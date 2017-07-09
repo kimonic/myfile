@@ -1,14 +1,22 @@
 package com.tudoujf.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.ui.DotView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * * ================================================
  * name:            GuideActivity
- * guide:
+ * guide:          WelcomeActivity-->GuideActivity
  * author：          kimonik
  * version：          1.0
  * date：            2017/7/6
@@ -37,6 +45,7 @@ public class GuideActivity extends AppCompatActivity {
             R.drawable.act_guide_page2,
             R.drawable.act_guide_page3,
             R.drawable.act_guide_page4};
+    private List<ImageView>  list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +58,39 @@ public class GuideActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        for (int i = 0; i <images.length; i++) {
-            ImageView imageView=new ImageView(this);
-//            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-            ViewGroup.LayoutParams params= imageView.getLayoutParams();
-            Log.e("TAG", "initView:----11----- "+imageView.getLayoutParams() );
-            params.width=1080;
-            params.height=1920;
 
-            imageView.setLayoutParams(params);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        list=new ArrayList<>();
+        for (int i = 0; i < images.length; i++) {
+            ImageView imageView=new ImageView(this);
             imageView.setImageResource(images[i]);
-            vpActguide.addView(imageView);
-            Log.e("TAG", "initView:----11----- "+imageView.getWidth() );
-            Log.e("TAG", "initView:------22--- "+imageView.getHeight() );
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            list.add(imageView);
         }
 
-        Log.e("TAG", "initView:--------- "+vpActguide.getChildCount() );
+        GuideVPAdapter adapter=new GuideVPAdapter(list);
+        vpActguide.setAdapter(adapter);
+        vpActguide.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                dvActguide.setPosition(position);
+                dvActguide.invalidate();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
         dvActguide.setViewPager(vpActguide);
         dvActguide.invalidate();
 
