@@ -65,7 +65,7 @@ public class HttpMethods {
     }
 
 
-    //下载
+    //下载http://imtt.dd.qq.com/16891/8C3E058EAFBFD4F1EFE0AAA815250716.apk?fsname=com.tencent.mobileqq_7.1.0_692.apk&csr=1bbd
     public void Download(final Context context, String url, final Map<String, String> paramsMap,
                          Callback callback) {
         OkGo.get(url)//
