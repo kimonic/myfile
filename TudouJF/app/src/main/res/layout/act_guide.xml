@@ -18,7 +18,6 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="30dp"
         android:id="@+id/dv_actguide"
-        android:background="#a3a3"
         />
 
 </FrameLayout>

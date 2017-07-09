@@ -44,6 +44,7 @@ dependencies {
 
     //okgo依赖--网络连接库
     compile 'com.lzy.net:okgo:3.0.2'
+//    compile 'com.lzy.net:okgo:2.1.4'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.squareup.okio:okio:1.13.0'
 

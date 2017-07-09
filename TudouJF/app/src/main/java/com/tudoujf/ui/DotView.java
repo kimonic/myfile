@@ -33,9 +33,9 @@ public class DotView extends View {
     /**控件的宽度*/
     private int width;
     /**小圆点的半径*/
-    private int dotRadius=20;
+    private int dotRadius=16;
     /**小圆点之间的间距*/
-    private int dotDistance=40;
+    private int dotDistance=20;
     /**绘制小圆点的画笔*/
     private Paint paintSel,paintUnSel;
     /**需要绘制的小圆的个数*/

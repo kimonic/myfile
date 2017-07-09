@@ -1,25 +1,37 @@
 package com.tudoujf.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lzy.okgo.callback.Callback;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.convert.StringConvert;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
 import com.tudoujf.R;
 import com.tudoujf.adapter.GuideVPAdapter;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.DotView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 
 /**
  * * ================================================
@@ -54,7 +66,6 @@ public class GuideActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
 
-
     }
 
     private void initView() {
@@ -66,6 +77,13 @@ public class GuideActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             list.add(imageView);
         }
+        list.get(list.size()-1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(GuideActivity.this,HttpTestActivity.class);
+                startActivity(intent);
+            }
+        });
 
         GuideVPAdapter adapter=new GuideVPAdapter(list);
         vpActguide.setAdapter(adapter);
