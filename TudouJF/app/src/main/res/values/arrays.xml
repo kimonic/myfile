@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="imagesUnSelR" >
+        <item>@drawable/act_home_icon1</item>
+        <item>@drawable/act_home_icon2</item>
+        <item>@drawable/act_home_icon3</item>
+        <item>@drawable/act_home_icon4</item>
+    </string-array>
+
+    <string-array name="imagesSelR" >
+        <item>@drawable/act_home_icon1_check</item>
+        <item>@drawable/act_home_icon2_check</item>
+        <item>@drawable/act_home_icon3_check</item>
+        <item>@drawable/act_home_icon4_check</item>
+    </string-array>
+    <string-array name="textIdR" >
+        <item>@string/homepage</item>
+        <item>@string/licai</item>
+        <item>@string/more</item>
+        <item>@string/my</item>
+    </string-array>
+
+
+</resources>

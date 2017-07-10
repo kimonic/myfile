@@ -1,7 +1,17 @@
 package com.tudoujf.activity;
 
+import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.NaviButtonView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -16,6 +26,13 @@ import com.tudoujf.base.BaseActivity;
  */
 
 public class HomeActivity extends BaseActivity {
+    @BindView(R.id.tbv_act_home)
+    MTopBarView tbvActHome;
+    @BindView(R.id.vp_act_home)
+    ViewPager vpActHome;
+    @BindView(R.id.nbv_act_home)
+    NaviButtonView nbvActHome;
+
     @Override
     public void initDataFromIntent() {
 
@@ -23,6 +40,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        nbvActHome.setmTopBarView(tbvActHome);
+
+
 
     }
 
@@ -45,4 +65,6 @@ public class HomeActivity extends BaseActivity {
     public int getLayoutResId() {
         return R.layout.act_home;
     }
+
+
 }

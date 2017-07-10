@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <declare-styleable name="NaviButtonView">
+            <attr name="colorSel" format="color"/>
+            <attr name="colorUnSel" format="color"/>
+            <attr name="textArray" format="reference|integer"/>
+            <attr name="imagesSelArray" format="reference|integer"/>
+            <attr name="imagesUnSelArray" format="reference|integer"/>
+            <attr name="count" format="integer"/>
+        </declare-styleable>
+</resources>

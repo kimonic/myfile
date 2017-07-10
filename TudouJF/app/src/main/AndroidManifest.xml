@@ -19,15 +19,20 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".activity.WelcomeActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".activity.GuideActivity"/>
+        <activity android:name=".activity.HttpTestActivity"/>
+        <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.GuideActivity"/>
-        <activity android:name=".activity.HttpTestActivity"/>
-        <activity android:name=".activity.HomeActivity"/>
 
 
     </application>

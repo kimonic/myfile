@@ -2,10 +2,12 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,45 +29,86 @@ import java.util.List;
  * date：            2017/7/10
  * description：  底部导航条自定义控件
  * history：
+ * mark:  必须设置count(按钮数量),imagsUnSel(未选中资源图片id数组)
+ * -------magsSel(选中资源图片id数组),text(按钮描述文本,与顶部bar同名)
+ * -------colorSel(选中时文本颜色),colorUnSel(未选中时文本颜色)
+ * -------app:imagesSelArray="@array/imagesSelR"
+ * -------app:imagesUnSelArray="@array/imagesUnSelR"
+ * -------app:textArray="@array/textIdR"
+ * -------app:count="4"
+ * -------app:colorSel="@color/colorPrimary"
+ * -------app:colorUnSel="@color/black"
  * ===================================================
  */
 
 public class NaviButtonView extends LinearLayout implements View.OnClickListener {
-    /**按钮数量*/
-    private int count=4;
-    /**未选中资源图片id*/
-    private int imagsUnSel[]=new int[]{R.drawable.act_home_icon1,
-            R.drawable.act_home_icon2,
-            R.drawable.act_home_icon3,
-            R.drawable.act_home_icon4,
-    };
-    /**选中资源图片id*/
-    private int imagsSel[]=new int[]{R.drawable.act_home_icon1_check,
-            R.drawable.act_home_icon2_check,
-            R.drawable.act_home_icon3_check,
-            R.drawable.act_home_icon4_check,
-    };
-    /**文本数组*/
-    private int text[]=new int[]{
-            R.string.homepage,
-            R.string.licai,
-            R.string.more,
-            R.string.my,
-    };
-    /**按钮集合*/
+    /**
+     * 按钮数量
+     */
+    private int count = 4;
+    /**
+     * 未选中资源图片id
+     */
+    private int imagsUnSel[];
+//    private int imagsUnSel[]=new int[]{R.drawable.act_home_icon1,
+//            R.drawable.act_home_icon2,
+//            R.drawable.act_home_icon3,
+//            R.drawable.act_home_icon4,
+//    };
+    /**
+     * 选中资源图片id
+     */
+    private int imagsSel[];
+//    private int imagsSel[]=new int[]{R.drawable.act_home_icon1_check,
+//            R.drawable.act_home_icon2_check,
+//            R.drawable.act_home_icon3_check,
+//            R.drawable.act_home_icon4_check,
+//    };
+    /**
+     * 文本数组
+     */
+    private int text[];
+//    private int text[]=new int[]{
+//            R.string.homepage,
+//            R.string.licai,
+//            R.string.more,
+//            R.string.my,
+//    };
+    /**
+     * 按钮集合
+     */
     private List<View> list;
     private List<ImageView> listImag;
     private List<TextView> listText;
 
-    /**选中时文本颜色*/
-    private int colorSel=Color.BLUE ;
-    private int colorUnSel=Color.BLACK;
+    /**
+     * 选中时文本颜色
+     */
+//    private int colorSel=Color.BLUE ;
+    private int colorSel;
+    private int colorUnSel;
+//    private int colorUnSel=Color.BLACK;
 
-    /**tag*/
-    private static final  String  VIEWTAG="navibuttonview";
+    /**
+     * tag
+     */
+    private static final String VIEWTAG = "navibuttonview";
 
-    /**关联viewpager*/
+    /**
+     * 关联viewpager
+     */
     private ViewPager viewPager;
+    /**
+     * 关联MTopBarView
+     */
+    private MTopBarView mTopBarView;
+
+
+    private AttributeSet attrs;
+
+    public void setmTopBarView(MTopBarView mTopBarView) {
+        this.mTopBarView = mTopBarView;
+    }
 
     public void setViewPager(ViewPager viewPager) {
         this.viewPager = viewPager;
@@ -77,7 +120,7 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
 
             @Override
             public void onPageSelected(int position) {
-                    setSelStyle(position);
+                setSelStyle(position);
             }
 
             @Override
@@ -97,36 +140,66 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
 
     public NaviButtonView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.attrs = attrs;
         initView();
     }
+
     @TargetApi(23)
     public NaviButtonView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        this.attrs = attrs;
         initView();
     }
 
     private void initView() {
-        list=new ArrayList<>();
-        listImag=new ArrayList<>();
-        listText=new ArrayList<>();
-        LayoutInflater inflater=LayoutInflater.from(getContext());
+
+
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.NaviButtonView);
+        count = a.getInt(R.styleable.NaviButtonView_count, 0);
+        colorSel = a.getColor(R.styleable.NaviButtonView_colorSel, 0);
+        colorUnSel = a.getColor(R.styleable.NaviButtonView_colorUnSel, 0);
+
+        imagsSel = new int[count];
+        imagsUnSel = new int[count];
+        text = new int[count];
+        TypedArray b = getContext().getResources().obtainTypedArray
+                (a.getResourceId(R.styleable.NaviButtonView_imagesSelArray, 0));
+        TypedArray c = getContext().getResources().obtainTypedArray
+                (a.getResourceId(R.styleable.NaviButtonView_imagesUnSelArray, 0));
+        TypedArray d = getContext().getResources().obtainTypedArray
+                (a.getResourceId(R.styleable.NaviButtonView_textArray, 0));
         for (int i = 0; i < count; i++) {
-            View view=inflater.inflate(R.layout.view_navibutton,null);
-            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-            params.weight=1;
+            imagsSel[i] = b.getResourceId(i, 0);
+            imagsUnSel[i] = c.getResourceId(i, 0);
+            text[i] = d.getResourceId(i, 0);
+        }
+        b.recycle();
+        c.recycle();
+        d.recycle();
+        a.recycle();
+
+
+        list = new ArrayList<>();
+        listImag = new ArrayList<>();
+        listText = new ArrayList<>();
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        for (int i = 0; i < count; i++) {
+            View view = inflater.inflate(R.layout.view_navibutton, null);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            params.weight = 1;
             view.setLayoutParams(params);
-            view.setTag(VIEWTAG+i);
+            view.setTag(VIEWTAG + i);
             this.addView(view);
             view.setOnClickListener(this);
             list.add(view);
-            ImageView imageView=view.findViewById(R.id.iv_navibutton);
+            ImageView imageView = view.findViewById(R.id.iv_navibutton);
             listImag.add(imageView);
-            TextView textView=view.findViewById(R.id.tv_navibutton);
+            TextView textView = view.findViewById(R.id.tv_navibutton);
             listText.add(textView);
-            if (i==0){
+            if (i == 0) {
                 imageView.setImageResource(imagsSel[i]);
                 textView.setTextColor(colorSel);
-            }else {
+            } else {
                 imageView.setImageResource(imagsUnSel[i]);
                 textView.setTextColor(colorUnSel);
             }
@@ -138,22 +211,28 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
     @Override
     public void onClick(View view) {
         for (int i = 0; i < count; i++) {
-            if ((VIEWTAG+i).equals(view.getTag())){
-                    setSelStyle(i);
-                if (viewPager!=null){
+            if ((VIEWTAG + i).equals(view.getTag())) {
+                setSelStyle(i);
+                if (viewPager != null) {
                     viewPager.setCurrentItem(i);
                 }
                 break;
             }
         }
     }
-    /**设置选中时的状态*/
+
+    /**
+     * 设置选中时的状态
+     */
     private void setSelStyle(int position) {
         for (int i = 0; i < count; i++) {
-            if (position==i){
+            if (position == i) {
                 listImag.get(i).setImageResource(imagsSel[i]);
                 listText.get(i).setTextColor(colorSel);
-            }else {
+                if (mTopBarView != null) {
+                    mTopBarView.setCenterTitle(text[i]);
+                }
+            } else {
                 listImag.get(i).setImageResource(imagsUnSel[i]);
                 listText.get(i).setTextColor(colorUnSel);
             }
