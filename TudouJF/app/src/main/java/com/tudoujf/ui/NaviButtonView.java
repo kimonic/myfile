@@ -32,6 +32,7 @@ import java.util.List;
  * mark:  必须设置count(按钮数量),imagsUnSel(未选中资源图片id数组)
  * -------magsSel(选中资源图片id数组),text(按钮描述文本,与顶部bar同名)
  * -------colorSel(选中时文本颜色),colorUnSel(未选中时文本颜色)
+ *
  * -------app:imagesSelArray="@array/imagesSelR"
  * -------app:imagesUnSelArray="@array/imagesUnSelR"
  * -------app:textArray="@array/textIdR"
@@ -50,30 +51,14 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
      * 未选中资源图片id
      */
     private int imagsUnSel[];
-//    private int imagsUnSel[]=new int[]{R.drawable.act_home_icon1,
-//            R.drawable.act_home_icon2,
-//            R.drawable.act_home_icon3,
-//            R.drawable.act_home_icon4,
-//    };
     /**
      * 选中资源图片id
      */
     private int imagsSel[];
-//    private int imagsSel[]=new int[]{R.drawable.act_home_icon1_check,
-//            R.drawable.act_home_icon2_check,
-//            R.drawable.act_home_icon3_check,
-//            R.drawable.act_home_icon4_check,
-//    };
     /**
      * 文本数组
      */
     private int text[];
-//    private int text[]=new int[]{
-//            R.string.homepage,
-//            R.string.licai,
-//            R.string.more,
-//            R.string.my,
-//    };
     /**
      * 按钮集合
      */
@@ -84,10 +69,8 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
     /**
      * 选中时文本颜色
      */
-//    private int colorSel=Color.BLUE ;
     private int colorSel;
     private int colorUnSel;
-//    private int colorUnSel=Color.BLACK;
 
     /**
      * tag
