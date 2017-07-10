@@ -48,7 +48,7 @@ public class GuideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_guide);
         ButterKnife.bind(this);
-        initView();
+        initView();//
 
     }
 
