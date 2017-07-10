@@ -4,4 +4,10 @@
     <string name="licai">理财</string>
     <string name="more">更多</string>
     <string name="my" >我的</string>
+    <string name="act_login_username">请输入用名/手机号</string>
+    <string name="act_login_password">请输入密码(6-16位数字和字母组合)</string>
+    <string name="act_login_nozhanghao">没有账号?</string>
+    <string name="act_login_zhuceyouli">注册即可领28888元体验金</string>
+    <string name="act_login_forgetpassword">忘记密码?</string>
+    <string name="act_login_login">登录</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.tudoujf.activity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.TextView;
@@ -75,6 +76,9 @@ public class HttpTestActivity extends BaseActivity {
 //                    }
 //                });
         String url="http://imtt.dd.qq.com/16891/8C3E058EAFBFD4F1EFE0AAA815250716.apk?fsname=com.tencent.mobileqq_7.1.0_692.apk&csr=1bbd";
+
+        Log.e("TAG", "initDataFromInternet:------ "+ Environment.getExternalStorageDirectory());
+
         HttpMethods.getInstance().Download(this, url, null, new FileCallback() {
             @Override
             public void onStart(Request<File, ? extends Request> request) {
@@ -95,6 +99,7 @@ public class HttpTestActivity extends BaseActivity {
 
             @Override
             public void downloadProgress(Progress progress) {
+                Log.e("TAG", "downloadProgress:----------------------- 1" );
                 System.out.println(progress);
 
                 String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);

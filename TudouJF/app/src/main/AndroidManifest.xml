@@ -28,6 +28,9 @@
         <activity android:name=".activity.GuideActivity"/>
         <activity android:name=".activity.HttpTestActivity"/>
         <activity android:name=".activity.HomeActivity">
+
+        </activity>
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
