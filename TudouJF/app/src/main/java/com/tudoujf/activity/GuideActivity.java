@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.tudoujf.R;
 import com.tudoujf.ui.DotView;
@@ -51,23 +52,27 @@ public class GuideActivity extends AppCompatActivity {
     private void initView() {
         for (int i = 0; i <images.length; i++) {
             ImageView imageView=new ImageView(this);
-//            ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-            ViewGroup.LayoutParams params= imageView.getLayoutParams();
-            Log.e("TAG", "initView:----11----- "+imageView.getLayoutParams() );
-            params.width=1080;
-            params.height=1920;
-
-            imageView.setLayoutParams(params);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             imageView.setImageResource(images[i]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             vpActguide.addView(imageView);
-            Log.e("TAG", "initView:----11----- "+imageView.getWidth() );
-            Log.e("TAG", "initView:------22--- "+imageView.getHeight() );
+
+//            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+////            ViewGroup.LayoutParams params= imageView.getLayoutParams();
+//            Log.e("TAG", "initView:----11----- "+imageView.getLayoutParams() );
+////            params.width=1080;
+////            params.height=1920;
+////
+//            imageView.setLayoutParams(params);
+            imageView.getLayoutParams().width=1080;
+            imageView.getLayoutParams().height=1920;
+            imageView.setLayoutParams(imageView.getLayoutParams());
+            Log.e("TAG", "initView:----11----- "+imageView.getLayoutParams().width );
+            Log.e("TAG", "initView:------22--- "+imageView.getLayoutParams().height );
         }
 
         Log.e("TAG", "initView:--------- "+vpActguide.getChildCount() );
         dvActguide.setViewPager(vpActguide);
         dvActguide.invalidate();
-
+//        https://github.com/kimonic/myfile.git
     }
 }
