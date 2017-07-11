@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  *
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseMethod{
+public abstract class BaseActivity extends AppCompatActivity implements BaseMethod,View.OnClickListener{
 
 
     @Override

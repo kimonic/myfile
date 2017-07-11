@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
 
 import com.tudoujf.HomeFragment;
 import com.tudoujf.R;
@@ -112,4 +113,8 @@ public class HomeActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

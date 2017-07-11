@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/act_affirm_bac"
     >
-    <ImageView
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_affirm"
         android:layout_width="match_parent"
-        android:layout_height="133dp"
-        android:contentDescription="@null"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/act_login2_bac"
-        />
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_affirm_title"
+        app:leftImage="@drawable/xvector_back" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,12 +30,12 @@
             android:layout_width="25dp"
             android:layout_height="45dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_login2_phone"
+            android:src="@drawable/act_login2_lock"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"/>
 
         <EditText
-            android:id="@+id/et_act_login_username"
+            android:id="@+id/et_act_affirm_password1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -42,11 +43,12 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="@string/act_login_username"
+            android:hint="@string/act_login_password"
+            android:inputType="textPassword"
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/iv_act_login_clear"
+            android:id="@+id/iv_act_affirm_clear1"
             android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_marginEnd="10dp"
@@ -54,109 +56,81 @@
             android:contentDescription="@null"
             android:src="@drawable/act_login2_clear"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_act_affirm_openclose1"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@null"
+            android:src="@drawable/act_login2_eyeopen" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:orientation="horizontal">
+
         <ImageView
-            android:layout_width="25dp"
+            android:layout_width="20dp"
             android:layout_height="45dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_login2_lock"
+            android:src="@drawable/act_affirm_lock"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             />
 
         <EditText
-            android:id="@+id/et_act_login_password"
+            android:id="@+id/et_act_affirm_password2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:hint="@string/act_login_password"
-            android:textSize="12sp"
-            android:background="@null"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/act_affirm_password2"
             android:inputType="textPassword"
-            />
+            android:textSize="12sp" />
+
         <ImageView
-            android:id="@+id/iv_act_login_clear1"
+            android:id="@+id/iv_act_affirm_clear2"
             android:layout_width="20dp"
             android:layout_height="30dp"
-            android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:contentDescription="@null"
-            android:visibility="gone"
-            android:src="@drawable/act_login2_clear" />
+            android:src="@drawable/act_login2_clear"
+            android:visibility="gone" />
+
         <ImageView
-            android:id="@+id/iv_act_login_openclose"
+            android:id="@+id/iv_act_affirm_openclose2"
             android:layout_width="20dp"
             android:layout_height="30dp"
-            android:contentDescription="@null"
-            android:src="@drawable/act_login2_eyeopen"
-            android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            />
+            android:layout_marginRight="10dp"
+            android:contentDescription="@null"
+            android:src="@drawable/act_login2_eyeopen" />
     </LinearLayout>
 
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_act_affirm_complete"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="12sp"
-            android:text="@string/act_login_nozhanghao"
-            />
-        <TextView
-            android:id="@+id/tv_act_login_register"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:text="@string/act_login_zhuceyouli"
-            android:textColor="@color/act_login_textcolor"
-
-            />
-        <TextView
-            android:id="@+id/tv_act_login_forgetpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textSize="12sp"
-            android:text="@string/act_login_forgetpassword"
-            android:textColor="@color/act_login_textcolor"
-            />
-    </LinearLayout>
-    
-    <TextView
-        android:id="@+id/tv_act_login_login"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:text="@string/act_login_login"
         android:background="@drawable/xshape_roundrect_mblue"
-        android:textColor="@color/act_login_textcolor1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+        android:gravity="center"
+        android:text="@string/act_affirm_complete"
+        android:textColor="@color/act_register_textcolor1"
+        android:textSize="16sp" />
+
 </LinearLayout>

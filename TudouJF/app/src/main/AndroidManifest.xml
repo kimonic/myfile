@@ -3,10 +3,10 @@
     package="com.tudoujf">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
 
     <application
@@ -17,25 +17,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <!--欢迎页activity-->
         <activity android:name=".activity.WelcomeActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-
-        <activity android:name=".activity.GuideActivity"/>
-        <activity android:name=".activity.HttpTestActivity"/>
-        <activity android:name=".activity.HomeActivity">
-
-        </activity>
-        <activity android:name=".activity.LoginActivity">
+        <!--初次引导页activity-->
+        <activity android:name=".activity.GuideActivity" />
+        <!--网络测试activity-->
+        <activity android:name=".activity.HttpTestActivity" />
+        <!--主页activity-->
+        <activity android:name=".activity.HomeActivity"/>
+        <!--登录页activity-->
+        <activity android:name=".activity.LoginActivity" />
+        <!--注册页activity-->
+        <activity android:name=".activity.RegisterActivity"/>
+        <!--确认密码页activity-->
+        <activity android:name=".activity.AffirmPasswordActivity"/>
+        <!--预览各个activity的界面-->
+        <activity android:name=".activity.PreviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--忘记密码activity-->
+        <activity android:name=".activity.FindPasswordActivity" />
+        <!--手势密码activity-->
+        <activity android:name=".activity.LockActivity"/>
 
 
     </application>

@@ -32,9 +32,11 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
 
     //Glide依赖--图片加载库
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
-//    compile 'com.android.support:support-v4:25.3.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+//    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
+////    compile 'com.android.support:support-v4:25.3.1'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     //glide扩展
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'

@@ -1,7 +1,20 @@
 package com.tudoujf.activity;
 
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.tudoujf.R;
+import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -16,6 +29,25 @@ import com.tudoujf.base.BaseActivity;
  */
 
 public class LoginActivity extends BaseActivity {
+    @BindView(R.id.et_act_login_username)
+    EditText etUsername;
+    @BindView(R.id.et_act_login_password)
+    EditText etPassword;
+    @BindView(R.id.tv_act_login_forgetpassword)
+    TextView tvForgetpassword;
+    @BindView(R.id.tv_act_login_login)
+    TextView tvLogin;
+    @BindView(R.id.tv_act_login_register)
+    TextView tvRegister;
+    @BindView(R.id.iv_act_login_clear)
+    ImageView ivClear;
+    @BindView(R.id.iv_act_login_clear1)
+    ImageView ivClear1;
+    @BindView(R.id.iv_act_login_openclose)
+    ImageView ivOpenclose;
+
+    private int count = 0;
+
     @Override
     public void initDataFromIntent() {
 
@@ -28,48 +60,34 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-/**
- *
- * input.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);//设置密文明显示
- *
- * 密文设置：
- EditText  et = (EditText)findViewById(R.id.et);
- TransformationMethod method =  PasswordTransformationMethod.getInstance();
- et.setTransformationMethod(method);
- 明文设置：
- EditText et = (EditText)findViewById(R.id.et);
- HideReturnsTransformationMethod method = HideReturnsTransformationMethod.getInstance();
- et.setTransformatinMethod(method);
- * //监听edittext的输入文本变化
- dialogEdittext.addTextChangedListener(new TextWatcher() {
-@Override//s--本次输入之前edittext中已存在的字符串,本次输入开始位置,start--已存在的字符个数,after--本次输入的字符个数
-public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-Log.e(Constant.TAG, "beforeTextChanged: ---"+s+"----"+start+"----"+after );
+        etUsername.addTextChangedListener(new MTextWatchAdapter() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > 0) {
+                    ivClear.setVisibility(View.VISIBLE);
+                } else {
+                    ivClear.setVisibility(View.GONE);
+                }
 
-}
+            }
+        });
+        etPassword.addTextChangedListener(new MTextWatchAdapter() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > 0) {
+                    ivClear1.setVisibility(View.VISIBLE);
+                } else {
+                    ivClear1.setVisibility(View.GONE);
+                }
 
-@Override//s----输入完成之后的字符串,start---本次输入开始的位置,count--本次输入的字符个数,before=1本次有删除,before=0,本次无删除
-public void onTextChanged(CharSequence s, int start, int before, int count) {
-Log.e(Constant.TAG, "onTextChanged: ---"+s+"----"+start+"----"+before+"-----"+count );
-
-if (count==0){
-dialogTextview.setBackgroundResource(R.drawable.textroundbac);
-}
-
-
-}
-
-@Override//s----输入完成之后的字符串
-public void afterTextChanged(Editable s) {
-Log.e(Constant.TAG, "afterTextChanged: ---"+s);
-
-if (dialogEdittext.getText().toString().length()>0){
-dialogTextview.setBackgroundResource(R.drawable.textroundbac1);
-}
-
-}
-});
- */
+            }
+        });
+        ivClear.setOnClickListener(this);
+        ivClear1.setOnClickListener(this);
+        ivOpenclose.setOnClickListener(this);
+        tvForgetpassword.setOnClickListener(this);
+        tvLogin.setOnClickListener(this);
+        tvRegister.setOnClickListener(this);
     }
 
     @Override
@@ -85,5 +103,38 @@ dialogTextview.setBackgroundResource(R.drawable.textroundbac1);
     @Override
     public int getLayoutResId() {
         return R.layout.act_login;
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_act_login_clear://用户名清除
+                etUsername.setText("");
+                break;
+            case R.id.iv_act_login_clear1://密码清除
+                etPassword.setText("");
+                break;
+            case R.id.iv_act_login_openclose://密码明文或密文显示
+                if (count % 2 == 1) {
+                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    ivOpenclose.setImageResource(R.drawable.act_login2_eyeopen);
+                } else {
+                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                    ivOpenclose.setImageResource(R.drawable.act_login2_eyeclose);
+                }
+                count++;
+                break;
+            case R.id.tv_act_login_forgetpassword://跳转忘记密码activity
+                openActivity(FindPasswordActivity.class);
+                break;
+            case R.id.tv_act_login_login://发送登陆请求,成功登陆后跳转主页
+
+                break;
+            case R.id.tv_act_login_register://跳转注册页
+                openActivity(RegisterActivity.class);
+                closeActivity();
+                break;
+        }
     }
 }

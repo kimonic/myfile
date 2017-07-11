@@ -5,7 +5,22 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 /**
- * Created by Administrator on 2017/7/7.
+ * * ================================================
+ * name:            ScreenSizeUtils
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/7/11
+ * description：  工具类 --屏幕尺寸相关
+ * ---------------getScreenWidth(Context context)------获取屏幕宽度
+ * ---------------getScreenHeight(Context context)------获取屏幕高度
+ * ---------------getDensityDpi(Context context)------获取屏幕密度dpi--displayMetrics.density*160
+ * ---------------getDensity(Context context)---------获取屏幕密度--displayMetrics.densityDpi/160
+ * ---------------dip2px(Context context, float dpValue)----dp转化为px
+ * ---------------sp2px(Context context, float spValue)------sp转化为px
+ * ---------------getStatusHeight(Context context)-------获取状态栏的高度px值
+ * history：
+ * ===================================================
  */
 
 public class ScreenSizeUtils {
@@ -78,6 +93,20 @@ public class ScreenSizeUtils {
         public static int sp2px(Context context, float spValue) {
             final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
             return (int) (spValue * fontScale + 0.5f);
+        }
+
+    /**
+     * 获取状态栏的高度px值
+     * @param context  上下文
+     * @return    状态栏高度--单位px
+     */
+    public static int getStatusHeight(Context context){
+            int statusBarHeight = -1;
+            int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+            }
+            return statusBarHeight;
         }
 
 }
