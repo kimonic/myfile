@@ -324,7 +324,6 @@ public class MLockView extends View {
             if (listener != null) {
                 listener.sucess();
             }
-            openOrCloseDraw=false;
         } else {
             if (inputCount > 0) {
                 Toast.makeText(getContext(), "输入错误,您还有" + inputCount + "次机会", Toast.LENGTH_SHORT).show();
