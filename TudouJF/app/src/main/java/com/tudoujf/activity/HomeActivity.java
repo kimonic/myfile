@@ -1,13 +1,11 @@
 package com.tudoujf.activity;
 
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
-import com.tudoujf.HomeFragment;
+import com.tudoujf.fragment.HomeFragment;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================

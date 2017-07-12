@@ -1,4 +1,4 @@
-package com.tudoujf;
+package com.tudoujf.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tudoujf.R;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.ui.DotView;

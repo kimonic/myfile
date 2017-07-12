@@ -12,6 +12,7 @@
         android:contentDescription="@null"
         />
     <TextView
+        android:id="@+id/tv_act_lock_welcome"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="16sp"
@@ -20,15 +21,13 @@
         android:textColor="@color/act_lock_textcolor1"
 
         />
-    <!--<com.tudoujf.ui.LockPatternView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_gravity="center"-->
-        <!--/>-->
+
     <com.tudoujf.ui.MLockView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/mlv_act_lock"
+
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,6 +40,7 @@
 
         >
         <TextView
+            android:id="@+id/tv_act_lock_forget"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
@@ -55,6 +55,7 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/tv_act_lock_other"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"

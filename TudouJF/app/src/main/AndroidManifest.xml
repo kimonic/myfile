@@ -47,6 +47,8 @@
         <activity android:name=".activity.FindPasswordActivity" />
         <!--手势密码activity-->
         <activity android:name=".activity.LockActivity"/>
+        <!--设置手势密码activity-->
+        <activity android:name=".activity.DrawGestureActivity"/>
 
 
     </application>

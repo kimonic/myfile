@@ -49,6 +49,13 @@
     <string name="act_lock_welcom">欢迎您,XXXXXXXXXXX</string>
     <string name="act_lock_forget">忘记手势密码</string>
     <string name="act_lock_other">使用其他账号登录</string>
+    <string name="errormoretimes">输入错误次数过多,请等待5分钟后再次重试</string>
+    <string name="inputsucess">输入成功</string>
+    <string name="act_drawgesture_pass">直接跳过</string>
+    <string name="act_drawgesture_error">手势密码前后输入不一致,请重新输入</string>
+    <string name="act_drawgesture_sucess">手势密码设置成功!</string>
+    <string name="act_drawgesture_hint">手势密码不能少于4个连接点,请重新设置</string>
+    <string name="mlockview_sucess">手势密码验证成功!</string>
 
 
 </resources>

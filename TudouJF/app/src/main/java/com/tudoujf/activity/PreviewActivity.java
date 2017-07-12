@@ -67,7 +67,9 @@ public class PreviewActivity extends BaseActivity {
             case R.id.bt_act_preview4:
                 openActivity(LockActivity.class);
                 break;
-            case R.id.bt_act_preview5:break;
+            case R.id.bt_act_preview5:
+                openActivity(DrawGestureActivity.class);
+                break;
             case R.id.bt_act_preview6:break;
             case R.id.bt_act_preview7:break;
             case R.id.bt_act_preview8:break;

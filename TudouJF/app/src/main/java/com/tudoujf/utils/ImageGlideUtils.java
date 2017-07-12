@@ -22,6 +22,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 
 public class ImageGlideUtils {
+    /**加载圆形网络图片*/
     public static  void loadCircularImage(ImageView view, String url) {
         Glide.with(view.getContext())
                 .load(url)
@@ -33,6 +34,7 @@ public class ImageGlideUtils {
                 .bitmapTransform(new CropCircleTransformation(view.getContext()))
                 .into(view);
     }
+    /**加载圆形本地资源图片*/
     public static  void loadCircularImage(ImageView view, int resId) {
         Glide.with(view.getContext())
                 .load(resId)
