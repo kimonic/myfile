@@ -98,6 +98,7 @@ public class PreviewActivity extends BaseActivity {
         Log.e("initDataFromIntent", ""+NetworkUtils.isNetworkAvailable(this));
         Log.e("initDataFromIntent", ""+NetworkUtils.isWifi(this));
         Log.e("initDataFromIntent", ""+NetworkUtils.isWifiEnabled(this));
+        Log.e("initDataFromIntent", "数据网络"+NetworkUtils.isMobileNetEnabled(this));
 
         NetworkUtils.getNetCanConnectBaiDu(this, new StringCallback() {
             @Override
