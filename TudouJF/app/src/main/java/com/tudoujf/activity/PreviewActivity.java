@@ -1,17 +1,19 @@
 package com.tudoujf.activity;
 
-import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.AESUtils;
-import com.tudoujf.utils.DeviceUtils;
+import com.tudoujf.utils.AppInfoUtils;
+import com.tudoujf.utils.L;
+import com.tudoujf.utils.NetworkUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
 
@@ -56,7 +58,7 @@ public class PreviewActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_act_preview:
                 openActivity(LoginActivity.class);
                 break;
@@ -75,34 +77,41 @@ public class PreviewActivity extends BaseActivity {
             case R.id.bt_act_preview5:
                 openActivity(DrawGestureActivity.class);
                 break;
-            case R.id.bt_act_preview6:break;
-            case R.id.bt_act_preview7:break;
-            case R.id.bt_act_preview8:break;
-            case R.id.bt_act_preview9:break;
+            case R.id.bt_act_preview6:
+                break;
+            case R.id.bt_act_preview7:
+                break;
+            case R.id.bt_act_preview8:
+                break;
+            case R.id.bt_act_preview9:
+                break;
         }
     }
 
     @Override
     public void initDataFromIntent() {
-        String s=AESUtils.encrypt("12345678","亦筝笙!");//A98E5D602656F608B9B96F8FAC3BFCAA
-        Log.e("TAG", "initDataFromIntent: -----aes----"+ s);//1573864034BA55BA048634A1A6951D1F
-        Log.e("TAG", "initDataFromIntent: -----aes----"+ AESUtils.decrypt("12345678",s));
-        String base=new String(Base64.encode("123456789".getBytes(),Base64.DEFAULT));
-        Log.e("TAG", "initDataFromIntent: -----------" +base);
-        Log.e("TAG", "initDataFromIntent: -----------" +(new String(Base64.decode(base.getBytes()
-                ,Base64.DEFAULT))));
-//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getAndroidID(this) );
-//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getMacAddress(this).replace(":","") );
-//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getManufacturer() );
-//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getModel());
-//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getSDKVersion());//1498816696000
-//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.isDeviceRooted());
-//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getIMET(this));
-//        Log.e("TAG", "initDataFromIntent: ---------"+ Build.ID);
-//        Log.e("TAG", "initDataFromIntent: ----99-----"+ Build.TIME);
-        //861211344413522
-//5071047551432824
-//080027198f10
+//        Log.e("initDataFromIntent","1231213"+ NetworkUtils.connectionNetwork());
+        Log.e("initDataFromIntent", NetworkUtils.getLocalIpAddress());
+        Log.e("initDataFromIntent", ""+NetworkUtils.getNetState(this));
+        Log.e("initDataFromIntent", ""+NetworkUtils.is2G(this));
+        Log.e("initDataFromIntent", ""+NetworkUtils.is3G(this));
+        Log.e("initDataFromIntent", ""+NetworkUtils.isNetworkAvailable(this));
+        Log.e("initDataFromIntent", ""+NetworkUtils.isWifi(this));
+        Log.e("initDataFromIntent", ""+NetworkUtils.isWifiEnabled(this));
+
+        NetworkUtils.getNetCanConnectBaiDu(this, new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                ToastUtils.showToast(PreviewActivity.this,"连接网络成功");
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showToast(PreviewActivity.this,"连接网络失败");
+            }
+        });
+
     }
 
     @Override
