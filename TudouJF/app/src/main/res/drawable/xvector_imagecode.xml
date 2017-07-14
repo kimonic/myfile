@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="70"
+    android:viewportHeight="70"
+    >
+    <group
+        >
+
+
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M34 3
+                               L10 3
+                               M3 10
+                                L3 60
+
+                               M 10 68
+                                L50 68
+                                M60 57
+                                L60 35
+"
+
+            />
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M11 3
+                              Q2 2 3 11
+
+    "
+            />
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M3 59
+                              Q1 69 11 68
+
+    "
+            />
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M48 68
+                              Q60 70 60 57
+
+    "
+            />
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M50 0
+                               L20 35
+                                12 57
+                                35 47
+                                64 12
+                                49 -3
+    "
+
+            />
+
+
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M50 15
+                               L32 35
+
+    "
+            />
+        <path  android:strokeColor="#9B9B9B"
+            android:strokeWidth="5"
+            android:pathData="M20 35
+                               L35 47
+
+    "
+            />
+
+
+        <!--<path  android:strokeColor="#a3a3a3"-->
+        <!--android:strokeWidth="1"-->
+        <!--android:pathData="M0 0-->
+        <!--L70 0-->
+        <!--L70 70-->
+        <!--L0 70-->
+        <!--L0 0-->
+        <!--"-->
+        <!--/>-->
+
+
+
+    </group>
+
+</vector>

@@ -59,9 +59,9 @@ public class MTopBarView extends LinearLayout {
     private void initView() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.view_mtopbar, this);
-        leftTV = view.findViewById(R.id.tv_mtopbar_left);
-        centerTV = view.findViewById(R.id.tv_mtopbar_center);
-        rightTV = view.findViewById(R.id.tv_mtopbar_right);
+        leftTV = (TextView) view.findViewById(R.id.tv_mtopbar_left);
+        centerTV = (TextView) view.findViewById(R.id.tv_mtopbar_center);
+        rightTV = (TextView) view.findViewById(R.id.tv_mtopbar_right);
 
         if (attrs!=null){
             TypedArray a=getContext().obtainStyledAttributes(attrs,R.styleable.MTopBarView);

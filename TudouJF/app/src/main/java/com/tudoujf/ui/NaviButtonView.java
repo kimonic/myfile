@@ -173,9 +173,9 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
             this.addView(view);
             view.setOnClickListener(this);
             list.add(view);
-            ImageView imageView = view.findViewById(R.id.iv_navibutton);
+            ImageView imageView = (ImageView) view.findViewById(R.id.iv_navibutton);
             listImag.add(imageView);
-            TextView textView = view.findViewById(R.id.tv_navibutton);
+            TextView textView = (TextView) view.findViewById(R.id.tv_navibutton);
             listText.add(textView);
             if (i == 0) {
                 imageView.setImageResource(imagsSel[i]);
