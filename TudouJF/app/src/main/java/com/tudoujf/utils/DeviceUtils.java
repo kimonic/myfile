@@ -1,40 +1,22 @@
 package com.tudoujf.utils;
-
-/**
- * * ==================================================
- * name:            DeviceUtils
- * guide:
- * author：          kimonik
- * version：          1.0
- * date：            2017/7/13
- * description：   设备信息相关工具类
- * history：
- * * ==================================================
- *
- */
-
-
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
-        import android.content.Intent;
-        import android.net.wifi.WifiInfo;
-        import android.net.wifi.WifiManager;
-        import android.os.Build;
-        import android.os.PowerManager;
-        import android.provider.Settings;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import java.io.File;
-        import java.net.NetworkInterface;
-        import java.util.Collections;
-        import java.util.List;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
  * * ================================================
- * name:            EncryptionLockUtils
+ * name:            DeviceUtils
  * guide:
  * author：          DeviceUtils
  * version：          1.0
@@ -56,7 +38,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
 public class DeviceUtils {
 
     private DeviceUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+        throw new UnsupportedOperationException("不允许使用new构造实例!!");
     }
 
     /**

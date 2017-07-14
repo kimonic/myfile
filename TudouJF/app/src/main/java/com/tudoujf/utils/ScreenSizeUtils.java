@@ -24,8 +24,12 @@ import android.view.WindowManager;
  */
 
 public class ScreenSizeUtils {
+    private ScreenSizeUtils() {
+        throw new UnsupportedOperationException("不允许使用new构造实例!!");
 
-        /**
+    }
+
+    /**
          * 获取屏幕的宽度px
          *
          * @param context 上下文

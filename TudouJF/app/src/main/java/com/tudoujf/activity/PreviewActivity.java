@@ -1,6 +1,7 @@
 package com.tudoujf.activity;
 
 import android.os.Build;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.utils.AESUtils;
 import com.tudoujf.utils.DeviceUtils;
 
 import butterknife.BindView;
@@ -82,16 +84,22 @@ public class PreviewActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
-        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getAndroidID(this) );
-        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getMacAddress(this).replace(":","") );
-        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getManufacturer() );
-        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getModel());
-        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getSDKVersion());//1498816696000
-        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.isDeviceRooted());
-        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getIMET(this));
-        Log.e("TAG", "initDataFromIntent: ---------"+ Build.ID);
-        Log.e("TAG", "initDataFromIntent: ----99-----"+ Build.TIME);
+        String s=AESUtils.encrypt("12345678","亦筝笙!");//A98E5D602656F608B9B96F8FAC3BFCAA
+        Log.e("TAG", "initDataFromIntent: -----aes----"+ s);//1573864034BA55BA048634A1A6951D1F
+        Log.e("TAG", "initDataFromIntent: -----aes----"+ AESUtils.decrypt("12345678",s));
+        String base=new String(Base64.encode("123456789".getBytes(),Base64.DEFAULT));
+        Log.e("TAG", "initDataFromIntent: -----------" +base);
+        Log.e("TAG", "initDataFromIntent: -----------" +(new String(Base64.decode(base.getBytes()
+                ,Base64.DEFAULT))));
+//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getAndroidID(this) );
+//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getMacAddress(this).replace(":","") );
+//        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getManufacturer() );
+//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getModel());
+//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getSDKVersion());//1498816696000
+//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.isDeviceRooted());
+//        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getIMET(this));
+//        Log.e("TAG", "initDataFromIntent: ---------"+ Build.ID);
+//        Log.e("TAG", "initDataFromIntent: ----99-----"+ Build.TIME);
         //861211344413522
 //5071047551432824
 //080027198f10

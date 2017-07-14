@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class EncryptionLockUtils {
 
-
+    /**手势密码加密*/
     @SuppressLint("HardwareIds")
     public static String  convertEncryption(Context context,List<Integer> list){
         String password=convertList(list);
