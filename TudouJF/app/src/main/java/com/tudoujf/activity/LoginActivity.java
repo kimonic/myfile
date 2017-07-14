@@ -1,9 +1,7 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,7 +12,6 @@ import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -47,6 +44,7 @@ public class LoginActivity extends BaseActivity {
     ImageView ivOpenclose;
 
     private int count = 0;
+
 
     @Override
     public void initDataFromIntent() {

@@ -1,10 +1,8 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,7 +13,6 @@ import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -57,7 +54,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.ll_act_register_agree)
     LinearLayout llAgree;
     @BindView(R.id.cb_act_register)
-    CheckBox cbActRegister;
+    TextView cbActRegister;
     private int count=0,countAgree=0;
 
     @Override
@@ -91,9 +88,9 @@ public class RegisterActivity extends BaseActivity {
                     break;
                 case R.id.ll_act_register_agree://同意土豆金服服务协议
                     if (countAgree%2==0){
-                        cbActRegister.setChecked(true);
+                        cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_sel);
                     }else {
-                        cbActRegister.setChecked(false);
+                        cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_unsel);
                     }
                     countAgree++;
                     break;

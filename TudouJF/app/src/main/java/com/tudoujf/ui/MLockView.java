@@ -8,13 +8,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.LockActivity;
 import com.tudoujf.utils.EncryptionLockUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -114,6 +112,7 @@ public class MLockView extends View {
      */
 
     private String password;
+    private boolean flag=false;
 
     /**
      * 设置手势密码
@@ -254,6 +253,12 @@ public class MLockView extends View {
                 canvas.drawLine(circleX[positionSet.get(positionSet.size() - 1) / 3], circleY[positionSet.get(positionSet.size() - 1) % 3],
                         currentX, currentY, linePaint);
             }
+
+            if (flag){
+                openOrCloseDraw=false;
+            }
+
+
         }
 
 
@@ -319,7 +324,7 @@ public class MLockView extends View {
         String inputPassword = EncryptionLockUtils.convertEncryption(getContext(), positionSet);
 
         if (password.equals(inputPassword)) {
-
+            flag=true;
             ToastUtils.showToast(getContext(), R.string.mlockview_sucess);
             if (listener != null) {
                 listener.sucess();

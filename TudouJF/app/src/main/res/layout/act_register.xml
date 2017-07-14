@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/act_affirm_bac"
@@ -19,20 +18,19 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+
             android:contentDescription="@null"
             android:src="@drawable/act_login2_phone"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
 
             />
 
@@ -55,7 +53,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_login2_clear"
+            android:src="@drawable/xvector_clear"
             android:visibility="gone" />
     </LinearLayout>
 
@@ -65,19 +63,18 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="@null"
             android:src="@drawable/act_register2_imagecode"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
 
             />
 
@@ -99,8 +96,8 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:contentDescription="@string/act_register_imagecode"
             android:background="@color/colorPrimary"
+            android:contentDescription="@string/act_register_imagecode"
 
 
             />
@@ -112,19 +109,18 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="@null"
             android:src="@drawable/act_register2_phonecode"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
 
             />
 
@@ -145,10 +141,10 @@
             android:id="@+id/tv_act_register_getcode"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:background="@drawable/xshape_roundrect_myellow"
             android:gravity="center"
             android:paddingLeft="5dp"
@@ -163,19 +159,18 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="@null"
             android:src="@drawable/act_login2_lock"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
 
             />
 
@@ -199,7 +194,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_login2_clear"
+            android:src="@drawable/xvector_clear"
             android:visibility="gone" />
 
         <ImageView
@@ -217,19 +212,18 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
-        >
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="20dp"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="@null"
             android:src="@drawable/act_register2_referrer"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
 
             />
 
@@ -249,20 +243,20 @@
 
     </LinearLayout>
 
-   <TextView
-       android:id="@+id/tv_act_register_login"
-       android:layout_width="wrap_content"
-       android:layout_height="30dp"
-       android:text="@string/act_register_login"
-       android:gravity="center_vertical"
-       android:layout_marginLeft="10dp"
-       android:layout_marginRight="10dp"
-       android:textSize="12sp"
-       android:layout_marginTop="20dp"
-       android:layout_marginBottom="5dp"
-       android:textColor="@color/act_register_tvcolor1"
+    <TextView
+        android:id="@+id/tv_act_register_login"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/act_register_login"
+        android:textColor="@color/act_register_tvcolor1"
+        android:textSize="12sp"
 
-       />
+        />
 
     <TextView
         android:id="@+id/tv_act_register_register"
@@ -275,31 +269,36 @@
         android:text="@string/act_register_register"
         android:textColor="@color/act_register_textcolor1"
         android:textSize="16sp" />
+
     <LinearLayout
+        android:id="@+id/ll_act_register_agree"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_marginTop="10dp"
-        android:id="@+id/ll_act_register_agree"
-        >
-        <CheckBox
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
             android:id="@+id/cb_act_register"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/act_register_agree"
-            android:textSize="12sp"
-            android:clickable="false"
-            android:background="@null"
-            />
+            android:background="@drawable/xvector_checkbox_unsel" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/act_register_tudouxieyi"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="@string/act_register_agree"
+            android:textColor="@color/act_register_tvcolor2"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/act_register_tvbac1"
-            />
+            android:text="@string/act_register_tudouxieyi"
+            android:textColor="@color/act_register_tvbac1" />
     </LinearLayout>
 
 

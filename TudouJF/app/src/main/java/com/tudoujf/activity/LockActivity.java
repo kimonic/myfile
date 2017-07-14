@@ -1,8 +1,6 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,15 +8,12 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MLockView;
-import com.tudoujf.utils.EncryptionLockUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
-import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -67,7 +62,6 @@ public class LockActivity extends BaseActivity {
     public void initDataFromIntent() {
         handler = new Handler();
         password = SharedPreferencesUtils.getInstance(this, "gesture").getString("ciphertext", "");
-        Log.e("TAG", "initDataFromIntent:----------999------------- "+password );
     }
 
     @Override
@@ -98,7 +92,6 @@ public class LockActivity extends BaseActivity {
 
             @Override
             public void sucess() {
-
             }
         });
     }

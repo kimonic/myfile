@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tudoujf">
 
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 
     <application
@@ -29,26 +30,30 @@
         <!--网络测试activity-->
         <activity android:name=".activity.HttpTestActivity" />
         <!--主页activity-->
-        <activity android:name=".activity.HomeActivity"/>
+        <activity android:name=".activity.HomeActivity" />
         <!--登录页activity-->
         <activity android:name=".activity.LoginActivity" />
         <!--注册页activity-->
-        <activity android:name=".activity.RegisterActivity"/>
+        <activity android:name=".activity.RegisterActivity" />
         <!--确认密码页activity-->
-        <activity android:name=".activity.AffirmPasswordActivity"/>
+        <activity android:name=".activity.AffirmPasswordActivity" />
         <!--预览各个activity的界面-->
         <activity android:name=".activity.PreviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+                <!--监听拦截home键-->
+                <!--<category android:name="android.intent.category.HOME" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
             </intent-filter>
         </activity>
         <!--忘记密码activity-->
         <activity android:name=".activity.FindPasswordActivity" />
         <!--手势密码activity-->
-        <activity android:name=".activity.LockActivity"/>
+        <activity android:name=".activity.LockActivity" />
         <!--设置手势密码activity-->
-        <activity android:name=".activity.DrawGestureActivity"/>
+        <activity android:name=".activity.DrawGestureActivity" />
 
 
     </application>

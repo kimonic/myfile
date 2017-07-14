@@ -1,14 +1,17 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.utils.DeviceUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -80,6 +83,18 @@ public class PreviewActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
+        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getAndroidID(this) );
+        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getMacAddress(this).replace(":","") );
+        Log.e("TAG", "initDataFromIntent: ---------"+DeviceUtils.getManufacturer() );
+        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getModel());
+        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getSDKVersion());//1498816696000
+        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.isDeviceRooted());
+        Log.e("TAG", "initDataFromIntent: ---------"+ DeviceUtils.getIMET(this));
+        Log.e("TAG", "initDataFromIntent: ---------"+ Build.ID);
+        Log.e("TAG", "initDataFromIntent: ----99-----"+ Build.TIME);
+        //861211344413522
+//5071047551432824
+//080027198f10
     }
 
     @Override

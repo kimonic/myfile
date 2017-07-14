@@ -1,7 +1,6 @@
 package com.tudoujf.activity;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -84,6 +83,7 @@ public class DrawGestureActivity extends BaseActivity {
                     if (inputCount == 4) {
                         password = EncryptionLockUtils.convertList(positionSet);
                     } else if (!password.equals( EncryptionLockUtils.convertList(positionSet))) {
+                        password=null;
                         inputCount = 5;
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_error);
                     }
@@ -91,6 +91,7 @@ public class DrawGestureActivity extends BaseActivity {
                     if (inputCount == 0) {
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_sucess);
                         savePassword(positionSet);
+                        mlvActDrawgesture.setOpenOrCloseDraw(false);
                         //// TODO: 2017/7/12    保存password,结束本activity,跳转至其他界面
                     } else {
                         ToastUtils.showToast(DrawGestureActivity.this, "请再次输入,还需输入" + inputCount + "次!");
@@ -112,8 +113,6 @@ public class DrawGestureActivity extends BaseActivity {
     private void savePassword(List<Integer> list) {
         String temp=EncryptionLockUtils.convertEncryption(this,list);
         SharedPreferencesUtils.getInstance(this,"gesture").put("ciphertext",temp);
-        Log.e("TAG", "initDataFromIntent: ----------999--------"+ temp);
-
     }
 
     @Override

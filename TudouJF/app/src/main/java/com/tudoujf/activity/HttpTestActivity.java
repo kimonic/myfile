@@ -1,15 +1,12 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
@@ -20,11 +17,8 @@ import com.tudoujf.http.HttpMethods;
 
 import java.io.File;
 import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -64,8 +58,6 @@ public class HttpTestActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-        Map<String,String> map=new HashMap<>();
-        map.put("wd","你好");
 
         final StringConvert convert=new StringConvert();
 

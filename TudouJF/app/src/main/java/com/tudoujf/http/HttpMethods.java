@@ -5,8 +5,6 @@ import android.content.Context;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.Callback;
-import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.util.Map;
 

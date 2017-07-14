@@ -4,7 +4,6 @@ package com.tudoujf.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.provider.Settings;
-import android.util.Log;
 
 import java.util.List;
 
@@ -24,11 +23,9 @@ public class EncryptionLockUtils {
 
     @SuppressLint("HardwareIds")
     public static String  convertEncryption(Context context,List<Integer> list){
-        String encryption="";
         String password=convertList(list);
         String ANDROID_ID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        encryption=MD5Utils.md5(password+ANDROID_ID);
-        return encryption;
+        return MD5Utils.md5(password+ANDROID_ID);
     }
 
     /**

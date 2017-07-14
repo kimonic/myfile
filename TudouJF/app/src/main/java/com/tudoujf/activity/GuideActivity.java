@@ -55,9 +55,9 @@ public class GuideActivity extends AppCompatActivity {
     private void initView() {
 
         list=new ArrayList<>();
-        for (int i = 0; i < images.length; i++) {
+        for (int image:images) {
             ImageView imageView=new ImageView(this);
-            imageView.setImageResource(images[i]);
+            imageView.setImageResource(image);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             list.add(imageView);
         }
