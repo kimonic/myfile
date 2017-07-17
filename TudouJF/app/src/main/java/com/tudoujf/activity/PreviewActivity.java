@@ -91,14 +91,17 @@ public class PreviewActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 //        Log.e("initDataFromIntent","1231213"+ NetworkUtils.connectionNetwork());
-        Log.e("initDataFromIntent", NetworkUtils.getLocalIpAddress());
-        Log.e("initDataFromIntent", ""+NetworkUtils.getNetState(this));
-        Log.e("initDataFromIntent", ""+NetworkUtils.is2G(this));
-        Log.e("initDataFromIntent", ""+NetworkUtils.is3G(this));
-        Log.e("initDataFromIntent", ""+NetworkUtils.isNetworkAvailable(this));
-        Log.e("initDataFromIntent", ""+NetworkUtils.isWifi(this));
-        Log.e("initDataFromIntent", ""+NetworkUtils.isWifiEnabled(this));
-        Log.e("initDataFromIntent", "数据网络"+NetworkUtils.isMobileNetEnabled(this));
+//        Log.e("initDataFromIntent111",""+ NetworkUtils.isConnected(this));
+//        Log.e("initDataFromIntent333",""+ NetworkUtils.getTelNetworkTypeINT(this));
+        Log.e("initDataFromIntent444",""+ NetworkUtils.isWifiAvailable(this));
+//        Log.e("initDataFromIntent", NetworkUtils.getLocalIpAddress());
+//        Log.e("initDataFromIntent", ""+NetworkUtils.getNetState(this));
+//        Log.e("initDataFromIntent", ""+NetworkUtils.is2G(this));
+//        Log.e("initDataFromIntent", ""+NetworkUtils.is3G(this));
+//        Log.e("initDataFromIntent", ""+NetworkUtils.isNetworkAvailable(this));
+//        Log.e("initDataFromIntent", ""+NetworkUtils.isWifi(this));
+//        Log.e("initDataFromIntent", ""+NetworkUtils.isWifiEnabled(this));
+//        Log.e("initDataFromIntent222", "数据网络"+NetworkUtils.isMobileNetEnabled(this));
 
         NetworkUtils.getNetCanConnectBaiDu(this, new StringCallback() {
             @Override

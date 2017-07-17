@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.FileCallback;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
@@ -71,99 +73,144 @@ public class HttpTestActivity extends BaseActivity {
         String url="http://imtt.dd.qq.com/16891/8C3E058EAFBFD4F1EFE0AAA815250716.apk?fsname=com.tencent.mobileqq_7.1.0_692.apk&csr=1bbd";
 
         Log.e("TAG", "initDataFromInternet:------ "+ Environment.getExternalStorageDirectory());
-
-        HttpMethods.getInstance().Download(this, url, null, new FileCallback() {
+        HttpMethods.getInstance().GET(this,url, new Callback<StringCallback>(){
             @Override
-            public void onStart(Request<File, ? extends Request> request) {
-                tvActHttptest1.setText("正在下载中");
+            public StringCallback convertResponse(okhttp3.Response response) throws Throwable {
+                return null;
             }
 
             @Override
-            public void onSuccess(Response<File> response) {
-//                handleResponse(response);
-                tvActHttptest1.setText("下载完成");
+            public void onStart(Request<StringCallback, ? extends Request> request) {
+
             }
 
             @Override
-            public void onError(Response<File> response) {
-//                handleError(response);
-                tvActHttptest1.setText("下载出错");
+            public void onSuccess(Response<StringCallback> response) {
+
+            }
+
+
+            @Override
+            public void onCacheSuccess(Response<StringCallback> response) {
+
+            }
+
+            @Override
+            public void onError(Response<StringCallback> response) {
+
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void uploadProgress(Progress progress) {
+
             }
 
             @Override
             public void downloadProgress(Progress progress) {
-                Log.e("TAG", "downloadProgress:----------------------- 1" );
-                System.out.println(progress);
 
-                String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
-                String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
-                tvActHttptest2.setText(downloadLength + "/" + totalLength);
-                String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
-                tvActHttptest3.setText(String.format("%s/s", speed));
-                tvActHttptest4.setText(NumberFormat.getPercentInstance().format(progress.fraction));
-//                pbProgress.setMax(10000);
-//                pbProgress.setProgress((int) (progress.fraction * 10000));
             }
-        });
-//        HttpMethods.getInstance().GET(this,"https://www.baidu.com/",null,"123", new Callback() {
-//                    @Override
-//                    public Object convertResponse(okhttp3.Response response) throws Throwable {
-//                        final String s = convert.convertResponse(response);
-//                        response.close();
-//                        Log.e("TAG", "convertResponse: " +Thread.currentThread().getName());
-//                        Log.e("TAG", "convertResponse: "+s );
-//                        System.out.println("convertResponse"+s);
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                tvActHttptest.setText(s);
-//                            }
-//                        });
-//                        return s;
-//                    }
-//
-//                    @Override
-//                    public void onStart(Request request) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(Response response) {
-//                        Log.e("TAG", "onSuccess: -----"+Thread.currentThread().getName() );
-////                        Log.e("TAG", "onSuccess: -----"+response.body() );
-//                        System.out.print("onSuccess"+response.body().toString());
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onCacheSuccess(Response response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Response response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFinish() {
-//
-//                    }
-//
-//                    @Override
-//                    public void uploadProgress(Progress progress) {
-//
-//                    }
-//
-//                    @Override
-//                    public void downloadProgress(Progress progress) {
-//
-//                    }
-//                }
-//        );
-    }
 
+
+
+        });
+
+//        HttpMethods.getInstance().Download(this, url, null, new Callback<FileCallback>() {
+//            @Override
+//            public void onStart(Request<File, ? extends Request> request) {
+//                tvActHttptest1.setText("正在下载中");
+//            }
+//
+//            @Override
+//            public void onSuccess(Response<File> response) {
+////                handleResponse(response);
+//                tvActHttptest1.setText("下载完成");
+//            }
+//
+//            @Override
+//            public void onError(Response<File> response) {
+////                handleError(response);
+//                tvActHttptest1.setText("下载出错");
+//            }
+//
+//            @Override
+//            public void downloadProgress(Progress progress) {
+//                Log.e("TAG", "downloadProgress:----------------------- 1" );
+//                System.out.println(progress);
+//
+//                String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
+//                String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
+//                tvActHttptest2.setText(downloadLength + "/" + totalLength);
+//                String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
+//                tvActHttptest3.setText(String.format("%s/s", speed));
+//                tvActHttptest4.setText(NumberFormat.getPercentInstance().format(progress.fraction));
+////                pbProgress.setMax(10000);
+////                pbProgress.setProgress((int) (progress.fraction * 10000));
+//            }
+//        });
+////        HttpMethods.getInstance().GET(this,"https://www.baidu.com/",null,"123", new Callback() {
+////                    @Override
+////                    public Object convertResponse(okhttp3.Response response) throws Throwable {
+////                        final String s = convert.convertResponse(response);
+////                        response.close();
+////                        Log.e("TAG", "convertResponse: " +Thread.currentThread().getName());
+////                        Log.e("TAG", "convertResponse: "+s );
+////                        System.out.println("convertResponse"+s);
+////                        runOnUiThread(new Runnable() {
+////                            @Override
+////                            public void run() {
+////                                tvActHttptest.setText(s);
+////                            }
+////                        });
+////                        return s;
+////                    }
+////
+////                    @Override
+////                    public void onStart(Request request) {
+////
+////                    }
+////
+////                    @Override
+////                    public void onSuccess(Response response) {
+////                        Log.e("TAG", "onSuccess: -----"+Thread.currentThread().getName() );
+//////                        Log.e("TAG", "onSuccess: -----"+response.body() );
+////                        System.out.print("onSuccess"+response.body().toString());
+////
+////                    }
+////
+////
+////                    @Override
+////                    public void onCacheSuccess(Response response) {
+////
+////                    }
+////
+////                    @Override
+////                    public void onError(Response response) {
+////
+////                    }
+////
+////                    @Override
+////                    public void onFinish() {
+////
+////                    }
+////
+////                    @Override
+////                    public void uploadProgress(Progress progress) {
+////
+////                    }
+////
+////                    @Override
+////                    public void downloadProgress(Progress progress) {
+////
+////                    }
+////                }
+////        );
+    }
+//
     @Override
     public void LoadInternetDataToUi() {
 
@@ -179,4 +226,6 @@ public class HttpTestActivity extends BaseActivity {
     public void onClick(View view) {
 
     }
+
+
 }
