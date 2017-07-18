@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
 import com.lzy.okgo.callback.Callback;
+import com.lzy.okgo.callback.StringCallback;
 import com.tudoujf.http.HttpMethods;
 
 import java.lang.reflect.Method;

@@ -9,6 +9,7 @@ import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -54,8 +55,8 @@ public class HttpMethods {
     /**
      * get请求
      */
-    public void GET(final Context context, String url, Callback<StringCallback> callback) {
-        OkGo.<StringCallback>get(url)     // 请求方式和请求url
+    public void GET(final Context context, String url, Callback callback) {
+        OkGo.get(url)     // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
                 .execute(callback);

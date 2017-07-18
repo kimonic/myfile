@@ -55,6 +55,8 @@
         <activity android:name=".activity.LockActivity" />
         <!--设置手势密码activity-->
         <activity android:name=".activity.DrawGestureActivity" />
+        <!--上拉加载下拉刷新activity-->
+        <activity android:name=".activity.PushPullActivity"/>
 
 
     </application>

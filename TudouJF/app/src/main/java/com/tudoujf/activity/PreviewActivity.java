@@ -5,10 +5,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.Request;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.AESUtils;
 import com.tudoujf.utils.AppInfoUtils;
 import com.tudoujf.utils.L;
@@ -78,6 +82,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(DrawGestureActivity.class);
                 break;
             case R.id.bt_act_preview6:
+                openActivity(PushPullActivity.class);
                 break;
             case R.id.bt_act_preview7:
                 break;
@@ -102,17 +107,10 @@ public class PreviewActivity extends BaseActivity {
 //        Log.e("initDataFromIntent", ""+NetworkUtils.isWifi(this));
 //        Log.e("initDataFromIntent", ""+NetworkUtils.isWifiEnabled(this));
 //        Log.e("initDataFromIntent222", "数据网络"+NetworkUtils.isMobileNetEnabled(this));
-
-        NetworkUtils.getNetCanConnectBaiDu(this, new StringCallback() {
+        HttpMethods.getInstance().GET(this, "", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                ToastUtils.showToast(PreviewActivity.this,"连接网络成功");
-            }
 
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                ToastUtils.showToast(PreviewActivity.this,"连接网络失败");
             }
         });
 
