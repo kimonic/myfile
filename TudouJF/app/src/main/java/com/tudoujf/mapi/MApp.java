@@ -12,6 +12,8 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
 
+import org.litepal.LitePal;
+
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -27,6 +29,7 @@ public class MApp extends Application{
     public void onCreate() {
         super.onCreate();
         initOkGo();
+        LitePal.initialize(this);
     }
     private void initOkGo() {
         HttpHeaders headers = new HttpHeaders();

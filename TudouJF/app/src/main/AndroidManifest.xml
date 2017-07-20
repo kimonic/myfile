@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name=".mapi.MApp"
         android:allowBackup="true"
@@ -19,46 +18,53 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--欢迎页activity-->
+
+        <!-- 欢迎页activity -->
         <activity android:name=".activity.WelcomeActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <!--初次引导页activity-->
+        <!-- 初次引导页activity -->
         <activity android:name=".activity.GuideActivity" />
-        <!--网络测试activity-->
+        <!-- 网络测试activity -->
         <activity android:name=".activity.HttpTestActivity" />
-        <!--主页activity-->
+        <!-- 主页activity -->
         <activity android:name=".activity.HomeActivity" />
-        <!--登录页activity-->
+        <!-- 登录页activity -->
         <activity android:name=".activity.LoginActivity" />
-        <!--注册页activity-->
+        <!-- 注册页activity -->
         <activity android:name=".activity.RegisterActivity" />
-        <!--确认密码页activity-->
+        <!-- 确认密码页activity -->
         <activity android:name=".activity.AffirmPasswordActivity" />
-        <!--预览各个activity的界面-->
+        <!-- 预览各个activity的界面 -->
         <activity android:name=".activity.PreviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <!--监听拦截home键-->
-                <!--<category android:name="android.intent.category.HOME" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!-- 监听拦截home键 -->
+                <!-- <category android:name="android.intent.category.HOME" /> -->
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
             </intent-filter>
         </activity>
-        <!--忘记密码activity-->
+        <!-- 忘记密码activity -->
         <activity android:name=".activity.FindPasswordActivity" />
-        <!--手势密码activity-->
+        <!-- 手势密码activity -->
         <activity android:name=".activity.LockActivity" />
-        <!--设置手势密码activity-->
+        <!-- 设置手势密码activity -->
         <activity android:name=".activity.DrawGestureActivity" />
-        <!--上拉加载下拉刷新activity-->
-        <activity android:name=".activity.PushPullActivity"/>
+        <!-- 上拉加载下拉刷新activity -->
+        <activity android:name=".activity.PushPullActivity" />
 
-
+        <service
+            android:name=".service.MyService"
+            android:enabled="true" />
+        <service
+            android:name=".service.MyIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
