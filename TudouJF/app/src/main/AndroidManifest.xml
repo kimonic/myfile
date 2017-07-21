@@ -39,6 +39,11 @@
         <activity android:name=".activity.RegisterActivity" />
         <!-- 确认密码页activity -->
         <activity android:name=".activity.AffirmPasswordActivity" />
+        <!--产品详情activity-->
+        <activity android:name=".activity.ProductDetailsActivity"/>
+
+
+
         <!-- 预览各个activity的界面 -->
         <activity android:name=".activity.PreviewActivity">
             <intent-filter>
@@ -58,6 +63,7 @@
         <activity android:name=".activity.DrawGestureActivity" />
         <!-- 上拉加载下拉刷新activity -->
         <activity android:name=".activity.PushPullActivity" />
+        <activity android:name=".activity.ProductDetailsActivity" />
 
         <service
             android:name=".service.MyService"

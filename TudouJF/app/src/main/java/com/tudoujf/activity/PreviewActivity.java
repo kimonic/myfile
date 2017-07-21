@@ -1,12 +1,17 @@
 package com.tudoujf.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,6 +27,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
+import com.lzy.okserver.download.DownloadTask;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
@@ -41,6 +47,8 @@ import java.io.File;
 
 import butterknife.BindView;
 import okhttp3.OkHttpClient;
+
+import static android.app.PendingIntent.FLAG_ONE_SHOT;
 
 /**
  * * ================================================
@@ -124,10 +132,13 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(DrawGestureActivity.class);
                 break;
             case R.id.bt_act_preview6:
-                openActivity(PushPullActivity.class);
+                openActivity(ProductDetailsActivity.class);
                 break;
             case R.id.bt_act_preview7:
-                showPop();
+                PendingIntent pendingIntent=PendingIntent.getActivity(this,0,null,FLAG_ONE_SHOT,null);
+                AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
+                long trig= SystemClock.elapsedRealtime()+10*1000;
+                manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,trig,pendingIntent);
                 break;
             case R.id.bt_act_preview8:
                 /**绑定服务*/
@@ -180,15 +191,16 @@ public class PreviewActivity extends BaseActivity {
         View view = LayoutInflater.from(this).inflate(R.layout.view_popitem, null);
         final PopupWindow pop = new PopupWindow(view, 300, 300);
 //        pop.setContentView(view);
-        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);
-        pop.setBackgroundDrawable(drawable);
-        pop.setOutsideTouchable(true);
-        pop.showAtLocation(btActPreview7, Gravity.TOP, 0, 0);
+        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
+        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
+        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
+        pop.setFocusable(true);//获取焦点
+        pop.showAtLocation(btActPreview7, Gravity.TOP, 0, 0);//显示位置
         int out[] = new int[2];
-        btActPreview.getLocationInWindow(out);
+        btActPreview.getLocationInWindow(out);//获取view在Android坐标系中左上角的坐标点
         Log.e("TAG", "showPop: ----" + out[0]);
         Log.e("TAG", "showPop: -----" + out[1]);
-
+        //pop的监听依靠承载的view来 实现
         view.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
@@ -196,16 +208,16 @@ public class PreviewActivity extends BaseActivity {
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        oldX = (int) event.getRawX();
+                        oldX = (int) event.getRawX();//获取Android坐标系坐标
                         oldY = (int) event.getRawY();
                         break;
                     case MotionEvent.ACTION_MOVE:
                         curX = (int) (event.getRawX() - oldX);
                         curY = (int) (event.getRawY() - oldY);
-                        pop.update(curX, curY, -1, -1, true);
+                        pop.update(curX, curY, -1, -1, true);//更新pop的位置
                         break;
                     case MotionEvent.ACTION_UP:
-                        pop.dismiss();
+                        pop.dismiss();//取消pop
                         break;
                 }
                 return true;

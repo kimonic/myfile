@@ -8,7 +8,7 @@
     <string name="act_login_password">请输入密码(6&#8211;16位数字和字母组合)</string>
     <string name="act_login_nozhanghao">没有账号?</string>
     <string name="act_login_zhuceyouli">注册即可领28888元体验金</string>
-    <string name="act_login_forgetpassword">忘记密码?</string>
+    <string name="act_login_forgetpassword">找回密码</string>
     <string name="act_login_login">登录</string>
     <string name="act_register_username">请输入手机号</string>
     <string name="act_register_imagecode">请输入图形验证码</string>
@@ -56,6 +56,7 @@
     <string name="act_drawgesture_sucess">手势密码设置成功!</string>
     <string name="act_drawgesture_hint">手势密码不能少于4个连接点,请重新设置</string>
     <string name="mlockview_sucess">手势密码验证成功!</string>
+    <string name="act_productdetails_temptitle">房产抵押借款20170327003</string>
 
 
 </resources>
