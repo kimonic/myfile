@@ -57,6 +57,52 @@
     <string name="act_drawgesture_hint">手势密码不能少于4个连接点,请重新设置</string>
     <string name="mlockview_sucess">手势密码验证成功!</string>
     <string name="act_productdetails_temptitle">房产抵押借款20170327003</string>
+    <string name="act_productdetails_rongzijine">融资金额</string>
+    <string name="act_productdetails_shengyuketou">剩余可投</string>
+    <string name="act_productdetails_huankuanfangshi">还款方式</string>
+    <string name="act_productdetails_jieshushujian">结束时间</string>
+    <string name="act_productdetails_touzirenshu">投资人数</string>
+    <string name="act_productdetails_jiekuanzhuangtai">借款状态</string>
+    <string name="act_productdetails_xiangmuxiangqing">项目详情</string>
+    <string name="act_productdetails_changjianwenti">常见问题</string>
+    <string name="act_productdetails_touziliebiao">投资列表</string>
+    <string name="act_productdetails_xiangmumiaoshu">项目描述</string>
+    <string name="act_productdetails_miaoshuneirong">\t\t\t\t孙先生,青岛某驴皮加工企业企业主,主营驴皮阿胶加工销售,年销售额2000万左右;孙女士(孙先生妻子,共同借款人),房产位于青岛市市南区高田路,建筑面积141.15平,市场价值约245万.</string>
+    <string name="act_productdetails_huankuanbaozhang">还款保障</string>
+    <string name="act_productdetails_baozhangneirong">\t\t\t\t\t\t\t\t1.借款人每个月的经营收入\n\t\t\t\t\t\t\t\t2.抵押房产</string>
+    <string name="act_productdetails_fengkongyijian">风控意见</string>
+    <string name="act_productdetails_fegnkongneirong">\t\t\t\t经实地走访,借款人实际经营状况良好,居住稳定,无其他不良信息.本次转让金额5万元,剩余未转让金额0万元.</string>
+    <string name="act_productdetails_baozhangjigou">保障机构</string>
+    <string name="act_productdetails_jigouneirong">\t\t\t\t财产基本险由泰山财产保险股份有限公司承保,保单号:
+    202140101032017000049;\n\t\t\t\t本项目由合作方(青岛某经济咨询信息有限公司)提供风险保障,如债务人发生违约一日后合作方进行债权回购.</string>
+    <string name="act_productdetails_fengxiantishi">风险提示</string>
+    <string name="act_productdetails_fengxianneirong">\t\t\t\t\t\t\t\t请平台投资人自行评估风险,谨慎投资.</string>
+    <string name="act_productdetails_xiangmuziliao">项目资料照片</string>
+    <string name="act_productdetails_lijigoumai">立即购买</string>
+    <string name="act_affirmbuy_yujihuodeshouyi">预计获得收益(元)</string>
+    <string name="act_affirmbuy_qitoujine">起投金额(元)</string>
+    <string name="act_affirmbuy_touzishangxian">投资上限(元)</string>
+    <string name="act_affirmbuy_lixishouyi">利息收益(元)</string>
+    <string name="act_affirmbuy_jianglishouyi">奖励收益(元)</string>
+    <string name="act_affirmbuy_ketouzijine">可投资金额</string>
+    <string name="act_affirmbuy_zhanghuyue">账户余额</string>
+    <string name="act_affirmbuy_chongzhi">充值</string>
+    <string name="act_affirmbuy_touzijine">投资金额(元)</string>
+    <string name="act_affirmbuy_keyonghongbao">可用红包</string>
+    <string name="act_affirmbuy_keyongjiaxiquan">可用加息券</string>
+    <string name="act_affirmbuy_keyongfanxianquan">返现券</string>
+    <string name="act_affirmbuy_tongyi">同意</string>
+    <string name="act_affirmbuy_pingtaijujianfuwuxieyi">《平台居间服务协议》</string>
+    <string name="act_affirmbuy_querengoumai">确认购买</string>
+    <string name="act_fanxianquansel_title">选择返现券</string>
+    <string name="act_fanxianquansel_zanwu">暂无返现券</string>
+    <string name="act_redpackage_hongbao">选择红包</string>
+    <string name="act_redpackage_keshiyong">您有3个红包可使用</string>
+    <string name="act_redpacksge_querenshiyong">确认使用</string>
+    <string name="act_redpackage_danbitouzi">单笔投资满1000元,最低</string>
+    <string name="act_redpackage_touziyueshu">投资0个月可使用</string>
+    <string name="act_redpackage_hongbaodaxiao">50元\t抽奖红包</string>
+    <string name="act_redpackage_zhuangtai">可使用</string>
 
 
 </resources>

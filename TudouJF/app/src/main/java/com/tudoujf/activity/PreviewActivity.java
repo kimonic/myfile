@@ -135,25 +135,30 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(ProductDetailsActivity.class);
                 break;
             case R.id.bt_act_preview7:
-                PendingIntent pendingIntent=PendingIntent.getActivity(this,0,null,FLAG_ONE_SHOT,null);
-                AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
-                long trig= SystemClock.elapsedRealtime()+10*1000;
-                manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,trig,pendingIntent);
+                openActivity(AffirmBuyActivity.class);
+
+//                PendingIntent pendingIntent=PendingIntent.getActivity(this,0,null,FLAG_ONE_SHOT,null);
+//                AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
+//                long trig= SystemClock.elapsedRealtime()+10*1000;
+//                manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,trig,pendingIntent);
                 break;
             case R.id.bt_act_preview8:
-                /**绑定服务*/
-                Intent intent1 = new Intent(this, MyService.class);
-                bindService(intent1,connection,BIND_AUTO_CREATE);
-                /**启动服务*/
-//                startService(intent1);
+                openActivity(FanXianQuanSelActivity.class);
+
+//                /**绑定服务*/
+//                Intent intent1 = new Intent(this, MyService.class);
+//                bindService(intent1,connection,BIND_AUTO_CREATE);
+//                /**启动服务*/
+////                startService(intent1);
                 break;
             case R.id.bt_act_preview9:
+                openActivity(RedPackageActivity.class);
                 //解绑服务,只能执行一次,多次报错
 //                unbindService(connection);
-                Log.e("TAG", "onDestroy:1212 "+ Thread.currentThread().getName());
-//                停止服务
-                Intent intent2 = new Intent(this, MyIntentService.class);
-                stopService(intent2);
+//                Log.e("TAG", "onDestroy:1212 "+ Thread.currentThread().getName());
+////                停止服务
+//                Intent intent2 = new Intent(this, MyIntentService.class);
+//                stopService(intent2);
                 break;
         }
     }
@@ -163,7 +168,7 @@ public class PreviewActivity extends BaseActivity {
 //        Log.e("initDataFromIntent","1231213"+ NetworkUtils.connectionNetwork());
 //        Log.e("initDataFromIntent111",""+ NetworkUtils.isConnected(this));
 //        Log.e("initDataFromIntent333",""+ NetworkUtils.getTelNetworkTypeINT(this));
-        Log.e("initDataFromIntent444", "" + NetworkUtils.isWifiAvailable(this));
+//        Log.e("initDataFromIntent444", "" + NetworkUtils.isWifiAvailable(this));
 //        Log.e("initDataFromIntent", NetworkUtils.getLocalIpAddress());
 //        Log.e("initDataFromIntent", ""+NetworkUtils.getNetState(this));
 //        Log.e("initDataFromIntent", ""+NetworkUtils.is2G(this));

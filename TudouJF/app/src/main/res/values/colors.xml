@@ -25,4 +25,13 @@
     <color name="act_lock_textcolor2">#0C9FCB</color>
     <color name="act_drawgesture_textcolor">#64635F</color>
     <color name="act_register_tvcolor2">#42423A</color>
+    <color name="color_black">#000000</color>
+    <color name="act_productdetails_tvcolor">#FFB982</color>
+    <color name="act_productdetails_tvcolor1">#9D9D9D</color>
+    <color name="act_productdetails_baccolor">#F0EFEA</color>
+    <color name="act_productdetails_baccolor1">#E7FAFF</color>
+    <color name="color_white">#ffffff</color>
+    <color name="act_affirmbuy_bac">#81E3FE</color>
+    <color name="act_fanxianquansel_bac">#F0F0E8</color>
+    <color name="color_gray">#919297</color>
 </resources>

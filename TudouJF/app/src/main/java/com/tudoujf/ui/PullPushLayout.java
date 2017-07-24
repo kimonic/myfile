@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.tudoujf.adapter.SimplVAdapter;
+import com.tudoujf.adapter.SimpleLVAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -252,7 +252,7 @@ public class PullPushLayout extends LinearLayout {
         for (int i = 0; i < 100; i++) {
             list.add("这个item的序号是---------" + i);
         }
-        listView.setAdapter(new SimplVAdapter(list, getContext()));
+        listView.setAdapter(new SimpleLVAdapter(list, getContext()));
 
 
         this.addView(headerView);

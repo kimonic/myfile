@@ -1,31 +1,22 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import com.scwang.smartrefresh.header.FunGameBattleCityHeader;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.header.StoreHouseHeader;
-import com.scwang.smartrefresh.header.fungame.FunGameHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.adapter.SimplVAdapter;
+import com.tudoujf.adapter.SimpleLVAdapter;
 import com.tudoujf.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -80,7 +71,7 @@ public class PushPullActivity extends BaseActivity {
         for (int i = 0; i < 50; i++) {
             list.add("这个item的序号是"+i);
         }
-        SimplVAdapter adapter=new SimplVAdapter(list,this);
+        SimpleLVAdapter adapter=new SimpleLVAdapter(list,this);
         listview.setAdapter(adapter);
     }
 

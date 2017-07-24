@@ -12,23 +12,23 @@ import butterknife.BindView;
 
 /**
  * * ================================================
- * name:            ProductDetailsActivity
+ * name:            AffirmBuyActivity
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/7/21
- * description：产品详情界面activity
+ * date：            2017/7/11
+ * description：确认购买activity
  * history：
  * ===================================================
  */
 
-public class ProductDetailsActivity extends BaseActivity {
-    @BindView(R.id.mtb_act_productdetails)
-    MTopBarView mtbProductdetails;
+public class AffirmBuyActivity extends BaseActivity {
+    @BindView(R.id.mtb_act_affirmbuy)
+    MTopBarView mtbAffirmbuy;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.act_productdetails;
+        return R.layout.act_affirmbuy;
     }
 
     @Override
@@ -44,9 +44,9 @@ public class ProductDetailsActivity extends BaseActivity {
     @Override
     public void initView() {
         /**设置沉浸式状态栏*/
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbProductdetails.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbAffirmbuy.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        mtbProductdetails.setLayoutParams(params);
+        mtbAffirmbuy.setLayoutParams(params);
     }
 
     @Override

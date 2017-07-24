@@ -16,11 +16,11 @@ import java.util.List;
  * listview的简单测试适配器
  */
 
-public class SimplVAdapter extends BaseAdapter {
+public class SimpleLVAdapter extends BaseAdapter {
     private List<String> list;
     private Context context;
 
-    public SimplVAdapter(List<String> list, Context context) {
+    public SimpleLVAdapter(List<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
