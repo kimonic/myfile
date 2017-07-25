@@ -3,6 +3,7 @@ package com.tudoujf.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
@@ -43,6 +44,8 @@ public class ProductDetailsActivity extends BaseActivity {
     LinearLayout llTouZiLieBiao;
     @BindView(R.id.ll_act_productdetails_changjianwenti)
     LinearLayout llChangJianWenTi;
+    @BindView(R.id.tv_act_productdetails_buynow)
+    TextView tvBuyNow;
 
     private List<UnderlineTextView> list;
     private List<LinearLayout> listLL;
@@ -65,6 +68,9 @@ public class ProductDetailsActivity extends BaseActivity {
                 break;
             case R.id.utv_act_productdetails3:
                 setUTVStyle(2);
+                break;
+            case R.id.tv_act_productdetails_buynow:
+                openActivity(AffirmBuyActivity.class);
                 break;
         }
     }
@@ -95,7 +101,7 @@ public class ProductDetailsActivity extends BaseActivity {
         list.add(utv2);
         list.add(utv3);
 
-        listLL=new ArrayList<>();
+        listLL = new ArrayList<>();
         listLL.add(llXiangMuXiangQing);
         listLL.add(llChangJianWenTi);
         listLL.add(llTouZiLieBiao);
@@ -106,6 +112,7 @@ public class ProductDetailsActivity extends BaseActivity {
         utv1.setOnClickListener(this);
         utv2.setOnClickListener(this);
         utv3.setOnClickListener(this);
+        tvBuyNow.setOnClickListener(this);
     }
 
     @Override
@@ -149,10 +156,5 @@ public class ProductDetailsActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }
