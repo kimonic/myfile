@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/xshape_roundrect_mwhite"
+    android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/act_affirmbuy_inputtouzimima"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    />
+                <com.tudoujf.ui.PasswordView
+                    android:layout_width="200dp"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:focusableInTouchMode="true"
+                    android:background="@null"
+                    android:cursorVisible="false"
+                    android:layout_height="35dp"
+                    android:id="@+id/pv_act_affirmbuy_dialog"
+
+
+                    />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:text="@string/act_affirmbuy_queren"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/xshape_roundrect_mbordergray"
+                    android:id="@+id/tv_act_affirmbuy_dialog"
+                    />
+        </LinearLayout>
+
+
+
+

@@ -103,6 +103,14 @@
     <string name="act_redpackage_touziyueshu">投资0个月可使用</string>
     <string name="act_redpackage_hongbaodaxiao">50元\t抽奖红包</string>
     <string name="act_redpackage_zhuangtai">可使用</string>
+    <string name="yuan">元</string>
+    <string name="youxiaoqizhi">有效期至:</string>
+    <string name="act_redpacksge_qingxuanze">请选择要使用的红包</string>
+    <string name="cancel1">取消</string>
+    <string name="act_affirmbuy_inputtouzimima">请输入投资密码</string>
+    <string name="act_affirmbuy_queren">确认</string>
+    <string name="act_redpackage_jiaxiquan">选择加息券</string>
+    <string name="act_productdetails_touzizonge">投资总额</string>
 
 
 </resources>

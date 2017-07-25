@@ -1,14 +1,20 @@
 package com.tudoujf.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.UnderlineTextView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -25,6 +31,21 @@ import butterknife.BindView;
 public class ProductDetailsActivity extends BaseActivity {
     @BindView(R.id.mtb_act_productdetails)
     MTopBarView mtbProductdetails;
+    @BindView(R.id.utv_act_productdetails1)
+    UnderlineTextView utv1;
+    @BindView(R.id.utv_act_productdetails2)
+    UnderlineTextView utv2;
+    @BindView(R.id.utv_act_productdetails3)
+    UnderlineTextView utv3;
+    @BindView(R.id.ll_act_productdetails_xiangmuxiangqing)
+    LinearLayout llXiangMuXiangQing;
+    @BindView(R.id.ll_act_productdetails_touziliebiao)
+    LinearLayout llTouZiLieBiao;
+    @BindView(R.id.ll_act_productdetails_changjianwenti)
+    LinearLayout llChangJianWenTi;
+
+    private List<UnderlineTextView> list;
+    private List<LinearLayout> listLL;
 
     @Override
     public int getLayoutResId() {
@@ -33,7 +54,19 @@ public class ProductDetailsActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.utv_act_productdetails1:
+                setUTVStyle(0);
 
+                break;
+            case R.id.utv_act_productdetails2:
+                setUTVStyle(1);
+
+                break;
+            case R.id.utv_act_productdetails3:
+                setUTVStyle(2);
+                break;
+        }
     }
 
     @Override
@@ -47,11 +80,32 @@ public class ProductDetailsActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbProductdetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbProductdetails.setLayoutParams(params);
+
+        mtbProductdetails.getLeftTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeActivity();
+            }
+        });
+
+        utv1.setUnderlinecolor(R.color.act_productdetails_tvcolor);
+
+        list = new ArrayList<>();
+        list.add(utv1);
+        list.add(utv2);
+        list.add(utv3);
+
+        listLL=new ArrayList<>();
+        listLL.add(llXiangMuXiangQing);
+        listLL.add(llChangJianWenTi);
+        listLL.add(llTouZiLieBiao);
     }
 
     @Override
     public void initListener() {
-
+        utv1.setOnClickListener(this);
+        utv2.setOnClickListener(this);
+        utv3.setOnClickListener(this);
     }
 
     @Override
@@ -74,5 +128,31 @@ public class ProductDetailsActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * 设置underllinetextview的样式
+     */
+    private void setUTVStyle(int i) {
 
+        for (int j = 0; j < list.size(); j++) {
+            if (i == j) {
+                list.get(j).setUnderlinecolor(R.color.act_productdetails_tvcolor);
+                list.get(j).setTextColor(getResources().getColor(R.color.act_productdetails_tvcolor));
+                listLL.get(j).setVisibility(View.VISIBLE);
+            } else {
+                list.get(j).setUnderlinecolor(R.color.color_black);
+                list.get(j).setTextColor(getResources().getColor(R.color.color_black));
+                listLL.get(j).setVisibility(View.GONE);
+            }
+        }
+
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

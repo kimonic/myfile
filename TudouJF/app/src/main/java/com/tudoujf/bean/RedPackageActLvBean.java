@@ -19,6 +19,24 @@ public class RedPackageActLvBean {
     private String content4;
     private String content5;
     private String content6;
+    private int background;
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getBackground() {
+        return background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
+    }
 
     public String getContent1() {
         return content1;

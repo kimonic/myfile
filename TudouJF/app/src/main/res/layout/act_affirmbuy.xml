@@ -67,7 +67,7 @@
 
         <View
             android:layout_width="2dp"
-            android:layout_height="30dp"
+            android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
             />
@@ -99,7 +99,7 @@
         </LinearLayout>
         <View
             android:layout_width="2dp"
-            android:layout_height="30dp"
+            android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
             />
@@ -130,7 +130,7 @@
         </LinearLayout>
         <View
             android:layout_width="2dp"
-            android:layout_height="30dp"
+            android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
             />
@@ -173,8 +173,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_ketouzijine"
             />
@@ -182,7 +182,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_ketouzijine"
             android:layout_marginLeft="20dp"
@@ -194,7 +194,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor"
             android:text="00,000.00元"
             android:layout_marginLeft="20dp"
@@ -215,8 +215,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_zhanghuyue"
             />
@@ -225,7 +225,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_zhanghuyue"
             android:layout_marginLeft="20dp"
@@ -274,8 +274,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_touzijine"
             />
@@ -283,7 +283,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_touzijine"
             android:layout_marginLeft="20dp"
@@ -316,8 +316,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyonghongbao"
             />
@@ -326,7 +326,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_keyonghongbao"
             android:layout_marginLeft="20dp"
@@ -334,6 +334,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/ll_act_affirmbuy_redpackage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -367,8 +368,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyongjiaxiquan"
             />
@@ -377,7 +378,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_keyongjiaxiquan"
             android:layout_marginLeft="20dp"
@@ -385,6 +386,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/ll_act_affirmbuy_jiaxiquan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -418,8 +420,8 @@
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyongfanxianquan"
             />
@@ -428,7 +430,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical|start"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
             android:text="@string/act_affirmbuy_keyongfanxianquan"
             android:layout_marginLeft="20dp"
@@ -436,6 +438,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/ll_act_affirmbuy_fanxianquan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -459,11 +462,11 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    
-    
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="22dp"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:gravity="center"
@@ -493,16 +496,16 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_act_affirmbuy_affirmbuy"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:textSize="18sp"
-        android:textColor="@color/color_white"
-        android:text="@string/act_affirmbuy_querengoumai"
-        android:background="@drawable/xshape_roundrect_mblue"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@drawable/xshape_roundrect_mblue"
         android:gravity="center"
-        />
+        android:text="@string/act_affirmbuy_querengoumai"
+        android:textColor="@color/color_white"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

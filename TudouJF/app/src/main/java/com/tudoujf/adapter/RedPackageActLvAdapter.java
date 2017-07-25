@@ -1,6 +1,8 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,7 @@ public class RedPackageActLvAdapter extends BaseAdapter {
             viewHolder.textView2= (TextView) view.findViewById(R.id.lvitem_redpackage_tv2);
             viewHolder.textView3= (TextView) view.findViewById(R.id.lvitem_redpackage_tv3);
             viewHolder.textView4= (TextView) view.findViewById(R.id.lvitem_redpackage_tv4);
-//            viewHolder.redView= (RedView) view.findViewById(R.id.lvitem_redpackage_rv5);
+            viewHolder.redView= (RedView) view.findViewById(R.id.lvitem_redpackage_rv5);
             view.setTag(viewHolder);
 
         }else {
@@ -74,7 +76,29 @@ public class RedPackageActLvAdapter extends BaseAdapter {
         viewHolder.textView2.setText(list.get(position).getContent2());
         viewHolder.textView3.setText(list.get(position).getContent3());
         viewHolder.textView4.setText(list.get(position).getContent4());
-//        viewHolder.redView.setText(list.get(position).getContent4());
+        viewHolder.redView.setOneText(list.get(position).getContent5());
+        viewHolder.redView.setFourText(list.get(position).getContent6());
+
+
+        if (list.get(position).getType()==1){//红包界面
+            if (list.get(position).getBackground()==1){
+                view.setBackgroundColor(Color.parseColor("#ffffff"));
+                viewHolder.redView.setBitmap(R.drawable.act_redpackage2_unsel);
+            }else {
+                view.setBackgroundColor(Color.parseColor("#E7FAFF"));
+                viewHolder.redView.setBitmap(R.drawable.act_redpackage2_sel);
+            }
+        }else {//加息券界面
+            viewHolder.redView.setTwoText("%");
+            if (list.get(position).getBackground()==1){
+                view.setBackgroundColor(Color.parseColor("#ffffff"));
+                viewHolder.redView.setBitmap(R.drawable.act_redpackage2_quanunsel);
+            }else {
+                view.setBackgroundColor(Color.parseColor("#E7FAFF"));
+                viewHolder.redView.setBitmap(R.drawable.act_redpackage2_quansel);
+            }
+        }
+
 
 
 
@@ -83,9 +107,9 @@ public class RedPackageActLvAdapter extends BaseAdapter {
         return view;
     }
 
-    private class ViewHolder{
-        TextView textView1,textView2,textView3,textView4;
-        RedView redView;
+    public class ViewHolder{
+        public TextView textView1,textView2,textView3,textView4;
+        public RedView redView;
     }
 
 }

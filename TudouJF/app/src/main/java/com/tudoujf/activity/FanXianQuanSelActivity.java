@@ -49,6 +49,13 @@ public class FanXianQuanSelActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbFanxianquansel.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbFanxianquansel.setLayoutParams(params);
+
+        mtbFanxianquansel.getLeftTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeActivity();
+            }
+        });
     }
 
     @Override

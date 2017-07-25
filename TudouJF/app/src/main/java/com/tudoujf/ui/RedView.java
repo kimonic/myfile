@@ -2,6 +2,7 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,7 +14,6 @@ import android.support.annotation.Px;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.tudoujf.R;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -32,49 +32,31 @@ import com.tudoujf.utils.ScreenSizeUtils;
 
 public class RedView extends View {
 
-    private int  imageId= R.drawable.act_redpackage2_unsel;
+    /**背景图片*/
     private Bitmap bitmap;
+    /**控件宽度*/
     private int width;
-    private int height;
     private String TAG="redview";
+    /**初始背景图片类型*/
+    private int type=1;
 
-    public Bitmap getBitmap() {
-        if (bitmap!=null){
-            return bitmap;
-        }
-        return BitmapFactory.decodeResource(getResources(),imageId);
+    private static final int RED_PACKAGE=1;
+    private static final int JIA_XI_QUAN=2;
+
+
+
+    public void setBitmap(int bitmapId) {
+        this.bitmap = BitmapFactory.decodeResource(getResources(),bitmapId);
+        invalidate();
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-
-    public String getOneText() {
-        return oneText;
-    }
 
     public void setOneText(String oneText) {
         this.oneText = oneText;
     }
 
-    public String getTwoText() {
-        return twoText;
-    }
-
     public void setTwoText(String twoText) {
         this.twoText = twoText;
-    }
-
-    public String getThreeText() {
-        return threeText;
-    }
-
-    public void setThreeText(String threeText) {
-        this.threeText = threeText;
-    }
-
-    public String getFourText() {
-        return fourText;
     }
 
     public void setFourText(String fourText) {
@@ -84,7 +66,7 @@ public class RedView extends View {
     private Rect rect=new Rect();
     private Paint onePaint,twoPaint,threePaint;
 
-    private String oneText="50",twoText="元",threeText="有效期至:",fourText="2016/XX/XX";
+    private String oneText,twoText=getResources().getString(R.string.yuan),threeText=getResources().getString(R.string.youxiaoqizhi),fourText;
 
     public RedView(Context context) {
         this(context, null, 0);
@@ -96,35 +78,47 @@ public class RedView extends View {
 
     public RedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView();
+        initView(attrs);
     }
     @TargetApi(23)
     public RedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initView();
+        initView(attrs);
     }
 
-    private void initView() {
-            bitmap= getBitmap();
+    private void initView(AttributeSet attrs) {
             onePaint=initPaint();
             twoPaint=initPaint();
             threePaint=initPaint();
-
-
+        if (attrs!=null){
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RedView);
+            type=a.getInt(R.styleable.RedView_type,1);
+            a.recycle();
+            switch (type){
+                case RED_PACKAGE:
+                    bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.act_redpackage2_unsel);
+                    break;
+                case JIA_XI_QUAN:
+                    bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.act_redpackage2_quanunsel);
+                    break;
+            }
+        }else {
+            bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.act_redpackage2_unsel);
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
         int width=getWidth();
-        Log.e("TAG", "onDraw:-*-------- " +getWidth());
-        Log.e("TAG", "onDraw: --------" +getHeight());
 
         rect.left=0;
         rect.top=0;
         rect.right=getWidth();
         rect.bottom=getHeight();
-        canvas.drawBitmap(bitmap,null,rect,null);
+        if (bitmap!=null){
+            canvas.drawBitmap(bitmap,null,rect,null);
+        }
 
         float  oneScaleX=0.15f;
         float  oneScaleY=0.18f;
@@ -169,26 +163,21 @@ public class RedView extends View {
         int widthMode=MeasureSpec.getMode(widthMeasureSpec);
         int heightMode=MeasureSpec.getMode(heightMeasureSpec);
 
-
-//        Log.e("TAG", "onMeasure: ------3---"+MeasureSpec.UNSPECIFIED);//0
-
         width=MeasureSpec.getSize(widthMeasureSpec);
-        height=MeasureSpec.getSize(heightMeasureSpec);
+
+        int height = MeasureSpec.getSize(heightMeasureSpec);
 
         if (widthMode==MeasureSpec.AT_MOST){
             width=100* ScreenSizeUtils.getDensity(getContext());
         }
         if (heightMode==MeasureSpec.AT_MOST){
-            height= (int) (100* ScreenSizeUtils.getDensity(getContext())/1.175f);
+            height = (int) (100* ScreenSizeUtils.getDensity(getContext())/1.175f);
         }
 
-        width= (int) (height*1.175f);
-        Log.e(TAG, "onMeasure: -----------" +width);
-        Log.e(TAG, "onMeasure: -----------" +height);
-        setMeasuredDimension(width,height);
-
+        width= (int) (height *1.175f);
+        setMeasuredDimension(width, height);
     }
-
+    /**初始化画笔*/
     private Paint initPaint(){
         Paint paint=new Paint();
         paint.setAntiAlias(true);
@@ -197,17 +186,13 @@ public class RedView extends View {
         return paint;
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-    }
 
+    /**该函数确定该view在父控件中的位置,并最终确定getwidth()和getheight()的值*/
     @Override
     public void layout(@Px int l, @Px int t, @Px int r, @Px int b) {
 
         int  w=ScreenSizeUtils.getScreenWidth(getContext())-width-10*ScreenSizeUtils.getDensity(getContext());
         int  w2=w+width;
-
         super.layout(w, t, w2, b);
     }
 }
