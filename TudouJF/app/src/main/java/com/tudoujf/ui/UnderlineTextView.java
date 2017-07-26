@@ -25,7 +25,7 @@ import com.tudoujf.R;
 
 public class UnderlineTextView extends AppCompatTextView {
 
-    private int underlinecolor= R.color.color_black;
+    private int underlinecolor= R.color.color_white;
     private Paint underlinePaint;
 
     public int getUnderlinecolor() {
@@ -53,10 +53,9 @@ public class UnderlineTextView extends AppCompatTextView {
 
     private void initView() {
         underlinePaint =new Paint();
-        underlinePaint.setStrokeWidth(5);
+        underlinePaint.setStrokeWidth(6);
         underlinePaint.setAntiAlias(true);
         underlinePaint.setStyle(Paint.Style.FILL);
-        underlinePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 
     }
 
@@ -64,10 +63,11 @@ public class UnderlineTextView extends AppCompatTextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
+
         underlinePaint.setColor(getResources().getColor(underlinecolor));
         int width=getWidth();
         int height=getHeight();
-        canvas.drawLine(0,height-5,width,height-5,underlinePaint);
+        canvas.drawLine(0,height-3,width,height-3,underlinePaint);
         canvas.restore();
     }
 }

@@ -2,7 +2,9 @@ package com.tudoujf.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
@@ -10,7 +12,6 @@ import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -27,6 +28,12 @@ import butterknife.ButterKnife;
 public class FanXianQuanSelActivity extends BaseActivity {
     @BindView(R.id.mtb_act_fanxianquansel)
     MTopBarView mtbFanxianquansel;
+    @BindView(R.id.iv_act_fanxianquansel)
+    ImageView ivFanxianquansel;
+    @BindView(R.id.tv_act_fanxianquansel)
+    TextView tvFanxianquansel;
+
+    private int type=2;
 
     @Override
     public int getLayoutResId() {
@@ -40,7 +47,11 @@ public class FanXianQuanSelActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+        Bundle bundle=getIntent().getExtras();
+        if (bundle!=null){
+            type=bundle.getInt("type",2);
+        }
+        // TODO: 2017/7/26   获取传输过来的数据,来确定要展示的标题和展示的图片,内容
     }
 
     @Override
@@ -56,6 +67,20 @@ public class FanXianQuanSelActivity extends BaseActivity {
                 closeActivity();
             }
         });
+
+        switch (type){
+            case 1:
+                ivFanxianquansel.setImageResource(R.drawable.act_fanxianquan2_redpackage);
+                tvFanxianquansel.setText(R.string.act_fanxianquansel_zanwuredpackage);
+                mtbFanxianquansel.setCenterTitle(R.string.act_fanxianquansel_titleredpackage);
+                break;
+            case 2:
+                ivFanxianquansel.setImageResource(R.drawable.act_fanxianquan2_quan);
+                tvFanxianquansel.setText(R.string.act_fanxianquansel_zanwu);
+                mtbFanxianquansel.setCenterTitle(R.string.act_fanxianquansel_title);
+                break;
+        }
+
     }
 
     @Override
@@ -82,6 +107,7 @@ public class FanXianQuanSelActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
 
 
 }

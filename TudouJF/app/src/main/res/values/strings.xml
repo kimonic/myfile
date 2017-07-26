@@ -110,7 +110,12 @@
     <string name="act_affirmbuy_inputtouzimima">请输入投资密码</string>
     <string name="act_affirmbuy_queren">确认</string>
     <string name="act_redpackage_jiaxiquan">选择加息券</string>
-    <string name="act_productdetails_touzizonge">投资总额</string>
+    <string name="act_productdetails_touzizonge">投资总额:</string>
+    <string name="act_productdetails_tempdata">XX,XXX.XX元</string>
+    <string name="act_productdetails_touzirenci">投资人次:</string>
+    <string name="act_productdetails_tempdata1">XXX人</string>
+    <string name="act_fanxianquansel_zanwuredpackage">暂无红包</string>
+    <string name="act_fanxianquansel_titleredpackage">选择红包</string>
 
 
 </resources>

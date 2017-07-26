@@ -433,34 +433,49 @@
                 android:visibility="gone"
                 >
                 <ListView
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:id="@+id/lv_act_productdetails"
+                    android:dividerHeight="0dp"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal"
                     android:gravity="end"
+                    android:layout_marginTop="20dp"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/act_productdetails_touzizonge"
+                        android:textSize="12sp"
+                        android:textColor="@color/act_productdetails_tvcolor2"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/act_productdetails_touzizonge"
-                        />
+                        android:text="@string/act_productdetails_tempdata"
+                        android:textSize="12sp"
+                        android:textColor="@color/act_productdetails_tvcolor2"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/act_productdetails_touzizonge"
-                        />
+                        android:text="@string/act_productdetails_touzirenci"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/act_productdetails_tvcolor2" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/act_productdetails_touzizonge"
+                        android:text="@string/act_productdetails_tempdata1"
+                        android:textSize="12sp"
+                        android:textColor="@color/act_productdetails_tvcolor2"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         />
                 </LinearLayout>
 
@@ -499,10 +514,11 @@
                     />
             </LinearLayout>
 
-            <HorizontalScrollView
+            <com.tudoujf.ui.MHorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
+                android:id="@+id/hsv_act_productdetails"
                 >
 
                 <LinearLayout
@@ -537,7 +553,16 @@
                         android:scaleType="fitXY"
                         android:src="@drawable/act_productdetails2_ziliao3" />
                 </LinearLayout>
-            </HorizontalScrollView>
+            </com.tudoujf.ui.MHorizontalScrollView>
+
+            <com.tudoujf.ui.IndicatorView
+                android:id="@+id/iv_act_productdetails"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="20dp"
+                />
 
             <TextView
                 android:id="@+id/tv_act_productdetails_buynow"

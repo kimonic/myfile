@@ -1,14 +1,22 @@
 package com.tudoujf.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.bean.ProductDetailsActLvBean;
+import com.tudoujf.ui.IndicatorView;
+import com.tudoujf.ui.MHorizontalScrollView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.UnderlineTextView;
+import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import java.util.ArrayList;
@@ -46,9 +54,18 @@ public class ProductDetailsActivity extends BaseActivity {
     LinearLayout llChangJianWenTi;
     @BindView(R.id.tv_act_productdetails_buynow)
     TextView tvBuyNow;
+    @BindView(R.id.lv_act_productdetails)
+    ListView lvInvestList;
+    @BindView(R.id.hsv_act_productdetails)
+    MHorizontalScrollView hsvImage;
+    @BindView(R.id.iv_act_productdetails)
+    IndicatorView indicator;
 
     private List<UnderlineTextView> list;
     private List<LinearLayout> listLL;
+    private List<ProductDetailsActLvBean> beanList;
+    private int hsvUnShowWidth;
+
 
     @Override
     public int getLayoutResId() {
@@ -78,6 +95,22 @@ public class ProductDetailsActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
+        beanList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            ProductDetailsActLvBean bean = new ProductDetailsActLvBean();
+            if (i == 0) {
+                bean.setTouBiaoRen("投标人");
+                bean.setTouZiJinE("投资金额(元)");
+                bean.setTouZiTime("投资时间");
+            } else {
+                bean.setTouBiaoRen("XXXXXXXXX");
+                bean.setTouZiJinE("XX,XXX.XX");
+                bean.setTouZiTime("20XX/XX/XX");
+            }
+            beanList.add(bean);
+
+        }
+
     }
 
     @Override
@@ -105,7 +138,24 @@ public class ProductDetailsActivity extends BaseActivity {
         listLL.add(llXiangMuXiangQing);
         listLL.add(llChangJianWenTi);
         listLL.add(llTouZiLieBiao);
+        ProductDetailsActLvAdapter adapter = new ProductDetailsActLvAdapter(this, beanList);
+        lvInvestList.setAdapter(adapter);
+
+        HeightUtils.setListviewHeight(lvInvestList);
+
+
+//        checkScroll();
+
+        hsvImage.setListener(new MHorizontalScrollView.ScrollListener() {
+
+            @Override
+            public void currentScrollX(int l, int t, int oldl, int oldt) {
+                indicator.setScale((float) l/hsvUnShowWidth);
+
+            }
+        });
     }
+
 
     @Override
     public void initListener() {
@@ -113,6 +163,7 @@ public class ProductDetailsActivity extends BaseActivity {
         utv2.setOnClickListener(this);
         utv3.setOnClickListener(this);
         tvBuyNow.setOnClickListener(this);
+
     }
 
     @Override
@@ -146,7 +197,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 list.get(j).setTextColor(getResources().getColor(R.color.act_productdetails_tvcolor));
                 listLL.get(j).setVisibility(View.VISIBLE);
             } else {
-                list.get(j).setUnderlinecolor(R.color.color_black);
+                list.get(j).setUnderlinecolor(R.color.color_white);
                 list.get(j).setTextColor(getResources().getColor(R.color.color_black));
                 listLL.get(j).setVisibility(View.GONE);
             }
@@ -154,6 +205,14 @@ public class ProductDetailsActivity extends BaseActivity {
 
 
     }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        hsvUnShowWidth = hsvImage.getChildAt(0).getWidth()-hsvImage.getWidth();
+    }
+
 
 
 

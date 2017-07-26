@@ -25,9 +25,9 @@
 <!--"-->
             <!--/>-->
         <path android:strokeColor="#FBFDF8"
-            android:strokeWidth="20"
+            android:strokeWidth="30"
             android:pathData="M170 130,
-                            L20 250
+                            L30 250
                            170 380
 
 "
