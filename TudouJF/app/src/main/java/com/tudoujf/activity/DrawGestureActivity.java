@@ -63,7 +63,7 @@ public class DrawGestureActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock2_icon);
+        ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
     }
 
     @Override

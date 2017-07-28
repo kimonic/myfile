@@ -5,14 +5,19 @@
     android:orientation="vertical"
     android:background="@color/act_affirm_bac"
     >
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="133dp"
-        android:contentDescription="@null"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/act_login2_bac"
-        />
+        >
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:contentDescription="@null"
+            android:layout_gravity="center"
+            android:src="@drawable/act_login_bac"
+            />
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
