@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Base64;
@@ -159,6 +160,15 @@ public class PreviewActivity extends BaseActivity {
 ////                停止服务
 //                Intent intent2 = new Intent(this, MyIntentService.class);
 //                stopService(intent2);
+
+//                Intent intent=new Intent(Intent.ACTION_SEND);
+////                intent.setType("image/*");
+//                intent.setType("text/plain");
+//                intent.putExtra(Intent.EXTRA_TEXT,"hello world");
+//                intent.putExtra(Intent.EXTRA_TEXT,"http://www.cnblogs.com/daner1257/p/5581443.html");
+////                intent.putExtra(Intent.EXTRA_STREAM, R.drawable.act_affirm2_check);
+////                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("/storage/emulated/0/Pictures/145.jpg"));
+//                startActivity(Intent.createChooser(intent,"分享到"));
                 break;
         }
     }

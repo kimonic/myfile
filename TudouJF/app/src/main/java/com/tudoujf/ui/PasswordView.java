@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
-import android.text.Selection;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import com.tudoujf.R;
 
 /**
  * * ================================================
@@ -31,6 +31,12 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
 
     private int textCount=0;
 
+    private TextView  btnText;
+
+    public void setBtnText(TextView btnText) {
+        this.btnText = btnText;
+    }
+
     public PasswordView(Context context) {
         this(context, null, 0);
     }
@@ -46,7 +52,6 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
 
     private void initView() {
         borderPaint=initPaint("#D4D4D2");
-//        borderPaint=initPaint("#F53E16");
         borderPaint.setStrokeWidth(5f);
         contentPaint=initPaint("#000000");
         backPaint=initPaint("#F0F0E8");
@@ -55,11 +60,8 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
 
     @Override
     protected void onDraw(Canvas canvas) {
-//        super.onDraw(canvas);
         int width=getWidth();
         int height=getHeight();
-        Log.e("TAG", "onDraw:-----1---------- " );
-        Log.e("TAG", "onDraw:--------2------- " );
         canvas.drawColor(Color.parseColor("#F0F0E8"));
 
         canvas.drawLine(0,0,width,0,borderPaint);
@@ -67,7 +69,6 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
         canvas.drawLine(0,height-5,width,height-5,borderPaint);
         canvas.drawLine(0,0,0,height-5,borderPaint);
 
-//        canvas.drawRect(0,0,width,height,borderPaint);
 
         float  contentWidth=(width-7*5)/6f;
         for (int i = 0; i < 5; i++) {
@@ -117,12 +118,18 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
         }else {
             content=s.toString();
         }
+        if (content.length()==6&&btnText!=null){
+            btnText.setClickable(true);
+            btnText.setBackgroundResource(R.drawable.xshape_roundrect_mborderblue);
+        }else if (btnText!=null){
+            btnText.setClickable(false);
+            btnText.setBackgroundResource(R.drawable.xshape_roundrect_mbordergray);
+        }
         invalidate();
     }
 
     /**获取密码*/
     public String getContent(){
-
         return content==null?"":content;
     }
 }

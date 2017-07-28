@@ -1,14 +1,11 @@
 package com.tudoujf.activity;
 
-import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -21,7 +18,6 @@ import com.tudoujf.ui.PasswordView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -88,6 +84,8 @@ public class AffirmBuyActivity extends BaseActivity {
         pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
         pop.setFocusable(true);//获取焦点
         pop.showAtLocation(this.getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
+
+
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -99,13 +97,15 @@ public class AffirmBuyActivity extends BaseActivity {
 
         final PasswordView passwordView = (PasswordView) view.findViewById(R.id.pv_act_affirmbuy_dialog);
         TextView textView = (TextView) view.findViewById(R.id.tv_act_affirmbuy_dialog);
+        passwordView.setBtnText(textView);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pop.dismiss();
-                Log.e("TAG", "onClick: ------" + passwordView.getContent());
             }
         });
+        textView.setClickable(false);
+
 
     }
 
