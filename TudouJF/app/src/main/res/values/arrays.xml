@@ -16,7 +16,7 @@
     <string-array name="textIdR" >
         <item>@string/homepage</item>
         <item>@string/licai</item>
-        <item>@string/more</item>
+        <item>@string/faxian</item>
         <item>@string/my</item>
     </string-array>
 

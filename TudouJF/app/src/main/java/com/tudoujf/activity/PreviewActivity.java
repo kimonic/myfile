@@ -1,19 +1,11 @@
 package com.tudoujf.activity;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
+import android.os.Bundle;
 import android.os.IBinder;
-import android.os.SystemClock;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,34 +14,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
 
-import com.lzy.okgo.callback.Callback;
-import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
-import com.lzy.okserver.download.DownloadTask;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.service.MyIntentService;
 import com.tudoujf.service.MyService;
-import com.tudoujf.test.Book;
-import com.tudoujf.utils.AESUtils;
-import com.tudoujf.utils.AppInfoUtils;
-import com.tudoujf.utils.L;
-import com.tudoujf.utils.NetworkUtils;
-import com.tudoujf.utils.ToastUtils;
-
-import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
-
-import java.io.File;
 
 import butterknife.BindView;
-import okhttp3.OkHttpClient;
-
-import static android.app.PendingIntent.FLAG_ONE_SHOT;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -84,13 +57,33 @@ public class PreviewActivity extends BaseActivity {
     Button btActPreview8;
     @BindView(R.id.bt_act_preview9)
     Button btActPreview9;
+    @BindView(R.id.bt_act_preview10)
+    Button btActPreview10;
+    @BindView(R.id.bt_act_preview11)
+    Button btActPreview11;
+    @BindView(R.id.bt_act_preview12)
+    Button btActPreview12;
+    @BindView(R.id.bt_act_preview13)
+    Button btActPreview13;
+    @BindView(R.id.bt_act_preview14)
+    Button btActPreview14;
+    @BindView(R.id.bt_act_preview15)
+    Button btActPreview15;
+    @BindView(R.id.bt_act_preview16)
+    Button btActPreview16;
+    @BindView(R.id.bt_act_preview17)
+    Button btActPreview17;
+    @BindView(R.id.bt_act_preview18)
+    Button btActPreview18;
 
 
     private int oldX = 0, oldY = 0;
     private int curX, curY;
     //获取通信用binder
     private MyService.DownLoadBinder binder;
-    /**绑定服务使用*/
+    /**
+     * 绑定服务使用
+     */
     private ServiceConnection connection = new ServiceConnection() {
         /**绑定服务时调用*/
         @Override
@@ -99,6 +92,7 @@ public class PreviewActivity extends BaseActivity {
             binder.startDownload();
             binder.getProgress();
         }
+
         /**解绑服务时调用*/
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -170,6 +164,27 @@ public class PreviewActivity extends BaseActivity {
 ////                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("/storage/emulated/0/Pictures/145.jpg"));
 //                startActivity(Intent.createChooser(intent,"分享到"));
                 break;
+            case R.id.bt_act_preview10:
+                openActivity(HomeActivity.class);
+                break;
+            case R.id.bt_act_preview11:
+                break;
+            case R.id.bt_act_preview12:
+                break;
+            case R.id.bt_act_preview13:
+                break;
+            case R.id.bt_act_preview14:
+                break;
+            case R.id.bt_act_preview15:
+                break;
+            case R.id.bt_act_preview16:
+                break;
+            case R.id.bt_act_preview17:
+                break;
+            case R.id.bt_act_preview18:
+                break;
+//            case R.id.bt_act_preview19:break;
+
         }
     }
 
@@ -254,6 +269,15 @@ public class PreviewActivity extends BaseActivity {
         btActPreview7.setOnClickListener(this);
         btActPreview8.setOnClickListener(this);
         btActPreview9.setOnClickListener(this);
+        btActPreview10.setOnClickListener(this);
+        btActPreview11.setOnClickListener(this);
+        btActPreview12.setOnClickListener(this);
+        btActPreview13.setOnClickListener(this);
+        btActPreview14.setOnClickListener(this);
+        btActPreview15.setOnClickListener(this);
+        btActPreview16.setOnClickListener(this);
+        btActPreview17.setOnClickListener(this);
+        btActPreview18.setOnClickListener(this);
     }
 
     @Override

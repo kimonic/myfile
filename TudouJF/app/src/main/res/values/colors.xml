@@ -36,4 +36,8 @@
     <color name="color_gray">#919297</color>
     <color name="colorRed">#FC2004</color>
     <color name="act_productdetails_tvcolor2">#4B4B4B</color>
+    <color name="frag_home_textcolor">#646464</color>
+    <color name="frag_home_bac">#FD7C28</color>
+    <color name="frag_home_bac1">#F0F0E8</color>
+    <color name="frag_home_textcolor1">#94938F</color>
 </resources>

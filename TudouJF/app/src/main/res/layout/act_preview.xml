@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,9 +88,79 @@
             android:text="@string/act_redpackage_hongbao"
             android:textSize="16sp" />
 
+        <Button
+            android:id="@+id/bt_act_preview10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="首页activity"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/bt_act_preview18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/act_redpackage_hongbao"
+            android:textSize="16sp" />
+
     </LinearLayout>
-
-
 
 
 </ScrollView>

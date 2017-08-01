@@ -1,17 +1,12 @@
 package com.tudoujf.service;
 
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
-import com.tudoujf.R;
-import com.tudoujf.activity.PreviewActivity;
+import android.view.View;
+import android.view.WindowManager;
 /**服务*/
 public class MyService extends Service {
     private String TAG = "myservice";
@@ -28,6 +23,10 @@ public class MyService extends Service {
             }
     }
 
+    private WindowManager mWindowManager;
+    private View view;
+    private WindowManager.LayoutParams wmParams;
+
     public MyService() {
     }
     /**初次启动服务时执行一次*/
@@ -36,17 +35,18 @@ public class MyService extends Service {
         Log.e(TAG, "onCreate: " );
         super.onCreate();
         //执行前台服务
-        Intent intent=new Intent(this,PreviewActivity.class);
-        PendingIntent pintent=PendingIntent.getActivity(this,0,intent,0);
-        Notification notification=new NotificationCompat.Builder(this)
-                .setContentTitle("123456789")
-                .setContentText("746545456")
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.act_home_icon1)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
-                .setContentIntent(pintent)
-                .build();
-        startForeground(1,notification);
+//        Intent intent=new Intent(this,PreviewActivity.class);
+//        PendingIntent pintent=PendingIntent.getActivity(this,0,intent,0);
+//        Notification notification=new NotificationCompat.Builder(this)
+//                .setContentTitle("123456789")
+//                .setContentText("746545456")
+//                .setWhen(System.currentTimeMillis())
+//                .setSmallIcon(R.drawable.act_home_icon1)
+//                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
+//                .setContentIntent(pintent)
+//                .build();
+//        startForeground(1,notification);
+
 
     }
     /**每start一次执行一次*/
@@ -59,6 +59,7 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         Log.e(TAG, "onDestroy: " );
+        mWindowManager.removeView(view);
         super.onDestroy();
     }
     /**返回binder,该方法用于与服务绑定的活动进行通信*/
@@ -68,4 +69,9 @@ public class MyService extends Service {
 
         return binder;
     }
+
+
+
+
+
 }

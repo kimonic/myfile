@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name=".mapi.MApp"
         android:allowBackup="true"
@@ -78,6 +81,9 @@
             android:exported="false">
 
         </service>
+        <!--签到悬浮窗service-->
+        <service android:name=".service.SignInService"
+            android:exported="false"/>
     </application>
 
 </manifest>

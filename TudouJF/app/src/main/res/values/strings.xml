@@ -2,7 +2,7 @@
     <string name="app_name">TudouJF</string>
     <string name="homepage">首页</string>
     <string name="licai">理财</string>
-    <string name="more">更多</string>
+    <string name="faxian">发现</string>
     <string name="my" >我的</string>
     <string name="act_login_username">请输入用户名/手机号</string>
     <string name="act_login_password">请输入密码(6&#8211;16位数字和字母组合)</string>
@@ -116,6 +116,18 @@
     <string name="act_productdetails_tempdata1">XXX人</string>
     <string name="act_fanxianquansel_zanwuredpackage">暂无红包</string>
     <string name="act_fanxianquansel_titleredpackage">选择红包</string>
+    <string name="frag_home_xinshoufuli">新手福利</string>
+    <string name="frag_home_huodongzhuanqu">活动专区</string>
+    <string name="frag_home_tuijianyouli">推荐有礼</string>
+    <string name="frag_home_xinxipilou">信息披露</string>
+    <string name="frag_home_xinshouzhuanxiangbiao">新手专享标</string>
+    <string name="frag_home_lijitouzi">立即投资</string>
+    <string name="frag_home_touzijine">投资金额</string>
+    <string name="frag_home_touziqixian">投资期限</string>
+    <string name="frag_home_yuqinianhuashouyi">预期年化收益</string>
+    <string name="dialog_zanbukaitong">暂不开通</string>
+    <string name="dialog_lijikaitong">立即开通</string>
+    <string name="dialog_tishi">为了您的资金安全\n请开通资金托管账户</string>
 
 
 </resources>
