@@ -72,6 +72,10 @@
         <activity android:name=".activity.DrawGestureActivity" />
         <!-- 上拉加载下拉刷新activity -->
         <activity android:name=".activity.PushPullActivity" />
+        <!--新手体验标activity-->
+        <activity android:name=".activity.NewcomerExperienceBidActivity"/>
+        <!--信息披露activity-->
+        <activity android:name=".activity.InfoPublishActivity"/>
 
         <service
             android:name=".service.MyService"

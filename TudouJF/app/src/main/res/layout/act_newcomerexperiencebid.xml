@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_newcomerexperiencebid"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_newcommerexperiencebid_title"
+        app:leftImage="@drawable/xvector_back" />
+
+    <com.tudoujf.ui.InfoView
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/act_affirm_bac"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_yitoujine"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="XXXXXXXXX元"
+            android:textColor="@color/act_newcomerexperiencebid_tvcolor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_gray" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_touzirenshu"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="XXXXXXXXX元"
+            android:textColor="@color/act_newcomerexperiencebid_tvcolor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_huankuanfangshi"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="XXXXXXXXX元"
+            android:textColor="@color/act_newcomerexperiencebid_tvcolor"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color_gray" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/act_affirm_bac"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/act_newcommerexperiencebid_jiaoyijilu"
+        android:textColor="@color/color_black"
+        android:textSize="16sp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_threeboderql"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_touziren"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_threeboderql"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_touzijineyuan"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_twoboder"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_touzishijian"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_act_newcomerexperiencebid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/act_affirm_bac"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/xshape_roundrect_mborderwhite"
+            android:gravity="center"
+            android:text="@string/act_newcommerexperiencebid_dianjijiazaigengduo"
+            android:textColor="@color/color_gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/global_theme_background_color"
+        android:gravity="center"
+        android:text="@string/act_newcommerexperiencebid_lijitoubiao"
+        android:textColor="@color/color_white"
+        android:textSize="20sp" />
+
+</LinearLayout>

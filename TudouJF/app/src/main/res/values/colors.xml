@@ -40,4 +40,7 @@
     <color name="frag_home_bac">#FD7C28</color>
     <color name="frag_home_bac1">#F0F0E8</color>
     <color name="frag_home_textcolor1">#94938F</color>
+    <color name="act_newcomerexperiencebid_tvcolor">#E77C1C</color>
+    <color name="act_infopublish_bac">#E7FAFF</color>
+    <color name="act_infopublish_tvcolor">#F48029</color>
 </resources>

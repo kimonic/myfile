@@ -17,6 +17,7 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.HomeFragment;
+import com.tudoujf.fragment.ManageMoneyMattersFragment;
 import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -85,10 +86,10 @@ public class HomeActivity extends BaseActivity {
         list.add(fragment1);
 
 
-        HomeFragment fragment2=new HomeFragment();
-        Bundle bundle2=new Bundle();
-        bundle2.putString("temp","第二页");
-        fragment2.setArguments(bundle2);
+        ManageMoneyMattersFragment fragment2=new ManageMoneyMattersFragment();
+//        Bundle bundle2=new Bundle();
+//        bundle2.putString("temp","第二页");
+//        fragment2.setArguments(bundle2);
         list.add(fragment2);
 
         HomeFragment fragment3=new HomeFragment();

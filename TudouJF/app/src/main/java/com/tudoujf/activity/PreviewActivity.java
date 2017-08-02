@@ -168,8 +168,10 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(HomeActivity.class);
                 break;
             case R.id.bt_act_preview11:
+                openActivity(NewcomerExperienceBidActivity.class);
                 break;
             case R.id.bt_act_preview12:
+                openActivity(InfoPublishActivity.class);
                 break;
             case R.id.bt_act_preview13:
                 break;

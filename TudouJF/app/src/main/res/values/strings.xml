@@ -128,6 +128,44 @@
     <string name="dialog_zanbukaitong">暂不开通</string>
     <string name="dialog_lijikaitong">立即开通</string>
     <string name="dialog_tishi">为了您的资金安全\n请开通资金托管账户</string>
+    <string name="act_newcommerexperiencebid_title">新手体验标</string>
+    <string name="act_newcommerexperiencebid_yitoujine">已投金额</string>
+    <string name="act_newcommerexperiencebid_huankuanfangshi">还款方式</string>
+    <string name="act_newcommerexperiencebid_touzirenshu">投资人数</string>
+    <string name="act_newcommerexperiencebid_jiaoyijilu">交易记录</string>
+    <string name="act_newcommerexperiencebid_touziren">投资人</string>
+    <string name="act_newcommerexperiencebid_touzijineyuan">投资金额(元)</string>
+    <string name="act_newcommerexperiencebid_touzishijian">投资时间</string>
+    <string name="act_newcommerexperiencebid_dianjijiazaigengduo">点击加载更多</string>
+    <string name="act_newcommerexperiencebid_lijitoubiao">立即投标</string>
+    <string name="act_infopublish_title">信息披露</string>
+    <string name="act_infopublish_gongsijieshao">公司介绍</string>
+    <string name="act_infopublish_gongsijianjie">公司简介</string>
+    <string name="act_infopublish_gongsidizhi">公司地址</string>
+    <string name="act_infopublish_chuangshiren">创始人</string>
+    <string name="act_infopublish_anquancuoshi">安全措施</string>
+    <string name="act_infopublish_jiuchonganquandun">九重安全盾</string>
+    <string name="act_infopublish_anquanbaozhang">安全保障</string>
+    <string name="act_infopublish_guanyuwomen">关于我们</string>
+    <string name="act_infopublish_tudoushijiao">土豆视角</string>
+    <string name="act_infopublish_meitibaodao">媒体报道</string>
+    <string name="act_infopublish_tudoudashiji">土豆大事记</string>
+    <string name="act_infopublish_yunyingmoshi">运营模式</string>
+    <string name="act_infopublish_zuzhijiagou">组织架构</string>
+    <string name="act_infopublish_hezuohuoban">合作伙伴</string>
+    <string name="act_infopublish_pingtaishuju">平台数据</string>
+    <string name="act_infopublish_meirigengxinyici">每日更新一次</string>
+    <string name="frag_managemoneymatters_lefttitle">投资列表</string>
+    <string name="frag_managemoneymatters_righttitle">债权列表</string>
+    <string name="xinshouzhuanxiang">新手专享</string>
+    <string name="qixian">期限</string>
+    <string name="jineyuan">金额(元)</string>
+    <string name="shengyuketou">剩余可投:</string>
+    <string name="huankuanzhong">还款中</string>
+    <string name="frag_managemoneymatters_quanbu">全部</string>
+    <string name="frag_managemoneymatters_anlilv">按利率</string>
+    <string name="frag_managemoneymatters_anqixian">按期限</string>
+    <string name="frag_managemoneymatters_anhuankuanfangshi">按还款方式</string>
 
 
 </resources>
