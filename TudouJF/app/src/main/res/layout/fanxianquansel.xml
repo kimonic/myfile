@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/act_fanxianquansel_bac"
+        android:background="@color/global_background_color"
         >
         <ImageView
             android:id="@+id/iv_act_fanxianquansel"

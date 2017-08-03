@@ -76,6 +76,8 @@
         <activity android:name=".activity.NewcomerExperienceBidActivity"/>
         <!--信息披露activity-->
         <activity android:name=".activity.InfoPublishActivity"/>
+        <!--我的体验金activity-->
+        <activity android:name=".activity.MyExperienceGoldActivity"/>
 
         <service
             android:name=".service.MyService"

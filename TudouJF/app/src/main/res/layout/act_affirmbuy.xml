@@ -285,22 +285,25 @@
             android:gravity="center_vertical|start"
             android:textSize="12sp"
             android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_touzijine"
+            android:text="@string/touzijineyuan"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_weight="1"
             />
-        <TextView
+
+        <EditText
+            android:id="@+id/et_act_affirm_touzijine"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor"
-            android:text="00,000.00元"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00,000.00元"
+            android:textColor="@color/act_productdetails_tvcolor"
+            android:background="@null"
+            android:textSize="12sp" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"

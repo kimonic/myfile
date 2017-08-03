@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/act_redpackage_hongbao"
+            android:text="我的体验金activity"
             android:textSize="16sp" />
 
         <Button

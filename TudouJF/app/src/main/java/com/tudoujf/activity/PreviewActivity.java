@@ -174,6 +174,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(InfoPublishActivity.class);
                 break;
             case R.id.bt_act_preview13:
+                openActivity(MyExperienceGoldActivity.class);
                 break;
             case R.id.bt_act_preview14:
                 break;

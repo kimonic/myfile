@@ -3,10 +3,14 @@ package com.tudoujf.activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import com.tudoujf.ui.PasswordView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -42,6 +47,8 @@ public class AffirmBuyActivity extends BaseActivity {
     LinearLayout llFanxianquan;
     @BindView(R.id.tv_act_affirmbuy_affirmbuy)
     TextView tvAffirmbuy;
+    @BindView(R.id.et_act_affirm_touzijine)
+    EditText etTouZiJinE;
 
     @Override
     public int getLayoutResId() {
@@ -55,14 +62,14 @@ public class AffirmBuyActivity extends BaseActivity {
                 openActivity(FanXianQuanSelActivity.class);
                 break;
             case R.id.ll_act_affirmbuy_jiaxiquan://跳转加息券界面
-                Bundle bundle1=new Bundle();
-                bundle1.putInt("type",2);
-                openActivity(RedPackageActivity.class,bundle1);
+                Bundle bundle1 = new Bundle();
+                bundle1.putInt("type", 2);
+                openActivity(RedPackageActivity.class, bundle1);
                 break;
             case R.id.ll_act_affirmbuy_redpackage://跳转红包界面
-                Bundle bundle=new Bundle();
-                bundle.putInt("type",1);
-                openActivity(RedPackageActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putInt("type", 1);
+                openActivity(RedPackageActivity.class, bundle);
                 break;
             case R.id.tv_act_affirmbuy_affirmbuy://确认购买按钮
                 showPasswordDialog();
@@ -135,6 +142,9 @@ public class AffirmBuyActivity extends BaseActivity {
         llJiaxiquan.setOnClickListener(this);
         llRedpackage.setOnClickListener(this);
         tvAffirmbuy.setOnClickListener(this);
+        Log.e("TAG", "onFocusChange: -------------11----"+etTouZiJinE );
+
+
     }
 
     @Override
@@ -158,4 +168,10 @@ public class AffirmBuyActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

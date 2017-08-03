@@ -83,7 +83,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/act_fanxianquansel_bac"
+        android:background="@color/global_background_color"
         />
 
     <ListView
@@ -91,7 +91,7 @@
         android:layout_height="match_parent"
         android:id="@+id/lv_frag_managemoneymatters"
         android:dividerHeight="10dp"
-        android:divider="@color/act_fanxianquansel_bac"
+        android:divider="@color/global_background_color"
         />
 
 

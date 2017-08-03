@@ -20,7 +20,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/act_affirm_bac"/>
+        android:background="@color/global_background_color"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,7 +121,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/act_affirm_bac"/>
+        android:background="@color/global_background_color"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -159,7 +159,7 @@
             android:layout_weight="1"
             android:background="@drawable/xshape_threeboderql"
             android:gravity="center"
-            android:text="@string/act_newcommerexperiencebid_touzijineyuan"
+            android:text="@string/touzijineyuan"
             android:textColor="@color/color_black"
             android:textSize="14sp"
 
@@ -171,7 +171,7 @@
             android:layout_weight="1"
             android:background="@drawable/xshape_twoboder"
             android:gravity="center"
-            android:text="@string/act_newcommerexperiencebid_touzishijian"
+            android:text="@string/touzishijian"
             android:textColor="@color/color_black"
             android:textSize="14sp"
 
@@ -188,7 +188,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
 
         >
         <TextView

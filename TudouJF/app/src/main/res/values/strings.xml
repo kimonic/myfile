@@ -3,7 +3,7 @@
     <string name="homepage">首页</string>
     <string name="licai">理财</string>
     <string name="faxian">发现</string>
-    <string name="my" >我的</string>
+    <string name="my">我的</string>
     <string name="act_login_username">请输入用户名/手机号</string>
     <string name="act_login_password">请输入密码(6&#8211;16位数字和字母组合)</string>
     <string name="act_login_nozhanghao">没有账号?</string>
@@ -16,7 +16,7 @@
     <string name="act_register_requestcode">获取验证码</string>
     <string name="act_register_referrerhint">请输入推荐人(如无推荐人可不填写)</string>
     <string name="act_register_login">已有账号,去登录</string>
-    <string name="act_register_agree" >注册即视为同意</string>
+    <string name="act_register_agree">注册即视为同意</string>
     <string name="act_register_tudouxieyi">《土豆金服服务协议》</string>
     <string name="act_affirm_title">确认密码</string>
     <string name="act_affirm_password2">确认新密码</string>
@@ -25,7 +25,6 @@
     <string name="act_find_next">下一步</string>
     <string name="act_find_username">请输入手机号</string>
     <string name="act_register_register">注册领取28888元体验金</string>
-
 
 
     <!-- 图案解锁 -->
@@ -87,7 +86,7 @@
     <string name="act_affirmbuy_ketouzijine">可投资金额</string>
     <string name="act_affirmbuy_zhanghuyue">账户余额</string>
     <string name="act_affirmbuy_chongzhi">充值</string>
-    <string name="act_affirmbuy_touzijine">投资金额(元)</string>
+
     <string name="act_affirmbuy_keyonghongbao">可用红包</string>
     <string name="act_affirmbuy_keyongjiaxiquan">可用加息券</string>
     <string name="act_affirmbuy_keyongfanxianquan">返现券</string>
@@ -122,7 +121,14 @@
     <string name="frag_home_xinxipilou">信息披露</string>
     <string name="frag_home_xinshouzhuanxiangbiao">新手专享标</string>
     <string name="frag_home_lijitouzi">立即投资</string>
-    <string name="frag_home_touzijine">投资金额</string>
+
+    <string name="touzijineyuan">投资金额(元)</string>
+    <string name="touzijine">投资金额</string>
+    <string name="touzishijian">投资时间</string>
+    <string name="yishoulixi">已收利息</string>
+    <string name="daishoulixi">代收利息</string>
+    <string name="zhuangtai">状\t\t\t\t\t\t态</string>
+
     <string name="frag_home_touziqixian">投资期限</string>
     <string name="frag_home_yuqinianhuashouyi">预期年化收益</string>
     <string name="dialog_zanbukaitong">暂不开通</string>
@@ -134,8 +140,6 @@
     <string name="act_newcommerexperiencebid_touzirenshu">投资人数</string>
     <string name="act_newcommerexperiencebid_jiaoyijilu">交易记录</string>
     <string name="act_newcommerexperiencebid_touziren">投资人</string>
-    <string name="act_newcommerexperiencebid_touzijineyuan">投资金额(元)</string>
-    <string name="act_newcommerexperiencebid_touzishijian">投资时间</string>
     <string name="act_newcommerexperiencebid_dianjijiazaigengduo">点击加载更多</string>
     <string name="act_newcommerexperiencebid_lijitoubiao">立即投标</string>
     <string name="act_infopublish_title">信息披露</string>
@@ -166,6 +170,12 @@
     <string name="frag_managemoneymatters_anlilv">按利率</string>
     <string name="frag_managemoneymatters_anqixian">按期限</string>
     <string name="frag_managemoneymatters_anhuankuanfangshi">按还款方式</string>
+    <string name="act_myexperiencegold_title">我的体验金</string>
+    <string name="act_myexperiencegold_keyongtiyanjin">可用体验金</string>
+    <string name="act_myexperiencegold_zhanghuzongzichan">账户总资产(元)</string>
+    <string name="act_myexperiencegold_keyongyue">可用余额(元)</string>
+    <string name="act_myexperiencegold_temp">--.--</string>
+
 
 
 </resources>

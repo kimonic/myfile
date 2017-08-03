@@ -15,7 +15,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
     <TextView
         android:layout_width="match_parent"
@@ -117,7 +117,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
     <TextView
         android:layout_width="match_parent"
@@ -196,7 +196,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
     <TextView
         android:layout_width="match_parent"
@@ -291,7 +291,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -375,7 +375,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -401,7 +401,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="14sp"
-            android:textColor="@color/act_infopublish_tvcolor"
+            android:textColor="@color/global_background_color"
             android:text="@string/act_infopublish_meirigengxinyici"
             android:gravity="bottom"
             android:paddingBottom="5dp"
@@ -422,7 +422,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/act_affirm_bac"
+        android:background="@color/global_background_color"
         />
 
 
