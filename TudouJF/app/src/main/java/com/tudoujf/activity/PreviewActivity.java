@@ -18,6 +18,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.bean.SafetyControlActLvBean;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
 
@@ -177,6 +178,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(MyExperienceGoldActivity.class);
                 break;
             case R.id.bt_act_preview14:
+                openActivity(SafetyControlActivity.class);
                 break;
             case R.id.bt_act_preview15:
                 break;

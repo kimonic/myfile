@@ -45,11 +45,14 @@
         <!--产品详情activity-->
         <activity android:name=".activity.ProductDetailsActivity"/>
         <!--确认购买activity-->
-        <activity android:name=".activity.AffirmBuyActivity"/>
+        <activity android:name=".activity.AffirmBuyActivity"
+            android:windowSoftInputMode="adjustResize" />
         <!--选择返现券activity-->
         <activity android:name=".activity.FanXianQuanSelActivity"/>
         <!--选择红包activity-->
         <activity android:name=".activity.RedPackageActivity"/>
+        <!--安全保障activity-->
+        <activity android:name=".activity.SafetyControlActivity"/>
 
 
 

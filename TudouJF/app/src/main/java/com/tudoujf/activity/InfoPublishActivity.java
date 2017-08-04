@@ -30,6 +30,28 @@ public class InfoPublishActivity extends BaseActivity {
     MTopBarView mtbInfopublish;
     @BindView(R.id.textView)
     TextView textView;
+    @BindView(R.id.ll_act_infopublish_gsjj)
+    LinearLayout llGsjj;
+    @BindView(R.id.ll_act_infopublish_csr)
+    LinearLayout llCsr;
+    @BindView(R.id.ll_act_infopublish_gsdz)
+    LinearLayout llGsdz;
+    @BindView(R.id.ll_act_infopublish_jcaqd)
+    LinearLayout llJcaqd;
+    @BindView(R.id.ll_act_infopublish_aqbz)
+    LinearLayout llAqbz;
+    @BindView(R.id.ll_act_infopublish_tdsj)
+    LinearLayout llTdsj;
+    @BindView(R.id.ll_act_infopublish_mtbd)
+    LinearLayout llMtbd;
+    @BindView(R.id.ll_act_infopublish_tddsj)
+    LinearLayout llTddsj;
+    @BindView(R.id.ll_act_infopublish_yyms)
+    LinearLayout llYyms;
+    @BindView(R.id.ll_act_infopublish_zzjg)
+    LinearLayout llZzjg;
+    @BindView(R.id.ll_act_infopublish_hzhb)
+    LinearLayout llHzhb;
 
     @Override
     public int getLayoutResId() {
@@ -38,6 +60,35 @@ public class InfoPublishActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.ll_act_infopublish_gsjj://公司简介
+                break;
+            case R.id.ll_act_infopublish_csr://创始人
+                break;
+            case R.id.ll_act_infopublish_gsdz://公司地址
+                break;
+
+            case R.id.ll_act_infopublish_jcaqd://九重安全盾
+                break;
+            case R.id.ll_act_infopublish_aqbz://安全保障
+                openActivity(SafetyControlActivity.class);
+                break;
+            case R.id.ll_act_infopublish_tdsj://土豆视角
+                break;
+
+            case R.id.ll_act_infopublish_mtbd://媒体报道
+                break;
+            case R.id.ll_act_infopublish_tddsj://土豆大事记
+                break;
+            case R.id.ll_act_infopublish_yyms://运营模式
+                break;
+
+            case R.id.ll_act_infopublish_zzjg://组织架构
+                break;
+            case R.id.ll_act_infopublish_hzhb://合作伙伴
+                break;
+        }
 
     }
 
@@ -63,6 +114,23 @@ public class InfoPublishActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        llGsjj.setOnClickListener(this);
+        llCsr.setOnClickListener(this);
+        llGsdz.setOnClickListener(this);
+
+
+        llJcaqd.setOnClickListener(this);
+        llAqbz.setOnClickListener(this);
+        llTdsj.setOnClickListener(this);
+
+
+        llMtbd.setOnClickListener(this);
+        llTddsj.setOnClickListener(this);
+        llYyms.setOnClickListener(this);
+
+
+        llZzjg.setOnClickListener(this);
+        llHzhb.setOnClickListener(this);
 
     }
 

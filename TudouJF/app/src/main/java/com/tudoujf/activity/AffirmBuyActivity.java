@@ -19,6 +19,7 @@ import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
+import com.tudoujf.utils.KeyboardChangeListener;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
@@ -134,6 +135,35 @@ public class AffirmBuyActivity extends BaseActivity {
                 closeActivity();
             }
         });
+
+
+        Log.e("TAG1212", "isShow = -----------------------");
+
+        new KeyboardChangeListener(this).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                Log.e("TAG1212", "isShow = [" + isShow + "], keyboardHeight = [" + keyboardHeight + "]");
+            }
+        });
+        etTouZiJinE.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
+// 可捕捉右下角的Return按钮,监听回车按钮
+//添加抛出收起事件代码
+                Log.e("TAG1212", "???????????????????????????????????????");
+                return false;
+            }
+        });
+//        etTouZiJinE.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                Log.e("TAG1212", "onKey: -----------------------------------");
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    return true;
+//                }
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -169,9 +199,8 @@ public class AffirmBuyActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void onBackPressed() {
+        Log.e("TAG1212", "onKey: -----------------------------------");
+        super.onBackPressed();
     }
 }

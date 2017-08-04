@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.tudoujf.R;
-import com.tudoujf.adapter.ManageMoneyMattersActLVAdapter;
+import com.tudoujf.adapter.ManageMoneyMattersActLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
 
@@ -75,7 +75,7 @@ public class ManageMoneyMattersFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        ManageMoneyMattersActLVAdapter actLVAdapter=new ManageMoneyMattersActLVAdapter(getActivity(),list);
+        ManageMoneyMattersActLvAdapter actLVAdapter=new ManageMoneyMattersActLvAdapter(getActivity(),list);
         lvFragManageMoneyMatters.setAdapter(actLVAdapter);
 
     }

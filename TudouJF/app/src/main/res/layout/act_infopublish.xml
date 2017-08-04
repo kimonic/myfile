@@ -36,6 +36,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_gsjj"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,6 +63,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_csr"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -88,6 +90,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_gsdz"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -137,6 +140,7 @@
         android:orientation="horizontal"
         >
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_jcaqd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -161,6 +165,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_aqbz"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -216,6 +221,7 @@
         android:orientation="horizontal"
         >
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_tdsj"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -240,6 +246,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_mtbd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -264,6 +271,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_tddsj"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -299,6 +307,7 @@
         android:orientation="horizontal"
         >
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_yyms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -323,6 +332,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_zzjg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -347,6 +357,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_act_infopublish_hzhb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"

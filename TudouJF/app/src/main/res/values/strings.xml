@@ -175,7 +175,8 @@
     <string name="act_myexperiencegold_zhanghuzongzichan">账户总资产(元)</string>
     <string name="act_myexperiencegold_keyongyue">可用余额(元)</string>
     <string name="act_myexperiencegold_temp">--.--</string>
-
+    <string name="act_safetycontrol_title">安全保障</string>
+    <string name="chakangengduo">查看更多</string>
 
 
 </resources>

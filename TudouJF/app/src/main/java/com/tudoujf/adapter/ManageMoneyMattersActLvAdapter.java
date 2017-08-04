@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * * ================================================
- * name:            ManageMoneyMattersActLVAdapter
+ * name:            ManageMoneyMattersActLvAdapter
  * guide:
  * author：          kimonik
  * version：          1.0
@@ -24,11 +24,11 @@ import java.util.List;
  * ===================================================
  */
 
-public class ManageMoneyMattersActLVAdapter extends BaseAdapter {
+public class ManageMoneyMattersActLvAdapter extends BaseAdapter {
     private Context context;
     private List<ManageMoneyMattersFragBean> list;
 
-    public ManageMoneyMattersActLVAdapter(Context context, List<ManageMoneyMattersFragBean> list) {
+    public ManageMoneyMattersActLvAdapter(Context context, List<ManageMoneyMattersFragBean> list) {
         this.context = context;
         this.list = list;
     }

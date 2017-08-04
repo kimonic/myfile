@@ -5,7 +5,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.tudoujf.R;
-import com.tudoujf.adapter.NewcomerExperienceBidActLVAdapter;
+import com.tudoujf.adapter.NewcomerExperienceBidActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.ProductDetailsActLvBean;
 import com.tudoujf.ui.MTopBarView;
@@ -76,7 +76,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
         });
 
 
-        NewcomerExperienceBidActLVAdapter adapter=new NewcomerExperienceBidActLVAdapter(this,list);
+        NewcomerExperienceBidActLvAdapter adapter=new NewcomerExperienceBidActLvAdapter(this,list);
         lvNewcomerExperienceBid.setAdapter(adapter);
     }
 

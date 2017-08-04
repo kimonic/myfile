@@ -25,11 +25,11 @@ import java.util.List;
  * ===================================================
  */
 
-public class NewcomerExperienceBidActLVAdapter extends BaseAdapter {
+public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
     private Context context;
     private List<ProductDetailsActLvBean> list;
 
-    public NewcomerExperienceBidActLVAdapter(Context context, List<ProductDetailsActLvBean> list) {
+    public NewcomerExperienceBidActLvAdapter(Context context, List<ProductDetailsActLvBean> list) {
         this.context = context;
         this.list = list;
     }
