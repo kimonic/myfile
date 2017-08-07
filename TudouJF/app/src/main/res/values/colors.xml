@@ -43,5 +43,6 @@
     <color name="frag_home_textcolor1">#94938F</color>
     <color name="act_newcomerexperiencebid_tvcolor">#E77C1C</color>
     <color name="act_infopublish_bac">#E7FAFF</color>
+    <color name="act_mymessage_unselcolor">#5AB8CF</color>
 
 </resources>

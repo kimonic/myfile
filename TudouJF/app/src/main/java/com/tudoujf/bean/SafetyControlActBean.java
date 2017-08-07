@@ -1,7 +1,7 @@
 package com.tudoujf.bean;
 /**
  * * ================================================
- * name:            SafetyControlActLvBean
+ * name:            SafetyControlActBean
  * guide:
  * author：          kimonik
  * version：          1.0
@@ -11,7 +11,7 @@ package com.tudoujf.bean;
  * ===================================================
  */
 
-public class SafetyControlActLvBean {
+public class SafetyControlActBean {
     private int  imaUrl;
     private String  title;
     private String  content;

@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/act_redpackage_hongbao"
+            android:text="活动专区activity"
             android:textSize="16sp" />
 
         <Button
@@ -141,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/act_redpackage_hongbao"
+            android:text="我的信息activity"
             android:textSize="16sp" />
 
         <Button

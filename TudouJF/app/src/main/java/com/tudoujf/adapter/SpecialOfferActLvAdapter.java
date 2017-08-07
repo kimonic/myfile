@@ -5,33 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.bean.ProductDetailsActBean;
+import com.tudoujf.bean.SpecialOfferActBean;
 
 import java.util.List;
 
-
 /**
  * * ================================================
- * name:            ProductDetailsActLvAdapter
+ * name:            SpecialOfferActLvAdapter
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/8/2
- * description：  NewcomerExperienceBidActivity中listview的adapter
+ * date：            2017/8/7
+ * description：  SpecialOfferActivity中listview的adapter
  * history：
  * ===================================================
  */
 
-public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
-    private Context context;
-    private List<ProductDetailsActBean> list;
 
-    public NewcomerExperienceBidActLvAdapter(Context context, List<ProductDetailsActBean> list) {
-        this.context = context;
+public class SpecialOfferActLvAdapter extends BaseAdapter {
+    private List<SpecialOfferActBean> list;
+    private Context context;
+
+    public SpecialOfferActLvAdapter(List<SpecialOfferActBean> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @Override
@@ -51,23 +52,30 @@ public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View view;
         ViewHolder viewHolder;
         if (convertView==null){
-            view= LayoutInflater.from(context).inflate(R.layout.lvitem_newcomerexperienceact,parent,false);
+            view= LayoutInflater.from(context).inflate(R.layout.lvitem_specialofferact,parent,false);
             viewHolder=new ViewHolder();
-            viewHolder.textView1= (TextView) view.findViewById(R.id.lvitem_productdetails_tv1);
-            viewHolder.textView2= (TextView) view.findViewById(R.id.lvitem_productdetails_tv2);
-            viewHolder.textView3= (TextView) view.findViewById(R.id.lvitem_productdetails_tv3);
+            viewHolder.textView1= (TextView) view.findViewById(R.id.lvitem_specialoffer_tv1);
+            viewHolder.textView2= (TextView) view.findViewById(R.id.lvitem_specialoffer_tv2);
+            viewHolder.imageView= (ImageView) view.findViewById(R.id.lvitem_specialoffer_iv);
             view.setTag(viewHolder);
+
         }else {
             view=convertView;
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getTouBiaoRen());
-        viewHolder.textView2.setText(list.get(position).getTouZiJinE());
-        viewHolder.textView3.setText(list.get(position).getTouZiTime());
+        viewHolder.textView1.setText(list.get(position).getTitle());
+        viewHolder.textView2.setText(list.get(position).getTime());
+        viewHolder.imageView.setImageResource(list.get(position).getResId());
+
+
+
+
+
 
 
 
@@ -75,7 +83,9 @@ public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
         return view;
     }
 
-    private class  ViewHolder{
-        TextView textView1,textView2,textView3;
+    private class ViewHolder{
+        public TextView textView1,textView2;
+        public ImageView imageView;
     }
+
 }

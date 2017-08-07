@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,12 +17,10 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.SafetyControlActLvBean;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -181,8 +178,10 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(SafetyControlActivity.class);
                 break;
             case R.id.bt_act_preview15:
+                openActivity(SpecialOfferActivity.class);
                 break;
             case R.id.bt_act_preview16:
+                openActivity(MyMessageActivity.class);
                 break;
             case R.id.bt_act_preview17:
                 break;

@@ -172,7 +172,6 @@ public class AffirmBuyActivity extends BaseActivity {
         llJiaxiquan.setOnClickListener(this);
         llRedpackage.setOnClickListener(this);
         tvAffirmbuy.setOnClickListener(this);
-        Log.e("TAG", "onFocusChange: -------------11----"+etTouZiJinE );
 
 
     }
@@ -200,7 +199,6 @@ public class AffirmBuyActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Log.e("TAG1212", "onKey: -----------------------------------");
         super.onBackPressed();
     }
 }

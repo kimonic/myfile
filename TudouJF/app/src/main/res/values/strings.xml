@@ -177,6 +177,16 @@
     <string name="act_myexperiencegold_temp">--.--</string>
     <string name="act_safetycontrol_title">安全保障</string>
     <string name="chakangengduo">查看更多</string>
+    <string name="act_specialoffer_title">活动专区</string>
+    <string name="act_mymessage_systemmessage">系统消息</string>
+    <string name="act_mymessage_mymessage">我的消息</string>
+    <string name="frag_systemmessage_previous">上一页</string>
+    <string name="frag_systemmessage_next">下一页</string>
+    <string name="frag_home_zhaiquanjiazhiyuan">债权价值(元)</string>
+    <string name="yuanbiaonianhuashouyi">原标年化收益</string>
+    <string name="zhuanrangjiageyuan">转让价格(元)</string>
+    <string name="shouqing">售罄</string>
+    <string name="frag_discover_discover">发现</string>
 
 
 </resources>

@@ -64,15 +64,6 @@ public class HomeActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vpActHome.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         vpActHome.setLayoutParams(params);
-
-
-
-
-
-
-
-
-
     }
 
     private void initFragmentList() {

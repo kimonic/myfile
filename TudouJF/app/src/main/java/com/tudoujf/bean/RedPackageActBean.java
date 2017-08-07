@@ -2,7 +2,7 @@ package com.tudoujf.bean;
 
 /**
  * * ================================================
- * name:            RedPackageActLvBean
+ * name:            RedPackageActBean
  * guide:
  * author：          kimonik
  * version：          1.0
@@ -12,7 +12,7 @@ package com.tudoujf.bean;
  * ===================================================
  */
 
-public class RedPackageActLvBean {
+public class RedPackageActBean {
     private String content1;
     private String content2;
     private String content3;

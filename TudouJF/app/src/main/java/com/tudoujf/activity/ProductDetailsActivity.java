@@ -1,9 +1,6 @@
 package com.tudoujf.activity;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,7 +8,7 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.ProductDetailsActLvBean;
+import com.tudoujf.bean.ProductDetailsActBean;
 import com.tudoujf.ui.IndicatorView;
 import com.tudoujf.ui.MHorizontalScrollView;
 import com.tudoujf.ui.MTopBarView;
@@ -23,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -63,7 +59,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
     private List<UnderlineTextView> list;
     private List<LinearLayout> listLL;
-    private List<ProductDetailsActLvBean> beanList;
+    private List<ProductDetailsActBean> beanList;
     private int hsvUnShowWidth;
 
 
@@ -97,7 +93,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
         beanList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            ProductDetailsActLvBean bean = new ProductDetailsActLvBean();
+            ProductDetailsActBean bean = new ProductDetailsActBean();
             if (i == 0) {
                 bean.setTouBiaoRen("投标人");
                 bean.setTouZiJinE("投资金额(元)");

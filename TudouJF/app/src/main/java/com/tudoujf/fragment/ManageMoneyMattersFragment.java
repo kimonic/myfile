@@ -1,10 +1,17 @@
 package com.tudoujf.fragment;
 
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.adapter.ManageMoneyMattersActLvAdapter;
+import com.tudoujf.adapter.HomeFragVPAdapter;
+import com.tudoujf.adapter.ManageMoneyMattersFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
 
@@ -12,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -28,8 +37,15 @@ import butterknife.BindView;
 public class ManageMoneyMattersFragment extends BaseFragment {
     @BindView(R.id.lv_frag_managemoneymatters)
     ListView lvFragManageMoneyMatters;
+    @BindView(R.id.tv_frag_managemoneymatters_touziliebiao)
+    TextView tvTouZiLieBiao;
+    @BindView(R.id.tv_frag_managemoneymatters_zhaiquanliebiao)
+    TextView tvZhaiQuanLieBiao;
+    @BindView(R.id.vp_frag_managemoneymatters)
+    ViewPager vpFragManageMoneyMatters;
 
-    private List<ManageMoneyMattersFragBean>  list;
+    private List<ManageMoneyMattersFragBean> list;
+    private List<Fragment> listFrag;
 
     @Override
     public int layoutRes() {
@@ -38,50 +54,83 @@ public class ManageMoneyMattersFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_frag_managemoneymatters_touziliebiao:
+                tvTouZiLieBiao.setTextColor(getResources().getColor(R.color.color_white));
+                tvZhaiQuanLieBiao.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+                vpFragManageMoneyMatters.setCurrentItem(0);
 
-    }
+                break;
+            case R.id.tv_frag_managemoneymatters_zhaiquanliebiao:
+                tvZhaiQuanLieBiao.setTextColor(getResources().getColor(R.color.color_white));
+                tvTouZiLieBiao.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+                vpFragManageMoneyMatters.setCurrentItem(1);
+                break;
 
-    @Override
-    public void initDataFromIntent() {
-
-        list=new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ManageMoneyMattersFragBean bean=new ManageMoneyMattersFragBean();
-
-            bean.setInvestTime(i+"个月");
-            bean.setInvestProgress(0.1f*i);
-            if (i%2==0){
-                bean.setInvestNow(false);
-                bean.setAward(true);
-            }else {
-                bean.setInvestNow(true);
-                bean.setAward(false);
-            }
-
-
-            bean.setInvestSum("10,000,000.00");
-            bean.setAwardValue(i*0.01f);
-
-            bean.setNianHuaShouYi(i+".00%");
-            bean.setShengYuKeTou(i*123456+".00元");
-            bean.setTitle("房产抵押贷款20170327003");
-
-
-
-            list.add(bean);
         }
 
     }
 
     @Override
+    public void initDataFromIntent() {
+        listFrag = new ArrayList<>();
+
+
+        ManageMoneyMattersChildFragment fragment1 = new ManageMoneyMattersChildFragment();
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("type", 1);
+        fragment1.setArguments(bundle1);
+
+
+        ManageMoneyMattersChildFragment fragment2 = new ManageMoneyMattersChildFragment();
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt("type", 2);
+        fragment2.setArguments(bundle2);
+
+
+        listFrag.add(fragment1);
+        listFrag.add(fragment2);
+
+
+    }
+
+    @Override
     public void initView() {
-        ManageMoneyMattersActLvAdapter actLVAdapter=new ManageMoneyMattersActLvAdapter(getActivity(),list);
-        lvFragManageMoneyMatters.setAdapter(actLVAdapter);
+
+
+        HomeFragVPAdapter adapter = new HomeFragVPAdapter(getChildFragmentManager(), listFrag);
+        vpFragManageMoneyMatters.setAdapter(adapter);
+        vpFragManageMoneyMatters.setOffscreenPageLimit(2);
 
     }
 
     @Override
     public void initListener() {
+        tvTouZiLieBiao.setOnClickListener(this);
+        tvZhaiQuanLieBiao.setOnClickListener(this);
+        vpFragManageMoneyMatters.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position==0){
+                    tvTouZiLieBiao.setTextColor(getResources().getColor(R.color.color_white));
+                    tvZhaiQuanLieBiao.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+                }else {
+                    tvZhaiQuanLieBiao.setTextColor(getResources().getColor(R.color.color_white));
+                    tvTouZiLieBiao.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 

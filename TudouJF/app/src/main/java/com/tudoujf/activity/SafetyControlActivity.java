@@ -1,15 +1,13 @@
 package com.tudoujf.activity;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.adapter.ExpanableAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.SafetyControlActLvBean;
+import com.tudoujf.bean.SafetyControlActBean;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
@@ -35,7 +33,7 @@ public class SafetyControlActivity extends BaseActivity {
     MTopBarView mtbSafetyControl;
     @BindView(R.id.lv_act_safetycontrol)
     ExpandableListView lvSafetyControl;
-    private List<SafetyControlActLvBean>  list;
+    private List<SafetyControlActBean>  list;
 
     @Override
     public int getLayoutResId() {
@@ -51,7 +49,7 @@ public class SafetyControlActivity extends BaseActivity {
     public void initDataFromIntent() {
         list=new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            SafetyControlActLvBean bean=new SafetyControlActLvBean();
+            SafetyControlActBean bean=new SafetyControlActBean();
             bean.setImaUrl(R.drawable.act_safetycontrol_icon1);
             bean.setTitle("百里挑一,优质借款人");
             bean.setContent("百里挑一,优质借款人百里挑一,优质借款人百里挑一,优质借款人百里挑一," +

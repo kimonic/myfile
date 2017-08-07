@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.SpecialOfferActivity;
 import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.assist.ViewPagerScroller;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -34,7 +36,7 @@ import butterknife.BindView;
  * author：          kimonik
  * version：          1.0
  * date：            2017/7/10
- * description：
+ * description：  首页activity中的首页fragment
  * history：
  * * ====================================================================
  */
@@ -56,10 +58,18 @@ public class HomeFragment extends BaseFragment {
     TextView tvFengXianTiShi1;
     @BindView(R.id.tv_frag_home_fengxiantishi2)
     TextView tvFengXianTiShi2;
+    @BindView(R.id.ll_frag_home_xinshoufuli)
+    LinearLayout llXinShouFuLi;
+    @BindView(R.id.ll_frag_home_huodongzhuanqu)
+    LinearLayout llHuoDongZhuanQu;
+    @BindView(R.id.ll_frag_home_tuijianyouli)
+    LinearLayout llTuiJianYouLi;
+    @BindView(R.id.ll_frag_home_xinxipilu)
+    LinearLayout llXinXiPiLu;
     private List<ImageView> list;
     private List<BallView> listBall;
     private float currentY;
-    private boolean  flag=false;
+    private boolean flag = false;
 
 
     @Override
@@ -84,6 +94,15 @@ public class HomeFragment extends BaseFragment {
                 if (vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
                 }
+                break;
+            case R.id.ll_frag_home_huodongzhuanqu:
+                openActivity(SpecialOfferActivity.class);
+                break;
+            case R.id.ll_frag_home_xinshoufuli:
+                break;
+            case R.id.ll_frag_home_tuijianyouli:
+                break;
+            case R.id.ll_frag_home_xinxipilu:
                 break;
         }
 
@@ -184,29 +203,33 @@ public class HomeFragment extends BaseFragment {
         tvFragHome.setOnClickListener(this);
         tvLeftArrow.setOnClickListener(this);
         tvRightArrow.setOnClickListener(this);
+        llHuoDongZhuanQu.setOnClickListener(this);
+        llTuiJianYouLi.setOnClickListener(this);
+        llXinShouFuLi.setOnClickListener(this);
+        llXinXiPiLu.setOnClickListener(this);
 
         vpBall.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        currentY=event.getY();
+                        currentY = event.getY();
                         break;
                     case MotionEvent.ACTION_UP:
 
-                        if (flag){
-                            if (event.getY()-currentY>0){
+                        if (flag) {
+                            if (event.getY() - currentY > 0) {
                                 showInfo(tvFengXianTiShi1);
-                            }else {
+                            } else {
                                 showInfo(tvFengXianTiShi2);
                             }
-                            flag=false;
+                            flag = false;
                         }
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        if (Math.abs(event.getY()-currentY)>24){
-                            flag=true;
+                        if (Math.abs(event.getY() - currentY) > 36) {
+                            flag = true;
                         }
                         break;
                 }
@@ -218,12 +241,12 @@ public class HomeFragment extends BaseFragment {
 
     private void showInfo(final TextView tv) {
         tv.setText("理财有风险,投资需谨慎");
-        LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,20* ScreenSizeUtils.getDensity(getActivity()));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 20 * ScreenSizeUtils.getDensity(getActivity()));
         tv.setLayoutParams(params);
-        Animation animation=new AlphaAnimation(0.5f,1);
+        Animation animation = new AlphaAnimation(0.5f, 1);
         animation.setDuration(2000);
-        final Animation animation1=new AlphaAnimation(1,0);
+        final Animation animation1 = new AlphaAnimation(1, 0);
         animation1.setDuration(2000);
         tv.setAnimation(animation);
 
@@ -252,8 +275,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onAnimationEnd(Animation animation) {
                 tv.setText("");
-                ViewGroup.LayoutParams params=tvFengXianTiShi1.getLayoutParams();
-                params.height=10*ScreenSizeUtils.getDensity(getActivity());
+                ViewGroup.LayoutParams params = tvFengXianTiShi1.getLayoutParams();
+                params.height = 10 * ScreenSizeUtils.getDensity(getActivity());
                 tv.setLayoutParams(params);
             }
 
@@ -281,7 +304,6 @@ public class HomeFragment extends BaseFragment {
         getActivity().stopService(intent);
         super.onDestroy();
     }
-
 
 
 }

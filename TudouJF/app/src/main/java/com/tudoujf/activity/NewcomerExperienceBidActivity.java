@@ -7,7 +7,7 @@ import android.widget.ListView;
 import com.tudoujf.R;
 import com.tudoujf.adapter.NewcomerExperienceBidActLvAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.ProductDetailsActLvBean;
+import com.tudoujf.bean.ProductDetailsActBean;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
@@ -34,7 +34,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     @BindView(R.id.lv_act_newcomerexperiencebid)
     ListView lvNewcomerExperienceBid;
 
-    List<ProductDetailsActLvBean> list;
+    List<ProductDetailsActBean> list;
 
     @Override
     public int getLayoutResId() {
@@ -51,7 +51,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
         list=new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            ProductDetailsActLvBean bean=new ProductDetailsActLvBean();
+            ProductDetailsActBean bean=new ProductDetailsActBean();
 
             bean.setTouZiTime("20XX-XX-XX 00:00:00");
             bean.setTouBiaoRen("XXXXX");

@@ -2,7 +2,7 @@ package com.tudoujf.bean;
 
 /**
  * * ================================================
- * name:            ProductDetailsActLvBean
+ * name:            ProductDetailsActBean
  * guide:
  * author：          kimonik
  * version：          1.0
@@ -12,7 +12,7 @@ package com.tudoujf.bean;
  * ===================================================
  */
 
-public class ProductDetailsActLvBean {
+public class ProductDetailsActBean {
 
 
     private String touBiaoRen;

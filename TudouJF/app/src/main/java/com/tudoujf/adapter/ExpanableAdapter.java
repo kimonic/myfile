@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.bean.SafetyControlActLvBean;
+import com.tudoujf.bean.SafetyControlActBean;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ import java.util.List;
 public class ExpanableAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<SafetyControlActLvBean> groupList;
+    private List<SafetyControlActBean> groupList;
 
-    public ExpanableAdapter(Context context, List<SafetyControlActLvBean> groupList) {
+    public ExpanableAdapter(Context context, List<SafetyControlActBean> groupList) {
         this.context = context;
         this.groupList = groupList;
     }

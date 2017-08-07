@@ -7,41 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@color/global_theme_background_color"
-        >
-        <TextView
-            android:id="@+id/tv_frag_managemoneymatters_touziliebiao"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textColor="@color/color_white"
-            android:textSize="18sp"
-            android:text="@string/frag_managemoneymatters_lefttitle"
-            android:gravity="center"
-
-            />
-        <TextView
-            android:id="@+id/tv_frag_managemoneymatters_zhaiquanliebiao"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textColor="@color/act_mymessage_unselcolor"
-            android:textSize="18sp"
-            android:text="@string/frag_managemoneymatters_righttitle"
-            android:gravity="center"
-
-            />
-
-    </LinearLayout>
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_frag_managemoneymatters"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -93,13 +58,10 @@
         />
 
     <ListView
+        android:id="@+id/lv_frag_managemoneymatterstouchild"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lv_frag_managemoneymatters"
-        android:dividerHeight="10dp"
         android:divider="@color/global_background_color"
-        />
-
-
+        android:dividerHeight="10dp" />
 
 </LinearLayout>

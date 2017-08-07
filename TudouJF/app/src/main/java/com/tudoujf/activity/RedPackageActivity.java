@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.adapter.RedPackageActLvAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.RedPackageActLvBean;
+import com.tudoujf.bean.RedPackageActBean;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.RedView;
 import com.tudoujf.utils.HeightUtils;
@@ -44,7 +44,7 @@ public class RedPackageActivity extends BaseActivity {
     @BindView(R.id.tv_act_redpackage2)
     TextView tvAffirmUse;
 
-    private List<RedPackageActLvBean> list;
+    private List<RedPackageActBean> list;
     private RedPackageActLvAdapter adapter;
     /**
      * 之前点击的item位置
@@ -82,7 +82,7 @@ public class RedPackageActivity extends BaseActivity {
 
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            RedPackageActLvBean bean = new RedPackageActLvBean();
+            RedPackageActBean bean = new RedPackageActBean();
             bean.setContent1("单笔投资满1000元  最低");
             bean.setContent2("投资0个月可使用");
             bean.setContent3("50元 抽奖红包");

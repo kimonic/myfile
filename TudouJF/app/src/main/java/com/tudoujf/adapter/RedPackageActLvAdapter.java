@@ -2,7 +2,6 @@ package com.tudoujf.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.bean.RedPackageActLvBean;
+import com.tudoujf.bean.RedPackageActBean;
 import com.tudoujf.ui.RedView;
 
 import java.util.List;
@@ -29,10 +28,10 @@ import java.util.List;
 
 public class RedPackageActLvAdapter extends BaseAdapter {
 
-    private List<RedPackageActLvBean>  list;
+    private List<RedPackageActBean>  list;
     private Context context;
 
-    public RedPackageActLvAdapter(List<RedPackageActLvBean> list, Context context) {
+    public RedPackageActLvAdapter(List<RedPackageActBean> list, Context context) {
         this.list = list;
         this.context = context;
     }

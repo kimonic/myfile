@@ -81,6 +81,10 @@
         <activity android:name=".activity.InfoPublishActivity"/>
         <!--我的体验金activity-->
         <activity android:name=".activity.MyExperienceGoldActivity"/>
+        <!--活动专区activity-->
+        <activity android:name=".activity.SpecialOfferActivity"/>
+        <!--我的信息activity-->
+        <activity android:name=".activity.MyMessageActivity"/>
 
         <service
             android:name=".service.MyService"

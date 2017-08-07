@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.bean.ProductDetailsActLvBean;
+import com.tudoujf.bean.ProductDetailsActBean;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ import java.util.List;
 public class ProductDetailsActLvAdapter extends BaseAdapter {
 
     private Context context;
-    private List<ProductDetailsActLvBean>  list;
+    private List<ProductDetailsActBean>  list;
 
-    public ProductDetailsActLvAdapter(Context context, List<ProductDetailsActLvBean> list) {
+    public ProductDetailsActLvAdapter(Context context, List<ProductDetailsActBean> list) {
         this.context = context;
         this.list = list;
     }

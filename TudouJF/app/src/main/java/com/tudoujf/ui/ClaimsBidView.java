@@ -19,17 +19,17 @@ import java.text.DecimalFormat;
 
 /**
  * * ==================================================
- * name:            BidView+
+ * name:            ClaimsBidView
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/7/21
- * description：   managemoneymattersfragment理财页-投标信息展示view
+ * date：            2017/8/7
+ * description：   managemoneymattersfragment理财页-债权投标信息展示view
  * history：
  * * ==================================================
  */
 
-public class BidView extends View {
+public class ClaimsBidView extends View {
 
     /**
      * 画笔
@@ -39,10 +39,7 @@ public class BidView extends View {
     private Path path = new Path(), textPath = new Path();
     private RectF rectF = new RectF();
 
-    /**
-     * 是否包含  奖**.**%
-     */
-    private boolean award = true;
+
     /**
      * 奖励的百分比,以浮点型数值表示,实际数值为该值除以100
      */
@@ -52,17 +49,17 @@ public class BidView extends View {
      */
     private String title = "房产抵押贷款20170327003";
     /**
-     * 年化收益
+     * 债权价值
      */
-    private String nianHuaShouYi = "8.00%";
+    private String zhaiQuanJiaZhi = "1,800.00";
     /**
-     * 投资期限
+     * 原标年化收益
      */
-    private String investTime = "12个月";
+    private String yuanBiaoNianHuaShouYi = "14%";
     /**
-     * 投资金额
+     * 转让价格元
      */
-    private String investSum = "8,888.88";
+    private String transferPrice = "888,888.88";
     /**
      * 投资进度
      */
@@ -77,14 +74,12 @@ public class BidView extends View {
     /**
      * 是否是立即投资
      */
-    private boolean investNow = true;
+    private boolean investNow = false;
 
     /**
-     * 是否显示奖***%
+     * 转让期数
      */
-    public void setAward(boolean award) {
-        this.award = award;
-    }
+    private String transfer = "转让期数:7/12";
 
 
     /**
@@ -102,29 +97,6 @@ public class BidView extends View {
         this.title = title;
     }
 
-
-    /**
-     * 年化收益率
-     */
-    public void setNianHuaShouYi(String nianHuaShouYi) {
-        this.nianHuaShouYi = nianHuaShouYi;
-    }
-
-
-    /**
-     * 投资期限
-     */
-    public void setInvestTime(String investTime) {
-        this.investTime = investTime;
-    }
-
-
-    /**
-     * 可投资金额
-     */
-    public void setInvestSum(String investSum) {
-        this.investSum = investSum;
-    }
 
     /**
      * 投资进度
@@ -156,21 +128,21 @@ public class BidView extends View {
         this.investNow = investNow;
     }
 
-    public BidView(Context context) {
+    public ClaimsBidView(Context context) {
         this(context, null, 0);
     }
 
-    public BidView(Context context, @Nullable AttributeSet attrs) {
+    public ClaimsBidView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BidView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ClaimsBidView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
     }
 
     @TargetApi(23)
-    public BidView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ClaimsBidView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
     }
@@ -211,109 +183,138 @@ public class BidView extends View {
 
     }
 
+    /**转让期数*/
+    public void setTransfer(String transfer) {
+        this.transfer = transfer;
+    }
+
+    /**债权价值*/
+    public void setZhaiQuanJiaZhi(String zhaiQuanJiaZhi) {
+        this.zhaiQuanJiaZhi = zhaiQuanJiaZhi;
+    }
+
+    /**原标年化收益*/
+    public void setYuanBiaoNianHuaShouYi(String yuanBiaoNianHuaShouYi) {
+        this.yuanBiaoNianHuaShouYi = yuanBiaoNianHuaShouYi;
+    }
+
+    /**转让价格*/
+    public void setTransferPrice(String transferPrice) {
+        this.transferPrice = transferPrice;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
 
+        //-----------------------标题--房产抵押贷款20170327003--------------------------------------
         float text1X = width * 0.03809f;
         float text1Y = width * 0.06666f;
         blackPaint.setTextSize(width * 0.03809f);
         canvas.drawText(title, text1X, text1Y, blackPaint);
+        //------------------------------------------------------------------------------------------
 
-
+        //-----------------------转让期数:7/12------------------------------------------------------
         float text2X = width * 0.6666f;
         float text2Y = width * 0.06666f;
         cyanPaint.setTextSize(width * 0.03809f);
-        canvas.drawText(getResources().getString(R.string.xinshouzhuanxiang), text2X, text2Y, cyanPaint);
+        canvas.drawText(transfer, text2X, text2Y, cyanPaint);
+        //------------------------------------------------------------------------------------------
 
-
+        //----------------------------标题下直线----------------------------------------------------
         float line1X = width * 0.03809f;
-        float line2X;
-        if (award) {
-            line2X = width * 0.9019f;
-        } else {
-            line2X = width * 0.9619f;
-        }
+        float line2X = width * 0.9619f;
         float lineY = width * 0.09523f;
         grayLinePaint.setStrokeWidth(2);
         canvas.drawLine(line1X, lineY, line2X, lineY, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
 
-        if (award) {
-            path.moveTo(width * 0.8285f, 0);
-            path.lineTo(width * 0.9142f, 0);
-            path.lineTo(width, width * 0.08571f);
-            path.lineTo(width, width * 0.1619f);
-            path.close();
-            canvas.drawPath(path, orangePaint);
-
-
-            textPath.moveTo(width * 0.8761f, width * 0.02857f);
-            textPath.lineTo(width * 0.9714f, width * 0.1238f);
-            whitePaint.setTextSize(width * 0.03809f);
-            canvas.drawTextOnPath("奖" + awardValue + "%", textPath, 0, 0, whitePaint);
-        }
-
-
+        //-----------------债权价值(元)上方数字显示---------------------------------------------------
         float text3X = width * 0.07714f;
         float text3Y = width * 0.1809f;
         orangePaint.setTextSize(width * 0.05714f);
-        canvas.drawText(nianHuaShouYi, text3X, text3Y, orangePaint);
+        canvas.drawText(zhaiQuanJiaZhi, text3X, text3Y, orangePaint);
+        //------------------------------------------------------------------------------------------
 
 
-        grayLinePaint.setTextSize(width * 0.03809f);
-        float text4X = text3X + orangePaint.measureText(nianHuaShouYi) / 2
-                - grayLinePaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi)) / 2;
+        //-----------------------债权价值(元)-------------------------------------------------------
+        grayLinePaint.setTextSize(width * 0.02777f);
+        float text4X = text3X + orangePaint.measureText(zhaiQuanJiaZhi) / 2
+                - grayLinePaint.measureText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan)) / 2;
         float text4Y = width * 0.2381f;
-        canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi), text4X, text4Y, grayLinePaint);
+        canvas.drawText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan), text4X, text4Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
-        float text5X = width * 0.3904f;
+
+        //---------------原标年化收益数字显示14%----------------------------------------------------
+        float text5X = width * 0.4351f;
         blackPaint.setTextSize(width * 0.05714f);
-        canvas.drawText(investTime, text5X, text3Y, blackPaint);
+        canvas.drawText(yuanBiaoNianHuaShouYi, text5X, text3Y, blackPaint);
+        //------------------------------------------------------------------------------------------
 
 
-        float text6X = text5X + blackPaint.measureText(investTime) / 2 - grayLinePaint.measureText(getResources().getString(R.string.qixian)) / 2;
-        canvas.drawText(getResources().getString(R.string.qixian), text6X, text4Y, grayLinePaint);
+        //---------------原标年化收益---------------------------------------------------------------
+        float text6X = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(getResources().getString(R.string.yuanbiaonianhuashouyi)) / 2;
+        canvas.drawText(getResources().getString(R.string.yuanbiaonianhuashouyi), text6X, text4Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
 
-        float text7X = width * 0.6666f;
+        //----------------转让价格(元)显示数字------------------------------------------------------
+        float text7X = width * 0.7407f;
         blackPaint.setTextSize(width * 0.03809f);
-        canvas.drawText(investSum, text7X, text3Y, blackPaint);
+        canvas.drawText(transferPrice, text7X, text3Y, blackPaint);
+        //------------------------------------------------------------------------------------------
 
 
-        float text8X = text7X + blackPaint.measureText(investSum) / 2 -
-                grayLinePaint.measureText(getResources().getString(R.string.jineyuan)) / 2;
-        canvas.drawText(getResources().getString(R.string.jineyuan), text8X, text4Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
+        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 -
+                grayLinePaint.measureText(getResources().getString(R.string.zhuanrangjiageyuan)) / 2;
+        canvas.drawText(getResources().getString(R.string.zhuanrangjiageyuan), text8X, text4Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
 
+        //--------------------进度显示直线---已进行部分---------------------------------------------
         float line4X = (width * 0.6666f) * investProgress + line1X;
         float line2Y = width * 0.2857f;
         cyanPaint.setStrokeWidth(width * 0.0057f);
         canvas.drawLine(line1X, line2Y, line4X, line2Y, cyanPaint);
+        //------------------------------------------------------------------------------------------
 
+        //--------------------进度显示直线---未完成部分---------------------------------------------
         grayLinePaint.setStrokeWidth(width * 0.0057f);
         float line6X = width * 0.7047f;
         canvas.drawLine(line4X, line2Y, line6X, line2Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
+
+        //--------------------进度显示文本--50.00%--------------------------------------------------
         float text9Y = width * 0.35f;
         blackPaint.setTextSize(width * 0.03809f);
 
         if (investProgress * 100 != 0) {
             canvas.drawText(decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         } else {
-            canvas.drawText(0+decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
+            canvas.drawText(0 + decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         }
+        //------------------------------------------------------------------------------------------
 
 
+        //------------------------剩余可投:--固定文本-----------------------------------------------
+        grayLinePaint.setTextSize(width * 0.03809f);
         float text10X = width * 0.3219f;
         canvas.drawText(getResources().getString(R.string.shengyuketou), text10X, text9Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
 
+
+        //------------------------剩余可投金额--999,999.00元----------------------------------------
         float text12X = text10X + grayLinePaint.measureText(getResources().getString(R.string.shengyuketou)) + 3;
         canvas.drawText(shengYuKeTou, text12X, text9Y, blackPaint);
+        //------------------------------------------------------------------------------------------
 
 
+        //-----------------按钮部分-----------------------------------------------------------------
         rectF.left = width * 0.7428f;
         rectF.top = width * 0.2761f;
         rectF.right = width * 0.9619f;
@@ -323,17 +324,18 @@ public class BidView extends View {
         whitePaint.setTextSize(width * 0.03809f);
         if (investNow) {
             canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
-            String invest1 = getResources().getString(R.string.frag_home_lijitouzi);
+            String invest1 = getResources().getString(R.string.act_productdetails_lijigoumai);
             float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
             float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
             canvas.drawText(invest1, text11X, text11Y, whitePaint);
         } else {
-            String invest1 = getResources().getString(R.string.huankuanzhong);
+            String invest1 = getResources().getString(R.string.shouqing);
             canvas.drawRoundRect(rectF, 5, 5, grayPaint);
             float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
             float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
             canvas.drawText(invest1, text11X, text11Y, whitePaint);
         }
+        //------------------------------------------------------------------------------------------
 
 
     }
@@ -347,13 +349,12 @@ public class BidView extends View {
 
         if (widthMode == MeasureSpec.AT_MOST || widthMode == MeasureSpec.UNSPECIFIED) {
             width = ScreenSizeUtils.getScreenWidth(getContext());
-            height = (int) (width * 0.4);
+            height = (int) (width * 0.3866);
             setMeasuredDimension(width, height);
-        }else {
-            height = (int) (width * 0.4);
+        } else {
+            height = (int) (width * 0.3866);
             setMeasuredDimension(width, height);
         }
-
 
 
     }
