@@ -187,6 +187,12 @@
     <string name="zhuanrangjiageyuan">转让价格(元)</string>
     <string name="shouqing">售罄</string>
     <string name="frag_discover_discover">发现</string>
+    <string name="frag_discover_xinyunchoujiang">幸运抽奖</string>
+    <string name="frag_discover_jifenshangcheng">积分商城</string>
+    <string name="frag_discover_haoliduihuan">豪礼兑换</string>
+    <string name="queding">确定</string>
+    <string name="wuwangluotishi">网络连接异常,请检查是否已打开WiFi或数据流量!!</string>
+    <string name="denglushibai">登陆失败!!</string>
 
 
 </resources>

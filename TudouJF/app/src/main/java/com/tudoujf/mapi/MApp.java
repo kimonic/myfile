@@ -2,6 +2,7 @@ package com.tudoujf.mapi;
 
 import android.app.Application;
 
+import com.example.encryptionpackages.CreateCode;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -30,6 +31,7 @@ public class MApp extends Application{
         super.onCreate();
         initOkGo();
         LitePal.initialize(this);
+        CreateCode.initCreatCode(this);
     }
     private void initOkGo() {
         HttpHeaders headers = new HttpHeaders();

@@ -21,6 +21,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="sak"
+            android:value=";3jm$>/p-ED^cVz_j~.KV&amp;V)k9jn,UAH" />
+        <meta-data
+            android:name="ssk"
+            android:value="DY34fdgsWET@#$%wg#@4fgd345sg" />
+        <meta-data
+            android:name="rak"
+            android:value="54Ms5bkE6UEdyrRviJ0![OR]g+i79x]k" />
+        <meta-data
+            android:name="rsk"
+            android:value="DYklj45T78ET@asd23" />
 
         <!-- 欢迎页activity -->
         <activity android:name=".activity.WelcomeActivity">
@@ -45,8 +57,7 @@
         <!--产品详情activity-->
         <activity android:name=".activity.ProductDetailsActivity"/>
         <!--确认购买activity-->
-        <activity android:name=".activity.AffirmBuyActivity"
-            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.AffirmBuyActivity"/>
         <!--选择返现券activity-->
         <activity android:name=".activity.FanXianQuanSelActivity"/>
         <!--选择红包activity-->
