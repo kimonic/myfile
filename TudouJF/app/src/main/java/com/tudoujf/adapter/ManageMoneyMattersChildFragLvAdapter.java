@@ -1,12 +1,14 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.ProductDetailsActivity;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
 import com.tudoujf.ui.BidView;
 import com.tudoujf.ui.ClaimsBidView;
@@ -77,7 +79,13 @@ public class ManageMoneyMattersChildFragLvAdapter extends BaseAdapter {
 //        viewHolder.bidView.setInvestSum(list.get(position).getInvestSum());
 //        viewHolder.bidView.setInvestTime(list.get(position).getInvestTime());
 
-
+        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
+            @Override
+            public void clickEvent() {
+                Intent intent=new Intent(context, ProductDetailsActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
 
 

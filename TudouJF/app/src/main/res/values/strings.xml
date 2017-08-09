@@ -193,6 +193,30 @@
     <string name="queding">确定</string>
     <string name="wuwangluotishi">网络连接异常,请检查是否已打开WiFi或数据流量!!</string>
     <string name="denglushibai">登陆失败!!</string>
+    <string name="frag_my_shenqingvip">申请VIP</string>
+    <string name="frag_my_zongshouyi">总累计收益(元)</string>
+    <string name="frag_my_zhanghuzongzichan">账户总资产</string>
+    <string name="frag_my_keyongyue">可用余额</string>
+    <string name="frag_my_wodetiyanjin">我的体验金</string>
+    <string name="frag_my_recharge">充值</string>
+    <string name="frag_my_withdrawals">提现</string>
+    <string name="frag_my_funddetails">资金详情</string>
+    <string name="frag_my_shimingrenzheng">为了您的投资和账户安全请完成实名认证</string>
+    <string name="wodejifen">我的积分</string>
+    <string name="wodeshouyi" >我的收益</string>
+    <string name="wodetuiguang">我的推广</string>
+    <string name="wodexiangmu">我的项目</string>
+    <string name="wodefuli">我的福利</string>
+    <string name="zhuanshukefu">专属客服</string>
+    <string name="shezhi">设置</string>
+    <string name="weixinguanzhu">微信关注\"土豆金服\"</string>
+    <string name="dengebenxi">等额本息</string>
+    <string name="daoqihuanbenxi">到期还本息</string>
+    <string name="anyuefuxi">按月付息</string>
+    <string name="act_creditorrightsdetails_title">债权详情</string>
+    <string name="act_creditorrightsdetails_zhuanrangjiage">转让价格</string>
+    <string name="act_creditorrightsdetails_zhuanrangshouyi">转让收益</string>
+    <string name="act_creditorrightsdetails_daishoubenjin">待收本金</string>
 
 
 </resources>

@@ -22,6 +22,7 @@
         android:layout_height="105dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:background="@color/color_white"
         >
         <LinearLayout
             android:id="@+id/ll_frag_discover_bt1"
@@ -35,7 +36,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@null"
-                android:src="@drawable/act_lock_icon"
+                android:src="@drawable/frag_discover_luck"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@null"
-                android:src="@drawable/act_lock_icon"
+                android:src="@drawable/frag_discover_jifenshangcheng"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +96,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="@null"
-                android:src="@drawable/act_lock_icon"
+                android:src="@drawable/frag_discover_haoliduihuan"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +119,10 @@
     <ListView
         android:id="@+id/lv_frag_discover"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:dividerHeight="10dp"
+        android:divider="@color/global_background_color"
+        />
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

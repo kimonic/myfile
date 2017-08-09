@@ -134,9 +134,9 @@ public class HomeFragment extends BaseFragment {
         ViewPagerScroller mPagerScroller = new ViewPagerScroller(getActivity());
         mPagerScroller.initViewPagerScroll(vpBall);
 
-
-        Intent intent = new Intent(getActivity(), SignInService.class);
-        getActivity().startService(intent);
+//         开启悬浮窗
+//        Intent intent = new Intent(getActivity(), SignInService.class);
+//        getActivity().startService(intent);
 
 
     }
@@ -300,8 +300,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        Intent intent = new Intent(getActivity(), SignInService.class);
-        getActivity().stopService(intent);
+//        关闭悬浮窗
+//        Intent intent = new Intent(getActivity(), SignInService.class);
+//        getActivity().stopService(intent);
         super.onDestroy();
     }
 

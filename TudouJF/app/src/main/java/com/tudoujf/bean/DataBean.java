@@ -1,7 +1,15 @@
 package com.tudoujf.bean;
 
 /**
- * Created by Administrator on 2017/8/8.
+ * * ====================================================================
+ * name:            DataBean
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/8/8
+ * description：   返回的加密json数据中的第三层json数据--data标签数据
+ * history：
+ * * ====================================================================
  */
 
 public class DataBean {
