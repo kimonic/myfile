@@ -222,8 +222,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:background="@drawable/xshape_roundrect_mcyan"
             android:baselineAligned="false"
             android:orientation="horizontal">
@@ -307,8 +307,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_mcyan_twoconner"
         android:orientation="horizontal">
@@ -317,14 +317,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="2dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="@string/frag_my_shimingrenzheng"
             android:textColor="@color/frag_home_bac"
-            android:textSize="10sp"
-
+            android:textSize="12sp"
             />
 
         <ImageView
@@ -336,15 +335,45 @@
             android:contentDescription="@null"
             android:src="@drawable/frag_my_arrowrightbac" />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/lv_frag_my"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_weight="1" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        >
+        <ListView
+            android:id="@+id/lv_frag_my"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="67dp"
+            android:orientation="vertical"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp">
+            <TextView
+                android:layout_width="21dp"
+                android:layout_height="17dp"
+                android:layout_gravity="end"
+                android:background="@drawable/xvector_close"
+                />
+            <ImageView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:contentDescription="@null"
+                android:src="@drawable/frag_my_onlineservice"
+
+                />
+        </LinearLayout>
+
+    </FrameLayout>
+
+
 
 
 </LinearLayout>

@@ -333,6 +333,7 @@
 
 
         <ImageView
+            android:id="@+id/iv_frag_home_signin"
             android:layout_width="92dp"
             android:layout_height="61dp"
             android:layout_gravity="top|end"

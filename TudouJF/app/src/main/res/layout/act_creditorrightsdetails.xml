@@ -14,7 +14,9 @@
         app:leftImage="@drawable/xvector_back" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,7 +127,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/color_gray"
                     android:gravity="center"
-                    android:text="@string/act_creditorrightsdetails_daishoubenjin"
+                    android:text="@string/act_creditorrightsdetails_daishoulixi"
                     />
                 <TextView
                     android:layout_width="0dp"
@@ -160,7 +162,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/color_gray"
                     android:gravity="center"
-                    android:text="@string/act_creditorrightsdetails_daishoubenjin"
+                    android:text="@string/act_creditorrightsdetails_zhaiquanjiazhi"
                     />
                 <TextView
                     android:layout_width="0dp"
@@ -182,11 +184,213 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="@color/global_background_color"
+                android:textSize="14sp"
+                android:textColor="@color/color_black"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="房产抵押贷款20170327003"
 
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_gray"
+                    android:gravity="center"
+                    android:text="@string/act_creditorrightsdetails_rongzijine"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:text="XX,XXX.XX元"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    />
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_gray"
+                    android:gravity="center"
+                    android:text="@string/act_creditorrightsdetails_huankuanfangshi"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:text="XX,XXX.XX元"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    />
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_gray"
+                    android:gravity="center"
+                    android:text="@string/act_creditorrightsdetails_huankuanjindu"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:text="XX,XXX.XX元"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    />
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_gray"
+                    android:gravity="center"
+                    android:text="@string/act_creditorrightsdetails_huankuanqixian"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:text="XX,XXX.XX元"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    />
 
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_gray"
+                    android:gravity="center"
+                    android:text="@string/act_creditorrightsdetails_touzirenshu"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:text="XX,XXX.XX元"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_gray"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                />
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/global_background_color"
+        />
+    <TextView
+        android:id="@+id/tv_act_creditorsrightsdetails_buynow"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:textSize="14sp"
+        android:text="@string/act_creditorrightsdetails_lijigoumai"
+        android:background="@color/global_theme_background_color"
+        android:textColor="@color/color_white"
+        android:gravity="center"
+        />
+
+
+
 </LinearLayout>

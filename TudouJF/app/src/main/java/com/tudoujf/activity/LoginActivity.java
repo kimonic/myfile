@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -173,6 +174,8 @@ public class LoginActivity extends BaseActivity {
                 String temp = response.body();
                 String temp1 = StringUtils.getDecodeString(temp);
 
+                Log.e(TAG, "onSuccess:-- "+temp1 );
+
                 if (temp1 != null) {
                     String code = "";
                     JSONObject jsonobject = null;
@@ -223,16 +226,16 @@ public class LoginActivity extends BaseActivity {
 
     private TreeMap<String, String> getArguments() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("member_name", etUsername.getText().toString().trim());
-        map.put("password", etPassword.getText().toString().trim());//密码没加密????
-        map.put("type", "2");//登录类型 1验证码登录 2密码登录
-        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
-
-
-//        map.put("member_name", "18022222222");
-//        map.put("password", "a123123");//密码没加密????
+//        map.put("member_name", etUsername.getText().toString().trim());
+//        map.put("password", etPassword.getText().toString().trim());//密码没加密????
 //        map.put("type", "2");//登录类型 1验证码登录 2密码登录
 //        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
+
+
+        map.put("member_name", "18022222222");
+        map.put("password", "a123123");//密码没加密????
+        map.put("type", "2");//登录类型 1验证码登录 2密码登录
+        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
         return map;
     }
 

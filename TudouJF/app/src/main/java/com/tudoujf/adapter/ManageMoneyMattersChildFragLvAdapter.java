@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.ProductDetailsActivity;
+import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
-import com.tudoujf.ui.BidView;
 import com.tudoujf.ui.ClaimsBidView;
 
 import java.util.List;
@@ -82,7 +81,7 @@ public class ManageMoneyMattersChildFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                Intent intent=new Intent(context, ProductDetailsActivity.class);
+                Intent intent=new Intent(context, CreditorRightsDetailsActivity.class);
                 context.startActivity(intent);
             }
         });

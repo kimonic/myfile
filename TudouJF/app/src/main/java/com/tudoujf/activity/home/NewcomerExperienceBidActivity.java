@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.home;
 
 import android.view.View;
 import android.widget.LinearLayout;

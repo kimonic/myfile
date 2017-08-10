@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.home;
 
 import android.os.Bundle;
 import android.view.View;

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.ProductDetailsActivity;
+import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
 import com.tudoujf.ui.BidView;
 

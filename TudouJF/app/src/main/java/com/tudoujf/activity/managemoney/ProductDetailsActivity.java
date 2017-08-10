@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.managemoney;
 
 import android.view.View;
 import android.widget.LinearLayout;
@@ -6,6 +6,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.AffirmBuyActivity;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.ProductDetailsActBean;

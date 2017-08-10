@@ -55,16 +55,25 @@
         <!-- 确认密码页activity -->
         <activity android:name=".activity.AffirmPasswordActivity" />
         <!--产品详情activity-->
-        <activity android:name=".activity.ProductDetailsActivity"/>
+        <activity android:name=".activity.managemoney.ProductDetailsActivity" />
         <!--确认购买activity-->
-        <activity android:name=".activity.AffirmBuyActivity"/>
+        <activity android:name=".activity.managemoney.AffirmBuyActivity" />
         <!--选择返现券activity-->
-        <activity android:name=".activity.FanXianQuanSelActivity"/>
+        <activity android:name=".activity.managemoney.FanXianQuanSelActivity" />
         <!--选择红包activity-->
-        <activity android:name=".activity.RedPackageActivity"/>
+        <activity android:name=".activity.managemoney.RedPackageActivity" />
         <!--安全保障activity-->
-        <activity android:name=".activity.SafetyControlActivity"/>
-
+        <activity android:name=".activity.home.SafetyControlActivity" />
+        <!--债权详情activity-->
+        <activity android:name=".activity.managemoney.CreditorRightsDetailsActivity" />
+        <!--债权详情购买确认activity-->
+        <activity android:name=".activity.managemoney.AffirmBuyCreditorsRightsActivity" />
+        <!--新手福利activity-->
+        <activity android:name=".activity.home.NewbieWelfareActivity" />
+        <!--签到activity-->
+        <activity android:name=".activity.home.SignInActivity"/>
+        <!--积分商城activity-->
+        <activity android:name=".activity.home.IntegralShopActivity"/>
 
 
         <!-- 预览各个activity的界面 -->
@@ -87,15 +96,15 @@
         <!-- 上拉加载下拉刷新activity -->
         <activity android:name=".activity.PushPullActivity" />
         <!--新手体验标activity-->
-        <activity android:name=".activity.NewcomerExperienceBidActivity"/>
+        <activity android:name=".activity.home.NewcomerExperienceBidActivity" />
         <!--信息披露activity-->
-        <activity android:name=".activity.InfoPublishActivity"/>
+        <activity android:name=".activity.home.InfoPublishActivity" />
         <!--我的体验金activity-->
-        <activity android:name=".activity.MyExperienceGoldActivity"/>
+        <activity android:name=".activity.home.MyExperienceGoldActivity" />
         <!--活动专区activity-->
-        <activity android:name=".activity.SpecialOfferActivity"/>
+        <activity android:name=".activity.home.SpecialOfferActivity" />
         <!--我的信息activity-->
-        <activity android:name=".activity.MyMessageActivity"/>
+        <activity android:name=".activity.MyMessageActivity" />
 
         <service
             android:name=".service.MyService"
@@ -106,8 +115,9 @@
 
         </service>
         <!--签到悬浮窗service-->
-        <service android:name=".service.SignInService"
-            android:exported="false"/>
+        <service
+            android:name=".service.SignInService"
+            android:exported="false" />
     </application>
 
 </manifest>

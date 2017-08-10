@@ -568,10 +568,10 @@
                 android:id="@+id/tv_act_productdetails_buynow"
                 android:layout_width="match_parent"
                 android:layout_marginTop="30dp"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:text="@string/act_productdetails_lijigoumai"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/color_white"
                 android:background="@color/global_theme_background_color"
                 />

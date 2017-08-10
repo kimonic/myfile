@@ -217,6 +217,30 @@
     <string name="act_creditorrightsdetails_zhuanrangjiage">转让价格</string>
     <string name="act_creditorrightsdetails_zhuanrangshouyi">转让收益</string>
     <string name="act_creditorrightsdetails_daishoubenjin">待收本金</string>
+    <string name="act_creditorrightsdetails_daishoulixi">待收利息</string>
+    <string name="act_creditorrightsdetails_zhaiquanjiazhi">债权价值</string>
+    <string name="act_creditorrightsdetails_rongzijine">融资金额</string>
+    <string name="act_creditorrightsdetails_huankuanfangshi">还款方式</string>
+    <string name="act_creditorrightsdetails_huankuanjindu">还款进度</string>
+    <string name="act_creditorrightsdetails_huankuanqixian">还款期限</string>
+    <string name="act_creditorrightsdetails_touzirenshu">投资人数</string>
+    <string name="act_creditorrightsdetails_lijigoumai">立即购买</string>
+    <string name="act_newbiewelfare_title">新手福利</string>
+    <string name="act_signin_title">我的积分</string>
+    <string name="zongjifen">总积分</string>
+    <string name="dianjicichu">点击此处</string>
+    <string name="qiandao" >签到</string>
+    <string name="yiqiandao">已签到</string>
+    <string name="act_signin_jifenshangcheng">积分商城</string>
+    <string name="act_signin_jifenjilu">积分记录</string>
+    <string name="act_signin_jifenshuoming">积分说明</string>
+    <string name="act_integralshop_title">积分商城</string>
+    <string name="act_integralshop_wodejifen">我的积分</string>
+    <string name="act_integralshop_touzizhuanjifen">投资赚积分</string>
+    <string name="act_integralshop_shangpinfenlei">商品分类</string>
+    <string name="act_integralshop_jifenshaixuan">积分筛选</string>
+    <string name="act_integralshop_remenduihuan">热门兑换</string>
+    <string name="act_integralshop_jifenpaihangbang">积分排行榜</string>
 
 
 </resources>

@@ -1,6 +1,6 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.home;
 
-import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,27 +10,28 @@ import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
- * name:            CreditorRightsDetailsActivity
- * guide:
+ * name:            IntegralShopActivity
+ * guide:          WelcomeActivity-->GuideActivity--->HomeActivity-->HomeFragment-->SignInActivity
  * author：          kimonik
  * version：          1.0
- * date：            2017/8/10
- * description：  债权详情activity
+ * date：            2017/8/11
+ * description：  首页activity中的首页fragment中的签到activity中的积分商城
  * history：
  * * ====================================================================
  */
 
-public class CreditorRightsDetailsActivity extends BaseActivity {
-    @BindView(R.id.mtb_act_creditorrightsdetails)
-    MTopBarView mtbCreditorRightsDetails;
+public class IntegralShopActivity extends BaseActivity {
+    @BindView(R.id.mtb_act_integralshop)
+    MTopBarView mtbActIntegralShop;
+    @BindView(R.id.rv_act_integralshop)
+    RecyclerView rvActIntegralShop;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.act_creditorrightsdetails;
+        return R.layout.act_integralshop;
     }
 
     @Override
@@ -45,12 +46,12 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-/**设置沉浸式状态栏*/
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbCreditorRightsDetails.getLayoutParams();
+        /**设置沉浸式状态栏*/
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActIntegralShop.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        mtbCreditorRightsDetails.setLayoutParams(params);
+        mtbActIntegralShop.setLayoutParams(params);
 
-        mtbCreditorRightsDetails.getLeftTV().setOnClickListener(new View.OnClickListener() {
+        mtbActIntegralShop.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeActivity();
@@ -83,10 +84,6 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
+
 }

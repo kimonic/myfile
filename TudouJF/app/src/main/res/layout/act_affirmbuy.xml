@@ -237,7 +237,7 @@
            android:layout_weight="1"
             android:gravity="center"
             android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor"
+            android:textColor="@color/global_theme_background_color"
             android:text="00,000.00元"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
@@ -501,14 +501,14 @@
     <TextView
         android:id="@+id/tv_act_affirmbuy_affirmbuy"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/xshape_roundrect_mblue"
         android:gravity="center"
         android:text="@string/act_affirmbuy_querengoumai"
         android:textColor="@color/color_white"
-        android:textSize="18sp" />
+        android:textSize="12sp" />
 
 
 </LinearLayout>

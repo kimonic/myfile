@@ -43,10 +43,10 @@
             android:id="@+id/iv_frag_my_in"
             android:layout_width="10dp"
             android:layout_height="17dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="10dp"
             android:contentDescription="@null"
             android:src="@drawable/frag_my_arrowright" />
     </LinearLayout>

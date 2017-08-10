@@ -1,6 +1,5 @@
 package com.tudoujf.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
@@ -13,12 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.SpecialOfferActivity;
+import com.tudoujf.activity.home.InfoPublishActivity;
+import com.tudoujf.activity.home.NewbieWelfareActivity;
+import com.tudoujf.activity.home.SignInActivity;
+import com.tudoujf.activity.home.SpecialOfferActivity;
 import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.assist.ViewPagerScroller;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.service.SignInService;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -27,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -66,6 +66,8 @@ public class HomeFragment extends BaseFragment {
     LinearLayout llTuiJianYouLi;
     @BindView(R.id.ll_frag_home_xinxipilu)
     LinearLayout llXinXiPiLu;
+    @BindView(R.id.iv_frag_home_signin)
+    ImageView ivSignIn;
     private List<ImageView> list;
     private List<BallView> listBall;
     private float currentY;
@@ -99,10 +101,15 @@ public class HomeFragment extends BaseFragment {
                 openActivity(SpecialOfferActivity.class);
                 break;
             case R.id.ll_frag_home_xinshoufuli:
+                openActivity(NewbieWelfareActivity.class);
                 break;
             case R.id.ll_frag_home_tuijianyouli:
                 break;
             case R.id.ll_frag_home_xinxipilu:
+                openActivity(InfoPublishActivity.class);
+                break;
+            case R.id.iv_frag_home_signin:
+                openActivity(SignInActivity.class);
                 break;
         }
 
@@ -207,6 +214,7 @@ public class HomeFragment extends BaseFragment {
         llTuiJianYouLi.setOnClickListener(this);
         llXinShouFuLi.setOnClickListener(this);
         llXinXiPiLu.setOnClickListener(this);
+        ivSignIn.setOnClickListener(this);
 
         vpBall.setOnTouchListener(new View.OnTouchListener() {
             @Override
