@@ -26,13 +26,29 @@ import okhttp3.OkHttpClient;
  */
 
 public class MApp extends Application{
+    public static MApp app = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        app=this;
         initOkGo();
         LitePal.initialize(this);
         CreateCode.initCreatCode(this);
     }
+
+
+
+
+    /**
+     * 单例
+     */
+    public synchronized static MApp getInstance() {
+        return app;
+    }
+
+
+
     private void initOkGo() {
         HttpHeaders headers = new HttpHeaders();
         headers.put("commonHeaderKey1", "commonHeaderValue1");    //header不支持中文，不允许有特殊字符

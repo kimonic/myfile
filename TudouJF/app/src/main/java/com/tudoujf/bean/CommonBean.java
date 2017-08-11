@@ -1,7 +1,12 @@
 package com.tudoujf.bean;
 
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
+import com.tudoujf.base.BaseBean;
+
+import org.json.JSONObject;
 
 
 /**
@@ -16,7 +21,7 @@ import com.google.gson.JsonObject;
  * * ====================================================================
  */
 
-public class CommonBean {
+public class CommonBean implements BaseBean{
 
     /**
      * code : 100
@@ -29,15 +34,15 @@ public class CommonBean {
 
     private String code;
     private String result;
-    private JsonObject data;
-    private JsonObject description;
+    private JsonElement data;
+    private JsonElement description;
     private String xmdy;
     private String diyou;
+
 
     public String getCode() {
         return code;
     }
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -50,19 +55,19 @@ public class CommonBean {
         this.result = result;
     }
 
-    public JsonObject getData() {
+    public JsonElement getData() {
         return data;
     }
 
-    public void setData(JsonObject data) {
+    public void setData(JsonElement data) {
         this.data = data;
     }
 
-    public JsonObject getDescription() {
+    public JsonElement getDescription() {
         return description;
     }
 
-    public void setDescription(JsonObject description) {
+    public void setDescription(JsonElement description) {
         this.description = description;
     }
 

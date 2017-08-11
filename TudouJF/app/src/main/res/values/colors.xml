@@ -45,5 +45,6 @@
     <color name="act_infopublish_bac">#E7FAFF</color>
     <color name="act_mymessage_unselcolor">#5AB8CF</color>
     <color name="frag_my_bac">#E5FAFF</color>
+    <color name="huigucolor">#2758A1</color>
 
 </resources>

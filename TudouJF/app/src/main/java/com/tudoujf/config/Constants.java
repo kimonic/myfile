@@ -466,4 +466,10 @@ public class Constants {
      * 计算器计算结果
      */
     public static  final  String CALCULATOR_RESULT =URL + "/phone/common/calculator";
+
+
+    public static  final  String STATUS_REGISTER_SUCCESS="register_status=success";//注册成功
+    public static  final   String STATUS_REGISTER_FAIL="register_status=fail";//注册失败
+    public static  final  String STATUS_CLOSE="/wap";
+
 }

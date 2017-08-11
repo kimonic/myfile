@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lzy.okgo.OkGo;
+import com.tudoujf.http.HttpMethods;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -63,6 +66,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
         unbinder.unbind();
     }
 }

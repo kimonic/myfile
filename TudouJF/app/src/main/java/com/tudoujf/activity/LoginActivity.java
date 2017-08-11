@@ -21,10 +21,12 @@ import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.DataBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -170,43 +172,21 @@ public class LoginActivity extends BaseActivity {
         HttpMethods.getInstance().POST(this, Constants.LOGIN, getArguments(), "123", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-
-                String temp = response.body();
-                String temp1 = StringUtils.getDecodeString(temp);
-
-                Log.e(TAG, "onSuccess:-- "+temp1 );
-
-                if (temp1 != null) {
-                    String code = "";
-                    JSONObject jsonobject = null;
-                    try {
-                        jsonobject = new JSONObject(temp1);
-                        code = jsonobject.getString("code");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    dialog.dismiss();
-                    if (code.equals("200")) {
-                        Gson gson = new Gson();
-                        CommonBean bean = gson.fromJson(temp1, new TypeToken<CommonBean>() {
-                        }.getType());
-                        DataBean dataBean = gson.fromJson(bean.getData().toString(), new TypeToken<DataBean>() {
-                        }.getType());
-                        openActivity(HomeActivity.class);
-                    } else if (code.equals("100")) {
-                        try {
-                            ToastUtils.showToast(LoginActivity.this, jsonobject.getString("description"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else if (code.equals("")){
-                        ToastUtils.showToast(LoginActivity.this, R.string.denglushibai);
-                    }
-                    // TODO: 2017/8/8 做对应返回错误码的处理
-                } else {
-                    dialog.dismiss();
-                    ToastUtils.showToast(LoginActivity.this, R.string.denglushibai);
+                dialog.dismiss();
+                BaseBean bean = ParseJson.parse(response.body(), new TypeToken<DataBean>() {}.getType());
+                Log.e(TAG, "onSuccess: ------ParseJson--------------???" + ParseJson.getBeanType(bean, DataBean.class));
+                int result = ParseJson.getBeanType(bean, DataBean.class);
+                if (result == ParseJson.BEAN_NULL) {
+                    ToastUtils.showToast(LoginActivity.this, "解析错误!");
+                } else if (result == ParseJson.BEAN_DATA) {
+                    DataBean bean1 = (DataBean) bean;
+                } else if (result == ParseJson.BEAN_COMMON) {
+                    ToastUtils.showToast(LoginActivity.this, ((CommonBean) bean).getDescription().toString());
+                } else if (result == ParseJson.BEAN_ERROR) {
+                    ToastUtils.showToast(LoginActivity.this, "参数错误!");
                 }
+//                     TODO: 2017/8/8 做对应返回错误码的处理
+
 
             }
 
@@ -226,16 +206,16 @@ public class LoginActivity extends BaseActivity {
 
     private TreeMap<String, String> getArguments() {
         TreeMap<String, String> map = new TreeMap<>();
-//        map.put("member_name", etUsername.getText().toString().trim());
-//        map.put("password", etPassword.getText().toString().trim());//密码没加密????
-//        map.put("type", "2");//登录类型 1验证码登录 2密码登录
-//        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
-
-
-        map.put("member_name", "18022222222");
-        map.put("password", "a123123");//密码没加密????
+        map.put("member_name", etUsername.getText().toString().trim());
+        map.put("password", etPassword.getText().toString().trim());//密码没加密????
         map.put("type", "2");//登录类型 1验证码登录 2密码登录
         map.put("phone_type", "1");//手机类型1=andriod 2=IOS
+
+
+//        map.put("member_name", "18022222222");
+//        map.put("password", "a123123");//密码没加密????
+//        map.put("type", "2");//登录类型 1验证码登录 2密码登录
+//        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
         return map;
     }
 

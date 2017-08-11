@@ -2,6 +2,7 @@ package com.tudoujf.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.NewbieWelfareActivity;
@@ -20,12 +24,17 @@ import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.assist.ViewPagerScroller;
 import com.tudoujf.base.BaseFragment;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -72,6 +81,7 @@ public class HomeFragment extends BaseFragment {
     private List<BallView> listBall;
     private float currentY;
     private boolean flag = false;
+    private String TAG = "HomeFragment";
 
 
     @Override
@@ -121,6 +131,15 @@ public class HomeFragment extends BaseFragment {
         if (bundle != null) {
 //            tvFragHome.setText(bundle.getString("temp"));
         }
+
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", "");
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homeactivity", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+
+            }
+        });
 
     }
 

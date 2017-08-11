@@ -74,6 +74,8 @@
         <activity android:name=".activity.home.SignInActivity"/>
         <!--积分商城activity-->
         <activity android:name=".activity.home.IntegralShopActivity"/>
+        <!--汇付支付activity-->
+        <activity android:name=".activity.HuiFuRegisterActivity"/>
 
 
         <!-- 预览各个activity的界面 -->

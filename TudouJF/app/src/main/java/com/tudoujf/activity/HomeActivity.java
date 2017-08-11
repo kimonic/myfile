@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +14,25 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.fragment.DiscoverFragment;
 import com.tudoujf.fragment.HomeFragment;
 import com.tudoujf.fragment.ManageMoneyMattersFragment;
 import com.tudoujf.fragment.MyFragment;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -42,6 +49,7 @@ import butterknife.BindView;
  */
 
 public class HomeActivity extends BaseActivity {
+    private static final String TAG = "HomeActivity";
     @BindView(R.id.vp_act_home)
     ViewPager vpActHome;
     @BindView(R.id.nbv_act_home)

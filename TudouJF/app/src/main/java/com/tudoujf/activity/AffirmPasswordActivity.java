@@ -156,7 +156,6 @@ public class AffirmPasswordActivity extends BaseActivity {
         ivClear1.setOnClickListener(this);
         ivClear2.setOnClickListener(this);
         tvComplete.setOnClickListener(this);
-
     }
 
     @Override

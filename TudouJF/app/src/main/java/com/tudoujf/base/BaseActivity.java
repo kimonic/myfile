@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.lzy.imagepicker.view.SystemBarTintManager;
+import com.lzy.okgo.OkGo;
 
 import butterknife.ButterKnife;
 
@@ -105,5 +106,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     /**关闭activity*/
     protected void closeActivity() {
         this.finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
+        super.onDestroy();
+
     }
 }

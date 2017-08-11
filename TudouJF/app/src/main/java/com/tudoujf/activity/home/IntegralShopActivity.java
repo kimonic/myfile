@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -51,17 +52,20 @@ public class IntegralShopActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActIntegralShop.setLayoutParams(params);
 
+        GridLayoutManager layoutManager=new GridLayoutManager(this,3,GridLayoutManager.VERTICAL,false);
+        rvActIntegralShop.setLayoutManager(layoutManager);
+//        rvActIntegralShop.setAdapter();
+
+    }
+
+    @Override
+    public void initListener() {
         mtbActIntegralShop.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeActivity();
             }
         });
-    }
-
-    @Override
-    public void initListener() {
-
     }
 
     @Override

@@ -193,6 +193,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(MyMessageActivity.class);
                 break;
             case R.id.bt_act_preview17:
+                openActivity(HuiFuRegisterActivity.class);
                 break;
             case R.id.bt_act_preview18:
                 break;

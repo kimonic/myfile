@@ -1,5 +1,7 @@
 package com.tudoujf.bean;
 
+import com.tudoujf.base.BaseBean;
+
 /**
  * * ====================================================================
  * name:            DataBean
@@ -12,7 +14,7 @@ package com.tudoujf.bean;
  * * ====================================================================
  */
 
-public class DataBean {
+public class DataBean implements BaseBean{
 
     /**
      * member : {"id":12268,"name":"18022222222","trustAccount":"6000060005589946","password":"6488a8e8b84c469c3aa021899da0e492","email":null,"phone":18022222222,"paypassword":null,"count":136,"registerIp":467619322,"registerTime":1475976339,"registerDate":"Oct 9, 2016 12:00:00 AM","lastloginIp":660157581,"lastlogStringime":1502178018,"lastloginDate":"Aug 8, 2017 12:00:00 AM","registerType":1,"role":1,"isRealname":1,"isEmail":-1,"isPhone":1,"isVideo":-1,"isId5":-1,"isVip":1,"isAuto":"-1","pwdAttach":"7t92k1VLII","status":1,"creditPoString":193,"lockTime":1496798204,"group":1,"groupStatus":"-1","vipStartTime":1496295998,"vipEndTime":1498887998,"vipCategoryId":5,"vipCategoryInd":"vip1","amount":30,"channelSource":null,"channelId":null,"provience":"山东省","ranking":null}
