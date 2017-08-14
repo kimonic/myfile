@@ -456,6 +456,8 @@ public class Constants {
     public static  final  String XIE_YI_URL = URL
             + "/phone/loan/loanType";
 
+    /**注册接口*/
+    public static  final String  REGISTER=URL+"/phone/public/reg";
 
     /**
      * 计算器还款方式列表

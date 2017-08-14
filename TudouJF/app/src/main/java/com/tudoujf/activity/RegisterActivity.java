@@ -1,9 +1,19 @@
 package com.tudoujf.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,11 +27,13 @@ import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.DataBean;
-import com.tudoujf.bean.HuiFuRegisterBean;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.CheckPhoneIsExistRegisterActBean;
+import com.tudoujf.bean.databean.PhoneCodeBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -73,8 +85,59 @@ public class RegisterActivity extends BaseActivity {
     LinearLayout llAgree;
     @BindView(R.id.cb_act_register)
     TextView cbActRegister;
-    private int count=0,countAgree=0;
-    private String TAG="RegisterActivity";
+    private int count = 0, countAgree = 0;
+    /**
+     * 手机验证码
+     */
+    private String randomCode;
+    private String TAG = "RegisterActivity";
+    /**
+     * 检测手机号是否存在的bean
+     */
+    private CheckPhoneIsExistRegisterActBean checkPhoneBean;
+    /**
+     * 获取手机验证码的返回bean
+     */
+    private PhoneCodeBean phoneCodeBean;
+    /**
+     * 用户名--手机号
+     */
+    private String userName;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 登陆注册时展示的dialog
+     */
+    private AlertDialog dialog;
+    /**
+     * 记录第一次点击back键的时间
+     */
+    private long beforeTime;
+
+    /**
+     * 倒计时handler
+     */
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            tvGetcode.setText(msg.what + "秒后可重新获得验证码!");
+            if (msg.what == 0) {
+                countTime = 60;
+                tvGetcode.setClickable(true);
+                tvGetcode.setText("获取验证码");
+            }
+        }
+    };
+    /**
+     * 倒计时时间
+     */
+    private int countTime = 60;
+    /**
+     * 是否同意协议
+     */
+    private boolean agreeRule = false;
 
     @Override
     public int getLayoutResId() {
@@ -83,81 +146,61 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.iv_act_register_clear://用户名清空
-                    etUsername.setText("");
-                    break;
-                case R.id.iv_act_register_clear1:
-                    etPassword.setText("");
-                    break;
-                case R.id.tv_act_register_getcode://发送网路请求,获取手机验证码
-                    break;
-                case R.id.iv_act_register_codeimage://点击可刷新图形验证码
-                    break;
+        switch (view.getId()) {
+            case R.id.iv_act_register_clear://用户名清空
+                etUsername.setText("");
+                break;
+            case R.id.iv_act_register_clear1://密码清空
+                etPassword.setText("");
+                break;
+            case R.id.tv_act_register_getcode://发送网路请求,获取手机验证码
 
-                case R.id.iv_act_register_openclose://明文密文显示
-                    inputTypeConfig(count,ivOpenclose,etPassword);
-                    count++;
-                    break;
-                case R.id.tv_act_register_login://启动登陆界面
-                    openActivity(LoginActivity.class);
-                    closeActivity();
-                    break;
-                case R.id.tv_act_register_register://检测注册信息,无误后提交注册信息
-                    commitInfo();
-                    break;
-                case R.id.ll_act_register_agree://同意土豆金服服务协议
-                    if (countAgree%2==0){
-                        cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_sel);
-                    }else {
-                        cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_unsel);
-                    }
-                    countAgree++;
-                    break;
-
-            }
-    }
-
-    private void commitInfo() {
-        TreeMap<String, String> map = new TreeMap<String, String>();
-        map.put("login_token", "12290");
-        HttpMethods.getInstance().POST(this, Constants.TRUST_REGISTER, map, "999", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                String temp = response.body();
-                String temp1 = StringUtils.getDecodeString(temp);
-                String temp2 = temp1.replace("\\","");
-
-                if (temp2 != null) {
-                    String code = "";
-                    JSONObject jsonobject = null;
-                    try {
-                        jsonobject = new JSONObject(temp2);
-                        code = jsonobject.getString("code");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    if (code.equals("200")) {
-                        Gson gson = new Gson();
-                        CommonBean bean = gson.fromJson(temp2, CommonBean.class);
-                        HuiFuRegisterBean dataBean = gson.fromJson(bean.getData().toString(),HuiFuRegisterBean.class);
-                        openActivity(HomeActivity.class);
-                    } else if (code.equals("100")) {
-                        try {
-                            ToastUtils.showToast(RegisterActivity.this, jsonobject.getString("description"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else if (code.equals("")){
-                        ToastUtils.showToast(RegisterActivity.this, R.string.denglushibai);
-                    }
-                    // TODO: 2017/8/8 做对应返回错误码的处理
-                } else {
-//                    ToastUtils.showToast(RegisterActivity.this, R.string.denglushibai);
+                if (etUsername.hasFocus()) {//有焦点时清除焦点
+                    etUsername.clearFocus();
                 }
-            }
-        });
+                if (checkPhoneBean != null && !userName.equals("")) {
+                    if (checkPhoneBean.getStatus().equals("0")) {
+                        startCountDown();
+                        getSms();
+                    } else {
+                        ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
+                    }
+                } else if (!etUsername.hasFocus()) {
+                    ToastUtils.showToast(RegisterActivity.this, "请输入正确的手机号码!!!");
+                }
+
+                break;
+            case R.id.iv_act_register_codeimage://点击可刷新图形验证码
+                break;
+
+            case R.id.iv_act_register_openclose://明文密文显示
+                inputTypeConfig(count, ivOpenclose, etPassword);
+                count++;
+                break;
+            case R.id.tv_act_register_login://启动登陆界面
+                openActivity(LoginActivity.class);
+                closeActivity();
+                break;
+            case R.id.tv_act_register_register://检测注册信息,无误后提交注册信息
+                commitInfo();
+                break;
+            case R.id.ll_act_register_agree://同意土豆金服服务协议
+                if (countAgree % 2 == 0) {
+                    cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_sel);
+                    agreeRule = true;
+                } else {
+                    cbActRegister.setBackgroundResource(R.drawable.xvector_checkbox_unsel);
+                    agreeRule = false;
+                }
+                countAgree++;
+                break;
+            case R.id.et_act_register_username:
+                etUsername.requestFocus();
+                break;
+
+        }
     }
+
 
     @Override
     public void initDataFromIntent() {
@@ -171,23 +214,54 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-            etUsername.addTextChangedListener(new MTextWatchAdapter(){
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    if (editable.length()>0){
-                        ivClear.setVisibility(View.VISIBLE);
-                    }else {
-                        ivClear.setVisibility(View.GONE);
-                    }
-                }
-            });
-
-        etPassword.addTextChangedListener(new MTextWatchAdapter(){
+        etUsername.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length()>0){
+                if (editable.length() > 0) {
+                    ivClear.setVisibility(View.VISIBLE);
+                } else {
+                    ivClear.setVisibility(View.GONE);
+                }
+            }
+        });
+        etUsername.setOnClickListener(this);
+
+        etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // 验证手机号是否已存在
+                if (!hasFocus) {
+                    if (checkPhoneNumber()) {
+                        TreeMap<String, String> map = new TreeMap<>();
+                        map.put("username", userName);
+                        HttpMethods.getInstance().POST(RegisterActivity.this, Constants.CHECK, map, "registeractivity", new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                Log.e(TAG, "onSuccess:---------校验手机号是否存在返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                                BaseBean bean = ParseJson.getJsonResult(response.body(), new TypeToken<CheckPhoneIsExistRegisterActBean>() {
+                                        }.getType(),
+                                        CheckPhoneIsExistRegisterActBean.class, RegisterActivity.this);
+                                if (bean != null) {
+                                    checkPhoneBean = (CheckPhoneIsExistRegisterActBean) bean;
+                                    if (checkPhoneBean.getStatus().equals("0")) {
+                                        tvGetcode.setBackgroundResource(R.drawable.xshape_roundrect_myellow);
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ToastUtils.showToast(RegisterActivity.this, R.string.qingtianxiezhengquedeshoujihao);
+                    }
+                }
+            }
+        });
+
+        etPassword.addTextChangedListener(new MTextWatchAdapter() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > 0) {
                     ivClear1.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     ivClear1.setVisibility(View.GONE);
                 }
             }
@@ -226,11 +300,196 @@ public class RegisterActivity extends BaseActivity {
         }
     }
 
-    public static String object2JsonNoEscaping(Object obj){
+    /**
+     * 倒计时60秒线程
+     */
+    private void startCountDown() {
+        tvGetcode.setClickable(false);
+        tvGetcode.setText("60秒后可重新获取验证码!");
+        new Thread() {
+            @Override
+            public void run() {
+                while (countTime > 0) {
+                    countTime--;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Message msg = Message.obtain();
+                    msg.what = countTime;
+                    handler.sendMessage(msg);
+                }
+            }
+        }.start();
+    }
+
+
+    /**
+     * 将object对象转化为json字符串
+     */
+    public static String object2JsonNoEscaping(Object obj) {
         GsonBuilder gson = new GsonBuilder();
         gson.disableHtmlEscaping();
         gson.serializeNulls();
         return gson.create().toJson(obj);
+        // TODO: 2017/8/14 无用待删除
+
+    }
+
+    /**
+     * 提交注册信息
+     */
+    private void commitInfo() {
+        if (checkSubmit()) {
+            showProgreessDialog();
+            TreeMap<String, String> map = new TreeMap<>();
+            map.put("phone", userName);
+            map.put("password", password);
+            map.put("referrer", etReferrer.getText().toString().trim());
+            map.put("invite_username", "");
+            HttpMethods.getInstance().POST(this, Constants.REGISTER, map, "registeractivity", new StringCallback() {
+                @Override
+                public void onSuccess(Response<String> response) {
+                    Log.e(TAG, "onSuccess:---------注册账号返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                    // TODO: 2017/8/14  调用登陆接口进行登陆,注册成功保存login_token,跳转设置手势密码页面
+                    ToastUtils.showToast(RegisterActivity.this, "注册成功!!");
+                    try {
+                        JSONObject json = new JSONObject(StringUtils.getDecodeString(response.body()));
+                        if (json.getString("code").equals("200")) {
+                    login();//登陆
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 调用登陆接口
+     */
+    private void login() {
+
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("member_name", userName);
+        map.put("password", password);//密码
+        map.put("type", "2");//登录类型 1验证码登录 2密码登录
+        map.put("client_id", "");//预留字段
+        HttpMethods.getInstance().POST(this, Constants.LOGIN, map, "registeractivity", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+
+
+            }
+        });
+    }
+
+    /**
+     * 获取手机验证码
+     */
+    public void getSms() {
+        randomCode = StringUtils.getRandomCode();
+        Log.e(TAG, "getSms: --------------------" + randomCode);
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("type", "reg");//类型注册
+        map.put("phone", userName);//手机号码
+        map.put("is_check", "1");//手机认证时默认为1
+        map.put("phone_code", "" + randomCode);
+        HttpMethods.getInstance().POST(RegisterActivity.this, Constants.REG_SMS, map, "registeractivity", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                Log.e(TAG, "onSuccess:---------获取验证码返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                Gson gson = new Gson();
+                phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
+                }.getType());
+                if (phoneCodeBean.getCode().equals("200")) {
+                    ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 检测输入的手机号码是否符合规则
+     */
+    private boolean checkPhoneNumber() {
+        userName = etUsername.getText().toString().trim();
+        return StringUtils.isCellphone(userName);
+    }
+
+    /**
+     * 检测注册数据
+     */
+    private boolean checkSubmit() {
+        if (!(phoneCodeBean != null && phoneCodeBean.getCode().equals("200")
+                && phoneCodeBean.getData().equals(phoneCodeBean.getDescription())
+                && etPhonecode.getText().toString().trim().equals(randomCode))) {
+            ToastUtils.showToast(this, "验证码输入错误!!");
+            return false;
+        }
+        if (!agreeRule) {
+            ToastUtils.showToast(this, "未同意土豆金服服务协议!!");
+            return false;
+        }
+        return checkPassword();
+    }
+
+    /**
+     * 检验密码规则
+     */
+    private boolean checkPassword() {
+        password = etPassword.getText().toString().trim();
+        if (password.length() < 6 || password.length() > 16 || !StringUtils.conformPasswordRule(password)) {
+            ToastUtils.showToast(this, "密码必须是6-16位数字和字母的组合!!");
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 开始请求登陆时显示
+     */
+    private void showProgreessDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_login, null);
+        dialog = new AlertDialog.Builder(this).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
+                    if (System.currentTimeMillis() - beforeTime < 2000) {
+                        closeActivity();
+                    } else {
+                        ToastUtils.showToast(RegisterActivity.this, "再点击一次将结束注册退出!");
+                        beforeTime = System.currentTimeMillis();
+                    }
+                    return true;
+                } else {
+                    return false; //默认返回 false
+                }
+            }
+        });
+        dialog.show();
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            WindowManager.LayoutParams lp = window.getAttributes();
+//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
+            int wh = 90 * ScreenSizeUtils.getDensity(this);
+            lp.width = wh;
+            lp.height = wh;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+
     }
 
 

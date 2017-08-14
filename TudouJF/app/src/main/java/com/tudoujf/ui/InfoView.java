@@ -95,7 +95,7 @@ public class InfoView extends View {
 
         paintGray=initPaint(Color.parseColor("#C1C2C7"));
         paintOrange=initPaint(Color.parseColor("#FD7833"));
-        paintOrange.setTextSize(width*0.09259f);
+        paintOrange.setTextSize(width*0.07333f);
         paintCyan=initPaint(Color.parseColor("#149BBB"));
 
         bitmapLeft= BitmapFactory.decodeResource(getResources(), R.drawable.act_productdetails2_nianhua1);
@@ -108,8 +108,8 @@ public class InfoView extends View {
         canvas.drawColor(Color.parseColor("#E7FAFF"));//背景色
         float underlineScale=(width*0.9259f)*underlineScale1/width;
 
-        float bitScale1=15.4f;//位图1高与控件高的比例
-        int bitWidth1= (int) (width/bitScale1);//控件的高度
+        float bitScale1=0.03333f;//位图1高与控件高的比例
+        int bitWidth1= (int) (width*bitScale1);//控件的高度
         float initScale=13.5f;//位图1左上角位置与控件宽度的比例
         float initScaleh=6.6f;//位图1左上角位置与控件宽度的比例
 
@@ -119,12 +119,12 @@ public class InfoView extends View {
         rectImag1.bottom=rectImag1.top+bitWidth1;
 
         canvas.drawBitmap(bitmapLeft,null,rectImag1,null);
-        paintGray.setTextSize(bitWidth1-10);//设置文字大小
+        paintGray.setTextSize(width*0.04f);//设置文字大小
 
         canvas.drawText("预期年化收益",rectImag1.left+bitWidth1+10,rectImag1.bottom-5,paintGray);
 
-        float bitScale2=5.5f;//位图1高与控件高的比例
-        int bitWidth2= (int) (width/bitScale2);//控件的高度
+        float bitScale2=0.16f;//位图1高与控件高的比例
+        int bitWidth2= (int) (width*bitScale2);//控件的高度
         float initScale2=1.29f;//位图1左上角位置与控件宽度的比例
         float initScaleh2=21f;//位图1左上角位置与控件宽度的比例
 
@@ -154,9 +154,9 @@ public class InfoView extends View {
         canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
 
         if (ifNew){//是否时新手标
-            canvas.drawRect(width/2.24f,width/41.538f,width/2.01f,width/14.4f,paintCyan);
-            paintWhite.setTextSize(width/23f);
-            canvas.drawText("新",width/2.22f,width/15.43f,paintWhite);
+            canvas.drawRect(width*0.4706f,width*0.03333f,width*0.5089f,width*0.07166f,paintCyan);
+            paintWhite.setTextSize(width*.03333f);
+            canvas.drawText("新",width*0.4736f,width*0.06666f,paintWhite);
         }
 
 

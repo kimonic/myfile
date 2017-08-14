@@ -46,6 +46,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:background="@null"
+            android:inputType="phone"
             android:gravity="center_vertical"
             android:hint="@string/act_register_username"
             android:textSize="12sp" />
@@ -149,7 +150,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/xshape_roundrect_myellow"
+            android:background="@drawable/xshape_roundrect_mgray"
             android:gravity="center"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"

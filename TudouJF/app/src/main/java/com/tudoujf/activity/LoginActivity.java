@@ -24,6 +24,7 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.DataBean;
+import com.tudoujf.bean.databean.CheckPhoneIsExistRegisterActBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
@@ -166,28 +167,24 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 登陆请求
+     */
     private void login() {
-
-
         HttpMethods.getInstance().POST(this, Constants.LOGIN, getArguments(), "123", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
-                BaseBean bean = ParseJson.parse(response.body(), new TypeToken<DataBean>() {}.getType());
-                Log.e(TAG, "onSuccess: ------ParseJson--------------???" + ParseJson.getBeanType(bean, DataBean.class));
-                int result = ParseJson.getBeanType(bean, DataBean.class);
-                if (result == ParseJson.BEAN_NULL) {
-                    ToastUtils.showToast(LoginActivity.this, "解析错误!");
-                } else if (result == ParseJson.BEAN_DATA) {
-                    DataBean bean1 = (DataBean) bean;
-                } else if (result == ParseJson.BEAN_COMMON) {
-                    ToastUtils.showToast(LoginActivity.this, ((CommonBean) bean).getDescription().toString());
-                } else if (result == ParseJson.BEAN_ERROR) {
-                    ToastUtils.showToast(LoginActivity.this, "参数错误!");
+                Log.e(TAG, "onSuccess:---------登陆成功后返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+
+                DataBean bean=null;
+                BaseBean bean1=  ParseJson.getJsonResult(response.body(),new TypeToken<DataBean>() {}.getType(),
+                        DataBean.class,LoginActivity.this );
+                if (bean1!=null){
+                    bean= (DataBean) bean1;
+                    openActivity(HomeActivity.class);
                 }
 //                     TODO: 2017/8/8 做对应返回错误码的处理
-
-
             }
 
             @Override
