@@ -1,20 +1,15 @@
 package com.tudoujf.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -22,19 +17,12 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.DataBean;
-import com.tudoujf.bean.databean.CheckPhoneIsExistRegisterActBean;
+import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
-import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
-import com.tudoujf.utils.ToastUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.TreeMap;
 
@@ -70,9 +58,12 @@ public class LoginActivity extends BaseActivity {
     ImageView ivClear1;
     @BindView(R.id.iv_act_login_openclose)
     ImageView ivOpenclose;
-
+    /**密码明文或密文表示计数*/
     private int count = 0;
+    /**加载中dialog*/
     private AlertDialog dialog;
+    /**登陆后的返回数据*/
+    private LoginBean bean;
 
 
     @Override
@@ -156,7 +147,7 @@ public class LoginActivity extends BaseActivity {
                 openActivity(FindPasswordActivity.class);
                 break;
             case R.id.tv_act_login_login://发送登陆请求,成功登陆后跳转主页
-                showProgreessDialog();
+                dialog= DialogUtils.showProgreessDialog(this,"再点击一次将结束登陆退出!");
                 login();
 
                 break;
@@ -177,11 +168,10 @@ public class LoginActivity extends BaseActivity {
                 dialog.dismiss();
                 Log.e(TAG, "onSuccess:---------登陆成功后返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
 
-                DataBean bean=null;
-                BaseBean bean1=  ParseJson.getJsonResult(response.body(),new TypeToken<DataBean>() {}.getType(),
-                        DataBean.class,LoginActivity.this );
+                BaseBean bean1=  ParseJson.getJsonResult(response.body(),new TypeToken<LoginBean>() {}.getType(),
+                        LoginBean.class,LoginActivity.this );
                 if (bean1!=null){
-                    bean= (DataBean) bean1;
+                    bean= (LoginBean) bean1;
                     openActivity(HomeActivity.class);
                 }
 //                     TODO: 2017/8/8 做对应返回错误码的处理
@@ -206,7 +196,7 @@ public class LoginActivity extends BaseActivity {
         map.put("member_name", etUsername.getText().toString().trim());
         map.put("password", etPassword.getText().toString().trim());//密码没加密????
         map.put("type", "2");//登录类型 1验证码登录 2密码登录
-        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
+        map.put("client_id", "");//预留字段
 
 
 //        map.put("member_name", "18022222222");
@@ -214,29 +204,6 @@ public class LoginActivity extends BaseActivity {
 //        map.put("type", "2");//登录类型 1验证码登录 2密码登录
 //        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
         return map;
-    }
-
-    /**
-     * 开始请求登陆时显示
-     */
-    private void showProgreessDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_login, null);
-        dialog = new AlertDialog.Builder(this).create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-        //一定得在show完dialog后来set属性
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setContentView(view);
-            WindowManager.LayoutParams lp = window.getAttributes();
-//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
-            int wh = 90 * ScreenSizeUtils.getDensity(this);
-            lp.width = wh;
-            lp.height = wh;
-            lp.gravity = Gravity.CENTER;
-            window.setAttributes(lp);
-        }
-
     }
 
 

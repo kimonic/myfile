@@ -1,13 +1,16 @@
 package com.tudoujf.ui;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.tudoujf.R;
 
@@ -25,17 +28,17 @@ import com.tudoujf.R;
 
 public class UnderlineTextView extends AppCompatTextView {
 
-    private int underlinecolor= R.color.color_white;
+    private int underlineColor;
     private Paint underlinePaint;
+    private AttributeSet attrs;
 
     public int getUnderlinecolor() {
-        return underlinecolor;
+        return underlineColor;
     }
 
     public void setUnderlinecolor(int underlinecolor) {
-        this.underlinecolor = underlinecolor;
+        this.underlineColor = underlinecolor;
     }
-
 
 
     public UnderlineTextView(Context context) {
@@ -48,14 +51,27 @@ public class UnderlineTextView extends AppCompatTextView {
 
     public UnderlineTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.attrs = attrs;
         initView();
     }
 
     private void initView() {
-        underlinePaint =new Paint();
+
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.UnderlineTextView);
+            underlineColor = a.getColor(R.styleable.UnderlineTextView_underlinecolor, 0);
+            a.recycle();
+        }
+
+
+
+
+        underlinePaint = new Paint();
         underlinePaint.setStrokeWidth(6);
         underlinePaint.setAntiAlias(true);
         underlinePaint.setStyle(Paint.Style.FILL);
+
+
 
     }
 
@@ -63,11 +79,14 @@ public class UnderlineTextView extends AppCompatTextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
-
-        underlinePaint.setColor(getResources().getColor(underlinecolor));
-        int width=getWidth();
-        int height=getHeight();
-        canvas.drawLine(0,height-3,width,height-3,underlinePaint);
+        if (underlineColor!=0){
+            underlinePaint.setColor(underlineColor);
+        }else {
+            underlinePaint.setColor(getResources().getColor(R.color.color_white));
+        }
+        int width = getWidth();
+        int height = getHeight();
+        canvas.drawLine(0, height - 3, width, height - 3, underlinePaint);
         canvas.restore();
     }
 }

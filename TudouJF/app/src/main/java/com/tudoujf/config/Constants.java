@@ -1,7 +1,5 @@
 package com.tudoujf.config;
 
-import com.example.encryptionpackages.CreateCode;
-
 /**
  * * ====================================================================
  * name:            Constants
@@ -15,7 +13,12 @@ import com.example.encryptionpackages.CreateCode;
  */
 
 public class Constants {
+    /**固定URL*/
     public static  final String  URL="http://m.test.tudoujf.com";
+    /**活动专区接口*/
+    public static  final String  HUO_DONG_ZHUAN_QU=URL+"/phone/activity/list";
+    /**签到接口*/
+    public static  final String  SIGN_IN=URL+"/phone/sign/index";
     /**
      * 网站服务协议
      */

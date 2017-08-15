@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/global_background_color"
+    >
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_affirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_myearnings_title"
+        app:leftImage="@drawable/xvector_back" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        >
+
+        <com.tudoujf.ui.UnderlineTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myearnings_daishoulixi"
+            android:textColor="@color/global_theme_background_color"
+            app:underlinecolor="@color/global_theme_background_color"
+            android:textSize="16sp" />
+        <com.tudoujf.ui.UnderlineTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myearnings_yishoulixi"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+        <com.tudoujf.ui.UnderlineTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myearnings_huodongshouyi"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -76,6 +76,8 @@
         <activity android:name=".activity.home.IntegralShopActivity"/>
         <!--汇付支付activity-->
         <activity android:name=".activity.HuiFuRegisterActivity"/>
+        <!--我的收益activity-->
+        <activity android:name=".activity.MyEarningsActivity"/>
 
 
         <!-- 预览各个activity的界面 -->

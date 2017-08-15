@@ -38,10 +38,7 @@ public class MLockView extends View {
      * 屏幕宽度
      */
     private int screenWidth;
-    /**
-     * 圆之间的距离dp
-     */
-    private final static int distanceDP = 50;
+
 
     /**
      * 圆之间的距离px
@@ -50,7 +47,7 @@ public class MLockView extends View {
     /**
      * 上下左右外边距px
      */
-    private final static int PADDING = 100;
+    private   int mPadding = 100;
     /**
      * 圆的半径
      */
@@ -150,7 +147,6 @@ public class MLockView extends View {
 
     private void initView() {
         screenWidth = ScreenSizeUtils.getScreenWidth(getContext());
-        distancePX = distanceDP * ScreenSizeUtils.getDensity(getContext());
         hollowPaint = initPaint("#FE7B20", 1, 5);
         shadePaint = initPaint("#A6D3D8", 2, 0);
         innerPaint = initPaint("#3EACC5", 2, 0);
@@ -190,9 +186,11 @@ public class MLockView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        int width=getWidth();
+        distancePX= (int) (width*0.1333f);
+        mPadding= (int) (width*0.12f);
 
-
-        radius = (getWidth() - PADDING * 2 - distancePX * 2) / 6;
+        radius = (getWidth() - mPadding * 2 - distancePX * 2) / 6;
         //中间圆的圆心坐标
         int circleX1 = getWidth() / 2 - 2 * radius - distancePX;
         int circleX2 = getWidth() / 2;
@@ -202,9 +200,9 @@ public class MLockView extends View {
         circleX[2] = circleX3;
 
 
-        int circleY1 = PADDING + radius;
-        int circleY2 = PADDING + radius * 3 + distancePX;
-        int circleY3 = PADDING + radius * 5 + distancePX * 2;
+        int circleY1 = mPadding + radius;
+        int circleY2 = mPadding + radius * 3 + distancePX;
+        int circleY3 = mPadding + radius * 5 + distancePX * 2;
         circleY[0] = circleY1;
         circleY[1] = circleY2;
         circleY[2] = circleY3;

@@ -1,19 +1,12 @@
 package com.tudoujf.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,7 +26,7 @@ import com.tudoujf.bean.databean.PhoneCodeBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -237,7 +230,7 @@ public class RegisterActivity extends BaseActivity {
                         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.CHECK, map, "registeractivity", new StringCallback() {
                             @Override
                             public void onSuccess(Response<String> response) {
-                                Log.e(TAG, "onSuccess:---------校验手机号是否存在返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                                Log.e(TAG, "onSuccess:---------校验手机号是否存在返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
                                 BaseBean bean = ParseJson.getJsonResult(response.body(), new TypeToken<CheckPhoneIsExistRegisterActBean>() {
                                         }.getType(),
                                         CheckPhoneIsExistRegisterActBean.class, RegisterActivity.this);
@@ -342,7 +335,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private void commitInfo() {
         if (checkSubmit()) {
-            showProgreessDialog();
+            dialog= DialogUtils.showProgreessDialog(this,"再点击一次将结束注册退出!");
             TreeMap<String, String> map = new TreeMap<>();
             map.put("phone", userName);
             map.put("password", password);
@@ -351,13 +344,16 @@ public class RegisterActivity extends BaseActivity {
             HttpMethods.getInstance().POST(this, Constants.REGISTER, map, "registeractivity", new StringCallback() {
                 @Override
                 public void onSuccess(Response<String> response) {
-                    Log.e(TAG, "onSuccess:---------注册账号返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                    Log.e(TAG, "onSuccess:---------注册账号返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
                     // TODO: 2017/8/14  调用登陆接口进行登陆,注册成功保存login_token,跳转设置手势密码页面
-                    ToastUtils.showToast(RegisterActivity.this, "注册成功!!");
                     try {
                         JSONObject json = new JSONObject(StringUtils.getDecodeString(response.body()));
                         if (json.getString("code").equals("200")) {
-                    login();//登陆
+                            login();//登陆
+                        }else {
+                            dialog.dismiss();
+                            ToastUtils.showToast(RegisterActivity.this, json.getString("description"));
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -381,9 +377,10 @@ public class RegisterActivity extends BaseActivity {
         HttpMethods.getInstance().POST(this, Constants.LOGIN, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
-
-
+                Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                // TODO: 2017/8/15 保存完数据之后,跳转手势密码页面
+                openActivity(DrawGestureActivity.class);
+                closeActivity();
             }
         });
     }
@@ -402,13 +399,14 @@ public class RegisterActivity extends BaseActivity {
         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.REG_SMS, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                Log.e(TAG, "onSuccess:---------获取验证码返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                Log.e(TAG, "onSuccess:---------获取验证码返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
                 Gson gson = new Gson();
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());
-                if (phoneCodeBean.getCode().equals("200")) {
-                    ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
-                }
+                    if (phoneCodeBean.getCode().equals("200")) {
+                        ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
+                    }
+
 
             }
         });
@@ -451,46 +449,6 @@ public class RegisterActivity extends BaseActivity {
         return true;
     }
 
-
-    /**
-     * 开始请求登陆时显示
-     */
-    private void showProgreessDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_login, null);
-        dialog = new AlertDialog.Builder(this).create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
-                    if (System.currentTimeMillis() - beforeTime < 2000) {
-                        closeActivity();
-                    } else {
-                        ToastUtils.showToast(RegisterActivity.this, "再点击一次将结束注册退出!");
-                        beforeTime = System.currentTimeMillis();
-                    }
-                    return true;
-                } else {
-                    return false; //默认返回 false
-                }
-            }
-        });
-        dialog.show();
-        //一定得在show完dialog后来set属性
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setContentView(view);
-            WindowManager.LayoutParams lp = window.getAttributes();
-//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
-            int wh = 90 * ScreenSizeUtils.getDensity(this);
-            lp.width = wh;
-            lp.height = wh;
-            lp.gravity = Gravity.CENTER;
-            window.setAttributes(lp);
-        }
-
-    }
 
 
 }

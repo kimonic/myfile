@@ -51,7 +51,7 @@ public class DrawGestureActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_act_drawgesture_pass://跳过设置手势密码
-
+                openActivity(HomeActivity.class);
                 break;
         }
     }

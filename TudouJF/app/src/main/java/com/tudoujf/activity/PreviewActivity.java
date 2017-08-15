@@ -196,6 +196,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(HuiFuRegisterActivity.class);
                 break;
             case R.id.bt_act_preview18:
+                openActivity(MyEarningsActivity.class);
                 break;
 //            case R.id.bt_act_preview19:break;
 

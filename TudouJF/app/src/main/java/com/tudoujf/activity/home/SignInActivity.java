@@ -1,16 +1,22 @@
 package com.tudoujf.activity.home;
 
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -26,6 +32,7 @@ import butterknife.ButterKnife;
 
 public class SignInActivity extends BaseActivity {
 
+    private static final String TAG ="SignInActivity" ;
     @BindView(R.id.mtb_act_signin)
     MTopBarView mtbActSignIn;
     @BindView(R.id.ll_act_signin_shop)
@@ -85,7 +92,23 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- " );
 
+        TreeMap<String,String> map=new TreeMap<>();
+        map.put("login_token","12232");
+        HttpMethods.getInstance().POST(this, Constants.SIGN_IN, map, "SignInActivity", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                String result= StringUtils.getDecodeString(response.body());
+                Log.e(TAG, "onSuccess:------------签到请求json数据----------------- "+result );
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- "+response.code() );
+                super.onError(response);
+            }
+        });
     }
 
     @Override

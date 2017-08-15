@@ -1,18 +1,25 @@
 package com.tudoujf.activity.home;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.SpecialOfferActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.SpecialOfferActBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -29,6 +36,7 @@ import butterknife.BindView;
  */
 
 public class SpecialOfferActivity extends BaseActivity {
+    private static final String TAG ="SpecialOfferActivity" ;
     @BindView(R.id.mtb_act_specialoffer)
     MTopBarView mtbSpecialOffer;
     @BindView(R.id.lv_act_specialoffer)
@@ -97,6 +105,25 @@ public class SpecialOfferActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- " );
+
+        TreeMap<String,String>  map=new TreeMap<>();
+        map.put("login_token","");
+        map.put("page_count","30");
+        map.put("page","5");
+        HttpMethods.getInstance().POST(this, Constants.HUO_DONG_ZHUAN_QU, map, "specialofferactivity", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                String result= StringUtils.getDecodeString(response.body());
+                Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- "+result );
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- "+response.code() );
+                super.onError(response);
+            }
+        });
 
     }
 

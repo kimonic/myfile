@@ -78,6 +78,7 @@ public class AwardInfoView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         int width=getWidth();
         int height=getHeight();
 

@@ -18,7 +18,7 @@
     <string name="act_register_login">已有账号,去登录</string>
     <string name="act_register_agree">注册即视为同意</string>
     <string name="act_register_tudouxieyi">《土豆金服服务协议》</string>
-    <string name="act_affirm_title">确认密码</string>
+    <string name="act_affirm_title">确认新密码</string>
     <string name="act_affirm_password2">确认新密码</string>
     <string name="act_affirm_complete">完成</string>
     <string name="act_find_title">找回密码</string>
@@ -243,6 +243,11 @@
     <string name="act_integralshop_jifenpaihangbang">积分排行榜</string>
     <string name="act_huifuregister_title">汇付注册</string>
     <string name="qingtianxiezhengquedeshoujihao">请填写正确的手机号码!!!</string>
+    <string name="act_myearnings_title">我的收益</string>
+    <string name="act_myearnings_daishoulixi">待收利息</string>
+    <string name="act_myearnings_yishoulixi">已收利息</string>
+    <string name="act_myearnings_huodongshouyi">活动收益</string>
+    <string name="frag_home_xinshoutiyanbiao">新手体验标</string>
 
 
 </resources>

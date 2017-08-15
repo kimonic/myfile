@@ -1,18 +1,33 @@
 package com.tudoujf.activity;
 
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.bean.databean.AffirmPasswordBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -49,6 +64,9 @@ public class AffirmPasswordActivity extends BaseActivity {
     private int count1 = 0, count2 = 0;
 
     private String password1, password2;
+    private String userName;
+    private String TAG = "AffirmPasswordActivity";
+    private AlertDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -74,22 +92,67 @@ public class AffirmPasswordActivity extends BaseActivity {
                 break;
             case R.id.tv_act_affirm_complete://两次密码输入一致则提交请求
                 if (obtainETContent()) {
-                    if (password1.equals(password2)) {
-                        // TODO: 2017/7/11   提交请求逻辑
-                    } else {
-                        // TODO: 2017/7/11  重新输入
-                    }
+                    commitInfo();
                 }
                 break;
         }
     }
 
+    private void commitInfo() {
+        dialog = DialogUtils.showProgreessDialog(this, "正在提交信息,请稍候!");
+        if (!userName.equals("")) {
+            TreeMap<String, String> map = new TreeMap<>();
+            map.put("type", "");
+            map.put("username", userName);
+            map.put("new_password", password1);
+            map.put("confirm_password", password2);
+            HttpMethods.getInstance().POST(this, Constants.EIDT_RECOBER_PWD, map, "affirmpasswordactivity", new StringCallback() {
+                @Override
+                public void onSuccess(Response<String> response) {
+                    dialog.dismiss();
+                    String result = StringUtils.getDecodeString(response.body());
+                    Log.e(TAG, "onSuccess: --------确认密码返回json字符串--------" + result);
+                    Gson gson = new Gson();
+                    AffirmPasswordBean bean = gson.fromJson(result, AffirmPasswordBean.class);
+                    if (bean != null) {
+                        if (bean.getCode().equals("200")) {
+                            ToastUtils.showToast(AffirmPasswordActivity.this, "密码修改成功,请重新登陆!");
+                            openActivity(LoginActivity.class);
+                            closeActivity();
+                        } else {
+                            ToastUtils.showToast(AffirmPasswordActivity.this, bean.getDescription());
+
+                        }
+                    }
+                }
+            });
+        } else {
+            ToastUtils.showToast(this, "出错啦,再来一遍吧!");
+        }
+
+    }
+
+    /**
+     * 获取两次输入的密码
+     */
     private boolean obtainETContent() {
         password1 = etPassword1.getText().toString();
         password2 = etPassword2.getText().toString();
-        if (password1.equals("") || null == password1) {
+        if (password1.equals("") || null == password1 || !checkPassword(password1)) {
             return false;
-        } else if (password2.equals("") || null == password2) {
+        } else if (!password1.equals(password2)) {
+            ToastUtils.showToast(this, "两次密码输入不一致,请重新输入!");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 检验密码规则
+     */
+    private boolean checkPassword(String password) {
+        if (password.length() < 6 || password.length() > 16 || !StringUtils.conformPasswordRule(password)) {
+            ToastUtils.showToast(this, "密码必须是6-16位数字和字母的组合!!");
             return false;
         }
         return true;
@@ -110,6 +173,10 @@ public class AffirmPasswordActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userName = bundle.getString("username", "");
+        }
 
     }
 

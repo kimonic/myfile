@@ -13,9 +13,16 @@ import com.tudoujf.http.HttpMethods;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
 /**
- * Created by Administrator on 2017/7/10.
+ * * ================================================
+ * name:            BaseActivity
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/7/10
+ * description：     fragment基类
+ * history：
+ * ===================================================
  *
  */
 
