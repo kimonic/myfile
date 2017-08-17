@@ -1,6 +1,7 @@
 package com.tudoujf.bean.databean;
 
 import com.tudoujf.base.BaseBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class MyMessageBean implements BaseBean {
     private String page;
     private String epage;
     private String total_items;
-    private String total_pages;
+    private String total_pages="0";
     /**此参数可能会出问题*/
     private String params;
     private List<ItemsBean> items;
@@ -109,6 +110,9 @@ public class MyMessageBean implements BaseBean {
 
         public String getTitle() {
             return title;
+        }
+        public String getTime() {
+            return StringUtils.getStrTime(send_time);
         }
 
         public void setTitle(String title) {

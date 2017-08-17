@@ -90,13 +90,13 @@ public class MyMessageActivity extends BaseActivity {
         list=new ArrayList<>();
         SystemMessageFragment   fragment1=new SystemMessageFragment();
         Bundle bundle=new Bundle();
-        bundle.putInt("type",1);
+        bundle.putInt("type",2);
         fragment1.setArguments(bundle);
 
 
         SystemMessageFragment   fragment2=new SystemMessageFragment();
         Bundle bundle1=new Bundle();
-        bundle1.putInt("type",2);
+        bundle1.putInt("type",1);
         fragment2.setArguments(bundle1);
 
         list.add(fragment1);

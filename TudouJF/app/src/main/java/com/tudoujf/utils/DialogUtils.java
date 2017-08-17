@@ -121,9 +121,13 @@ public class DialogUtils {
     }
 
 
-
     /**
+     * /**
      * 展示土豆进度dialog
+
+     * @param context   上下文
+     * @param msg    点击back键的提示信息
+     * @return   alertdialog
      */
     public static AlertDialog showProgreessDialog(final Context context, final String msg) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_login, null);

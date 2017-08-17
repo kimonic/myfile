@@ -1,6 +1,7 @@
 package com.tudoujf.activity.home;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.text.Html.FROM_HTML_MODE_COMPACT;
 
 /**
  * * ====================================================================
@@ -32,10 +35,12 @@ public class MessageDetailsActivity extends BaseActivity {
     TextView tvTitle;
     @BindView(R.id.tv_act_messagedetails_time)
     TextView tvTime;
-    @BindView(R.id.tv_act_messagedetails_name)
-    TextView tvName;
+
     @BindView(R.id.tv_act_messagedetails_content)
     TextView tvContent;
+    private String  title="-------";
+    private String  time="****-**-**";
+    private String content="------";
 
     @Override
     public int getLayoutResId() {
@@ -50,6 +55,13 @@ public class MessageDetailsActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
+        Bundle bundle=getIntent().getExtras();
+        if (bundle!=null){
+            title=bundle.getString("title");
+            time=bundle.getString("time");
+            content=bundle.getString("content");
+        }
+
     }
 
     @Override
@@ -58,6 +70,10 @@ public class MessageDetailsActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbMessageDetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbMessageDetails.setLayoutParams(params);
+
+        tvTitle.setText(title);
+        tvTime.setText(time);
+        tvContent.setText(Html.fromHtml(content));
     }
 
     @Override

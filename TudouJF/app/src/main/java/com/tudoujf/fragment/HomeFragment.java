@@ -206,21 +206,22 @@ public class HomeFragment extends BaseFragment {
         if (bundle != null) {
 //            tvFragHome.setText(bundle.getString("temp"));
         }
-
-        TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "");
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homeactivity", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-
-            }
-        });
+//
+//        TreeMap<String, String> map = new TreeMap<>();
+//        map.put("login_token", "12267");
+//        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homeactivity", new StringCallback() {
+//            @Override
+//            public void onSuccess(Response<String> response) {
+//
+//            }
+//        });
 
     }
 
     @Override
     public void initView() {
         initAutoCarousel();
+        initDataFromInternet();
 
 //         开启悬浮窗
 //        Intent intent = new Intent(getActivity(), SignInService.class);
@@ -396,7 +397,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "");
+        map.put("login_token", "12267");
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homefragment", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -409,6 +410,12 @@ public class HomeFragment extends BaseFragment {
                     bean = (HomeBean) bean1;
                     LoadInternetDataToUi();
                 }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------"+ response.message() );
+                super.onError(response);
             }
         });
 

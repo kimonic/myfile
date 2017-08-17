@@ -1,10 +1,9 @@
 package com.tudoujf.fragment;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,26 +11,31 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.MessageDetailsActivity;
 import com.tudoujf.adapter.SystemMessageFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.bean.SystemMessageFragBean;
 import com.tudoujf.bean.databean.MyMessageBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -51,34 +55,50 @@ public class SystemMessageFragment extends BaseFragment {
     TextView tvPrevious;
     @BindView(R.id.tv_frag_systemmessage_next)
     TextView tvNext;
+    @BindView(R.id.srl_frag_systemmessage)
+    SmartRefreshLayout srlFragSystemMessage;
 
     private List<MyMessageBean.ItemsBean> list;
 
     private int type = 0;
     private int page = 1;
     private MyMessageBean bean;
+    private AlertDialog dialog;
+    /**
+     * 上拉加载与下拉刷新标识
+     */
+    private int refreshFlag = 0;
+    private static final int  REFRESH=1;
+    private static final int  LOADMORE=2;
 
     @Override
     public int layoutRes() {
         return R.layout.frag_systemmessage;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.tv_frag_systemmessage_previous:
                 if (page > 1) {
                     page--;
                     initDataFromInternet();
+                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+                } else {
+                    tvPrevious.setTextColor(getResources().getColor(R.color.color_gray));
                 }
                 break;
             case R.id.tv_frag_systemmessage_next:
-                if (bean!=null&&page<StringUtils.string2Integer(bean.getEpage())){
+                if (bean != null && page < StringUtils.string2Integer(bean.getTotal_pages())) {
                     page++;
+                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
                     initDataFromInternet();
+                } else {
+                    tvNext.setTextColor(getResources().getColor(R.color.color_gray));
                 }
-
                 break;
         }
 
@@ -91,23 +111,22 @@ public class SystemMessageFragment extends BaseFragment {
         if (bundle != null) {
             type = bundle.getInt("type", 0);
         }
-        if (type != 0) {
-            initDataFromInternet();
-        }
-
-//        list = new ArrayList<>();
-//        for (int i = 0; i < 13; i++) {
-//            SystemMessageFragBean bean = new SystemMessageFragBean();
-//            bean.setTitle("XXXXXXXXXXXXXXXXXXXXXX");
-//            bean.setTime("201X-XX-XX");
-//            list.add(bean);
-//        }
-
     }
 
     @Override
     public void initView() {
 
+        //设置全区背景色
+        srlFragSystemMessage.setPrimaryColorsId(R.color.global_theme_background_color);
+        //设置 Header 为 Material风格
+        srlFragSystemMessage.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        //设置 Footer 为 球脉冲
+        srlFragSystemMessage.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+        dialog = DialogUtils.showProgreessDialog(getActivity(), "再点击一次将退出该页面!");
+
+        if (type != 0) {
+            initDataFromInternet();
+        }
 
     }
 
@@ -117,18 +136,42 @@ public class SystemMessageFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: 2017/8/17 传入打开详情时需要传入的参数
-                openActivity(MessageDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("title", list.get(position).getTitle());
+                bundle.putString("content", list.get(position).getContents());
+                bundle.putString("time", list.get(position).getTime());
+
+                openActivity(MessageDetailsActivity.class, bundle);
             }
         });
         tvPrevious.setOnClickListener(this);
         tvNext.setOnClickListener(this);
 
+
+//        /**上拉加载与下拉刷新监听*/
+        srlFragSystemMessage.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page = 1;
+                initDataFromInternet();
+                refreshFlag = 1;
+            }
+        });
+        srlFragSystemMessage.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean!=null&&page < StringUtils.string2Integer(bean.getTotal_pages())) {
+                    page++;
+                    initDataFromInternet();
+                    refreshFlag = 2;
+                }
+            }
+        });
+
     }
 
     @Override
     public void initDataFromInternet() {
-
-
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", "12267");
         map.put("type", "" + type);
@@ -136,6 +179,11 @@ public class SystemMessageFragment extends BaseFragment {
         HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_LIST, map, "info", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+                if (refreshFlag != 0) {
+                    stopRefresh(refreshFlag);
+                    refreshFlag = 0;
+                }
+                dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
                 FileUtils.saveJsonToSDCard(getActivity(), "infomessage", result);
@@ -145,29 +193,42 @@ public class SystemMessageFragment extends BaseFragment {
                 if (baseBean != null) {
                     bean = (MyMessageBean) baseBean;
                     LoadInternetDataToUi();
+                } else {
+                    ToastUtils.showToast(getActivity(), "没有要展示的数据");
                 }
             }
 
             @Override
             public void onError(Response<String> response) {
+                dialog.dismiss();
+                ToastUtils.showToast(getActivity(), R.string.wuwangluotishi);
                 Log.e("TAG", "onSuccess: ----------消息接口请求返回错误信息" + type + "-----------------" + response.message());
                 super.onError(response);
             }
         });
-
-
     }
 
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-
-            list=bean.getItems();
-            SystemMessageFragLvAdapter adapter = new SystemMessageFragLvAdapter(list, getActivity());
-            lvFragSystemMessage.setAdapter(adapter);
+            list = bean.getItems();
+            if (list.size() == 0) {
+                ToastUtils.showToast(getActivity(), "当前页没有要展示的数据");
+            }else {
+                SystemMessageFragLvAdapter adapter = new SystemMessageFragLvAdapter(list, getActivity());
+                lvFragSystemMessage.setAdapter(adapter);
+            }
         }
-
     }
-
-
+    /**终止刷新加载*/
+    private void stopRefresh(int flag) {
+        switch (flag) {
+            case REFRESH:
+                srlFragSystemMessage.finishRefresh();
+                break;
+            case LOADMORE:
+                srlFragSystemMessage.finishLoadmore();
+                break;
+        }
+    }
 }
