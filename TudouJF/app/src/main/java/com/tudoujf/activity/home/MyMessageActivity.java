@@ -1,5 +1,6 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.home;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -88,7 +89,16 @@ public class MyMessageActivity extends BaseActivity {
     private void initFragmentList() {
         list=new ArrayList<>();
         SystemMessageFragment   fragment1=new SystemMessageFragment();
+        Bundle bundle=new Bundle();
+        bundle.putInt("type",1);
+        fragment1.setArguments(bundle);
+
+
         SystemMessageFragment   fragment2=new SystemMessageFragment();
+        Bundle bundle1=new Bundle();
+        bundle1.putInt("type",2);
+        fragment2.setArguments(bundle1);
+
         list.add(fragment1);
         list.add(fragment2);
     }

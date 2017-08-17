@@ -67,6 +67,7 @@ public class FileUtils {
 
 
         File file = new File(getFilepath(context) + fileName);
+        Log.e("TAG", "saveJsonToSDCard: "+(getFilepath(context) + fileName ));
 
         FileOutputStream os = null;
         try {

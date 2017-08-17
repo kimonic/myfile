@@ -5,7 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tudoujf.bean.GlobalBean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -104,5 +107,41 @@ public class StringUtils {
         String regex = "^[a-zA-Z0-9]+$";
         return isDigit && isLetter && str.matches(regex);
     }
+
+
+
+
+     /**
+     *将字符串转化为int型数字
+     * @param intString  数字型字符串
+     * @return     字符串数字或0
+     */
+    public static int  string2Integer(String intString){
+        try {
+            return Integer.parseInt(intString);
+        }catch (NumberFormatException e){
+            return 0;
+        }
+
+    }
+
+    /**将时间戳转为字符串
+     *
+     * @param cc_time   时间戳字符串,到秒
+     * @return     yyyy-MM-dd
+     */
+    public static String getStrTime(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            long lcc_time = Long.valueOf(cc_time);
+            re_StrTime = sdf.format(new Date(lcc_time*1000L));
+
+        }catch (NumberFormatException e){
+            return "****-**-**";
+        }
+        return re_StrTime;
+    }
+
 
 }

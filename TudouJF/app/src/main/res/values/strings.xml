@@ -248,6 +248,16 @@
     <string name="act_myearnings_yishoulixi">已收利息</string>
     <string name="act_myearnings_huodongshouyi">活动收益</string>
     <string name="frag_home_xinshoutiyanbiao">新手体验标</string>
+    <string name="act_adress_title">公司地址</string>
+    <string name="licaiyoufengxian">理财有风险,投资需谨慎</string>
+    <string name="act_integralrecode_title">积分记录</string>
+    <string name="act_integralrecode_zongjifen" >总积分</string>
+    <string name="act_integralrecode_default">--,---</string>
+    <string name="act_integralrecode_timeorder">按时间筛选</string>
+    <string name="act_integralrecode_name">名称</string>
+    <string name="act_integralrecode_integral">积分</string>
+    <string name="act_integralrecode_time">时间</string>
+    <string name="act_messagedetails_title">我的消息</string>
 
 
 </resources>

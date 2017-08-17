@@ -1,5 +1,7 @@
 package com.tudoujf.base;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -12,6 +14,9 @@ import android.view.WindowManager;
 
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.lzy.okgo.OkGo;
+import com.tudoujf.utils.ToastUtils;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -25,11 +30,12 @@ import butterknife.ButterKnife;
  * description：     activity基类
  * history：
  * ===================================================
- *
  */
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseMethod,View.OnClickListener{
+public abstract class BaseActivity extends AppCompatActivity implements BaseMethod, View.OnClickListener {
 
+    /**app进入前台后为false,返回后为true*/
+    private boolean isActive=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +51,32 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         initDataFromInternet();
 
     }
-    /**设置加载的布局*/
+
+    /**
+     * 设置加载的布局
+     */
     public abstract int getLayoutResId();
 
 
-    /** 设置状态栏颜色改变状态栏颜色 */
+    /**
+     * 设置状态栏颜色改变状态栏颜色
+     */
     protected int setStatusBarColor() {
         return 0;
     }
 
-    /** 子类可以重写决定是否使用透明状态栏 */
+    /**
+     * 子类可以重写决定是否使用透明状态栏
+     */
     protected boolean translucentStatusBar() {
         return false;
     }
 
-    /** 设置状态栏颜色 */
+    /**
+     * 设置状态栏颜色
+     */
     protected void initSystemBarTint() {
-        if (setStatusBarColor()!=0){
+        if (setStatusBarColor() != 0) {
             Window window = getWindow();
             if (translucentStatusBar()) {
                 // 设置状态栏全透明
@@ -90,11 +105,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
 
     }
 
-    /**启动下一个activity*/
+    /**
+     * 启动下一个activity
+     */
     protected void openActivity(Class<? extends BaseActivity> toActivity) {
         openActivity(toActivity, null);
     }
-    /**启动下一个activity*/
+
+    /**
+     * 启动下一个activity
+     */
     protected void openActivity(Class<? extends BaseActivity> toActivity, Bundle parameter) {
         Intent intent = new Intent(this, toActivity);
         if (parameter != null) {
@@ -103,7 +123,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         startActivity(intent);
     }
 
-    /**关闭activity*/
+    /**
+     * 关闭activity
+     */
     protected void closeActivity() {
         this.finish();
     }
@@ -114,4 +136,59 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         super.onDestroy();
 
     }
+
+
+    /**
+     * 程序是否在前台运行
+     *
+     * @return  返回程序是否在前台运行
+     */
+    public boolean isAppOnForeground() {
+        // Returns a list of application processes that are running on the
+        // device
+
+        ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = getApplicationContext().getPackageName();
+
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null){
+            return false;
+        }
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            // The name of the process that this object is associated with.
+            if (appProcess.processName.equals(packageName)
+                    && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+        @Override
+        protected void onStop() {
+            // TODO Auto-generated method stub
+            super.onStop();
+
+            if (!isAppOnForeground()) {
+                //app 进入后台
+                ToastUtils.showToast(this,"app已经进入后台!!");
+//                全局变量 记录当前已经进入后台
+                        isActive = false;
+            }
+        }
+
+        @Override
+        protected void onResume() {
+            // TODO Auto-generated method stub
+            super.onResume();
+
+
+            if (!isActive) {
+//            app 从后台唤醒，进入前台
+                ToastUtils.showToast(this,"app已经回到前台!!");
+            isActive = true;
+            }
+        }
 }

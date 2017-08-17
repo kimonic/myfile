@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_messagedetails"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_messagedetails_title"
+        app:leftImage="@drawable/xvector_back" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/global_background_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="@color/color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_act_messagedetails_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="提现成功"
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_act_messagedetails_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:text="2017-7-4"
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_act_messagedetails_name"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_black"
+        android:textSize="12sp"
+        android:text="亲爱的XXXXX,您好"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_act_messagedetails_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/color_white"
+        android:textColor="@color/color_gray"
+        android:textSize="12sp"
+        android:text="    您申请的体现$[500,001.00]元已成功到账,到账金额$[500,000.00]元,是续费$[1.00]元,请注意查收."
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:lineSpacingExtra="5dp"
+        />
+
+
+</LinearLayout>

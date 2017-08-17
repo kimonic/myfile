@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.bean.SpecialOfferActBean;
 import com.tudoujf.bean.SystemMessageFragBean;
+import com.tudoujf.bean.databean.MyMessageBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -27,10 +29,10 @@ import java.util.List;
  */
 
 public class SystemMessageFragLvAdapter extends BaseAdapter {
-    private List<SystemMessageFragBean> list;
+    private List<MyMessageBean.ItemsBean> list;
     private Context context;
 
-    public SystemMessageFragLvAdapter(List<SystemMessageFragBean> list, Context context) {
+    public SystemMessageFragLvAdapter(List<MyMessageBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -69,7 +71,7 @@ public class SystemMessageFragLvAdapter extends BaseAdapter {
         }
 
         viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getTime());
+        viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getSend_time()));
 //        viewHolder.imageView.setImageResource(list.get(position).getResId());
 
 

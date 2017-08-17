@@ -15,22 +15,18 @@ package com.tudoujf.config;
 public class Constants {
     /**固定URL*/
     public static  final String  URL="http://m.test.tudoujf.com";
+
     /**活动专区接口*/
     public static  final String  HUO_DONG_ZHUAN_QU=URL+"/phone/activity/list";
     /**签到接口*/
     public static  final String  SIGN_IN=URL+"/phone/sign/index";
-    /**
-     * 网站服务协议
-     */
-    public static  final  String AGREEMENT_WEBSITE = URL + "/wap/index/appAgreement";
-    /**
-     * 债权转让协议
-     */
-    public static  final  String AGREEMENT_CREDITOR_TRANSFER = URL + "/wap/transfer/appTransferAgreement#?id=";//后面加id
-    /**
-     * 借款协议
-     */
-    public static  final  String AGREEMENT_BORROW = URL + "/wap/loan/appLoanAgreement#?id=";//后面加id
+    /**消息列表接口*/
+    public static  final String  MESSAGE_LIST=URL+"/phone/message/list";
+    /**积分记录表接口*/
+    public static  final String  INTEGRAL_LIST=URL+"/phone/sign/list";
+
+
+
     /**
      * 用户登录验证
      */
@@ -46,6 +42,26 @@ public class Constants {
      * 检测手机号码、邮箱、用户名是否存在
      */
     public static  final  String CHECK = URL + "/phone/member/checkExit";
+
+    /**
+     * 发送注册短信验证码
+     */
+    public static  final  String REG_SMS = URL + "/phone/public/sendSms";
+
+
+    /**
+     * 网站服务协议
+     */
+    public static  final  String AGREEMENT_WEBSITE = URL + "/wap/index/appAgreement";
+    /**
+     * 债权转让协议
+     */
+    public static  final  String AGREEMENT_CREDITOR_TRANSFER = URL + "/wap/transfer/appTransferAgreement#?id=";//后面加id
+    /**
+     * 借款协议
+     */
+    public static  final  String AGREEMENT_BORROW = URL + "/wap/loan/appLoanAgreement#?id=";//后面加id
+
 
     /**
      * 用户注销
@@ -142,10 +158,7 @@ public class Constants {
      * 获取版本信息
      */
     public static  final  String VERSION = URL + "/phone/extra/version";
-    /**
-     * 发送注册短信验证码
-     */
-    public static  final  String REG_SMS = URL + "/phone/public/sendSms";
+
     /**
      * 提交手机认证
      */

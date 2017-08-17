@@ -108,7 +108,13 @@
         <!--活动专区activity-->
         <activity android:name=".activity.home.SpecialOfferActivity" />
         <!--我的信息activity-->
-        <activity android:name=".activity.MyMessageActivity" />
+        <activity android:name=".activity.home.MyMessageActivity" />
+        <!--公司地址显示activity-->
+        <activity android:name=".activity.home.AdressActivity" />
+        <!--积分记录activity-->
+        <activity android:name=".activity.home.IntegralRecodeActivity" />
+        <!--我的消息&#45;&#45;消息详情activity-->
+        <activity android:name=".activity.home.MessageDetailsActivity"/>
 
         <service
             android:name=".service.MyService"

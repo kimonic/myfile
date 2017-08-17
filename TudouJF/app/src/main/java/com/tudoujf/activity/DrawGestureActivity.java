@@ -1,6 +1,7 @@
 package com.tudoujf.activity;
 
 import android.annotation.SuppressLint;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,8 +39,9 @@ public class DrawGestureActivity extends BaseActivity {
     MLockView mlvActDrawgesture;
     @BindView(R.id.tv_act_drawgesture_pass)
     TextView tvPass;
-
-    private int inputCount = 4;
+    /**需要绘制的次数*/
+    private int inputCount = 2;
+    /**手势密码加密后的字符串*/
     private String password;
 
     @Override
@@ -52,6 +54,7 @@ public class DrawGestureActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_act_drawgesture_pass://跳过设置手势密码
                 openActivity(HomeActivity.class);
+                closeActivity();
                 break;
         }
     }
@@ -80,19 +83,27 @@ public class DrawGestureActivity extends BaseActivity {
                 if (positionSet.size() < 5 && password == null) {
                     ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_hint);
                 } else {
-                    if (inputCount == 4) {
+                    if (inputCount == 2) {
                         password = EncryptionLockUtils.convertList(positionSet);
                     } else if (!password.equals( EncryptionLockUtils.convertList(positionSet))) {
                         password=null;
-                        inputCount = 5;
+                        inputCount = inputCount+1;
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_error);
                     }
                     inputCount--;
                     if (inputCount == 0) {
+                        tvPass.setClickable(false);
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_sucess);
-                        savePassword(positionSet);
+                        savePassword(positionSet);//保存手势密码
                         mlvActDrawgesture.setOpenOrCloseDraw(false);
-                        //// TODO: 2017/7/12    保存password,结束本activity,跳转至其他界面
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {//延迟2秒跳转至首页
+                            @Override
+                            public void run() {
+                                openActivity(HomeActivity.class);
+                                closeActivity();
+                            }
+                        }, 2000);
                     } else {
                         ToastUtils.showToast(DrawGestureActivity.this, "请再次输入,还需输入" + inputCount + "次!");
                     }
@@ -109,7 +120,6 @@ public class DrawGestureActivity extends BaseActivity {
         });
     }
 
-    @SuppressLint("HardwareIds")
     private void savePassword(List<Integer> list) {
         String temp=EncryptionLockUtils.convertEncryption(this,list);
         SharedPreferencesUtils.getInstance(this,"gesture").put("ciphertext",temp);

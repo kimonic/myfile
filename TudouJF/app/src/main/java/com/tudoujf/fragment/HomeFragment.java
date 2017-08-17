@@ -1,9 +1,10 @@
 package com.tudoujf.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
+import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewbieWelfareActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
@@ -44,7 +46,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -121,6 +122,39 @@ public class HomeFragment extends BaseFragment {
      * 标的展示数据的list集合
      */
     private List<HomeBean.LoanBean> loanBeanList;
+    /**
+     * 轮播handler
+     */
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (vpFragHome != null) {
+                vpFragHome.setCurrentItem(msg.what);
+            }
+        }
+    };
+
+    /**
+     * 控制轮播标志
+     */
+    private boolean autoFlag = true;
+    /**
+     * 当回到桌面时,暂停运行
+     */
+    private boolean autoFlagIn = true;
+    /**
+     * 轮播计数自增
+     */
+    private int autoCount = 0;
+    /**
+     * 递增递减控制
+     */
+    private boolean plummet = false;
+    /**
+     * 轮播线程
+     */
+    private Thread thread;
+    private boolean notify = false;
 
 
     @Override
@@ -136,13 +170,12 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home:
                 break;
             case R.id.tv_frag_home_leftarrow:
-                if (vpBall.getCurrentItem() > 0) {
+                if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() - 1);
-
                 }
                 break;
             case R.id.tv_frag_home_rightarrow:
-                if (vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
+                if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
                 }
                 break;
@@ -161,7 +194,7 @@ public class HomeFragment extends BaseFragment {
                 openActivity(SignInActivity.class);
                 break;
             case R.id.fl_frag_msgcount:
-
+                openActivity(MyMessageActivity.class);
                 break;
         }
 
@@ -187,7 +220,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
-
+        initAutoCarousel();
 
 //         开启悬浮窗
 //        Intent intent = new Intent(getActivity(), SignInService.class);
@@ -246,31 +279,20 @@ public class HomeFragment extends BaseFragment {
 
         BannerVPAdapter adpter = new BannerVPAdapter(list, listUrl);
         vpFragHome.setAdapter(adpter);
+        ViewPagerScroller mPagerScroller = new ViewPagerScroller(getActivity());
+        mPagerScroller.initViewPagerScroll(vpFragHome);
         dvFragHome.setViewPager(vpFragHome);
         dvFragHome.invalidate();
-
 
     }
 
     @Override
     public void initListener() {
-        vpFragHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        vpFragHome.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-
                 dvFragHome.setPosition(position);
                 dvFragHome.invalidate();
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -293,7 +315,6 @@ public class HomeFragment extends BaseFragment {
                         currentY = event.getY();
                         break;
                     case MotionEvent.ACTION_UP:
-
                         if (flag) {
                             if (event.getY() - currentY > 0) {
                                 showInfo(tvFengXianTiShi1);
@@ -313,29 +334,17 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        vpBall.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        vpBall.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 initOtherView(position);
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
 
     }
 
     private void showInfo(final TextView tv) {
-        tv.setText("理财有风险,投资需谨慎");
+        tv.setText(R.string.licaiyoufengxian);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 20 * ScreenSizeUtils.getDensity(getActivity()));
         tv.setLayoutParams(params);
@@ -344,6 +353,7 @@ public class HomeFragment extends BaseFragment {
         final Animation animation1 = new AlphaAnimation(1, 0);
         animation1.setDuration(2000);
         tv.setAnimation(animation);
+
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -415,9 +425,7 @@ public class HomeFragment extends BaseFragment {
             } else {
                 ivSignIn.setVisibility(View.GONE);
             }
-
         }
-
     }
 
     /**
@@ -451,10 +459,10 @@ public class HomeFragment extends BaseFragment {
                 tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + loanBeanList.get(position).getPeriod_unit()));
             }
 
-            if ("0".equals(bean.getMessage_count())){
+            if ("0".equals(bean.getMessage_count())) {
                 ivMsgCount.setImageResource(R.drawable.frag_home_noinfo);
                 tvMsgCount.setText("");
-            }else {
+            } else {
                 ivMsgCount.setImageResource(R.drawable.frag_home_info);
                 tvMsgCount.setText(bean.getMessage_count());
             }
@@ -463,13 +471,78 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+
+    @Override
+    public void onStop() {
+        autoFlagIn = false;
+        super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        autoFlagIn = true;
+        if (notify) {
+            try {
+                synchronized (thread) {
+                    thread.notify();
+                    notify = false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        super.onResume();
+    }
+
     @Override
     public void onDestroy() {
 //        关闭悬浮窗
 //        Intent intent = new Intent(getActivity(), SignInService.class);
 //        getActivity().stopService(intent);
+        autoFlag = false;
         super.onDestroy();
     }
 
-
+    private void initAutoCarousel() {
+        thread = new Thread() {
+            @Override
+            public void run() {
+                while (autoFlag) {
+                    if (autoFlagIn) {
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if (plummet) {
+                            autoCount++;
+                            if (autoCount > 3) {
+                                plummet = !plummet;
+                                autoCount = autoCount - 2;
+                            }
+                        } else {
+                            autoCount--;
+                            if (autoCount < 0) {
+                                plummet = !plummet;
+                                autoCount = autoCount + 2;
+                            }
+                        }
+                        Message msg = Message.obtain();
+                        msg.what = autoCount;
+                        handler.sendMessage(msg);
+                    } else {
+                        notify = true;
+                        try {
+                            synchronized (this) {
+                                thread.wait();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        };
+        thread.start();
+    }
 }

@@ -18,6 +18,7 @@ import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.MyExperienceGoldActivity;
+import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SafetyControlActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
