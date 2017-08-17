@@ -7,6 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <Button
+            android:id="@+id/bt_act_preview0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="测试接口"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/bt_act_preview"

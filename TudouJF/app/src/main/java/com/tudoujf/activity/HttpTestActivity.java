@@ -1,26 +1,23 @@
 package com.tudoujf.activity;
 
-import android.os.Environment;
-import android.text.format.Formatter;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import com.lzy.okgo.callback.Callback;
-import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.convert.StringConvert;
-import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.utils.StringUtils;
 
-import java.io.File;
-import java.text.NumberFormat;
+import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -37,12 +34,50 @@ import butterknife.BindView;
 public class HttpTestActivity extends BaseActivity {
     @BindView(R.id.tv_act_httptest1)
     TextView tvActHttptest1;
-    @BindView(R.id.tv_act_httptest2)
-    TextView tvActHttptest2;
-    @BindView(R.id.tv_act_httptest3)
-    TextView tvActHttptest3;
+
     @BindView(R.id.tv_act_httptest4)
     TextView tvActHttptest4;
+    @BindView(R.id.et_canshu_interface)
+    EditText etCanshuInterface;
+    @BindView(R.id.et_canshu_key1)
+    EditText etCanshuKey1;
+    @BindView(R.id.et_canshu_value1)
+    EditText etCanshuValue1;
+    @BindView(R.id.et_canshu_key2)
+    EditText etCanshuKey2;
+    @BindView(R.id.et_canshu_value2)
+    EditText etCanshuValue2;
+    @BindView(R.id.et_canshu_key3)
+    EditText etCanshuKey3;
+    @BindView(R.id.et_canshu_value3)
+    EditText etCanshuValue3;
+    @BindView(R.id.et_canshu_key4)
+    EditText etCanshuKey4;
+    @BindView(R.id.et_canshu_value4)
+    EditText etCanshuValue4;
+    @BindView(R.id.et_canshu_key5)
+    EditText etCanshuKey5;
+    @BindView(R.id.et_canshu_value5)
+    EditText etCanshuValue5;
+    @BindView(R.id.et_canshu_key6)
+    EditText etCanshuKey6;
+    @BindView(R.id.et_canshu_value6)
+    EditText etCanshuValue6;
+    @BindView(R.id.clear1)
+    TextView clear1;
+    @BindView(R.id.clear2)
+    TextView clear2;
+    @BindView(R.id.clear3)
+    TextView clear3;
+    @BindView(R.id.clear4)
+    TextView clear4;
+    @BindView(R.id.clear5)
+    TextView clear5;
+    @BindView(R.id.clear6)
+    TextView clear6;
+    @BindView(R.id.clear7)
+    TextView clear7;
+
     @Override
     public void initDataFromIntent() {
 
@@ -50,167 +85,36 @@ public class HttpTestActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        etCanshuKey1.setText("login_token");
+        etCanshuKey2.setText("type");
+        etCanshuKey3.setText("page_count");
+        etCanshuKey4.setText("page");
+        etCanshuKey5.setText("start_time");
+        etCanshuKey6.setText("end_time");
+        etCanshuValue1.setText("12267");
 
     }
 
     @Override
     public void initListener() {
+        tvActHttptest4.setOnClickListener(this);
+        clear1.setOnClickListener(this);
+        clear2.setOnClickListener(this);
+        clear3.setOnClickListener(this);
+        clear4.setOnClickListener(this);
+        clear5.setOnClickListener(this);
+        clear6.setOnClickListener(this);
+        clear7.setOnClickListener(this);
 
     }
 
     @Override
     public void initDataFromInternet() {
 
-        final StringConvert convert=new StringConvert();
 
-//        HttpMethods.getInstance().GET(this, "http://www.juzimi.com/aboutus", null, "123",
-//                new StringCallback() {
-//                    @Override
-//                    public void onSuccess(Response<String> response) {
-//                        tvActHttptest.setText(response.body());
-//                    }
-//                });
-        String url="http://imtt.dd.qq.com/16891/8C3E058EAFBFD4F1EFE0AAA815250716.apk?fsname=com.tencent.mobileqq_7.1.0_692.apk&csr=1bbd";
-
-        Log.e("TAG", "initDataFromInternet:------ "+ Environment.getExternalStorageDirectory());
-        HttpMethods.getInstance().GET(this,url, new Callback<StringCallback>(){
-            @Override
-            public StringCallback convertResponse(okhttp3.Response response) throws Throwable {
-                return null;
-            }
-
-            @Override
-            public void onStart(Request<StringCallback, ? extends Request> request) {
-
-            }
-
-            @Override
-            public void onSuccess(Response<StringCallback> response) {
-
-            }
-
-
-            @Override
-            public void onCacheSuccess(Response<StringCallback> response) {
-
-            }
-
-            @Override
-            public void onError(Response<StringCallback> response) {
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-
-            @Override
-            public void uploadProgress(Progress progress) {
-
-            }
-
-            @Override
-            public void downloadProgress(Progress progress) {
-
-            }
-
-
-
-        });
-
-//        HttpMethods.getInstance().Download(this, url, null, new Callback<FileCallback>() {
-//            @Override
-//            public void onStart(Request<File, ? extends Request> request) {
-//                tvActHttptest1.setText("正在下载中");
-//            }
-//
-//            @Override
-//            public void onSuccess(Response<File> response) {
-////                handleResponse(response);
-//                tvActHttptest1.setText("下载完成");
-//            }
-//
-//            @Override
-//            public void onError(Response<File> response) {
-////                handleError(response);
-//                tvActHttptest1.setText("下载出错");
-//            }
-//
-//            @Override
-//            public void downloadProgress(Progress progress) {
-//                Log.e("TAG", "downloadProgress:----------------------- 1" );
-//                System.out.println(progress);
-//
-//                String downloadLength = Formatter.formatFileSize(getApplicationContext(), progress.currentSize);
-//                String totalLength = Formatter.formatFileSize(getApplicationContext(), progress.totalSize);
-//                tvActHttptest2.setText(downloadLength + "/" + totalLength);
-//                String speed = Formatter.formatFileSize(getApplicationContext(), progress.speed);
-//                tvActHttptest3.setText(String.format("%s/s", speed));
-//                tvActHttptest4.setText(NumberFormat.getPercentInstance().format(progress.fraction));
-////                pbProgress.setMax(10000);
-////                pbProgress.setProgress((int) (progress.fraction * 10000));
-//            }
-//        });
-////        HttpMethods.getInstance().GET(this,"https://www.baidu.com/",null,"123", new Callback() {
-////                    @Override
-////                    public Object convertResponse(okhttp3.Response response) throws Throwable {
-////                        final String s = convert.convertResponse(response);
-////                        response.close();
-////                        Log.e("TAG", "convertResponse: " +Thread.currentThread().getName());
-////                        Log.e("TAG", "convertResponse: "+s );
-////                        System.out.println("convertResponse"+s);
-////                        runOnUiThread(new Runnable() {
-////                            @Override
-////                            public void run() {
-////                                tvActHttptest.setText(s);
-////                            }
-////                        });
-////                        return s;
-////                    }
-////
-////                    @Override
-////                    public void onStart(Request request) {
-////
-////                    }
-////
-////                    @Override
-////                    public void onSuccess(Response response) {
-////                        Log.e("TAG", "onSuccess: -----"+Thread.currentThread().getName() );
-//////                        Log.e("TAG", "onSuccess: -----"+response.body() );
-////                        System.out.print("onSuccess"+response.body().toString());
-////
-////                    }
-////
-////
-////                    @Override
-////                    public void onCacheSuccess(Response response) {
-////
-////                    }
-////
-////                    @Override
-////                    public void onError(Response response) {
-////
-////                    }
-////
-////                    @Override
-////                    public void onFinish() {
-////
-////                    }
-////
-////                    @Override
-////                    public void uploadProgress(Progress progress) {
-////
-////                    }
-////
-////                    @Override
-////                    public void downloadProgress(Progress progress) {
-////
-////                    }
-////                }
-////        );
     }
-//
+
+    //
     @Override
     public void LoadInternetDataToUi() {
 
@@ -224,6 +128,74 @@ public class HttpTestActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_act_httptest4:
+                tvActHttptest1.setText("");
+                httpSend();
+                break;
+            case R.id.clear1:
+                etCanshuInterface.setText("");
+                break;
+            case R.id.clear2:
+                etCanshuKey1.setText("");
+                etCanshuValue1.setText("");
+                break;
+            case R.id.clear3:
+                etCanshuKey2.setText("");
+                etCanshuValue2.setText("");
+                break;
+            case R.id.clear4:
+                etCanshuKey3.setText("");
+                etCanshuValue3.setText("");
+                break;
+            case R.id.clear5:
+                etCanshuKey4.setText("");
+                etCanshuValue4.setText("");
+                break;
+            case R.id.clear6:
+                etCanshuKey5.setText("");
+                etCanshuValue5.setText("");
+                break;
+            case R.id.clear7:
+                etCanshuKey6.setText("");
+                etCanshuValue6.setText("");
+                break;
+        }
+    }
+
+    private void httpSend() {
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put(etCanshuKey1.getText().toString().trim(), etCanshuValue1.getText().toString().trim());
+        map.put(etCanshuKey2.getText().toString().trim(), etCanshuValue2.getText().toString().trim());
+        map.put(etCanshuKey3.getText().toString().trim(), etCanshuValue3.getText().toString().trim());
+        map.put(etCanshuKey4.getText().toString().trim(), etCanshuValue4.getText().toString().trim());
+        map.put(etCanshuKey5.getText().toString().trim(), etCanshuValue5.getText().toString().trim());
+        map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
+        String url;
+
+        url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
+        HttpMethods.getInstance().POST(this, url, map, "test", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                if (!etCanshuInterface.getText().toString().trim().equals("")) {
+                    Log.e("TAG", "onSuccess: --------888------" + response.body());
+                    String result = StringUtils.getDecodeString(response.body());
+                    tvActHttptest1.setText(result);
+                    Log.e("TAG", "onSuccess:-----------哈哈---------- " + result);
+                } else {
+                    tvActHttptest1.setText(response.body());
+                }
+
+
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                tvActHttptest1.setText(response.message());
+                super.onError(response);
+            }
+        });
+
 
     }
 

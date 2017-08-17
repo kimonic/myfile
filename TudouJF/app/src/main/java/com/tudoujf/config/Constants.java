@@ -24,6 +24,8 @@ public class Constants {
     public static  final String  MESSAGE_LIST=URL+"/phone/message/list";
     /**积分记录表接口*/
     public static  final String  INTEGRAL_LIST=URL+"/phone/sign/list";
+    /**标记消息是否已读接口*/
+    public static  final String  MESSAGE_READ=URL+"/phone/message/view";
 
 
 

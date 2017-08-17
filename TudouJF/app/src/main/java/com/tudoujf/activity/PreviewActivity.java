@@ -47,6 +47,8 @@ import butterknife.BindView;
 public class PreviewActivity extends BaseActivity {
     @BindView(R.id.bt_act_preview)
     Button btActPreview;
+    @BindView(R.id.bt_act_preview0)
+    Button btActPreview0;
     @BindView(R.id.bt_act_preview1)
     Button btActPreview1;
     @BindView(R.id.bt_act_preview2)
@@ -116,6 +118,9 @@ public class PreviewActivity extends BaseActivity {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.bt_act_preview0:
+                openActivity(HttpTestActivity.class);
+                break;
             case R.id.bt_act_preview:
                 openActivity(LoginActivity.class);
                 break;
@@ -275,6 +280,7 @@ public class PreviewActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        btActPreview0.setOnClickListener(this);
         btActPreview.setOnClickListener(this);
         btActPreview1.setOnClickListener(this);
         btActPreview2.setOnClickListener(this);

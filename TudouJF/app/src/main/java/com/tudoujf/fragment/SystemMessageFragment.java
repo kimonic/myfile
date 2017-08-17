@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -58,7 +60,7 @@ public class SystemMessageFragment extends BaseFragment {
     @BindView(R.id.srl_frag_systemmessage)
     SmartRefreshLayout srlFragSystemMessage;
 
-    private List<MyMessageBean.ItemsBean> list;
+    private List<MyMessageBean.ItemsBean> list=new ArrayList<>();
 
     private int type = 0;
     private int page = 1;
@@ -70,6 +72,7 @@ public class SystemMessageFragment extends BaseFragment {
     private int refreshFlag = 0;
     private static final int  REFRESH=1;
     private static final int  LOADMORE=2;
+    private SystemMessageFragLvAdapter adapter;
 
     @Override
     public int layoutRes() {
@@ -83,6 +86,7 @@ public class SystemMessageFragment extends BaseFragment {
             case R.id.tv_frag_systemmessage_previous:
                 if (page > 1) {
                     page--;
+                    dialog.show();
                     initDataFromInternet();
                     tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
                     tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
@@ -92,6 +96,7 @@ public class SystemMessageFragment extends BaseFragment {
                 break;
             case R.id.tv_frag_systemmessage_next:
                 if (bean != null && page < StringUtils.string2Integer(bean.getTotal_pages())) {
+                    dialog.show();
                     page++;
                     tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
                     tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
@@ -135,12 +140,24 @@ public class SystemMessageFragment extends BaseFragment {
         lvFragSystemMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TreeMap<String,String>  map=new TreeMap<>();
+                map.put("login_token", "12267");
+                map.put("message_id", list.get(position).getId());
+                list.get(position).setStatus("2");
+                adapter.notifyDataSetChanged();
+                HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_READ, map, "", new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
+                    }
+                });
+
                 // TODO: 2017/8/17 传入打开详情时需要传入的参数
                 Bundle bundle = new Bundle();
                 bundle.putString("title", list.get(position).getTitle());
                 bundle.putString("content", list.get(position).getContents());
                 bundle.putString("time", list.get(position).getTime());
-
                 openActivity(MessageDetailsActivity.class, bundle);
             }
         });
@@ -152,6 +169,7 @@ public class SystemMessageFragment extends BaseFragment {
         srlFragSystemMessage.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                dialog.show();
                 page = 1;
                 initDataFromInternet();
                 refreshFlag = 1;
@@ -160,10 +178,14 @@ public class SystemMessageFragment extends BaseFragment {
         srlFragSystemMessage.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
+                dialog.show();
                 if (bean!=null&&page < StringUtils.string2Integer(bean.getTotal_pages())) {
                     page++;
                     initDataFromInternet();
                     refreshFlag = 2;
+                }else {
+                    stopRefresh(2);
+                    dialog.dismiss();
                 }
             }
         });
@@ -211,12 +233,20 @@ public class SystemMessageFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            list = bean.getItems();
+            if (page==1){
+                list.clear();
+            }
+            list.addAll(bean.getItems());
             if (list.size() == 0) {
                 ToastUtils.showToast(getActivity(), "当前页没有要展示的数据");
             }else {
-                SystemMessageFragLvAdapter adapter = new SystemMessageFragLvAdapter(list, getActivity());
-                lvFragSystemMessage.setAdapter(adapter);
+                if (adapter!=null){
+                    adapter.notifyDataSetChanged();
+                }else {
+                    adapter = new SystemMessageFragLvAdapter(list, getActivity());
+                    lvFragSystemMessage.setAdapter(adapter);
+                }
+
             }
         }
     }
@@ -231,4 +261,6 @@ public class SystemMessageFragment extends BaseFragment {
                 break;
         }
     }
+
+
 }

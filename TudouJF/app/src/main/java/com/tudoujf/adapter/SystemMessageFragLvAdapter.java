@@ -72,6 +72,13 @@ public class SystemMessageFragLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText(list.get(position).getTitle());
         viewHolder.textView2.setText(list.get(position).getTime());
+        if (list.get(position).getStatus().equals("1")){
+            viewHolder.textView1.setTextColor(context.getResources().getColor(R.color.color_black));
+            viewHolder.textView2.setTextColor(context.getResources().getColor(R.color.color_black));
+        }else {
+            viewHolder.textView1.setTextColor(context.getResources().getColor(R.color.color_gray));
+            viewHolder.textView2.setTextColor(context.getResources().getColor(R.color.color_gray));
+        }
 //        viewHolder.imageView.setImageResource(list.get(position).getResId());
 
 
