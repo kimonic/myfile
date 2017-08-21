@@ -1,24 +1,42 @@
 package com.tudoujf.activity.home;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.tudoujf.R;
+import com.tudoujf.adapter.IntegralRecodeActLvAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.IntegralRecodeBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.CalendarDialog;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
+import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -35,6 +53,46 @@ import butterknife.ButterKnife;
 public class IntegralRecodeActivity extends BaseActivity {
     @BindView(R.id.mtb_act_integralrecode)
     MTopBarView mtbIntegralRecode;
+    @BindView(R.id.tv_act_integralrecode_totalintegral)
+    TextView tvTotalintegral;//总积分
+    @BindView(R.id.iv_act_integralrecode_filtrate)
+    ImageView ivFiltrate;//筛选按钮
+    @BindView(R.id.lv_act_integralrecode)
+    ListView lvIntegralRecode;
+    @BindView(R.id.srl_fact_integralrecode)
+    SmartRefreshLayout srlIntegralRecode;
+    private String TAG = "IntegralRecodeActivity";
+
+    /**
+     * 返回的请求数据databean
+     */
+    private IntegralRecodeBean bean;
+    /**
+     * 总积分
+     */
+    private String totalIntegral;
+    /**
+     * 积分记录数据集
+     */
+    private List<IntegralRecodeBean.ItemsBean> list;
+    /**加载进度dialog,选择筛选时间dialog*/
+    private AlertDialog dialog,timeSelDialog;
+    /**
+     * 加载显示积分页数
+     */
+    private int page = 1;
+    /**
+     * listview适配器
+     */
+    private IntegralRecodeActLvAdapter adapter;
+    /**
+     * 自定义dialog的展示view
+     */
+    private View view;
+    /**
+     * 自定义dialog的展示view的控件
+     */
+    private TextView startTime, endTime, cancel, confirm;
 
     @Override
     public int getLayoutResId() {
@@ -43,12 +101,40 @@ public class IntegralRecodeActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_act_integralrecode_filtrate://时间筛选按钮
+                if (timeSelDialog==null){
+                    timeSelDialog=DialogUtils.showTimeSel(this, "", view);
+                }else {
+                    timeSelDialog.show();
+                }
+
+                break;
+            case R.id.tv_dialog_starttime://dialog中选择开始时间
+                CalendarDialog  dialog2=new CalendarDialog(this);
+                dialog2.show();
+                break;
+            case R.id.tv_dialog_endtime://dialog中选择结束时间
+                break;
+            case R.id.tv_dialog_cancel://dialog中取消选择
+                timeSelDialog.dismiss();
+                break;
+            case R.id.tv_dialog_confirm://dialog中确认选择
+                timeSelDialog.dismiss();
+
+                // TODO: 2017/8/21 根据选择的时间进行条件查询展示
+
+                break;
+        }
 
     }
 
     @Override
     public void initDataFromIntent() {
-
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            totalIntegral = bundle.getString("totalIntegral");
+        }
     }
 
     @Override
@@ -57,6 +143,25 @@ public class IntegralRecodeActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbIntegralRecode.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbIntegralRecode.setLayoutParams(params);
+        tvTotalintegral.setText(totalIntegral);
+
+
+        //设置全区背景色
+        srlIntegralRecode.setPrimaryColorsId(R.color.global_theme_background_color);
+        //设置 Header 为 Material风格
+        srlIntegralRecode.setEnableRefresh(false);
+        //设置 Footer 为 球脉冲
+        srlIntegralRecode.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        dialog = DialogUtils.showProgreessDialog(this, "再次点击将退出该页面!");
+
+        view = LayoutInflater.from(this).inflate(R.layout.dialog_act_integralrecode_timesel, null);
+
+        startTime = (TextView) view.findViewById(R.id.tv_dialog_starttime);
+        endTime = (TextView) view.findViewById(R.id.tv_dialog_endtime);
+        cancel = (TextView) view.findViewById(R.id.tv_dialog_cancel);
+        confirm = (TextView) view.findViewById(R.id.tv_dialog_confirm);
+
     }
 
     @Override
@@ -67,29 +172,80 @@ public class IntegralRecodeActivity extends BaseActivity {
                 closeActivity();
             }
         });
+        srlIntegralRecode.setOnLoadmoreListener(new OnLoadmoreListener() {//加载更多
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean != null && page < bean.getTotal_pages() + 1) {
+                    page = page + 1;
+                    initDataFromInternet();//再次请求数据
+                } else {
+                    srlIntegralRecode.finishLoadmore();
+                    ToastUtils.showToast(IntegralRecodeActivity.this, R.string.meiyougengduojilula);
+                }
+
+            }
+        });
+        ivFiltrate.setOnClickListener(this);
+        startTime.setOnClickListener(this);
+        endTime.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+        confirm.setOnClickListener(this);
     }
 
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "");
-        HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "info", new StringCallback() {
+        map.put("login_token", "12267");
+        map.put("start_time", "");
+        map.put("end_time", "");
+        map.put("page_count", "");//待删除字段
+        map.put("page", "" + page);
+        HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "IntegralRecodeActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------消息接口请求返回数据-----------------" + result);
+                Log.e(TAG, "onSuccess: ----------消息接口请求返回数据-----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralRecodeBean>() {
+                        }.getType(),
+                        IntegralRecodeBean.class, IntegralRecodeActivity.this);
+                if (page == 1 && bean1 != null) {
+                    dialog.dismiss();
+                    bean = (IntegralRecodeBean) bean1;
+                    LoadInternetDataToUi();
+                } else if (page > 1 && bean1 != null) {
+                    srlIntegralRecode.finishLoadmore();
+                    bean = (IntegralRecodeBean) bean1;
+                    LoadInternetDataToUi();
+                }
+
             }
 
             @Override
             public void onError(Response<String> response) {
                 Log.e("TAG", "onSuccess: ----------消息接口请求返回错误信息-----------------" + response.message());
+                dialog.dismiss();
                 super.onError(response);
             }
         });
+
+
     }
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean != null) {
+            if (page == 1 && bean.getItems() != null && bean.getItems().size() != 0) {
+                list = bean.getItems();
+                adapter = new IntegralRecodeActLvAdapter(list, this);
+                lvIntegralRecode.setAdapter(adapter);
+            } else if (page > 1 && bean.getItems() != null) {
+                list.addAll(bean.getItems());
+                adapter.notifyDataSetChanged();
+            } else {
+                ToastUtils.showToast(this, "当前没有要显示的积分记录");
+            }
+
+        }
 
     }
 
@@ -103,10 +259,5 @@ public class IntegralRecodeActivity extends BaseActivity {
         return true;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

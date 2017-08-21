@@ -1,9 +1,11 @@
 package com.tudoujf.fragment;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
@@ -33,7 +35,7 @@ public class MyFragment extends BaseFragment {
 
     private List<MyFragBean> list;
 
-    private int[]  titleResId=new int[]{
+    private int[] titleResId = new int[]{
             R.string.wodejifen,
             R.string.wodeshouyi,
             R.string.wodetuiguang,
@@ -43,7 +45,7 @@ public class MyFragment extends BaseFragment {
             R.string.shezhi,
     };
 
-    private int[]  iconResId=new int[]{
+    private int[] iconResId = new int[]{
             R.drawable.frag_my_wodejifen,
             R.drawable.frag_my_wodeshouyi,
             R.drawable.frag_my_wodetuiguang,
@@ -65,12 +67,12 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         for (int i = 0; i < titleResId.length; i++) {
-            MyFragBean bean=new MyFragBean();
+            MyFragBean bean = new MyFragBean();
             bean.setTitle(getResources().getString(titleResId[i]));
             bean.setResId1(iconResId[i]);
-            if (i==6){
+            if (i == 6) {
                 bean.setMark(getResources().getString(R.string.weixinguanzhu));
             }
             list.add(bean);
@@ -80,12 +82,34 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        MyFragLvAdapter    adapter=new MyFragLvAdapter(list,getActivity());
+        MyFragLvAdapter adapter = new MyFragLvAdapter(list, getActivity());
         lvFragMy.setAdapter(adapter);
     }
 
     @Override
     public void initListener() {
+        lvFragMy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        openActivity(SignInActivity.class);
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                }
+            }
+        });
 
     }
 

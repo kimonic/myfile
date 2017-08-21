@@ -14,6 +14,7 @@
         app:leftImage="@drawable/xvector_back" />
 
     <com.tudoujf.ui.SignInView
+        android:id="@+id/siv_act_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

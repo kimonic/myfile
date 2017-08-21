@@ -1,18 +1,29 @@
 package com.tudoujf.activity.home;
 
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.CommonBean;
+import com.tudoujf.bean.databean.SignInBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.SignInView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.TreeMap;
 
@@ -32,15 +43,20 @@ import butterknife.BindView;
 
 public class SignInActivity extends BaseActivity {
 
-    private static final String TAG ="SignInActivity" ;
+    private static final String TAG = "SignInActivity";
     @BindView(R.id.mtb_act_signin)
     MTopBarView mtbActSignIn;
     @BindView(R.id.ll_act_signin_shop)
     LinearLayout llShop;
     @BindView(R.id.ll_act_signin_jilu)
-    LinearLayout llJilu;
+    LinearLayout llJiLu;
     @BindView(R.id.ll_act_signin_shuoming)
-    LinearLayout llShuoming;
+    LinearLayout llShuoMing;
+    @BindView(R.id.siv_act_signin)
+    SignInView sivSignIn;
+
+    private SignInBean bean;
+    private AlertDialog  dialog;
 
     @Override
     public int getLayoutResId() {
@@ -54,6 +70,11 @@ public class SignInActivity extends BaseActivity {
                 openActivity(IntegralShopActivity.class);
                 break;
             case R.id.ll_act_signin_jilu:
+                Bundle bundle=new Bundle();
+                if (bean!=null){
+                    bundle.putString("totalIntegral",bean.getCredit_point());
+                }
+                openActivity(IntegralRecodeActivity.class,bundle);
                 break;
             case R.id.ll_act_signin_shuoming:
                 break;
@@ -68,7 +89,10 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+
+        dialog= DialogUtils.showProgreessDialog(this,"再次点击将退出该页面!");
+
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActSignIn.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActSignIn.setLayoutParams(params);
@@ -85,27 +109,59 @@ public class SignInActivity extends BaseActivity {
             }
         });
 
-        llJilu.setOnClickListener(this);
+        llJiLu.setOnClickListener(this);
         llShop.setOnClickListener(this);
-        llShuoming.setOnClickListener(this);
+        llShuoMing.setOnClickListener(this);
+        sivSignIn.setListener(new SignInView.ClickEventListener() {
+            @Override
+            public void clickEvent() {
+                dialog.show();
+                TreeMap<String, String> map = new TreeMap<>();
+                map.put("login_token", "12267");
+                HttpMethods.getInstance().POST(SignInActivity.this, Constants.SIGN_IN_SAVE, map, "SignInActivity", new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dialog.dismiss();
+                        String result=StringUtils.getDecodeString(response.body());
+                        Log.e(TAG, "onSuccess: -----------****签到----------------"+result );
+                        Gson gson=new Gson();
+                        CommonBean bean=gson.fromJson(result, CommonBean.class);
+                        if (bean.getCode().equals("200")){
+                            sivSignIn.setFlagIsSignIn(true);
+                            initDataFromInternet();
+                        }
+                    }
+                });
+
+            }
+        });
     }
 
     @Override
     public void initDataFromInternet() {
-        Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- " );
+        Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- ");
 
-        TreeMap<String,String> map=new TreeMap<>();
-        map.put("login_token","12232");
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", "12267");
         HttpMethods.getInstance().POST(this, Constants.SIGN_IN, map, "SignInActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                String result= StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess:------------签到请求json数据----------------- "+result );
+                dialog.dismiss();
+                String result = StringUtils.getDecodeString(response.body());
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SignInBean>() {
+                        }.getType()
+                        , SignInBean.class, SignInActivity.this);
+                if (bean1 != null) {
+                    bean = (SignInBean) bean1;
+                    LoadInternetDataToUi();
+                }
+                Log.e(TAG, "onSuccess:------------签到请求json数据----------------- " + result);
             }
 
             @Override
             public void onError(Response<String> response) {
-                Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- "+response.code() );
+                dialog.dismiss();
+                Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- " + response.code());
                 super.onError(response);
             }
         });
@@ -113,6 +169,17 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean != null) {
+            if (bean.getSign_status().equals("-1")) {
+                sivSignIn.setTotalIntegrel(bean.getCredit_point());
+                sivSignIn.setFlagIsSignIn(true);
+            }else {
+                sivSignIn.setTotalIntegrel(bean.getCredit_point());
+                sivSignIn.setFlagIsSignIn(false);
+                sivSignIn.setFlagSignInSuccess(true);
+            }
+            sivSignIn.invalidate();
+        }
 
     }
 

@@ -115,6 +115,8 @@
         <activity android:name=".activity.home.IntegralRecodeActivity" />
         <!--我的消息&#45;&#45;消息详情activity-->
         <activity android:name=".activity.home.MessageDetailsActivity"/>
+        <!--webview加titleactivity-->
+        <activity android:name=".activity.common.WebActivity" />
 
         <service
             android:name=".service.MyService"

@@ -1,8 +1,11 @@
 package com.tudoujf.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -40,7 +43,7 @@ public class DialogUtils {
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(message)
                 .setPositiveButton(positiveText,listener)
-                .setNegativeButton(R.string.cancel1, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -59,7 +62,7 @@ public class DialogUtils {
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setMessage(message)
                 .setPositiveButton(positiveText,listener)
-                .setNegativeButton(R.string.cancel1, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -97,7 +100,7 @@ public class DialogUtils {
         dialog.setMessage(message)
                 .setTitle(title)
                 .setPositiveButton(positiveText,listener)
-                .setNegativeButton(R.string.cancel1, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -130,7 +133,7 @@ public class DialogUtils {
      * @return   alertdialog
      */
     public static AlertDialog showProgreessDialog(final Context context, final String msg) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_login, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_login, null);
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(false);
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
@@ -163,6 +166,45 @@ public class DialogUtils {
             lp.gravity = Gravity.CENTER;
             window.setAttributes(lp);
         }
+        return dialog;
+    }
+
+
+    /**
+     *
+     * 时间筛选dialog--integralrecodeactivity中显示
+     * @param context   上下文
+     * @param msg    点击back键的提示信息
+     * @return   alertdialog(v7)
+     */
+    public static AlertDialog showTimeSel(final Context context, final String msg,View view) {
+
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
+                    dialog.dismiss();
+                    return true;
+                } else {
+                    return false; //默认返回 false
+                }
+            }
+        });
+        dialog.show();
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setGravity(Gravity.BOTTOM);
+            ColorDrawable drawable=new ColorDrawable(Color.WHITE);
+            window.setBackgroundDrawable(drawable);
+//            window.setBackgroundDrawable(new ColorDrawable());
+            window.setContentView(view);
+            window.setWindowAnimations(R.style.AnimBottom);
+        }
+
         return dialog;
     }
 

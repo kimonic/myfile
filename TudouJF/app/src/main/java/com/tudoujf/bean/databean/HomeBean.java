@@ -6,7 +6,15 @@ import com.tudoujf.base.BaseBean;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/8/15.
+ * * ====================================================================
+ * name:            HomeBean
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/8/15
+ * description：   首页homefragment,返回的dataBean
+ * history：
+ * * ====================================================================
  */
 
 public class HomeBean implements BaseBean {

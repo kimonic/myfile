@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -104,7 +105,6 @@ public class HomeFragment extends BaseFragment {
     ImageView ivMsgCount;
     @BindView(R.id.tv_frag_msgcount)
     TextView tvMsgCount;
-    Unbinder unbinder1;
     private List<ImageView> list;
     private List<BallView> listBall;
     private float currentY;
@@ -125,7 +125,7 @@ public class HomeFragment extends BaseFragment {
     /**
      * 轮播handler
      */
-    private Handler handler = new Handler() {
+    private  Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (vpFragHome != null) {
@@ -172,11 +172,15 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home_leftarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() - 1);
+                }else {
+                    ToastUtils.showToast(getActivity(),"已经没有更多啦!");
                 }
                 break;
             case R.id.tv_frag_home_rightarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
+                }else {
+                    ToastUtils.showToast(getActivity(),"已经没有更多啦!");
                 }
                 break;
             case R.id.ll_frag_home_huodongzhuanqu:
@@ -193,11 +197,28 @@ public class HomeFragment extends BaseFragment {
             case R.id.iv_frag_home_signin:
                 openActivity(SignInActivity.class);
                 break;
-            case R.id.fl_frag_msgcount:
-                openActivity(MyMessageActivity.class);
+            case R.id.fl_frag_msgcount://启动我的消息页面
+                Intent intent=new Intent(getActivity(),MyMessageActivity.class);
+                startActivityForResult(intent,1);
+
+//                openActivity(MyMessageActivity.class);
                 break;
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e(TAG, "onActivityResult: ----未读消息数--------"+ data.getStringExtra("msgcount"));
+        if (requestCode==1){//我的消息返回数据
+            int  msgCount=data.getIntExtra("msgcount",0);
+            if (msgCount!=0){
+                Log.e(TAG, "onActivityResult: ----未读消息数--------"+ data.getStringExtra("msgcount"));
+                tvMsgCount.setText((""+msgCount));
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -517,7 +538,7 @@ public class HomeFragment extends BaseFragment {
                 while (autoFlag) {
                     if (autoFlagIn) {
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(5000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

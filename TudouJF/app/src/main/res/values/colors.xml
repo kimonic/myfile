@@ -46,5 +46,7 @@
     <color name="act_mymessage_unselcolor">#5AB8CF</color>
     <color name="frag_my_bac">#E5FAFF</color>
     <color name="huigucolor">#2758A1</color>
+    <color name="color_gray1">#DCDCDC</color>
+    <color name="dialog_integralrecode_bac">#E3FBFF</color>
 
 </resources>

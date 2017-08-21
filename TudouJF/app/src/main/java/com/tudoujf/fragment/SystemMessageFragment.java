@@ -2,6 +2,7 @@ package com.tudoujf.fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.util.DiffUtil;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -21,9 +23,11 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.MessageDetailsActivity;
+import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.adapter.SystemMessageFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
+import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.databean.MyMessageBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
@@ -32,6 +36,9 @@ import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +80,10 @@ public class SystemMessageFragment extends BaseFragment {
     private static final int  REFRESH=1;
     private static final int  LOADMORE=2;
     private SystemMessageFragLvAdapter adapter;
+    private Gson gson=new Gson();
+    private boolean   sendSuccess=false;
+    private int positionInner;
+
 
     @Override
     public int layoutRes() {
@@ -140,25 +151,43 @@ public class SystemMessageFragment extends BaseFragment {
         lvFragSystemMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TreeMap<String,String>  map=new TreeMap<>();
-                map.put("login_token", "12267");
-                map.put("message_id", list.get(position).getId());
-                list.get(position).setStatus("2");
-                adapter.notifyDataSetChanged();
-                HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_READ, map, "", new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
-                    }
-                });
+                positionInner=position;
+                if (!list.get(position).getStatus().equals("2")){
+                    dialog.show();
+                    list.get(position).setStatus("2");
+                    TreeMap<String,String>  map=new TreeMap<>();
+                    map.put("login_token", "12267");
+                    map.put("message_id", list.get(position).getId());
+                    adapter.notifyDataSetChanged();
+                    HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_READ, map, "", new StringCallback() {
+                        @Override
+                        public void onSuccess(Response<String> response) {
+                            dialog.dismiss();
+                            String result = StringUtils.getDecodeString(response.body());
+                            CommonBean bean=gson.fromJson(result, CommonBean.class);
+                            if (bean!=null&&bean.getCode().equals("200")){
+                                // TODO: 2017/8/18 从接口获取未读消息数量
+                                try {
+                                    JSONObject json=new JSONObject(bean.getData().toString());
+                                    ((MyMessageActivity)getActivity()).unreadMessageCount(json.getInt("message_count"));
 
-                // TODO: 2017/8/17 传入打开详情时需要传入的参数
-                Bundle bundle = new Bundle();
-                bundle.putString("title", list.get(position).getTitle());
-                bundle.putString("content", list.get(position).getContents());
-                bundle.putString("time", list.get(position).getTime());
-                openActivity(MessageDetailsActivity.class, bundle);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                openDetailsActivity();
+                            }else {
+                                ToastUtils.showToast(getActivity(),"网络不太给力哟!");
+                            }
+                            Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
+                        }
+                    });
+                }else {
+                    openDetailsActivity();
+                }
+
+
+
+
             }
         });
         tvPrevious.setOnClickListener(this);
@@ -260,6 +289,15 @@ public class SystemMessageFragment extends BaseFragment {
                 srlFragSystemMessage.finishLoadmore();
                 break;
         }
+    }
+
+    private void openDetailsActivity(){
+        // TODO: 2017/8/17 传入打开详情时需要传入的参数
+        Bundle bundle = new Bundle();
+        bundle.putString("title", list.get(positionInner).getTitle());
+        bundle.putString("content", list.get(positionInner).getContents());
+        bundle.putString("time", list.get(positionInner).getTime());
+        openActivity(MessageDetailsActivity.class, bundle);
     }
 
 

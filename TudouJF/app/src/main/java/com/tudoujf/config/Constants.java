@@ -20,12 +20,14 @@ public class Constants {
     public static  final String  HUO_DONG_ZHUAN_QU=URL+"/phone/activity/list";
     /**签到接口*/
     public static  final String  SIGN_IN=URL+"/phone/sign/index";
+    /**上传签到接口*/
+    public static  final String  SIGN_IN_SAVE=URL+"/phone/sign/save";
     /**消息列表接口*/
     public static  final String  MESSAGE_LIST=URL+"/phone/message/list";
     /**积分记录表接口*/
     public static  final String  INTEGRAL_LIST=URL+"/phone/sign/list";
     /**标记消息是否已读接口*/
-    public static  final String  MESSAGE_READ=URL+"/phone/message/view";
+    public static  final String  MESSAGE_READ=URL+"/phone/message/read";
 
 
 

@@ -44,14 +44,26 @@ public class SignInView extends View {
     private Paint whitePaint, textPaint;
     /**
      * 是否是点击此处签到
+     * true--未签到,false--已签到
      */
     private boolean flagIsSignIn = true;
-    /**点击成功后不再响应点击事件*/
+    /**点击成功后不再响应点击事件
+     * false---可点击
+     * true--不能点击
+     * */
     private boolean flagSignInSuccess = false;
     /**点击事件监听*/
     private ClickEventListener  listener;
     private int currentX;
     private int currentY;
+
+    public boolean isFlagSignInSuccess() {
+        return flagSignInSuccess;
+    }
+
+    public void setFlagSignInSuccess(boolean flagSignInSuccess) {
+        this.flagSignInSuccess = flagSignInSuccess;
+    }
 
     /**当前总积分*/
     public void setTotalIntegrel(String totalIntegrel) {
@@ -171,12 +183,10 @@ public class SignInView extends View {
                  currentY= (int) event.getY();
                 if (rectClick.contains(currentX,currentY)&&!flagSignInSuccess){
                     flagIsSignIn=false;
-                    invalidate();
                     if (listener!=null){
                         listener.clickEvent();
                     }
 
-                    flagSignInSuccess=true;
 
                 }
 

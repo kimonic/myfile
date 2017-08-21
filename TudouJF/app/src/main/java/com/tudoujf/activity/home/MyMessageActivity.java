@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -43,6 +44,8 @@ public class MyMessageActivity extends BaseActivity {
     FrameLayout flActMymessage;
 
     private List<Fragment> list;
+    /**消息未读数量*/
+    private int messageCount=0;
 
     @Override
     public int getLayoutResId() {
@@ -53,6 +56,9 @@ public class MyMessageActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_mymessage_bac:
+                Intent intent=new Intent();
+                intent.putExtra("msgcount",messageCount);
+                setResult(messageCount,intent);//返回结果
                 closeActivity();
                 break;
             case R.id.tv_act_mymessage_systemmessage:
@@ -152,6 +158,19 @@ public class MyMessageActivity extends BaseActivity {
     @Override
     protected boolean translucentStatusBar() {
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent();
+        intent.putExtra("msgcount",messageCount);
+        setResult(messageCount,intent);//返回结果
+        super.onBackPressed();
+    }
+
+    /**消息未读数量*/
+    public void unreadMessageCount(int  count){
+        messageCount=count;
     }
 
 

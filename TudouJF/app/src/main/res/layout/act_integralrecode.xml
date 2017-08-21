@@ -30,6 +30,7 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_act_integralrecode_totalintegral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -67,11 +68,13 @@
             android:textSize="12sp" />
 
         <ImageView
+            android:id="@+id/iv_act_integralrecode_filtrate"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/act_integralrecode_filtrate"
             android:contentDescription="@null" />
 
     </LinearLayout>
@@ -84,6 +87,7 @@
         android:layout_marginRight="10dp"
         android:background="@color/color_white"
         >
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -94,6 +98,7 @@
             android:text="@string/act_integralrecode_name"
             android:textColor="@color/color_black"
             android:textSize="12sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -116,14 +121,28 @@
             android:textSize="12sp" />
 
     </LinearLayout>
-    <ListView
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_gray1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_fact_integralrecode"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@color/global_background_color"
+        >
+    <ListView
+        android:id="@+id/lv_act_integralrecode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/color_white"
         />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

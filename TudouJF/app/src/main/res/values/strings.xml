@@ -105,7 +105,7 @@
     <string name="yuan">元</string>
     <string name="youxiaoqizhi">有效期至:</string>
     <string name="act_redpacksge_qingxuanze">请选择要使用的红包</string>
-    <string name="cancel1">取消</string>
+    <string name="cancel">取消</string>
     <string name="act_affirmbuy_inputtouzimima">请输入投资密码</string>
     <string name="act_affirmbuy_queren">确认</string>
     <string name="act_redpackage_jiaxiquan">选择加息券</string>
@@ -258,6 +258,17 @@
     <string name="act_integralrecode_integral">积分</string>
     <string name="act_integralrecode_time">时间</string>
     <string name="act_messagedetails_title">我的消息</string>
+    <string name="act_web_title" >积分记录</string>
+    <string name="meiyougengduojilula">没有更多记录啦!</string>
+    <string name="dialog_qingxuanzeshijian">请选择您要查询的时间</string>
+    <string name="confirm">确定</string>
+    <string name="sunday">日</string>
+    <string name="saturday">六</string>
+    <string name="friday">五</string>
+    <string name="thursday">四</string>
+    <string name="monday">一</string>
+    <string name="tuesday">二</string>
+    <string name="wednesday">三</string>
 
 
 </resources>

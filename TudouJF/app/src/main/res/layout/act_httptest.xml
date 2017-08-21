@@ -40,7 +40,7 @@
             />
         <TextView
             android:id="@+id/clear1"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -89,7 +89,7 @@
             />
         <TextView
             android:id="@+id/clear2"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -139,7 +139,7 @@
             />
         <TextView
             android:id="@+id/clear3"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -189,7 +189,7 @@
             />
         <TextView
             android:id="@+id/clear4"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -239,7 +239,7 @@
             />
         <TextView
             android:id="@+id/clear5"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -289,7 +289,7 @@
             />
         <TextView
             android:id="@+id/clear6"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"
@@ -339,7 +339,7 @@
             />
         <TextView
             android:id="@+id/clear7"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             android:text="清空"

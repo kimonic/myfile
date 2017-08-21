@@ -17,6 +17,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
+import com.tudoujf.activity.home.IntegralRecodeActivity;
 import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
@@ -85,6 +86,8 @@ public class PreviewActivity extends BaseActivity {
     Button btActPreview17;
     @BindView(R.id.bt_act_preview18)
     Button btActPreview18;
+    @BindView(R.id.bt_act_preview20)
+    Button btActPreview20;
 
 
     private int oldX = 0, oldY = 0;
@@ -205,6 +208,9 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(MyEarningsActivity.class);
                 break;
 //            case R.id.bt_act_preview19:break;
+            case R.id.bt_act_preview20:
+                openActivity(IntegralRecodeActivity.class);
+                break;
 
         }
     }
@@ -300,6 +306,8 @@ public class PreviewActivity extends BaseActivity {
         btActPreview16.setOnClickListener(this);
         btActPreview17.setOnClickListener(this);
         btActPreview18.setOnClickListener(this);
+//        btActPreview19.setOnClickListener(this);
+        btActPreview20.setOnClickListener(this);
     }
 
     @Override

@@ -209,7 +209,7 @@ public class AffirmPasswordActivity extends BaseActivity {
             }
         });
 
-        /**设置沉浸式状态栏*/
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActAffirm.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActAffirm.setLayoutParams(params);
