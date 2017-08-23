@@ -27,10 +27,12 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.CalendarDialog;
+import com.tudoujf.ui.CalendarDialogScroll;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.TimeUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
@@ -55,6 +57,8 @@ public class IntegralRecodeActivity extends BaseActivity {
     MTopBarView mtbIntegralRecode;
     @BindView(R.id.tv_act_integralrecode_totalintegral)
     TextView tvTotalintegral;//总积分
+     @BindView(R.id.tv_act_integralrecode_integralrecode)
+    TextView intefralRecode;//积分记录
     @BindView(R.id.iv_act_integralrecode_filtrate)
     ImageView ivFiltrate;//筛选按钮
     @BindView(R.id.lv_act_integralrecode)
@@ -81,6 +85,10 @@ public class IntegralRecodeActivity extends BaseActivity {
      * 加载显示积分页数
      */
     private int page = 1;
+    /**参数--start_time*/
+    private String  paramsStartTime="";
+    /**参数---end_time*/
+    private String paramsEndTime="";
     /**
      * listview适配器
      */
@@ -93,6 +101,9 @@ public class IntegralRecodeActivity extends BaseActivity {
      * 自定义dialog的展示view的控件
      */
     private TextView startTime, endTime, cancel, confirm;
+    /**日历dialog*/
+//    private CalendarDialog calendarDialog;
+    private CalendarDialogScroll calendarDialog;
 
     @Override
     public int getLayoutResId() {
@@ -111,19 +122,47 @@ public class IntegralRecodeActivity extends BaseActivity {
 
                 break;
             case R.id.tv_dialog_starttime://dialog中选择开始时间
-                CalendarDialog  dialog2=new CalendarDialog(this);
-                dialog2.show();
+                if (calendarDialog==null){
+//                    calendarDialog=new CalendarDialog(this);
+                    calendarDialog=new CalendarDialogScroll(this);
+                }
+                calendarDialog.showDialog();
                 break;
             case R.id.tv_dialog_endtime://dialog中选择结束时间
+                if (calendarDialog==null){
+//                    calendarDialog=new CalendarDialog(this);
+                    calendarDialog=new CalendarDialogScroll(this);
+                }
+                calendarDialog.showDialog();
                 break;
             case R.id.tv_dialog_cancel://dialog中取消选择
                 timeSelDialog.dismiss();
                 break;
             case R.id.tv_dialog_confirm://dialog中确认选择
+                dialog.show();
+                String date1=startTime.getText().toString();
+                String date2=endTime.getText().toString();
+                if (TimeUtils.compareDate(date1,date2)){
+                    paramsStartTime=date2;
+                    paramsEndTime=date1;
+                }else {
+                    paramsStartTime=date1;
+                    paramsEndTime=date2;
+                }
+                page=1;
+                initDataFromInternet();
+                Log.e(TAG, "onClick:-----------true,第一个日期较大---------------- "+TimeUtils.compareDate(date1,date2) );
                 timeSelDialog.dismiss();
 
                 // TODO: 2017/8/21 根据选择的时间进行条件查询展示
 
+                break;
+            case R.id.tv_act_integralrecode_integralrecode:
+                paramsStartTime="";
+                paramsEndTime="";
+                page=1;
+                dialog.show();
+                initDataFromInternet();
                 break;
         }
 
@@ -162,6 +201,12 @@ public class IntegralRecodeActivity extends BaseActivity {
         cancel = (TextView) view.findViewById(R.id.tv_dialog_cancel);
         confirm = (TextView) view.findViewById(R.id.tv_dialog_confirm);
 
+        startTime.setText(TimeUtils.getCurrentFirstOfTheMonteh());
+        endTime.setText(TimeUtils.getNowDateShort());
+
+//        calendarDialog=new CalendarDialog(this);
+        calendarDialog=new CalendarDialogScroll(this);
+
     }
 
     @Override
@@ -185,19 +230,39 @@ public class IntegralRecodeActivity extends BaseActivity {
 
             }
         });
+        //非滑动日历
+//        calendarDialog.setListener(new CalendarDialog.OnCalendarDialogDismissListener() {
+//
+//            @Override
+//            public void onDismiss(String sTime, String eTime) {
+//                startTime.setText(sTime);
+//                endTime.setText(eTime);
+//            }
+//        });
+        //滑动日历
+        calendarDialog.setListener(new CalendarDialogScroll.OnCalendarDialogDismissListener() {
+            @Override
+            public void onDismiss(String sTime, String eTime) {
+                startTime.setText(sTime);
+                endTime.setText(eTime);
+            }
+        });
+
         ivFiltrate.setOnClickListener(this);
         startTime.setOnClickListener(this);
         endTime.setOnClickListener(this);
         cancel.setOnClickListener(this);
         confirm.setOnClickListener(this);
+        intefralRecode.setOnClickListener(this);
+
     }
 
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", "12267");
-        map.put("start_time", "");
-        map.put("end_time", "");
+        map.put("start_time", paramsStartTime);
+        map.put("end_time", paramsEndTime);
         map.put("page_count", "");//待删除字段
         map.put("page", "" + page);
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "IntegralRecodeActivity", new StringCallback() {
@@ -206,8 +271,8 @@ public class IntegralRecodeActivity extends BaseActivity {
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ----------消息接口请求返回数据-----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralRecodeBean>() {
-                        }.getType(),
-                        IntegralRecodeBean.class, IntegralRecodeActivity.this);
+                        }.getType(),IntegralRecodeBean.class, IntegralRecodeActivity.this);
+
                 if (page == 1 && bean1 != null) {
                     dialog.dismiss();
                     bean = (IntegralRecodeBean) bean1;
@@ -217,7 +282,6 @@ public class IntegralRecodeActivity extends BaseActivity {
                     bean = (IntegralRecodeBean) bean1;
                     LoadInternetDataToUi();
                 }
-
             }
 
             @Override
@@ -244,9 +308,7 @@ public class IntegralRecodeActivity extends BaseActivity {
             } else {
                 ToastUtils.showToast(this, "当前没有要显示的积分记录");
             }
-
         }
-
     }
 
     @Override

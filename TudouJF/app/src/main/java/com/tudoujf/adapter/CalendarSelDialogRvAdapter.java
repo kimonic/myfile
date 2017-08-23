@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.bean.databean.CalendarBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,31 +26,59 @@ import java.util.List;
 
 public class CalendarSelDialogRvAdapter extends RecyclerView.Adapter<CalendarSelDialogRvAdapter.MyViewHolder> {
     private Context context;
-    private List<String> list;
+    private List<CalendarBean> list;
 
-    public CalendarSelDialogRvAdapter(Context context, List<String> list) {
+    private RVItemListener listener;
+
+    /**
+     * item点击事件
+     */
+    public RVItemListener getListener() {
+        return listener;
+    }
+
+    public void setListener(RVItemListener listener) {
+        this.listener = listener;
+    }
+
+    public CalendarSelDialogRvAdapter(Context context, List<CalendarBean> list) {
         this.context = context;
         this.list = list;
-        initList();
     }
 
-    private void initList() {
-        list=new ArrayList<>();
-        for (int i = 0; i < 35; i++) {
-            list.add(""+i);
-        }
-    }
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.rvitem_dialog_calendarsel, parent,false));
-        return holder;
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.rvitem_dialog_calendarsel, parent, false));
     }
 
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.tv.setText(list.get(position));
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
+        holder.tv.setText(("" + list.get(position).getDay()));
+        holder.tv.setTag(position);
+
+
+        switch (list.get(position).getFlag()) {
+            case 1:
+                holder.tv.setBackgroundColor(context.getResources().getColor(R.color.calendar_bac));
+                break;
+            case 2:
+                holder.tv.setBackgroundColor(context.getResources().getColor(R.color.dialog_integralrecode_bac));
+                break;
+            case 3:
+                holder.tv.setBackgroundColor(context.getResources().getColor(R.color.calendar_selbac));
+                break;
+        }
+        holder.tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.itemClick(v);
+                }
+            }
+        });
     }
 
     @Override
@@ -62,9 +90,13 @@ public class CalendarSelDialogRvAdapter extends RecyclerView.Adapter<CalendarSel
 
         TextView tv;
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             tv = (TextView) view.findViewById(R.id.id_num);
         }
+    }
+
+    public interface RVItemListener {
+        void itemClick(View v);
     }
 }

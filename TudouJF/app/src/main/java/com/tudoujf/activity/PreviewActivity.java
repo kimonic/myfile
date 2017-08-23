@@ -86,6 +86,8 @@ public class PreviewActivity extends BaseActivity {
     Button btActPreview17;
     @BindView(R.id.bt_act_preview18)
     Button btActPreview18;
+    @BindView(R.id.bt_act_preview19)
+    Button btActPreview19;
     @BindView(R.id.bt_act_preview20)
     Button btActPreview20;
 
@@ -207,7 +209,9 @@ public class PreviewActivity extends BaseActivity {
             case R.id.bt_act_preview18:
                 openActivity(MyEarningsActivity.class);
                 break;
-//            case R.id.bt_act_preview19:break;
+            case R.id.bt_act_preview19:
+                openActivity(TestActivity.class);
+                break;
             case R.id.bt_act_preview20:
                 openActivity(IntegralRecodeActivity.class);
                 break;
@@ -306,7 +310,7 @@ public class PreviewActivity extends BaseActivity {
         btActPreview16.setOnClickListener(this);
         btActPreview17.setOnClickListener(this);
         btActPreview18.setOnClickListener(this);
-//        btActPreview19.setOnClickListener(this);
+        btActPreview19.setOnClickListener(this);
         btActPreview20.setOnClickListener(this);
     }
 

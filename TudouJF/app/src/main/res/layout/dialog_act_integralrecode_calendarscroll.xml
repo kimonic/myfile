@@ -5,6 +5,7 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="36dp"
@@ -82,22 +83,21 @@
             android:id="@+id/tv_dialog_canlendar_previous"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:background="@drawable/dialog_canlendarsel_tableheader_leftarrow"
-            />
+            android:background="@drawable/dialog_canlendarsel_tableheader_leftarrow" />
 
         <TextView
             android:id="@+id/tv_dialog_canlendar_currenttime"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="2017-08-15"
+            android:background="@drawable/dialog_canlendarsel_tableheader_left"
             android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="2017-08-15"
             android:textColor="@color/color_white"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="10dp"
-            android:background="@drawable/dialog_canlendarsel_tableheader_left"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tv_dialog_canlendar_next"
             android:layout_width="50dp"
@@ -107,91 +107,89 @@
             />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/sunday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/monday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/tuesday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/wednesday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/thursday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/friday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/saturday"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_dialog_canlendar"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_dialog_canlendar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="300dp"
         android:layout_marginBottom="10dp"
-        />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
 
 
 </LinearLayout>
-
 

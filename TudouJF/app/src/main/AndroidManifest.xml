@@ -78,6 +78,8 @@
         <activity android:name=".activity.HuiFuRegisterActivity"/>
         <!--我的收益activity-->
         <activity android:name=".activity.MyEarningsActivity"/>
+        <!--测试用的activity,正式发布时删除-->
+        <activity android:name=".activity.TestActivity"/>
 
 
         <!-- 预览各个activity的界面 -->
