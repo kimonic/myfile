@@ -158,5 +158,16 @@ public class StringUtils {
         return re_StrTime;
     }
 
+    /**
+     * 判断字符串是否为null,或者""、{}、[]
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty2(String str) {
+        return str == null || "".equals(str.trim()) || "{}".equals(str)
+                || "[]".equals(str) || "null".equals(str);
+    }
+
 
 }

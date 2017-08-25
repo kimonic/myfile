@@ -146,7 +146,6 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
             bean.setShengYuKeTou(i * 123456 + ".00元");
             bean.setTitle("房产抵押贷款20170327003");
 
-
             list.add(bean);
         }
 
@@ -160,7 +159,6 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
         } else {
             ManageMoneyMattersChildFragLvAdapter actLVAdapter = new ManageMoneyMattersChildFragLvAdapter(getActivity(), list);
             lvFragManageMoneyMatters.setAdapter(actLVAdapter);
-
         }
 
         initDataFromInternet();
@@ -172,7 +170,6 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
         llOrder1.setOnClickListener(this);
         llOrder2.setOnClickListener(this);
         llOrder3.setOnClickListener(this);
-
     }
 
     @Override
