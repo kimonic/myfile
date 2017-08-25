@@ -23,6 +23,7 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/tv_act_myexperiencegold_amount"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/global_theme_background_color"
@@ -54,6 +55,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_act_myexperiencegold_amount_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -88,6 +90,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_act_myexperiencegold_amount_balance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -104,212 +107,86 @@
         android:layout_height="20dp"
         android:background="@color/global_background_color" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/act_myexperiencegold_wodetouzi"
+        android:textColor="@color/color_black"
+        android:textSize="14sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/touzijine"
-                android:textColor="@color/color_gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="28,888.00元"
-                android:textColor="@color/global_theme_background_color"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/touzishijian"
+            android:textColor="@color/color_black"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_fourboder"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/touzijineyuan"
+            android:textColor="@color/color_black"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_twoboder"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/yishoulixiyuan"
+            android:textColor="@color/color_black"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_fourboder"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/daishoulixiyuan"
+            android:textColor="@color/color_black"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_twoboder"
+            android:textSize="12sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/zhuangtai"
+            android:textColor="@color/color_black"
+            android:layout_weight="1"
+            android:background="@drawable/xshape_fourboder"
+            android:textSize="12sp" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/global_background_color"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/touzishijian"
-                android:textColor="@color/color_gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="20XX/XX/XX"
-                android:textColor="@color/color_black1"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/global_background_color"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/yishoulixi"
-                android:textColor="@color/color_gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0.00元"
-                android:textColor="@color/act_register_tvcolor1"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/global_background_color"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/daishoulixi"
-                android:textColor="@color/color_gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="0.00元"
-                android:textColor="@color/act_register_tvcolor1"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/global_background_color"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:text="@string/zhuangtai"
-                android:textColor="@color/color_gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="回款中"
-                android:textColor="@color/color_black1"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/global_background_color"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
-    <View
+    <ListView
+        android:id="@+id/lv_act_myexperience"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/color_white"
+        android:dividerHeight="0dp"
+        android:divider="@null"
         android:layout_weight="1"
-        android:background="@color/global_background_color" />
+        />
+
+
 
 
 </LinearLayout>

@@ -125,6 +125,21 @@ public class StringUtils {
 
     }
 
+
+    /**
+     *将字符串转化为float型数字
+     * @param floatString  数字型字符串
+     * @return     字符串数字或0
+     */
+    public static float  string2Float(String floatString){
+        try {
+            return Float.parseFloat(floatString);
+        }catch (NumberFormatException e){
+            return 0;
+        }
+
+    }
+
     /**将时间戳转为字符串
      *
      * @param cc_time   时间戳字符串,到秒

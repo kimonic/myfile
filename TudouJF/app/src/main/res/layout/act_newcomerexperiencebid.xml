@@ -15,6 +15,7 @@
         app:leftImage="@drawable/xvector_back" />
 
     <com.tudoujf.ui.InfoView
+        android:id="@+id/iv_act_newcomerexperiencebid"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 
@@ -39,10 +40,11 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_act_newcomerexperiencebid_yitoujine"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="XXXXXXXXX元"
+            android:text="@string/act_newcomerexperiencebid_default"
             android:textColor="@color/act_newcomerexperiencebid_tvcolor"
             android:textSize="14sp" />
 
@@ -72,10 +74,11 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_act_newcomerexperiencebid_touzirenshu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="XXXXXXXXX元"
+            android:text="@string/act_integralrecode_default"
             android:textColor="@color/act_newcomerexperiencebid_tvcolor"
             android:textSize="14sp" />
 
@@ -104,10 +107,11 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tv_act_newcomerexperiencebid_huankuanfangshi"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="XXXXXXXXX元"
+            android:text="@string/act_newcomerexperiencebid_default1"
             android:textColor="@color/act_newcomerexperiencebid_tvcolor"
             android:textSize="14sp" />
 
@@ -193,6 +197,7 @@
 
         >
         <TextView
+            android:id="@+id/tv_act_newcomerexperiencebid_loadmore"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
@@ -210,6 +215,7 @@
 
 
     <TextView
+        android:id="@+id/tv_act_newcomerexperiencebid_bidnow"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/global_theme_background_color"

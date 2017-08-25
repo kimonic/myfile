@@ -127,7 +127,7 @@
     <string name="touzishijian">投资时间</string>
     <string name="yishoulixi">已收利息</string>
     <string name="daishoulixi">代收利息</string>
-    <string name="zhuangtai">状\t\t\t\t\t\t态</string>
+    <string name="zhuangtai">状态</string>
 
     <string name="frag_home_touziqixian">投资期限</string>
     <string name="frag_home_yuqinianhuashouyi">预期年化收益</string>
@@ -269,6 +269,11 @@
     <string name="monday">一</string>
     <string name="tuesday">二</string>
     <string name="wednesday">三</string>
+    <string name="act_myexperiencegold_wodetouzi">我的投资</string>
+    <string name="yishoulixiyuan">已收利息(元)</string>
+    <string name="daishoulixiyuan">待收利息(元)</string>
+    <string name="act_newcomerexperiencebid_default">--------元</string>
+    <string name="act_newcomerexperiencebid_default1">\????????</string>
 
 
 </resources>

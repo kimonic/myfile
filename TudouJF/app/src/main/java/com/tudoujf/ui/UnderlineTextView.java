@@ -28,7 +28,7 @@ import com.tudoujf.R;
 
 public class UnderlineTextView extends AppCompatTextView {
 
-    private int underlineColor;
+    private int underlineColor=0;
     private Paint underlinePaint;
     private AttributeSet attrs;
 
@@ -80,7 +80,7 @@ public class UnderlineTextView extends AppCompatTextView {
         super.onDraw(canvas);
         canvas.save();
         if (underlineColor!=0){
-            underlinePaint.setColor(underlineColor);
+            underlinePaint.setColor(getContext().getResources().getColor(underlineColor));
         }else {
             underlinePaint.setColor(getResources().getColor(R.color.color_white));
         }

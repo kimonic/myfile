@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,16 +15,28 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.adapter.ManageMoneyMattersChildFragLvAdapter;
 import com.tudoujf.adapter.ManageMoneyMattersFragLvAdapter;
+import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.ManageMoneyMattersFragBean;
+import com.tudoujf.bean.databean.ManageMoneyMattersBean;
+import com.tudoujf.bean.databean.MyExperienceGoldBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +77,9 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
 
     private int count1 = 0, count2 = 0;
 
+    private ManageMoneyMattersBean  bean;
+    private String requestUrl;
+
     @Override
     public int layoutRes() {
         return R.layout.frag_managemoneymatterschild;
@@ -101,6 +117,12 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
     public void initDataFromIntent() {
 
         type = getArguments().getInt("type", 1);
+        if (type==1){
+            requestUrl=Constants.INVESTMENT_LIST;
+        }else {
+            requestUrl=Constants.CREDITOR_TRANSFER_LIST;
+        }
+
 
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -141,6 +163,8 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
 
         }
 
+        initDataFromInternet();
+
     }
 
     @Override
@@ -153,6 +177,30 @@ public class ManageMoneyMattersChildFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+
+        TreeMap<String, String> map = new TreeMap<>();
+//        map.put("login_token", "12267");
+        map.put("page", "1");
+        map.put("order_type", "1");//排序类别,1全部2利率3期限
+        map.put("sort_type", "1");//排序方式,1升序 2降序
+        map.put("repay_type", "1");//还款方式,1等额本息--3到期本息---4按月付息----5按天计息到期还本息
+
+
+        HttpMethods.getInstance().POST(getActivity(), requestUrl, map, "MyExperienceGoldActivity",
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----理财投资列表接口返回数据------------------- " + result);
+//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyExperienceGoldBean>() {
+//                        }.getType(), MyExperienceGoldBean.class,getActivity());
+//                        if (bean1 != null) {
+//                            bean = (MyExperienceGoldBean) bean1;
+//                            LoadInternetDataToUi();
+//                        }
+
+                    }
+                });
 
     }
 

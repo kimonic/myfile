@@ -46,7 +46,7 @@ public class InfoView extends View {
 
 
     /**投资进度*/
-    private float underlineScale1=0.88f;//对应75%\
+    private float underlineScale1=0;//对应75%\
     /**预期年化收益率*/
     private String nianHuaShouYi="8.8%";
     /**借款期限*/
@@ -135,7 +135,7 @@ public class InfoView extends View {
 
 
         canvas.drawBitmap(bitmapRight,null,rectImag2,null);
-        canvas.drawText("借款期限",width/1.6f,rectImag1.bottom-5,paintGray);
+        canvas.drawText("借款期限",width/1.5f,rectImag1.bottom-5,paintGray);
 
         float textWidth1=paintGray.measureText("预期年化收益");
 
@@ -146,7 +146,7 @@ public class InfoView extends View {
         float textWidth2=paintGray.measureText("借款期限");
 
         //借款期限
-        int textX2= (int) (width/1.6f+textWidth2/2-paintOrange.measureText(jieKuanQiXian)/2);
+        int textX2= (int) (width/1.5f+textWidth2/2-paintOrange.measureText(jieKuanQiXian)/2);
         canvas.drawText(jieKuanQiXian,textX2,width/9.1f,paintOrange);
 
         canvas.drawLine(width/1.86f,width/61.74f,width/1.86f,rectImag1.bottom-5,paintCyan);//中分线
@@ -162,12 +162,12 @@ public class InfoView extends View {
 
         rectF.left=width*underlineScale;
         rectF.top=width/4.07f;
-        rectF.right=rectF.left+width*0.07407f;
+        rectF.right=rectF.left+width*0.10407f;
         rectF.bottom=width*0.277f;
         canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
 
         paintWhite.setTextSize(width*0.02777f);
-        canvas.drawText((int)(underlineScale1*100)+"%",width*(underlineScale+0.01f),width*0.2731f,paintWhite);
+        canvas.drawText(handleProgress(),width*(underlineScale+0.01f),width*0.2731f,paintWhite);
 
         canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
 
@@ -178,6 +178,15 @@ public class InfoView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             setMeasuredDimension(width, (int) (width/whScale));
+    }
+
+    private String handleProgress(){
+        if (underlineScale1==0){
+            return "0.00%";
+        }else {
+            return (underlineScale1*100)+"%";
+        }
+
     }
 
     private Paint initPaint(int color){

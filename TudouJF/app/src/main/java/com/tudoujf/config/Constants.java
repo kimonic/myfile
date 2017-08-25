@@ -28,6 +28,13 @@ public class Constants {
     public static  final String  INTEGRAL_LIST=URL+"/phone/sign/list";
     /**标记消息是否已读接口*/
     public static  final String  MESSAGE_READ=URL+"/phone/message/read";
+    /**我的体验金接口*/
+    public static  final String  MY_EXPERIENCE=URL+"/phone/loan/myExperience";
+    /**新手体验标详情*/
+    public static  final String  MY_EXPERIENCE_LOAN_INFO=URL+"/phone/loan/loanInfo";
+    /**理财--投资列表*/
+    public static  final String  INVESTMENT_LIST=URL+"/phone/loan/list";
+    public static  final String  CREDITOR_TRANSFER_LIST=URL+"/phone/transfer/list";
 
 
 

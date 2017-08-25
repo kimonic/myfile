@@ -198,6 +198,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 list.get(j).setTextColor(getResources().getColor(R.color.color_black));
                 listLL.get(j).setVisibility(View.GONE);
             }
+
         }
 
 

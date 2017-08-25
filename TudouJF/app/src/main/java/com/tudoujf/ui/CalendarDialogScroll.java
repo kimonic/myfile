@@ -109,24 +109,12 @@ public class CalendarDialogScroll implements View.OnClickListener {
         tvPrevious.setOnClickListener(this);
         tvNext.setOnClickListener(this);
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 tvCurrentTime.setText(listData.get(position).getTitle());
 
                 // TODO: 2017/8/23 可在此处动态设置viewpager的高度,但设置后在切换时会有抖动
-
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
