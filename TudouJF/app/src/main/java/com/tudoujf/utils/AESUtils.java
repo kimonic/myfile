@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
  * description：  AES加密工具类---加密方式---AES/CBC/PKCS5PADDING
  * history：
  * ---------------------encrypt(String key, String src)----加密返回16进制字符串
- * ---------------------encrypt(String key, String src)----解密返回文本
+ * ---------------------decrypt(String key, String src)----解密返回文本
  * ---------------------
  * ---------------------
  * mark:              如果该类报错,则可能是字符编码不一致造成的

@@ -85,7 +85,7 @@ public class DrawGestureActivity extends BaseActivity {
                 } else {
                     if (inputCount == 2) {
                         password = EncryptionLockUtils.convertList(positionSet);
-                    } else if (!password.equals( EncryptionLockUtils.convertList(positionSet))) {
+                    } else if (password!=null&&!password.equals( EncryptionLockUtils.convertList(positionSet))) {
                         password=null;
                         inputCount = inputCount+1;
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_error);

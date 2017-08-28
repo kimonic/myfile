@@ -5,6 +5,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.MyEarningsActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
@@ -96,6 +97,7 @@ public class MyFragment extends BaseFragment {
                         openActivity(SignInActivity.class);
                         break;
                     case 1:
+                        openActivity(MyEarningsActivity.class);
                         break;
                     case 2:
                         break;

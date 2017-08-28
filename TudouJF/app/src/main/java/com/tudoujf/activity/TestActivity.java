@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.CalendarView;
+import com.tudoujf.utils.AESUtils;
 import com.tudoujf.utils.TimeUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -62,6 +64,8 @@ public class TestActivity extends BaseActivity {
      * 当前点击按钮标识
      */
     private int buttonFlag = 1;
+    private String TAG="TestActivity";
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_test;
@@ -113,6 +117,16 @@ public class TestActivity extends BaseActivity {
             });
             listData.add(view);
         }
+
+        //测试aes加密
+
+        String  mingwen="12331";
+        String  miwen= AESUtils.encrypt("123456",mingwen);
+        String  jiemi=AESUtils.decrypt("123456",miwen);
+
+        Log.e(TAG, "initDataFromIntent: ----------密文---------"+miwen );
+        Log.e(TAG, "initDataFromIntent: ----------明文---------"+jiemi );
+
 
     }
 

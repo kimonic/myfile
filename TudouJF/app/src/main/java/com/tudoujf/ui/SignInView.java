@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -16,7 +15,6 @@ import android.view.View;
 
 import com.tudoujf.R;
 import com.tudoujf.utils.ScreenSizeUtils;
-import com.tudoujf.utils.ToastUtils;
 
 /**
  * * ==================================================
@@ -37,9 +35,13 @@ public class SignInView extends View {
     private static final int BACRESID = R.drawable.view_signin;
     private Bitmap bitmap;
     private Rect rect = new Rect(), rectClick = new Rect();
-    /**当前总积分*/
+    /**
+     * 当前总积分
+     */
     private String totalIntegrel = "00,000";
-    /**签到成功*/
+    /**
+     * 签到成功
+     */
     private String signInSuccess = "签到成功,获得1积分";
     private Paint whitePaint, textPaint;
     /**
@@ -47,13 +49,16 @@ public class SignInView extends View {
      * true--未签到,false--已签到
      */
     private boolean flagIsSignIn = true;
-    /**点击成功后不再响应点击事件
+    /**
+     * 点击成功后不再响应点击事件
      * false---可点击
      * true--不能点击
-     * */
+     */
     private boolean flagSignInSuccess = false;
-    /**点击事件监听*/
-    private ClickEventListener  listener;
+    /**
+     * 点击事件监听
+     */
+    private ClickEventListener listener;
     private int currentX;
     private int currentY;
 
@@ -65,15 +70,23 @@ public class SignInView extends View {
         this.flagSignInSuccess = flagSignInSuccess;
     }
 
-    /**当前总积分*/
+    /**
+     * 当前总积分
+     */
     public void setTotalIntegrel(String totalIntegrel) {
         this.totalIntegrel = totalIntegrel;
     }
-    /**是否已签到*/
+
+    /**
+     * 是否已签到
+     */
     public void setFlagIsSignIn(boolean flag) {
         this.flagIsSignIn = flag;
     }
-    /**点击时间监听*/
+
+    /**
+     * 点击时间监听
+     */
     public void setListener(ClickEventListener listener) {
         this.listener = listener;
     }
@@ -150,9 +163,9 @@ public class SignInView extends View {
         }
 
 
-        if (!flagIsSignIn){
-            float textX3=width*0.32f;
-            float textY3=width*0.71f;
+        if (!flagIsSignIn) {
+            float textX3 = width * 0.32f;
+            float textY3 = width * 0.71f;
             canvas.drawText(signInSuccess, textX3, textY3, whitePaint);
         }
 
@@ -179,11 +192,12 @@ public class SignInView extends View {
             case MotionEvent.ACTION_DOWN:
                 break;
             case MotionEvent.ACTION_UP:
-                 currentX= (int) event.getX();
-                 currentY= (int) event.getY();
-                if (rectClick.contains(currentX,currentY)&&!flagSignInSuccess){
-                    flagIsSignIn=false;
-                    if (listener!=null){
+                currentX = (int) event.getX();
+                currentY = (int) event.getY();
+                if (rectClick.contains(currentX, currentY) && !flagSignInSuccess) {
+                    //此处的值在进入签到的下级页面后,结束返回会导致此view刷新
+//                    flagIsSignIn = false;
+                    if (listener != null) {
                         listener.clickEvent();
                     }
 
@@ -195,7 +209,7 @@ public class SignInView extends View {
         return true;
     }
 
-    public interface ClickEventListener{
+    public interface ClickEventListener {
         void clickEvent();
     }
 }

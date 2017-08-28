@@ -32,6 +32,7 @@ import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.HomeBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.AwardInfoView;
@@ -125,7 +126,7 @@ public class HomeFragment extends BaseFragment {
     /**
      * 轮播handler
      */
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (vpFragHome != null) {
@@ -172,15 +173,15 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home_leftarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() - 1);
-                }else {
-                    ToastUtils.showToast(getActivity(),"已经没有更多啦!");
+                } else {
+                    ToastUtils.showToast(getActivity(), "已经没有更多啦!");
                 }
                 break;
             case R.id.tv_frag_home_rightarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
-                }else {
-                    ToastUtils.showToast(getActivity(),"已经没有更多啦!");
+                } else {
+                    ToastUtils.showToast(getActivity(), "已经没有更多啦!");
                 }
                 break;
             case R.id.ll_frag_home_huodongzhuanqu:
@@ -198,8 +199,8 @@ public class HomeFragment extends BaseFragment {
                 openActivity(SignInActivity.class);
                 break;
             case R.id.fl_frag_msgcount://启动我的消息页面
-                Intent intent=new Intent(getActivity(),MyMessageActivity.class);
-                startActivityForResult(intent,1);
+                Intent intent = new Intent(getActivity(), MyMessageActivity.class);
+                startActivityForResult(intent, 1);
 
 //                openActivity(MyMessageActivity.class);
                 break;
@@ -209,12 +210,12 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e(TAG, "onActivityResult: ----未读消息数--------"+ data.getStringExtra("msgcount"));
-        if (requestCode==1){//我的消息返回数据
-            int  msgCount=data.getIntExtra("msgcount",0);
-            if (msgCount!=0){
-                Log.e(TAG, "onActivityResult: ----未读消息数--------"+ data.getStringExtra("msgcount"));
-                tvMsgCount.setText((""+msgCount));
+        Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
+        if (requestCode == 1) {//我的消息返回数据
+            int msgCount = data.getIntExtra("msgcount", 0);
+            if (msgCount != 0) {
+                Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
+                tvMsgCount.setText(("" + msgCount));
             }
 
         }
@@ -418,10 +419,12 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "12267");
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homefragment", new StringCallback() {
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+        //        map.put("login_token", "12267");
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
@@ -435,7 +438,7 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onError(Response<String> response) {
-                Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------"+ response.message() );
+                Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------" + response.message());
                 super.onError(response);
             }
         });

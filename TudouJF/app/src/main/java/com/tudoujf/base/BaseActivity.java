@@ -34,8 +34,10 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseMethod, View.OnClickListener {
 
-    /**app进入前台后为false,返回后为true*/
-    private boolean isActive=true;
+    /**
+     * app进入前台后为false,返回后为true
+     */
+    private boolean isActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +134,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
 
     @Override
     protected void onDestroy() {
-        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
+
+//        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient()); //此处开启会造成不定时的数据无法加载
+        OkGo.cancelTag(OkGo.getInstance().getOkHttpClient(), getLocalClassName());
         super.onDestroy();
 
     }
@@ -141,17 +145,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     /**
      * 程序是否在前台运行
      *
-     * @return  返回程序是否在前台运行
+     * @return 返回程序是否在前台运行
      */
     public boolean isAppOnForeground() {
-        // Returns a list of application processes that are running on the
-        // device
-
+        //返回所有正在手机上运行的app的进程列表
         ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = getApplicationContext().getPackageName();
 
         List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-        if (appProcesses == null){
+        if (appProcesses == null) {
             return false;
         }
 
@@ -166,29 +168,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         return false;
     }
 
-        @Override
-        protected void onStop() {
-            // TODO Auto-generated method stub
-            super.onStop();
+    @Override
+    protected void onStop() {
+        super.onStop();
 
-            if (!isAppOnForeground()) {
-                //app 进入后台
-                ToastUtils.showToast(this,"app已经进入后台!!");
+        if (!isAppOnForeground()) {
+            //app 进入后台
+            ToastUtils.showToast(this, "土豆app已经进入后台运行!!");
 //                全局变量 记录当前已经进入后台
-                        isActive = false;
-            }
+            isActive = false;
         }
+    }
 
-        @Override
-        protected void onResume() {
-            // TODO Auto-generated method stub
-            super.onResume();
-
-
-            if (!isActive) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isActive) {
 //            app 从后台唤醒，进入前台
-                ToastUtils.showToast(this,"app已经回到前台!!");
+            ToastUtils.showToast(this, "土豆app已经回到前台!!");
             isActive = true;
-            }
         }
+    }
 }

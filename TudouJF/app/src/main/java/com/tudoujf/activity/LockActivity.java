@@ -74,6 +74,7 @@ public class LockActivity extends BaseActivity {
     public void initView() {
         ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         mlvActLock.setPassword(password);
+        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- "+password );
 //        TreeMap<String,String>  map=new TreeMap<>();
 //        map.put("login_token","12267");
 //        Log.e("TAG", "initView:------------加密字符串---------- " + StringUtils.getRequestParams(map));

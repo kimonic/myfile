@@ -27,6 +27,15 @@ import okhttp3.OkHttpClient;
 
 public class MApp extends Application{
     public static MApp app = null;
+    private boolean isLogin=false;
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setLogin(boolean login) {
+        isLogin = login;
+    }
 
     @Override
     public void onCreate() {

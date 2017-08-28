@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.encryptionpackages.AESencrypt;
+import com.example.encryptionpackages.CreateCode;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -19,11 +21,16 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.mapi.MApp;
+import com.tudoujf.utils.AESUtils;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 
+import java.lang.reflect.GenericSignatureFormatError;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -41,7 +48,7 @@ import butterknife.BindView;
  */
 
 public class LoginActivity extends BaseActivity {
-    private static String TAG = "loginactivity";
+    private static String TAG = "LoginActivity";
     @BindView(R.id.et_act_login_username)
     EditText etUsername;
     @BindView(R.id.et_act_login_password)
@@ -147,7 +154,7 @@ public class LoginActivity extends BaseActivity {
                 openActivity(FindPasswordActivity.class);
                 break;
             case R.id.tv_act_login_login://发送登陆请求,成功登陆后跳转主页
-                dialog= DialogUtils.showProgreessDialog(this,"再点击一次将结束登陆退出!");
+                dialog= DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
                 login();
 
                 break;
@@ -162,7 +169,7 @@ public class LoginActivity extends BaseActivity {
      * 登陆请求
      */
     private void login() {
-        HttpMethods.getInstance().POST(this, Constants.LOGIN, getArguments(), "123", new StringCallback() {
+        HttpMethods.getInstance().POST(this, Constants.LOGIN, getArguments(), getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
@@ -172,6 +179,11 @@ public class LoginActivity extends BaseActivity {
                         LoginBean.class,LoginActivity.this );
                 if (bean1!=null){
                     bean= (LoginBean) bean1;
+                    //加密存储logintoken到本地
+                    SharedPreferencesUtils.getInstance(LoginActivity.this,Constants.USER_CONFIG)
+                            .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
+                                    CreateCode.getSEND_AES_KEY(),bean.getLogin_token()));
+                    MApp.getInstance().setLogin(true);
                     openActivity(HomeActivity.class);
                 }
 //                     TODO: 2017/8/8 做对应返回错误码的处理

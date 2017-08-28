@@ -20,11 +20,13 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.fragment.DiscoverFragment;
 import com.tudoujf.fragment.HomeFragment;
 import com.tudoujf.fragment.ManageMoneyMattersFragment;
 import com.tudoujf.fragment.MyFragment;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -102,6 +104,10 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        //判断是否已登陆
+        if (!"".equals(UserConfig.getInstance().getLoginToken(this))){
+            MApp.getInstance().setLogin(true);
+        }
 
     }
 

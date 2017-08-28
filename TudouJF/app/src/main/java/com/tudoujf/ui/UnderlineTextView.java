@@ -80,7 +80,11 @@ public class UnderlineTextView extends AppCompatTextView {
         super.onDraw(canvas);
         canvas.save();
         if (underlineColor!=0){
-            underlinePaint.setColor(getContext().getResources().getColor(underlineColor));
+            try {
+                underlinePaint.setColor(getContext().getResources().getColor(underlineColor));
+            }catch (Exception  e){
+                underlinePaint.setColor(underlineColor);
+            }
         }else {
             underlinePaint.setColor(getResources().getColor(R.color.color_white));
         }

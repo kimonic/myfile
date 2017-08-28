@@ -274,6 +274,7 @@
     <string name="daishoulixiyuan">待收利息(元)</string>
     <string name="act_newcomerexperiencebid_default">--------元</string>
     <string name="act_newcomerexperiencebid_default1">\????????</string>
+    <string name="zaicidianjijinagtuichugaiyemian">再次点击将退出该页面!</string>
 
 
 </resources>
