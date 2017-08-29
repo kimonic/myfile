@@ -419,8 +419,10 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-        //        map.put("login_token", "12267");
+
+        //首页的logintoken为null时,会出现系统错误
+        map.put("login_token",UserConfig.getInstance().getLoginToken(getActivity()));
+
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {

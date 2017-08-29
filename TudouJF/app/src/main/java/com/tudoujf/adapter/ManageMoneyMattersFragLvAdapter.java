@@ -9,8 +9,9 @@ import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
-import com.tudoujf.bean.ManageMoneyMattersFragBean;
+import com.tudoujf.bean.databean.ManageMoneyMattersBean;
 import com.tudoujf.ui.BidView;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -28,9 +29,10 @@ import java.util.List;
 
 public class ManageMoneyMattersFragLvAdapter extends BaseAdapter {
     private Context context;
-    private List<ManageMoneyMattersFragBean> list;
+    private List<ManageMoneyMattersBean.ItemsBean> list;
+    private String TAG="ManageMoneyFragAda";
 
-    public ManageMoneyMattersFragLvAdapter(Context context, List<ManageMoneyMattersFragBean> list) {
+    public ManageMoneyMattersFragLvAdapter(Context context, List<ManageMoneyMattersBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -54,47 +56,70 @@ public class ManageMoneyMattersFragLvAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
-        if (convertView==null){
-            view= LayoutInflater.from(context).inflate(R.layout.lvitem_managemoneymattersfrag,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.bidView= (BidView) view.findViewById(R.id.lvitem_managemoneymatters_bv);
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.lvitem_managemoneymattersfrag, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.bidView = (BidView) view.findViewById(R.id.lvitem_managemoneymatters_bv);
 
             view.setTag(viewHolder);
+        } else {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
+        }
+
+        if (!"-1".equals(list.get(position).getAward_status())) {//是否额外奖励 -1否 1按金额，2按比例
+            viewHolder.bidView.setAward(true);//奖0.02%是否显示
         }else {
-            view=convertView;
-            viewHolder= (ViewHolder) view.getTag();
+            viewHolder.bidView.setAward(false);//奖0.02%是否显示
         }
 
 
-        viewHolder.bidView.setAward(list.get(position).isAward());
-        viewHolder.bidView.setAwardValue(list.get(position).getAwardValue());
-        viewHolder.bidView.setInvestNow(list.get(position).isInvestNow());
-        viewHolder.bidView.setInvestProgress(list.get(position).getInvestProgress());
+//        viewHolder.bidView.setAwardValue(list.get(position).getAwardValue());//奖励的数值
 
-        viewHolder.bidView.setTitle(list.get(position).getTitle());
-        viewHolder.bidView.setNianHuaShouYi(list.get(position).getNianHuaShouYi());
+        if (!"立即投资".equals(list.get(position).getStatus_name())){//是否时立即还款按钮
+            viewHolder.bidView.setInvestNow(false);
+        }else {
+            viewHolder.bidView.setInvestNow(true);
+        }
+        if (list.get(position).getStatus_name()!=null){
+            viewHolder.bidView.setButtonText(list.get(position).getStatus_name());//按钮文本
+        }
 
-        viewHolder.bidView.setShengYuKeTou(list.get(position).getShengYuKeTou());
-        viewHolder.bidView.setInvestSum(list.get(position).getInvestSum());
-        viewHolder.bidView.setInvestTime(list.get(position).getInvestTime());
+
+
+
+        viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress())/100);//投资进度
+        if (list.get(position).getName()!=null){
+            viewHolder.bidView.setTitle((list.get(position).getCategory_name()+list.get(position).getSerialno()));//标的标题
+        }
+
+        if ("-1".equals(list.get(position).getAdditional_status())){//是否显示新手专享
+            viewHolder.bidView.setIsNewer("");
+        }else {
+            viewHolder.bidView.setIsNewer(context.getResources().getString(R.string.xinshouzhuanxiang));
+        }
+
+        viewHolder.bidView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr())+"%");//预期年化收益率
+
+        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
+
+        viewHolder.bidView.setInvestSum(list.get(position).getAmount()+"元");//总投资金额
+        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限
+        viewHolder.bidView.invalidate();
 
         viewHolder.bidView.setListener(new BidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                Intent intent=new Intent(context, ProductDetailsActivity.class);
+                Intent intent = new Intent(context, ProductDetailsActivity.class);
                 context.startActivity(intent);
             }
         });
 
 
-
-
-
-
         return view;
     }
 
-    private class  ViewHolder{
+    private class ViewHolder {
         BidView bidView;
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tudoujf.bean.GlobalBean;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -167,6 +168,13 @@ public class StringUtils {
     public static boolean isEmpty2(String str) {
         return str == null || "".equals(str.trim()) || "{}".equals(str)
                 || "[]".equals(str) || "null".equals(str);
+    }
+
+    /**补齐两位小数*/
+    public static String  getTwoDecimalsStr(String  fStr){
+        float  f=string2Float(fStr);
+        DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        return decimalFormat.format(f);//format 返回的是字符串
     }
 
 

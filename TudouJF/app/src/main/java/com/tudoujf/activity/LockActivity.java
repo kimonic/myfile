@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -67,7 +68,7 @@ public class LockActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         handler = new Handler();
-        password = SharedPreferencesUtils.getInstance(this, "gesture").getString("ciphertext", "");
+        password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("ciphertext","");
     }
 
     @Override

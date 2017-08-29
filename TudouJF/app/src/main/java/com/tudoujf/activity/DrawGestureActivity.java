@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.EncryptionLockUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -122,7 +123,7 @@ public class DrawGestureActivity extends BaseActivity {
 
     private void savePassword(List<Integer> list) {
         String temp=EncryptionLockUtils.convertEncryption(this,list);
-        SharedPreferencesUtils.getInstance(this,"gesture").put("ciphertext",temp);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("ciphertext",temp);
     }
 
     @Override

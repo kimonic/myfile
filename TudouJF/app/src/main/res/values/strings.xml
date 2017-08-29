@@ -260,6 +260,7 @@
     <string name="act_messagedetails_title">我的消息</string>
     <string name="act_web_title" >积分记录</string>
     <string name="meiyougengduojilula">没有更多记录啦!</string>
+    <string name="meiyougengduola">没有更多啦!</string>
     <string name="dialog_qingxuanzeshijian">请选择您要查询的时间</string>
     <string name="confirm">确定</string>
     <string name="sunday">日</string>
@@ -275,6 +276,8 @@
     <string name="act_newcomerexperiencebid_default">--------元</string>
     <string name="act_newcomerexperiencebid_default1">\????????</string>
     <string name="zaicidianjijinagtuichugaiyemian">再次点击将退出该页面!</string>
+    <string name="frag_creditorlist_zhuanrangqishu">转让期数</string>
+    <string name="frag_creditorlist_zhuanrangjine">转让金额</string>
 
 
 </resources>

@@ -3,24 +3,17 @@ package com.tudoujf.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
-import com.tudoujf.adapter.ManageMoneyMattersFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.bean.ManageMoneyMattersFragBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -35,8 +28,8 @@ import butterknife.Unbinder;
  */
 
 public class ManageMoneyMattersFragment extends BaseFragment {
-    @BindView(R.id.lv_frag_managemoneymatters)
-    ListView lvFragManageMoneyMatters;
+//    @BindView(R.id.lv_frag_managemoneymatters)
+//    ListView lvFragManageMoneyMatters;
     @BindView(R.id.tv_frag_managemoneymatters_touziliebiao)
     TextView tvTouZiLieBiao;
     @BindView(R.id.tv_frag_managemoneymatters_zhaiquanliebiao)
@@ -44,7 +37,6 @@ public class ManageMoneyMattersFragment extends BaseFragment {
     @BindView(R.id.vp_frag_managemoneymatters)
     ViewPager vpFragManageMoneyMatters;
 
-    private List<ManageMoneyMattersFragBean> list;
     private List<Fragment> listFrag;
 
     @Override
@@ -76,13 +68,13 @@ public class ManageMoneyMattersFragment extends BaseFragment {
         listFrag = new ArrayList<>();
 
 
-        ManageMoneyMattersChildFragment fragment1 = new ManageMoneyMattersChildFragment();
+        InvestListFragment fragment1 = new InvestListFragment();
         Bundle bundle1 = new Bundle();
         bundle1.putInt("type", 1);
         fragment1.setArguments(bundle1);
 
 
-        ManageMoneyMattersChildFragment fragment2 = new ManageMoneyMattersChildFragment();
+        InvestListFragment fragment2 = new InvestListFragment();
         Bundle bundle2 = new Bundle();
         bundle2.putInt("type", 2);
         fragment2.setArguments(bundle2);

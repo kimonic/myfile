@@ -1,11 +1,9 @@
 package com.tudoujf.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
-import android.util.JsonReader;
-
-import com.google.gson.Gson;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,7 +20,8 @@ import java.util.Map;
  * author：          kimonik
  * version：          1.0
  * date：            2017/7/12
- * description：SharedPreferences本地存储工具类,单例
+ * description：SharedPreferences本地存储工具类,单例,使用该类,必须保证存储文件名只有一个,
+ * 否则打开不同文件时,因单例已存在会造成无法的读取不同文件的内容
  * history：
  * ===================================================
  */
@@ -38,10 +37,11 @@ public class SharedPreferencesUtils {
      * @param context   上下文
      * @param spName   存储的文件名
      */
-    private SharedPreferencesUtils(Context context,String spName) {
+    @SuppressLint("ApplySharedPref")
+    private SharedPreferencesUtils(Context context, String spName) {
         sp = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
         editor = sp.edit();
-        editor.apply();
+        editor.commit();
     }
 
 

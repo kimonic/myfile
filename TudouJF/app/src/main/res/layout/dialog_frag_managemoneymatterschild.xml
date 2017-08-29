@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_dialog_dengebenxi"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
@@ -14,6 +15,7 @@
 
             />
         <TextView
+            android:id="@+id/tv_dialog_daoqihuanbenxi"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"
@@ -23,6 +25,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_dialog_anyuefuxi"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="14sp"

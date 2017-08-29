@@ -97,7 +97,7 @@ public class UserConfig {
             try {
                 userId = AESencrypt.decrypt2PHP(CreateCode.getSEND_AES_KEY(),
                         SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
-                                .getString(Constants.SHARE_USERID, ""));
+                                .getString(Constants.SHARE_USERID));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -124,6 +124,9 @@ public class UserConfig {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        if (loginToken==null){
+            return "";
         }
         return loginToken;
     }

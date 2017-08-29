@@ -38,67 +38,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:text="@string/frag_managemoneymatters_quanbu"
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="16sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:text="@string/frag_managemoneymatters_quanbu"-->
 
-            />
+            <!--/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:text="@string/frag_managemoneymatters_anlilv"
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="16sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:text="@string/frag_managemoneymatters_anlilv"-->
 
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:text="@string/frag_managemoneymatters_anqixian"
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="16sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:text="@string/frag_managemoneymatters_anqixian"-->
 
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/color_black"
-            android:text="@string/frag_managemoneymatters_anhuankuanfangshi"
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:textSize="16sp"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:text="@string/frag_managemoneymatters_anhuankuanfangshi"-->
 
-            />
+            <!--/>-->
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/global_background_color"
-        />
+    <!--</LinearLayout>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="10dp"-->
+        <!--android:background="@color/global_background_color"-->
+        <!--/>-->
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_frag_managemoneymatters"
-        android:dividerHeight="10dp"
-        android:divider="@color/global_background_color"
-        />
+    <!--<ListView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/lv_frag_managemoneymatters"-->
+        <!--android:dividerHeight="10dp"-->
+        <!--android:divider="@color/global_background_color"-->
+        <!--/>-->
 
 
 
