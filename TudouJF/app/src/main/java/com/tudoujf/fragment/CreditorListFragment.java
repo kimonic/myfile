@@ -1,15 +1,8 @@
 package com.tudoujf.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -26,10 +19,12 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.adapter.ManageMoneyMattersFragLvAdapter;
+import com.tudoujf.adapter.CreditorListFragLvAdapter;
+import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.bean.databean.ManageMoneyMattersBean;
+import com.tudoujf.bean.databean.CreditorListBean;
+import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
@@ -42,7 +37,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -82,16 +76,15 @@ public class CreditorListFragment extends BaseFragment {
     ListView lvFragManageMoneyMatters;
     @BindView(R.id.srl_frag_managemoneymatterstouchild)
     SmartRefreshLayout swipeRefreshLayout;
-    Unbinder unbinder;
 
 
-    private List<ManageMoneyMattersBean.ItemsBean> listNew;
+    private List<CreditorListBean.ItemsBean> listNew;
 
     private int type = 1;
 
-    private int count1 = 0, count2 = 0;
+    private int count1 = 0, count2 = 0,count3=0;
 
-    private ManageMoneyMattersBean bean;
+    private CreditorListBean bean;
     private String requestUrl;
 
     /**
@@ -111,23 +104,22 @@ public class CreditorListFragment extends BaseFragment {
      * 排序方式,升序降序
      */
     private String sortType = "";
-    /**
-     * 还款方式
-     */
-    private String repayType = "";
 
     /**
      * 投资列表适配器
      */
-    private ManageMoneyMattersFragLvAdapter actLVAdapter;
+    private CreditorListFragLvAdapter actLVAdapter;
     private String TAG = "ManageMoneyChild";
     /**
      * 互斥的button按钮背景色设置的list
      */
     private List<View> list;
-    private List<TextView> listTV;
 
-    private PopupWindow pop;
+    /**按钮文本显示list*/
+    private List<TextView> listTV;
+    /**按钮指示排序list*/
+    private List<TextView>  listIndicator;
+
 
     @Override
     public int layoutRes() {
@@ -137,10 +129,11 @@ public class CreditorListFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_frag_managemoneymatterschild1://按利率排序
+            case R.id.ll_frag_creditorlist1://按利率排序
                 setBacStyle(0, "2");
 
                 tvOrder2.setBackgroundResource(R.drawable.xvector_updownarrow3);
+                tvOrder3.setBackgroundResource(R.drawable.xvector_updownarrow3);
                 if (count1 % 2 == 1) {
                     sortType = "2";
                     tvOrder1.setBackgroundResource(R.drawable.xvector_updownarrow1);
@@ -153,10 +146,11 @@ public class CreditorListFragment extends BaseFragment {
 
 
                 break;
-            case R.id.ll_frag_managemoneymatterschild2://按期限排序
+            case R.id.ll_frag_creditorlist2://按转让期数排序
                 setBacStyle(1, "3");
 
                 tvOrder1.setBackgroundResource(R.drawable.xvector_updownarrow3);
+                tvOrder3.setBackgroundResource(R.drawable.xvector_updownarrow3);
                 if (count2 % 2 == 1) {
                     sortType = "2";
                     tvOrder2.setBackgroundResource(R.drawable.xvector_updownarrow1);
@@ -169,54 +163,39 @@ public class CreditorListFragment extends BaseFragment {
 
 
                 break;
-            case R.id.ll_frag_managemoneymatterschild3://按还款方式排序
+            case R.id.ll_frag_creditorlist3://按转让金额排序
 
                 tvOrder1.setBackgroundResource(R.drawable.xvector_updownarrow3);
                 tvOrder2.setBackgroundResource(R.drawable.xvector_updownarrow3);
-                setBacStyle(2, "");
-                showPop();
+                setBacStyle(2, "4");
 
+                if (count3 % 2 == 1) {
+                    sortType = "2";
+                    tvOrder3.setBackgroundResource(R.drawable.xvector_updownarrow1);
+                } else {
+                    sortType = "1";
+                    tvOrder3.setBackgroundResource(R.drawable.xvector_updownarrow2);
+                }
+                count3++;
+                initDataFromInternet();
 
                 break;
-            case R.id.tv_frag_managemoneymatterschild_total:
-                setBacStyle(3, "");
-
-
+            case R.id.tv_frag_creditorlist_total://全部
+                setBacStyle(3, "1");
                 sortType = "";
                 initDataFromInternet();
 
                 break;
-            case R.id.tv_dialog_dengebenxi:
-                pop.dismiss();
-                dialog.show();
 
-                repayType = "1";
-                initDataFromInternet();
-                break;
-            case R.id.tv_dialog_daoqihuanbenxi:
-                pop.dismiss();
-                dialog.show();
-                repayType = "3";
-                initDataFromInternet();
-                break;
-            case R.id.tv_dialog_anyuefuxi:
-                pop.dismiss();
-                dialog.show();
-                repayType = "4";
-                initDataFromInternet();
-                break;
         }
 
     }
 
     private void setBacStyle(int position, String mOrderType) {
-        if (position != 2) {
-            dialog.show();
-        }
 
+        dialog.show();
         page = 1;
         orderType = mOrderType;
-        repayType = "";
 
         for (int i = 0; i < list.size(); i++) {
             if (i == position) {
@@ -234,12 +213,7 @@ public class CreditorListFragment extends BaseFragment {
     @Override
     public void initDataFromIntent() {
 
-        type = getArguments().getInt("type", 1);
-        if (type == 1) {
-            requestUrl = Constants.INVESTMENT_LIST;
-        } else {
-            requestUrl = Constants.CREDITOR_TRANSFER_LIST;
-        }
+        requestUrl = Constants.CREDITOR_TRANSFER_LIST;
 
 
     }
@@ -258,6 +232,14 @@ public class CreditorListFragment extends BaseFragment {
         listTV.add(tvOrder12);
         listTV.add(tvOrder13);
         listTV.add(tvTotal);
+
+        listIndicator=new ArrayList<>();
+        listIndicator.add(tvOrder1);
+        listIndicator.add(tvOrder2);
+        listIndicator.add(tvOrder3);
+        listIndicator.add(tvTotal);
+
+
 
 
         //设置全区背景色
@@ -312,12 +294,10 @@ public class CreditorListFragment extends BaseFragment {
         map.put("page", page + "");
         map.put("order_type", orderType);//排序类别,1全部2利率3期限
         map.put("sort_type", sortType);//排序方式,1升序 2降序
-        map.put("repay_type", repayType);//还款方式,1等额本息--3到期本息---4按月付息----5按天计息到期还本息
 
         Log.e(TAG, "onLoadmore: ------page--------===" + page);
         Log.e(TAG, "onLoadmore: ------orderType--------===" + orderType);
         Log.e(TAG, "onLoadmore: ------sortType--------===" + sortType);
-        Log.e(TAG, "onLoadmore: ------repayType--------===" + repayType);
 
 
         HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
@@ -334,12 +314,12 @@ public class CreditorListFragment extends BaseFragment {
 
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----理财投资列表接口返回数据-- " + type + "------" + result);
+                        Log.e("TAG", "onSuccess:----理财债权列表接口返回数据-- " + type + "------" + result);
 
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ManageMoneyMattersBean>() {
-                        }.getType(), ManageMoneyMattersBean.class, getActivity());
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorListBean>() {
+                        }.getType(), CreditorListBean.class, getActivity());
                         if (bean1 != null) {
-                            bean = (ManageMoneyMattersBean) bean1;
+                            bean = (CreditorListBean) bean1;
                             LoadInternetDataToUi();
                         } else {
                             ToastUtils.showToast(getActivity(), "数据加载出错!");
@@ -363,7 +343,7 @@ public class CreditorListFragment extends BaseFragment {
             }
 
             if (actLVAdapter == null) {
-                actLVAdapter = new ManageMoneyMattersFragLvAdapter(getActivity(), listNew);
+                actLVAdapter = new CreditorListFragLvAdapter(getActivity(), listNew);
                 lvFragManageMoneyMatters.setAdapter(actLVAdapter);
             } else {
                 actLVAdapter.notifyDataSetChanged();
@@ -380,50 +360,6 @@ public class CreditorListFragment extends BaseFragment {
         }
 
     }
-
-    private void showAlertDialog() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_frag_managemoneymatterschild, null);
-        WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
-        params.alpha = 0.5f;
-        getActivity().getWindow().setAttributes(params);
-        int width = llOrder3.getWidth();
-        pop = new PopupWindow(view, width, ViewPager.LayoutParams.WRAP_CONTENT);
-        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
-        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
-        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
-        pop.setFocusable(true);//获取焦点
-
-
-        view.findViewById(R.id.tv_dialog_dengebenxi).setOnClickListener(this);
-        view.findViewById(R.id.tv_dialog_daoqihuanbenxi).setOnClickListener(this);
-        view.findViewById(R.id.tv_dialog_anyuefuxi).setOnClickListener(this);
-
-        pop.showAsDropDown(llOrder3);//显示位置
-
-
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
-                params.alpha = 1f;
-                getActivity().getWindow().setAttributes(params);
-            }
-        });
-
-
-    }
-
-    private void showPop() {
-        if (pop == null) {
-            showAlertDialog();
-        } else {
-            WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
-            params.alpha = 0.5f;
-            getActivity().getWindow().setAttributes(params);
-            pop.showAsDropDown(llOrder3);//显示位置
-        }
-    }
-
 
 
 }

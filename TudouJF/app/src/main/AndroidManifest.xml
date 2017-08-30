@@ -77,7 +77,7 @@
         <!--汇付支付activity-->
         <activity android:name=".activity.HuiFuRegisterActivity"/>
         <!--我的收益activity-->
-        <activity android:name=".activity.MyEarningsActivity"/>
+        <activity android:name=".activity.my.MyEarningsActivity"/>
         <!--测试用的activity,正式发布时删除-->
         <activity android:name=".activity.TestActivity"/>
 

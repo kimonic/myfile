@@ -27,6 +27,7 @@ import com.tudoujf.activity.managemoney.AffirmBuyActivity;
 import com.tudoujf.activity.managemoney.FanXianQuanSelActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
+import com.tudoujf.activity.my.MyEarningsActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;

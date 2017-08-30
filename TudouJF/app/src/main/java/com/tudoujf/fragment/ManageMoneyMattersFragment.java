@@ -69,15 +69,15 @@ public class ManageMoneyMattersFragment extends BaseFragment {
 
 
         InvestListFragment fragment1 = new InvestListFragment();
-        Bundle bundle1 = new Bundle();
-        bundle1.putInt("type", 1);
-        fragment1.setArguments(bundle1);
+//        Bundle bundle1 = new Bundle();
+//        bundle1.putInt("type", 1);
+//        fragment1.setArguments(bundle1);
 
 
-        InvestListFragment fragment2 = new InvestListFragment();
-        Bundle bundle2 = new Bundle();
-        bundle2.putInt("type", 2);
-        fragment2.setArguments(bundle2);
+        CreditorListFragment fragment2 = new CreditorListFragment();
+//        Bundle bundle2 = new Bundle();
+//        bundle2.putInt("type", 2);
+//        fragment2.setArguments(bundle2);
 
 
         listFrag.add(fragment1);

@@ -7,17 +7,17 @@ import java.util.List;
 
 /**
  * * ====================================================================
- * name:            ManageMoneyMattersBean
+ * name:            InvestListBean
  * guide:
  * author：          kimonik
  * version：          1.0
  * date：            2017/8/25
- * description：   理财---投资列表,债权列表返回的bean
+ * description：   理财---投资列表返回的bean
  * history：
  * * ====================================================================
  */
 
-public class ManageMoneyMattersBean implements BaseBean {
+public class InvestListBean implements BaseBean {
 
     /**
      * page : 1

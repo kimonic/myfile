@@ -5,12 +5,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.MyEarningsActivity;
+import com.tudoujf.activity.my.MyEarningsActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
-import com.tudoujf.utils.HeightUtils;
 
 import java.util.ArrayList;
 import java.util.List;

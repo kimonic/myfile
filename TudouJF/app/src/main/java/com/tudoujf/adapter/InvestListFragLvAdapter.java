@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
-import com.tudoujf.bean.databean.ManageMoneyMattersBean;
+import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.ui.BidView;
 import com.tudoujf.utils.StringUtils;
 
@@ -17,22 +17,22 @@ import java.util.List;
 
 /**
  * * ================================================
- * name:            ManageMoneyMattersFragLvAdapter
+ * name:            InvestListFragLvAdapter
  * guide:
  * author：          kimonik
  * version：          1.0
  * date：            2017/8/2
- * description：  ManageMoneyMattersFragment中listview的adapter
+ * description：  InvestListFragment中listview的adapter
  * history：
  * ===================================================
  */
 
-public class ManageMoneyMattersFragLvAdapter extends BaseAdapter {
+public class InvestListFragLvAdapter extends BaseAdapter {
     private Context context;
-    private List<ManageMoneyMattersBean.ItemsBean> list;
+    private List<InvestListBean.ItemsBean> list;
     private String TAG="ManageMoneyFragAda";
 
-    public ManageMoneyMattersFragLvAdapter(Context context, List<ManageMoneyMattersBean.ItemsBean> list) {
+    public InvestListFragLvAdapter(Context context, List<InvestListBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -57,7 +57,7 @@ public class ManageMoneyMattersFragLvAdapter extends BaseAdapter {
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.lvitem_managemoneymattersfrag, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.lvitem_investfrag, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.bidView = (BidView) view.findViewById(R.id.lvitem_managemoneymatters_bv);
 
@@ -76,7 +76,7 @@ public class ManageMoneyMattersFragLvAdapter extends BaseAdapter {
 
 //        viewHolder.bidView.setAwardValue(list.get(position).getAwardValue());//奖励的数值
 
-        if (!"立即投资".equals(list.get(position).getStatus_name())){//是否时立即还款按钮
+        if (!"借款中".equals(list.get(position).getStatus_name())){//是否时立即还款按钮
             viewHolder.bidView.setInvestNow(false);
         }else {
             viewHolder.bidView.setInvestNow(true);

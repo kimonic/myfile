@@ -377,3 +377,4 @@ public class ClaimsBidView extends View {
         void clickEvent();
     }
 }
+

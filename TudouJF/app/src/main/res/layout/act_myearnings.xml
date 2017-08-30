@@ -3,24 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/global_background_color"
-    >
+    android:orientation="vertical">
 
-    <com.tudoujf.ui.MTopBarView
-        android:id="@+id/mtb_act_affirm"
+    <FrameLayout
+        android:id="@+id/fl_act_myearnings"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/act_register_tvbac1"
-        app:centerText="@string/act_myearnings_title"
-        app:leftImage="@drawable/xvector_back" />
+        android:layout_height="60dp"
+        android:background="@color/global_theme_background_color">
+
+        <TextView
+            android:id="@+id/tv_act_myearnings_bac"
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/xvector_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/act_myearnings_title"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_act_myearnings_filtrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_myearnings_sel"
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="16dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/act_myearnings_filter" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myearnings_daishoulixi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -29,9 +73,11 @@
             android:gravity="center"
             android:text="@string/act_myearnings_daishoulixi"
             android:textColor="@color/global_theme_background_color"
-            app:underlinecolor="@color/global_theme_background_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:underlinecolor="@color/global_theme_background_color" />
+
         <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myearnings_yishoulixi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -41,7 +87,9 @@
             android:text="@string/act_myearnings_yishoulixi"
             android:textColor="@color/color_black"
             android:textSize="16sp" />
+
         <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myearnings_huodongshouyi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -51,8 +99,27 @@
             android:text="@string/act_myearnings_huodongshouyi"
             android:textColor="@color/color_black"
             android:textSize="16sp" />
-
-
     </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_act_myearnings"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/tv_act_myearnings_total"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:textColor="@color/color_white"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:text="合计(元):000,000.00"
+        android:gravity="center"
+        android:textSize="18sp"
+        />
+
 
 </LinearLayout>

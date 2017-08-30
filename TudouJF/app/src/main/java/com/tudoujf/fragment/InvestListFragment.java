@@ -24,10 +24,10 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.adapter.ManageMoneyMattersFragLvAdapter;
+import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.bean.databean.ManageMoneyMattersBean;
+import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
@@ -79,13 +79,13 @@ public class InvestListFragment extends BaseFragment {
     @BindView(R.id.tv_frag_managemoneymatterschild_total)
     TextView tvTotal;
 
-    private List<ManageMoneyMattersBean.ItemsBean> listNew;
+    private List<InvestListBean.ItemsBean> listNew;
 
     private int type = 1;
 
     private int count1 = 0, count2 = 0;
 
-    private ManageMoneyMattersBean bean;
+    private InvestListBean bean;
     private String requestUrl;
 
     /**
@@ -113,7 +113,7 @@ public class InvestListFragment extends BaseFragment {
     /**
      * 投资列表适配器
      */
-    private ManageMoneyMattersFragLvAdapter actLVAdapter;
+    private InvestListFragLvAdapter actLVAdapter;
     private String TAG = "ManageMoneyChild";
     /**
      * 互斥的button按钮背景色设置的list
@@ -133,7 +133,6 @@ public class InvestListFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.ll_frag_managemoneymatterschild1://按利率排序
                 setBacStyle(0, "2");
-
                 tvOrder2.setBackgroundResource(R.drawable.xvector_updownarrow3);
                 if (count1 % 2 == 1) {
                     sortType = "2";
@@ -144,8 +143,6 @@ public class InvestListFragment extends BaseFragment {
                 }
                 count1++;
                 initDataFromInternet();
-
-
                 break;
             case R.id.ll_frag_managemoneymatterschild2://按期限排序
                 setBacStyle(1, "3");
@@ -160,8 +157,6 @@ public class InvestListFragment extends BaseFragment {
                 }
                 count2++;
                 initDataFromInternet();
-
-
                 break;
             case R.id.ll_frag_managemoneymatterschild3://按还款方式排序
 
@@ -170,20 +165,15 @@ public class InvestListFragment extends BaseFragment {
                 setBacStyle(2, "");
                 showPop();
 
-
                 break;
             case R.id.tv_frag_managemoneymatterschild_total:
-                setBacStyle(3, "");
-
-
+                setBacStyle(3, "1");
                 sortType = "";
                 initDataFromInternet();
-
                 break;
             case R.id.tv_dialog_dengebenxi:
                 pop.dismiss();
                 dialog.show();
-
                 repayType="1";
                 initDataFromInternet();
                 break;
@@ -227,15 +217,7 @@ public class InvestListFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
-
-        type = getArguments().getInt("type", 1);
-        if (type == 1) {
             requestUrl = Constants.INVESTMENT_LIST;
-        } else {
-            requestUrl = Constants.CREDITOR_TRANSFER_LIST;
-        }
-
-
     }
 
     @Override
@@ -330,10 +312,10 @@ public class InvestListFragment extends BaseFragment {
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----理财投资列表接口返回数据-- " + type + "------" + result);
 
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ManageMoneyMattersBean>() {
-                        }.getType(), ManageMoneyMattersBean.class, getActivity());
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<InvestListBean>() {
+                        }.getType(), InvestListBean.class, getActivity());
                         if (bean1 != null) {
-                            bean = (ManageMoneyMattersBean) bean1;
+                            bean = (InvestListBean) bean1;
                             LoadInternetDataToUi();
                         } else {
                             ToastUtils.showToast(getActivity(), "数据加载出错!");
@@ -357,7 +339,7 @@ public class InvestListFragment extends BaseFragment {
             }
 
             if (actLVAdapter == null) {
-                actLVAdapter = new ManageMoneyMattersFragLvAdapter(getActivity(), listNew);
+                actLVAdapter = new InvestListFragLvAdapter(getActivity(), listNew);
                 lvFragManageMoneyMatters.setAdapter(actLVAdapter);
             } else {
                 actLVAdapter.notifyDataSetChanged();
