@@ -61,14 +61,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:background="@color/act_infopublish_bac"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:orientation="horizontal">
 
         <com.tudoujf.ui.UnderlineTextView
             android:id="@+id/utv_act_myearnings_daishoulixi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/act_myearnings_daishoulixi"
@@ -80,46 +81,44 @@
             android:id="@+id/utv_act_myearnings_yishoulixi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/act_myearnings_yishoulixi"
             android:textColor="@color/color_black"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:textSize="16sp" />
 
         <com.tudoujf.ui.UnderlineTextView
             android:id="@+id/utv_act_myearnings_huodongshouyi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/act_myearnings_huodongshouyi"
             android:textColor="@color/color_black"
             android:textSize="16sp" />
     </LinearLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_act_myearnings"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/tv_act_myearnings_total"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:textColor="@color/color_white"
-        android:background="@drawable/xshape_roundrect_themecolor"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:text="合计(元):000,000.00"
+        android:background="@drawable/xshape_roundrect_themecolor"
         android:gravity="center"
-        android:textSize="18sp"
-        />
+        android:text="合计(元):000,000.00"
+        android:textColor="@color/color_white"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

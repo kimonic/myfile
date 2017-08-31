@@ -30,6 +30,7 @@ import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.databean.MyMessageBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
@@ -81,7 +82,6 @@ public class SystemMessageFragment extends BaseFragment {
     private static final int  LOADMORE=2;
     private SystemMessageFragLvAdapter adapter;
     private Gson gson=new Gson();
-    private boolean   sendSuccess=false;
     private int positionInner;
 
 
@@ -103,6 +103,7 @@ public class SystemMessageFragment extends BaseFragment {
                     tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
                 } else {
                     tvPrevious.setTextColor(getResources().getColor(R.color.color_gray));
+
                 }
                 break;
             case R.id.tv_frag_systemmessage_next:
@@ -156,7 +157,8 @@ public class SystemMessageFragment extends BaseFragment {
                     dialog.show();
                     list.get(position).setStatus("2");
                     TreeMap<String,String>  map=new TreeMap<>();
-                    map.put("login_token", "12267");
+
+                    map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
                     map.put("message_id", list.get(position).getId());
                     adapter.notifyDataSetChanged();
                     HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_READ, map, "", new StringCallback() {
@@ -170,7 +172,6 @@ public class SystemMessageFragment extends BaseFragment {
                                 try {
                                     JSONObject json=new JSONObject(bean.getData().toString());
                                     ((MyMessageActivity)getActivity()).unreadMessageCount(json.getInt("message_count"));
-
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -224,7 +225,7 @@ public class SystemMessageFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "12267");
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
         map.put("type", "" + type);
         map.put("page", "" + page);
         HttpMethods.getInstance().POST(getContext(), Constants.MESSAGE_LIST, map, "info", new StringCallback() {
@@ -275,7 +276,6 @@ public class SystemMessageFragment extends BaseFragment {
                     adapter = new SystemMessageFragLvAdapter(list, getActivity());
                     lvFragSystemMessage.setAdapter(adapter);
                 }
-
             }
         }
     }

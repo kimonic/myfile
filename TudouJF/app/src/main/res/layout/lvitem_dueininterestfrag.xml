@@ -7,55 +7,48 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:orientation="horizontal"
-        android:background="@color/color_white"
         >
         <TextView
-            android:id="@+id/tv_frag_dueininterest1"
+            android:id="@+id/tv_lvitem_frag_dueininterest1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:textColor="@color/color_black"
+            android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/frag_dueininterest_date"
             />
         <TextView
-            android:id="@+id/tv_frag_dueininterest2"
+            android:id="@+id/tv_lvitem_frag_dueininterest2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:textColor="@color/color_black"
+            android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/frag_dueininterest_name"
             />
         <TextView
-            android:id="@+id/tv_frag_dueininterest3"
+            android:id="@+id/tv_lvitem_frag_dueininterest3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:textColor="@color/color_black"
+            android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/frag_dueininterest_toubiaojineyuan"
             />
 
         <TextView
-            android:id="@+id/tv_frag_dueininterest4"
+            android:id="@+id/tv_lvitem_frag_dueininterest4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:textColor="@color/color_black"
+            android:textColor="@color/act_newcomerexperiencebid_tvcolor"
             android:gravity="center"
             android:text="@string/frag_dueininterest_shouyi"
             />
 
     </LinearLayout>
-    <ListView
-        android:id="@+id/lv_frag_dueininterest"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_white"
-        />
 </LinearLayout>

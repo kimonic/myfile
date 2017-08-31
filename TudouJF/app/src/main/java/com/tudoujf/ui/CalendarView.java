@@ -168,7 +168,6 @@ public class CalendarView extends View {
         //---------------临时数据源-----------------------------------------------------------------
 
         initList(year, month);
-        Log.e("TAG", "initView:---------year-------------------- " + year + "-------" + month);
         row = listData.size() / 7;
         list = new ArrayList<>();
         for (int i = 0; i < 7 * row; i++) {
