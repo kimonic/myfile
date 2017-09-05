@@ -7,9 +7,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.MyEarningsActivity;
+import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.home.SignInActivity;
-import com.tudoujf.activity.my.MyPopularizeActivity;
+import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
+import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
@@ -119,6 +120,7 @@ public class MyFragment extends BaseFragment {
                         openActivity(MyPopularizeActivity.class);
                         break;
                     case 3://我的项目
+                        openActivity(MyProjectActivity.class);
                         break;
                     case 4://我的福利
                         break;

@@ -9,8 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.RecommendRecordActBean;
-import com.tudoujf.activity.my.SucceedInvitationActBean;
+import com.tudoujf.activity.my.mypopularize.RecommendRecordActBean;
 
 import java.util.List;
 

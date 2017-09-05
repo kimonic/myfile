@@ -6,11 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.SucceedInvitationActBean;
+import com.tudoujf.activity.my.mypopularize.SucceedInvitationActBean;
 
 import java.util.List;
 

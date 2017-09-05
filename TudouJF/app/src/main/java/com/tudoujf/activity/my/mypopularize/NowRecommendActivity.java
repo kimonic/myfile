@@ -1,4 +1,4 @@
-package com.tudoujf.activity.my;
+package com.tudoujf.activity.my.mypopularize;
 
 import android.os.Bundle;
 import android.view.View;

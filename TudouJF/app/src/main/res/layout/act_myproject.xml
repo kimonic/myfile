@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/mtb_act_myproject"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/global_theme_background_color">
+
+        <TextView
+            android:id="@+id/tv_act_myproject_bac"
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/xvector_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/act_myproject_title"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_act_myproject_filtrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_myearnings_sel"
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="16dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/act_myearnings_filter" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/act_infopublish_bac"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:orientation="horizontal">
+
+        <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myproject_total"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myproject_total"
+            android:textColor="@color/global_theme_background_color"
+            android:textSize="16sp"
+            app:underlinecolor="@color/global_theme_background_color" />
+
+        <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myproject_touzixiangmu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myproject_touzixiangmu"
+            android:textColor="@color/color_black"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:textSize="16sp" />
+
+        <com.tudoujf.ui.UnderlineTextView
+            android:id="@+id/utv_act_myproject_zhaiquanxiangmu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/act_myproject_zhaiquanxiangmu"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_act_myproject"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        />
+
+
+</LinearLayout>

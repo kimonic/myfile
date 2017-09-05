@@ -1,9 +1,11 @@
-package com.tudoujf.activity.my;
+package com.tudoujf.activity.my.myproject;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.AffirmBuyCreditorsRightsActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -12,27 +14,36 @@ import butterknife.BindView;
 
 /**
  * * ====================================================================
- * name:            MyFragment
+ * name:            MyCreditorRightsDetailsActivity
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/9/6
- * description：  我的推广-->推广奖励说明activity
+ * date：            2017/9/8
+ * description：  我的项目-->我的债权详情activity
  * history：
  * * ====================================================================
  */
 
-public class InvitationAwardExplainActivity extends BaseActivity {
-    @BindView(R.id.mtb_act_invitationawardexplain)
-    MTopBarView mtbActInvitationAwardExplain;
+public class MyCreditorRightsDetailsActivity extends BaseActivity {
+
+
+    @BindView(R.id.mtb_act_mycreditorrightsdetails)
+    MTopBarView mtb;
+    @BindView(R.id.tv_act_mycreditorsrightsdetails_buynow)
+    TextView tvBuyNow;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.act_invitationawardexplain;
+        return R.layout.act_mycreditorrightsdetails;
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_act_creditorsrightsdetails_buynow:
+                openActivity(AffirmBuyCreditorsRightsActivity.class);
+                break;
+        }
 
     }
 
@@ -43,20 +54,22 @@ public class InvitationAwardExplainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActInvitationAwardExplain.getLayoutParams();
+/**设置沉浸式状态栏*/
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtb.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        mtbActInvitationAwardExplain.setLayoutParams(params);
-    }
+        mtb.setLayoutParams(params);
 
-    @Override
-    public void initListener() {
-        mtbActInvitationAwardExplain.getLeftTV().setOnClickListener(new View.OnClickListener() {
+        mtb.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeActivity();
             }
         });
+    }
+
+    @Override
+    public void initListener() {
+        tvBuyNow.setOnClickListener(this);
     }
 
     @Override
@@ -78,4 +91,7 @@ public class InvitationAwardExplainActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
+
 }

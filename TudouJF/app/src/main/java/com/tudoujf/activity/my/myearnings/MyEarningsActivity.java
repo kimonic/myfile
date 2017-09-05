@@ -1,4 +1,4 @@
-package com.tudoujf.activity.my;
+package com.tudoujf.activity.my.myearnings;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
