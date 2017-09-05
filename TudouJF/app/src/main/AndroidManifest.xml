@@ -119,6 +119,18 @@
         <activity android:name=".activity.home.MessageDetailsActivity"/>
         <!--webview加titleactivity-->
         <activity android:name=".activity.common.WebActivity" />
+        <!--我的推广activity-->
+        <activity android:name=".activity.my.MyPopularizeActivity" />
+        <!--成功邀请activity-->
+        <activity android:name=".activity.my.SucceedInvitationActivity"/>
+        <!--结算记录activity-->
+        <activity android:name=".activity.my.AccountRecordActivity"/>
+        <!--推广记录activity-->
+        <activity android:name=".activity.my.RecommendRecordActivity" />
+        <!--立即推荐activity-->
+        <activity android:name=".activity.my.NowRecommendActivity" />
+        <!--推广奖励说明activity-->
+        <activity android:name=".activity.my.InvitationAwardExplainActivity" />
 
         <service
             android:name=".service.MyService"

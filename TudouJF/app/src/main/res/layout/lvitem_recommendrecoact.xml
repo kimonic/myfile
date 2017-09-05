@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_lvitem_recommendrecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        >
+
+        <TextView
+            android:id="@+id/tv_lvitem_recommendrecord1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_recommendrecord2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_recommendrecord3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_recommendrecord4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_recommendrecord5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

@@ -283,6 +283,45 @@
     <string name="frag_dueininterest_name">项目名称</string>
     <string name="frag_dueininterest_shouyi">收益(元)</string>
     <string name="frag_dueininterest_toubiaojineyuan">投标金额(元)</string>
+    <string name="act_mypopularize_righttitle">立即推荐</string>
+    <string name="act_mypopularize_chenggongyaoqing">成功邀请好友0位</string>
+    <string name="act_mypopularize_chakan">查看</string>
+    <string name="act_mypopularize_tuiguangjilu">推广记录</string>
+    <string name="act_mypopularize_jiesuanjilu">结算记录</string>
+    <string name="act_mypopularize_tuiguangjianglishuoming">推广奖励说明</string>
+    <string name="act_mypopularize_tichengzonge">提成总额</string>
+    <string name="act_mypopularize_touziticheng">投资提成</string>
+    <string name="act_mypopularize_jiekuanhuankuanticheng">借款还款提成</string>
+    <string name="act_mypopularize_dangqianshengyujiesuanjine">当前剩余结算金额</string>
+    <string name="act_mypopularize_jiesuanzhong">结算中</string>
+    <string name="act_mypopularize_default">00,000.00元</string>
+    <string name="act_mypopularize_man">满</string>
+    <string name="act_mypopularize_yibaiyuan">100元</string>
+    <string name="act_mypopularize_jiesuanyici">结算一次</string>
+    <string name="act_mypopularize_lijijiesuan">立即结算</string>
+    <string name="act_mypopularize_title">我的推广</string>
+    <string name="act_succeedinvitation_title">成功邀请</string>
+    <string name="act_succeedinvitation_username" >用户名</string>
+    <string name="act_succeedinvitation_touzizongeyuan">投资总额(元)</string>
+    <string name="act_succeedinvitation_huankuanzongeyuan">还款总额(元)</string>
+    <string name="act_succeedinvitation_default">XXXXXX</string>
+    <string name="act_succeedinvitation_default1">000,000.00</string>
+    <string name="act_accountrecord_title">结算记录</string>
+    <string name="act_accountrecord_date">日期</string>
+    <string name="act_accountrecord_jiesuanjine">结算金额</string>
+    <string name="act_accountrecord_zhuangtai">状态</string>
+    <string name="act_recommendrecord_title">推广记录</string>
+    <string name="act_recommendrecord_touzitichengyuan">投资提成(元)</string>
+    <string name="act_recommendrecord_tichengbili">提成比例</string>
+    <string name="act_recommendrecord_jiekuanticheng">借款提成</string>
+    <string name="act_recommendrecord_jiekuantichengyuan">借款提成(元)</string>
+    <string name="act_recommendrecord_date">日期</string>
+    <string name="act_nowrecommend_title">立即推荐</string>
+    <string name="act_invitationawardexplain_title">推广奖励说明</string>
+    <string name="act_invitationawardexplain_1">1.邀请好友或其他朋友注册成功,即可简历推广关系;</string>
+    <string name="act_invitationawardexplain_2">2.好友或其他朋友投资成功,系统将自动根据投资提成比例给予奖励;</string>
+    <string name="act_invitationawardexplain_3">3.好友或其他朋友借款成功,还款时系统自动根据借款推广抽成比例给予奖励;</string>
+    <string name="act_invitationawardexplain_4">4.推广奖励提成的算法;</string>
 
 
 </resources>

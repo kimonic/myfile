@@ -2,14 +2,19 @@ package com.tudoujf.fragment;
 
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.my.MyEarningsActivity;
 import com.tudoujf.activity.home.SignInActivity;
+import com.tudoujf.activity.my.MyPopularizeActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
+import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +37,10 @@ public class MyFragment extends BaseFragment {
 
     @BindView(R.id.lv_frag_my)
     ListView lvFragMy;
+    @BindView(R.id.tv_frag_my)
+    TextView tvFragMy;
+    @BindView(R.id.iv_frag_my)
+    ImageView ivFragMy;
 
     private List<MyFragBean> list;
 
@@ -62,7 +71,14 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tv_frag_my://打开客服界面
+                ToastUtils.showToast(getActivity(),"我将关闭客服界面!");
+                break;
+            case R.id.iv_frag_my://关闭客服
+                ToastUtils.showToast(getActivity(),"我将打开客服界面!");
+                break;
+        }
     }
 
     @Override
@@ -84,6 +100,7 @@ public class MyFragment extends BaseFragment {
     public void initView() {
         MyFragLvAdapter adapter = new MyFragLvAdapter(list, getActivity());
         lvFragMy.setAdapter(adapter);
+        HeightUtils.setListviewHeight(lvFragMy);
     }
 
     @Override
@@ -92,25 +109,30 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                    case 0:
+                    case 0://我的积分
                         openActivity(SignInActivity.class);
                         break;
-                    case 1:
+                    case 1://我的收益
                         openActivity(MyEarningsActivity.class);
                         break;
-                    case 2:
+                    case 2://我的推广
+                        openActivity(MyPopularizeActivity.class);
                         break;
-                    case 3:
+                    case 3://我的项目
                         break;
-                    case 4:
+                    case 4://我的福利
                         break;
-                    case 5:
+                    case 5://专属客服
                         break;
-                    case 6:
+                    case 6://设置
                         break;
                 }
             }
         });
+
+        tvFragMy.setOnClickListener(this);
+        ivFragMy.setOnClickListener(this);
+
 
     }
 

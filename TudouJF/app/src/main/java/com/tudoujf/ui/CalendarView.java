@@ -15,6 +15,7 @@ import android.view.View;
 import com.tudoujf.bean.databean.CalendarBean;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.TimeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -239,7 +240,8 @@ public class CalendarView extends View {
                 isScroll = false;
                 return true;
             case MotionEvent.ACTION_MOVE:
-                isScroll = true;
+                //此处会影响真实触控效果
+//                isScroll = true;
                 break;
             case MotionEvent.ACTION_UP:
                 if (!isScroll) {

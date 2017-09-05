@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -15,11 +13,10 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.myearnings.DueInInterestFragment;
-import com.tudoujf.ui.CalendarDialogScroll;
+import com.tudoujf.ui.DateFilterDialog;
 import com.tudoujf.ui.UnderlineTextView;
-import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
-import com.tudoujf.utils.TimeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,27 +52,18 @@ public class MyEarningsActivity extends BaseActivity {
     @BindView(R.id.tv_act_myearnings_total)
     TextView tvTotal;
 
+
     private List<UnderlineTextView>  list;
     private List<Fragment>  listFrag;
-    private CalendarDialogScroll dialogScroll;
 
-    /**
-     * 自定义dialog的展示view
-     */
-    private View view;
-    /**
-     * 自定义dialog的展示view的控件
-     */
-    private TextView startTime, endTime, cancel, confirm;
-    /**参数--start_time*/
-    private String  paramsStartTime="";
-    /**参数---end_time*/
-    private String paramsEndTime="";
+
+    private DateFilterDialog dateFilterDialog;
 
 
 
-    /**加载进度dialog,选择筛选时间dialog*/
-    private AlertDialog dialog,timeSelDialog;
+
+    /**加载进度dialog*/
+    private AlertDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -101,46 +89,18 @@ public class MyEarningsActivity extends BaseActivity {
                closeActivity();
                 break;
             case R.id.ll_act_myearnings_filtrate:
-                if (timeSelDialog==null){
-                    timeSelDialog= DialogUtils.showTimeSel(this, "", view);
-                }else {
-                    timeSelDialog.show();
+                if (dateFilterDialog == null) {
+                    dateFilterDialog = new DateFilterDialog(this);
+                    dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
+                        @Override
+                        public void dismiss(String startTime, String endTime) {
+                            // TODO: 2017/9/4  请求网络筛选展示数据
+                            ToastUtils.showToast(MyEarningsActivity.this, startTime + "-----------" + endTime);
+                        }
+                    });
                 }
-//                if (dialogScroll==null){
-//                    dialogScroll=new CalendarDialogScroll(this);
-//                }
-//                dialogScroll.showDialog();
-                break;
-            case R.id.tv_dialog_starttime://dialog中选择开始时间
-                if (dialogScroll==null){
-                    dialogScroll=new CalendarDialogScroll(this);
-                }
-                dialogScroll.showDialog();
-                break;
-            case R.id.tv_dialog_endtime://dialog中选择结束时间
-                if (dialogScroll==null){
-                    dialogScroll=new CalendarDialogScroll(this);
-                }
-                dialogScroll.showDialog();
-                break;
-            case R.id.tv_dialog_cancel://dialog中取消选择
-                timeSelDialog.dismiss();
-                break;
-            case R.id.tv_dialog_confirm://dialog中确认选择
-//                dialog.show();//进度dialog
-                String date1=startTime.getText().toString();
-                String date2=endTime.getText().toString();
-                if (TimeUtils.compareDate(date1,date2)){
-                    paramsStartTime=date2;
-                    paramsEndTime=date1;
-                }else {
-                    paramsStartTime=date1;
-                    paramsEndTime=date2;
-                }
-//                page=1;
-//                initDataFromInternet();
-//                Log.e(TAG, "onClick:-----------true,第一个日期较大---------------- "+TimeUtils.compareDate(date1,date2) );
-                timeSelDialog.dismiss();
+                dateFilterDialog.show();
+
 
                 // TODO: 2017/8/21 根据选择的时间进行条件查询展示
 
@@ -189,6 +149,8 @@ public class MyEarningsActivity extends BaseActivity {
     @Override
     public void initView() {
 
+
+
         list=new ArrayList<>();
         list.add(utvDaiShouLiXi);
         list.add(utvYiShouLiXi);
@@ -203,21 +165,6 @@ public class MyEarningsActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) flActMyEarnings.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         flActMyEarnings.setLayoutParams(params);
-
-
-        view = LayoutInflater.from(this).inflate(R.layout.dialog_act_integralrecode_timesel, null);
-
-        startTime = (TextView) view.findViewById(R.id.tv_dialog_starttime);
-        endTime = (TextView) view.findViewById(R.id.tv_dialog_endtime);
-        cancel = (TextView) view.findViewById(R.id.tv_dialog_cancel);
-        confirm = (TextView) view.findViewById(R.id.tv_dialog_confirm);
-
-        startTime.setText(TimeUtils.getCurrentFirstOfTheMonteh());
-        endTime.setText(TimeUtils.getNowDateShort());
-
-        dialogScroll=new CalendarDialogScroll(this);
-
-
 
     }
 
@@ -237,18 +184,7 @@ public class MyEarningsActivity extends BaseActivity {
             }
         });
 
-        startTime.setOnClickListener(this);
-        endTime.setOnClickListener(this);
-        cancel.setOnClickListener(this);
-        confirm.setOnClickListener(this);
 
-        dialogScroll.setListener(new CalendarDialogScroll.OnCalendarDialogDismissListener() {
-            @Override
-            public void onDismiss(String sTime, String eTime) {
-                startTime.setText(sTime);
-                endTime.setText(eTime);
-            }
-        });
 
     }
 

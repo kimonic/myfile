@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.tudoujf.R;
 import com.tudoujf.adapter.DueInInterestFragLvAdapterO;
 import com.tudoujf.base.BaseFragment;
@@ -43,6 +46,10 @@ public class DueInInterestFragment extends BaseFragment {
     TextView tvHuoDong;
     @BindView(R.id.tv_frag_dueininterest4)
     TextView tvShouYi;
+
+
+    @BindView(R.id.srl_frag_dueininterest)
+    SmartRefreshLayout srl;
     Unbinder unbinder;
 
 
@@ -77,6 +84,7 @@ public class DueInInterestFragment extends BaseFragment {
         if (getArguments()!=null){
             type=getArguments().getInt("type",1);
         }
+
         switch (type) {
             case 1://待收利息,已收利息
             case 2:
@@ -95,6 +103,9 @@ public class DueInInterestFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        srl.setPrimaryColors(getResources().getColor(R.color.global_theme_background_color));
+        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        srl.setRefreshFooter(new BallPulseFooter(getActivity()));
 
     }
 
