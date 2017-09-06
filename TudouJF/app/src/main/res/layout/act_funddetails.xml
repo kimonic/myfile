@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/mtb_act_funddetails"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/global_theme_background_color">
+
+        <TextView
+            android:id="@+id/tv_act_funddetails_bac"
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/xvector_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/act_funddetails_title"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+
+
+            <TextView
+                android:id="@+id/tv_act_funddetails_jiaoyijilu"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_newcommerexperiencebid_jiaoyijilu"
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
+
+    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@color/global_theme_background_color"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:text="@string/zongzichanyuan"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="000,000,000.00"
+            />
+
+    </LinearLayout>
+
+
+    <com.tudoujf.ui.FundDetailsView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/chongzhi"
+
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_gray"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/tixian"
+
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/global_background_color"
+        />
+</LinearLayout>

@@ -3,12 +3,14 @@ package com.tudoujf.fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.home.SignInActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
+import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -42,6 +45,13 @@ public class MyFragment extends BaseFragment {
     TextView tvFragMy;
     @BindView(R.id.iv_frag_my)
     ImageView ivFragMy;
+    @BindView(R.id.ll_frag_my_chongzhi)
+    LinearLayout llChongZhi;
+    @BindView(R.id.ll_frag_my_tixian)
+    LinearLayout llTiXian;
+    @BindView(R.id.ll_frag_my_funddetails)
+    LinearLayout llFundDetails;
+    Unbinder unbinder;
 
     private List<MyFragBean> list;
 
@@ -74,10 +84,17 @@ public class MyFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_frag_my://打开客服界面
-                ToastUtils.showToast(getActivity(),"我将关闭客服界面!");
+                ToastUtils.showToast(getActivity(), "我将关闭客服界面!");
                 break;
             case R.id.iv_frag_my://关闭客服
-                ToastUtils.showToast(getActivity(),"我将打开客服界面!");
+                ToastUtils.showToast(getActivity(), "我将打开客服界面!");
+                break;
+            case R.id.ll_frag_my_chongzhi://充值
+                break;
+            case R.id.ll_frag_my_tixian://提现
+                break;
+            case R.id.ll_frag_my_funddetails://资金详情
+                openActivity(FundDetailsActivity.class);
                 break;
         }
     }
@@ -134,6 +151,9 @@ public class MyFragment extends BaseFragment {
 
         tvFragMy.setOnClickListener(this);
         ivFragMy.setOnClickListener(this);
+        llFundDetails.setOnClickListener(this);
+        llChongZhi.setOnClickListener(this);
+        llTiXian.setOnClickListener(this);
 
 
     }

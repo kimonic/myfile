@@ -364,6 +364,14 @@
     <string name="yishoushouyi">已收收益</string>
     <string name="daishoubenjin">待收本金</string>
     <string name="jianglijine">奖励金额</string>
+    <string name="act_funddetails_title">资金详情</string>
+    <string name="zongzichanyuan">总资产(元)</string>
+    <string name="chongzhi">充值</string>
+    <string name="tixian">提现</string>
+    <string name="act_transactiondetails_title">交易记录</string>
+    <string name="dianjijiazaigengduo">点击加载更多</string>
+    <string name="guanlianxiangmu">关联项目</string>
+    <string name="yue">余\t\t\t\t额</string>
 
 
 </resources>

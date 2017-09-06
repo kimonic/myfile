@@ -137,6 +137,10 @@
         <activity android:name=".activity.my.myproject.MyCreditorRightsDetailsActivity"/>
         <!--我的投资详情activity-->
         <activity android:name=".activity.my.myproject.MyInvestDetailsActivity"/>
+        <!--资金详情activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.FundDetailsActivity" />
+        <!--交易记录activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.TransactionRecordActivity" />
 
         <service
             android:name=".service.MyService"

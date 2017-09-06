@@ -236,6 +236,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/ll_frag_my_chongzhi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -261,6 +262,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_frag_my_tixian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -286,6 +288,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_frag_my_funddetails"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

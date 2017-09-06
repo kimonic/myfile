@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lvitem_transactiondetails_tv1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="商户充值成功"
+            android:textColor="@color/color_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/lvitem_transactiondetails_tv2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|end"
+            android:text="20XX-XX-XX  XX:XX"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/guanlianxiangmu"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lvitem_transactiondetails_tv3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="XXXXXXXXXXX"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/yue"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lvitem_transactiondetails_tv4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="000,000,000.00元"
+            android:textColor="@color/color_orange"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lvitem_transactiondetails_tv5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Y+000,000,000.00"
+            android:textColor="@color/color_orange"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>
