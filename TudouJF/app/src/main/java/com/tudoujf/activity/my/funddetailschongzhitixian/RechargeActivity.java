@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,53 +11,43 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
- * name:            FundDetailsActivity
+ * name:            RechargeActivity
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/9/11
- * description：  资金详情activity
+ * date：            2017/9/12
+ * description：  充值activity
  * history：
  * * ====================================================================
  */
 
-public class FundDetailsActivity extends BaseActivity {
-    @BindView(R.id.tv_act_funddetails_bac)
-    TextView tvActFundDetailsBac;
-    @BindView(R.id.tv_act_funddetails_jiaoyijilu)
-    TextView tvJiaoYiJiLu;
-    @BindView(R.id.tv_act_funddetails_withdraw)
-    TextView tvWithdraw;
-    @BindView(R.id.tv_act_funddetails_recharge)
-    TextView tvRecharge;
-    @BindView(R.id.mtb_act_funddetails)
-    FrameLayout mtbActFundDetails;
+public class RechargeActivity extends BaseActivity {
+    @BindView(R.id.tv_act_recharge_bac)
+    TextView tvActRechargeBac;
+    @BindView(R.id.tv_act_recharge_chognzhijilu)
+    TextView tvChognZhiJiLu;
+    @BindView(R.id.mtb_act_recharge)
+    FrameLayout mtbActRecharge;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.act_funddetails;
+        return R.layout.act_recharge;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_act_funddetails_bac:
+            case R.id.tv_act_recharge_bac:
                 closeActivity();
                 break;
-            case R.id.tv_act_funddetails_jiaoyijilu://交易记录
-                openActivity(TransactionRecordActivity.class);
-                break;
-            case R.id.tv_act_funddetails_withdraw:
-                openActivity(WithdrawActivity.class);
-                break;
-            case R.id.tv_act_funddetails_recharge:
-                openActivity(RechargeActivity.class);
+            case R.id.tv_act_recharge_chognzhijilu://充值记录
+                openActivity(RechargeRecordActivity.class);
                 break;
         }
-
     }
 
     @Override
@@ -67,17 +58,15 @@ public class FundDetailsActivity extends BaseActivity {
     @Override
     public void initView() {
 //        /**设置沉浸式状态栏*/
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActFundDetails.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActRecharge.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        mtbActFundDetails.setLayoutParams(params);
+        mtbActRecharge.setLayoutParams(params);
     }
 
     @Override
     public void initListener() {
-        tvActFundDetailsBac.setOnClickListener(this);
-        tvJiaoYiJiLu.setOnClickListener(this);
-        tvWithdraw.setOnClickListener(this);
-        tvRecharge.setOnClickListener(this);
+        tvActRechargeBac.setOnClickListener(this);
+        tvChognZhiJiLu.setOnClickListener(this);
     }
 
     @Override

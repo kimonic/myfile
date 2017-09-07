@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
@@ -90,8 +92,10 @@ public class MyFragment extends BaseFragment {
                 ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值
+                openActivity(RechargeActivity.class);
                 break;
             case R.id.ll_frag_my_tixian://提现
+                openActivity(WithdrawActivity.class);
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
                 openActivity(FundDetailsActivity.class);

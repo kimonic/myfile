@@ -8,24 +8,25 @@
     >
 
     <com.tudoujf.ui.MTopBarView
-        android:id="@+id/mtb_act_transactiondetails"
+        android:id="@+id/mtb_act_rechargerecord"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/act_register_tvbac1"
-        app:centerText="@string/act_transactiondetails_title"
+        app:centerText="@string/act_rechargerecord_title"
         app:leftImage="@drawable/xvector_back" />
 
     <ListView
-        android:id="@+id/lv_act_transactiondetails"
+        android:id="@+id/lv_act_rechargerecord"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginTop="10dp"
-        android:dividerHeight="0dp"
-        android:divider="@null"
+        android:dividerHeight="5dp"
+        android:divider="@color/global_background_color"
         />
 
     <TextView
+        android:id="@+id/tv_act_rechargerecord_loadmore"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:textSize="16sp"
@@ -41,5 +42,3 @@
 
 
 </LinearLayout>
-
-

@@ -86,6 +86,8 @@
         android:background="@color/color_white"
         >
         <TextView
+
+            android:id="@+id/tv_act_funddetails_recharge"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -95,21 +97,24 @@
             android:text="@string/chongzhi"
 
             />
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/color_gray"
             />
         <TextView
+            android:id="@+id/tv_act_funddetails_withdraw"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="16sp"
-            android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/tixian"
+            android:textColor="@color/color_black"
 
-            />
+            android:textSize="16sp" />
+
+
 
     </LinearLayout>
     <View

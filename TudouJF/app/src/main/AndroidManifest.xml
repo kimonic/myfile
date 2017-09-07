@@ -141,6 +141,14 @@
         <activity android:name=".activity.my.funddetailschongzhitixian.FundDetailsActivity" />
         <!--交易记录activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.TransactionRecordActivity" />
+        <!--充值activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.RechargeActivity" />
+        <!--充值记录activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.RechargeRecordActivity" />
+        <!--提现activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawActivity" />
+        <!--提现记录activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity" />
 
         <service
             android:name=".service.MyService"

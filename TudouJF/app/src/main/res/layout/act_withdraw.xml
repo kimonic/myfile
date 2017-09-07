@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/mtb_act_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/global_theme_background_color">
+
+        <TextView
+            android:id="@+id/tv_act_withdraw_bac"
+            android:layout_width="24dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/xvector_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/act_withdraw_title"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_act_withdraw_tixianjilu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/tixianjilu"
+            android:textColor="@color/color_white"
+            android:textSize="12sp" />
+
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/color_orange"
+            android:gravity="center_vertical"
+            android:text="XXXXXX银行"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center_vertical"
+            android:text="XXXXXX银行"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="********XXXXXXXX"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/xvector_rightarrowlarge"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/kaihuming"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="XXXXXXXXXX"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp"
+
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/zhihangmingcheng"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="XXXX银行"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp" />
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center_vertical"
+            android:text="@string/zhuanghuyue"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center_vertical"
+            android:text="XXXXXXXXXX"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textColor="@color/color_orange"
+            android:gravity="center_vertical|end"
+            android:text="@string/quanbutixian"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="invisible"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center_vertical|end"
+            android:text="@string/yuan"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+
+
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center_vertical"
+            android:text="@string/tixianjine"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+
+            />
+
+        <EditText
+            android:id="@+id/et_act_withdraw_jine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray"
+            android:gravity="center_vertical"
+            android:hint="@string/qingshurujine"
+            android:background="@null"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textColor="@color/color_orange"
+            android:gravity="center_vertical|end"
+            android:text="@string/quanbutixian"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center_vertical|end"
+            android:text="@string/yuan"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+
+
+            />
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_act_withdraw_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_orange"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_act_withdraw_lijitixian"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/xshape_roundrect_mgray1"
+        android:gravity="center"
+        android:text="@string/lijitixian"
+
+        android:textColor="@color/color_white"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
+

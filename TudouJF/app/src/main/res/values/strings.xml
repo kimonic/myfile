@@ -372,6 +372,26 @@
     <string name="dianjijiazaigengduo">点击加载更多</string>
     <string name="guanlianxiangmu">关联项目</string>
     <string name="yue">余\t\t\t\t额</string>
+    <string name="act_recharge_title">充值</string>
+    <string name="act_recharge_congzhijilu">充值记录</string>
+    <string name="chongzhileixing">充值类型</string>
+    <string name="huifutuoguan">汇付托管</string>
+    <string name="zhuanghuyue">账户余额</string>
+    <string name="chongzhijine">充值金额</string>
+    <string name="qingshuruchognzhijine">请输入充值金额</string>
+    <string name="lijichongzhi">立即充值</string>
+    <string name="act_rechargerecord_title">充值记录</string>
+    <string name="default1">----------------</string>
+    <string name="act_withdraw_title" >提现</string>
+    <string name="tixianjilu">提现记录</string>
+    <string name="kaihuming">开户名</string>
+    <string name="zhihangmingcheng">支行名称</string>
+    <string name="lijitixian">立即提现</string>
+    <string name="tixianjine">提现金额</string>
+    <string name="qingshurujine">请输入金额</string>
+    <string name="quanbutixian">全部提现</string>
+    <string name="qingshurutixianjine">请输入提现金额</string>
+    <string name="act_withdrawrecord_title">提现记录</string>
 
 
 </resources>
