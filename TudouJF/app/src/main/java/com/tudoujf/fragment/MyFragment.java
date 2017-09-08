@@ -15,6 +15,7 @@ import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
+import com.tudoujf.activity.my.set.SetActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
@@ -148,6 +149,7 @@ public class MyFragment extends BaseFragment {
                     case 5://专属客服
                         break;
                     case 6://设置
+                        openActivity(SetActivity.class);
                         break;
                 }
             }

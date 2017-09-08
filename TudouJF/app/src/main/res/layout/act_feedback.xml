@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_feedback_title"
+        app:leftImage="@drawable/xvector_back" />
+
+
+    <EditText
+        android:id="@+id/et_act_feedback_content"
+
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:hint="@string/qingshurunindebaoguiyijianhejianyi"
+        android:textColor="@color/color_gray"
+        android:background="@color/color_white"
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+
+    <EditText
+        android:id="@+id/et_act_feedback_contact"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:hint="@string/qingliuxianindelianxifangshi"
+        android:textColor="@color/color_gray"
+        android:background="@color/color_white"
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_act_feedback_submit"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/color_white"
+        android:textSize="20sp"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:text="@string/tijiao"
+        android:gravity="center"
+
+        />
+
+</LinearLayout>

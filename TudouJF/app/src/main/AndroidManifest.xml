@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
 
     <application
         android:name=".mapi.MApp"
@@ -149,6 +149,14 @@
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawActivity" />
         <!--提现记录activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity" />
+        <!--设置activity-->
+        <activity android:name=".activity.my.set.SetActivity" />
+        <!--意见反馈activity-->
+        <activity android:name=".activity.my.set.FeedbackActivity" />
+        <!--帮助中心问题分类activity-->
+        <activity android:name=".activity.my.set.QuestionClassificationActivity" />
+        <!--帮助中心通用activity-->
+        <activity android:name=".activity.my.set.HelpCenterCommonActivity" />
 
         <service
             android:name=".service.MyService"

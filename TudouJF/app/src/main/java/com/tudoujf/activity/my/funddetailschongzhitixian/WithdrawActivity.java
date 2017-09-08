@@ -1,9 +1,8 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.view.Gravity;
@@ -19,12 +18,10 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -58,6 +55,7 @@ public class WithdrawActivity extends BaseActivity {
     public int getLayoutResId() {
         return R.layout.act_withdraw;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -110,7 +108,7 @@ public class WithdrawActivity extends BaseActivity {
                 // TODO: 2017/9/7 当前提现金额大于余额时
 //                tvActWithdrawHint.setText("账号余额不足");
                 if (StringUtils.string2Integer(editable.toString()) < 100 || StringUtils.string2Integer(editable.toString()) > 500000) {
-                    tvActWithdrawHint.setText("提现金额应大于100元小于500000元");
+                    tvActWithdrawHint.setText(R.string.tixianjineyingdayu);
                     tvLiJiTiXian.setBackgroundResource(R.drawable.xshape_roundrect_mgray1);
                 } else {
                     tvActWithdrawHint.setText("");

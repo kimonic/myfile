@@ -392,6 +392,33 @@
     <string name="quanbutixian">全部提现</string>
     <string name="qingshurutixianjine">请输入提现金额</string>
     <string name="act_withdrawrecord_title">提现记录</string>
+    <string name="tixianjineyingdayu">提现金额应大于100元小于500000元</string>
+    <string name="tudoujinfuv">土豆金服Ver3.2.1</string>
+    <string name="guangfangwangzhan">官方网站</string>
+    <string name="wangzhi">www.tudoujf.com</string>
+    <string name="weixinhao">微信号</string>
+    <string name="weixinhaon">tudoujf-com</string>
+    <string name="kefudianhua">客服电话</string>
+    <string name="kefuhaoma">400-066-5811</string>
+    <string name="bangzhuzhongxin">帮助中心</string>
+    <string name="yijianfankui">意见反馈</string>
+    <string name="jianchagengxin">检查更新</string>
+    <string name="act_feedback_title">意见反馈</string>
+    <string name="qingshurunindebaoguiyijianhejianyi">请输入您的宝贵意见和建议,感谢您对我们的支持(限200字以内)</string>
+    <string name="qingliuxianindelianxifangshi">请留下您的联系方式(电话、QQ或邮箱)</string>
+    <string name="tijiao">提交</string>
+    <string name="fuwushijian">服务时间</string>
+    <string name="zaowan">早9:00至晚21:00</string>
+    <string name="bodakefurexian">拨打客服热线</string>
+    <string name="act_questionclassification_title">问题分类</string>
+    <string name="xinshouzhiyin">新手指引</string>
+    <string name="chongzhitixian">充值提现</string>
+    <string name="woyaolicai">我要理财</string>
+    <string name="woyaorongzi">我要融资</string>
+    <string name="zhaiquanzhuanrang">债权转让</string>
+    <string name="wangzhanfeiyong">网站费用</string>
+    <string name="falvfagui">法律法规</string>
+    <string name="mingcijieshi">名词解释</string>
 
 
 </resources>
