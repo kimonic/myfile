@@ -12,10 +12,16 @@ import com.tudoujf.R;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/7/18.
- * listview的简单测试适配器
+ * * ====================================================================
+ * name:            BankCardManageActivity
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/9/15
+ * description：  listview的简单适配器
+ * history：
+ * * ====================================================================
  */
-
 public class SimpleLVAdapter extends BaseAdapter {
     private List<String> list;
     private Context context;

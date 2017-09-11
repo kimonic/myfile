@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="@color/color_orange"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
+            <ImageView
+                android:id="@+id/lvitem_bankcardmanage_ivicon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@null"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/act_lock_icon"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                />
+            <TextView
+                android:id="@+id/lvitem_bankcardmanage_tvname"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/color_white"
+                android:textSize="14sp"
+                android:gravity="center_vertical"
+                android:text="中国农业银行"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/lvitem_bankcardmanage_tvnumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/color_white"
+            android:textSize="18sp"
+            android:gravity="center_horizontal|top"
+            android:text="622**********0544"
+            />
+        
+    </LinearLayout>
+
+
+</LinearLayout>

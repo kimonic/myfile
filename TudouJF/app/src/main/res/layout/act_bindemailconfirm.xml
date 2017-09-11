@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_bindemailconfirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_bindemail_title"
+        app:leftImage="@drawable/xvector_back" />
+
+    <TextView
+        android:id="@+id/et_act_bindemailconfirm_name"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:textColor="@color/color_black"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="邮箱号码:187****888@XXX.com"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_white"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/et_act_bindemailconfirm_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/color_black"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:background="@drawable/xshape_roundrect_mwhite1"
+            android:hint="@string/qingshurunindyzm"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            />
+        <TextView
+
+            android:id="@+id/tv_act_bindemailconfirm_getcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:text="@string/huoquyanzhengma"
+            android:background="@drawable/xshape_roundrect_myellow"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/qingshuruyanzhengma"
+        android:textColor="@color/color_orange"
+        android:textSize="12sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_act_bindemailconfirm_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:gravity="center"
+        android:text="@string/querenbangding"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:text="已向邮箱187****8888@XX.com发送验证码,请输入验证码完成绑定."
+        android:textColor="@color/color_gray"
+        android:textSize="12sp"
+        />
+
+
+
+</LinearLayout>

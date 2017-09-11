@@ -419,6 +419,41 @@
     <string name="wangzhanfeiyong">网站费用</string>
     <string name="falvfagui">法律法规</string>
     <string name="mingcijieshi">名词解释</string>
+    <string name="act_myaccount_title">我的账户</string>
+    <string name="genggaitouxiang">更改头像</string>
+    <string name="yonghuxinxi">用户信息</string>
+    <string name="yinhangkaguanli">银行卡管理</string>
+    <string name="weibangding">未绑定</string>
+    <string name="wodehuifuzhanghao">我的汇付账号</string>
+    <string name="anquanrenzheng">安全认证</string>
+    <string name="shoujibangding">手机绑定</string>
+    <string name="youxiangrenzheng">邮箱认证</string>
+    <string name="weirenzheng">未认证</string>
+    <string name="shimingrenzheng">实名认证</string>
+    <string name="mimashezhi">密码设置</string>
+    <string name="denglumima">登陆密码</string>
+    <string name="xiugai">修改</string>
+    <string name="shoushimima">手势密码</string>
+    <string name="tuichudenglu">退出登陆</string>
+    <string name="act_changepassword_title">修改登陆密码</string>
+    <string name="qingshuruyuanmima">请输入原密码</string>
+    <string name="qingshuruxinmima">请输入新密码</string>
+    <string name="querenxinmima">确认新密码</string>
+    <string name="querenxiugai">确认修改</string>
+    <string name="act_changephonenumber_title">修改手机号</string>
+    <string name="wancheng">完成</string>
+    <string name="qingshuruninybddsjh">请输入您要绑定的手机号</string>
+    <string name="qingshurunindyzm">请输入您的验证码</string>
+    <string name="huoquyanzhengma">获取验证码</string>
+    <string name="qingshuruyanzhengma">请输入验证码</string>
+    <string name="xiayibu">下一步</string>
+    <string name="act_bindemail_title">邮箱绑定</string>
+    <string name="qingshuruyouxiang">请输入邮箱</string>
+    <string name="querenbangding">确认绑定</string>
+    <string name="act_bankcardmanage_title">银行卡管理</string>
+    <string name="tianjiayinhangka">添加银行卡</string>
+    <string name="paishe">拍摄</string>
+    <string name="xiangcexuanqu">相册选取</string>
 
 
 </resources>

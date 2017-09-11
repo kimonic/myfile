@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_myaccount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_myaccount_title"
+        app:leftImage="@drawable/xvector_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/global_background_color"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_icon"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@color/color_white"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_act_myaccount_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_lock_icon"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textSize="14sp"
+                        android:textColor="@color/color_black"
+                        android:gravity="center"
+                        android:text="XXXXXXXXXX"
+
+                        />
+
+                    <ImageView
+                        android:layout_width="23dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/frag_my_vipt"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@null"
+                        android:layout_marginBottom="5dp"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"
+                    android:text="@string/genggaitouxiang"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textSize="16sp"
+                android:textColor="@color/color_black"
+                android:gravity="center_vertical"
+                android:text="@string/yonghuxinxi"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_bankcard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_account_bankcard"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/yinhangkaguanli"
+
+                    />
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"
+                    android:text="@string/weibangding"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_huifu"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_account_huifuzhanghao"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/wodehuifuzhanghao"
+
+                    />
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp"
+                    android:text="XXXXXXXXXX"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/anquanrenzheng"
+                android:textColor="@color/color_black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_account_shoujibangding"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/shoujibangding"
+
+                    />
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp"
+                    android:text="@string/weibangding"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_email"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_account_youxiangrenzheng"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/youxiangrenzheng"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="@string/weirenzheng"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/act_account_shimingrenzheng"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/shimingrenzheng"
+
+                    />
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp"
+                    android:text="@string/weirenzheng"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/mimashezhi"
+                android:textColor="@color/color_black"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_login"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/act_account_denglumima" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/denglumima"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:text="@string/xiugai"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/xvector_rightarrowlarge" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_gesture"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/act_account_shoushimima" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/shoushimima"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"
+
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:textColor="@color/color_orange"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_act_myaccount_oc"
+                    android:layout_width="38dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/act_myaccount_open" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/global_background_color"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_act_myaccount_signout"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:textSize="20sp"
+                android:textColor="@color/color_white"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/tuichudenglu"
+                android:background="@drawable/xshape_roundrect_themecolor"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="@color/global_background_color"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

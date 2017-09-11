@@ -20,22 +20,32 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             >
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="@null"
-                android:src="@drawable/act_lock_icon" />
-
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_frag_my_myaccount"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:text="欢迎你,XXXXXXXXXXX"
-                android:textColor="@color/color_white"
-                android:textSize="14sp" />
+                >
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/act_lock_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_vertical"
+                    android:text="欢迎你,XXXXXXXXXXX"
+                    android:textColor="@color/color_white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
 
             <ImageView
                 android:layout_width="18dp"

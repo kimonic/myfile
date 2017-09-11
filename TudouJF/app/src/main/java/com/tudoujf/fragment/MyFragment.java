@@ -12,6 +12,7 @@ import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
+import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
@@ -52,6 +53,8 @@ public class MyFragment extends BaseFragment {
     LinearLayout llChongZhi;
     @BindView(R.id.ll_frag_my_tixian)
     LinearLayout llTiXian;
+    @BindView(R.id.ll_frag_my_myaccount)
+    LinearLayout llMyAccount;
     @BindView(R.id.ll_frag_my_funddetails)
     LinearLayout llFundDetails;
     Unbinder unbinder;
@@ -100,6 +103,10 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
                 openActivity(FundDetailsActivity.class);
+                break;
+            case R.id.ll_frag_my_myaccount://我的账户
+                openActivity(MyAccountActivity.class);
+
                 break;
         }
     }
@@ -160,6 +167,7 @@ public class MyFragment extends BaseFragment {
         llFundDetails.setOnClickListener(this);
         llChongZhi.setOnClickListener(this);
         llTiXian.setOnClickListener(this);
+        llMyAccount.setOnClickListener(this);
 
 
     }

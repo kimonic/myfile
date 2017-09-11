@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.set;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -150,19 +148,19 @@ public class QuestionClassificationActivity extends BaseActivity {
         private int  textResId;
         private int imageResId;
 
-        public int getTextResId() {
+        int getTextResId() {
             return textResId;
         }
 
-        public void setTextResId(int textResId) {
+        void setTextResId(int textResId) {
             this.textResId = textResId;
         }
 
-        public int getImageResId() {
+        int getImageResId() {
             return imageResId;
         }
 
-        public void setImageResId(int imageResId) {
+        void setImageResId(int imageResId) {
             this.imageResId = imageResId;
         }
     }

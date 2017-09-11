@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/xshape_roundrect_mwhite"
+
+        >
+        <TextView
+            android:id="@+id/act_myaccount_paishe"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/paishe"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_gray"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/act_myaccount_xiangcexuanqu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="16sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/xiangcexuanqu"
+
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"  />
+    </LinearLayout>
+
+
+</LinearLayout>

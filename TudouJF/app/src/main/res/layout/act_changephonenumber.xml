@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">
+
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_changephonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_changephonenumber_title"
+        app:leftImage="@drawable/xvector_back" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:textColor="@color/color_black"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:background="@drawable/xshape_roundrect_mwhite1"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="已绑定的手机号:187****8888"
+        />
+
+
+
+
+    <TextView
+        android:id="@+id/tv_act_changephonenumber_change"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:text="@string/act_changephonenumber_title"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+
+        />
+
+
+</LinearLayout>
