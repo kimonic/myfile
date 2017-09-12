@@ -2,23 +2,17 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 /**
@@ -67,41 +61,26 @@ public class MRedView extends View {
     private boolean valid = true;
     private String twoText="元";
 
-    public String getTwoText() {
-        return twoText;
-    }
 
     public void setTwoText(String twoText) {
         this.twoText = twoText;
     }
 
-    public boolean isValid() {
-        return valid;
-    }
 
     public void setValid(boolean valid) {
         this.valid = valid;
     }
 
-    public String getOneText() {
-        return oneText;
-    }
 
     public void setOneText(String oneText) {
         this.oneText = oneText;
     }
 
-    public String getFourText() {
-        return fourText;
-    }
 
     public void setFourText(String fourText) {
         this.fourText = fourText;
     }
 
-    public boolean isRedPackageOrQuan() {
-        return redPackageOrQuan;
-    }
 
     public void setRedPackageOrQuan(boolean redPackageOrQuan) {
         this.redPackageOrQuan = redPackageOrQuan;
@@ -117,16 +96,16 @@ public class MRedView extends View {
 
     public MRedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(attrs);
+        initView();
     }
 
-    @TargetApi(23)
+    @TargetApi(21)
     public MRedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        initView(attrs);
+        initView();
     }
 
-    private void initView(AttributeSet attrs) {
+    private void initView() {
         path = new Path();
         pathL = new Path();
         redRect = new RectF();
@@ -291,7 +270,6 @@ public class MRedView extends View {
     /**该函数确定该view在父控件中的位置,并最终确定getwidth()和getheight()的值*/
     @Override
     public void layout(@Px int l, @Px int t, @Px int r, @Px int b) {
-
         int  w=ScreenSizeUtils.getScreenWidth(getContext())-widthFi-10*ScreenSizeUtils.getDensity(getContext());
         int  w2=w+widthFi;
         super.layout(w, t, w2, b);
