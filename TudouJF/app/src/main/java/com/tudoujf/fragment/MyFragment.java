@@ -16,6 +16,7 @@ import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
+import com.tudoujf.activity.my.mywelfare.MyWelfareActivity;
 import com.tudoujf.activity.my.set.SetActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
@@ -152,6 +153,7 @@ public class MyFragment extends BaseFragment {
                         openActivity(MyProjectActivity.class);
                         break;
                     case 4://我的福利
+                        openActivity(MyWelfareActivity.class);
                         break;
                     case 5://专属客服
                         break;

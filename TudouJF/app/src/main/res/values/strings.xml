@@ -454,6 +454,20 @@
     <string name="tianjiayinhangka">添加银行卡</string>
     <string name="paishe">拍摄</string>
     <string name="xiangcexuanqu">相册选取</string>
+    <string name="hongbao">红包</string>
+    <string name="jiaxiquan">加息券</string>
+    <string name="fanxianquan">返现券</string>
+    <string name="keyonghongbao">可用红包</string>
+    <string name="yiyonghongbao">已用红包</string>
+    <string name="guoqihongbao">过期红包</string>
+    <string name="keyongjiaxiquan">可用加息券</string>
+    <string name="yiyongjiaxiquan">已用加息券</string>
+    <string name="guoqijiaxiquan">过期加息券</string>
+    <string name="keyongfanxianquan">可用返现券</string>
+    <string name="yiyongfanxianquan">已用返现券</string>
+    <string name="guoqifanxianquan">过期返现券</string>
+    <string name="quan">券</string>
+    <string name="baifenhao">%</string>
 
 
 </resources>

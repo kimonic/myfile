@@ -19,8 +19,36 @@ public class RedPackageActBean {
     private String content4;
     private String content5;
     private String content6;
+    private String content7;
     private int background;
     private int type;
+    private boolean valid;
+    private boolean quanOrRedPackage;
+
+
+    public boolean isQuanOrRedPackage() {
+        return quanOrRedPackage;
+    }
+
+    public void setQuanOrRedPackage(boolean quanOrRedPackage) {
+        this.quanOrRedPackage = quanOrRedPackage;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    public String getContent7() {
+        return content7;
+    }
+
+    public void setContent7(String content7) {
+        this.content7 = content7;
+    }
 
     public int getType() {
         return type;

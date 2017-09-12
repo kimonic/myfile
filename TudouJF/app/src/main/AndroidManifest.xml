@@ -173,6 +173,8 @@
         <activity android:name=".activity.my.myaccount.BindEmailConfirmActivity" />
         <!--61.银行卡管理activity-->
         <activity android:name=".activity.my.myaccount.BankCardManageActivity" />
+        <!--62.我的福利activity-->
+        <activity android:name=".activity.my.mywelfare.MyWelfareActivity" />
 
         <service
             android:name=".service.MyService"

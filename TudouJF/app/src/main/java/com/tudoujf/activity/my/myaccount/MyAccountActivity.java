@@ -1,6 +1,7 @@
 package com.tudoujf.activity.my.myaccount;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -119,7 +120,11 @@ public class MyAccountActivity extends BaseActivity {
             case R.id.act_myaccount_paishe://拍照
                 dialog.dismiss();
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 1);
+                try{
+                    startActivityForResult(intent, 1);
+                }catch (ActivityNotFoundException e){
+                    ToastUtils.showToast(this,"未能找到相机!");
+                }
                 break;
             case R.id.act_myaccount_xiangcexuanqu://相册选取
                 dialog.dismiss();
@@ -191,7 +196,7 @@ public class MyAccountActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("TAG", "onActivityResult:相册???--- " + data);
-        if (requestCode == 1) {
+        if (requestCode == 1&&data!=null) {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
             Log.e("TAG", "onActivityResult: --------------------" + photo);
             if (photo != null) {
