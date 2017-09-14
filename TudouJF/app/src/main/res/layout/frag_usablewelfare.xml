@@ -11,6 +11,7 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/tv_frag_usable_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -39,5 +40,31 @@
         android:divider="#F0F0E8"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"/>
+    <LinearLayout
+        android:id="@+id/ll_frag_usable_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/iv_frag_usable_baoquan"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            />
+        <TextView
+            android:id="@+id/tv_frag_usable_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:paddingTop="20dp"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

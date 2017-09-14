@@ -1,14 +1,21 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,10 +26,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -76,6 +86,9 @@ public class MyAccountActivity extends BaseActivity {
     private View view;
 
 
+    private int requestCount = 0;
+
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_myaccount;
@@ -119,11 +132,33 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.act_myaccount_paishe://拍照
                 dialog.dismiss();
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                try{
-                    startActivityForResult(intent, 1);
-                }catch (ActivityNotFoundException e){
-                    ToastUtils.showToast(this,"未能找到相机!");
+                // TODO: 2017/9/14 此处权限申请需真机测试,不同机型对应不同的处理方案
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED && requestCount == 0) {
+                    requestCount++;
+                    ToastUtils.showToast(this, "需要相机使用权限,否则无法使用此功能,请在应用权限设置中进行授权!");
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+                } else if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED && requestCount != 0) {
+
+                    requestCount++;
+                    ToastUtils.showToast(this, "需要相机使用权限,否则无法使用此功能,请在应用权限设置中进行授权!");
+
+                    Intent localIntent = new Intent();
+                    localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                    localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+                    startActivity(localIntent);
+
+
+                } else {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    try {
+                        startActivityForResult(intent, 1);
+                    } catch (ActivityNotFoundException e) {
+                        ToastUtils.showToast(this, "未能找到相机!");
+                    }
                 }
                 break;
             case R.id.act_myaccount_xiangcexuanqu://相册选取
@@ -196,7 +231,7 @@ public class MyAccountActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("TAG", "onActivityResult:相册???--- " + data);
-        if (requestCode == 1&&data!=null) {
+        if (requestCode == 1 && data != null) {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
             Log.e("TAG", "onActivityResult: --------------------" + photo);
             if (photo != null) {
@@ -205,16 +240,18 @@ public class MyAccountActivity extends BaseActivity {
             } else {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
-        } else if (requestCode == 2&&data!=null) {
-
-            Log.e("TAG", "onActivityResult:相册111 " + data.getData());
-            Log.e("TAG", "onActivityResult:相册 222" + data.getData().toString());
-
+        } else if (requestCode == 2 && data != null) {
+            //遗留问题:小米4手机中,一旦点击图片则返回本activity,无法点击相册中的确定
             ContentResolver resolver = getContentResolver();
             try {
                 InputStream inputStream = resolver.openInputStream(data.getData());
+
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                ivIcon.setImageBitmap(bitmap);
+                int density = ScreenSizeUtils.getDensity(this);
+
+
+                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -254,5 +291,6 @@ public class MyAccountActivity extends BaseActivity {
 
         return dialog;
     }
+
 
 }

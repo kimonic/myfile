@@ -1,5 +1,7 @@
 package com.tudoujf.activity;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.StringUtils;
 
+import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -110,8 +113,15 @@ public class HttpTestActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        SensorManager manager= (SensorManager) getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors=manager.getSensorList(Sensor.TYPE_ALL);
+        StringBuilder builder=new StringBuilder();
+        for (int i = 0; i < sensors.size(); i++) {
+            Log.e("TAG", "onStart: ---------------------"+sensors.get(i).getName());
+            builder.append(sensors.get(i).getName()).append("\n");
+        }
 
-
+        tvActHttptest1.setText(builder.toString());
     }
 
     //
@@ -198,6 +208,7 @@ public class HttpTestActivity extends BaseActivity {
 
 
     }
+
 
 
 }

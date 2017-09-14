@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
@@ -40,8 +39,9 @@ import butterknife.BindView;
  * date：            2017/7/11
  * description：确认密码页activity
  * history：
- * ===================================================
+ * ==================================================
  */
+
 
 public class AffirmPasswordActivity extends BaseActivity {
     @BindView(R.id.mtb_act_affirm)
@@ -96,6 +96,8 @@ public class AffirmPasswordActivity extends BaseActivity {
                 }
                 break;
         }
+
+
     }
 
     private void commitInfo() {
@@ -214,6 +216,8 @@ public class AffirmPasswordActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActAffirm.setLayoutParams(params);
 
+
+
     }
 
     @Override
@@ -235,6 +239,8 @@ public class AffirmPasswordActivity extends BaseActivity {
 
     }
 
+
+
     @Override
     protected int setStatusBarColor() {
         return getResources().getColor(R.color.global_theme_background_color);
@@ -244,4 +250,6 @@ public class AffirmPasswordActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
 }

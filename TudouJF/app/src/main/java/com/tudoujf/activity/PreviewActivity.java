@@ -4,6 +4,8 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Gravity;
@@ -27,10 +29,13 @@ import com.tudoujf.activity.managemoney.AffirmBuyActivity;
 import com.tudoujf.activity.managemoney.FanXianQuanSelActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
+import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -211,7 +216,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(MyEarningsActivity.class);
                 break;
             case R.id.bt_act_preview19://控件测试
-                openActivity(TestActivity.class);
+                openActivity(MyAccountActivity.class);
                 break;
             case R.id.bt_act_preview20:
                 openActivity(IntegralRecodeActivity.class);
@@ -222,6 +227,15 @@ public class PreviewActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+
+        SensorManager manager= (SensorManager) getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors=manager.getSensorList(Sensor.TYPE_ALL);
+        for (int i = 0; i < sensors.size(); i++) {
+            Log.e("TAG", "onStart: ---------------------"+sensors.get(i).getName());
+        }
+
+
+
 //        Log.e("initDataFromIntent","1231213"+ NetworkUtils.connectionNetwork());
 //        Log.e("initDataFromIntent111",""+ NetworkUtils.isConnected(this));
 //        Log.e("initDataFromIntent333",""+ NetworkUtils.getTelNetworkTypeINT(this));

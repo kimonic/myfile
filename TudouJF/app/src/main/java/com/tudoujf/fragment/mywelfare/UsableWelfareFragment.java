@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.adapter.RedPackageActLvAdapter;
 import com.tudoujf.adapter.UsableWelfareFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.RedPackageActBean;
@@ -38,6 +39,15 @@ public class UsableWelfareFragment extends BaseFragment {
     @BindView(R.id.lv_frag_usable_info)
     ListView lvFragUsableInfo;
     Unbinder unbinder;
+    @BindView(R.id.tv_frag_usable_count)
+    TextView tvCount;
+    @BindView(R.id.iv_frag_usable_baoquan)
+    ImageView ivBaoQuan;
+    @BindView(R.id.tv_frag_usable_description)
+    TextView tvDescription;
+    @BindView(R.id.ll_frag_usable_nothing)
+    LinearLayout llNothing;
+    Unbinder unbinder1;
 
     private List<RedPackageActBean> list;
     private UsableWelfareFragLvAdapter adapter;
@@ -88,6 +98,8 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 2:
+
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -105,6 +117,7 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 3:
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -139,6 +152,7 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 5:
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -156,6 +170,7 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 6:
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -190,6 +205,7 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 8:
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -207,6 +223,7 @@ public class UsableWelfareFragment extends BaseFragment {
                 }
                 break;
             case 9:
+                llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -241,12 +258,14 @@ public class UsableWelfareFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
 
+
     }
 
     @Override
     public void LoadInternetDataToUi() {
 
     }
+
 
 
 }

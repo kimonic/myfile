@@ -103,6 +103,7 @@ public class MyWelfareFragment extends BaseFragment {
         listTv.add(tvYiYongHongBao);
         listTv.add(tvGuoQiHongBao);
 
+
         switch (type) {
             case 1://红包
                 initTitle(redPackgeTilte);
