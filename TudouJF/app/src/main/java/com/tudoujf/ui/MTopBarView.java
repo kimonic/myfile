@@ -99,6 +99,12 @@ public class MTopBarView extends LinearLayout {
     public void setCenterTitle(int resId) {
         centerTV.setText(resId);
     }
+    /**
+     * 设置中间标题
+     */
+    public void setCenterTitle(String title) {
+        centerTV.setText(title);
+    }
 
     /**
      * 获得左方控件

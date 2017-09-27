@@ -35,6 +35,9 @@ public class Constants {
     /**理财--投资列表*/
     public static  final String  INVESTMENT_LIST=URL+"/phone/loan/list";
     public static  final String  CREDITOR_TRANSFER_LIST=URL+"/phone/transfer/list";
+    /**投资列表详情接口*/
+    public static  final String  INVESTMENT_DETAILS=URL+"/phone/loan/loanInfo";
+
     /**用户名*/
     public static  final String SHARE_USERNAME = "username";
     /**用户信息保存文件名*/
@@ -43,6 +46,8 @@ public class Constants {
     public static  final String SHARE_USERID = "userid";
     public static  final String SHARE_ISLOGIN = "islogin";
     public static  final String SHARE_USERKEY = "userkey";
+
+
 
 
 

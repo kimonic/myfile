@@ -53,7 +53,7 @@ public class InvestListFragLvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
         if (convertView == null) {
@@ -111,6 +111,7 @@ public class InvestListFragLvAdapter extends BaseAdapter {
             @Override
             public void clickEvent() {
                 Intent intent = new Intent(context, ProductDetailsActivity.class);
+                intent.putExtra("loan_id",list.get(position).getId());
                 context.startActivity(intent);
             }
         });

@@ -14,6 +14,7 @@ import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
@@ -89,12 +90,14 @@ public class HttpTestActivity extends BaseActivity {
     @Override
     public void initView() {
         etCanshuKey1.setText("login_token");
-        etCanshuKey2.setText("type");
+        etCanshuKey2.setText("loan_id ");
         etCanshuKey3.setText("page_count");
         etCanshuKey4.setText("page");
         etCanshuKey5.setText("start_time");
         etCanshuKey6.setText("end_time");
         etCanshuValue1.setText("12267");
+
+        etCanshuInterface.setText("/phone/loan/loanInfo");
 
     }
 
@@ -183,7 +186,9 @@ public class HttpTestActivity extends BaseActivity {
         map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
         String url;
 
+
         url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
+
         HttpMethods.getInstance().POST(this, url, map, "test", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -191,6 +196,8 @@ public class HttpTestActivity extends BaseActivity {
                     Log.e("TAG", "onSuccess: --------888------" + response.body());
                     String result = StringUtils.getDecodeString(response.body());
                     tvActHttptest1.setText(result);
+                    FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据.txt",result);
+                    //   /phone/loan/loanInfo  loan_id,292
                     Log.e("TAG", "onSuccess:-----------哈哈---------- " + result);
                 } else {
                     tvActHttptest1.setText(response.body());

@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <com.tudoujf.ui.InfoView
+                android:id="@+id/iv_act_productdetails_info"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
 
@@ -45,6 +46,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_rongziedu"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -66,6 +68,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_shengyuketou"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -97,6 +100,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_huankuanfangshi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -126,6 +130,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_jiekuanzhuangtai"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -155,6 +160,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_touzirenshu"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -184,6 +190,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_jieshushijian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -242,6 +249,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/ll_act_productdetails_xiangmuxiangqing"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -269,6 +277,8 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_xiangmumiaoshu"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -306,6 +316,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_huankuanbaozhang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="10dp"
@@ -342,6 +353,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_fengkongyijian"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="10dp"
@@ -378,6 +390,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_baozhangjigou"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="10dp"
@@ -414,6 +427,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_act_productdetails_fengxiantishi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="10dp"
@@ -455,6 +469,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_act_productdetails_touzizonge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/act_productdetails_tempdata"
@@ -469,6 +484,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/act_productdetails_tvcolor2" />
                     <TextView
+                        android:id="@+id/tv_act_productdetails_touzirenci"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/act_productdetails_tempdata1"
@@ -522,36 +538,12 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/ll_act_productdetails_image"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="180dp"
-                        android:layout_height="200dp"
-                        android:contentDescription="@null"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/act_productdetails2_ziliao1" />
 
-                    <ImageView
-                        android:layout_width="180dp"
-                        android:layout_height="200dp"
-                        android:contentDescription="@null"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/act_productdetails2_ziliao2" />
-
-                    <ImageView
-                        android:layout_width="180dp"
-                        android:layout_height="200dp"
-                        android:contentDescription="@null"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/act_productdetails2_ziliao3" />
                 </LinearLayout>
             </com.tudoujf.ui.MHorizontalScrollView>
 

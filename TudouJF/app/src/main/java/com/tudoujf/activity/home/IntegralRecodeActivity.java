@@ -268,6 +268,9 @@ public class IntegralRecodeActivity extends BaseActivity {
         map.put("end_time", paramsEndTime);
         map.put("page_count", "");//待删除字段
         map.put("page", "" + page);
+        Log.e("TAG", "initDataFromInternet: ---------------------??"+paramsStartTime);
+        Log.e("TAG", "initDataFromInternet: ---------------------??"+paramsEndTime);
+
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "IntegralRecodeActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {

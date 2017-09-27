@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
@@ -46,6 +47,8 @@ public class AffirmBuyActivity extends BaseActivity {
     LinearLayout llFanxianquan;
     @BindView(R.id.tv_act_affirmbuy_affirmbuy)
     TextView tvAffirmbuy;
+    @BindView(R.id.tv_act_affirmbuy_chongzhi)
+    TextView tvChongZhi;
     @BindView(R.id.et_act_affirm_touzijine)
     EditText etTouZiJinE;
 
@@ -72,6 +75,9 @@ public class AffirmBuyActivity extends BaseActivity {
                 break;
             case R.id.tv_act_affirmbuy_affirmbuy://确认购买按钮
                 showPasswordDialog();
+                break;
+         case R.id.tv_act_affirmbuy_chongzhi://充值按钮
+                openActivity(RechargeActivity.class);
                 break;
         }
     }
@@ -122,7 +128,7 @@ public class AffirmBuyActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbAffirmbuy.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbAffirmbuy.setLayoutParams(params);
@@ -170,6 +176,7 @@ public class AffirmBuyActivity extends BaseActivity {
         llJiaxiquan.setOnClickListener(this);
         llRedpackage.setOnClickListener(this);
         tvAffirmbuy.setOnClickListener(this);
+        tvChongZhi.setOnClickListener(this);
 
 
     }

@@ -97,7 +97,7 @@ public class RedPackageActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbRedpackage.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbRedpackage.setLayoutParams(params);

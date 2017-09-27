@@ -52,8 +52,6 @@ public class BitmapUtils {
      */
     public static Bitmap getReduceBitmap(Bitmap inBitmap, int newWidth, int newHeight) {
         Bitmap outBitmap;
-
-
         float width = inBitmap.getWidth();
         float height = inBitmap.getHeight();
 

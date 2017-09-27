@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.ProductDetailsActBean;
+import com.tudoujf.bean.databean.InvestDetailsBean;
 
 import java.util.List;
 
@@ -27,9 +28,9 @@ import java.util.List;
 public class ProductDetailsActLvAdapter extends BaseAdapter {
 
     private Context context;
-    private List<ProductDetailsActBean>  list;
+    private List<InvestDetailsBean.TenderListBean>  list;
 
-    public ProductDetailsActLvAdapter(Context context, List<ProductDetailsActBean> list) {
+    public ProductDetailsActLvAdapter(Context context, List<InvestDetailsBean.TenderListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -65,9 +66,9 @@ public class ProductDetailsActLvAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getTouBiaoRen());
-        viewHolder.textView2.setText(list.get(position).getTouZiJinE());
-        viewHolder.textView3.setText(list.get(position).getTouZiTime());
+        viewHolder.textView1.setText(list.get(position).getMember_name());
+        viewHolder.textView2.setText(list.get(position).getAmount());
+        viewHolder.textView3.setText(list.get(position).getAdd_time());
 
         if (position==0){
             viewHolder.textView1.setTextColor(context.getResources().getColor(R.color.act_productdetails_tvcolor1));

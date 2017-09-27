@@ -45,7 +45,7 @@ public class InfoView extends View {
     private static final float whScale=3.5f;
 
 
-    /**投资进度*/
+    /**投资进度--0.88f*/
     private float underlineScale1=0;//对应75%\
     /**预期年化收益率*/
     private String nianHuaShouYi="8.8%";
@@ -123,18 +123,7 @@ public class InfoView extends View {
 
         canvas.drawText("预期年化收益",rectImag1.left+bitWidth1+10,rectImag1.bottom-5,paintGray);
 
-        float bitScale2=0.16f;//位图1高与控件高的比例
-        int bitWidth2= (int) (width*bitScale2);//控件的高度
-        float initScale2=1.29f;//位图1左上角位置与控件宽度的比例
-        float initScaleh2=21f;//位图1左上角位置与控件宽度的比例
 
-        rectImag2.left= (int) (width/initScale2);
-        rectImag2.top= (int) (width/initScaleh2);
-        rectImag2.right=rectImag2.left+bitWidth2;
-        rectImag2.bottom=rectImag2.top+bitWidth2;
-
-
-        canvas.drawBitmap(bitmapRight,null,rectImag2,null);
         canvas.drawText("借款期限",width/1.5f,rectImag1.bottom-5,paintGray);
 
         float textWidth1=paintGray.measureText("预期年化收益");
@@ -153,23 +142,50 @@ public class InfoView extends View {
 
         canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
 
+
+
+        //------------------------------------------新手标相关--------------------------------------
         if (ifNew){//是否时新手标
             canvas.drawRect(width*0.4706f,width*0.03333f,width*0.5089f,width*0.07166f,paintCyan);
             paintWhite.setTextSize(width*.03333f);
             canvas.drawText("新",width*0.4736f,width*0.06666f,paintWhite);
+
+
+            //-------------------------新手专享图片------------------------------------
+            float bitScale2=0.16f;//位图1高与控件高的比例
+            int bitWidth2= (int) (width*bitScale2);//控件的高度
+            float initScale2=1.29f;//位图1左上角位置与控件宽度的比例
+            float initScaleh2=21f;//位图1左上角位置与控件宽度的比例
+
+            rectImag2.left= (int) (width/initScale2);
+            rectImag2.top= (int) (width/initScaleh2);
+            rectImag2.right=rectImag2.left+bitWidth2;
+            rectImag2.bottom=rectImag2.top+bitWidth2;
+
+
+            canvas.drawBitmap(bitmapRight,null,rectImag2,null);
         }
+        //------------------------------------------新手标相关--------------------------------------
 
 
+        //------------------------------------------投资进度--------------------------------------
         rectF.left=width*underlineScale;
         rectF.top=width/4.07f;
+
         rectF.right=rectF.left+width*0.10407f;
+        if (rectF.right>width-rectF.left){
+            rectF.left=width-+width*0.10407f;
+            rectF.right=width;
+        }
+
         rectF.bottom=width*0.277f;
         canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
 
         paintWhite.setTextSize(width*0.02777f);
-        canvas.drawText(handleProgress(),width*(underlineScale+0.01f),width*0.2731f,paintWhite);
+        canvas.drawText(handleProgress(),rectF.left+width*0.01f,width*0.2731f,paintWhite);
 
         canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
+        //------------------------------------------投资进度--------------------------------------
 
 
 
@@ -184,7 +200,7 @@ public class InfoView extends View {
         if (underlineScale1==0){
             return "0.00%";
         }else {
-            return (underlineScale1*100)+"%";
+            return underlineScale1+"%";
         }
 
     }
