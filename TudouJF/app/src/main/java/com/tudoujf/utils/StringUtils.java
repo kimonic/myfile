@@ -1,9 +1,13 @@
 package com.tudoujf.utils;
 
+import android.util.Log;
+
 import com.example.encryptionpackages.CreateCode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tudoujf.bean.GlobalBean;
+
+import org.litepal.tablemanager.typechange.BooleanOrm;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -92,8 +96,8 @@ public class StringUtils {
      * 密码规则：必须是6-16位大小写字母及数字的组合
      * 是否包含
      *
-     * @param str   检验的字符串
-     * @return   符合--true,不符合--false
+     * @param str 检验的字符串
+     * @return 符合--true,不符合--false
      */
     public static boolean conformPasswordRule(String str) {
         boolean isDigit = false;//定义一个boolean值，用来表示是否包含数字
@@ -110,17 +114,16 @@ public class StringUtils {
     }
 
 
-
-
-     /**
-     *将字符串转化为int型数字
-     * @param intString  数字型字符串
-     * @return     字符串数字或0
+    /**
+     * 将字符串转化为int型数字
+     *
+     * @param intString 数字型字符串
+     * @return 字符串数字或0
      */
-    public static int  string2Integer(String intString){
+    public static int string2Integer(String intString) {
         try {
             return Integer.parseInt(intString);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return 0;
         }
 
@@ -128,32 +131,34 @@ public class StringUtils {
 
 
     /**
-     *将字符串转化为float型数字
-     * @param floatString  数字型字符串
-     * @return     字符串数字或0
+     * 将字符串转化为float型数字
+     *
+     * @param floatString 数字型字符串
+     * @return 字符串数字或0
      */
-    public static float  string2Float(String floatString){
+    public static float string2Float(String floatString) {
         try {
             return Float.parseFloat(floatString);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return 0;
         }
 
     }
 
-    /**将时间戳转为字符串
+    /**
+     * 将时间戳转为字符串
      *
-     * @param cc_time   时间戳字符串,到秒
-     * @return     yyyy-MM-dd
+     * @param cc_time 时间戳字符串,到秒
+     * @return yyyy-MM-dd
      */
     public static String getStrTime(String cc_time) {
         String re_StrTime = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             long lcc_time = Long.valueOf(cc_time);
-            re_StrTime = sdf.format(new Date(lcc_time*1000L));
+            re_StrTime = sdf.format(new Date(lcc_time * 1000L));
 
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return "****-**-**";
         }
         return re_StrTime;
@@ -170,12 +175,59 @@ public class StringUtils {
                 || "[]".equals(str) || "null".equals(str);
     }
 
-    /**补齐两位小数*/
-    public static String  getTwoDecimalsStr(String  fStr){
-        float  f=string2Float(fStr);
-        DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+    /**
+     * 补齐两位小数
+     */
+    public static String getTwoDecimalsStr(String fStr) {
+        float f = string2Float(fStr);
+        DecimalFormat decimalFormat = new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
         return decimalFormat.format(f);//format 返回的是字符串
     }
 
+    /**
+     * 将字符串转成unicode
+     *
+     * @param str 待转字符串
+     * @return unicode字符串
+     */
+    public static String convertStr2Unicode(String str) {
+        str = (str == null ? "" : str);
+        String tmp;
+        StringBuffer sb = new StringBuffer(1000);
+        char c;
+        int i, j;
+        sb.setLength(0);
+        for (i = 0; i < str.length(); i++) {
+            c = str.charAt(i);
+            sb.append("\\u");
+            j = (c >>> 8); //取出高8位
+            tmp = Integer.toHexString(j);
+            if (tmp.length() == 1)
+                sb.append("0");
+            sb.append(tmp);
+            j = (c & 0xFF); //取出低8位
+            tmp = Integer.toHexString(j);
+            if (tmp.length() == 1)
+                sb.append("0");
+            sb.append(tmp);
 
+        }
+        return (new String(sb));
+    }
+
+    /**
+     * 将缩进的字符串,有空格的地方统一替换为8个   \u0020
+     * 针对投资列表详情
+     */
+    public static String convertRetract(String str) {
+        String temp = str.replace("\n\n", "\n").replace("\u00a0", "\u0020");
+        Pattern p = Pattern.compile("\\u0020+");//匹配多于一个空格的地方,至少两个
+        Matcher m = p.matcher(temp);
+        StringBuffer sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, "\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020");//将匹配到的字符串用指定字符串替代
+        }
+        m.appendTail(sb);//将未匹配到的地方添加到sb中
+        return sb.toString();
+    }
 }

@@ -106,7 +106,7 @@ public class InfoView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.parseColor("#E7FAFF"));//背景色
-        float underlineScale=(width*0.9259f)*underlineScale1/width;
+        float underlineScale=(width*0.9259f)*underlineScale1/100/width;
 
         float bitScale1=0.03333f;//位图1高与控件高的比例
         int bitWidth1= (int) (width*bitScale1);//控件的高度
@@ -140,6 +140,7 @@ public class InfoView extends View {
 
         canvas.drawLine(width/1.86f,width/61.74f,width/1.86f,rectImag1.bottom-5,paintCyan);//中分线
 
+        Log.e("TAG", "onDraw: -------------dsdsdsd--------"+underlineScale);
         canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
 
 

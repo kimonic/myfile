@@ -37,6 +37,8 @@ public class Constants {
     public static  final String  CREDITOR_TRANSFER_LIST=URL+"/phone/transfer/list";
     /**投资列表详情接口*/
     public static  final String  INVESTMENT_DETAILS=URL+"/phone/loan/loanInfo";
+    /**获取首页标的详情对应标的id接口*/
+    public static  final String  HOME_DETAILS_ID=URL+"/phone/loan/getLoanidByProduct";
 
     /**用户名*/
     public static  final String SHARE_USERNAME = "username";

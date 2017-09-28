@@ -223,10 +223,10 @@ public class ProductDetailsActivity extends BaseActivity {
     public void initDataFromInternet() {
         showProgressDialog();
         TreeMap<String, String> map = new TreeMap<>();
-//        map.put("loan_id", loan_id);
+        map.put("loan_id", loan_id);
         //----------------------------临时固定id----------------------------------------------------------------------------------------------------------------
-        map.put("loan_id", "110");
-        Log.e("TAG", "initDataFromInternet: ---------------------" + loan_id);
+//        map.put("loan_id", "110");
+        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + loan_id);
 
         HttpMethods.getInstance().POST(this, Constants.INVESTMENT_DETAILS, map, getLocalClassName(),
                 new StringCallback() {
@@ -258,8 +258,8 @@ public class ProductDetailsActivity extends BaseActivity {
 
             mtbProductdetails.setCenterTitle(bean.getLoan_info().getName());
 
-            tvRongZiEDu.setText(bean.getLoan_info().getAmount());
-            tvShengYuKeTou.setText(bean.getLoan_info().getLeft_amount());
+            tvRongZiEDu.setText((bean.getLoan_info().getAmount()+"元"));
+            tvShengYuKeTou.setText((bean.getLoan_info().getLeft_amount()+"元"));
             tvHuanKuanFangShi.setText(bean.getRepay_type().getContents());
 
 
@@ -278,12 +278,11 @@ public class ProductDetailsActivity extends BaseActivity {
 
 
             //------------------------------------项目详情--------------------------------------
-
-            tvXiangMuMiaoShu.setText(Html.fromHtml(bean.getLoan_info().getProject_contents()));
-            tvHuanKuanBaoZhang.setText(Html.fromHtml(bean.getLoan_info().getRepay_contents()));
-            tvFengKongYiJian.setText(Html.fromHtml(bean.getLoan_info().getContrall_contents()));
-            tvBaoZhangJiGou.setText(Html.fromHtml(bean.getLoan_info().getPromise_contents()));
-            tvFengXianTiShi.setText(Html.fromHtml(bean.getLoan_info().getDenger_contents()));
+            tvXiangMuMiaoShu.setText(StringUtils.convertRetract(Html.fromHtml(bean.getLoan_info().getProject_contents()).toString()));
+            tvHuanKuanBaoZhang.setText(StringUtils.convertRetract(Html.fromHtml(bean.getLoan_info().getRepay_contents()).toString()));
+            tvFengKongYiJian.setText(StringUtils.convertRetract(Html.fromHtml(bean.getLoan_info().getContrall_contents()).toString()));
+            tvBaoZhangJiGou.setText(StringUtils.convertRetract(Html.fromHtml(bean.getLoan_info().getPromise_contents()).toString()));
+            tvFengXianTiShi.setText(StringUtils.convertRetract(Html.fromHtml(bean.getLoan_info().getDenger_contents()).toString()));
 
             //------------------------------------项目详情--------------------------------------
 
@@ -296,6 +295,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 for (int i = 0; i < imageList.size(); i++) {
                     ImageView imageView = new ImageView(this);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(180 * desity, 200 * desity);
+                    imageView.setPadding(20*desity,0,20*desity,0);
                     imageView.setLayoutParams(params);
                     ImageGlideUtils.loadImageFromUrl(imageView, imageList.get(i).getImgurl());
                     llImage.addView(imageView);
@@ -373,6 +373,8 @@ public class ProductDetailsActivity extends BaseActivity {
         }
 
     }
+
+
 
 
 }

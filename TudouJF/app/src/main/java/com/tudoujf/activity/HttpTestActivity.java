@@ -194,8 +194,14 @@ public class HttpTestActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 if (!etCanshuInterface.getText().toString().trim().equals("")) {
                     Log.e("TAG", "onSuccess: --------888------" + response.body());
-                    String result = StringUtils.getDecodeString(response.body());
-                    tvActHttptest1.setText(result);
+                    String result="";
+                    try {
+                        result = StringUtils.getDecodeString(response.body());
+                        tvActHttptest1.setText(result);
+                    }catch (Exception e){
+                        tvActHttptest1.setText(response.body());
+                    }
+
                     FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据.txt",result);
                     //   /phone/loan/loanInfo  loan_id,292
                     Log.e("TAG", "onSuccess:-----------哈哈---------- " + result);

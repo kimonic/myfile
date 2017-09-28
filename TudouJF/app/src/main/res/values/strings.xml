@@ -468,6 +468,7 @@
     <string name="guoqifanxianquan">过期返现券</string>
     <string name="quan">券</string>
     <string name="baifenhao">%</string>
+    <string name="qingqiushujuchucuo">请求数据出错啦!</string>
 
 
 </resources>

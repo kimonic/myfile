@@ -76,11 +76,18 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 
 //        viewHolder.bidView.setAwardValue(list.get(position).getAwardValue());//奖励的数值
 
-        if (!"借款中".equals(list.get(position).getStatus_name())){//是否时立即还款按钮
+//        if (!"借款中".equals(list.get(position).getStatus_name())){
+//            viewHolder.bidView.setInvestNow(false);
+//        }else {
+//            viewHolder.bidView.setInvestNow(true);
+//        }
+        //判断按钮是蓝色还是灰色,条件status<=3并且进度<100
+        if (!(StringUtils.string2Integer(list.get(position).getStatus())<=3&&StringUtils.string2Integer(list.get(position).getProgress())<100)){//是否时立即还款按钮
             viewHolder.bidView.setInvestNow(false);
         }else {
             viewHolder.bidView.setInvestNow(true);
         }
+
         if (list.get(position).getStatus_name()!=null){
             viewHolder.bidView.setButtonText(list.get(position).getStatus_name());//按钮文本
         }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,12 +26,14 @@ import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewbieWelfareActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
+import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.BannerVPAdapter;
 import com.tudoujf.assist.ViewPagerScroller;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.HomeBean;
+import com.tudoujf.bean.databean.HomeBidIdBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -38,6 +41,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -156,7 +160,20 @@ public class HomeFragment extends BaseFragment {
      */
     private Thread thread;
     private boolean notify = false;
+    /**
+     * 当前ballview的位置
+     */
+    private int ballviewPosition = 0;
 
+
+    /**
+     * 加载dialog
+     */
+    private AlertDialog dialog;
+    /**
+     * 将要打开的标的详情idbean
+     */
+    private HomeBidIdBean homeBidIdBean;
 
     @Override
     public int layoutRes() {
@@ -169,6 +186,7 @@ public class HomeFragment extends BaseFragment {
 
         switch (view.getId()) {
             case R.id.tv_frag_home:
+                requestLoanId();
                 break;
             case R.id.tv_frag_home_leftarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
@@ -208,6 +226,40 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    /**
+     * 请求对应标的id
+     */
+    private void requestLoanId() {
+        dialog.show();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", "");
+        map.put("time_limit", loanBeanList.get(ballviewPosition).getPeriod());
+        map.put("is_experience", loanBeanList.get(ballviewPosition).getExperience_status());
+        map.put("is_new", loanBeanList.get(ballviewPosition).getAdditional_status());
+
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, getActivity().getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dialog.dismiss();
+
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBidIdBean>() {
+                        }.getType(),
+                        HomeBidIdBean.class, getActivity());
+                if (bean1 != null) {
+                    homeBidIdBean = (HomeBidIdBean) bean1;
+                    Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据loan_id----------------" + homeBidIdBean.getLoan_id());
+                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                    intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showToast(getActivity(), R.string.qingqiushujuchucuo);
+                }
+            }
+        });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
@@ -224,10 +276,10 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-//            tvFragHome.setText(bundle.getString("temp"));
-        }
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+////            tvFragHome.setText(bundle.getString("temp"));
+//        }
 //
 //        TreeMap<String, String> map = new TreeMap<>();
 //        map.put("login_token", "12267");
@@ -249,6 +301,7 @@ public class HomeFragment extends BaseFragment {
 //        Intent intent = new Intent(getActivity(), SignInService.class);
 //        getActivity().startService(intent);
 
+        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
 
     }
 
@@ -277,11 +330,6 @@ public class HomeFragment extends BaseFragment {
      * 初始化导航图片数据
      */
     private void initImagesViews() {
-//        int images[] = new int[]{R.drawable.frag_home_vp1,
-//                R.drawable.frag_home_vp2,
-//                R.drawable.frag_home_vp3,
-//                R.drawable.frag_home_vp4,
-//        };
         list = new ArrayList<>();
         listUrl = bean.getBanner();
 
@@ -360,6 +408,7 @@ public class HomeFragment extends BaseFragment {
         vpBall.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                ballviewPosition = position;
                 initOtherView(position);
             }
         });
@@ -421,12 +470,12 @@ public class HomeFragment extends BaseFragment {
         TreeMap<String, String> map = new TreeMap<>();
 
         //首页的logintoken为null时,会出现系统错误
-        map.put("login_token",UserConfig.getInstance().getLoginToken(getActivity()));
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
 
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-
+                dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
@@ -440,6 +489,7 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onError(Response<String> response) {
+                dialog.dismiss();
                 Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------" + response.message());
                 super.onError(response);
             }
