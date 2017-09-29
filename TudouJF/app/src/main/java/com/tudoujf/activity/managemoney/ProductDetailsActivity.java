@@ -223,9 +223,9 @@ public class ProductDetailsActivity extends BaseActivity {
     public void initDataFromInternet() {
         showProgressDialog();
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("loan_id", loan_id);
+//        map.put("loan_id", loan_id);
         //----------------------------临时固定id----------------------------------------------------------------------------------------------------------------
-//        map.put("loan_id", "110");
+        map.put("loan_id", "110");
         Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + loan_id);
 
         HttpMethods.getInstance().POST(this, Constants.INVESTMENT_DETAILS, map, getLocalClassName(),
@@ -288,7 +288,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
 
             //------------------------------------图片列表--------------------------------------
-            List<InvestDetailsBean.AttaListBean> imageList = bean.getAttaList();
+            final List<InvestDetailsBean.AttaListBean> imageList = bean.getAttaList();
 
             if (imageList != null && imageList.size() > 0) {
                 int desity = ScreenSizeUtils.getDensity(this);
@@ -298,6 +298,15 @@ public class ProductDetailsActivity extends BaseActivity {
                     imageView.setPadding(20*desity,0,20*desity,0);
                     imageView.setLayoutParams(params);
                     ImageGlideUtils.loadImageFromUrl(imageView, imageList.get(i).getImgurl());
+                    final String url=imageList.get(i).getImgurl();
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(getApplicationContext(),ImageShowActivity.class);
+                            intent.putExtra("url",url);
+                            startActivity(intent);
+                        }
+                    });
                     llImage.addView(imageView);
                 }
             }

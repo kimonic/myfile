@@ -1,6 +1,7 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +19,7 @@ import android.widget.PopupWindow;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.IntegralRecodeActivity;
 import com.tudoujf.activity.home.MyExperienceGoldActivity;
@@ -31,6 +33,7 @@ import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
 import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
+import com.tudoujf.activity.test.ImageScaleActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
@@ -213,7 +216,9 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(HuiFuRegisterActivity.class);
                 break;
             case R.id.bt_act_preview18:
-                openActivity(MyEarningsActivity.class);
+                Intent intent=new Intent(this,ImageScaleActivity.class);
+                startActivity(intent);
+//                openActivity(MyEarningsActivity.class);
                 break;
             case R.id.bt_act_preview19://控件测试
                 openActivity(MyAccountActivity.class);

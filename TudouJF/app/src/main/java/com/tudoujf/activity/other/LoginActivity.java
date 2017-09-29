@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -16,21 +16,19 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.config.Constants;
-import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
-import com.tudoujf.utils.AESUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 
-import java.lang.reflect.GenericSignatureFormatError;
 import java.util.TreeMap;
 
 import butterknife.BindView;

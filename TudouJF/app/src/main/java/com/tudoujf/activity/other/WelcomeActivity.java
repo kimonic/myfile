@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.content.Intent;
 import android.os.Bundle;

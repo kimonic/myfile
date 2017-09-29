@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.os.Handler;
 import android.os.Message;

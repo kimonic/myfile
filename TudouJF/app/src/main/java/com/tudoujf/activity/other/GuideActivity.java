@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.ui.DotView;
 

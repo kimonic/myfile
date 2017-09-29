@@ -1,12 +1,12 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
-import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MLockView;

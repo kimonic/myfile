@@ -40,7 +40,7 @@
             android:value="DYklj45T78ET@asd23" />
 
         <!-- 1.欢迎页activity -->
-        <activity android:name=".activity.WelcomeActivity">
+        <activity android:name=".activity.other.WelcomeActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -48,17 +48,17 @@
             <!-- </intent-filter> -->
         </activity>
         <!-- 2.初次引导页activity -->
-        <activity android:name=".activity.GuideActivity" />
+        <activity android:name=".activity.other.GuideActivity" />
         <!--3. 网络测试activity -->
-        <activity android:name=".activity.HttpTestActivity" />
+        <activity android:name=".activity.other.HttpTestActivity" />
         <!--4. 主页activity -->
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.home.HomeActivity" />
         <!-- 5.登录页activity -->
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.other.LoginActivity" />
         <!-- 6.注册页activity -->
-        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.other.RegisterActivity" />
         <!-- 7.确认密码页activity -->
-        <activity android:name=".activity.AffirmPasswordActivity" />
+        <activity android:name=".activity.other.AffirmPasswordActivity" />
         <!--8.产品详情activity-->
         <activity android:name=".activity.managemoney.ProductDetailsActivity" />
         <!--9.确认购买activity-->
@@ -80,15 +80,15 @@
         <!--17.积分商城activity-->
         <activity android:name=".activity.home.IntegralShopActivity"/>
         <!--18.汇付支付activity-->
-        <activity android:name=".activity.HuiFuRegisterActivity"/>
+        <activity android:name=".activity.other.HuiFuRegisterActivity"/>
         <!--19.我的收益activity-->
         <activity android:name=".activity.my.myearnings.MyEarningsActivity"/>
         <!--20.测试用的activity,正式发布时删除-->
-        <activity android:name=".activity.TestActivity"/>
+        <activity android:name=".activity.other.TestActivity"/>
 
 
         <!-- 21.预览各个activity的界面 -->
-        <activity android:name=".activity.PreviewActivity">
+        <activity android:name=".activity.other.PreviewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,13 +99,13 @@
             </intent-filter>
         </activity>
         <!-- 22.忘记密码activity -->
-        <activity android:name=".activity.FindPasswordActivity" />
+        <activity android:name=".activity.other.FindPasswordActivity" />
         <!-- 23.手势密码activity -->
-        <activity android:name=".activity.LockActivity" />
+        <activity android:name=".activity.other.LockActivity" />
         <!-- 24.设置手势密码activity -->
-        <activity android:name=".activity.DrawGestureActivity" />
+        <activity android:name=".activity.other.DrawGestureActivity" />
         <!-- 25.上拉加载下拉刷新activity -->
-        <activity android:name=".activity.PushPullActivity" />
+        <activity android:name=".activity.other.PushPullActivity" />
         <!--26.新手体验标activity-->
         <activity android:name=".activity.home.NewcomerExperienceBidActivity" />
         <!--27.信息披露activity-->
@@ -180,6 +180,8 @@
         <activity android:name=".activity.my.myaccount.BankCardManageActivity" />
         <!--62.我的福利activity-->
         <activity android:name=".activity.my.mywelfare.MyWelfareActivity" />
+        <activity android:name=".activity.managemoney.ImageShowActivity" />
+        <activity android:name=".activity.test.ImageScaleActivity" />
 
         <service
             android:name=".service.MyService"

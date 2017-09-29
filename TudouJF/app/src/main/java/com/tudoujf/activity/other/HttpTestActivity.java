@@ -1,8 +1,7 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================

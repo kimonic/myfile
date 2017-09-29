@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -8,15 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
-import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
-import java.util.TreeMap;
 
 import butterknife.BindView;
 

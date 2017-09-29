@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;

@@ -1,4 +1,4 @@
-package com.tudoujf.activity;
+package com.tudoujf.activity.other;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
