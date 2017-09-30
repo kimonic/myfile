@@ -3,20 +3,27 @@ package com.tudoujf.activity.test;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.tudoujf.R;
+import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * * ===============================================================
@@ -36,14 +43,15 @@ public class ImageScaleActivity extends Activity {
     ImageView iv;
     Button btn, btn1;
     private Bitmap bitmap;
-    private int count=0;
-    private int count1=0;
+    private int count = 0;
+    private int count1 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_imagescale);
 
+        Log.e("TAG", "onClick: ---hello--111");
         iv = (ImageView) findViewById(R.id.iv);
         iv.setOnTouchListener(new TouchListener());
 
@@ -56,11 +64,36 @@ public class ImageScaleActivity extends Activity {
             }
         });
 
-        bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.test);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qm);
+        try {
+        @SuppressWarnings("ResourceType")InputStream in = getResources().openRawResource(R.drawable.qm);
+        //获得图片的宽、高
+        BitmapFactory.Options tmpOptions = new BitmapFactory.Options();
+        tmpOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(in, null, tmpOptions);
+        int width = tmpOptions.outWidth;
+        int height = tmpOptions.outHeight;
+
+        //设置显示图片的中心区域
+        BitmapRegionDecoder bitmapRegionDecoder = null;
+
+            bitmapRegionDecoder = BitmapRegionDecoder.newInstance(in, false);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        Bitmap bitmap = bitmapRegionDecoder.decodeRegion(new Rect(width / 2 - 100, height / 2 - 100, width / 2 + 100, height / 2 + 100), options);
+        iv.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        bitmap=BitmapUtils.getReduceBitmap(bitmap,30000,900);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("TAG", "onClick: ---hello--222");
+
 
                 if (count1 == 0) {
                     //xml中默认设置为center,为实现缩放拖动,故应设置为ImageView.ScaleType.MATRIX
@@ -86,18 +119,20 @@ public class ImageScaleActivity extends Activity {
 //                matrix.postRotate(count++*90, ScreenSizeUtils.getScreenWidth(ImageScaleActivity.this)/2,
 //                        ScreenSizeUtils.getScreenHeight(ImageScaleActivity.this)/2);
 
-                //通过改变bitmap四个角的坐标点对bitmap进行处理可拉伸为不规则四边形
+//                //通过改变bitmap四个角的坐标点对bitmap进行处理可拉伸为不规则四边形
                 Matrix matrix = new Matrix();//matrix
                 matrix.set(iv.getImageMatrix());
                 int bw = bitmap.getWidth();//位图宽度
                 int bh = bitmap.getHeight();//位图高度
                 float[] src = {0, 0, 0, bh, bw, bh, bw, 0};//坐标系为控件的Android坐标系,原图片四角坐标点,此处可对应1-4个坐标点,为改变前的坐标点的位置
                 int DX = 100;//偏移量
-                float[] dst = {0 + DX, -50, 0, bh-50, bw, bh+200, bw - DX, 0};//对应src坐标点的个数,为改变后的坐标点位置,要改变的图片四角坐标点
+                float[] dst = {0 + DX, -50, 0, bh - 50, bw, bh + 200, bw - DX, 0};//对应src坐标点的个数,为改变后的坐标点位置,要改变的图片四角坐标点
                 matrix.setPolyToPoly(src, 0, dst, 0, 4);//执行改变,改变四个点的位置,最后一个参数即为要改变的点的个数与src,dsc的坐标个数相对应
-
-//                iv.setRotation(count++*90);
+//
+//                matrix.setScale(0.03f,1);
+////                iv.setRotation(count++*90);
                 iv.setImageMatrix(matrix);//设置新的matrix
+                iv.setImageBitmap(bitmap);
 //                canvas.drawBitmap(bitmap, matrix, paint);
             }
         });
