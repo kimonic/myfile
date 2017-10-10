@@ -100,6 +100,8 @@ public class ImageScaleActivity extends Activity {
                     iv.setScaleType(ImageView.ScaleType.MATRIX);
                     count1++;
                 }
+                /**
+                 */
                 //matrix错切
 //                Matrix matrix = new Matrix();
 //                int bw = bitmap.getWidth();
