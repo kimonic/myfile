@@ -1,6 +1,7 @@
 package com.tudoujf.activity.other;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
@@ -22,6 +23,7 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
@@ -63,16 +65,28 @@ public class LoginActivity extends BaseActivity {
     ImageView ivClear1;
     @BindView(R.id.iv_act_login_openclose)
     ImageView ivOpenclose;
-    /**密码明文或密文表示计数*/
+    /**
+     * 密码明文或密文表示计数
+     */
     private int count = 0;
-    /**加载中dialog*/
+    /**
+     * 加载中dialog
+     */
     private AlertDialog dialog;
-    /**登陆后的返回数据*/
+    /**
+     * 登陆后的返回数据
+     */
     private LoginBean bean;
+    private int type = 0;
 
 
     @Override
     public void initDataFromIntent() {
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            type = intent.getIntExtra("type", 0);
+        }
 
     }
 
@@ -152,7 +166,7 @@ public class LoginActivity extends BaseActivity {
                 openActivity(FindPasswordActivity.class);
                 break;
             case R.id.tv_act_login_login://发送登陆请求,成功登陆后跳转主页
-                dialog= DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+                dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
                 login();
 
                 break;
@@ -171,18 +185,23 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
-                Log.e(TAG, "onSuccess:---------登陆成功后返回的json数据-------------"+StringUtils.getDecodeString(response.body()) );
+                Log.e(TAG, "onSuccess:---------登陆成功后返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
 
-                BaseBean bean1=  ParseJson.getJsonResult(response.body(),new TypeToken<LoginBean>() {}.getType(),
-                        LoginBean.class,LoginActivity.this );
-                if (bean1!=null){
-                    bean= (LoginBean) bean1;
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
+                        }.getType(),
+                        LoginBean.class, LoginActivity.this);
+                if (bean1 != null) {
+                    bean = (LoginBean) bean1;
                     //加密存储logintoken到本地
-                    SharedPreferencesUtils.getInstance(LoginActivity.this,Constants.USER_CONFIG)
+                    SharedPreferencesUtils.getInstance(LoginActivity.this, Constants.USER_CONFIG)
                             .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
-                                    CreateCode.getSEND_AES_KEY(),bean.getLogin_token()));
+                                    CreateCode.getSEND_AES_KEY(), bean.getLogin_token()));
+                    UserConfig.getInstance().setLoginToken(bean.getLogin_token());//每次登陆重置logintoken
                     MApp.getInstance().setLogin(true);
-                    openActivity(HomeActivity.class);
+                    if (type != 888) {//直接从登陆界面进入应用时
+                        openActivity(HomeActivity.class);
+                    }
+                    closeActivity();
                 }
 //                     TODO: 2017/8/8 做对应返回错误码的处理
             }
@@ -207,12 +226,6 @@ public class LoginActivity extends BaseActivity {
         map.put("password", etPassword.getText().toString().trim());//密码没加密????
         map.put("type", "2");//登录类型 1验证码登录 2密码登录
         map.put("client_id", "");//预留字段
-
-
-//        map.put("member_name", "18022222222");
-//        map.put("password", "a123123");//密码没加密????
-//        map.put("type", "2");//登录类型 1验证码登录 2密码登录
-//        map.put("phone_type", "1");//手机类型1=andriod 2=IOS
         return map;
     }
 

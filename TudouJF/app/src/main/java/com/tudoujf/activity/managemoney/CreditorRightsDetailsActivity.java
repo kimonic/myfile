@@ -1,21 +1,20 @@
 package com.tudoujf.activity.managemoney;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.CreditorRightsDetailsBean;
+import com.tudoujf.bean.databean.IdentityCheckBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -30,7 +29,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -73,10 +71,14 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     @BindView(R.id.tv_act_creditorsrightsdetails_invest_count)
     TextView tvInvestCount;
 
-    private String transfer_id = "",loan_id="";
-    private AlertDialog dialog;
-
+    private String transfer_id = "", loan_id = "";
     private CreditorRightsDetailsBean bean;
+    private IdentityCheckBean identityCheckBean;
+    private String loginToken;
+    /**
+     * 是否已经登陆,已经登陆了则只检查是否实名,未登陆登陆后需要再次刷新本页面
+     */
+    private boolean isLogin = false;
 
     @Override
     public int getLayoutResId() {
@@ -87,14 +89,31 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_creditorsrightsdetails_buynow:
-                if (bean!=null){
-                    Intent intent=new Intent(this,AffirmBuyCreditorsRightsActivity.class);
-                    intent.putExtra("id",bean.getTransferMap().getId());
-                    startActivity(intent);
-                }
+                checkLogin();
                 break;
         }
 
+    }
+
+    /**
+     * 进入购买页面
+     */
+    private void enterBuy() {
+        if (bean != null) {
+            if (bean.getTransferMap().getIs_self() == null) {
+                Intent intent = new Intent(this, AffirmBuyCreditorsRightsActivity.class);
+                intent.putExtra("id", bean.getTransferMap().getId());
+                startActivity(intent);
+            } else if ("2".equals(bean.getTransferMap().getIs_self())) {
+                ToastUtils.showToast(CreditorRightsDetailsActivity.this, R.string.bunenggoumaizijidezhaiquan);
+            } else if ("1".equals(bean.getTransferMap().getIs_self())) {
+                ToastUtils.showToast(CreditorRightsDetailsActivity.this, R.string.bunenggoumaizijidezhaiwu);
+            } else {
+                ToastUtils.showToast(this, R.string.weizhicuowu);
+            }
+        } else {
+            ToastUtils.showToast(this, R.string.shujujiazaichucuoqtchcxjr);
+        }
     }
 
     @Override
@@ -132,27 +151,25 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-        showDialog();
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("transfer_id", transfer_id);
         map.put("loan_id", loan_id);
-        Log.e("TAG", "initDataFromInternet: transfer_id-----" + transfer_id);
-        Log.e("TAG", "initDataFromInternet: loan_id-----" + loan_id);
-        Log.e("TAG", "initDataFromInternet: logintoken-----" + UserConfig.getInstance().getLoginToken(this));
-
         HttpMethods.getInstance().POST(this, Constants.CREDITOR_DETAILS, map, getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                dialog.dismiss();
+                dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e("TAG", "onSuccess: -----------请求债权详情返回的json数据----------------" + result);
-                Gson gson = new Gson();
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorRightsDetailsBean>() {
                 }.getType(), CreditorRightsDetailsBean.class, CreditorRightsDetailsActivity.this);
                 if (bean1 != null) {
                     bean = (CreditorRightsDetailsBean) bean1;
                     LoadInternetDataToUi();
+                    if (isLogin) {
+                        enterBuy();
+                    }
                 } else {
                     ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                 }
@@ -164,7 +181,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
-        if (bean!=null){
+        if (bean != null) {
             tvTransferPrice.setText(bean.getTransferMap().getAmount());
             tvTransferEarnings.setText(bean.getTransferMap().getIncome());
             tvCapitalOnCall.setText(bean.getTransferMap().getWait_principal());
@@ -174,7 +191,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             tvFinancingAmount.setText(bean.getLoanMap().getLoan_info().getAmount());//融资金额
 
             tvRepaymentWay.setText(bean.getLoanMap().getRepay_type().getName());//还款方式
-            tvRepaymentSchedule.setText("已还"+bean.getTransferMap().getPeriod_yes()+"期/共"+bean.getTransferMap().getTotal_period()+"期");//??还款进度
+            tvRepaymentSchedule.setText("已还" + bean.getTransferMap().getPeriod_yes() + "期/共" + bean.getTransferMap().getTotal_period() + "期");//??还款进度
             tvRepaymentDeadline.setText(bean.getTransferMap().getLast_repay_time());//??还款期限
             tvInvestCount.setText(bean.getLoanMap().getLoan_info().getTender_count());//投资人数
         }
@@ -191,15 +208,63 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         return true;
     }
 
-    private void showDialog() {
-        if (dialog == null) {
-            dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+//-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
+
+    private void checkLogin() {
+        loginToken = UserConfig.getInstance().getLoginToken(this);
+        if ("".equals(loginToken)) {
+            isLogin = false;
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("type", 888);
+            startActivityForResult(intent, 888);
         } else {
-            dialog.show();
+            isLogin = true;
+            checkIdentity();
         }
+    }
+
+    private void checkIdentity() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", loginToken);
+        HttpMethods.getInstance().POST(this, Constants.IDENTITY_CHECK, map, getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
+                }.getType(), IdentityCheckBean.class, CreditorRightsDetailsActivity.this);
+                if (bean1 != null) {
+                    identityCheckBean = (IdentityCheckBean) bean1;
+                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
+                        if (isLogin) {//之前已登录
+                            enterBuy();
+                        } else {//之前未登录
+                            isLogin = true;
+                            initDataFromInternet();
+                        }
+                    } else {
+                        // TODO: 2017/10/11 弹出汇付托管开通页面
+                        DialogUtils.showHuiFuDialog(CreditorRightsDetailsActivity.this);
+                    }
+                } else {
+                    ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                }
+            }
+        });
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 888) {
+            checkLogin();
+        }
+    }
+
+    //-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
 
 
 }

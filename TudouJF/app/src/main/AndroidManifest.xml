@@ -52,7 +52,9 @@
         <!--3. 网络测试activity -->
         <activity android:name=".activity.other.HttpTestActivity" />
         <!--4. 主页activity -->
-        <activity android:name=".activity.home.HomeActivity" />
+        <activity android:name=".activity.home.HomeActivity"
+            android:launchMode="singleTask"
+            />
         <!-- 5.登录页activity -->
         <activity android:name=".activity.other.LoginActivity" />
         <!-- 6.注册页activity -->

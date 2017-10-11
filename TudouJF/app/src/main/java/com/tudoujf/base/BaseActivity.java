@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,9 @@ import android.view.WindowManager;
 
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.lzy.okgo.OkGo;
+import com.tudoujf.R;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
@@ -38,6 +42,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
      * app进入前台后为false,返回后为true
      */
     private boolean isActive = true;
+
+    private AlertDialog  bDialog;
+
+    public void showPDialog() {
+        if (bDialog==null){
+            bDialog= DialogUtils.showProgreessDialog(this,getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        }else {
+            bDialog.show();
+        }
+    }
+
+    public void dismissPDialog(){
+        if (bDialog!=null){
+            bDialog.dismiss();
+        }
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

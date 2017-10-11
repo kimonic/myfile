@@ -78,6 +78,15 @@ public class CreditorRightsDetailsBean implements BaseBean {
         private String total_period;
         private String member_id;
         private String loan_id;
+        private String is_self;
+
+        public String getIs_self() {
+            return is_self;
+        }
+
+        public void setIs_self(String is_self) {
+            this.is_self = is_self;
+        }
 
         public String getPeriod_yes() {
             return period_yes;

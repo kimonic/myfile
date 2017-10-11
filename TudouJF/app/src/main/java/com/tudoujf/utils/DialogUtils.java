@@ -14,6 +14,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 
@@ -206,6 +208,50 @@ public class DialogUtils {
         }
 
         return dialog;
+    }
+
+    /**开通汇付托管dialog*/
+    public static void showHuiFuDialog(final Context context){
+
+        View view= LayoutInflater.from(context).inflate(R.layout.dialog_act_home,null);
+        WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
+        params.alpha = 0.5f;
+        ((Activity)context).getWindow().setAttributes(params);
+        final PopupWindow pop = new PopupWindow(view, ScreenSizeUtils.getScreenWidth(context) - 180, 500);
+        pop.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+
+        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
+        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
+        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
+        pop.setFocusable(true);//获取焦点
+        pop.showAtLocation(((Activity)context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
+
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams params = ((Activity)context).getWindow().getAttributes();
+                params.alpha = 1f;
+                ((Activity)context).getWindow().setAttributes(params);
+            }
+        });
+        TextView tvLiJiKaiTong= (TextView) view.findViewById(R.id.tv_dialog_lijikaitong);
+        TextView   tvZanBuKaiTong= (TextView) view.findViewById(R.id.tv_dialog_zanbukaitong);
+        tvZanBuKaiTong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+            }
+        });
+        tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2017/8/1 开通资金托管逻辑
+            }
+        });
+
+
+        SharedPreferencesUtils.getInstance(context,"popshow").put("show",false);
+
     }
 
 

@@ -28,12 +28,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.encryptionpackages.AESencrypt;
+import com.example.encryptionpackages.CreateCode;
 import com.lzy.imagepicker.util.BitmapUtil;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.io.FileNotFoundException;
@@ -129,6 +136,11 @@ public class MyAccountActivity extends BaseActivity {
                 count++;
                 break;
             case R.id.tv_act_myaccount_signout://退出登陆
+                SharedPreferencesUtils.getInstance(MyAccountActivity.this, Constants.USER_CONFIG)
+                        .put(Constants.SHARE_LOGINTOKEN, "");
+                UserConfig.getInstance().setLoginToken("");
+                openActivity(HomeActivity.class);
+                closeActivity();
                 break;
             case R.id.act_myaccount_paishe://拍照
                 dialog.dismiss();

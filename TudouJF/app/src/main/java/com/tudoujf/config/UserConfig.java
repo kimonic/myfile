@@ -1,9 +1,12 @@
 package com.tudoujf.config;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 
 import com.example.encryptionpackages.AESencrypt;
 import com.example.encryptionpackages.CreateCode;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 

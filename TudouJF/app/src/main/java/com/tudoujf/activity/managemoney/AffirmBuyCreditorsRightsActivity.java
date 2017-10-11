@@ -1,9 +1,11 @@
 package com.tudoujf.activity.managemoney;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.service.notification.NotificationListenerService;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
@@ -83,7 +85,21 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_affirmbuycreditors_affirmbuyright://确认购买按钮
-                showPasswordDialog();
+                if (bean!= null){
+                    if ((StringUtils.string2Float(bean.getBalance_amount())>=StringUtils.string2Float(bean.getAmount()))){
+                        showPasswordDialog();
+                    }else {
+                        DialogUtils.showDialog(this, getResources().getString(R.string.zhanghuyuebuzu), R.string.queren, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                openActivity(RechargeActivity.class);
+                            }
+                        });
+                    }
+                }else {
+                    ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.shujujiazaichucuoqtchcxjr);
+                }
+
                 break;
             case R.id.tv_act_affirmbuycreditors_recharge:
                 openActivity(RechargeActivity.class);
@@ -196,6 +212,8 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
         if (bean!=null){
             mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name());
             tvEarnings.setText(bean.getIncome());
+            tvBalance.setText(bean.getBalance_amount());
+            tvInvestamount.setText(bean.getAmount());
         }
     }
 

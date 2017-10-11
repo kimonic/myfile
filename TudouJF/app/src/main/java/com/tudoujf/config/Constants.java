@@ -43,6 +43,8 @@ public class Constants {
     public static  final String  CREDITOR_DETAILS=URL+"/phone/transfer/transferInfo";
     /**债权购买接口*/
     public static  final String  CREDITOR_BUY=URL+"/phone/transfer/TransferBuyInfo";
+    /**是否实名验证接口*/
+    public static final String  IDENTITY_CHECK=URL+"/phone/system/isApprove";
 
     /**用户名*/
     public static  final String SHARE_USERNAME = "username";

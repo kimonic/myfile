@@ -470,6 +470,12 @@
     <string name="baifenhao">%</string>
     <string name="qingqiushujuchucuo">请求数据出错啦!</string>
     <string name="shujujiazaichucuo">数据加载出错!</string>
+    <string name="zhanghuyuebuzu">账户余额不足,请先充值!!</string>
+    <string name="queren">确认</string>
+    <string name="shujujiazaichucuoqtchcxjr">数据加载出错,请退出后重新进入!</string>
+    <string name="bunenggoumaizijidezhaiwu">不能购买自己的债务!</string>
+    <string name="weizhicuowu">未知错误!!</string>
+    <string name="bunenggoumaizijidezhaiquan">不能购买自己的债权！</string>
 
 
 </resources>
