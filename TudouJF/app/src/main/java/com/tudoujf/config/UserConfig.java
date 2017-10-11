@@ -121,7 +121,7 @@ public class UserConfig {
                 e.printStackTrace();
             }
         }
-        if (loginToken==null){
+        if (loginToken==null){//此处进行未登陆处理
             return "";
         }
         return loginToken;
@@ -132,7 +132,6 @@ public class UserConfig {
     }
 
 
-//
     /**
      * username
      *

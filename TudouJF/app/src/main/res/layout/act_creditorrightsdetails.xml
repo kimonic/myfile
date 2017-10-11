@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <com.tudoujf.ui.InfoView
+                android:id="@+id/iv_act_creditorsrightsdetails_info"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
             <View
@@ -45,6 +46,7 @@
                     android:text="@string/act_creditorrightsdetails_zhuanrangjiage"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_transfer_price"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -61,15 +63,16 @@
                     android:gravity="center"
                     android:text="@string/act_creditorrightsdetails_zhuanrangshouyi"
                     />
+
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_transfer_earnings"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:textColor="@color/act_productdetails_tvcolor"
                     android:gravity="center"
                     android:text="XX,XXX.XX元"
-                    />
+                    android:textColor="@color/act_productdetails_tvcolor"
+                    android:textSize="14sp" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -94,6 +97,7 @@
                     android:text="@string/act_creditorrightsdetails_daishoubenjin"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_capital_on_call"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -130,6 +134,7 @@
                     android:text="@string/act_creditorrightsdetails_daishoulixi"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_interrest_on_call"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -165,6 +170,7 @@
                     android:text="@string/act_creditorrightsdetails_zhaiquanjiazhi"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_creditor_value"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -212,6 +218,7 @@
                     android:text="@string/act_creditorrightsdetails_rongzijine"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_financing_amount"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -247,6 +254,7 @@
                     android:text="@string/act_creditorrightsdetails_huankuanfangshi"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_repayment_way"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -282,6 +290,7 @@
                     android:text="@string/act_creditorrightsdetails_huankuanjindu"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_repayment_schedule"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -317,6 +326,7 @@
                     android:text="@string/act_creditorrightsdetails_huankuanqixian"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_repayment_deadline"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"
@@ -352,6 +362,7 @@
                     android:text="@string/act_creditorrightsdetails_touzirenshu"
                     />
                 <TextView
+                    android:id="@+id/tv_act_creditorsrightsdetails_invest_count"
                     android:layout_width="0dp"
                     android:layout_height="38dp"
                     android:layout_weight="1"

@@ -1,7 +1,11 @@
 package com.tudoujf.activity.managemoney;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +14,32 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.AffirmBuyCreditorRightrsBean;
+import com.tudoujf.bean.databean.CreditorRightsDetailsBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.InfoView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -35,8 +58,21 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
 
     @BindView(R.id.mtb_act_affirmbuycreditorsright)
     MTopBarView mtbAffirmBuyCreditorsRight;
+
     @BindView(R.id.tv_act_affirmbuycreditors_affirmbuyright)
     TextView tvAffirmBuyCreditorsRight;
+    @BindView(R.id.tv_act_affirmbuycreditors_earnings)
+    TextView tvEarnings;//预计获得收益
+    @BindView(R.id.tv_act_affirmbuycreditors_investamount)
+    TextView tvInvestamount;//可投资金额
+    @BindView(R.id.tv_act_affirmbuycreditors_balance)
+    TextView tvBalance;//账户余额
+    @BindView(R.id.tv_act_affirmbuycreditors_recharge)
+    TextView tvRecharge;//充值
+
+    private  String  transfer_id="";
+    private AlertDialog dialog;
+    private AffirmBuyCreditorRightrsBean  bean;
 
     @Override
     public int getLayoutResId() {
@@ -46,9 +82,11 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.tv_act_affirmbuycreditors_affirmbuyright://确认购买按钮
                 showPasswordDialog();
+                break;
+            case R.id.tv_act_affirmbuycreditors_recharge:
+                openActivity(RechargeActivity.class);
                 break;
         }
     }
@@ -94,12 +132,16 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        Intent intent=getIntent();
+        if (intent!=null){
+            transfer_id=intent.getStringExtra("id");
+        }
 
     }
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbAffirmBuyCreditorsRight.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbAffirmBuyCreditorsRight.setLayoutParams(params);
@@ -117,18 +159,44 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     @Override
     public void initListener() {
         tvAffirmBuyCreditorsRight.setOnClickListener(this);
+        tvRecharge.setOnClickListener(this);
 
 
     }
 
     @Override
     public void initDataFromInternet() {
+        showDialog();
+        TreeMap<String,String> map=new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("transfer_id",transfer_id);
+        HttpMethods.getInstance().POST(this, Constants.CREDITOR_BUY, map, getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dialog.dismiss();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: -----------请求债权购买接口返回的json数据----------------" + result);
+                Gson gson = new Gson();
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AffirmBuyCreditorRightrsBean>() {
+                }.getType(), AffirmBuyCreditorRightrsBean.class, AffirmBuyCreditorsRightsActivity.this);
+                if (bean1 != null) {
+                    bean = (AffirmBuyCreditorRightrsBean) bean1;
+                    LoadInternetDataToUi();
+                } else {
+                    ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                }
+            }
+        });
 
     }
 
     @Override
     public void LoadInternetDataToUi() {
 
+        if (bean!=null){
+            mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name());
+            tvEarnings.setText(bean.getIncome());
+        }
     }
 
     @Override
@@ -148,4 +216,12 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     }
 
 
+    private void showDialog() {
+        if (dialog == null) {
+            dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        } else {
+            dialog.show();
+        }
+
+    }
 }

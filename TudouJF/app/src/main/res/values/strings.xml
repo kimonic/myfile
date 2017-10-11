@@ -469,6 +469,7 @@
     <string name="quan">券</string>
     <string name="baifenhao">%</string>
     <string name="qingqiushujuchucuo">请求数据出错啦!</string>
+    <string name="shujujiazaichucuo">数据加载出错!</string>
 
 
 </resources>

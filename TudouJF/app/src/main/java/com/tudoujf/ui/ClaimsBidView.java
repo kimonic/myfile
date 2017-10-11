@@ -365,7 +365,8 @@ public class ClaimsBidView extends View {
             float currentX = event.getX();
             float currentY = event.getY();
             if (rectF.contains(currentX, currentY)) {
-                if (listener != null && investNow) {
+//                if (listener != null && investNow) {
+                if (listener != null) {
                     listener.clickEvent();
                 }
             }

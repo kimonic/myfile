@@ -14,6 +14,7 @@ import com.tudoujf.bean.databean.CreditorListBean;
 import com.tudoujf.ui.BidView;
 import com.tudoujf.ui.ClaimsBidView;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
@@ -90,11 +91,15 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setTransferPrice(list.get(position).getAmount() + "元");//转让金额
 //        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限
         viewHolder.bidView.invalidate();
+        final String  id=list.get(position).getId();
+        final String  loan_id=list.get(position).getLoan_id();
 
         viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
                 Intent intent = new Intent(context, CreditorRightsDetailsActivity.class);
+                intent.putExtra("transfer_id",id);
+                intent.putExtra("loan_id",loan_id);
                 context.startActivity(intent);
             }
         });
