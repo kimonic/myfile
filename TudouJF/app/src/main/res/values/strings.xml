@@ -476,6 +476,8 @@
     <string name="bunenggoumaizijidezhaiwu">不能购买自己的债务!</string>
     <string name="weizhicuowu">未知错误!!</string>
     <string name="bunenggoumaizijidezhaiquan">不能购买自己的债权！</string>
+    <string name="chexiao">撤销</string>
+    <string name="zhaiquangoumai">债权购买</string>
 
 
 </resources>

@@ -75,10 +75,18 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     private CreditorRightsDetailsBean bean;
     private IdentityCheckBean identityCheckBean;
     private String loginToken;
+    private String status;
     /**
      * 是否已经登陆,已经登陆了则只检查是否实名,未登陆登陆后需要再次刷新本页面
      */
     private boolean isLogin = false;
+    private boolean isLogin1 = false;
+
+    /**
+     * 验证请求只执行一次
+     */
+    private boolean request = true;
+
 
     @Override
     public int getLayoutResId() {
@@ -89,7 +97,11 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_creditorsrightsdetails_buynow:
-                checkLogin();
+                if (request) {
+                    checkLogin();
+                } else {
+                    enterBuy();
+                }
                 break;
         }
 
@@ -99,6 +111,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
      * 进入购买页面
      */
     private void enterBuy() {
+        request = false;
         if (bean != null) {
             if (bean.getTransferMap().getIs_self() == null) {
                 Intent intent = new Intent(this, AffirmBuyCreditorsRightsActivity.class);
@@ -122,7 +135,10 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         if (intent != null) {
             transfer_id = intent.getStringExtra("transfer_id");
             loan_id = intent.getStringExtra("loan_id");
+            status = intent.getStringExtra("status");
         }
+
+
 
     }
 
@@ -194,6 +210,17 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             tvRepaymentSchedule.setText("已还" + bean.getTransferMap().getPeriod_yes() + "期/共" + bean.getTransferMap().getTotal_period() + "期");//??还款进度
             tvRepaymentDeadline.setText(bean.getTransferMap().getLast_repay_time());//??还款期限
             tvInvestCount.setText(bean.getLoanMap().getLoan_info().getTender_count());//投资人数
+
+            status=bean.getTransferMap().getStatus();
+
+            if (!"1".equals(status)){
+                tvBuyNow.setClickable(false);
+                tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
+                if ("2".equals(status)){
+                    tvBuyNow.setText(getResources().getString(R.string.shouqing));
+                }
+
+            }
         }
 
     }
@@ -221,6 +248,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             isLogin = true;
             checkIdentity();
         }
+
     }
 
     private void checkIdentity() {
@@ -238,7 +266,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                 if (bean1 != null) {
                     identityCheckBean = (IdentityCheckBean) bean1;
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-                        if (isLogin) {//之前已登录
+                        if (isLogin && !isLogin1) {//之前已登录
                             enterBuy();
                         } else {//之前未登录
                             isLogin = true;
@@ -260,6 +288,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 888) {
+            isLogin1 = true;
             checkLogin();
         }
     }

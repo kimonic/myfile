@@ -30,6 +30,16 @@ public class UserConfig {
     private String isLogin;
     private String loginToken;
 
+    private boolean  creditorFlush=false;
+
+    public boolean isCreditorFlush() {
+        return creditorFlush;
+    }
+
+    public void setCreditorFlush(boolean creditorFlush) {
+        this.creditorFlush = creditorFlush;
+    }
+
     /**
      *
      */

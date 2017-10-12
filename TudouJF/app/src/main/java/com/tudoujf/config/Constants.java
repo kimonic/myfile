@@ -34,6 +34,7 @@ public class Constants {
     public static  final String  MY_EXPERIENCE_LOAN_INFO=URL+"/phone/loan/loanInfo";
     /**理财--投资列表*/
     public static  final String  INVESTMENT_LIST=URL+"/phone/loan/list";
+    /**理财--债权列表*/
     public static  final String  CREDITOR_TRANSFER_LIST=URL+"/phone/transfer/list";
     /**投资列表详情接口*/
     public static  final String  INVESTMENT_DETAILS=URL+"/phone/loan/loanInfo";
@@ -45,6 +46,8 @@ public class Constants {
     public static  final String  CREDITOR_BUY=URL+"/phone/transfer/TransferBuyInfo";
     /**是否实名验证接口*/
     public static final String  IDENTITY_CHECK=URL+"/phone/system/isApprove";
+    /**确认购买债权接口*/
+    public static final String  AFFIRM_BUY_CREDITOR_RIGHTS=URL+"/phone/trust/buyTransfer";
 
     /**用户名*/
     public static  final String SHARE_USERNAME = "username";

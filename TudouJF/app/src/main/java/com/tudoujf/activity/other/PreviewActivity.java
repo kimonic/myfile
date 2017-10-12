@@ -221,7 +221,7 @@ public class PreviewActivity extends BaseActivity {
 //                openActivity(MyEarningsActivity.class);
                 break;
             case R.id.bt_act_preview19://控件测试
-                openActivity(MyAccountActivity.class);
+                openActivity(TestActivity.class);
                 break;
             case R.id.bt_act_preview20:
                 openActivity(IntegralRecodeActivity.class);

@@ -26,6 +26,7 @@ import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.CreditorListBean;
 import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
@@ -295,9 +296,6 @@ public class CreditorListFragment extends BaseFragment {
         map.put("order_type", orderType);//排序类别,1全部2利率3期限
         map.put("sort_type", sortType);//排序方式,1升序 2降序
 
-        Log.e(TAG, "onLoadmore: ------page--------===" + page);
-        Log.e(TAG, "onLoadmore: ------orderType--------===" + orderType);
-        Log.e(TAG, "onLoadmore: ------sortType--------===" + sortType);
 
 
         HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
@@ -360,6 +358,39 @@ public class CreditorListFragment extends BaseFragment {
         }
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserConfig.getInstance().isCreditorFlush()){
+            UserConfig.getInstance().setCreditorFlush(false);
+            page=1;
+            initDataFromInternet();
+        }
+
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.e("TAG", "setUserVisibleHint: -----执行");
+        if (isVisibleToUser) {
+            Log.e("TAG", "setUserVisibleHint: -----可见");
+            if (UserConfig.getInstance().isCreditorFlush()){
+                Log.e("TAG", "setUserVisibleHint: -----可见刷新");
+
+                UserConfig.getInstance().setCreditorFlush(false);
+                page=1;
+                initDataFromInternet();
+            }
+
+            //相当于Fragment的onResume
+        } else {
+            //相当于Fragment的onPause
+            Log.e("TAG", "setUserVisibleHint: -----不可见");
+        }
+    }
+
 
 
 }

@@ -87,7 +87,11 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
             case R.id.tv_act_affirmbuycreditors_affirmbuyright://确认购买按钮
                 if (bean!= null){
                     if ((StringUtils.string2Float(bean.getBalance_amount())>=StringUtils.string2Float(bean.getAmount()))){
-                        showPasswordDialog();
+//                        showPasswordDialog();
+                        Intent intent=new Intent(this,CreditorRightsHuiFuBuyActivity.class);
+                        Log.e("TAG", "onClick: -----------transfer_id-------"+transfer_id);
+                        intent.putExtra("transferId",transfer_id);
+                        startActivity(intent);
                     }else {
                         DialogUtils.showDialog(this, getResources().getString(R.string.zhanghuyuebuzu), R.string.queren, new DialogInterface.OnClickListener() {
                             @Override

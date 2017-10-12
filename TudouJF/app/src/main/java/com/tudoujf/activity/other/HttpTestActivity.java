@@ -184,6 +184,10 @@ public class HttpTestActivity extends BaseActivity {
         map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
         String url;
 
+        for (String  s:map.keySet()){
+            Log.e("TAG", "httpSend:----"+s+"-------- "+map.get(s));
+        }
+
 
         url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
 

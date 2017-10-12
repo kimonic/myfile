@@ -182,10 +182,12 @@
         <activity android:name=".activity.my.myaccount.BankCardManageActivity" />
         <!--62.我的福利activity-->
         <activity android:name=".activity.my.mywelfare.MyWelfareActivity" />
-        <!--展示图片的activity,可以自由缩放,拖动-->
+        <!--63.展示图片的activity,可以自由缩放,拖动-->
         <activity android:name=".activity.managemoney.ImageShowActivity" />
-        <!--手势缩放移动图片的activity-->
+        <!--64.手势缩放移动图片的activity-->
         <activity android:name=".activity.test.ImageScaleActivity" />
+        <!--65.债权购买汇付跳转页activity-->
+        <activity android:name=".activity.managemoney.CreditorRightsHuiFuBuyActivity" />
 
         <service
             android:name=".service.MyService"

@@ -3,6 +3,7 @@ package com.tudoujf.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.EditText;
 
 import org.json.JSONObject;
@@ -36,6 +37,8 @@ public class Utils
             result += "&" + key + "=" + jo.optString(key);
         }
         result=result.replaceFirst("&","");
+        Log.e("TAG", "handleJson: -----"+result);
+
         return result;
     }
 

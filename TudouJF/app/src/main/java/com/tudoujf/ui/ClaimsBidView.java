@@ -66,6 +66,14 @@ public class ClaimsBidView extends View {
     private float investProgress = 0.5f;
     private DecimalFormat decimalFormat = new DecimalFormat(".00");
     private String shengYuKeTou = "999,999.00元";
+    /**
+     * 按钮文本显示判断
+     */
+    private String status = "";
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     /**
      * 立即投资点击事件
@@ -183,22 +191,30 @@ public class ClaimsBidView extends View {
 
     }
 
-    /**转让期数*/
+    /**
+     * 转让期数
+     */
     public void setTransfer(String transfer) {
         this.transfer = transfer;
     }
 
-    /**债权价值*/
+    /**
+     * 债权价值
+     */
     public void setZhaiQuanJiaZhi(String zhaiQuanJiaZhi) {
         this.zhaiQuanJiaZhi = zhaiQuanJiaZhi;
     }
 
-    /**原标年化收益*/
+    /**
+     * 原标年化收益
+     */
     public void setYuanBiaoNianHuaShouYi(String yuanBiaoNianHuaShouYi) {
         this.yuanBiaoNianHuaShouYi = yuanBiaoNianHuaShouYi;
     }
 
-    /**转让价格*/
+    /**
+     * 转让价格
+     */
     public void setTransferPrice(String transferPrice) {
         this.transferPrice = transferPrice;
     }
@@ -322,19 +338,24 @@ public class ClaimsBidView extends View {
 
 
         whitePaint.setTextSize(width * 0.03809f);
-        if (investNow) {
+        String invest1;
+        if (status.equals("1")) {
+            invest1 = getResources().getString(R.string.act_productdetails_lijigoumai);
             canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
-            String invest1 = getResources().getString(R.string.act_productdetails_lijigoumai);
-            float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
-            float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
-            canvas.drawText(invest1, text11X, text11Y, whitePaint);
-        } else {
-            String invest1 = getResources().getString(R.string.shouqing);
+//            float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
+//            float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
+//            canvas.drawText(invest1, text11X, text11Y, whitePaint);
+        } else if (status.equals("2")) {
             canvas.drawRoundRect(rectF, 5, 5, grayPaint);
-            float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
-            float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
-            canvas.drawText(invest1, text11X, text11Y, whitePaint);
+
+            invest1 = getResources().getString(R.string.shouqing);
+        } else {
+            canvas.drawRoundRect(rectF, 5, 5, grayPaint);
+            invest1 = getResources().getString(R.string.chexiao);
         }
+        float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
+        float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
+        canvas.drawText(invest1, text11X, text11Y, whitePaint);
         //------------------------------------------------------------------------------------------
 
 
