@@ -478,6 +478,11 @@
     <string name="bunenggoumaizijidezhaiquan">不能购买自己的债权！</string>
     <string name="chexiao">撤销</string>
     <string name="zhaiquangoumai">债权购买</string>
+    <string name="zhucechenggong">注册成功</string>
+    <string name="zhuceshibai">注册失败</string>
+    <string name="huifuzhuce">汇付注册</string>
+    <string name="wuxianzhi">无限制</string>
+    <string name="qingshurunindetouzijine">请输入您的投资金额</string>
 
 
 </resources>

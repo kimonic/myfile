@@ -188,6 +188,8 @@
         <activity android:name=".activity.test.ImageScaleActivity" />
         <!--65.债权购买汇付跳转页activity-->
         <activity android:name=".activity.managemoney.CreditorRightsHuiFuBuyActivity" />
+        <!--66.实名认证activity-->
+        <activity android:name=".activity.my.RealNameAuthenticationHuiFuActivity" />
 
         <service
             android:name=".service.MyService"

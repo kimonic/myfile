@@ -1,6 +1,7 @@
 package com.tudoujf.activity.managemoney;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
@@ -140,7 +141,9 @@ public class ProductDetailsActivity extends BaseActivity {
                 setUTVStyle(2);
                 break;
             case R.id.tv_act_productdetails_buynow:
-                openActivity(AffirmBuyActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("loan_id",loan_id);
+                openActivity(AffirmBuyActivity.class,bundle);
                 break;
         }
     }
@@ -225,7 +228,7 @@ public class ProductDetailsActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
 //        map.put("loan_id", loan_id);
         //----------------------------临时固定id----------------------------------------------------------------------------------------------------------------
-        map.put("loan_id", "110");
+        map.put("loan_id", loan_id);
         Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + loan_id);
 
         HttpMethods.getInstance().POST(this, Constants.INVESTMENT_DETAILS, map, getLocalClassName(),

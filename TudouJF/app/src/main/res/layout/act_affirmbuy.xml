@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/act_register_tvbac1"
-        app:centerText="@string/act_productdetails_temptitle"
         app:leftImage="@drawable/xvector_back" />
     <TextView
         android:layout_width="match_parent"
@@ -22,6 +21,7 @@
         android:background="@color/global_theme_background_color"
         />
     <TextView
+        android:id="@+id/tv_act_affirmbuy_earings"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
@@ -55,6 +55,7 @@
                 android:text="@string/act_affirmbuy_qitoujine"
                 />
             <TextView
+                android:id="@+id/tv_act_affirmbuy_qitou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -88,6 +89,7 @@
                 android:text="@string/act_affirmbuy_touzishangxian"
                 />
             <TextView
+                android:id="@+id/tv_act_affirmbuy_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
@@ -190,6 +192,7 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/tv_act_affirmbuy_wait_amount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -232,6 +235,8 @@
             android:layout_marginStart="20dp"
             />
         <TextView
+
+            android:id="@+id/tv_act_affirmbuy_balance"
             android:layout_width="0dp"
             android:layout_height="match_parent"
            android:layout_weight="1"
@@ -294,16 +299,17 @@
 
         <EditText
             android:id="@+id/et_act_affirm_touzijine"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_weight="1"
             android:gravity="center"
-            android:text="00,000.00元"
             android:textColor="@color/act_productdetails_tvcolor"
             android:background="@null"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:inputType="number"
+            android:hint="@string/qingshurunindetouzijine"
+            />
 
         <View
             android:layout_width="0dp"

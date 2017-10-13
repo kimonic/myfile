@@ -1,5 +1,6 @@
 package com.tudoujf.activity.managemoney;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,13 +15,26 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.AffirmBuyBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
 import com.tudoujf.utils.KeyboardChangeListener;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -49,8 +63,21 @@ public class AffirmBuyActivity extends BaseActivity {
     TextView tvAffirmbuy;
     @BindView(R.id.tv_act_affirmbuy_chongzhi)
     TextView tvChongZhi;
+    @BindView(R.id.tv_act_affirmbuy_earings)
+    TextView tvEarings;
+    @BindView(R.id.tv_act_affirmbuy_balance)
+    TextView tvBalance;
+    @BindView(R.id.tv_act_affirmbuy_wait_amount)
+    TextView tvWaitAmount;
+    @BindView(R.id.tv_act_affirmbuy_qitou)
+    TextView tvQiTou;
+    @BindView(R.id.tv_act_affirmbuy_max)
+    TextView tvMax;
     @BindView(R.id.et_act_affirm_touzijine)
     EditText etTouZiJinE;
+
+    private String loan_id;
+    private AffirmBuyBean bean;
 
     @Override
     public int getLayoutResId() {
@@ -76,7 +103,7 @@ public class AffirmBuyActivity extends BaseActivity {
             case R.id.tv_act_affirmbuy_affirmbuy://确认购买按钮
                 showPasswordDialog();
                 break;
-         case R.id.tv_act_affirmbuy_chongzhi://充值按钮
+            case R.id.tv_act_affirmbuy_chongzhi://充值按钮
                 openActivity(RechargeActivity.class);
                 break;
         }
@@ -123,6 +150,11 @@ public class AffirmBuyActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            loan_id = bundle.getString("loan_id");
+        }
 
     }
 
@@ -183,11 +215,47 @@ public class AffirmBuyActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("loan_id", loan_id);
+
+        HttpMethods.getInstance().POST(this, Constants.PRODUCE_BUY, map, getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----产品购买接口返回数据--------" + result);
+
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AffirmBuyBean>() {
+                        }.getType(), AffirmBuyBean.class, AffirmBuyActivity.this);
+                        if (bean1 != null) {
+                            bean = (AffirmBuyBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(AffirmBuyActivity.this, "数据加载出错!");
+                        }
+                    }
+
+                });
 
     }
 
+
     @Override
     public void LoadInternetDataToUi() {
+        if (bean!=null){
+            mtbAffirmbuy.setCenterTitle(bean.getName());
+            tvBalance.setText(bean.getMember().getBalance_amount());
+            tvWaitAmount.setText(bean.getWait_amount());
+            tvQiTou.setText(bean.getTender_amount_min());
+            if ("0".equals(bean.getTender_amount_max())){
+                tvMax.setText(R.string.wuxianzhi);
+            }else {
+                tvMax.setText(bean.getTender_amount_max());
+            }
+        }
 
     }
 

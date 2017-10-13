@@ -67,6 +67,7 @@
                 android:textSize="12sp" />
 
             <FrameLayout
+                android:id="@+id/fl_frag_my_message"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="end|center_vertical"
@@ -334,6 +335,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_frag_my_realname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"

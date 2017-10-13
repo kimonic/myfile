@@ -1,14 +1,18 @@
 package com.tudoujf.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.SignInActivity;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
@@ -46,8 +50,12 @@ public class MyFragment extends BaseFragment {
 
     @BindView(R.id.lv_frag_my)
     ListView lvFragMy;
+     @BindView(R.id.fl_frag_my_message)
+     FrameLayout flMessage;
     @BindView(R.id.tv_frag_my)
     TextView tvFragMy;
+    @BindView(R.id.tv_frag_my_realname)
+    TextView tvRealName;
     @BindView(R.id.iv_frag_my)
     ImageView ivFragMy;
     @BindView(R.id.ll_frag_my_chongzhi)
@@ -108,6 +116,12 @@ public class MyFragment extends BaseFragment {
             case R.id.ll_frag_my_myaccount://我的账户
                 openActivity(MyAccountActivity.class);
 
+                break;
+            case R.id.tv_frag_my_realname://跳转实名认证页面
+                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                break;
+            case R.id.fl_frag_my_message://我的消息页面
+                openActivity(MyMessageActivity.class);
                 break;
         }
     }
@@ -170,6 +184,8 @@ public class MyFragment extends BaseFragment {
         llChongZhi.setOnClickListener(this);
         llTiXian.setOnClickListener(this);
         llMyAccount.setOnClickListener(this);
+        tvRealName.setOnClickListener(this);
+        flMessage.setOnClickListener(this);
 
 
     }

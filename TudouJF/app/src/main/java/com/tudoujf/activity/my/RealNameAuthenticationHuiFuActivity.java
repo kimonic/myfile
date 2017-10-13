@@ -1,4 +1,4 @@
-package com.tudoujf.activity.managemoney;
+package com.tudoujf.activity.my;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
+import com.tudoujf.bean.HuiFuRegisterBean;
 import com.tudoujf.bean.databean.CreditorRightsBuyHuiFuBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -38,17 +39,17 @@ import butterknife.BindView;
 
 /**
  * * ================================================
- * name:            CreditorRightsHuiFuBuyActivity
+ * name:            RealNameAuthenticationHuiFuActivity
  * guide:
  * author：          kimonik
  * version：          1.0
  * date：            2017/8/11
- * description：债权购买汇付跳转页activity----临时页面未详细处理
+ * description：   实名认证activity--汇付相关
  * history：
  * ===================================================
  */
 
-public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
+public class RealNameAuthenticationHuiFuActivity extends BaseActivity {
     @BindView(R.id.mtb_act_huifuregister)
     MTopBarView mtbActHuiFuRegister;
     @BindView(R.id.wv_act_huifuregister)
@@ -87,7 +88,7 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActHuiFuRegister.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActHuiFuRegister.setLayoutParams(params);
-        mtbActHuiFuRegister.setCenterTitle(getResources().getString(R.string.zhaiquangoumai));
+        mtbActHuiFuRegister.setCenterTitle(getResources().getString(R.string.huifuzhuce));
 
         commitInfo();
         AndroidBug5497Workaround.assistActivity(this);
@@ -158,14 +159,14 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//            if (url.contains(Constants.STATUS_REGISTER_SUCCESS)) {
-//                startActivity(new Intent(CreditorRightsHuiFuBuyActivity.this, HomeActivity.class));
-//                finish();
-//            } else if (url.contains(Constants.STATUS_REGISTER_FAIL)) {
-//                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, "注册失败1");
-//                finish();
-//            } else
-            if (url.contains(Constants.STATUS_CLOSE)) {
+            if (url.contains(Constants.STATUS_REGISTER_SUCCESS)) {
+                ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, getResources().getString(R.string.zhucechenggong));
+                startActivity(new Intent(RealNameAuthenticationHuiFuActivity.this, HomeActivity.class));
+                finish();
+            } else if (url.contains(Constants.STATUS_REGISTER_FAIL)) {
+                ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, getResources().getString(R.string.zhuceshibai));
+                finish();
+            } else if (url.contains(Constants.STATUS_CLOSE)) {
                 UserConfig.getInstance().setCreditorFlush(true);
                 openActivity(HomeActivity.class);
                 finish();
@@ -187,12 +188,8 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        map.put("transferId", transferId);
-        Log.e("TAG", "commitInfo: -transferId----" + transferId);
         Log.e("TAG", "commitInfo: --UserConfig.getInstance().getLoginToken(this)---" + UserConfig.getInstance().getLoginToken(this));
-
-
-        HttpMethods.getInstance().POST(this, Constants.AFFIRM_BUY_CREDITOR_RIGHTS, map, "999", new StringCallback() {
+        HttpMethods.getInstance().POST(this, Constants.REAL_NAME_AUTHENTICATION, map, "999", new StringCallback() {
             @SuppressLint("SetJavaScriptEnabled")
             @Override
             public void onSuccess(Response<String> response) {
@@ -215,12 +212,12 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
 
-                        CreditorRightsBuyHuiFuBean dataBean = gson.fromJson(bean.getData().toString(), CreditorRightsBuyHuiFuBean.class);
+                        HuiFuRegisterBean dataBean = gson.fromJson(bean.getData().toString(), HuiFuRegisterBean.class);
 
                         url = dataBean.getSubmit_url();
                         JSONObject jo = null;
                         try {
-                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<CreditorRightsBuyHuiFuBean>() {
+                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<HuiFuRegisterBean>() {
                             }.getType()));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -242,17 +239,17 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
                     } else if (code.equals("100")) {
                         try {
                             if (jsonobject != null) {
-                                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, jsonobject.getString("description"));
+                                ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, jsonobject.getString("description"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else if (code.equals("")) {
-                        ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, R.string.denglushibai);
+                        ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.denglushibai);
                     }
                     // TODO: 2017/8/8 做对应返回错误码的处理
                 } else {
-                    ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, R.string.denglushibai);
+                    ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.denglushibai);
                 }
             }
         });
@@ -267,7 +264,7 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
                 closeActivity();
             } else {
                 beforeTime = System.currentTimeMillis();
-                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, R.string.zaicidianjijinagtuichugaiyemian);
+                ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.zaicidianjijinagtuichugaiyemian);
             }
         }
     }

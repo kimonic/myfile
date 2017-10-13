@@ -33,6 +33,7 @@ import com.example.encryptionpackages.CreateCode;
 import com.lzy.imagepicker.util.BitmapUtil;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
@@ -123,6 +124,7 @@ public class MyAccountActivity extends BaseActivity {
                 openActivity(BindEmailActivity.class);
                 break;
             case R.id.ll_act_myaccount_name://实名认证
+                openActivity(RealNameAuthenticationHuiFuActivity.class);
                 break;
             case R.id.ll_act_myaccount_login://登陆密码
                 openActivity(ChangePasswordActivity.class);

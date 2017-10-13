@@ -53,6 +53,16 @@ public class Constants {
     public static  final String SHARE_USERNAME = "username";
     /**用户信息保存文件名*/
     public static  final String USER_CONFIG = "userconfig";
+    /**产品点击购买接口*/
+    public static  final String  PRODUCE_BUY=URL+"/phone/loan/loansimpleinfo";
+
+
+    /**
+     * 托管注册
+     */
+    public static  final  String REAL_NAME_AUTHENTICATION = URL + "/phone/trust/register";
+    public static  final  String TRUST_REGISTER = URL + "/phone/trust/register";
+
     public static  final String SHARE_LOGINTOKEN = "loginToken";
     public static  final String SHARE_USERID = "userid";
     public static  final String SHARE_ISLOGIN = "islogin";
@@ -439,10 +449,7 @@ public class Constants {
      * 判断是否是自己的债权
      */
     public static  final  String IS_MY_TRANSFER = URL + "/phone/transfer/isMyTransfer";
-    /**
-     * 托管注册
-     */
-    public static  final  String TRUST_REGISTER = URL + "/phone/trust/register";
+
     /**
      * 是否注册托管
      */
