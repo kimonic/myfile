@@ -148,6 +148,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     }
 
     /**
+     * 启动下一个activity
+     */
+    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, Bundle parameter,int requestCode) {
+        Intent intent = new Intent(this, toActivity);
+        if (parameter != null) {
+            intent.putExtras(parameter);
+        }
+        startActivityForResult(intent,requestCode);
+    }
+
+    /**
      * 关闭activity
      */
     protected void closeActivity() {

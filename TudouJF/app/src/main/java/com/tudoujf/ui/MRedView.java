@@ -50,17 +50,27 @@ public class MRedView extends View {
     private String oneText = "50";
     private String threeText;
     private String fourText = "2017/07/08";
-    private int  widthFi=0;
+    private int widthFi = 0;
 
 
     /**
      * 是绘制券还是红包
      */
     private boolean redPackageOrQuan = true;
-    /**是有效状态还是无效状态*/
+    /**
+     * 是有效状态还是无效状态
+     */
     private boolean valid = true;
-    private String twoText="元";
+    /**
+     * 选中状态
+     */
+    private boolean sel = false;
 
+    private String twoText = "元";
+
+    public void setSel(boolean sel) {
+        this.sel = sel;
+    }
 
     public void setTwoText(String twoText) {
         this.twoText = twoText;
@@ -123,9 +133,16 @@ public class MRedView extends View {
         int width = getWidth();//控件宽
         int height = getHeight();//控件高
 
-        if (!valid){
+        if (!valid) {
             bacPaint.setColor(Color.parseColor("#999999"));
             redPackagePaint.setColor(Color.parseColor("#8F8F8F"));
+        }
+
+
+        if (sel) {
+            bacPaint.setColor(Color.parseColor("#EA5A5A"));
+        } else {
+            bacPaint.setColor(Color.parseColor("#F67070"));
         }
 
         //------------------------绘制背景----------------------------------------------------------
@@ -169,7 +186,7 @@ public class MRedView extends View {
             pathL.moveTo(redRect.left, pathLH);
             pathL.quadTo(centerX, pathLH1, redRect.right, pathLH);
             canvas.drawPath(pathL, redPackagePaint);
-            redPackagePaint.setStrokeWidth(width*0.02f);
+            redPackagePaint.setStrokeWidth(width * 0.02f);
             float oneX = centerX - width * 0.06382f;
             float oneY = width * 0.1489f;
             float twoY = width * 0.2340f;
@@ -191,7 +208,7 @@ public class MRedView extends View {
             float quanRadious = width * 0.1356f;
             float circleX = width * 0.8723f;
             float circleY = width * 0.1064f;
-            redPackagePaint.setStrokeWidth(width*0.01111f);
+            redPackagePaint.setStrokeWidth(width * 0.01111f);
             redPackagePaint.setStyle(Paint.Style.STROKE);
             canvas.drawCircle(circleX, circleY, quanRadious, redPackagePaint);
 
@@ -204,7 +221,7 @@ public class MRedView extends View {
             canvas.drawText(getResources().getString(R.string.quan), textX, textY, redPackagePaint);
             //------------------------绘制券背景----------------------------------------------------
 
-            oneTX = width/2-whitePaint.measureText(oneText+ twoText)/2;
+            oneTX = width / 2 - whitePaint.measureText(oneText + twoText) / 2;
         }
 
 
@@ -223,7 +240,7 @@ public class MRedView extends View {
 
 
 //---------------------------绘制第三行文字---------------------------------------------------------
-        float threeTY =width * 0.58f ;
+        float threeTY = width * 0.58f;
         float textThreeS = width * 0.1f;
         whitePaint.setTextSize(textThreeS);
         canvas.drawText(threeText, oneTX, threeTY, whitePaint);
@@ -231,7 +248,7 @@ public class MRedView extends View {
 
 
 //---------------------------绘制第四行文字---------------------------------------------------------
-        float fourTY =width * 0.71f ;
+        float fourTY = width * 0.71f;
         float textFourS = width * 0.1f;
         whitePaint.setTextSize(textFourS);
         canvas.drawText(fourText, oneTX, fourTY, whitePaint);
@@ -252,7 +269,7 @@ public class MRedView extends View {
         }
 
         int width = (int) (height * 1.175f + 0.5f);
-        widthFi=width;
+        widthFi = width;
         setMeasuredDimension(width, height);
     }
 
@@ -267,11 +284,13 @@ public class MRedView extends View {
         return paint;
     }
 
-    /**该函数确定该view在父控件中的位置,并最终确定getwidth()和getheight()的值*/
+    /**
+     * 该函数确定该view在父控件中的位置,并最终确定getwidth()和getheight()的值
+     */
     @Override
     public void layout(@Px int l, @Px int t, @Px int r, @Px int b) {
-        int  w=ScreenSizeUtils.getScreenWidth(getContext())-widthFi-10*ScreenSizeUtils.getDensity(getContext());
-        int  w2=w+widthFi;
+        int w = ScreenSizeUtils.getScreenWidth(getContext()) - widthFi - 10 * ScreenSizeUtils.getDensity(getContext());
+        int w2 = w + widthFi;
         super.layout(w, t, w2, b);
     }
 

@@ -15,11 +15,14 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.IdentityCheckBean;
 import com.tudoujf.bean.databean.InvestDetailsBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.IndicatorView;
@@ -112,6 +115,7 @@ public class ProductDetailsActivity extends BaseActivity {
     private List<InvestDetailsBean.TenderListBean> beanList;
     private int hsvUnShowWidth;
     private String loan_id;
+    private IdentityCheckBean identityCheckBean;
     /**
      * 加载进度dialog
      */
@@ -121,6 +125,21 @@ public class ProductDetailsActivity extends BaseActivity {
      * 按钮之前的位置
      */
     private int beforePosition = 0;
+
+
+    private String loginToken;
+    private String status;
+    private String hint;
+    /**
+     * 是否已经登陆,已经登陆了则只检查是否实名,未登陆登陆后需要再次刷新本页面
+     */
+    private boolean isLogin = false;
+    private boolean isLogin1 = false;
+
+    /**
+     * 验证请求只执行一次
+     */
+    private boolean request = true;
 
 
     @Override
@@ -140,10 +159,14 @@ public class ProductDetailsActivity extends BaseActivity {
             case R.id.utv_act_productdetails3:
                 setUTVStyle(2);
                 break;
-            case R.id.tv_act_productdetails_buynow:
-                Bundle bundle=new Bundle();
-                bundle.putString("loan_id",loan_id);
-                openActivity(AffirmBuyActivity.class,bundle);
+            case R.id.tv_act_productdetails_buynow://立即购买按钮
+                if (request) {
+                    checkLogin();
+                } else {
+                    enterBuy();
+                }
+
+
                 break;
         }
     }
@@ -155,23 +178,15 @@ public class ProductDetailsActivity extends BaseActivity {
 
         if (intent != null) {
             loan_id = intent.getStringExtra("loan_id");
+            hint = intent.getStringExtra("hint");
         }
 
         beanList = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
         InvestDetailsBean.TenderListBean bean = new InvestDetailsBean.TenderListBean();
-//            if (i == 0) {
         bean.setMember_name("投标人");
         bean.setAmount("投资金额(元)");
         bean.setAdd_time("投资时间");
-//            } else {
-//                bean.setTouBiaoRen("XXXXXXXXX");
-//                bean.setTouZiJinE("XX,XXX.XX");
-//                bean.setTouZiTime("20XX/XX/XX");
-//            }
         beanList.add(bean);
-//
-//        }
 
     }
 
@@ -243,8 +258,10 @@ public class ProductDetailsActivity extends BaseActivity {
                         }.getType(), InvestDetailsBean.class, ProductDetailsActivity.this);
                         if (bean1 != null) {
                             bean = (InvestDetailsBean) bean1;
-
                             LoadInternetDataToUi();
+                            if (isLogin) {
+                                enterBuy();
+                            }
                         } else {
                             ToastUtils.showToast(ProductDetailsActivity.this, "数据加载出错!");
                         }
@@ -259,10 +276,17 @@ public class ProductDetailsActivity extends BaseActivity {
 
         if (bean != null) {
 
+            if (!(StringUtils.string2Float(bean.getLoan_info().getProgress()) < 100 && StringUtils.string2Float(bean.getLoan_info().getStatus()) <= 3)) {
+                tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
+                tvBuyNow.setText(hint);
+            }
+
+
+
             mtbProductdetails.setCenterTitle(bean.getLoan_info().getName());
 
-            tvRongZiEDu.setText((bean.getLoan_info().getAmount()+"元"));
-            tvShengYuKeTou.setText((bean.getLoan_info().getLeft_amount()+"元"));
+            tvRongZiEDu.setText((bean.getLoan_info().getAmount() + "元"));
+            tvShengYuKeTou.setText((bean.getLoan_info().getLeft_amount() + "元"));
             tvHuanKuanFangShi.setText(bean.getRepay_type().getContents());
 
 
@@ -298,15 +322,15 @@ public class ProductDetailsActivity extends BaseActivity {
                 for (int i = 0; i < imageList.size(); i++) {
                     ImageView imageView = new ImageView(this);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(180 * desity, 200 * desity);
-                    imageView.setPadding(20*desity,0,20*desity,0);
+                    imageView.setPadding(20 * desity, 0, 20 * desity, 0);
                     imageView.setLayoutParams(params);
                     ImageGlideUtils.loadImageFromUrl(imageView, imageList.get(i).getImgurl());
-                    final String url=imageList.get(i).getImgurl();
+                    final String url = imageList.get(i).getImgurl();
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(getApplicationContext(),ImageShowActivity.class);
-                            intent.putExtra("url",url);
+                            Intent intent = new Intent(getApplicationContext(), ImageShowActivity.class);
+                            intent.putExtra("url", url);
                             startActivity(intent);
                         }
                     });
@@ -386,7 +410,92 @@ public class ProductDetailsActivity extends BaseActivity {
 
     }
 
+    //-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
 
+    /**
+     * 进入购买页面
+     */
+    private void enterBuy() {
+        Log.e("TAG", "enterBuy: -----进入购买!");
+
+        request = false;
+        if (bean != null) {
+            if (StringUtils.string2Float(bean.getLoan_info().getProgress()) < 100 && StringUtils.string2Float(bean.getLoan_info().getStatus()) <= 3) {
+                Bundle bundle = new Bundle();
+                bundle.putString("loan_id", loan_id);
+                bundle.putString("is_beginner", bean.getLoan_info().getAdditional_status());
+                bundle.putString("time_limit", bean.getLoan_info().getPeriod());
+                Log.e("TAG", "enterBuy: --bean.get???Loan_info().getAdditional_status()---"+bean.getLoan_info().getAdditional_status());
+
+
+
+                openActivity(AffirmBuyActivity.class, bundle);
+            } else if (hint != null) {
+                ToastUtils.showToast(this, hint + getResources().getString(R.string.bunenggoumai));
+            } else {
+                ToastUtils.showToast(this, R.string.weizhicuowu);
+            }
+        } else {
+            ToastUtils.showToast(this, R.string.shujujiazaichucuoqtchcxjr);
+        }
+    }
+
+    private void checkLogin() {
+        loginToken = UserConfig.getInstance().getLoginToken(this);
+        if ("".equals(loginToken)) {
+            isLogin = false;
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("type", 888);
+            startActivityForResult(intent, 888);
+        } else {
+            isLogin = true;
+            checkIdentity();
+        }
+
+    }
+
+    private void checkIdentity() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", loginToken);
+        HttpMethods.getInstance().POST(this, Constants.IDENTITY_CHECK, map, getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
+                }.getType(), IdentityCheckBean.class, ProductDetailsActivity.this);
+                if (bean1 != null) {
+                    identityCheckBean = (IdentityCheckBean) bean1;
+                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
+                        if (isLogin && !isLogin1) {//之前已登录
+                            enterBuy();
+                        } else {//之前未登录
+                            isLogin = true;
+                            initDataFromInternet();
+                        }
+                    } else {
+                        DialogUtils.showHuiFuDialog(ProductDetailsActivity.this);
+                    }
+                } else {
+                    ToastUtils.showToast(ProductDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                }
+            }
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 888) {
+            isLogin1 = true;
+            checkLogin();
+        }
+    }
+
+    //-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
 
 
 }

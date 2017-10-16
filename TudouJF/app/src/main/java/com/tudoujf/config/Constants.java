@@ -55,6 +55,10 @@ public class Constants {
     public static  final String USER_CONFIG = "userconfig";
     /**产品点击购买接口*/
     public static  final String  PRODUCE_BUY=URL+"/phone/loan/loansimpleinfo";
+    /**获取可用红包接口*/
+    public static  final String  RED_BAG=URL+"/phone/tender/getRedBag";
+    /**获取可用加息券接口*/
+    public static  final String  JIA_XI_QUAN=URL+"/phone/tender/getCoupon";
 
 
     /**

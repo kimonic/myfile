@@ -96,7 +96,7 @@
     <string name="act_fanxianquansel_title">选择返现券</string>
     <string name="act_fanxianquansel_zanwu">暂无返现券</string>
     <string name="act_redpackage_hongbao">选择红包</string>
-    <string name="act_redpackage_keshiyong">您有3个红包可使用</string>
+    <string name="act_redpackage_keshiyong">您有0个红包可使用</string>
     <string name="act_redpacksge_querenshiyong">确认使用</string>
     <string name="act_redpackage_danbitouzi">单笔投资满1000元,最低</string>
     <string name="act_redpackage_touziyueshu">投资0个月可使用</string>
@@ -483,6 +483,18 @@
     <string name="huifuzhuce">汇付注册</string>
     <string name="wuxianzhi">无限制</string>
     <string name="qingshurunindetouzijine">请输入您的投资金额</string>
+    <string name="bunenggoumai">,不能购买!</string>
+    <string name="ling">00,000.00</string>
+    <string name="qingshurutouzijine">请输入投资金额</string>
+    <string name="touzijinebixuweishidebeishu">投资金额必须为10的倍数!</string>
+    <string name="touzijinebixudayudengyuqitoujine">投资金额必须大于等于起投金额!</string>
+    <string name="touzijinebunengdayuzuidaketoujine">投资金额不能大于最大可投金额!</string>
+    <string name="qingxiantongyipingtaijujianfuwuxieyi">请先同意平台居间服务协议!</string>
+    <string name="keshiyong">可使用</string>
+    <string name="meiyouxuanzhongkeyonghongbao">没有选中可用红包!</string>
+    <string name="dianjixuanzekeyonghongbao">点击选择可用红包</string>
+    <string name="dianjixuanzekeyongjiaxiquan">点击选择可用加息券</string>
+    <string name="meiyoukeyonghongbao">没有可用红包</string>
 
 
 </resources>

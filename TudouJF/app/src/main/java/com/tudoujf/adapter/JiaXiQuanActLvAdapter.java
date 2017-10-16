@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.bean.databean.JiaXiQuanBean;
 import com.tudoujf.bean.databean.RedBagBean;
 import com.tudoujf.ui.MRedView;
 import com.tudoujf.utils.StringUtils;
@@ -22,18 +23,18 @@ import java.util.List;
  * author：          kimonik
  * version：          1.0
  * date：            2017/7/24
- * description：  RedPackageActivity中listview的adapter
+ * description：  RedPackageActivity中listview的adapter/加息券用
  * history：
  * ===================================================
  */
 
-public class RedPackageActLvAdapter extends BaseAdapter {
+public class JiaXiQuanActLvAdapter extends BaseAdapter {
 
-    private List<RedBagBean.ListBean> list;
+    private List<JiaXiQuanBean.ListBean> list;
     private Context context;
     private int type;
 
-    public RedPackageActLvAdapter(RedBagBean bean, Context context) {
+    public JiaXiQuanActLvAdapter(JiaXiQuanBean bean, Context context) {
         this.list = bean.getList();
         this.type = bean.getType();
         this.context = context;
@@ -76,22 +77,16 @@ public class RedPackageActLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText("单笔投资满" + list.get(position).getTender_amount_min() + "元、最低");
         viewHolder.textView2.setText("投资" + list.get(position).getTime_limit() + "个月可使用");
-        viewHolder.textView3.setText((list.get(position).getAmount() + "元   "));
+        viewHolder.textView3.setText((list.get(position).getInterest() + "%   "+list.get(position).getName()));
         viewHolder.textView4.setText(context.getResources().getString(R.string.keshiyong));
-        viewHolder.redView.setOneText(list.get(position).getAmount());
+
+        viewHolder.redView.setRedPackageOrQuan(false);
+        viewHolder.redView.setOneText(list.get(position).getInterest());
         viewHolder.redView.setFourText(StringUtils.getStrTimeBias(list.get(position).getEnd_time()));
 
 
-        if (type == 1) {//红包界面
-            if (list.get(position).getBackground() == 1) {
-                view.setBackgroundColor(Color.parseColor("#ffffff"));
-                viewHolder.redView.setSel(false);
-            } else {
-                view.setBackgroundColor(Color.parseColor("#E7FAFF"));
-                viewHolder.redView.setSel(true);
-//                viewHolder.redView.setBitmap(R.drawable.act_redpackage2_sel);
-            }
-        } else {//加息券,fan界面
+        if (type == 2) {//加息券界面
+           //加息券,fan界面
             viewHolder.redView.setTwoText("%");
             if (list.get(position).getBackground() == 1) {
                 view.setBackgroundColor(Color.parseColor("#ffffff"));

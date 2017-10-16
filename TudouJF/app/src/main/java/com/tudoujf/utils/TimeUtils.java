@@ -56,7 +56,7 @@ public class TimeUtils {
      * @param strDate 日期
      * @return yyyy-MM-dd
      */
-    private static Date strToDate(String strDate) {
+    public static Date strToDate(String strDate) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         ParsePosition pos = new ParsePosition(0);
         return formatter.parse(strDate, pos);

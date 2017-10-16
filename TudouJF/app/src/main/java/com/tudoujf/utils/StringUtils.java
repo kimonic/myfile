@@ -164,6 +164,26 @@ public class StringUtils {
         return re_StrTime;
     }
 
+
+    /**
+     * 将时间戳转为字符串
+     *
+     * @param cc_time 时间戳字符串,到秒
+     * @return yyyy-MM-dd
+     */
+    public static String getStrTimeBias(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+        try {
+            long lcc_time = Long.valueOf(cc_time);
+            re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+
+        } catch (NumberFormatException e) {
+            return "****/**/**";
+        }
+        return re_StrTime;
+    }
+
     /**
      * 判断字符串是否为null,或者""、{}、[]
      *

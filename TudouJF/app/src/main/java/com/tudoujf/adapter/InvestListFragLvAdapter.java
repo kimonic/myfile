@@ -119,6 +119,7 @@ public class InvestListFragLvAdapter extends BaseAdapter {
             public void clickEvent() {
                 Intent intent = new Intent(context, ProductDetailsActivity.class);
                 intent.putExtra("loan_id",list.get(position).getId());
+                intent.putExtra("hint",list.get(position).getStatus_name());
                 context.startActivity(intent);
             }
         });
