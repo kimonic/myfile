@@ -1,14 +1,22 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.RechargeHuiFuActivity;
+import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +40,14 @@ public class RechargeActivity extends BaseActivity {
     TextView tvChognZhiJiLu;
     @BindView(R.id.mtb_act_recharge)
     FrameLayout mtbActRecharge;
+    @BindView(R.id.tv_act_recharge_balance)
+    TextView tvBalance;
+    @BindView(R.id.et_act_recharge_amount)
+    EditText etAmount;
+    @BindView(R.id.tv_act_recharge_rechargenow)
+    TextView tvRechargenow;
+
+    private String balance = "";
 
     @Override
     public int getLayoutResId() {
@@ -47,11 +63,25 @@ public class RechargeActivity extends BaseActivity {
             case R.id.tv_act_recharge_chognzhijilu://充值记录
                 openActivity(RechargeRecordActivity.class);
                 break;
+            case R.id.tv_act_recharge_rechargenow://立即充值
+                String  temp=etAmount.getText().toString();
+                if (!temp.equals("")&&StringUtils.string2Float(temp)>0){
+                    Intent intent=new Intent(this, RechargeHuiFuActivity.class);
+                    intent.putExtra("amount",temp);
+                    startActivity(intent);
+                }
+
+                break;
         }
     }
 
     @Override
     public void initDataFromIntent() {
+        Intent intent = getIntent();
+        Bundle bundle=intent.getExtras();
+        if (bundle!=null){
+            balance = bundle.getString("balance");
+        }
 
     }
 
@@ -61,12 +91,27 @@ public class RechargeActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActRecharge.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActRecharge.setLayoutParams(params);
+
+
+        tvBalance.setText(balance);
     }
 
     @Override
     public void initListener() {
         tvActRechargeBac.setOnClickListener(this);
         tvChognZhiJiLu.setOnClickListener(this);
+        tvRechargenow.setOnClickListener(this);
+
+        etAmount.addTextChangedListener(new MTextWatchAdapter(){
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().contains(".")&&editable.toString().substring(editable.toString().indexOf(".")).length()>3){
+                    etAmount.setText(StringUtils.getTwoDecimalsStr(editable.toString()));
+                    etAmount.setSelection(etAmount.getText().length());
+                    ToastUtils.showToast(RechargeActivity.this, R.string.zuiduozhinengshuruliangweixiaoshu);
+                }
+            }
+        });
     }
 
     @Override
@@ -88,4 +133,6 @@ public class RechargeActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
 }

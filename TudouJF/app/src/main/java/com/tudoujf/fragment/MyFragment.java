@@ -1,6 +1,7 @@
 package com.tudoujf.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -105,7 +106,9 @@ public class MyFragment extends BaseFragment {
                 ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值
-                openActivity(RechargeActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("balance","暂无");
+                openActivity(RechargeActivity.class,bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
                 openActivity(WithdrawActivity.class);

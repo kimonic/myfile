@@ -190,6 +190,10 @@
         <activity android:name=".activity.managemoney.CreditorRightsHuiFuBuyActivity" />
         <!--66.实名认证activity-->
         <activity android:name=".activity.my.RealNameAuthenticationHuiFuActivity" />
+        <!--67.标的购买汇付跳转页activity-->
+        <activity android:name=".activity.managemoney.InvestHuiFuBuyActivity" />
+        <!--68.汇付充值activity-->
+        <activity android:name=".activity.managemoney.RechargeHuiFuActivity" />
 
         <service
             android:name=".service.MyService"

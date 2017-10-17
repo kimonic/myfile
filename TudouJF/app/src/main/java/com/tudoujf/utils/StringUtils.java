@@ -9,6 +9,7 @@ import com.tudoujf.bean.GlobalBean;
 
 import org.litepal.tablemanager.typechange.BooleanOrm;
 
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -200,7 +201,8 @@ public class StringUtils {
      */
     public static String getTwoDecimalsStr(String fStr) {
         float f = string2Float(fStr);
-        DecimalFormat decimalFormat = new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        decimalFormat.setRoundingMode(RoundingMode.DOWN);//舍去多余位
         return decimalFormat.format(f);//format 返回的是字符串
     }
 

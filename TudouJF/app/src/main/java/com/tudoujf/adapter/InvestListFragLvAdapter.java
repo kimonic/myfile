@@ -97,7 +97,8 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress())/100);//投资进度
         if (list.get(position).getName()!=null){
-            viewHolder.bidView.setTitle((list.get(position).getCategory_name()+list.get(position).getSerialno()));//标的标题
+//            viewHolder.bidView.setTitle((list.get(position).getCategory_name()+list.get(position).getSerialno()));//标的标题
+            viewHolder.bidView.setTitle(list.get(position).getName());//标的标题
         }
 
         if ("-1".equals(list.get(position).getAdditional_status())){//是否显示新手专享

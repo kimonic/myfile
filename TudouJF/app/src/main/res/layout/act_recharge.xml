@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <FrameLayout
         android:id="@+id/mtb_act_recharge"
         android:layout_width="match_parent"
@@ -27,14 +28,13 @@
             android:textSize="16sp" />
 
 
-
         <TextView
             android:id="@+id/tv_act_recharge_chognzhijilu"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:text="@string/act_recharge_congzhijilu"
             android:textColor="@color/color_white"
             android:textSize="12sp" />
@@ -46,19 +46,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:orientation="horizontal"
         android:background="@color/color_white"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center_vertical"
             android:text="@string/chongzhileixing"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
 
             />
 
@@ -66,10 +66,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/huifutuoguan"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp"
 
             />
 
@@ -77,12 +77,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center_vertical"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
 
             />
-
 
 
     </LinearLayout>
@@ -91,47 +90,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:orientation="horizontal"
         android:background="@color/color_white"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center_vertical"
             android:text="@string/zhuanghuyue"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
 
             />
 
         <TextView
+            android:id="@+id/tv_act_recharge_balance"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="XXXXXXXXXX"
+            android:textColor="@color/color_gray"
+            android:textSize="14sp"
 
             />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center_vertical|end"
             android:text="@string/yuan"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
 
 
             />
-
 
 
     </LinearLayout>
@@ -139,65 +138,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:orientation="horizontal"
         android:background="@color/color_white"
-        >
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
-            android:gravity="center_vertical"
-            android:text="@string/chongzhijine"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/chongzhijine"
+            android:textColor="@color/color_black"
+            android:textSize="14sp"
 
             />
 
         <EditText
+            android:id="@+id/et_act_recharge_amount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_gray"
+            android:background="@null"
             android:gravity="center"
             android:hint="@string/qingshuruchognzhijine"
-            android:background="@null"
-
+            android:textColor="@color/color_gray"
+            android:textSize="14sp"
+            android:inputType="number|numberDecimal"
             />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="@color/color_black"
             android:gravity="center_vertical|end"
             android:text="@string/yuan"
-            android:layout_marginRight="20dp"
-            android:layout_marginEnd="20dp"
-
-
-            />
-
-
-
+            android:textColor="@color/color_black"
+            android:textSize="14sp" />
     </LinearLayout>
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="38dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
-    android:background="@drawable/xshape_roundrect_themecolor"
-    android:text="@string/lijichongzhi"
-    android:textColor="@color/color_white"
-    android:textSize="18sp"
-    android:gravity="center"
+    <TextView
+        android:id="@+id/tv_act_recharge_rechargenow"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:gravity="center"
+        android:text="@string/lijichongzhi"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
 
-    />
+        />
 
 
 </LinearLayout>

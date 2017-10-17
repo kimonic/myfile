@@ -104,6 +104,8 @@ public class AffirmBuyActivity extends BaseActivity {
     private String redId = "";
     private String jiaXiQuanId = "";
     private String acount = "";
+    private  String  paypassword="";
+    private  String  has_password;
 
     @Override
     public int getLayoutResId() {
@@ -117,29 +119,41 @@ public class AffirmBuyActivity extends BaseActivity {
                 openActivity(FanXianQuanSelActivity.class);
                 break;
             case R.id.ll_act_affirmbuy_jiaxiquan://跳转加息券界面
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("time_limit", time_limit);
-                bundle1.putInt("type", 2);
-                bundle1.putString("amount", etTouZiJinE.getText().toString());
-                openActivityForResult(RedPackageActivity.class, bundle1, 999);
-//                openActivity(RedPackageActivity.class, bundle1);
+                if (etTouZiJinE.getText().toString().equals("")){
+                    ToastUtils.showToast(AffirmBuyActivity.this, R.string.qingxianshurutouzijine);
+                }else {
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("time_limit", time_limit);
+                    bundle1.putInt("type", 2);
+                    bundle1.putString("amount", etTouZiJinE.getText().toString());
+                    openActivityForResult(RedPackageActivity.class, bundle1, 999);
+                }
                 break;
             case R.id.ll_act_affirmbuy_redpackage://跳转红包界面
+                if (etTouZiJinE.getText().toString().equals("")){
+                    ToastUtils.showToast(AffirmBuyActivity.this, R.string.qingxianshurutouzijine);
+                }else {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("type", 1);
+                    bundle.putString("amount", etTouZiJinE.getText().toString());
+                    bundle.putString("is_beginner", is_beginner);
+                    bundle.putString("time_limit", time_limit);
+                    openActivityForResult(RedPackageActivity.class, bundle, 888);
+                }
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("type", 1);
-                bundle.putString("amount", etTouZiJinE.getText().toString());
-                bundle.putString("is_beginner", is_beginner);
-                bundle.putString("time_limit", time_limit);
-                openActivityForResult(RedPackageActivity.class, bundle, 888);
+
                 break;
             case R.id.tv_act_affirmbuy_affirmbuy://确认购买按钮
-                if (bean != null && checkInput()) {
+                if (bean != null && checkInput()&&"true".equals(has_password)) {
                     showPasswordDialog();
+                }else  if (bean != null && checkInput()){
+                    openNextActivity();
                 }
                 break;
             case R.id.tv_act_affirmbuy_chongzhi://充值按钮
-                openActivity(RechargeActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("balance",bean.getMember().getBalance_amount());
+                openActivity(RechargeActivity.class,bundle);
                 break;
             case R.id.ll_act_affirmbuy_xieyi://同意居间服务协议
                 count++;
@@ -152,6 +166,16 @@ public class AffirmBuyActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    private void openNextActivity(){
+        Intent  intent=new Intent(this,InvestHuiFuBuyActivity.class);
+        intent.putExtra("amount", etTouZiJinE.getText().toString());//金额
+        intent.putExtra("id", loan_id);//标的id
+        intent.putExtra("coupon", jiaXiQuanId);//加息券id
+        intent.putExtra("redBag", redId);//红包id
+        intent.putExtra("paypassword", paypassword);//投资密码
+        startActivity(intent);
     }
 
     private void showPasswordDialog() {
@@ -185,6 +209,8 @@ public class AffirmBuyActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                paypassword=passwordView.getContent();
+                openNextActivity();
                 pop.dismiss();
             }
         });
@@ -199,6 +225,7 @@ public class AffirmBuyActivity extends BaseActivity {
             loan_id = bundle.getString("loan_id");
             is_beginner = bundle.getString("is_beginner");
             time_limit = bundle.getString("time_limit");
+            has_password = bundle.getString("has_password");
 
         }
 
@@ -248,6 +275,11 @@ public class AffirmBuyActivity extends BaseActivity {
                     String temp = decimalFormat.format(StringUtils.string2Float(bean.getApr()) / 100 * StringUtils.string2Float(editable.toString()) / 12);
                     tvEarings.setText(temp);
                     tvLiXi.setText(temp);
+                    redId="";
+                    jiaXiQuanId="";
+                    tvRedPackage.setText(R.string.dianjixuanzekeyonghongbao);
+                    tvJiaxiquan.setText(R.string.dianjixuanzekeyongjiaxiquan);
+
                 } else {
                     tvEarings.setText(R.string.ling);
                     tvLiXi.setText(R.string.ling);
@@ -389,8 +421,8 @@ public class AffirmBuyActivity extends BaseActivity {
             jiaXiQuanId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
             if (jiaXiQuanId == null || "".equals(jiaXiQuanId)) {
-                ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyonghongbao));
-                tvJiaxiquan.setText(getResources().getString(R.string.meiyoukeyonghongbao));
+                ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
+                tvJiaxiquan.setText(getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
             } else {
                 tvJiaxiquan.setText("已选" + acount + "%加息券");
             }

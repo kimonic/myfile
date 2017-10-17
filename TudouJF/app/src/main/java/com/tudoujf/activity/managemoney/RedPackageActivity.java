@@ -210,8 +210,6 @@ public class RedPackageActivity extends BaseActivity {
                         if (adapterJiaXiQuan != null) {
                             adapterJiaXiQuan.notifyDataSetChanged();
                         }
-
-
                     }
                     count = 1;
                     beforePosition = position;

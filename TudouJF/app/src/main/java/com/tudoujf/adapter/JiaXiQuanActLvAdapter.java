@@ -81,7 +81,7 @@ public class JiaXiQuanActLvAdapter extends BaseAdapter {
         viewHolder.textView4.setText(context.getResources().getString(R.string.keshiyong));
 
         viewHolder.redView.setRedPackageOrQuan(false);
-        viewHolder.redView.setOneText(list.get(position).getInterest());
+        viewHolder.redView.setOneText(StringUtils.getTwoDecimalsStr(list.get(position).getInterest()));
         viewHolder.redView.setFourText(StringUtils.getStrTimeBias(list.get(position).getEnd_time()));
 
 
