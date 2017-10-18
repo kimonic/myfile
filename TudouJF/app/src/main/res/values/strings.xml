@@ -499,6 +499,7 @@
     <string name="qingxianshurutouzijine">请先输入投资金额!</string>
     <string name="meiyouxuanzhongkeyongjiaxiquan">没有可用加息券</string>
     <string name="zuiduozhinengshuruliangweixiaoshu">最多只能输入两位小数!</string>
+    <string name="qingxinashuruchongzhijine">请先输入充值金额,并且充值金额不能为0!</string>
 
 
 </resources>

@@ -16,10 +16,11 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.databean.InvestBuyHuiFuBean;
+import com.tudoujf.bean.databean.RechargeBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -103,6 +104,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
                 closeActivity();
             }
         });
+        mtbActHuiFuRegister.setCenterTitle(R.string.chongzhi);
     }
 
     @Override
@@ -168,7 +170,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
 //            } else
             if (url.contains(Constants.STATUS_CLOSE)) {
                 UserConfig.getInstance().setCreditorFlush(true);
-                openActivity(HomeActivity.class);
+                openActivity(RechargeRecordActivity.class);
                 finish();
             }
 
@@ -189,6 +191,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("amount", amount);
+        map.put("paymentType", "chinapnrTrust");//paymentType:"chinapnrTrust"
 
         Log.e("TAG", "commitInfo: -----amount"+amount);
         Log.e("TAG", "commitInfo: -----login_token"+UserConfig.getInstance().getLoginToken(this));
@@ -218,12 +221,12 @@ public class RechargeHuiFuActivity extends BaseActivity {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
 
-                        InvestBuyHuiFuBean dataBean = gson.fromJson(bean.getData().toString(), InvestBuyHuiFuBean.class);
+                        RechargeBean dataBean = gson.fromJson(bean.getData().toString(), RechargeBean.class);
 
                         url = dataBean.getSubmit_url();
                         JSONObject jo = null;
                         try {
-                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<InvestBuyHuiFuBean>() {
+                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<RechargeBean>() {
                             }.getType()));
                         } catch (JSONException e) {
                             e.printStackTrace();

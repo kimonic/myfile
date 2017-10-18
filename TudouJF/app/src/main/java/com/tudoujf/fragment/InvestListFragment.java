@@ -84,6 +84,7 @@ public class InvestListFragment extends BaseFragment {
     private int type = 1;
 
     private int count1 = 0, count2 = 0;
+    private  int  flag=1;
 
     private InvestListBean bean;
     private String requestUrl;
@@ -290,10 +291,6 @@ public class InvestListFragment extends BaseFragment {
         map.put("sort_type", sortType);//排序方式,1升序 2降序
         map.put("repay_type", repayType);//还款方式,1等额本息--3到期本息---4按月付息----5按天计息到期还本息
 
-        Log.e(TAG, "onLoadmore: ------page--------===" + page);
-        Log.e(TAG, "onLoadmore: ------orderType--------===" + orderType);
-        Log.e(TAG, "onLoadmore: ------sortType--------===" + sortType);
-        Log.e(TAG, "onLoadmore: ------repayType--------===" + repayType);
 
 
         HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
@@ -400,5 +397,16 @@ public class InvestListFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("TAG", "onResume: -----投资列表恢复");
+        if (flag!=1){
+            page = 1;
+            initDataFromInternet();
+        }
+        flag++;
+
+    }
 
 }

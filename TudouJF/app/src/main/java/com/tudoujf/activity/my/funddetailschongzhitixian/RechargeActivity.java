@@ -69,6 +69,9 @@ public class RechargeActivity extends BaseActivity {
                     Intent intent=new Intent(this, RechargeHuiFuActivity.class);
                     intent.putExtra("amount",temp);
                     startActivity(intent);
+                    closeActivity();
+                }else {
+                    ToastUtils.showToast(RechargeActivity.this, R.string.qingxinashuruchongzhijine);
                 }
 
                 break;

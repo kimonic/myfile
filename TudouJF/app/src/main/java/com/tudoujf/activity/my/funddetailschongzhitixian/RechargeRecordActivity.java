@@ -9,6 +9,13 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.RechargeRecordActLvAdapterN;
 import com.tudoujf.base.BaseActivity;
@@ -23,6 +30,7 @@ import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -45,8 +53,10 @@ public class RechargeRecordActivity extends BaseActivity {
     MTopBarView mtbActRechargeRecord;
     @BindView(R.id.lv_act_rechargerecord)
     ListView lvActRechargeRecord;
-    @BindView(R.id.tv_act_rechargerecord_loadmore)
-    TextView tvLoadMore;
+    //    @BindView(R.id.tv_act_rechargerecord_loadmore)
+//    TextView tvLoadMore;
+    @BindView(R.id.srl_act_rechargerecord)
+    SmartRefreshLayout srl;
 
 
     private List<RechargeRecodeBean.ItemsBean> list;
@@ -61,25 +71,25 @@ public class RechargeRecordActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_act_rechargerecord_loadmore:
-                if (bean != null && page < bean.getTotal_pages()) {
-                    page = page + 1;
-                    initDataFromInternet();
-                } else if (bean != null) {
-                    ToastUtils.showToast(RechargeRecordActivity.this, R.string.meiyougengduola);
-                } else {
-                    page = 1;
-                    initDataFromInternet();
-                }
-
-                break;
-//                 case R.id.:break;
-//                 case R.id.:break;
-//                 case R.id.:break;
-//                 case R.id.:break;
-//                 case R.id.:break;
-        }
+//        switch (v.getId()) {
+//            case R.id.tv_act_rechargerecord_loadmore:
+//                if (bean != null && page < bean.getTotal_pages()) {
+//                    page = page + 1;
+//                    initDataFromInternet();
+//                } else if (bean != null) {
+//                    ToastUtils.showToast(RechargeRecordActivity.this, R.string.meiyougengduola);
+//                } else {
+//                    page = 1;
+//                    initDataFromInternet();
+//                }
+//
+//                break;
+////                 case R.id.:break;
+////                 case R.id.:break;
+////                 case R.id.:break;
+////                 case R.id.:break;
+////                 case R.id.:break;
+//        }
 
     }
 
@@ -108,6 +118,16 @@ public class RechargeRecordActivity extends BaseActivity {
         mtbActRechargeRecord.setLayoutParams(params);
 
 
+        //设置全区背景色
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+        //设置 Header 为 Material风格
+//        swipeRefreshLayout.setEnableRefresh(true);
+        srl.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+        //设置 Footer 为 球脉冲
+        srl.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        list = new ArrayList<>();
+
     }
 
     @Override
@@ -118,13 +138,35 @@ public class RechargeRecordActivity extends BaseActivity {
                 closeActivity();
             }
         });
-        tvLoadMore.setOnClickListener(this);
+//        tvLoadMore.setOnClickListener(this);
+
+
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {//加载更多
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean != null && page < bean.getTotal_pages()) {
+                    page++;
+                    initDataFromInternet();
+                } else {
+                    srl.finishLoadmore();
+                    ToastUtils.showToast(RechargeRecordActivity.this, R.string.meiyougengduola);
+                }
+
+            }
+        });
+        srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page = 1;
+                list.clear();
+                initDataFromInternet();
+            }
+        });
 
     }
 
     @Override
     public void initDataFromInternet() {
-//        RECHARG_ERECORD
 
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
@@ -137,6 +179,13 @@ public class RechargeRecordActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
+
+                        if (page > 1) {
+                            srl.finishLoadmore();
+                        } else {
+                            srl.finishRefresh();
+                        }
+
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----充值记录接口返回数据--------" + result);
 
@@ -158,14 +207,18 @@ public class RechargeRecordActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            if (page == 1) {
-                list = bean.getItems();
-            } else {
-                list.addAll(bean.getItems());
-            }
+            Log.e("TAG", "onSuccess: -----" + bean.getItems().size());
+
+//            if (page == 1) {
+//                list = bean.getItems();
+//            } else {
+            list.addAll(bean.getItems());
+            Log.e("TAG", "onSuccess: --数据源添加数据---" + list.size());
+//            }
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
-            } else{
+                Log.e("TAG", "onSuccess: --刷新数据源---" + list.size());
+            } else {
                 adapter = new RechargeRecordActLvAdapterN(list, this);
                 lvActRechargeRecord.setAdapter(adapter);
             }

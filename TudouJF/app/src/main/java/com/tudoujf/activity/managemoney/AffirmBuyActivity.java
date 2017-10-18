@@ -98,14 +98,16 @@ public class AffirmBuyActivity extends BaseActivity {
     private String is_beginner;
     private String time_limit;
 
+    private int flag = 1;
+
     /**
      * 红包id
      */
     private String redId = "";
     private String jiaXiQuanId = "";
     private String acount = "";
-    private  String  paypassword="";
-    private  String  has_password;
+    private String paypassword = "";
+    private String has_password;
 
     @Override
     public int getLayoutResId() {
@@ -119,9 +121,9 @@ public class AffirmBuyActivity extends BaseActivity {
                 openActivity(FanXianQuanSelActivity.class);
                 break;
             case R.id.ll_act_affirmbuy_jiaxiquan://跳转加息券界面
-                if (etTouZiJinE.getText().toString().equals("")){
+                if (etTouZiJinE.getText().toString().equals("")) {
                     ToastUtils.showToast(AffirmBuyActivity.this, R.string.qingxianshurutouzijine);
-                }else {
+                } else {
                     Bundle bundle1 = new Bundle();
                     bundle1.putString("time_limit", time_limit);
                     bundle1.putInt("type", 2);
@@ -130,9 +132,9 @@ public class AffirmBuyActivity extends BaseActivity {
                 }
                 break;
             case R.id.ll_act_affirmbuy_redpackage://跳转红包界面
-                if (etTouZiJinE.getText().toString().equals("")){
+                if (etTouZiJinE.getText().toString().equals("")) {
                     ToastUtils.showToast(AffirmBuyActivity.this, R.string.qingxianshurutouzijine);
-                }else {
+                } else {
                     Bundle bundle = new Bundle();
                     bundle.putInt("type", 1);
                     bundle.putString("amount", etTouZiJinE.getText().toString());
@@ -144,16 +146,16 @@ public class AffirmBuyActivity extends BaseActivity {
 
                 break;
             case R.id.tv_act_affirmbuy_affirmbuy://确认购买按钮
-                if (bean != null && checkInput()&&"true".equals(has_password)) {
+                if (bean != null && checkInput() && "true".equals(has_password)) {
                     showPasswordDialog();
-                }else  if (bean != null && checkInput()){
+                } else if (bean != null && checkInput()) {
                     openNextActivity();
                 }
                 break;
             case R.id.tv_act_affirmbuy_chongzhi://充值按钮
-                Bundle bundle=new Bundle();
-                bundle.putString("balance",bean.getMember().getBalance_amount());
-                openActivity(RechargeActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("balance", bean.getMember().getBalance_amount());
+                openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_act_affirmbuy_xieyi://同意居间服务协议
                 count++;
@@ -168,8 +170,8 @@ public class AffirmBuyActivity extends BaseActivity {
         }
     }
 
-    private void openNextActivity(){
-        Intent  intent=new Intent(this,InvestHuiFuBuyActivity.class);
+    private void openNextActivity() {
+        Intent intent = new Intent(this, InvestHuiFuBuyActivity.class);
         intent.putExtra("amount", etTouZiJinE.getText().toString());//金额
         intent.putExtra("id", loan_id);//标的id
         intent.putExtra("coupon", jiaXiQuanId);//加息券id
@@ -209,7 +211,7 @@ public class AffirmBuyActivity extends BaseActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paypassword=passwordView.getContent();
+                paypassword = passwordView.getContent();
                 openNextActivity();
                 pop.dismiss();
             }
@@ -275,8 +277,8 @@ public class AffirmBuyActivity extends BaseActivity {
                     String temp = decimalFormat.format(StringUtils.string2Float(bean.getApr()) / 100 * StringUtils.string2Float(editable.toString()) / 12);
                     tvEarings.setText(temp);
                     tvLiXi.setText(temp);
-                    redId="";
-                    jiaXiQuanId="";
+                    redId = "";
+                    jiaXiQuanId = "";
                     tvRedPackage.setText(R.string.dianjixuanzekeyonghongbao);
                     tvJiaxiquan.setText(R.string.dianjixuanzekeyongjiaxiquan);
 
@@ -428,4 +430,14 @@ public class AffirmBuyActivity extends BaseActivity {
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (flag != 1) {
+            initDataFromInternet();
+        }
+        flag++;
+    }
+
 }
