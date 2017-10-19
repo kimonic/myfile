@@ -1,5 +1,6 @@
 package com.tudoujf.activity.managemoney;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -181,7 +182,7 @@ public class AffirmBuyActivity extends BaseActivity {
     }
 
     private void showPasswordDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_affirmbuy, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_affirmbuy, null);
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.alpha = 0.5f;

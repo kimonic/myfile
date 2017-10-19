@@ -10,6 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.SignInActivity;
@@ -27,6 +34,7 @@ import com.tudoujf.adapter.MyFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -67,6 +75,8 @@ public class MyFragment extends BaseFragment {
     LinearLayout llMyAccount;
     @BindView(R.id.ll_frag_my_funddetails)
     LinearLayout llFundDetails;
+     @BindView(R.id.srl_frag_my)
+     SmartRefreshLayout srl;
     Unbinder unbinder;
 
     private List<MyFragBean> list;
@@ -149,6 +159,16 @@ public class MyFragment extends BaseFragment {
         MyFragLvAdapter adapter = new MyFragLvAdapter(list, getActivity());
         lvFragMy.setAdapter(adapter);
         HeightUtils.setListviewHeight(lvFragMy);
+
+
+        //设置全区背景色
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+        //设置 Header 为 Material风格
+//        swipeRefreshLayout.setEnableRefresh(true);
+        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        //设置 Footer 为 球脉冲
+        srl.setEnableLoadmore(false);
+
     }
 
     @Override
@@ -189,6 +209,16 @@ public class MyFragment extends BaseFragment {
         llMyAccount.setOnClickListener(this);
         tvRealName.setOnClickListener(this);
         flMessage.setOnClickListener(this);
+
+        srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+//                page = 1;
+//                initDataFromInternet();
+
+                srl.finishRefresh();
+            }
+        });
 
 
     }

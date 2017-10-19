@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActBean;
-import com.tudoujf.activity.my.funddetailschongzhitixian.TransactionRecordActBean;
+import com.tudoujf.bean.databean.WithdrawRecordBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -26,10 +26,10 @@ import java.util.List;
  */
 
 public class RechargeRecordActLvAdapter extends BaseAdapter {
-    private List<RechargeRecordActBean> list;
+    private List<WithdrawRecordBean.ItemsBean> list;
     private Context context;
 
-    public RechargeRecordActLvAdapter(List<RechargeRecordActBean> list, Context context) {
+    public RechargeRecordActLvAdapter(List<WithdrawRecordBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -68,10 +68,10 @@ public class RechargeRecordActLvAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getJinE());
-        viewHolder.textView2.setText(list.get(position).getDate());
-        viewHolder.textView3.setText(list.get(position).getState());
-        viewHolder.textView4.setText(list.get(position).getContent());
+        viewHolder.textView1.setText(list.get(position).getAmount());
+        viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
+        viewHolder.textView3.setText(list.get(position).getStatus_name());
+        viewHolder.textView4.setText(R.string.tixianjine);
 
 
 
@@ -85,7 +85,7 @@ public class RechargeRecordActLvAdapter extends BaseAdapter {
     }
 
     private class ViewHolder{
-        public TextView textView1,textView2,textView3,textView4;
+        private TextView textView1,textView2,textView3,textView4;
     }
 
 }

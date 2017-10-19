@@ -114,9 +114,13 @@ public class Constants {
     /**
      * 充值记录
      */
-    public static final String RECHARG_ERECORD = URL
-            + "/phone/recharge/rechargelog";
-
+    public static final String RECHARG_ERECORD = URL + "/phone/recharge/rechargelog";
+    /**
+     * 提现接口
+     */
+    public static final String WITHDRAW = URL + "/phone/bank/withdrawCash";
+    /**提现记录接口*/
+    public static final String WITHDRAW_RECORD=URL + "/phone/bank/withdrawLog";
 
 
     /**
@@ -466,15 +470,15 @@ public class Constants {
      */
     public static final String WITHDRAW_FEE = URL
             + "/phone/member/getCashFee";
-    /**
-     * 提现
-     */
-    public static final String WITHDRAW = URL + "/phone/member/withDraw";
-    /**
-     * 提现记录
-     */
-    public static final String WITHDRAW_RECORD = URL
-            + "/phone/member/withDrawLog";
+//    /**
+//     * 提现
+//     */
+//    public static final String WITHDRAW = URL + "/phone/member/withDraw";
+//    /**
+//     * 提现记录
+//     */
+//    public static final String WITHDRAW_RECORD = URL
+//            + "/phone/member/withDrawLog";
     /**
      * 推广记录
      */

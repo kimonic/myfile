@@ -15,7 +15,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
@@ -168,8 +167,10 @@ public class RechargeHuiFuActivity extends BaseActivity {
 //                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, "注册失败1");
 //                finish();
 //            } else
+            Log.e("TAG", "onPageStarted: -----"+url);
+            
             if (url.contains(Constants.STATUS_CLOSE)) {
-                UserConfig.getInstance().setCreditorFlush(true);
+//                UserConfig.getInstance().setCreditorFlush(true);
                 openActivity(RechargeRecordActivity.class);
                 finish();
             }
@@ -259,7 +260,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
                     }
                     // TODO: 2017/8/8 做对应返回错误码的处理
                 } else {
-                    ToastUtils.showToast(RechargeHuiFuActivity.this, R.string.denglushibai);
+                    ToastUtils.showToast(RechargeHuiFuActivity.this, R.string.shujujiazaichucuo);
                 }
             }
         });

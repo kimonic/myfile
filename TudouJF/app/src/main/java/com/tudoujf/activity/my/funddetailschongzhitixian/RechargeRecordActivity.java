@@ -96,6 +96,9 @@ public class RechargeRecordActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
+        Log.e("TAG", "initDataFromIntent: -----启动充值记录!");
+
+
 //        //临时数据源
 //        list=new ArrayList<>();
 //        for (int i = 0; i < 30; i++) {
@@ -125,6 +128,7 @@ public class RechargeRecordActivity extends BaseActivity {
         srl.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         //设置 Footer 为 球脉冲
         srl.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+        srl.setEnableLoadmore(true);
 
         list = new ArrayList<>();
 

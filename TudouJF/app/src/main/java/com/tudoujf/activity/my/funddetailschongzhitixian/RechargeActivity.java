@@ -3,7 +3,6 @@ package com.tudoujf.activity.my.funddetailschongzhitixian;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -19,7 +18,6 @@ import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================

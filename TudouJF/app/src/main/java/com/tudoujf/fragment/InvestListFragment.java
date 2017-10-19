@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
@@ -115,7 +116,6 @@ public class InvestListFragment extends BaseFragment {
      * 投资列表适配器
      */
     private InvestListFragLvAdapter actLVAdapter;
-    private String TAG = "ManageMoneyChild";
     /**
      * 互斥的button按钮背景色设置的list
      */
@@ -355,7 +355,7 @@ public class InvestListFragment extends BaseFragment {
     }
 
     private void showAlertDialog() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_frag_managemoneymatterschild, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_frag_managemoneymatterschild, null);
         WindowManager.LayoutParams params = getActivity().getWindow().getAttributes();
         params.alpha = 0.5f;
         getActivity().getWindow().setAttributes(params);

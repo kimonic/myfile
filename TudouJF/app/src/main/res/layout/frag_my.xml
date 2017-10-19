@@ -1,404 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_frag_my"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     >
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/global_background_color"
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants" >
-
+        android:layout_height="match_parent"
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/global_theme_background_color"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:descendantFocusability="blocksDescendants" >
+
             <LinearLayout
-                android:id="@+id/ll_frag_my_myaccount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/global_theme_background_color"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 >
+                <LinearLayout
+                    android:id="@+id/ll_frag_my_myaccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/act_lock_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center_vertical"
+                        android:text="欢迎你,XXXXXXXXXXX"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="18dp"
+                    android:layout_height="11dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/act_lock_icon" />
+                    android:src="@drawable/frag_my_vip" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/xshape_roundrect_mwhite1"
                     android:gravity="center_vertical"
-                    android:text="欢迎你,XXXXXXXXXXX"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/frag_my_shenqingvip"
+                    android:textColor="@color/global_theme_background_color"
+                    android:textSize="12sp" />
 
+                <FrameLayout
+                    android:id="@+id/fl_frag_my_message"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/frag_home_info">
+
+                    <TextView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_gravity="end|top"
+                        android:gravity="center"
+                        android:text="99"
+                        android:textColor="@color/color_white"
+                        android:textSize="8sp" />
+                </FrameLayout>
             </LinearLayout>
-
-
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="11dp"
-                android:contentDescription="@null"
-                android:src="@drawable/frag_my_vip" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/xshape_roundrect_mwhite1"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="@string/frag_my_shenqingvip"
-                android:textColor="@color/global_theme_background_color"
-                android:textSize="12sp" />
+                android:background="@color/global_theme_background_color"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/frag_my_zongshouyi"
+                android:textColor="@color/color_white"
+                android:textSize="14sp" />
 
-            <FrameLayout
-                android:id="@+id/fl_frag_my_message"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/frag_home_info">
-
-                <TextView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_gravity="end|top"
-                    android:gravity="center"
-                    android:text="99"
-                    android:textColor="@color/color_white"
-                    android:textSize="8sp" />
-            </FrameLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/global_theme_background_color"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/frag_my_zongshouyi"
-            android:textColor="@color/color_white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/global_theme_background_color"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:text="00,000,000.00"
-            android:textColor="@color/color_white"
-            android:textSize="22sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/global_theme_background_color"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="5dp"
-                    android:text="@string/frag_my_zhanghuzongzichan"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="00.00"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/act_affirmbuy_bac" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="@string/frag_my_keyongyue"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="00.00"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/act_affirmbuy_bac" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/frag_my_wodetiyanjin"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="00.00"
-                    android:textColor="@color/color_white"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/global_theme_background_color"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:text="00,000,000.00"
+                android:textColor="@color/color_white"
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/global_theme_background_color" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/xshape_roundrect_mcyan"
-                android:baselineAligned="false"
+                android:layout_height="70dp"
+                android:background="@color/global_theme_background_color"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ll_frag_my_chongzhi"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/frag_my_recharge" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="@string/frag_my_zhanghuzongzichan"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:gravity="center"
-                        android:text="@string/frag_my_recharge"
-                        android:textColor="@color/color_black"
-                        android:textSize="18sp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="00.00"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
 
-                        />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/act_affirmbuy_bac" />
+
                 <LinearLayout
-                    android:id="@+id/ll_frag_my_tixian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/frag_my_withdrawals" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/frag_my_keyongyue"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:gravity="center"
-                        android:text="@string/frag_my_withdrawals"
-                        android:textColor="@color/color_black"
-                        android:textSize="18sp"
+                        android:text="00.00"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
 
-                        />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/act_affirmbuy_bac" />
+
                 <LinearLayout
-                    android:id="@+id/ll_frag_my_funddetails"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/frag_my_funddetails" />
+                    >
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
                         android:gravity="center"
-                        android:text="@string/frag_my_funddetails"
-                        android:textColor="@color/color_black"
-                        android:textSize="18sp"
-                        />
+                        android:text="@string/frag_my_wodetiyanjin"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="00.00"
+                        android:textColor="@color/color_white"
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-        </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/xshape_roundrect_mcyan_twoconner"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_frag_my_realname"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="2dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
-                android:text="@string/frag_my_shimingrenzheng"
-                android:textColor="@color/frag_home_bac"
-                android:textSize="12sp"
-                />
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:contentDescription="@null"
-                android:src="@drawable/frag_my_arrowrightbac" />
-        </LinearLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            >
-            <ListView
-                android:id="@+id/lv_frag_my"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="90dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@color/global_theme_background_color" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/xshape_roundrect_mcyan"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_frag_my_chongzhi"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_my_recharge" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_my_recharge"
+                            android:textColor="@color/color_black"
+                            android:textSize="18sp"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_frag_my_tixian"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_my_withdrawals" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_my_withdrawals"
+                            android:textColor="@color/color_black"
+                            android:textSize="18sp"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_frag_my_funddetails"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_my_funddetails" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_my_funddetails"
+                            android:textColor="@color/color_black"
+                            android:textSize="18sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+
             <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="67dp"
-                android:orientation="vertical"
-                android:layout_gravity="end|top"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginEnd="20dp">
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/xshape_roundrect_mcyan_twoconner"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/tv_frag_my"
-                    android:layout_width="21dp"
-                    android:layout_height="17dp"
-                    android:layout_gravity="end"
-                    android:background="@drawable/xvector_close"
+                    android:id="@+id/tv_frag_my_realname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/frag_my_shimingrenzheng"
+                    android:textColor="@color/frag_home_bac"
+                    android:textSize="12sp"
                     />
+
                 <ImageView
-                    android:id="@+id/iv_frag_my"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
                     android:contentDescription="@null"
-                    android:src="@drawable/frag_my_onlineservice"
-
-                    />
+                    android:src="@drawable/frag_my_arrowrightbac" />
             </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                >
+                <ListView
+                    android:id="@+id/lv_frag_my"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="67dp"
+                    android:orientation="vertical"
+                    android:layout_gravity="end|top"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp">
+                    <TextView
+                        android:id="@+id/tv_frag_my"
+                        android:layout_width="21dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/xvector_close"
+                        />
+                    <ImageView
+                        android:id="@+id/iv_frag_my"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/frag_my_onlineservice"
 
-        </FrameLayout>
+                        />
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
-
-
-    </LinearLayout>
-</ScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

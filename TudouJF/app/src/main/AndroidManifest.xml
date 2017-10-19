@@ -151,7 +151,9 @@
         <!--46.充值activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.RechargeActivity" />
         <!--47.充值记录activity-->
-        <activity android:name=".activity.my.funddetailschongzhitixian.RechargeRecordActivity" />
+        <activity android:name=".activity.my.funddetailschongzhitixian.RechargeRecordActivity"
+            android:launchMode="singleTop"
+            />
         <!--48.提现activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawActivity" />
         <!--49.提现记录activity-->
