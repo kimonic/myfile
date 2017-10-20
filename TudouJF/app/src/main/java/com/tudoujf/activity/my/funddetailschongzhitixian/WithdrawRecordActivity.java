@@ -165,8 +165,7 @@ public class WithdrawRecordActivity extends BaseActivity {
                 dismissPDialog();
 
 
-                if (page > 1) {
-                    srl.finishLoadmore();
+                if (page > 1) {                    srl.finishLoadmore();
                 } else {
                     srl.finishRefresh();
                 }
