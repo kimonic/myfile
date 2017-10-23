@@ -1,11 +1,17 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.UserConfig;
@@ -43,6 +49,9 @@ public class HomeActivity extends BaseActivity {
     NaviButtonView nbvActHome;
 
     private List<Fragment> list;
+    private boolean isLogin = false;
+
+    private int beforePosition = 0;
 
     @Override
     public void initDataFromIntent() {
@@ -84,15 +93,43 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        //----------------------------可能会对页面跳转产生影响-------------------------------------
+        nbvActHome.setListener(new NaviButtonView.CurrentPositionListener() {
+            @Override
+            public boolean currentPosition(int position) {
+                if (position == 3 && !isLogin) {
+                    openLoginAct();
+                    return false;
+                } else {
+                    beforePosition = position;
+                    return true;
+                }
+            }
+        });
+
+        vpActHome.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 3 && !isLogin) {
+                    openLoginAct();
+                } else {
+                    beforePosition = position;
+                }
+
+            }
+        });
+        //----------------------------可能会对页面跳转产生影响-------------------------------------
 
     }
 
     @Override
     public void initDataFromInternet() {
         //判断是否已登陆
-        if (!"".equals(UserConfig.getInstance().getLoginToken(this))) {
-            MApp.getInstance().setLogin(true);
-        }
+//        if (!"".equals(UserConfig.getInstance().getLoginToken(this))) {
+//            MApp.getInstance().setLogin(true);
+//            isLogin = true;
+//        }
+        checkLogin();
 
     }
 
@@ -128,6 +165,51 @@ public class HomeActivity extends BaseActivity {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
             DialogUtils.showHuiFuDialog(this);
+        }
+    }
+
+    //----------------------------可能会对页面跳转产生影响-------------------------------------
+
+    private void checkLogin() {
+        if (!"".equals(UserConfig.getInstance().getLoginToken(this))) {
+            MApp.getInstance().setLogin(true);
+            isLogin = true;
+        } else {
+            isLogin = false;
+        }
+    }
+
+    private void openLoginAct() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("type", 888);
+        startActivityForResult(intent, 888);
+    }
+    //----------------------------可能会对页面跳转产生影响-------------------------------------
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 888) {
+            //----------------------------可能会对页面跳转产生影响-------------------------------------
+            checkLogin();
+            if (isLogin) {
+                vpActHome.setCurrentItem(3);
+            }
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //----------------------------可能会对页面跳转产生影响-------------------------------------
+        checkLogin();
+        if (!isLogin) {
+            if (beforePosition != 3) {
+                vpActHome.setCurrentItem(beforePosition);
+            } else {
+                vpActHome.setCurrentItem(0);
+            }
         }
     }
 }

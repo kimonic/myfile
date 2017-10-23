@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lzy.okgo.OkGo;
+import com.tudoujf.R;
 import com.tudoujf.http.HttpMethods;
+import com.tudoujf.utils.DialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,6 +32,22 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment implements BaseMethod, View.OnClickListener {
     Unbinder unbinder;
+
+    private AlertDialog bDialog;
+
+    public void showPDialog() {
+        if (bDialog==null){
+            bDialog= DialogUtils.showProgreessDialog(getActivity(),getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        }else {
+            bDialog.show();
+        }
+    }
+
+    public void dismissPDialog(){
+        if (bDialog!=null){
+            bDialog.dismiss();
+        }
+    }
 
     @Nullable
     @Override

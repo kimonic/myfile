@@ -196,6 +196,8 @@
         <activity android:name=".activity.managemoney.InvestHuiFuBuyActivity" />
         <!--68.汇付充值activity-->
         <activity android:name=".activity.managemoney.RechargeHuiFuActivity" />
+        <!--68.汇付提现activity-->
+        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawHuiFuActivity" />
 
         <service
             android:name=".service.MyService"

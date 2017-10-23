@@ -1,7 +1,7 @@
 package com.tudoujf.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -10,12 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.MyMessageActivity;
@@ -31,14 +31,22 @@ import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.activity.my.mywelfare.MyWelfareActivity;
 import com.tudoujf.activity.my.set.SetActivity;
 import com.tudoujf.adapter.MyFragLvAdapter;
+import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
+import com.tudoujf.bean.databean.PersonalCenterBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
@@ -59,8 +67,8 @@ public class MyFragment extends BaseFragment {
 
     @BindView(R.id.lv_frag_my)
     ListView lvFragMy;
-     @BindView(R.id.fl_frag_my_message)
-     FrameLayout flMessage;
+    @BindView(R.id.fl_frag_my_message)
+    FrameLayout flMessage;
     @BindView(R.id.tv_frag_my)
     TextView tvFragMy;
     @BindView(R.id.tv_frag_my_realname)
@@ -75,9 +83,29 @@ public class MyFragment extends BaseFragment {
     LinearLayout llMyAccount;
     @BindView(R.id.ll_frag_my_funddetails)
     LinearLayout llFundDetails;
-     @BindView(R.id.srl_frag_my)
-     SmartRefreshLayout srl;
-    Unbinder unbinder;
+    @BindView(R.id.srl_frag_my)
+    SmartRefreshLayout srl;
+    @BindView(R.id.iv_frag_my_icon)
+    ImageView ivIcon;
+    @BindView(R.id.tv_frag_my_username)
+    TextView tvUsername;
+    @BindView(R.id.iv_frag_my_vip)
+    ImageView ivVip;
+    @BindView(R.id.tv_frag_my_vipapply)
+    TextView tvVipapply;
+    @BindView(R.id.tv_frag_my_message)
+    TextView tvMessage;
+    @BindView(R.id.tv_frag_my_amount)
+    TextView tvAmount;
+    @BindView(R.id.tv_frag_my_total)
+    TextView tvTotal;
+    @BindView(R.id.tv_frag_my_canuse)
+    TextView tvCanuse;
+    @BindView(R.id.tv_frag_my_experience)
+    TextView tvExperience;
+    @BindView(R.id.ll_frag_my_realname)
+    LinearLayout llRealname;
+    Unbinder unbinder1;
 
     private List<MyFragBean> list;
 
@@ -100,6 +128,7 @@ public class MyFragment extends BaseFragment {
             R.drawable.frag_my_zhuanshukefu,
             R.drawable.frag_my_shezhi,
     };
+    private PersonalCenterBean bean;
 
     @Override
     public int layoutRes() {
@@ -116,9 +145,9 @@ public class MyFragment extends BaseFragment {
                 ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值
-                Bundle bundle=new Bundle();
-                bundle.putString("balance","暂无");
-                openActivity(RechargeActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("balance", "暂无");
+                openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
                 openActivity(WithdrawActivity.class);
@@ -168,6 +197,7 @@ public class MyFragment extends BaseFragment {
         srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         //设置 Footer 为 球脉冲
         srl.setEnableLoadmore(false);
+        initDataFromInternet();
 
     }
 
@@ -225,13 +255,56 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+        Log.e("TAG", "initDataFromInternet: -----个人中心");
+
+
+        showPDialog();
+
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+
+
+
+        HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, getActivity().getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
+
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<PersonalCenterBean>() {
+                        }.getType(), PersonalCenterBean.class, getActivity());
+                        if (bean1 != null) {
+                            bean = (PersonalCenterBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                        }
+
+                    }
+                });
+
+
 
     }
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean!=null){
+            ImageGlideUtils.loadCircularImage(ivIcon,bean.getAvatar());
+            tvUsername.setText((getResources().getString(R.string.huanyingni)+bean.getMember_name()));
+            tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getInterest_award()));
+            tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
+            tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
+            tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
+            tvMessage.setText(bean.getCount());
+
+
+        }
 
     }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
+import com.tudoujf.config.UserConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,7 @@ import java.util.List;
  * mark:  必须设置count(按钮数量),imagsUnSel(未选中资源图片id数组)
  * -------magsSel(选中资源图片id数组),text(按钮描述文本,与顶部bar同名)
  * -------colorSel(选中时文本颜色),colorUnSel(未选中时文本颜色)
- *
+ * <p>
  * -------app:imagesSelArray="@array/imagesSelR"
  * -------app:imagesUnSelArray="@array/imagesUnSelR"
  * -------app:textArray="@array/textIdR"
@@ -69,6 +72,11 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
      */
     private int colorSel;
     private int colorUnSel;
+
+    /**
+     * 当前位置监听
+     */
+    private CurrentPositionListener listener;
 
     /**
      * tag
@@ -132,6 +140,11 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
         initView();
     }
 
+
+    public void setListener(CurrentPositionListener listener) {
+        this.listener = listener;
+    }
+
     private void initView() {
 
 
@@ -193,14 +206,24 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
     public void onClick(View view) {
         for (int i = 0; i < count; i++) {
             if ((VIEWTAG + i).equals(view.getTag())) {
-                setSelStyle(i);
+
                 if (viewPager != null) {
-                    viewPager.setCurrentItem(i);
+
+                    if (listener == null) {
+                        setSelStyle(i);
+                        viewPager.setCurrentItem(i);
+                    } else if (listener.currentPosition(i)) {
+                        setSelStyle(i);
+                        viewPager.setCurrentItem(i);
+                    }
+
+
                 }
                 break;
             }
         }
     }
+
 
     /**
      * 设置选中时的状态
@@ -218,5 +241,9 @@ public class NaviButtonView extends LinearLayout implements View.OnClickListener
                 listText.get(i).setTextColor(colorUnSel);
             }
         }
+    }
+
+    public interface CurrentPositionListener {
+        boolean currentPosition(int position);
     }
 }

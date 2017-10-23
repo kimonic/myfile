@@ -1,4 +1,4 @@
-package com.tudoujf.activity.managemoney;
+package com.tudoujf.activity.my.funddetailschongzhitixian;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,11 +15,11 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.databean.RechargeBean;
+import com.tudoujf.bean.databean.WithdrawHuiFuBean;
+import com.tudoujf.bean.databean.WithdrawHuiFuBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -38,17 +38,17 @@ import butterknife.BindView;
 
 /**
  * * ================================================
- * name:            RechargeHuiFuActivity
+ * name:            WithdrawHuiFuActivity
  * guide:
  * author：          kimonik
  * version：          1.0
  * date：            2017/8/11
- * description：汇付充值activity
+ * description：汇付提现activity
  * history：
  * ===================================================
  */
 
-public class RechargeHuiFuActivity extends BaseActivity {
+public class WithdrawHuiFuActivity extends BaseActivity {
     @BindView(R.id.mtb_act_huifuregister)
     MTopBarView mtbActHuiFuRegister;
     @BindView(R.id.wv_act_huifuregister)
@@ -88,7 +88,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActHuiFuRegister.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActHuiFuRegister.setLayoutParams(params);
-        mtbActHuiFuRegister.setCenterTitle(R.string.chongzhi);
+        mtbActHuiFuRegister.setCenterTitle(getResources().getString(R.string.tixian));
 
         commitInfo();
         AndroidBug5497Workaround.assistActivity(this);
@@ -170,7 +170,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
             
             if (url.contains(Constants.STATUS_CLOSE)) {
 //                UserConfig.getInstance().setCreditorFlush(true);
-                openActivity(RechargeRecordActivity.class);
+                openActivity(WithdrawRecordActivity.class);
                 finish();
             }
 
@@ -197,13 +197,13 @@ public class RechargeHuiFuActivity extends BaseActivity {
         Log.e("TAG", "commitInfo: -----login_token"+UserConfig.getInstance().getLoginToken(this));
 
 
-        HttpMethods.getInstance().POST(this, Constants.RECHARGE, map, "999", new StringCallback() {
+        HttpMethods.getInstance().POST(this, Constants.HUIFU_WITHDRAW, map, "999", new StringCallback() {
             @SuppressLint("SetJavaScriptEnabled")
             @Override
             public void onSuccess(Response<String> response) {
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求充值页面接口返回的json数据----------------" + result);
+                Log.e("TAG", "onSuccess: -----------请求提现页面接口返回的json数据----------------" + result);
 
                 String temp = response.body();
                 String temp2 = StringUtils.getDecodeString(temp);
@@ -221,12 +221,12 @@ public class RechargeHuiFuActivity extends BaseActivity {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
 
-                        RechargeBean dataBean = gson.fromJson(bean.getData().toString(), RechargeBean.class);
+                        WithdrawHuiFuBean dataBean = gson.fromJson(bean.getData().toString(), WithdrawHuiFuBean.class);
 
                         url = dataBean.getSubmit_url();
                         JSONObject jo = null;
                         try {
-                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<RechargeBean>() {
+                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<WithdrawHuiFuBean>() {
                             }.getType()));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -248,18 +248,18 @@ public class RechargeHuiFuActivity extends BaseActivity {
                     } else if (code.equals("100")) {
                         try {
                             if (jsonobject != null) {
-                                ToastUtils.showToast(RechargeHuiFuActivity.this, jsonobject.getString("description"));
+                                ToastUtils.showToast(WithdrawHuiFuActivity.this, jsonobject.getString("description"));
                                 closeActivity();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else if (code.equals("")) {
-                        ToastUtils.showToast(RechargeHuiFuActivity.this, R.string.denglushibai);
+                        ToastUtils.showToast(WithdrawHuiFuActivity.this, R.string.denglushibai);
                     }
                     // TODO: 2017/8/8 做对应返回错误码的处理
                 } else {
-                    ToastUtils.showToast(RechargeHuiFuActivity.this, R.string.shujujiazaichucuo);
+                    ToastUtils.showToast(WithdrawHuiFuActivity.this, R.string.shujujiazaichucuo);
                 }
             }
         });
@@ -274,7 +274,7 @@ public class RechargeHuiFuActivity extends BaseActivity {
                 closeActivity();
             } else {
                 beforeTime = System.currentTimeMillis();
-                ToastUtils.showToast(RechargeHuiFuActivity.this, R.string.zaicidianjijinagtuichugaiyemian);
+                ToastUtils.showToast(WithdrawHuiFuActivity.this, R.string.zaicidianjijinagtuichugaiyemian);
             }
         }
     }

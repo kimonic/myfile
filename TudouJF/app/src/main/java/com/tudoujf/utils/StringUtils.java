@@ -122,6 +122,9 @@ public class StringUtils {
      * @return 字符串数字或0
      */
     public static int string2Integer(String intString) {
+        if (intString==null){
+            return 0;
+        }
         try {
             return Integer.parseInt(intString);
         } catch (NumberFormatException e) {
@@ -138,6 +141,9 @@ public class StringUtils {
      * @return 字符串数字或0
      */
     public static float string2Float(String floatString) {
+        if (floatString==null){
+            return 0;
+        }
         try {
             return Float.parseFloat(floatString);
         } catch (NumberFormatException e) {
@@ -203,6 +209,17 @@ public class StringUtils {
         float f = string2Float(fStr);
         DecimalFormat decimalFormat = new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
         decimalFormat.setRoundingMode(RoundingMode.DOWN);//舍去多余位
+        return decimalFormat.format(f);//format 返回的是字符串
+    }
+
+    /**
+     * 每三位用都好分隔
+     */
+    public static String getCommaDecimalsStr(String fStr) {
+        float f = string2Float(fStr);
+//        return String.format("%.2f",986.9951);
+        DecimalFormat decimalFormat = new DecimalFormat(",##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+//        decimalFormat.setRoundingMode(RoundingMode.DOWN);//舍去多余位
         return decimalFormat.format(f);//format 返回的是字符串
     }
 

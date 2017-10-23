@@ -315,7 +315,7 @@ public class InvestListFragment extends BaseFragment {
                             bean = (InvestListBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(getActivity(), "数据加载出错!");
+                            ToastUtils.showToast(getActivity(),R.string.shujujiazaichucuo);
                         }
 
                     }
@@ -400,7 +400,6 @@ public class InvestListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("TAG", "onResume: -----投资列表恢复");
         if (flag!=1){
             page = 1;
             initDataFromInternet();

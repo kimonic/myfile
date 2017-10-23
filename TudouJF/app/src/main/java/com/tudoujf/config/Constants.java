@@ -119,8 +119,19 @@ public class Constants {
      * 提现接口
      */
     public static final String WITHDRAW = URL + "/phone/bank/withdrawCash";
-    /**提现记录接口*/
-    public static final String WITHDRAW_RECORD=URL + "/phone/bank/withdrawLog";
+    /**
+     * 提现记录接口
+     */
+    public static final String WITHDRAW_RECORD = URL + "/phone/bank/withdrawLog";
+    /**
+     * 汇付提现接口
+     */
+    public static final String HUIFU_WITHDRAW = URL + "/phone/trust/withdraw";
+
+    /**
+     * 个人中心首页
+     */
+    public static final String PERSONAL_CENTER_MAIN = URL + "/phone/member/memberCenter";
 
 
     /**
@@ -287,11 +298,7 @@ public class Constants {
     public static final String NOTICELIST = URL
             + "/phone/articles/noticeList";
 
-    /**
-     * 个人中心首页
-     */
-    public static final String PERSONAL_CENTER_MAIN = URL
-            + "/phone/member/memberCenter";
+
     /**
      * 用户资金详情
      */
@@ -524,10 +531,7 @@ public class Constants {
     public static final String RECHARGE_FEE = URL
             + "/phone/recharge/rechargeFee";
 
-    /**
-     * 易宝提现
-     */
-    public static final String YIBAO_WITHDRAW = URL + "/phone/trust/withdraw";
+
     /**
      * 易宝绑定银行卡
      */
