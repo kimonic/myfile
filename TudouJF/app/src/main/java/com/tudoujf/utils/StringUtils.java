@@ -216,6 +216,9 @@ public class StringUtils {
      * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
+        if (fStr==null){
+            return "";
+        }
         if (fStr.contains(".")) {
             int temp = fStr.indexOf(".");
             String s = fStr.substring(0, temp);

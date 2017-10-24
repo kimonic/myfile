@@ -502,6 +502,7 @@
     <string name="qingxinashuruchongzhijine">请先输入充值金额,并且充值金额不能为0!</string>
     <string name="yuebuzu">账户余额不足!</string>
     <string name="huanyingni">欢迎你,</string>
+    <string name="zanwu">暂无</string>
 
 
 </resources>

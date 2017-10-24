@@ -133,16 +133,18 @@ public class MRedView extends View {
         int width = getWidth();//控件宽
         int height = getHeight();//控件高
 
-        if (!valid) {
-            bacPaint.setColor(Color.parseColor("#999999"));
-            redPackagePaint.setColor(Color.parseColor("#8F8F8F"));
-        }
+
 
 
         if (sel) {
             bacPaint.setColor(Color.parseColor("#EA5A5A"));
         } else {
             bacPaint.setColor(Color.parseColor("#F67070"));
+        }
+
+        if (!valid) {
+            bacPaint.setColor(Color.parseColor("#999999"));
+            redPackagePaint.setColor(Color.parseColor("#8F8F8F"));
         }
 
         //------------------------绘制背景----------------------------------------------------------

@@ -94,7 +94,7 @@ public class RechargeActivity extends BaseActivity {
         mtbActRecharge.setLayoutParams(params);
 
 
-        tvBalance.setText(balance);
+        tvBalance.setText(StringUtils.getCommaDecimalsStr(balance));
     }
 
     @Override

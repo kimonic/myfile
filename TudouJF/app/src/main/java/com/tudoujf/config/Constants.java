@@ -134,6 +134,8 @@ public class Constants {
     public static final String PERSONAL_CENTER_MAIN = URL + "/phone/member/memberCenter";
     /**资金详情接口*/
     public static final String FUND_DETAILS=URL+"/phone/account/memberAccount";
+    /**交易记录接口*/
+    public static final String TRADERECORD = URL+ "/phone/account/accountLog";
 
 
     /**
@@ -373,11 +375,6 @@ public class Constants {
      */
     public static final String MY_INVESTMENT_DETAIL = URL
             + "/phone/tender/tenderInfo";
-    /**
-     * 用户交易记录
-     */
-    public static final String TRADERECORD = URL
-            + "/phone/account/accountLog";
 
 
     /**

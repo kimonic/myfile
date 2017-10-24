@@ -14,30 +14,38 @@
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_transactiondetails_title"
         app:leftImage="@drawable/xvector_back" />
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_act_transactiondetails"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/global_background_color"
+        app:srlEnableLoadmoreWhenContentNotFull="true"
+        >
 
     <ListView
         android:id="@+id/lv_act_transactiondetails"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:dividerHeight="0dp"
         android:divider="@null"
         />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textSize="16sp"
-        android:textColor="@color/color_gray"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="@string/dianjijiazaigengduo"
-        android:background="@drawable/xshape_roundrect_mbordergraywhite"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:textSize="16sp"-->
+        <!--android:textColor="@color/color_gray"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:text="@string/dianjijiazaigengduo"-->
+        <!--android:background="@drawable/xshape_roundrect_mbordergraywhite"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--/>-->
 
 
 </LinearLayout>

@@ -157,7 +157,9 @@
         <!--48.提现activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawActivity" />
         <!--49.提现记录activity-->
-        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity" />
+        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity"
+            android:launchMode="singleTop"
+            />
         <!--50.设置activity-->
         <activity android:name=".activity.my.set.SetActivity" />
         <!--51.意见反馈activity-->

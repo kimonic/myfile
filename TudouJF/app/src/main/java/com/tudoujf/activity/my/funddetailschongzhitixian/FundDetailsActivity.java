@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -72,10 +72,25 @@ public class FundDetailsActivity extends BaseActivity {
                 openActivity(TransactionRecordActivity.class);
                 break;
             case R.id.tv_act_funddetails_withdraw:
-                openActivity(WithdrawActivity.class);
+                Intent intent = new Intent(this, WithdrawActivity.class);
+                if (bean != null) {
+                    intent.putExtra("amount", bean.getBalance_amount());
+                } else {
+                    intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                }
+                startActivity(intent);
+//                openActivity(WithdrawActivity.class);
                 break;
             case R.id.tv_act_funddetails_recharge:
-                openActivity(RechargeActivity.class);
+                Bundle bundle = new Bundle();
+                if (bean != null) {
+                    bundle.putString("balance", bean.getBalance_amount());
+                } else {
+                    bundle.putString("balance", getResources().getString(R.string.zanwu));
+                }
+                openActivity(RechargeActivity.class, bundle);
+
+//                openActivity(RechargeActivity.class);
                 break;
         }
 
@@ -144,7 +159,7 @@ public class FundDetailsActivity extends BaseActivity {
             fdvDetails.setInterest_wait_total(StringUtils.getCommaDecimalsStr(bean.getInterest_wait_total()));
             fdvDetails.setInterest_yes_total(StringUtils.getCommaDecimalsStr(bean.getInterest_yes_total()));
             fdvDetails.setPrincipal_wait_total(StringUtils.getCommaDecimalsStr(bean.getPrincipal_wait_total()));
-
+            fdvDetails.invalidate();
         }
 
     }

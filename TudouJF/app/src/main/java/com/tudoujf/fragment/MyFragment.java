@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -146,11 +147,22 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 Bundle bundle = new Bundle();
-                bundle.putString("balance", "暂无");
+                if (bean != null) {
+                    bundle.putString("balance", bean.getAmount_balance());
+                } else {
+                    bundle.putString("balance", getResources().getString(R.string.zanwu));
+                }
                 openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
-                openActivity(WithdrawActivity.class);
+                Intent intent = new Intent(getActivity(), WithdrawActivity.class);
+                if (bean != null) {
+                    intent.putExtra("amount", bean.getAmount_balance());
+                } else {
+                    intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                }
+                startActivity(intent);
+//                openActivity(WithdrawActivity.class);
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
                 openActivity(FundDetailsActivity.class);
@@ -245,8 +257,8 @@ public class MyFragment extends BaseFragment {
             public void onRefresh(RefreshLayout refreshlayout) {
 //                page = 1;
 //                initDataFromInternet();
+                initDataFromInternet();
 
-                srl.finishRefresh();
             }
         });
 
@@ -264,7 +276,6 @@ public class MyFragment extends BaseFragment {
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
 
 
-
         HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, getActivity().getLocalClassName(),
                 new StringCallback() {
                     @Override
@@ -272,6 +283,9 @@ public class MyFragment extends BaseFragment {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
+                        if (srl.isRefreshing()) {
+                            srl.finishRefresh();
+                        }
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<PersonalCenterBean>() {
                         }.getType(), PersonalCenterBean.class, getActivity());
@@ -286,25 +300,25 @@ public class MyFragment extends BaseFragment {
                 });
 
 
-
     }
 
     @Override
     public void LoadInternetDataToUi() {
-        if (bean!=null){
-            ImageGlideUtils.loadCircularImage(ivIcon,bean.getAvatar());
-            tvUsername.setText((getResources().getString(R.string.huanyingni)+bean.getMember_name()));
+        if (bean != null) {
+            ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar());
+            tvUsername.setText((getResources().getString(R.string.huanyingni) + bean.getMember_name()));
             tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getInterest_award()));
             tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
             tvMessage.setText(bean.getCount());
-
-
         }
 
     }
 
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        initDataFromInternet();
+    }
 }

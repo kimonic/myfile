@@ -123,7 +123,7 @@ public class WithdrawActivity extends BaseActivity {
             amount = "0";
         }
         //---------------------------临时数据-----------------------------------------------------------
-        amount = "1000";
+//        amount = "1000";
 
     }
 
@@ -204,8 +204,7 @@ public class WithdrawActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            tvAmount.setText(amount);
-
+            tvAmount.setText(StringUtils.getCommaDecimalsStr(amount));
         }
 
     }
