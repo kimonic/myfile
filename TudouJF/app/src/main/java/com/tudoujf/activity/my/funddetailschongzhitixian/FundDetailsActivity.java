@@ -1,15 +1,32 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.FundDetailsBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.FundDetailsView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -34,6 +51,11 @@ public class FundDetailsActivity extends BaseActivity {
     TextView tvRecharge;
     @BindView(R.id.mtb_act_funddetails)
     FrameLayout mtbActFundDetails;
+    @BindView(R.id.tv_act_funddetails_total)
+    TextView tvTotal;
+    @BindView(R.id.fdv_act_funddetails_details)
+    FundDetailsView fdvDetails;
+    private FundDetailsBean bean;
 
     @Override
     public int getLayoutResId() {
@@ -83,10 +105,47 @@ public class FundDetailsActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
 
+
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + UserConfig.getInstance().getLoginToken(this));
+
+        HttpMethods.getInstance().POST(this, Constants.FUND_DETAILS, map, getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----资金详情接口返回数据--------" + result);
+
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<FundDetailsBean>() {
+                        }.getType(), FundDetailsBean.class, FundDetailsActivity.this);
+                        if (bean1 != null) {
+                            bean = (FundDetailsBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(FundDetailsActivity.this, R.string.shujujiazaichucuo);
+                        }
+
+                    }
+                });
+
     }
 
     @Override
     public void LoadInternetDataToUi() {
+
+        if (bean != null) {
+            tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getTotal_amount()));
+            fdvDetails.setBalance_amount(StringUtils.getCommaDecimalsStr(bean.getBalance_amount()));
+            fdvDetails.setFreeze_amount(StringUtils.getCommaDecimalsStr(bean.getFreeze_amount()));
+            fdvDetails.setInterest_wait_total(StringUtils.getCommaDecimalsStr(bean.getInterest_wait_total()));
+            fdvDetails.setInterest_yes_total(StringUtils.getCommaDecimalsStr(bean.getInterest_yes_total()));
+            fdvDetails.setPrincipal_wait_total(StringUtils.getCommaDecimalsStr(bean.getPrincipal_wait_total()));
+
+        }
 
     }
 
@@ -99,4 +158,6 @@ public class FundDetailsActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
 }

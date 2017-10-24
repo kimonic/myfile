@@ -122,7 +122,7 @@ public class StringUtils {
      * @return 字符串数字或0
      */
     public static int string2Integer(String intString) {
-        if (intString==null){
+        if (intString == null) {
             return 0;
         }
         try {
@@ -141,7 +141,7 @@ public class StringUtils {
      * @return 字符串数字或0
      */
     public static float string2Float(String floatString) {
-        if (floatString==null){
+        if (floatString == null) {
             return 0;
         }
         try {
@@ -213,14 +213,44 @@ public class StringUtils {
     }
 
     /**
-     * 每三位用都好分隔
+     * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
-        float f = string2Float(fStr);
-//        return String.format("%.2f",986.9951);
-        DecimalFormat decimalFormat = new DecimalFormat(",##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-//        decimalFormat.setRoundingMode(RoundingMode.DOWN);//舍去多余位
-        return decimalFormat.format(f);//format 返回的是字符串
+        if (fStr.contains(".")) {
+            int temp = fStr.indexOf(".");
+            String s = fStr.substring(0, temp);
+            String se = fStr.substring(temp + 1);
+            switch (se.length()) {
+                case 0:
+                    fStr=fStr+"00";
+                    break;
+                case 1:
+                    fStr=fStr+"0";
+                    break;
+            }
+            return getCommaDecimalsStrAssist(s,fStr);
+
+        } else {
+            return getCommaDecimalsStrAssist(fStr,fStr + ".00");
+        }
+    }
+    /**getCommaDecimalsStr(String s)方法辅助*/
+    private static String getCommaDecimalsStrAssist(String s,String fStr){
+        if (s.length() > 3) {
+            StringBuilder builder = new StringBuilder(fStr);
+            int start = s.length() % 3;
+            if (start != 0) {
+                builder.insert(s.length() % 3, ",");
+            }
+            int i = 1;
+            while (s.length() - 3 * i >= 3) {
+                builder.insert(s.length() - 3 * i + start, ",");
+                i++;
+            }
+            return builder.toString();
+        } else {
+            return fStr;
+        }
     }
 
     /**

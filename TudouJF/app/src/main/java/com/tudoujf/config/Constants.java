@@ -132,6 +132,8 @@ public class Constants {
      * 个人中心首页
      */
     public static final String PERSONAL_CENTER_MAIN = URL + "/phone/member/memberCenter";
+    /**资金详情接口*/
+    public static final String FUND_DETAILS=URL+"/phone/account/memberAccount";
 
 
     /**

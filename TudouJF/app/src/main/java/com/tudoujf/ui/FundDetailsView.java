@@ -29,6 +29,12 @@ public class FundDetailsView extends View {
     private Paint redPaint,whitePaint,bluePaint,violetPaint,greenPaint,yellowPaint,blackPaint,
     grayPaint,orangePaint;
 
+    private  String  balance_amount="000,000,000.00",
+            freeze_amount="000,000,000.00",
+            interest_yes_total="000,000,000.00",
+            principal_wait_total="000,000,000.00",
+            interest_wait_total="000,000,000.00";
+
 
     public FundDetailsView(Context context) {
         this(context, null, 0);
@@ -49,6 +55,46 @@ public class FundDetailsView extends View {
         initView();
     }
 
+    public String getBalance_amount() {
+        return balance_amount;
+    }
+
+    public void setBalance_amount(String balance_amount) {
+        this.balance_amount = balance_amount;
+    }
+
+    public String getFreeze_amount() {
+        return freeze_amount;
+    }
+
+    public void setFreeze_amount(String freeze_amount) {
+        this.freeze_amount = freeze_amount;
+    }
+
+    public String getInterest_yes_total() {
+        return interest_yes_total;
+    }
+
+    public void setInterest_yes_total(String interest_yes_total) {
+        this.interest_yes_total = interest_yes_total;
+    }
+
+    public String getPrincipal_wait_total() {
+        return principal_wait_total;
+    }
+
+    public void setPrincipal_wait_total(String principal_wait_total) {
+        this.principal_wait_total = principal_wait_total;
+    }
+
+    public String getInterest_wait_total() {
+        return interest_wait_total;
+    }
+
+    public void setInterest_wait_total(String interest_wait_total) {
+        this.interest_wait_total = interest_wait_total;
+    }
+
     private void initView() {
         redPaint=initPaint("#F96937");
         whitePaint=initPaint("#EFECF2");
@@ -60,7 +106,7 @@ public class FundDetailsView extends View {
 
         blackPaint=initPaint("#464545");
         grayPaint=initPaint("#B8B8B5");
-        grayPaint.setStrokeWidth(3);
+        grayPaint.setStrokeWidth(2);
         orangePaint=initPaint("#F48029");
     }
 
@@ -70,7 +116,7 @@ public class FundDetailsView extends View {
 
 
         int  width=getWidth();
-        float  radius=width*0.02666f;
+        float  radius=width*0.03666f;
 
 
         //--------背景色----------------------------------------------------------------------------
@@ -93,7 +139,7 @@ public class FundDetailsView extends View {
 
 
         //--------圆内文字--------------------------------------------------------------------------
-        whitePaint.setTextSize(width*0.03333f);
+        whitePaint.setTextSize(width*0.03933f);
         canvas.drawText("可",width*0.0953f,width*0.1519f,whitePaint);
         canvas.drawText("冻",width*0.0953f,width*0.2852f,whitePaint);
         canvas.drawText("已",width*0.0953f,width*0.4185f,whitePaint);
@@ -104,20 +150,27 @@ public class FundDetailsView extends View {
 
         //----------------文本----------------------------------------------------------------------
 
-        blackPaint.setTextSize(width*0.03333f);
-        orangePaint.setTextSize(width*0.03333f);
+        blackPaint.setTextSize(width*0.03933f);
+        orangePaint.setTextSize(width*0.05033f);
+//        orangePaint.setTextSize(width*0.03333f);
 
-        canvas.drawText("可用余额",width*0.2f,width*0.1519f,blackPaint);
-        canvas.drawText("冻结金额",width*0.2f,width*0.2852f,blackPaint);
-        canvas.drawText("已收利息",width*0.2f,width*0.4185f,blackPaint);
-        canvas.drawText("待收本金",width*0.2f,width*0.5518f,blackPaint);
-        canvas.drawText("待收利息",width*0.2f,width*0.6851f,blackPaint);
+        canvas.drawText("可用余额",width*0.25f,width*0.1519f,blackPaint);
+        canvas.drawText("冻结金额",width*0.25f,width*0.2852f,blackPaint);
+        canvas.drawText("已收利息",width*0.25f,width*0.4185f,blackPaint);
+        canvas.drawText("待收本金",width*0.25f,width*0.5518f,blackPaint);
+        canvas.drawText("待收利息",width*0.25f,width*0.6851f,blackPaint);
 
-        canvas.drawText("000,000,000.00",width*0.4f,width*0.1519f,orangePaint);
-        canvas.drawText("000,000,000.00",width*0.4f,width*0.2852f,orangePaint);
-        canvas.drawText("000,000,000.00",width*0.4f,width*0.4185f,orangePaint);
-        canvas.drawText("000,000,000.00",width*0.4f,width*0.5518f,orangePaint);
-        canvas.drawText("000,000,000.00",width*0.4f,width*0.6851f,orangePaint);
+//        canvas.drawText(balance_amount,width*0.4f,width*0.1519f,orangePaint);
+//        canvas.drawText(freeze_amount,width*0.4f,width*0.2852f,orangePaint);
+//        canvas.drawText(interest_yes_total,width*0.4f,width*0.4185f,orangePaint);
+//        canvas.drawText(principal_wait_total,width*0.4f,width*0.5518f,orangePaint);
+//        canvas.drawText(interest_wait_total,width*0.4f,width*0.6851f,orangePaint);
+
+        canvas.drawText(balance_amount,width*0.6333f-orangePaint.measureText(balance_amount)/2,width*0.1519f,orangePaint);
+        canvas.drawText(freeze_amount,width*0.6333f-orangePaint.measureText(freeze_amount)/2,width*0.2852f,orangePaint);
+        canvas.drawText(interest_yes_total,width*0.6333f-orangePaint.measureText(interest_yes_total)/2,width*0.4185f,orangePaint);
+        canvas.drawText(principal_wait_total,width*0.6333f-orangePaint.measureText(principal_wait_total)/2,width*0.5518f,orangePaint);
+        canvas.drawText(interest_wait_total,width*0.6333f-orangePaint.measureText(interest_wait_total)/2,width*0.6851f,orangePaint);
 
 
         canvas.drawText("元",width*0.8666f,width*0.1519f,blackPaint);
