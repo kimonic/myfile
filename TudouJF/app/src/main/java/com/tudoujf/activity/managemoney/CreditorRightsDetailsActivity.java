@@ -97,7 +97,9 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_creditorsrightsdetails_buynow:
-                if (request) {
+                if (bean != null && "1".equals(bean.getTransferMap().getIs_self())) {
+                    ToastUtils.showToast(CreditorRightsDetailsActivity.this, R.string.zijibunenggoumaizijidebiaodi);
+                } else if (request) {
                     checkLogin();
                 } else {
                     enterBuy();

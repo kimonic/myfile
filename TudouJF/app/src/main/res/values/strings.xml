@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TudouJF</string>
+    <string name="app_name">土豆金服</string>
     <string name="homepage">首页</string>
     <string name="licai">理财</string>
     <string name="faxian">发现</string>
@@ -503,6 +503,16 @@
     <string name="yuebuzu">账户余额不足!</string>
     <string name="huanyingni">欢迎你,</string>
     <string name="zanwu">暂无</string>
+    <string name="jijiangkaiqishoushimima">即将开启手势密码!</string>
+    <string name="kaiqishoushimima">开启手势密码</string>
+    <string name="jijiangguanbishoushimima">即将关闭手势密码!</string>
+    <string name="guanbishoushimima">关闭手势密码</string>
+    <string name="qinghuizhishoushimima">请绘制您的手势密码</string>
+    <string name="quxiaoshoushimimachenggong">取消手势密码成功!</string>
+    <string name="quxiaoshoushimimashibai">取消手势密码失败!</string>
+    <string name="qinghuizhinindangqiandeshoushimima">请绘制您当前的手势密码</string>
+    <string name="qingshurunindeshoushimima">请输入您的手势密码</string>
+    <string name="zijibunenggoumaizijidebiaodi">自己不能购买自己的标的</string>
 
 
 </resources>

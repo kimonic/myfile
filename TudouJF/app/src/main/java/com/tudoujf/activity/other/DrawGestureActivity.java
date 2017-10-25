@@ -1,5 +1,7 @@
 package com.tudoujf.activity.other;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +11,7 @@ import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.EncryptionLockUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -40,10 +43,19 @@ public class DrawGestureActivity extends BaseActivity {
     MLockView mlvActDrawgesture;
     @BindView(R.id.tv_act_drawgesture_pass)
     TextView tvPass;
-    /**需要绘制的次数*/
+    /**
+     * 需要绘制的次数
+     */
     private int inputCount = 2;
-    /**手势密码加密后的字符串*/
+    /**
+     * 手势密码加密后的字符串
+     */
     private String password;
+    /**
+     * 从我的账户进入的绘制手势密码的标识
+     */
+    private String type;
+    private String userName;
 
     @Override
     public int getLayoutResId() {
@@ -62,12 +74,21 @@ public class DrawGestureActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            type = bundle.getString("type");
+            userName = bundle.getString("name");
+        }
 
     }
 
     @Override
     public void initView() {
         ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
+        if ("open".equals(type)) {
+            tvPass.setVisibility(View.GONE);
+        }
+        tvWelcome.setText((getResources().getString(R.string.huanyingni) + userName));
     }
 
     @Override
@@ -86,23 +107,35 @@ public class DrawGestureActivity extends BaseActivity {
                 } else {
                     if (inputCount == 2) {
                         password = EncryptionLockUtils.convertList(positionSet);
-                    } else if (password!=null&&!password.equals( EncryptionLockUtils.convertList(positionSet))) {
-                        password=null;
-                        inputCount = inputCount+1;
+                    } else if (password != null && !password.equals(EncryptionLockUtils.convertList(positionSet))) {
+                        password = null;
+                        inputCount = inputCount + 1;
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_error);
                     }
                     inputCount--;
                     if (inputCount == 0) {
                         tvPass.setClickable(false);
                         ToastUtils.showToast(DrawGestureActivity.this, R.string.act_drawgesture_sucess);
+
                         savePassword(positionSet);//保存手势密码
+                        UserConfig.getInstance().setLockPass(true);//已开启手势密码
+
+
                         mlvActDrawgesture.setOpenOrCloseDraw(false);
-                        Handler handler=new Handler();
+                        Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {//延迟2秒跳转至首页
                             @Override
                             public void run() {
-                                openActivity(HomeActivity.class);
-                                closeActivity();
+                                if ("open".equals(type)) {
+                                    Intent intent = new Intent();
+                                    intent.putExtra("result", true);
+                                    setResult(111, intent);
+                                    closeActivity();
+                                } else {
+                                    openActivity(HomeActivity.class);
+                                    closeActivity();
+                                }
+
                             }
                         }, 2000);
                     } else {
@@ -122,8 +155,9 @@ public class DrawGestureActivity extends BaseActivity {
     }
 
     private void savePassword(List<Integer> list) {
-        String temp=EncryptionLockUtils.convertEncryption(this,list);
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("ciphertext",temp);
+        String temp = EncryptionLockUtils.convertEncryption(this, list);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("ciphertext", temp);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("lockPass", true);
     }
 
     @Override
@@ -136,6 +170,15 @@ public class DrawGestureActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if ("open".equals(type)) {
+            Intent intent = new Intent();
+            intent.putExtra("result", false);
+            setResult(111, intent);
+            closeActivity();
+        }
 
+    }
 }
 

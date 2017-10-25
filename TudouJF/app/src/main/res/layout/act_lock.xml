@@ -22,6 +22,18 @@
 
         />
 
+    <TextView
+        android:id="@+id/tv_act_lock_hint"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:text="@string/qinghuizhishoushimima"
+        android:textColor="@color/act_lock_textcolor1"
+
+        />
+
+
     <com.tudoujf.ui.MLockView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +42,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/ll_act_lock_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"

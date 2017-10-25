@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -106,7 +105,6 @@ public class MyFragment extends BaseFragment {
     TextView tvExperience;
     @BindView(R.id.ll_frag_my_realname)
     LinearLayout llRealname;
-    Unbinder unbinder1;
 
     private List<MyFragBean> list;
 
@@ -168,7 +166,9 @@ public class MyFragment extends BaseFragment {
                 openActivity(FundDetailsActivity.class);
                 break;
             case R.id.ll_frag_my_myaccount://我的账户
-                openActivity(MyAccountActivity.class);
+                Bundle bundle1=new Bundle();
+                bundle1.putString("name",bean.getMember_name());
+                openActivity(MyAccountActivity.class,bundle1);
 
                 break;
             case R.id.tv_frag_my_realname://跳转实名认证页面
@@ -268,38 +268,34 @@ public class MyFragment extends BaseFragment {
     @Override
     public void initDataFromInternet() {
         Log.e("TAG", "initDataFromInternet: -----个人中心");
+        String loginToken = UserConfig.getInstance().getLoginToken(getActivity());
+        if (!"".equals(loginToken)) {
+            showPDialog();
+            TreeMap<String, String> map = new TreeMap<>();
+            map.put("login_token", loginToken);
+            HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, getActivity().getLocalClassName(),
+                    new StringCallback() {
+                        @Override
+                        public void onSuccess(Response<String> response) {
+                            dismissPDialog();
+                            String result = StringUtils.getDecodeString(response.body());
+                            Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
+                            if (srl.isRefreshing()) {
+                                srl.finishRefresh();
+                            }
 
+                            BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<PersonalCenterBean>() {
+                            }.getType(), PersonalCenterBean.class, getActivity());
+                            if (bean1 != null) {
+                                bean = (PersonalCenterBean) bean1;
+                                LoadInternetDataToUi();
+                            } else {
+                                ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                            }
 
-        showPDialog();
-
-        TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-
-
-        HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, getActivity().getLocalClassName(),
-                new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        dismissPDialog();
-                        String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
-                        if (srl.isRefreshing()) {
-                            srl.finishRefresh();
                         }
-
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<PersonalCenterBean>() {
-                        }.getType(), PersonalCenterBean.class, getActivity());
-                        if (bean1 != null) {
-                            bean = (PersonalCenterBean) bean1;
-                            LoadInternetDataToUi();
-                        } else {
-                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
-                        }
-
-                    }
-                });
-
-
+                    });
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -34,12 +36,15 @@ import com.lzy.imagepicker.util.BitmapUtil;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.activity.other.DrawGestureActivity;
+import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.BitmapUtils;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -92,6 +97,12 @@ public class MyAccountActivity extends BaseActivity {
     private int count = 0;
     private AlertDialog dialog;
     private View view;
+    /**
+     * 是否已开启手势密码
+     */
+    private boolean isOpen;
+    private AlertDialog.Builder dialogOpen, dialogClose;
+    private  String  userName;
 
 
     private int requestCount = 0;
@@ -130,12 +141,18 @@ public class MyAccountActivity extends BaseActivity {
                 openActivity(ChangePasswordActivity.class);
                 break;
             case R.id.ll_act_myaccount_gesture://手势密码
-                if (count % 2 == 1) {
-                    tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
+                if (isOpen) {
+                    showCloseDialog();
                 } else {
-                    tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
+                    showOpenDialog();
                 }
-                count++;
+
+//                if (count % 2 == 1) {
+//                    tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
+//                } else {
+//                    tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
+//                }
+//                count++;
                 break;
             case R.id.tv_act_myaccount_signout://退出登陆
                 SharedPreferencesUtils.getInstance(MyAccountActivity.this, Constants.USER_CONFIG)
@@ -187,6 +204,10 @@ public class MyAccountActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        Bundle bundle=getIntent().getExtras();
+        if (bundle!=null){
+            userName=bundle.getString("name");
+        }
 
     }
 
@@ -202,6 +223,16 @@ public class MyAccountActivity extends BaseActivity {
         view = LayoutInflater.from(this).inflate(R.layout.dialog_act_myaccount, null);
         tvPhotograph = (TextView) view.findViewById(R.id.act_myaccount_paishe);
         tvAlbum = (TextView) view.findViewById(R.id.act_myaccount_xiangcexuanqu);
+
+        //---------------------------------------------手势密码相关---------------------------------
+        if (UserConfig.getInstance().getLockPass(this)) {//已开启
+            isOpen = true;
+            tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
+        } else {
+            isOpen = false;
+            tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
+        }
+        //---------------------------------------------手势密码相关---------------------------------
 
 
     }
@@ -269,6 +300,15 @@ public class MyAccountActivity extends BaseActivity {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+        } else if (requestCode == 111) {//开启手势密码是否成功
+            if (data != null && data.getBooleanExtra("result", false)) {
+                tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
+                isOpen=true;
+            }
+
+        } else if (requestCode == 222 && data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
+            tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
+            isOpen=false;
         }
 
 
@@ -304,6 +344,40 @@ public class MyAccountActivity extends BaseActivity {
         }
 
         return dialog;
+    }
+
+    private void showOpenDialog() {
+        if (dialogOpen == null) {
+            dialogOpen = DialogUtils.showDialogS(this, R.string.jijiangkaiqishoushimima, R.string.queding, R.string.kaiqishoushimima, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("name",userName);
+                    bundle.putString("type","open");
+                    openActivityForResult(DrawGestureActivity.class, bundle, 111);//打开绘制手势密码界面
+                }
+            });
+
+        } else {
+            dialogOpen.show();
+        }
+
+    }
+
+    private void showCloseDialog() {
+        if (dialogClose == null) {
+            dialogClose = DialogUtils.showDialogS(this, R.string.jijiangguanbishoushimima, R.string.queding, R.string.guanbishoushimima, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("name",userName);
+                    bundle.putString("type","close");
+                    openActivityForResult(LockActivity.class, bundle, 222);//打开手势密码界面
+                }
+            });
+        } else {
+            dialogClose.show();
+        }
     }
 
 

@@ -478,6 +478,8 @@ public class HomeFragment extends BaseFragment {
                 dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
+                Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据-------response.body()---------" + response.body());
+                Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据Constants.HOME_DETAILS_ID----------------" + Constants.HOME);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
                         }.getType(),
                         HomeBean.class, getActivity());

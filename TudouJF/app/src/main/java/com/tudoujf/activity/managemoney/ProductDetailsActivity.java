@@ -160,7 +160,9 @@ public class ProductDetailsActivity extends BaseActivity {
                 setUTVStyle(2);
                 break;
             case R.id.tv_act_productdetails_buynow://立即购买按钮
-                if (request) {
+                if (bean != null && "1".equals(bean.getMember().getSelf_loan())) {
+                    ToastUtils.showToast(ProductDetailsActivity.this, R.string.zijibunenggoumaizijidebiaodi);
+                } else if (request) {
                     checkLogin();
                 } else {
                     enterBuy();
@@ -280,7 +282,6 @@ public class ProductDetailsActivity extends BaseActivity {
                 tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
                 tvBuyNow.setText(hint);
             }
-
 
 
             mtbProductdetails.setCenterTitle(bean.getLoan_info().getName());
@@ -426,8 +427,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 bundle.putString("is_beginner", bean.getLoan_info().getAdditional_status());
                 bundle.putString("time_limit", bean.getLoan_info().getPeriod());
                 bundle.putString("has_password", bean.getLoan_info().isPassword_status());
-                Log.e("TAG", "enterBuy: --bean.get???Loan_info().getAdditional_status()---"+bean.getLoan_info().getAdditional_status());
-
+                Log.e("TAG", "enterBuy: --bean.get???Loan_info().getAdditional_status()---" + bean.getLoan_info().getAdditional_status());
 
 
                 openActivity(AffirmBuyActivity.class, bundle);

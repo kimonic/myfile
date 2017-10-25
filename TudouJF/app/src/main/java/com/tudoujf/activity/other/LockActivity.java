@@ -1,19 +1,23 @@
 package com.tudoujf.activity.other;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
@@ -41,9 +45,16 @@ public class LockActivity extends BaseActivity {
     TextView tvForget;
     @BindView(R.id.tv_act_lock_other)
     TextView tvOther;
+     @BindView(R.id.tv_act_lock_hint)
+    TextView tvHint;
+    @BindView(R.id.ll_act_lock_btn)
+    LinearLayout llBtn;
 
     private Handler handler;
     private String password;
+
+    private String userName;
+    private String type;
 
     @Override
     public int getLayoutResId() {
@@ -67,17 +78,31 @@ public class LockActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         handler = new Handler();
-        password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("ciphertext","");
+        password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("ciphertext", "");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userName = bundle.getString("name");
+            type = bundle.getString("type");
+        }
+
     }
 
     @Override
     public void initView() {
         ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         mlvActLock.setPassword(password);
-        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- "+password );
+        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
 //        TreeMap<String,String>  map=new TreeMap<>();
 //        map.put("login_token","12267");
 //        Log.e("TAG", "initView:------------加密字符串---------- " + StringUtils.getRequestParams(map));
+        if ("close".equals(type)){
+            llBtn.setVisibility(View.GONE);
+            tvHint.setText(R.string.qinghuizhinindangqiandeshoushimima);
+        }else {
+            tvHint.setText(R.string.qingshurunindeshoushimima);
+        }
+        tvWelcome.setText((getResources().getString(R.string.huanyingni) + userName));
+
     }
 
     @Override
@@ -98,7 +123,7 @@ public class LockActivity extends BaseActivity {
             @Override
             public void drawFinish(List<Integer> positionSet) {
                 for (int i = 0; i < positionSet.size(); i++) {
-                    Log.e("TAG", "drawFinish:-------positionSet------------ " +positionSet.get(i));
+                    Log.e("TAG", "drawFinish:-------positionSet------------ " + positionSet.get(i));
 
                 }
 
@@ -106,8 +131,21 @@ public class LockActivity extends BaseActivity {
 
             @Override
             public void sucess() {
-                openActivity(HomeActivity.class);//手势密码验证成功后打开的页面
+                if ("close".equals(type)){
+
+                    UserConfig.getInstance().setLockPass(false);
+                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put("lockPass", false);
+                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put("ciphertext", "");
+
+                    ToastUtils.showToast(LockActivity.this, R.string.quxiaoshoushimimachenggong);
+                    Intent intent=new Intent();
+                    intent.putExtra("result",true);
+                    setResult(222,intent);
+                }else {
+                    openActivity(HomeActivity.class);//手势密码验证成功后打开的页面
+                }
                 closeActivity();
+
             }
         });
     }
@@ -124,10 +162,19 @@ public class LockActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        //按下返回键回到主界面
-        Intent home = new Intent(Intent.ACTION_MAIN);
-        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        home.addCategory(Intent.CATEGORY_HOME);
-        startActivity(home);
+        if ("close".equals(type)){
+            ToastUtils.showToast(LockActivity.this, R.string.quxiaoshoushimimashibai);
+            Intent intent=new Intent();
+            intent.putExtra("result",false);
+            setResult(222,intent);
+        }else {
+            //按下返回键回到主界面
+            Intent home = new Intent(Intent.ACTION_MAIN);
+            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            home.addCategory(Intent.CATEGORY_HOME);
+            startActivity(home);
+        }
+        closeActivity();
+
     }
 }

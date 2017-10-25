@@ -12,13 +12,61 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
+
+    //-------------------------------------正式打包添加-------------------------------------------------
+    //签名配置
+    signingConfigs{
+
+//        debug{
+//            storeFile file("/Users/sail/.android/debug.keystore");
+//        }
+        release{
+            storeFile file("E:\\work\\resouse\\workkeystore\\tdjf.jks")
+            storePassword "hunxiao"
+            keyAlias "hunxiao"
+            keyPassword "hunxiao"
         }
     }
+
+    buildTypes {
+        debug {
+            //显示Log
+            buildConfigField("boolean", "LOG_DEBUG", "true")
+            versionNameSuffix "-debug"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            //混淆
+            minifyEnabled true
+//            //优化
+//            zipAlignEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            // signingConfig signingConfigs.release
+            //签名
+            proguardFiles 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    // 移除lint检查的error
+    lintOptions {
+        abortOnError false
+    }
+    //-------------------------------------正式打包添加-------------------------------------------------
+
+
+
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

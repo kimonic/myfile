@@ -29,8 +29,9 @@ public class UserConfig {
     private String userName;
     private String isLogin;
     private String loginToken;
+    private boolean lockPass;
 
-    private boolean  creditorFlush=false;
+    private boolean creditorFlush = false;
 
     public boolean isCreditorFlush() {
         return creditorFlush;
@@ -56,8 +57,8 @@ public class UserConfig {
         if (null == userKey) {
             try {
                 userKey = AESencrypt.decrypt2PHP(CreateCode.getSEND_AES_KEY(),
-                        SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
-                        .getString(Constants.SHARE_USERKEY, ""));
+                        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
+                                .getString(Constants.SHARE_USERKEY, ""));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -72,14 +73,14 @@ public class UserConfig {
     /**
      * isLogin
      *
-     * @return    "
+     * @return "
      */
     public synchronized String getLogin(Context context) {
         if (null == isLogin)//未登录时为null
         {
             try {//AES解密?????
                 isLogin = AESencrypt.decrypt2PHP(CreateCode.getSEND_AES_KEY(),
-                        SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
+                        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
                                 .getString(Constants.SHARE_ISLOGIN, ""));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -105,7 +106,7 @@ public class UserConfig {
         if (null == userId) {
             try {
                 userId = AESencrypt.decrypt2PHP(CreateCode.getSEND_AES_KEY(),
-                        SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
+                        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
                                 .getString(Constants.SHARE_USERID));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -128,13 +129,13 @@ public class UserConfig {
             try {
                 loginToken = AESencrypt.decrypt2PHP(
                         CreateCode.getSEND_AES_KEY(),
-                        SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
-                        .getString(Constants.SHARE_LOGINTOKEN, ""));
+                        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
+                                .getString(Constants.SHARE_LOGINTOKEN, ""));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        if (loginToken==null){//此处进行未登陆处理
+        if (loginToken == null) {//此处进行未登陆处理
             return "";
         }
         return loginToken;
@@ -148,14 +149,14 @@ public class UserConfig {
     /**
      * username
      *
-     * @return  username0
+     * @return username0
      */
     public synchronized String getUserName(Context context) {
         if (null == userName) {
             try {
                 userName = AESencrypt.decrypt2PHP(CreateCode.getSEND_AES_KEY(),
-                        SharedPreferencesUtils.getInstance(context,Constants.USER_CONFIG)
-                                .getString(Constants.SHARE_USERNAME,""));
+                        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
+                                .getString(Constants.SHARE_USERNAME, ""));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -163,19 +164,37 @@ public class UserConfig {
         return userName;
     }
 
-    /**设置用户名*/
+    /**
+     * 设置用户名
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
-     * @return   UserConfig
+     * @return UserConfig
      */
     public synchronized static UserConfig getInstance() {
         if (null == mUserConfig) {
             mUserConfig = new UserConfig();
         }
         return mUserConfig;
+    }
+
+    /**
+     * 获取手势密码是否存在
+     */
+    public boolean getLockPass(Context context) {
+
+        return SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).getBoolean("lockPass", false);
+
+    }
+
+    /**
+     * 设置手势密码是否存在
+     */
+    public void setLockPass(boolean lockPass) {
+        this.lockPass = lockPass;
     }
 
     /**

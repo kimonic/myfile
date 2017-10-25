@@ -89,7 +89,7 @@ public class TransactionRecordActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActTransactionDetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActTransactionDetails.setLayoutParams(params);
@@ -154,14 +154,11 @@ public class TransactionRecordActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
-
-
                         if (page > 1) {
                             srl.finishLoadmore();
                         } else {
                             srl.finishRefresh();
                         }
-
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----交易记录接口返回数据--------" + result);
 

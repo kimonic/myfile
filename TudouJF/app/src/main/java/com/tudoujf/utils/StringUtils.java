@@ -39,6 +39,9 @@ public class StringUtils {
      * 返回未解密的json对象
      */
     private static GlobalBean firstParseJson(String json) {
+
+        Log.e("TAG", "firstParseJson: 混淆差错-----" +json);
+
         return gson.fromJson(json, new TypeToken<GlobalBean>() {
         }.getType());
     }
@@ -50,6 +53,8 @@ public class StringUtils {
     public static String getDecodeString(String json) {
         String temp;
         GlobalBean bean = firstParseJson(json);
+        Log.e("TAG", "getDecodeString: ---混淆差错bean.getDiyou()--" + bean.getDiyou());
+
         //MD5验证
         if (MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
@@ -216,7 +221,7 @@ public class StringUtils {
      * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
-        if (fStr==null){
+        if (fStr == null) {
             return "";
         }
         if (fStr.contains(".")) {
@@ -225,20 +230,23 @@ public class StringUtils {
             String se = fStr.substring(temp + 1);
             switch (se.length()) {
                 case 0:
-                    fStr=fStr+"00";
+                    fStr = fStr + "00";
                     break;
                 case 1:
-                    fStr=fStr+"0";
+                    fStr = fStr + "0";
                     break;
             }
-            return getCommaDecimalsStrAssist(s,fStr);
+            return getCommaDecimalsStrAssist(s, fStr);
 
         } else {
-            return getCommaDecimalsStrAssist(fStr,fStr + ".00");
+            return getCommaDecimalsStrAssist(fStr, fStr + ".00");
         }
     }
-    /**getCommaDecimalsStr(String s)方法辅助*/
-    private static String getCommaDecimalsStrAssist(String s,String fStr){
+
+    /**
+     * getCommaDecimalsStr(String s)方法辅助
+     */
+    private static String getCommaDecimalsStrAssist(String s, String fStr) {
         if (s.length() > 3) {
             StringBuilder builder = new StringBuilder(fStr);
             int start = s.length() % 3;
