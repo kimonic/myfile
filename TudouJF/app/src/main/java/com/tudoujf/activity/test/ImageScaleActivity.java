@@ -64,9 +64,9 @@ public class ImageScaleActivity extends Activity {
             }
         });
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qm);
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.act_account_bankcard);
         try {
-        @SuppressWarnings("ResourceType")InputStream in = getResources().openRawResource(R.drawable.qm);
+        @SuppressWarnings("ResourceType")InputStream in = getResources().openRawResource(R.drawable.act_account_bankcard);
         //获得图片的宽、高
         BitmapFactory.Options tmpOptions = new BitmapFactory.Options();
         tmpOptions.inJustDecodeBounds = true;
@@ -93,6 +93,7 @@ public class ImageScaleActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.e("TAG", "onClick: ---hello--222");
+
 
 
                 if (count1 == 0) {

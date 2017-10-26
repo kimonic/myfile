@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.tudoujf"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,12 +21,12 @@ android {
 
     //-------------------------------------正式打包添加-------------------------------------------------
     //签名配置
-    signingConfigs{
+    signingConfigs {
 
 //        debug{
 //            storeFile file("/Users/sail/.android/debug.keystore");
 //        }
-        release{
+        release {
             storeFile file("E:\\work\\resouse\\workkeystore\\tdjf.jks")
             storePassword "hunxiao"
             keyAlias "hunxiao"
@@ -64,27 +64,39 @@ android {
     //-------------------------------------正式打包添加-------------------------------------------------
 
 
-
 }
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+
+//此处依赖可能有问题----------------------------------------------------------------
+    compile 'com.android.support:appcompat-v7:26.1.0'
+//    , {
+//        exclude group: 'com.android.support', module: 'support-v13'
+//    }
+    //此处依赖可能有问题----------------------------------------------------------------
+
+
     testCompile 'junit:junit:4.12'
     //butterknife依赖
     compile 'com.jakewharton:butterknife:8.6.0'
+
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     //Glide依赖--图片加载库
     //    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     ////    compile 'com.android.support:support-v4:25.3.1'
     //    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
     compile 'com.github.bumptech.glide:glide:3.8.0'
+
     //glide扩展
     compile 'jp.wasabeef:glide-transformations:2.0.2'
+
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
     //json数据解析库
     compile 'com.google.code.gson:gson:2.8.1'
@@ -105,5 +117,18 @@ dependencies {
     //如果使用了特殊的Header
     //    数据库操作库
     compile 'org.litepal.android:core:1.5.1'
-    compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    compile 'com.android.support:cardview-v7:26.1.0'
 }
+//此处依赖可能有问题----------------------------------------------------------------
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.1.0'
+            }
+        }
+    }
+}
+//此处依赖可能有问题----------------------------------------------------------------

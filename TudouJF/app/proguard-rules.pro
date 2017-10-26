@@ -1,3 +1,9 @@
+##########---------------------------------友情提示---------------------------------------##########
+
+#                         本文件非高手不要妄动,否则你会有各种各样的奇妙之旅                        #
+
+##########---------------------------------友情提示---------------------------------------##########
+
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
 # in C:\Users\Administrator\AppData\Local\Android\Sdk/tools/proguard/proguard-android.txt
@@ -180,13 +186,13 @@
 -dontwarn com.lzy.okgo.**
 -keep class com.lzy.okgo.**{*;}
 
-#okrx
--dontwarn com.lzy.okrx.**
--keep class com.lzy.okrx.**{*;}
-
-#okrx2
--dontwarn com.lzy.okrx2.**
--keep class com.lzy.okrx2.**{*;}
+##okrx
+#-dontwarn com.lzy.okrx.**
+#-keep class com.lzy.okrx.**{*;}
+#
+##okrx2
+#-dontwarn com.lzy.okrx2.**
+#-keep class com.lzy.okrx2.**{*;}
 
 #okserver
 -dontwarn com.lzy.okserver.**

@@ -40,7 +40,6 @@ public class StringUtils {
      */
     private static GlobalBean firstParseJson(String json) {
 
-        Log.e("TAG", "firstParseJson: 混淆差错-----" +json);
 
         return gson.fromJson(json, new TypeToken<GlobalBean>() {
         }.getType());
@@ -53,7 +52,6 @@ public class StringUtils {
     public static String getDecodeString(String json) {
         String temp;
         GlobalBean bean = firstParseJson(json);
-        Log.e("TAG", "getDecodeString: ---混淆差错bean.getDiyou()--" + bean.getDiyou());
 
         //MD5验证
         if (MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
