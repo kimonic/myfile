@@ -81,10 +81,10 @@ public class LockActivity extends BaseActivity {
         password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("ciphertext", "");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            userName = bundle.getString("name");
-            type = bundle.getString("type");
+//            userName = bundle.getString("name");//用户名
+            type = bundle.getString("type");//关闭锁屏密码
         }
-
+        userName= SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("userName", "");
     }
 
     @Override

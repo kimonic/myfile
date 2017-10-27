@@ -164,7 +164,9 @@ public class HomeActivity extends BaseActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
-            DialogUtils.showHuiFuDialog(this);
+            if (!"".equals(UserConfig.getInstance().getLoginToken(this))){
+                DialogUtils.showHuiFuDialog(this);
+            }
         }
     }
 

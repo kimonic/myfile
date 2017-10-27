@@ -192,7 +192,8 @@ public class LoginActivity extends BaseActivity {
                         LoginBean.class, LoginActivity.this);
                 if (bean1 != null) {
                     bean = (LoginBean) bean1;
-                    //加密存储logintoken到本地
+                    //加密存储logintoken,username到本地
+                    SharedPreferencesUtils.getInstance(LoginActivity.this, Constants.USER_CONFIG).put("userName", bean.getMember().getName());
                     SharedPreferencesUtils.getInstance(LoginActivity.this, Constants.USER_CONFIG)
                             .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
                                     CreateCode.getSEND_AES_KEY(), bean.getLogin_token()));

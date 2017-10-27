@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 
 
 /**
@@ -278,6 +280,9 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 // TODO: 2017/8/1 开通资金托管逻辑
+                Intent intent=new Intent(context, RealNameAuthenticationHuiFuActivity.class);
+                context.startActivity(intent);
+
             }
         });
 

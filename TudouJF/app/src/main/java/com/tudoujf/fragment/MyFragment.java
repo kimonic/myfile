@@ -307,7 +307,12 @@ public class MyFragment extends BaseFragment {
             tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
-            tvMessage.setText(bean.getCount());
+            int  count=StringUtils.string2Integer(bean.getCount());
+            if (count<100){
+                tvMessage.setText(bean.getCount());
+            }else {
+                tvMessage.setText(getResources().getString(R.string.ninenine));
+            }
         }
 
     }

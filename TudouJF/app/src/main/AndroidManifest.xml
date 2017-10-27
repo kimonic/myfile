@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tudoujf">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -13,8 +14,10 @@
 
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera"
+        tools:ignore="UnsupportedChromeOsHardware" />
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        tools:ignore="UnsupportedChromeOsHardware" />
 
 
 
@@ -42,10 +45,10 @@
         <!-- 1.欢迎页activity -->
         <activity android:name=".activity.other.WelcomeActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <!-- 2.初次引导页activity -->
         <activity android:name=".activity.other.GuideActivity" />
@@ -91,14 +94,14 @@
 
         <!-- 21.预览各个activity的界面 -->
         <activity android:name=".activity.other.PreviewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-                <!-- 监听拦截home键 -->
-                <!-- <category android:name="android.intent.category.HOME" /> -->
-                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--&lt;!&ndash; 监听拦截home键 &ndash;&gt;-->
+                <!--&lt;!&ndash; <category android:name="android.intent.category.HOME" /> &ndash;&gt;-->
+                <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
+            <!--</intent-filter>-->
         </activity>
         <!-- 22.忘记密码activity -->
         <activity android:name=".activity.other.FindPasswordActivity" />

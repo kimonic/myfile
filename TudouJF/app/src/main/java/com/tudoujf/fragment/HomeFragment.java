@@ -1,7 +1,6 @@
 package com.tudoujf.fragment;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -20,6 +19,10 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
@@ -52,7 +55,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -69,6 +71,8 @@ import butterknife.Unbinder;
 public class HomeFragment extends BaseFragment {
     @BindView(R.id.tv_frag_home)
     TextView tvFragHome;
+    @BindView(R.id.srl_frag_home)
+    SmartRefreshLayout srl;
     @BindView(R.id.vp_frag_home)
     ViewPager vpFragHome;
     @BindView(R.id.dv_frag_home)
@@ -99,7 +103,6 @@ public class HomeFragment extends BaseFragment {
     TextView tvBidTitle;
     @BindView(R.id.aiv_frag_home)
     AwardInfoView aivFragHome;
-    Unbinder unbinder;
     @BindView(R.id.tv_frag_home_touzijine)
     TextView tvTouZiJinE;
     @BindView(R.id.tv_frag_home_touziqixian)
@@ -230,7 +233,8 @@ public class HomeFragment extends BaseFragment {
      * 请求对应标的id
      */
     private void requestLoanId() {
-        dialog.show();
+//        dialog.show();
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", "");
         map.put("time_limit", loanBeanList.get(ballviewPosition).getPeriod());
@@ -240,7 +244,8 @@ public class HomeFragment extends BaseFragment {
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据----------------" + result);
@@ -267,7 +272,11 @@ public class HomeFragment extends BaseFragment {
             int msgCount = data.getIntExtra("msgcount", 0);
             if (msgCount != 0) {
                 Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
-                tvMsgCount.setText(("" + msgCount));
+                if (msgCount<100){
+                    tvMsgCount.setText(("" + msgCount));
+                }else {
+                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
+                }
             }
 
         }
@@ -301,7 +310,16 @@ public class HomeFragment extends BaseFragment {
 //        Intent intent = new Intent(getActivity(), SignInService.class);
 //        getActivity().startService(intent);
 
-        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+//        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+
+
+        //设置全区背景色
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+        //设置 Header 为 Material风格
+//        swipeRefreshLayout.setEnableRefresh(true);
+        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        //设置 Footer 为 球脉冲
+        srl.setEnableLoadmore(false);
 
     }
 
@@ -380,6 +398,7 @@ public class HomeFragment extends BaseFragment {
         vpBall.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                srl.setEnableRefresh(false);
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -394,6 +413,7 @@ public class HomeFragment extends BaseFragment {
                             }
                             flag = false;
                         }
+                        srl.setEnableRefresh(true);
                         break;
                     case MotionEvent.ACTION_MOVE:
                         if (Math.abs(event.getY() - currentY) > 36) {
@@ -403,6 +423,7 @@ public class HomeFragment extends BaseFragment {
                 }
                 return false;
             }
+
         });
 
         vpBall.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -413,7 +434,17 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                initDataFromInternet();
+
+            }
+        });
+
     }
+
+
 
     private void showInfo(final TextView tv) {
         tv.setText(R.string.licaiyoufengxian);
@@ -427,7 +458,8 @@ public class HomeFragment extends BaseFragment {
         tv.setAnimation(animation);
 
 
-        animation.setAnimationListener(new Animation.AnimationListener() {
+        animation.setAnimationListener(new Animation.AnimationListener()
+        {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -467,6 +499,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
 
         //首页的logintoken为null时,会出现系统错误
@@ -475,7 +508,13 @@ public class HomeFragment extends BaseFragment {
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
+
+                if (srl.isRefreshing()) {
+                    srl.finishRefresh();
+                }
+
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
@@ -489,7 +528,8 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onError(Response<String> response) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
                 Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------" + response.message());
                 super.onError(response);
             }
@@ -547,7 +587,12 @@ public class HomeFragment extends BaseFragment {
                 tvMsgCount.setText("");
             } else {
                 ivMsgCount.setImageResource(R.drawable.frag_home_info);
-                tvMsgCount.setText(bean.getMessage_count());
+                int  count=StringUtils.string2Integer(bean.getMessage_count());
+                if (count<100){
+                    tvMsgCount.setText(bean.getMessage_count());
+                }else {
+                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
+                }
             }
 
         }
