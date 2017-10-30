@@ -5,10 +5,13 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-    <com.tudoujf.ui.mytest.MyPaletteView
+    <!--<com.tudoujf.ui.mytest.MyPaletteView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+    <com.tudoujf.ui.mytest.GameView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
 
     <!--<com.tudoujf.ui.FundDetailsView-->

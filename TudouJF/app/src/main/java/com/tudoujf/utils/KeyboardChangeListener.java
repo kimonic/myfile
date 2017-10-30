@@ -1,7 +1,7 @@
 package com.tudoujf.utils;
+
 import android.app.Activity;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -31,7 +31,7 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
 
     public KeyboardChangeListener(Activity contextObj) {
         if (contextObj == null) {
-            Log.i(TAG, "contextObj is null");
+//            Log.i(TAG, "contextObj is null");
             return;
         }
         mContentView = findContentView(contextObj);
@@ -51,9 +51,9 @@ public class KeyboardChangeListener implements ViewTreeObserver.OnGlobalLayoutLi
     @Override
     public void onGlobalLayout() {
         int currHeight = mContentView.getHeight();
-        Log.e(TAG, "onGlobalLayout:---------- "+currHeight );
+//        Log.e(TAG, "onGlobalLayout:---------- "+currHeight );
         if (currHeight == 0) {
-            Log.i(TAG, "currHeight is 0");
+//            Log.i(TAG, "currHeight is 0");
             return;
         }
         boolean hasChange = false;

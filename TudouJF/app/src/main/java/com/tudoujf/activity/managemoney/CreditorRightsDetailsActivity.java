@@ -192,7 +192,16 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                     ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                 }
             }
-        });
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(CreditorRightsDetailsActivity.this, R.string.huoquzhaiquanxiangqignshujushibai);
+
+                    }
+                }
+        );
 
 
     }
@@ -281,6 +290,13 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                 } else {
                     ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                 }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(CreditorRightsDetailsActivity.this, R.string.yanzhengshimingxinxishibai);
             }
         });
 

@@ -275,7 +275,9 @@ public class AffirmBuyActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (bean != null && StringUtils.string2Float(editable.toString()) >= 10) {
-                    String temp = decimalFormat.format(StringUtils.string2Float(bean.getApr()) / 100 * StringUtils.string2Float(editable.toString()) / 12);
+                    //计算预期收益
+                    String temp = decimalFormat.format((StringUtils.string2Float(bean.getApr()) /
+                            100 * StringUtils.string2Float(editable.toString()) / 12)*StringUtils.string2Float(bean.getPeriod()));
                     tvEarings.setText(temp);
                     tvLiXi.setText(temp);
                     redId = "";
@@ -338,6 +340,13 @@ public class AffirmBuyActivity extends BaseActivity {
                         }
                     }
 
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(AffirmBuyActivity.this, R.string.huoquchanpinxinxishibai);
+
+                    }
                 });
 
     }

@@ -514,6 +514,13 @@
     <string name="qingshurunindeshoushimima">请输入您的手势密码</string>
     <string name="zijibunenggoumaizijidebiaodi">自己不能购买自己的标的</string>
     <string name="ninenine">99</string>
+    <string name="yanzhengshimingxinxishibai">验证实名信息失败!!</string>
+    <string name="huoquchanpinxiangqingshibai">获取产品详情失败!!</string>
+    <string name="huoqugerenzhongxinshujushibai">获取个人中心数据失败</string>
+    <string name="huoqushouyeshujushibai">获取首页数据失败!!</string>
+    <string name="huoquzhaiquanxiangqignshujushibai">获取债权详情数据失败!!</string>
+    <string name="jiekoufanhuicuowumiaoshu">接口返回错误描述:</string>
+    <string name="huoquchanpinxinxishibai">获取产品信息失败!!</string>
 
 
 </resources>

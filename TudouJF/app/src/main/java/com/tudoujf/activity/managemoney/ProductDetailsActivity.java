@@ -167,8 +167,6 @@ public class ProductDetailsActivity extends BaseActivity {
                 } else {
                     enterBuy();
                 }
-
-
                 break;
         }
     }
@@ -268,6 +266,13 @@ public class ProductDetailsActivity extends BaseActivity {
                             ToastUtils.showToast(ProductDetailsActivity.this, R.string.shujujiazaichucuo);
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(ProductDetailsActivity.this, R.string.huoquchanpinxiangqingshibai);
                     }
                 });
 
@@ -417,7 +422,6 @@ public class ProductDetailsActivity extends BaseActivity {
      * 进入购买页面
      */
     private void enterBuy() {
-        Log.e("TAG", "enterBuy: -----进入购买!");
 
         request = false;
         if (bean != null) {
@@ -456,6 +460,7 @@ public class ProductDetailsActivity extends BaseActivity {
     }
 
     private void checkIdentity() {
+
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", loginToken);
@@ -482,6 +487,13 @@ public class ProductDetailsActivity extends BaseActivity {
                 } else {
                     ToastUtils.showToast(ProductDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                 }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(ProductDetailsActivity.this, R.string.yanzhengshimingxinxishibai);
             }
         });
 

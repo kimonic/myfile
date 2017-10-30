@@ -1,11 +1,9 @@
 package com.tudoujf.fragment;
 
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -20,16 +18,13 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.CreditorListFragLvAdapter;
-import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.CreditorListBean;
-import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -38,7 +33,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * * ====================================================================
@@ -83,15 +77,11 @@ public class CreditorListFragment extends BaseFragment {
 
     private int type = 1;
 
-    private int count1 = 0, count2 = 0,count3=0;
+    private int count1 = 0, count2 = 0, count3 = 0;
 
     private CreditorListBean bean;
     private String requestUrl;
 
-    /**
-     * 加载dialog
-     */
-    private AlertDialog dialog;
 
     /**
      * 加载的页码
@@ -116,10 +106,14 @@ public class CreditorListFragment extends BaseFragment {
      */
     private List<View> list;
 
-    /**按钮文本显示list*/
+    /**
+     * 按钮文本显示list
+     */
     private List<TextView> listTV;
-    /**按钮指示排序list*/
-    private List<TextView>  listIndicator;
+    /**
+     * 按钮指示排序list
+     */
+    private List<TextView> listIndicator;
 
 
     @Override
@@ -194,7 +188,7 @@ public class CreditorListFragment extends BaseFragment {
 
     private void setBacStyle(int position, String mOrderType) {
 
-        dialog.show();
+        showPDialog();
         page = 1;
         orderType = mOrderType;
 
@@ -234,13 +228,11 @@ public class CreditorListFragment extends BaseFragment {
         listTV.add(tvOrder13);
         listTV.add(tvTotal);
 
-        listIndicator=new ArrayList<>();
+        listIndicator = new ArrayList<>();
         listIndicator.add(tvOrder1);
         listIndicator.add(tvOrder2);
         listIndicator.add(tvOrder3);
         listIndicator.add(tvTotal);
-
-
 
 
         //设置全区背景色
@@ -251,8 +243,6 @@ public class CreditorListFragment extends BaseFragment {
         //设置 Footer 为 球脉冲
         swipeRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
 
-
-        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
 
         initDataFromInternet();
 
@@ -290,6 +280,7 @@ public class CreditorListFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
 
         TreeMap<String, String> map = new TreeMap<>();
         map.put("page", page + "");
@@ -297,12 +288,11 @@ public class CreditorListFragment extends BaseFragment {
         map.put("sort_type", sortType);//排序方式,1升序 2降序
 
 
-
         HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        dialog.dismiss();
+                        dismissPDialog();
 
                         if (page > 1) {
                             swipeRefreshLayout.finishLoadmore();
@@ -320,9 +310,14 @@ public class CreditorListFragment extends BaseFragment {
                             bean = (CreditorListBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(getActivity(), "数据加载出错!");
+                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
                     }
                 });
 
@@ -362,9 +357,9 @@ public class CreditorListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (UserConfig.getInstance().isCreditorFlush()){
+        if (UserConfig.getInstance().isCreditorFlush()) {
             UserConfig.getInstance().setCreditorFlush(false);
-            page=1;
+            page = 1;
             initDataFromInternet();
         }
 
@@ -376,11 +371,11 @@ public class CreditorListFragment extends BaseFragment {
         Log.e("TAG", "setUserVisibleHint: -----执行");
         if (isVisibleToUser) {
             Log.e("TAG", "setUserVisibleHint: -----可见");
-            if (UserConfig.getInstance().isCreditorFlush()){
+            if (UserConfig.getInstance().isCreditorFlush()) {
                 Log.e("TAG", "setUserVisibleHint: -----可见刷新");
 
                 UserConfig.getInstance().setCreditorFlush(false);
-                page=1;
+                page = 1;
                 initDataFromInternet();
             }
 
@@ -390,7 +385,6 @@ public class CreditorListFragment extends BaseFragment {
             Log.e("TAG", "setUserVisibleHint: -----不可见");
         }
     }
-
 
 
 }

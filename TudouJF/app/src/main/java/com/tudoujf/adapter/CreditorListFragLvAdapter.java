@@ -9,12 +9,9 @@ import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
-import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.bean.databean.CreditorListBean;
-import com.tudoujf.ui.BidView;
 import com.tudoujf.ui.ClaimsBidView;
 import com.tudoujf.utils.StringUtils;
-import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 

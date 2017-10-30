@@ -2,9 +2,11 @@ package com.tudoujf.http;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tudoujf.R;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.utils.StringUtils;
@@ -117,7 +119,8 @@ public class ParseJson {
                 ToastUtils.showToast(context, "解析错误!");
                 return null;
             case BEAN_COMMON:
-                ToastUtils.showToast(context, ((CommonBean) bean).getDescription().toString());
+                ToastUtils.showToast(context, (context.getResources().getString(R.string.jiekoufanhuicuowumiaoshu)
+                        +((CommonBean) bean).getDescription().toString()));
                 return null;
             case BEAN_DATA:
                 return bean;

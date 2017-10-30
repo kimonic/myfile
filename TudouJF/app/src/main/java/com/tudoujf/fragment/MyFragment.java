@@ -166,9 +166,9 @@ public class MyFragment extends BaseFragment {
                 openActivity(FundDetailsActivity.class);
                 break;
             case R.id.ll_frag_my_myaccount://我的账户
-                Bundle bundle1=new Bundle();
-                bundle1.putString("name",bean.getMember_name());
-                openActivity(MyAccountActivity.class,bundle1);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("name", bean.getMember_name());
+                openActivity(MyAccountActivity.class, bundle1);
 
                 break;
             case R.id.tv_frag_my_realname://跳转实名认证页面
@@ -294,6 +294,13 @@ public class MyFragment extends BaseFragment {
                             }
 
                         }
+
+                        @Override
+                        public void onError(Response<String> response) {
+                            super.onError(response);
+                            dismissPDialog();
+                            ToastUtils.showToast(getActivity(), R.string.huoqugerenzhongxinshujushibai);
+                        }
                     });
         }
     }
@@ -307,10 +314,10 @@ public class MyFragment extends BaseFragment {
             tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
-            int  count=StringUtils.string2Integer(bean.getCount());
-            if (count<100){
+            int count = StringUtils.string2Integer(bean.getCount());
+            if (count < 100) {
                 tvMessage.setText(bean.getCount());
-            }else {
+            } else {
                 tvMessage.setText(getResources().getString(R.string.ninenine));
             }
         }

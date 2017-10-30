@@ -1,13 +1,9 @@
 package com.tudoujf.utils;
 
-import android.util.Log;
-
 import com.example.encryptionpackages.CreateCode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tudoujf.bean.GlobalBean;
-
-import org.litepal.tablemanager.typechange.BooleanOrm;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -162,7 +158,7 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTime(String cc_time) {
-        String re_StrTime = null;
+        String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
             long lcc_time = Long.valueOf(cc_time);
@@ -182,7 +178,7 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTimeBias(String cc_time) {
-        String re_StrTime = null;
+        String re_StrTime ;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         try {
             long lcc_time = Long.valueOf(cc_time);
@@ -220,7 +216,7 @@ public class StringUtils {
      */
     public static String getCommaDecimalsStr(String fStr) {
         if (fStr == null) {
-            return "";
+            return "0.00";
         }
         if (fStr.contains(".")) {
             int temp = fStr.indexOf(".");

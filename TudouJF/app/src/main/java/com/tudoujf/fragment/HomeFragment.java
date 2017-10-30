@@ -177,6 +177,8 @@ public class HomeFragment extends BaseFragment {
      * 将要打开的标的详情idbean
      */
     private HomeBidIdBean homeBidIdBean;
+    /**banner 的页面个数*/
+    private int bannerCount;
 
     @Override
     public int layoutRes() {
@@ -365,7 +367,7 @@ public class HomeFragment extends BaseFragment {
             list.add(imageview);
         }
 
-
+        bannerCount=listUrl.size()-1;
         BannerVPAdapter adpter = new BannerVPAdapter(list, listUrl);
         vpFragHome.setAdapter(adpter);
         ViewPagerScroller mPagerScroller = new ViewPagerScroller(getActivity());
@@ -528,10 +530,9 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onError(Response<String> response) {
-//                dialog.dismiss();
-                dismissPDialog();
-                Log.e(TAG, "onError: ------------首页fragment返回的json数据----------------" + response.message());
                 super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(getActivity(), R.string.huoqushouyeshujushibai);
             }
         });
 
@@ -644,7 +645,7 @@ public class HomeFragment extends BaseFragment {
                         }
                         if (plummet) {
                             autoCount++;
-                            if (autoCount > 3) {
+                            if (autoCount > bannerCount) {
                                 plummet = !plummet;
                                 autoCount = autoCount - 2;
                             }

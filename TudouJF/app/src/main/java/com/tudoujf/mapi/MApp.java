@@ -22,12 +22,11 @@ import okhttp3.OkHttpClient;
 
 /**
  * Created by Administrator on 2017/7/6.
- *
  */
 
-public class MApp extends Application{
+public class MApp extends Application {
     public static MApp app = null;
-    private boolean isLogin=false;
+    private boolean isLogin = false;
 
     public boolean isLogin() {
         return isLogin;
@@ -40,13 +39,11 @@ public class MApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        app=this;
+        app = this;
         initOkGo();
         LitePal.initialize(this);
         CreateCode.initCreatCode(this);
     }
-
-
 
 
     /**
@@ -55,7 +52,6 @@ public class MApp extends Application{
     public synchronized static MApp getInstance() {
         return app;
     }
-
 
 
     private void initOkGo() {
@@ -67,7 +63,6 @@ public class MApp extends Application{
         params.put("commonParamsKey2", "这里支持中文参数");
         //
         //----------------------------------------------------------------------------------------//
-
 
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -108,7 +103,7 @@ public class MApp extends Application{
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的
                 .setCacheMode(CacheMode.NO_CACHE)               //全局统一缓存模式，默认不使用缓存，可以不传
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
-                .setRetryCount(3)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
+                .setRetryCount(3)//全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
                 .addCommonHeaders(headers)                      //全局公共头
                 .addCommonParams(params);                       //全局公共参数
     }

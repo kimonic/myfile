@@ -45,10 +45,10 @@
         <!-- 1.欢迎页activity -->
         <activity android:name=".activity.other.WelcomeActivity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
         <!-- 2.初次引导页activity -->
         <activity android:name=".activity.other.GuideActivity" />
@@ -94,14 +94,14 @@
 
         <!-- 21.预览各个activity的界面 -->
         <activity android:name=".activity.other.PreviewActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                <!--&lt;!&ndash; 监听拦截home键 &ndash;&gt;-->
-                <!--&lt;!&ndash; <category android:name="android.intent.category.HOME" /> &ndash;&gt;-->
-                <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- 监听拦截home键 -->
+                <!-- <category android:name="android.intent.category.HOME" /> -->
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            </intent-filter>
         </activity>
         <!-- 22.忘记密码activity -->
         <activity android:name=".activity.other.FindPasswordActivity" />
