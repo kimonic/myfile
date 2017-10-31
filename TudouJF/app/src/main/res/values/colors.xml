@@ -53,5 +53,10 @@
     <color name="calendar_selbac">#1393B6</color>
     <color name="lvbac">#FEFCEF</color>
     <color name="color_orange">#F48029</color>
+    <color name="color_blue">#48AEFA</color>
+    <color name="color_yellow">#FFCA27</color>
+    <color name="color_green">#85CE20</color>
+    <color name="color_add">#F96937</color>
+    <color name="color_minus">#64D0B6</color>
 
 </resources>

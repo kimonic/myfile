@@ -521,6 +521,29 @@
     <string name="huoquzhaiquanxiangqignshujushibai">获取债权详情数据失败!!</string>
     <string name="jiekoufanhuicuowumiaoshu">接口返回错误描述:</string>
     <string name="huoquchanpinxinxishibai">获取产品信息失败!!</string>
+    <string name="dangqiantouzhuedushi">当前投注额度是:</string>
+    <string name="jiayibai">+100</string>
+    <string name="jiawubai">+500</string>
+    <string name="jiayiqian">+1000</string>
+    <string name="jiayiwan">+10000</string>
+    <string name="jianyibai">-100</string>
+    <string name="jianwubai">-500</string>
+    <string name="jianyiqian">-1000</string>
+    <string name="jianyiwan">-10000</string>
+    <string name="benqikaichucishu">本期开出次数是:</string>
+    <string name="shangcizhongjiangjieguoshi">上次中奖结果是:</string>
+    <string name="hongse">红色</string>
+    <string name="huangse">黄色</string>
+    <string name="lanse">蓝色</string>
+    <string name="lvse">绿色</string>
+    <string name="shengyuzonge">剩余总额:</string>
+    <string name="qingxuanzeyaoxiazhudeleixing">请选择要下注的类型!!</string>
+    <string name="weixuanzhong">未选中</string>
+    <string name="yixuanzhong">已选中</string>
+    <string name="caizhongfanfive">猜中返50倍</string>
+    <string name="caizhongfanthree">猜中返3倍</string>
+    <string name="caizhongfansix">猜中返6倍</string>
+    <string name="caizhongfantwo">猜中返2倍</string>
 
 
 </resources>

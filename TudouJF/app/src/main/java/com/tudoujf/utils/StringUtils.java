@@ -1,5 +1,7 @@
 package com.tudoujf.utils;
 
+import android.util.Log;
+
 import com.example.encryptionpackages.CreateCode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -244,12 +246,16 @@ public class StringUtils {
         if (s.length() > 3) {
             StringBuilder builder = new StringBuilder(fStr);
             int start = s.length() % 3;
+            int  tem=0;
             if (start != 0) {
                 builder.insert(s.length() % 3, ",");
+                tem=1;
             }
             int i = 1;
             while (s.length() - 3 * i >= 3) {
-                builder.insert(s.length() - 3 * i + start, ",");
+
+                builder.insert(s.length() - 3 * i + start-tem, ",");
+                Log.e("TAG", "getCommaDecimalsStrAssist: -----"+builder.toString()+"------------"+s.length());
                 i++;
             }
             return builder.toString();

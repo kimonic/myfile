@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.header.flyrefresh.MountanScenceView;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseFragment;
+import com.tudoujf.config.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,8 @@ public class MyWelfareFragment extends BaseFragment {
     Unbinder unbinder;
 
     private int type = 1;
+
+    private  String  url;
 
     private int[] redPackgeTilte = new int[]{
             R.string.keyonghongbao,
@@ -106,10 +110,12 @@ public class MyWelfareFragment extends BaseFragment {
 
         switch (type) {
             case 1://红包
+                url= Constants.RED_BAG;
                 initTitle(redPackgeTilte);
                 initFragment();
                 break;
             case 2://加息券
+                url= Constants.JIA_XI_QUAN;
                 initTitle(jiaXiQuanTilte);
                 initFragment();
                 break;
