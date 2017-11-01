@@ -9,10 +9,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
+import com.tudoujf.R;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,11 @@ public class GameView extends View {
      * 倒计时
      */
     private int reciprocal;
+
+    /**设置游戏周期*/
+    public void setSleepTime(int sleepTime) {
+        this.sleepTime = sleepTime;
+    }
 
     /**
      * 设置结果回调接口
@@ -156,8 +162,6 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.e("TAG", "onDraw: ---绘制进行中--" + count);
-
 
         canvas.drawColor(Color.parseColor("#48AEFA"));
 
@@ -185,7 +189,6 @@ public class GameView extends View {
         if (count - 1 > -1 && count < listColorFlag.size() + 1&&reciprocal==0) {
             returnResult(listColorFlag.get(count - 1));
 //            ToastUtils.showToast(getContext(),"当前的结果是:     "+listColorFlag.get(count-1));
-            Log.e("TAG", "onDraw:当前的结果是 -----" + listColorFlag.get(count - 1));
         }
 
         String temp = "剩余开奖时间" + reciprocal + "秒";
@@ -237,10 +240,12 @@ public class GameView extends View {
                         }
                     }
 
-
                     postInvalidate();
                     count++;
                     if (count == 101) {
+                        if (listener!=null){
+                            listener.oneFinish( redCount,  blueCount,  yellowCount,  greenCount);
+                        }
                         count = 0;
                         redCount = 0;
                         blueCount = 0;
@@ -289,5 +294,8 @@ public class GameView extends View {
          * 本期内各种类型出现的次数
          */
         void resultCount(int redCount, int blueCount, int yellowCount, int greenCount);
+
+        /**一轮结束*/
+        void oneFinish(int redCount, int blueCount, int yellowCount, int greenCount);
     }
 }

@@ -9,5 +9,7 @@
    <!--Java bean,对应相应的表名,必须写完整包路径-->
     <list>
         <mapping class="com.tudoujf.test.Book"/>
+        <mapping class="com.tudoujf.test.ScoreBean"/>
+        <mapping class="com.tudoujf.test.GuessBean"/>
     </list>
 </litepal>

@@ -212,6 +212,7 @@ public class MyWelfareFragment extends BaseFragment {
 
         HomeFragVPAdapter adapter = new HomeFragVPAdapter(getChildFragmentManager(), listFrag);
         vpTwo.setAdapter(adapter);
+        vpTwo.setOffscreenPageLimit(3);
 
     }
 

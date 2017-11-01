@@ -1,24 +1,34 @@
 package com.tudoujf.fragment.mywelfare;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.UsableWelfareFragLvAdapter;
+import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.RedPackageActBean;
+import com.tudoujf.bean.databean.WelfareListBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -55,6 +65,10 @@ public class UsableWelfareFragment extends BaseFragment {
      * 当前activity的类型,是红包还是加息券
      */
     private int actType = 1;
+    private int page = 1;
+    private String status;
+    private String url;
+    private WelfareListBean  bean;
 
     @Override
     public int layoutRes() {
@@ -80,7 +94,9 @@ public class UsableWelfareFragment extends BaseFragment {
         list = new ArrayList<>();
 
         switch (actType) {
-            case 1:
+            case 1://可用红包-2过期 -1可用 1已用
+                status = "-1";
+                url = Constants.BOUNTY;
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -97,7 +113,9 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 2:
+            case 2://已用红包-2过期 -1可用 1已用
+                status = "1";
+                url = Constants.BOUNTY;
 
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
@@ -116,7 +134,9 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 3:
+            case 3://过期红包-2过期 -1可用 1已用
+                status = "-2";
+                url = Constants.BOUNTY;
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
@@ -134,7 +154,9 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 4:
+            case 4://可用加息券-2过期 -1可用 1已用
+                status = "-1";
+                url = Constants.COUPOM;
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -151,7 +173,9 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 5:
+            case 5://已用加息券
+                status = "1";
+                url = Constants.COUPOM;
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
@@ -169,7 +193,9 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 6:
+            case 6://过期加息券-2过期 -1可用 1已用
+                status = "-2";
+                url = Constants.COUPOM;
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
@@ -187,7 +213,8 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 7:
+            case 7://可用返现券-2过期 -1可用 1已用
+                status = "-1";
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
                     bean.setContent1("单笔投资满1000元  最低");
@@ -204,7 +231,8 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 8:
+            case 8://已用返现券-2过期 -1可用 1已用
+                status = "1";
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
@@ -222,7 +250,8 @@ public class UsableWelfareFragment extends BaseFragment {
                     list.add(bean);
                 }
                 break;
-            case 9:
+            case 9://过期返现券-2过期 -1可用 1已用
+                status = "-2";
                 llFragUsableUse.setVisibility(View.GONE);
                 for (int i = 0; i < 10; i++) {
                     RedPackageActBean bean = new RedPackageActBean();
@@ -248,6 +277,7 @@ public class UsableWelfareFragment extends BaseFragment {
     public void initView() {
         adapter = new UsableWelfareFragLvAdapter(list, getActivity());
         lvFragUsableInfo.setAdapter(adapter);
+        initDataFromInternet();
     }
 
     @Override
@@ -257,6 +287,37 @@ public class UsableWelfareFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+        map.put("status", status);
+        map.put("page", "" + page);
+        HttpMethods.getInstance().POST(getActivity(), url, map,"UsableWelfareFragment", new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess: -----------请求我的福利返回的json数据-------"+actType+"---------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WelfareListBean>() {
+                        }.getType(), WelfareListBean.class, getActivity());
+                        if (bean1 != null) {
+                            bean = (WelfareListBean) bean1;
+                            LoadInternetDataToUi();
+
+                        } else {
+                            ToastUtils.showToast(getActivity(), getResources().getString(R.string.shujujiazaichucuo));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(getActivity(), R.string.huoquzhaiquanxiangqignshujushibai);
+
+                    }
+                }
+        );
 
 
     }
@@ -265,7 +326,6 @@ public class UsableWelfareFragment extends BaseFragment {
     public void LoadInternetDataToUi() {
 
     }
-
 
 
 }

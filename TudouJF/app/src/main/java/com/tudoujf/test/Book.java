@@ -1,5 +1,7 @@
 package com.tudoujf.test;
 
+import android.util.Log;
+
 import org.litepal.crud.DataSupport;
 
 /**
@@ -9,10 +11,30 @@ import org.litepal.crud.DataSupport;
 
 public class Book extends DataSupport{
     private int id;
+    private int num;
+    private int age;
     private String name;
+
     private float price;
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     public int getId() {
+        Log.e("TAG", "initDataFromIntent: --888---"+id);
         return id;
     }
 

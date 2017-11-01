@@ -137,6 +137,33 @@ public class Constants {
     /**交易记录接口*/
     public static final String TRADERECORD = URL+ "/phone/account/accountLog";
 
+    /**我的的福利红包列表接口*/
+    public static final String BOUNTY=URL+"/phone/bounty/list";
+
+    /**我的的福利加息券列表接口*/
+    public static final String COUPOM=URL+"/phone/coupon/list";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 托管注册

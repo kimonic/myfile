@@ -292,4 +292,53 @@ public class DialogUtils {
     }
 
 
+    /**
+     *
+     * 简单登录
+     *
+     * @param context 上下文
+     * @param msg     点击back键的提示信息
+     * @return alertdialog
+     */
+    public static AlertDialog showUserDialog(final Context context, final String msg,View view) {
+//        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_user, null);
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            private long beforeTime;
+
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
+                    if (System.currentTimeMillis() - beforeTime < 2000) {
+                        ((Activity) context).finish();
+                    } else {
+                        ToastUtils.showToast(context, msg);
+                        beforeTime = System.currentTimeMillis();
+                    }
+                    return true;
+                } else {
+                    return false; //默认返回 false
+                }
+            }
+        });
+        dialog.show();
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setContentView(view);
+//            WindowManager.LayoutParams lp = window.getAttributes();
+////            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
+//            int wh = 90 * ScreenSizeUtils.getDensity(context);
+//            lp.width = wh;
+//            lp.height = wh;
+//            lp.gravity = Gravity.CENTER;
+//            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+
+
 }

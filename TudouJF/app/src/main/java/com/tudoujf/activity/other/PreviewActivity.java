@@ -33,6 +33,7 @@ import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
 import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
+import com.tudoujf.activity.test.GuessHappyActivity;
 import com.tudoujf.activity.test.ImageScaleActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
@@ -216,7 +217,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(HuiFuRegisterActivity.class);
                 break;
             case R.id.bt_act_preview18:
-                Intent intent=new Intent(this,ImageScaleActivity.class);
+                Intent intent=new Intent(this,GuessHappyActivity.class);
                 startActivity(intent);
 //                openActivity(MyEarningsActivity.class);
                 break;

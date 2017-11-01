@@ -203,6 +203,8 @@
         <activity android:name=".activity.managemoney.RechargeHuiFuActivity" />
         <!--68.汇付提现activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawHuiFuActivity" />
+        <!--69.猜猜乐activity-->
+        <activity android:name=".activity.test.GuessHappyActivity" />
 
         <service
             android:name=".service.MyService"

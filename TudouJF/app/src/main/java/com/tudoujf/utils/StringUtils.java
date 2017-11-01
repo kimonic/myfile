@@ -232,17 +232,20 @@ public class StringUtils {
                     fStr = fStr + "0";
                     break;
             }
-            return getCommaDecimalsStrAssist(s, fStr);
+            if (se.length()>2){
+                fStr = s + "."+se.substring(0,2);
+            }
+            return getCommaDecimalsStrAssist(s, fStr,2);
 
         } else {
-            return getCommaDecimalsStrAssist(fStr, fStr + ".00");
+            return getCommaDecimalsStrAssist(fStr, fStr + ".00",2);
         }
     }
 
     /**
      * getCommaDecimalsStr(String s)方法辅助
      */
-    private static String getCommaDecimalsStrAssist(String s, String fStr) {
+    private static String getCommaDecimalsStrAssist(String s, String fStr,int flag) {
         if (s.length() > 3) {
             StringBuilder builder = new StringBuilder(fStr);
             int start = s.length() % 3;
@@ -251,16 +254,50 @@ public class StringUtils {
                 builder.insert(s.length() % 3, ",");
                 tem=1;
             }
-            int i = 1;
-            while (s.length() - 3 * i >= 3) {
+//              12,345678,910.00    -6
+//              12,345,678,910.00   -10
+//              12,345,678,910.00  -14
+//              12,345,678,910.00
+            //123,456,789  -3
+            //123,456,789  -7
 
-                builder.insert(s.length() - 3 * i + start-tem, ",");
+            int i = 1;
+            while (s.length()-3*i >= 3) {
+                if (flag==2){
+                    builder.insert(fStr.length()+tem - 6-(i-1)*4, ",");
+                }else if (flag==0){
+                    builder.insert(fStr.length()+tem - 3-(i-1)*4, ",");
+                }
+                tem++;
                 Log.e("TAG", "getCommaDecimalsStrAssist: -----"+builder.toString()+"------------"+s.length());
                 i++;
             }
+//            while (s.length()+tem - 3 * i >= 3) {
+//                builder.insert(s.length() - 3 * i - 3+tem, ",");
+//                tem++;
+//                Log.e("TAG", "getCommaDecimalsStrAssist: -----"+builder.toString()+"------------"+s.length());
+//                i++;
+//            }
             return builder.toString();
         } else {
             return fStr;
+        }
+    }
+
+    /**
+     * 每三位用逗号分隔,不保留小数
+     */
+    public static String getCommaDecimalsStrZeroDot(String fStr) {
+        if (fStr == null) {
+            return "0";
+        }
+        if (fStr.contains(".")) {
+            int temp = fStr.indexOf(".");
+            String s = fStr.substring(0, temp);
+            return getCommaDecimalsStrAssist(s, s,0);
+
+        } else {
+            return getCommaDecimalsStrAssist(fStr, fStr,0);
         }
     }
 

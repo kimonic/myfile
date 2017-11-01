@@ -186,6 +186,14 @@
 -dontwarn com.lzy.okgo.**
 -keep class com.lzy.okgo.**{*;}
 
+-keep class org.litepal.** {
+    *;
+}
+
+-keep class * extends org.litepal.crud.DataSupport {
+    *;
+}
+
 ##okrx
 #-dontwarn com.lzy.okrx.**
 #-keep class com.lzy.okrx.**{*;}
