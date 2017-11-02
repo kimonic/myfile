@@ -15,6 +15,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.TimeUtils;
 
 import java.util.List;
 import java.util.TreeMap;
@@ -204,7 +205,7 @@ public class HttpTestActivity extends BaseActivity {
                         tvActHttptest1.setText(response.body());
                     }
 
-                    FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据.txt",result);
+                    FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据"+ System.currentTimeMillis()+".txt",result);
                     //   /phone/loan/loanInfo  loan_id,292
                     Log.e("TAG", "onSuccess:-----------哈哈---------- " + result);
                 } else {

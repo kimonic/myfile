@@ -70,7 +70,9 @@ public class HomeActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vpActHome.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         vpActHome.setLayoutParams(params);
+
     }
+
 
     private void initFragmentList() {
         list = new ArrayList<>();
@@ -164,7 +166,7 @@ public class HomeActivity extends BaseActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
-            if (!"".equals(UserConfig.getInstance().getLoginToken(this))){
+            if (!"".equals(UserConfig.getInstance().getLoginToken(this))) {
                 DialogUtils.showHuiFuDialog(this);
             }
         }
@@ -213,5 +215,16 @@ public class HomeActivity extends BaseActivity {
                 vpActHome.setCurrentItem(0);
             }
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        int flag = intent.getIntExtra("flag", 0);
+        if (flag == 555) {
+            vpActHome.setCurrentItem(1);
+        }
+
     }
 }

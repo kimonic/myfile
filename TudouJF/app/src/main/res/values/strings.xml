@@ -548,6 +548,8 @@
     <string name="youxikaishi">游戏开始啦,赶紧投注吧!</string>
     <string name="bencizhongjiangjinewei">本次中奖金额为:</string>
     <string name="jijiangkaiqixiayilun">即将开启下一轮!!!</string>
+    <string name="qingxuanzeyaoshiyongdejiaxiquan">请选择要使用的加息券</string>
+    <string name="huoquhongbaoxinxishibai">获取红包信息失败</string>
 
 
 </resources>

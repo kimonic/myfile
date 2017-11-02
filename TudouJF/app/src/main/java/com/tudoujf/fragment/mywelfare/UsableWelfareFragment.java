@@ -1,5 +1,6 @@
 package com.tudoujf.fragment.mywelfare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +13,10 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.UsableWelfareFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
-import com.tudoujf.bean.RedPackageActBean;
 import com.tudoujf.bean.databean.WelfareListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -29,7 +30,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * * ================================================================
@@ -48,7 +48,6 @@ public class UsableWelfareFragment extends BaseFragment {
     LinearLayout llFragUsableUse;
     @BindView(R.id.lv_frag_usable_info)
     ListView lvFragUsableInfo;
-    Unbinder unbinder;
     @BindView(R.id.tv_frag_usable_count)
     TextView tvCount;
     @BindView(R.id.iv_frag_usable_baoquan)
@@ -57,9 +56,7 @@ public class UsableWelfareFragment extends BaseFragment {
     TextView tvDescription;
     @BindView(R.id.ll_frag_usable_nothing)
     LinearLayout llNothing;
-    Unbinder unbinder1;
 
-    private List<RedPackageActBean> list;
     private UsableWelfareFragLvAdapter adapter;
     /**
      * 当前activity的类型,是红包还是加息券
@@ -68,7 +65,8 @@ public class UsableWelfareFragment extends BaseFragment {
     private int page = 1;
     private String status;
     private String url;
-    private WelfareListBean  bean;
+    private WelfareListBean bean;
+    private List<WelfareListBean.ItemsBean> listItem;
 
     @Override
     public int layoutRes() {
@@ -80,194 +78,65 @@ public class UsableWelfareFragment extends BaseFragment {
 
         switch (v.getId()) {
             case R.id.ll_frag_usable_use://跳转红包使用界面
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("flag", 555);
+                getActivity().startActivity(intent);
                 break;
         }
     }
 
     @Override
     public void initDataFromIntent() {
+        listItem = new ArrayList<>();
         Bundle bundle = getArguments();
         if (bundle != null) {
             actType = bundle.getInt("type", 1);
         }
 
-        list = new ArrayList<>();
 
         switch (actType) {
             case 1://可用红包-2过期 -1可用 1已用
                 status = "-1";
                 url = Constants.BOUNTY;
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("元");
-                    bean.setBackground(1);
-                    bean.setType(actType);
-                    bean.setQuanOrRedPackage(true);
-                    bean.setValid(true);
-                    list.add(bean);
-                }
                 break;
             case 2://已用红包-2过期 -1可用 1已用
                 status = "1";
                 url = Constants.BOUNTY;
 
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setValid(false);
-                    bean.setContent7("元");
-                    bean.setBackground(1);
-                    bean.setQuanOrRedPackage(true);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
             case 3://过期红包-2过期 -1可用 1已用
                 status = "-2";
                 url = Constants.BOUNTY;
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("元");
-                    bean.setBackground(1);
-                    bean.setValid(false);
-                    bean.setQuanOrRedPackage(true);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
             case 4://可用加息券-2过期 -1可用 1已用
                 status = "-1";
                 url = Constants.COUPOM;
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("8.88");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("%");
-                    bean.setBackground(1);
-                    bean.setType(actType);
-                    bean.setQuanOrRedPackage(false);
-                    bean.setValid(true);
-                    list.add(bean);
-                }
                 break;
             case 5://已用加息券
                 status = "1";
                 url = Constants.COUPOM;
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("8.88");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("%");
-                    bean.setBackground(1);
-                    bean.setQuanOrRedPackage(false);
-                    bean.setValid(false);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
             case 6://过期加息券-2过期 -1可用 1已用
                 status = "-2";
                 url = Constants.COUPOM;
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("8.88");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("%");
-                    bean.setBackground(1);
-                    bean.setValid(false);
-                    bean.setQuanOrRedPackage(false);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
             case 7://可用返现券-2过期 -1可用 1已用
+                url = Constants.CASH_BACK;
                 status = "-1";
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("元");
-                    bean.setBackground(1);
-                    bean.setValid(true);
-                    bean.setQuanOrRedPackage(false);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
             case 8://已用返现券-2过期 -1可用 1已用
+                url = Constants.CASH_BACK;
                 status = "1";
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("元");
-                    bean.setBackground(1);
-                    bean.setType(actType);
-                    bean.setQuanOrRedPackage(false);
-                    bean.setValid(false);
-                    list.add(bean);
-                }
                 break;
             case 9://过期返现券-2过期 -1可用 1已用
+                url = Constants.CASH_BACK;
                 status = "-2";
                 llFragUsableUse.setVisibility(View.GONE);
-                for (int i = 0; i < 10; i++) {
-                    RedPackageActBean bean = new RedPackageActBean();
-                    bean.setContent1("单笔投资满1000元  最低");
-                    bean.setContent2("投资0个月可使用");
-                    bean.setContent3("50元 抽奖红包");
-                    bean.setContent4("可使用");
-                    bean.setContent5("500");
-                    bean.setContent6("2017/07/08");
-                    bean.setContent7("元");
-                    bean.setQuanOrRedPackage(false);
-                    bean.setBackground(1);
-                    bean.setValid(false);
-                    bean.setType(actType);
-                    list.add(bean);
-                }
                 break;
         }
 
@@ -275,8 +144,7 @@ public class UsableWelfareFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        adapter = new UsableWelfareFragLvAdapter(list, getActivity());
-        lvFragUsableInfo.setAdapter(adapter);
+
         initDataFromInternet();
     }
 
@@ -292,18 +160,17 @@ public class UsableWelfareFragment extends BaseFragment {
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
         map.put("status", status);
         map.put("page", "" + page);
-        HttpMethods.getInstance().POST(getActivity(), url, map,"UsableWelfareFragment", new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), url, map, "UsableWelfareFragment", new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------请求我的福利返回的json数据-------"+actType+"---------" + result);
+                        Log.e("TAG", "onSuccess: -----------请求我的福利返回的json数据-------" + actType + "---------" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WelfareListBean>() {
                         }.getType(), WelfareListBean.class, getActivity());
                         if (bean1 != null) {
                             bean = (WelfareListBean) bean1;
                             LoadInternetDataToUi();
-
                         } else {
                             ToastUtils.showToast(getActivity(), getResources().getString(R.string.shujujiazaichucuo));
                         }
@@ -313,8 +180,7 @@ public class UsableWelfareFragment extends BaseFragment {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(getActivity(), R.string.huoquzhaiquanxiangqignshujushibai);
-
+                        ToastUtils.showToast(getActivity(), R.string.huoquhongbaoxinxishibai);
                     }
                 }
         );
@@ -324,7 +190,112 @@ public class UsableWelfareFragment extends BaseFragment {
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean != null) {
 
+            if (bean.getItems() != null && actType < 4) {
+                listItem.addAll(bean.getItems());
+                llFragUsableUse.setVisibility(View.VISIBLE);
+                lvFragUsableInfo.setVisibility(View.VISIBLE);
+                llNothing.setVisibility(View.GONE);
+
+                if (listItem.size() > 0) {
+                    tvCount.setText(("您有" + listItem.size() + "个红包可使用,立即使用>>"));
+                    for (int i = 0; i < listItem.size(); i++) {
+                        listItem.get(i).setType(actType);
+                    }
+
+                    if (adapter == null) {
+                        adapter = new UsableWelfareFragLvAdapter(listItem, getActivity(), 1);
+                        lvFragUsableInfo.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                    lvFragUsableInfo.setVisibility(View.GONE);
+                    llNothing.setVisibility(View.VISIBLE);
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan2_redpackage);
+                    tvDescription.setText("暂无红包");
+                }
+            } else if (bean.getItems() != null && actType < 7 && actType > 3) {
+                listItem.addAll(bean.getItems());
+                llFragUsableUse.setVisibility(View.VISIBLE);
+                lvFragUsableInfo.setVisibility(View.VISIBLE);
+                llNothing.setVisibility(View.GONE);
+
+                if (listItem.size() > 0) {
+                    tvCount.setText(("您有" + listItem.size() + "个加息券可使用,立即使用>>"));
+                    for (int i = 0; i < listItem.size(); i++) {
+                        listItem.get(i).setType(actType);
+                    }
+
+                    if (adapter == null) {
+                        adapter = new UsableWelfareFragLvAdapter(listItem, getActivity(), 2);
+                        lvFragUsableInfo.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                    lvFragUsableInfo.setVisibility(View.GONE);
+                    llNothing.setVisibility(View.VISIBLE);
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                    tvDescription.setText("暂无加息券");
+                }
+            } else if (bean.getItems() != null && actType > 6) {
+                listItem.addAll(bean.getItems());
+                llFragUsableUse.setVisibility(View.VISIBLE);
+                lvFragUsableInfo.setVisibility(View.VISIBLE);
+                llNothing.setVisibility(View.GONE);
+
+                if (listItem.size() > 0) {
+                    tvCount.setText(("您有" + listItem.size() + "个返现券可使用,立即使用>>"));
+                    for (int i = 0; i < listItem.size(); i++) {
+                        listItem.get(i).setType(actType);
+                    }
+
+                    if (adapter == null) {
+                        adapter = new UsableWelfareFragLvAdapter(listItem, getActivity(), 3);
+                        lvFragUsableInfo.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                    lvFragUsableInfo.setVisibility(View.GONE);
+                    llNothing.setVisibility(View.VISIBLE);
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                    tvDescription.setText("暂无返现券");
+                }
+
+            }
+
+
+        } else {
+            llFragUsableUse.setVisibility(View.GONE);
+            lvFragUsableInfo.setVisibility(View.GONE);
+            llNothing.setVisibility(View.VISIBLE);
+            switch (actType) {
+                case 1:
+                case 2:
+                case 3:
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan2_redpackage);
+                    tvDescription.setText("暂无红包");
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                    tvDescription.setText("暂无加息券");
+                    break;
+                case 7:
+                case 8:
+                case 9:
+                    ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                    tvDescription.setText("暂无返现券");
+                    break;
+            }
+        }
     }
 
 

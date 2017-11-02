@@ -106,7 +106,7 @@ public class WelfareListBean implements BaseBean {
          * member_name : 18011111111
          * loan_id : 303
          */
-
+        private int type;
         private String rule_id;
         private String activity_id;
         private String remark;
@@ -127,6 +127,127 @@ public class WelfareListBean implements BaseBean {
         private String add_time;
         private String member_name;
         private String loan_id;
+
+        //加息券独有字段
+        private String coupon_type;
+        private String dead_line;
+        private String coupon_days;
+        private String sign;
+        private String coupon_multiple;
+        private String together_status;
+        private String interest;
+
+
+        //返现券独有字段
+        private String proportion;
+        private String upd_time;
+        private String repay_time;
+        private String status_name;
+        private String proportion_amount;
+
+        public String getProportion() {
+            return proportion;
+        }
+
+        public void setProportion(String proportion) {
+            this.proportion = proportion;
+        }
+
+        public String getUpd_time() {
+            return upd_time;
+        }
+
+        public void setUpd_time(String upd_time) {
+            this.upd_time = upd_time;
+        }
+
+        public String getRepay_time() {
+            return repay_time;
+        }
+
+        public void setRepay_time(String repay_time) {
+            this.repay_time = repay_time;
+        }
+
+        public String getStatus_name() {
+            return status_name;
+        }
+
+        public void setStatus_name(String status_name) {
+            this.status_name = status_name;
+        }
+
+        public String getProportion_amount() {
+            return proportion_amount;
+        }
+
+        public void setProportion_amount(String proportion_amount) {
+            this.proportion_amount = proportion_amount;
+        }
+
+        public String getCoupon_type() {
+            return coupon_type;
+        }
+
+        public void setCoupon_type(String coupon_type) {
+            this.coupon_type = coupon_type;
+        }
+
+        public String getDead_line() {
+            return dead_line;
+        }
+
+        public void setDead_line(String dead_line) {
+            this.dead_line = dead_line;
+        }
+
+        public String getCoupon_days() {
+            return coupon_days;
+        }
+
+        public void setCoupon_days(String coupon_days) {
+            this.coupon_days = coupon_days;
+        }
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
+
+        public String getCoupon_multiple() {
+            return coupon_multiple;
+        }
+
+        public void setCoupon_multiple(String coupon_multiple) {
+            this.coupon_multiple = coupon_multiple;
+        }
+
+        public String getTogether_status() {
+            return together_status;
+        }
+
+        public void setTogether_status(String together_status) {
+            this.together_status = together_status;
+        }
+
+        public String getInterest() {
+            return interest;
+        }
+
+        public void setInterest(String interest) {
+            this.interest = interest;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
 
         public String getRule_id() {
             return rule_id;

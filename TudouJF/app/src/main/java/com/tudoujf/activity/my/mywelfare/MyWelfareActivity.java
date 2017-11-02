@@ -118,6 +118,7 @@ public class MyWelfareActivity extends BaseActivity {
 
         HomeFragVPAdapter adapter=new HomeFragVPAdapter(getSupportFragmentManager(),listFrag);
         vpOne.setAdapter(adapter);
+        vpOne.setOffscreenPageLimit(3);
     }
 
     @Override

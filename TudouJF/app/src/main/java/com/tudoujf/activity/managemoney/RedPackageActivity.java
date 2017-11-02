@@ -139,6 +139,7 @@ public class RedPackageActivity extends BaseActivity {
                 url = Constants.RED_BAG;
             } else if (actType == 2) {
                 url = Constants.JIA_XI_QUAN;
+                tvAffirmUse.setText(R.string.qingxuanzeyaoshiyongdejiaxiquan);
             }
         }
 
@@ -228,7 +229,11 @@ public class RedPackageActivity extends BaseActivity {
                 } else {
                     redId = "";
                     acount = "";
-                    tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_qingxuanze));
+                    if (actType == 1) {
+                        tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_qingxuanze));
+                    }else {
+                        tvAffirmUse.setText(getResources().getString(R.string.qingxuanzeyaoshiyongdejiaxiquan));
+                    }
                     tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_munsel);
                 }
             }
