@@ -14,10 +14,12 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.adapter.FanXianQuanActLvAdapter;
 import com.tudoujf.adapter.JiaXiQuanActLvAdapter;
 import com.tudoujf.adapter.RedPackageActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.FanXianQuanBean;
 import com.tudoujf.bean.databean.JiaXiQuanBean;
 import com.tudoujf.bean.databean.RedBagBean;
 import com.tudoujf.config.Constants;
@@ -60,10 +62,12 @@ public class RedPackageActivity extends BaseActivity {
 
     private List<RedBagBean.ListBean> listRed;
     private List<JiaXiQuanBean.ListBean> listJiaXiQuan;
+    private List<FanXianQuanBean.ListBean> listFanXianQuan;
     private RedPackageActLvAdapter adapter;
     private JiaXiQuanActLvAdapter adapterJiaXiQuan;
+    private FanXianQuanActLvAdapter adapterFanXianQuan;
     /**
-     * 之前点击的item位置
+     * 0之前点击的item位置
      */
     private int beforePosition = -1;
     /**
@@ -84,12 +88,14 @@ public class RedPackageActivity extends BaseActivity {
     private String amount;
     private RedBagBean bean;
     private JiaXiQuanBean jiaXiQuanBean;
+    private FanXianQuanBean fanXianQuanBean;
 
     /**
      * 红包id
      */
     private String redId = "";
     private String acount = "";
+    private String together_status = "";
     /**
      * 请求的url连接
      */
@@ -104,19 +110,29 @@ public class RedPackageActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_redpackage2:
-                if (actType == 1) {//红包
-                    Intent intent = new Intent();
-                    intent.putExtra("redId", redId);
-                    intent.putExtra("acount", acount);
-                    setResult(888, intent);
-                    closeActivity();
-                } else if (actType == 2) {//加息券
-                    Intent intent = new Intent();
-                    intent.putExtra("redId", redId);
-                    intent.putExtra("acount", acount);
-                    setResult(999, intent);
-                    closeActivity();
-                }
+                skip();
+//                if (actType == 1) {//红包
+//                    Intent intent = new Intent();
+//                    intent.putExtra("redId", redId);
+//                    intent.putExtra("acount", acount);
+//                    intent.putExtra("together_status", together_status);
+//                    setResult(888, intent);
+//                    closeActivity();
+//                } else if (actType == 2) {//加息券
+//                    Intent intent = new Intent();
+//                    intent.putExtra("redId", redId);
+//                    intent.putExtra("acount", acount);
+//                    intent.putExtra("together_status", together_status);
+//                    setResult(999, intent);
+//                    closeActivity();
+//                } else if (actType == 3) {//返现券--------------------------------------------------------------------------------------------------
+//                    Intent intent = new Intent();
+//                    intent.putExtra("redId", redId);
+//                    intent.putExtra("acount", acount);
+//                    intent.putExtra("together_status", together_status);
+//                    setResult(777, intent);
+//                    closeActivity();
+//                }
                 break;
 //                     case R.id.:break;
 //                     case R.id.:break;
@@ -124,6 +140,27 @@ public class RedPackageActivity extends BaseActivity {
 //                     case R.id.:break;
 //                     case R.id.:break;
         }
+    }
+
+    private void skip() {
+        Intent intent = new Intent();
+        intent.putExtra("redId", redId);
+        intent.putExtra("acount", acount);
+        Log.e("TAG", "skip: -----"+together_status);
+
+        intent.putExtra("together_status", together_status);
+        switch (actType) {
+            case 1://红包
+                setResult(888, intent);
+                break;
+            case 2://加息券
+                setResult(999, intent);
+                break;
+            case 3://返现券
+                setResult(777, intent);
+                break;
+        }
+        closeActivity();
     }
 
     @Override
@@ -135,11 +172,15 @@ public class RedPackageActivity extends BaseActivity {
             is_beginner = bundle.getString("is_beginner");
             time_limit = bundle.getString("time_limit");
             amount = bundle.getString("amount");
+            together_status = bundle.getString("together_status");//----------------------------------------------------------------
             if (actType == 1) {
                 url = Constants.RED_BAG;
             } else if (actType == 2) {
                 url = Constants.JIA_XI_QUAN;
                 tvAffirmUse.setText(R.string.qingxuanzeyaoshiyongdejiaxiquan);
+            } else if (actType == 3) {//---------------------------------------------------------------------------------------------------
+                url = Constants.FAN_XIAN_QUAN;
+                tvAffirmUse.setText(R.string.qingxuanzeyaoshiyongdefanxianquan);
             }
         }
 
@@ -154,6 +195,8 @@ public class RedPackageActivity extends BaseActivity {
         mtbRedpackage.setLayoutParams(params);
         if (actType == 2) {
             mtbRedpackage.setCenterTitle(R.string.act_redpackage_jiaxiquan);
+        }else if (actType==3){
+            mtbRedpackage.setCenterTitle(R.string.xuanzefanxianquan);
         }
         mtbRedpackage.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,37 +214,37 @@ public class RedPackageActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == beforePosition) {
                     count++;
-                    if (actType == 2) {//加息券activity时
-                        if (count % 2 == 1) {
-                            setItemStyle(view, position, 2, "#E7FAFF", true);
-                            itemSel = true;
-                        } else {
-                            setItemStyle(view, position, 1, "#FFFFFF", false);
-                            itemSel = false;
-                        }
-                    } else {//红包activity时
-                        if (count % 2 == 1) {
-                            setItemStyle(view, position, 2, "#E7FAFF", true);
-                            itemSel = true;
-                        } else {
-                            setItemStyle(view, position, 1, "#FFFFFF", false);
-                            itemSel = false;
-                        }
-                    }
+//                    if (actType == 2) {//加息券activity时
+                    if (count % 2 == 1) {
+                        setItemStyle(view, position, 2, "#E7FAFF", true);
+                        itemSel = true;
+                    } else {
+                        setItemStyle(view, position, 1, "#FFFFFF", false);
+                        itemSel = false;
+                    }//--------------------------------------------------------------------------------------------------------------
+//                    } else {//红包activity时
+//                        if (count % 2 == 1) {
+//                            setItemStyle(view, position, 2, "#E7FAFF", true);
+//                            itemSel = true;
+//                        } else {
+//                            setItemStyle(view, position, 1, "#FFFFFF", false);
+//                            itemSel = false;
+//                        }
+//                    }
                 } else {//点击的不是同一个item时
-                    if (actType == 2) {//加息券activity时
-                        setItemStyle(view, position, 2, "#E7FAFF", true);
-                    } else {//红包activity时
-                        setItemStyle(view, position, 2, "#E7FAFF", true);
-                    }
+//                    if (actType == 2) {//加息券activity时
+                    setItemStyle(view, position, 2, "#E7FAFF", true);
+//                    } else {//红包activity时
+//                        setItemStyle(view, position, 2, "#E7FAFF", true);
+//                    }//-------------------------------------------------------------------------------------------------------------------------------
                     if (beforePosition != -1) {
 
                         if (lvRedpackage.getChildAt(beforePosition) != null) {
-                            if (actType == 2) {//加息券activity时
-                                setItemStyle(lvRedpackage.getChildAt(beforePosition), beforePosition, 1, "#FFFFFF", false);
-                            } else {//红包activity时
-                                setItemStyle(lvRedpackage.getChildAt(beforePosition), beforePosition, 1, "#FFFFFF", false);
-                            }
+//                            if (actType == 2) {//加息券activity时
+                            setItemStyle(lvRedpackage.getChildAt(beforePosition), beforePosition, 1, "#FFFFFF", false);
+//                            } else {//红包activity时
+//                                setItemStyle(lvRedpackage.getChildAt(beforePosition), beforePosition, 1, "#FFFFFF", false);
+//                            }
                         } else {
                             listRed.get(beforePosition).setBackground(1);
                         }
@@ -211,6 +254,7 @@ public class RedPackageActivity extends BaseActivity {
                         if (adapterJiaXiQuan != null) {
                             adapterJiaXiQuan.notifyDataSetChanged();
                         }
+
                     }
                     count = 1;
                     beforePosition = position;
@@ -220,20 +264,29 @@ public class RedPackageActivity extends BaseActivity {
                     if (actType == 1) {
                         redId = listRed.get(position).getId();
                         acount = listRed.get(position).getAmount();
+                        together_status = listRed.get(position).getTogether_status();
                     } else if (actType == 2) {
                         redId = listJiaXiQuan.get(position).getId();
                         acount = listJiaXiQuan.get(position).getInterest();
+                        together_status = listJiaXiQuan.get(position).getTogether_status();
+                    } else if (actType == 3) {
+                        redId = listFanXianQuan.get(position).getId();
+                        acount = listFanXianQuan.get(position).getProportion();
+                        together_status = listFanXianQuan.get(position).getTogether_status();
                     }
                     tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
                     tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                 } else {
                     redId = "";
                     acount = "";
+                    together_status = "";
                     if (actType == 1) {
                         tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_qingxuanze));
-                    }else {
+                    } else if (actType == 2) {
                         tvAffirmUse.setText(getResources().getString(R.string.qingxuanzeyaoshiyongdejiaxiquan));
-                    }
+                    } else if (actType == 3) {
+                        tvAffirmUse.setText(getResources().getString(R.string.qingxuanzeyaoshiyongdefanxianquan));
+                    }//----------------------------------------------------------------------------------------------------------------------------------
                     tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_munsel);
                 }
             }
@@ -248,6 +301,7 @@ public class RedPackageActivity extends BaseActivity {
         map.put("is_beginner", is_beginner);
         map.put("time_limit", time_limit);
         map.put("amount", amount);//该值不能为空
+        map.put("together_status", together_status);//该值不能为空
 
 
         HttpMethods.getInstance().POST(this, url, map, getLocalClassName(),
@@ -260,6 +314,8 @@ public class RedPackageActivity extends BaseActivity {
                             Log.e("TAG", "onSuccess:----获取可用红包接口返回数据--------" + result);
                         } else if (actType == 2) {
                             Log.e("TAG", "onSuccess:----获取可用加息券接口返回数据--------" + result);
+                        } else if (actType == 3) {
+                            Log.e("TAG", "onSuccess:----获取可用返现券接口返回数据--------" + result);
                         }
                         if (actType == 1) {
                             BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RedBagBean>() {
@@ -282,6 +338,16 @@ public class RedPackageActivity extends BaseActivity {
                             } else {
                                 ToastUtils.showToast(RedPackageActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                             }
+                        } else if (actType == 3) {
+                            BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<FanXianQuanBean>() {
+                            }.getType(), FanXianQuanBean.class, RedPackageActivity.this);
+                            if (bean1 != null) {
+                                fanXianQuanBean = (FanXianQuanBean) bean1;
+                                fanXianQuanBean.setType(actType);
+                                LoadInternetDataToUi();
+                            } else {
+                                ToastUtils.showToast(RedPackageActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                            }
                         }
 
                     }
@@ -294,7 +360,7 @@ public class RedPackageActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
         if (bean != null && actType == 1) {
             listRed = bean.getList();
-            tvRedpackageCount.setText("您有" + listRed.size() + "个红包可使用");
+            tvRedpackageCount.setText(("您有" + listRed.size() + "个红包可使用"));
             adapter = new RedPackageActLvAdapter(bean, this);
             lvRedpackage.setAdapter(adapter);
             HeightUtils.setListviewHeight(lvRedpackage);
@@ -302,9 +368,18 @@ public class RedPackageActivity extends BaseActivity {
 
         if (jiaXiQuanBean != null && actType == 2) {
             listJiaXiQuan = jiaXiQuanBean.getList();
-            tvRedpackageCount.setText("您有" + listJiaXiQuan.size() + "个加息券可使用");
+            tvRedpackageCount.setText(("您有" + listJiaXiQuan.size() + "个加息券可使用"));
             adapterJiaXiQuan = new JiaXiQuanActLvAdapter(jiaXiQuanBean, this);
             lvRedpackage.setAdapter(adapterJiaXiQuan);
+            HeightUtils.setListviewHeight(lvRedpackage);
+        }
+
+
+        if (fanXianQuanBean != null && actType == 3) {
+            listFanXianQuan = fanXianQuanBean.getList();
+            tvRedpackageCount.setText(("您有" + listFanXianQuan.size() + "个返现券可使用"));
+            adapterFanXianQuan = new FanXianQuanActLvAdapter(fanXianQuanBean, this);
+            lvRedpackage.setAdapter(adapterFanXianQuan);
             HeightUtils.setListviewHeight(lvRedpackage);
         }
 
@@ -328,6 +403,8 @@ public class RedPackageActivity extends BaseActivity {
             listRed.get(position).setBackground(backType);
         } else if (actType == 2) {
             listJiaXiQuan.get(position).setBackground(backType);
+        } else if (actType == 3) {
+            listFanXianQuan.get(position).setBackground(backType);
         }
         view.setBackgroundColor(Color.parseColor(color));
         ((MRedView) (view.findViewById(R.id.lvitem_redpackage_rv5))).setSel(sel);//红包view的选中状态

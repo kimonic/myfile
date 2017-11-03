@@ -84,6 +84,8 @@ public class AffirmBuyActivity extends BaseActivity {
     TextView tvRedPackage;
     @BindView(R.id.tv_act_affirmbuy_jiaxiquan)
     TextView tvJiaxiquan;
+    @BindView(R.id.tv_act_affirmbuy_fanxianquan)
+    TextView tvFanXianQuan;
     @BindView(R.id.tv_act_affirmbuy_lixi)
     TextView tvLiXi;
     @BindView(R.id.et_act_affirm_touzijine)
@@ -106,9 +108,14 @@ public class AffirmBuyActivity extends BaseActivity {
      */
     private String redId = "";
     private String jiaXiQuanId = "";
+    private String fanXianQuanId = "";
     private String acount = "";
     private String paypassword = "";
     private String has_password;
+    private int together_status_redbag = 1;
+    private int together_status_jiaxiquan = 1;
+    private int together_status_fanxianquan = 1;
+    private int together_status;
 
     @Override
     public int getLayoutResId() {
@@ -119,7 +126,22 @@ public class AffirmBuyActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_affirmbuy_fanxianquan://跳转返现券页面
-                openActivity(FanXianQuanSelActivity.class);
+                if (etTouZiJinE.getText().toString().equals("")) {
+                    ToastUtils.showToast(AffirmBuyActivity.this, R.string.qingxianshurutouzijine);
+                } else {
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putInt("type", 3);
+                    bundle2.putString("amount", etTouZiJinE.getText().toString());
+                    bundle2.putString("time_limit", time_limit);
+                    if (together_status_fanxianquan == -1) {
+                        together_status = 1;
+                    } else {
+                        together_status = together_status_redbag * together_status_jiaxiquan * together_status_fanxianquan;
+                    }
+                    bundle2.putString("together_status", "" + together_status);
+                    openActivityForResult(RedPackageActivity.class, bundle2, 777);
+                }
+
                 break;
             case R.id.ll_act_affirmbuy_jiaxiquan://跳转加息券界面
                 if (etTouZiJinE.getText().toString().equals("")) {
@@ -129,6 +151,12 @@ public class AffirmBuyActivity extends BaseActivity {
                     bundle1.putString("time_limit", time_limit);
                     bundle1.putInt("type", 2);
                     bundle1.putString("amount", etTouZiJinE.getText().toString());
+                    if (together_status_jiaxiquan == -1) {
+                        together_status = 1;
+                    } else {
+                        together_status = together_status_redbag * together_status_jiaxiquan * together_status_fanxianquan;
+                    }
+                    bundle1.putString("together_status", "" + together_status);
                     openActivityForResult(RedPackageActivity.class, bundle1, 999);
                 }
                 break;
@@ -141,6 +169,12 @@ public class AffirmBuyActivity extends BaseActivity {
                     bundle.putString("amount", etTouZiJinE.getText().toString());
                     bundle.putString("is_beginner", is_beginner);
                     bundle.putString("time_limit", time_limit);
+                    if (together_status_redbag == -1) {
+                        together_status = 1;
+                    } else {
+                        together_status = together_status_redbag * together_status_jiaxiquan * together_status_fanxianquan;
+                    }
+                    bundle.putString("together_status", "" + together_status);
                     openActivityForResult(RedPackageActivity.class, bundle, 888);
                 }
 
@@ -277,13 +311,18 @@ public class AffirmBuyActivity extends BaseActivity {
                 if (bean != null && StringUtils.string2Float(editable.toString()) >= 10) {
                     //计算预期收益
                     String temp = decimalFormat.format((StringUtils.string2Float(bean.getApr()) /
-                            100 * StringUtils.string2Float(editable.toString()) / 12)*StringUtils.string2Float(bean.getPeriod()));
+                            100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod()));
                     tvEarings.setText(temp);
                     tvLiXi.setText(temp);
                     redId = "";
                     jiaXiQuanId = "";
+                    fanXianQuanId="";
+                    together_status_redbag = 1;
+                    together_status_jiaxiquan = 1;
+                    together_status_fanxianquan = 1;
                     tvRedPackage.setText(R.string.dianjixuanzekeyonghongbao);
                     tvJiaxiquan.setText(R.string.dianjixuanzekeyongjiaxiquan);
+                    tvFanXianQuan.setText(R.string.dianjixuanzefanxianquan);
 
                 } else {
                     tvEarings.setText(R.string.ling);
@@ -336,7 +375,7 @@ public class AffirmBuyActivity extends BaseActivity {
                             bean = (AffirmBuyBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(AffirmBuyActivity.this, "数据加载出错!");
+                            ToastUtils.showToast(AffirmBuyActivity.this, R.string.shujujiazaichucuo);
                         }
                     }
 
@@ -418,27 +457,69 @@ public class AffirmBuyActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //---------------------------------红包-----------------------------------------------------
         if (requestCode == 888 && data != null) {//红包
             redId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
+            String status = data.getStringExtra("together_status");
+            Log.e("TAG", "onActivityResult: -----"+status);
+            if (!status.equals("")) {
+                together_status_redbag = StringUtils.string2Integer(status);
+            }
             if (redId == null || "".equals(redId)) {
                 ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyonghongbao));
                 tvRedPackage.setText(getResources().getString(R.string.meiyoukeyonghongbao));
             } else {
-                tvRedPackage.setText("已选" + acount + "元红包");
+                tvRedPackage.setText(("已选" + acount + "元红包"));
             }
         }
+        //---------------------------------红包-----------------------------------------------------
+
+
+
+
+        //---------------------------------加息券---------------------------------------------------
 
         if (requestCode == 999 && data != null) {//加息券
+
             jiaXiQuanId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
+            String status = data.getStringExtra("together_status");
+            if (!status.equals("")) {
+                together_status_jiaxiquan = StringUtils.string2Integer(status);
+            }
             if (jiaXiQuanId == null || "".equals(jiaXiQuanId)) {
                 ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
                 tvJiaxiquan.setText(getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
             } else {
-                tvJiaxiquan.setText("已选" + acount + "%加息券");
+                tvJiaxiquan.setText(("已选" + acount + "%加息券"));
             }
         }
+
+        //---------------------------------加息券---------------------------------------------------
+
+
+
+
+        //---------------------------------返现券---------------------------------------------------
+
+        if (requestCode == 777 && data != null) {//返现券
+            fanXianQuanId = data.getStringExtra("redId");
+            acount = data.getStringExtra("acount");
+            String status = data.getStringExtra("together_status");
+            if (!status.equals("")) {
+                together_status_fanxianquan = StringUtils.string2Integer(status);
+            }
+            if (fanXianQuanId == null || "".equals(fanXianQuanId)) {
+                ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyongfanxianquan));
+                tvFanXianQuan.setText(getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
+            } else {
+                tvFanXianQuan.setText(("已选" + acount + "%返现券"));
+            }
+        }
+
+        //---------------------------------返现券---------------------------------------------------
+
     }
 
     @Override

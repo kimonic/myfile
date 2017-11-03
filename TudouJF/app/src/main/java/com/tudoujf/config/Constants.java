@@ -144,6 +144,8 @@ public class Constants {
     public static final String COUPOM=URL+"/phone/coupon/list";
     /**我的的福利返现券列表接口*/
     public static final String CASH_BACK=URL+"/phone/cashback/list";
+ /**我的的福利返现券列表接口*/
+    public static final String FAN_XIAN_QUAN=URL+"/phone/tender/getCashback";
 
 
 

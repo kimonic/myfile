@@ -48,5 +48,31 @@
         android:layout_marginBottom="30dp"
         />
 
+    <LinearLayout
+        android:id="@+id/ll_act_redpackage_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:id="@+id/iv_act_redpackage_baoquan"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            />
+        <TextView
+            android:id="@+id/tv_act_redpackage_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:paddingTop="20dp"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

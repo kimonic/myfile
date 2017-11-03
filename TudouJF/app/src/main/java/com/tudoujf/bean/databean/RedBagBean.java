@@ -71,7 +71,16 @@ public class RedBagBean implements BaseBean {
         private String member_name;
         private String is_beginer;
         private String sign;
+        private String together_status;
         private int background=1;
+
+        public String getTogether_status() {
+            return together_status;
+        }
+
+        public void setTogether_status(String together_status) {
+            this.together_status = together_status;
+        }
 
         public int getBackground() {
             return background;

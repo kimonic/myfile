@@ -550,6 +550,10 @@
     <string name="jijiangkaiqixiayilun">即将开启下一轮!!!</string>
     <string name="qingxuanzeyaoshiyongdejiaxiquan">请选择要使用的加息券</string>
     <string name="huoquhongbaoxinxishibai">获取红包信息失败</string>
+    <string name="dianjixuanzefanxianquan">点击选择返现券</string>
+    <string name="qingxuanzeyaoshiyongdefanxianquan">请选择要使用的返现券</string>
+    <string name="meiyouxuanzhongkeyongfanxianquan">没有选中可用返现券!</string>
+    <string name="xuanzefanxianquan">选择返现券</string>
 
 
 </resources>

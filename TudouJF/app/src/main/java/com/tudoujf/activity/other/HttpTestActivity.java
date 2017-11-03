@@ -196,7 +196,7 @@ public class HttpTestActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!etCanshuInterface.getText().toString().trim().equals("")) {
-                    Log.e("TAG", "onSuccess: --------888------" + response.body());
+                    Log.e("TAG", "onSuccess: --------接口测试返回响应------" + response.body());
                     String result="";
                     try {
                         result = StringUtils.getDecodeString(response.body());
@@ -207,7 +207,7 @@ public class HttpTestActivity extends BaseActivity {
 
                     FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据"+ System.currentTimeMillis()+".txt",result);
                     //   /phone/loan/loanInfo  loan_id,292
-                    Log.e("TAG", "onSuccess:-----------哈哈---------- " + result);
+                    Log.e("TAG", "onSuccess:-----------接口测试返回结果---------- " + result);
                 } else {
                     tvActHttptest1.setText(response.body());
                 }

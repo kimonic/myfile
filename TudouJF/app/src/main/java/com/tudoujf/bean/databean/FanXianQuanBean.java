@@ -6,17 +6,17 @@ import java.util.List;
 
 /**
  * * ===============================================================
- * name:             JiaXiQuanBean
+ * name:             FanXianQuanBean
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：             2017/10/16
- * description：   获取可用加息券接口返回的bean
+ * date：             2017/11/3
+ * description：
  * history：
  * *==================================================================
  */
 
-public class JiaXiQuanBean implements BaseBean {
+public class FanXianQuanBean implements BaseBean {
 
     private List<ListBean> list;
     private int  type;
@@ -39,50 +39,37 @@ public class JiaXiQuanBean implements BaseBean {
 
     public static class ListBean {
         /**
-         * remark : pc端登陆赠送
+         * proportion : 1
+         * remark : 投资抽奖
          * status : -1
-         * coupon_type : 1
-         * dead_line : 0
-         * coupon_days : 0
-         * getway : 1
-         * member_id : 12269
-         * id : 12
-         * coupon_multiple : 0
-         * end_time : 1510502400
+         * getway : 9
+         * member_id : 12267
+         * id : 7
+         * sign : 投资抽奖
+         * together_status : -1
+         * end_time : 1512057599
          * time_limit : 1
-         * interest : 2
-         * name : 无限制(1个月)
-         * tender_amount_min : 0
-         * add_time : 1485878400
-         * member_name : 18033333333
+         * name : 10元以上(至少3个月)
+         * tender_amount_min : 10
+         * add_time : 1509167177
+         * member_name : 18011111111
          */
 
+        private String proportion;
         private String remark;
         private String status;
-        private String coupon_type;
-        private String dead_line;
-        private String coupon_days;
         private String getway;
         private String member_id;
         private String id;
-        private String coupon_multiple;
+        private String sign;
+        private String together_status;
         private String end_time;
         private String time_limit;
-        private String interest;
         private String name;
         private String tender_amount_min;
         private String add_time;
         private String member_name;
-        private String together_status;
-        private int background=1;
-
-        public String getTogether_status() {
-            return together_status;
-        }
-
-        public void setTogether_status(String together_status) {
-            this.together_status = together_status;
-        }
+        private  int  background=1;
 
         public int getBackground() {
             return background;
@@ -90,6 +77,14 @@ public class JiaXiQuanBean implements BaseBean {
 
         public void setBackground(int background) {
             this.background = background;
+        }
+
+        public String getProportion() {
+            return proportion;
+        }
+
+        public void setProportion(String proportion) {
+            this.proportion = proportion;
         }
 
         public String getRemark() {
@@ -106,30 +101,6 @@ public class JiaXiQuanBean implements BaseBean {
 
         public void setStatus(String status) {
             this.status = status;
-        }
-
-        public String getCoupon_type() {
-            return coupon_type;
-        }
-
-        public void setCoupon_type(String coupon_type) {
-            this.coupon_type = coupon_type;
-        }
-
-        public String getDead_line() {
-            return dead_line;
-        }
-
-        public void setDead_line(String dead_line) {
-            this.dead_line = dead_line;
-        }
-
-        public String getCoupon_days() {
-            return coupon_days;
-        }
-
-        public void setCoupon_days(String coupon_days) {
-            this.coupon_days = coupon_days;
         }
 
         public String getGetway() {
@@ -156,12 +127,20 @@ public class JiaXiQuanBean implements BaseBean {
             this.id = id;
         }
 
-        public String getCoupon_multiple() {
-            return coupon_multiple;
+        public String getSign() {
+            return sign;
         }
 
-        public void setCoupon_multiple(String coupon_multiple) {
-            this.coupon_multiple = coupon_multiple;
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
+
+        public String getTogether_status() {
+            return together_status;
+        }
+
+        public void setTogether_status(String together_status) {
+            this.together_status = together_status;
         }
 
         public String getEnd_time() {
@@ -178,14 +157,6 @@ public class JiaXiQuanBean implements BaseBean {
 
         public void setTime_limit(String time_limit) {
             this.time_limit = time_limit;
-        }
-
-        public String getInterest() {
-            return interest;
-        }
-
-        public void setInterest(String interest) {
-            this.interest = interest;
         }
 
         public String getName() {
