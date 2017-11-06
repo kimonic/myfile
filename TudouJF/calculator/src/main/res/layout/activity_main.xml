@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_green"
+    tools:context="com.tudoujf.calculator.MainActivity">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/fanxian"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_fanxian"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/shouyi"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_nianhuashouyi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/touzishijian"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_touzishijian"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="@string/yi"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/touzijine"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_touzijine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/zongnianhuashouyi"
+                android:textSize="16sp"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_act_main_zongnianhuashouyi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:contentDescription="@null"
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_act_main_calculator"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/color_douhuang"
+            android:gravity="center"
+            android:text="@string/jisuan"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/tianshuzhuanhuaweiyueshu"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_tianshu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:hint="@string/qingshuruyaozhuanhuadetianshu"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_act_main_translate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_douhuang"
+            android:gravity="center"
+            android:text="@string/jisuan"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_green"
+                android:gravity="center"
+                android:text="@string/tianshuzhuanhuaweiyueshu1"
+                android:textSize="16sp"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_main_tianshu1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/color_douhuang"
+                android:gravity="center"
+                android:hint="@string/qingshuruyaozhuanhuadetianshu"
+                android:inputType="number"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_act_main_translate1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/color_douhuang"
+            android:gravity="center"
+            android:text="@string/jisuan"
+            android:textSize="20sp" />
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<TextView-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/fanxian"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="16sp"-->
+        <!--android:background="@color/color_green"-->
+
+        <!--/>-->
+        <!--<EditText-->
+        <!--android:id="@+id/et_act_main_fanxian"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@null"-->
+        <!--android:inputType="number"-->
+        <!--android:textSize="16sp"-->
+        <!--/>-->
+
+        <!--</LinearLayout>-->
+
+
+    </LinearLayout>
+
+</ScrollView>

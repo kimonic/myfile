@@ -554,6 +554,8 @@
     <string name="qingxuanzeyaoshiyongdefanxianquan">请选择要使用的返现券</string>
     <string name="meiyouxuanzhongkeyongfanxianquan">没有选中可用返现券!</string>
     <string name="xuanzefanxianquan">选择返现券</string>
+    <string name="huoquzhanghuxinxishibai">获取账户信息失败!</string>
+    <string name="bangdingyinhangka">绑定银行卡</string>
 
 
 </resources>

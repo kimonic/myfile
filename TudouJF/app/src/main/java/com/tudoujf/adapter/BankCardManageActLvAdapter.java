@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.BankCardManageActBean;
+import com.tudoujf.bean.databean.BankCardManageBean;
+import com.tudoujf.utils.ImageGlideUtils;
 
 import java.util.List;
 
@@ -26,10 +28,10 @@ import java.util.List;
  */
 
 public class BankCardManageActLvAdapter extends BaseAdapter {
-    private List<BankCardManageActBean> list;
+    private List<BankCardManageBean.BankInfoBean> list;
     private Context context;
 
-    public BankCardManageActLvAdapter(List<BankCardManageActBean> list, Context context) {
+    public BankCardManageActLvAdapter(List<BankCardManageBean.BankInfoBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -53,29 +55,29 @@ public class BankCardManageActLvAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
-        if (convertView==null){
-            view = LayoutInflater.from(context).inflate(R.layout.lvitem_bankcardmanageact,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.textView1= (TextView) view.findViewById(R.id.lvitem_bankcardmanage_tvname);
-            viewHolder.textView2= (TextView) view.findViewById(R.id.lvitem_bankcardmanage_tvnumber);
-            viewHolder.imageView= (ImageView) view.findViewById(R.id.lvitem_bankcardmanage_ivicon);
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.lvitem_bankcardmanageact, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.textView1 = (TextView) view.findViewById(R.id.lvitem_bankcardmanage_tvname);
+            viewHolder.textView2 = (TextView) view.findViewById(R.id.lvitem_bankcardmanage_tvnumber);
+            viewHolder.imageView = (ImageView) view.findViewById(R.id.lvitem_bankcardmanage_ivicon);
             view.setTag(viewHolder);
-        }else {
-            view=convertView;
-            viewHolder= (ViewHolder) view.getTag();
+        } else {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getBankName());
-        viewHolder.textView2.setText(list.get(position).getCardNumber());
-        viewHolder.imageView.setImageResource(list.get(position).getImageResId());
-
+        viewHolder.textView1.setText(list.get(position).getBank_name());
+        viewHolder.textView2.setText(list.get(position).getAccount());
+        ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getBank_img());
+//        .setImageResource(list.get(position).getImageResId());
 
 
         return view;
     }
 
-    private class ViewHolder{
-        private TextView textView1,textView2;
+    private class ViewHolder {
+        private TextView textView1, textView2;
         private ImageView imageView;
     }
 }

@@ -67,6 +67,10 @@ public class StringUtils {
         Map<String, String> params = new HashMap<>(2);
         params.put("diyou", CreateCode.p2sDiyou(CreateCode.GetJson(map)));
         params.put("xmdy", CreateCode.p2sXmdy(CreateCode.p2sDiyou(CreateCode.GetJson(map))));
+
+//        Log.e("TAG", "getRequestParams: -diyou----"+params.get("diyou"));
+//        Log.e("TAG", "getRequestParams: -xmdy----"+params.get("xmdy"));
+
         return params;
     }
 

@@ -205,6 +205,8 @@
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawHuiFuActivity" />
         <!--69.猜猜乐activity-->
         <activity android:name=".activity.test.GuessHappyActivity" />
+        <!--70.添加银行卡汇付页面activity-->
+        <activity android:name=".activity.managemoney.AddBankCardHuiFuActivity" />
 
         <service
             android:name=".service.MyService"

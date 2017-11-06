@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">年化收益计算器</string>
+    <string name="fanxian">返现金额(元)</string>
+    <string name="shouyi">年化收益(%)</string>
+    <string name="touzishijian">投资时间(月)</string>
+    <string name="zongnianhuashouyi">总年化收益率</string>
+    <string name="jisuan">计算</string>
+    <string name="yi">1</string>
+    <string name="touzijine">投资金额(元)</string>
+    <string name="tianshuzhuanhuaweiyueshu">天数转化为月数(/30)</string>
+    <string name="tianshuzhuanhuaweiyueshu1">天数转化为月数(/31)</string>
+    <string name="qingshuruyaozhuanhuadetianshu">请输入要转化的天数</string>
+</resources>

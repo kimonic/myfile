@@ -1,22 +1,35 @@
 package com.tudoujf.activity.my.myaccount;
 
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.AddBankCardHuiFuActivity;
 import com.tudoujf.adapter.BankCardManageActLvAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.bean.BankCardManageActBean;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.BankCardManageBean;
+import com.tudoujf.bean.databean.IdentityCheckBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -41,7 +54,13 @@ public class BankCardManageActivity extends BaseActivity {
     LinearLayout llAdd;
 
 
-    private List<BankCardManageActBean>  list;
+    private BankCardManageBean  bean;
+
+    private  String  loginToken;
+
+
+    private List<BankCardManageBean.BankInfoBean>  list;
+    private IdentityCheckBean identityCheckBean;
 
 
     @Override
@@ -53,6 +72,8 @@ public class BankCardManageActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_bankcardmanage_add://添加银行卡
+                //需要先验证是否已实名
+                checkIdentity();
                 break;
 
         }
@@ -63,15 +84,17 @@ public class BankCardManageActivity extends BaseActivity {
     public void initDataFromIntent() {
 
         list=new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            BankCardManageActBean bean=new BankCardManageActBean();
-            bean.setImageResId(R.drawable.act_lock_icon);
-            bean.setBankName("中国农业银行");
-            bean.setCardNumber("622848************0544");
 
-            list.add(bean);
-
-        }
+        loginToken=UserConfig.getInstance().getLoginToken(this);
+//        for (int i = 0; i < 30; i++) {
+//            BankCardManageActBean bean=new BankCardManageActBean();
+//            bean.setImageResId(R.drawable.act_lock_icon);
+//            bean.setBankName("中国农业银行");
+//            bean.setCardNumber("622848************0544");
+//
+//            list.add(bean);
+//
+//        }
 
     }
 
@@ -84,8 +107,7 @@ public class BankCardManageActivity extends BaseActivity {
 
 
 
-        BankCardManageActLvAdapter adapter=new BankCardManageActLvAdapter(list,this);
-        lvInfo.setAdapter(adapter);
+
     }
 
     @Override
@@ -102,11 +124,47 @@ public class BankCardManageActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", loginToken);
 
+        HttpMethods.getInstance().POST(this, Constants.BANK_CARD_INFO, map, getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----绑定的银行卡列表接口返回数据--------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<BankCardManageBean>() {
+                        }.getType(), BankCardManageBean.class, BankCardManageActivity.this);
+                        if (bean1 != null) {
+                            bean = (BankCardManageBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(BankCardManageActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(BankCardManageActivity.this, R.string.huoquzhanghuxinxishibai);
+
+                    }
+                });
     }
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean!=null){
+            if (bean.getBank_info()!=null&&bean.getBank_info().size()>0){
+                list.addAll(bean.getBank_info());
+                BankCardManageActLvAdapter adapter=new BankCardManageActLvAdapter(list,this);
+                lvInfo.setAdapter(adapter);
+            }
+
+        }
 
     }
 
@@ -118,6 +176,42 @@ public class BankCardManageActivity extends BaseActivity {
     @Override
     protected boolean translucentStatusBar() {
         return true;
+    }
+
+
+    private void checkIdentity() {
+
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", loginToken);
+        HttpMethods.getInstance().POST(this, Constants.IDENTITY_CHECK, map, getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
+                }.getType(), IdentityCheckBean.class, BankCardManageActivity.this);
+                if (bean1 != null) {
+                    identityCheckBean = (IdentityCheckBean) bean1;
+                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
+                        openActivity(AddBankCardHuiFuActivity.class);
+                    } else {
+                        DialogUtils.showHuiFuDialog(BankCardManageActivity.this);
+                    }
+                } else {
+                    ToastUtils.showToast(BankCardManageActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(BankCardManageActivity.this, R.string.yanzhengshimingxinxishibai);
+            }
+        });
+
     }
 
 

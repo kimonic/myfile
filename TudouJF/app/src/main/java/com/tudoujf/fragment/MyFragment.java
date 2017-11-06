@@ -168,6 +168,7 @@ public class MyFragment extends BaseFragment {
             case R.id.ll_frag_my_myaccount://我的账户
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("name", bean.getMember_name());
+                bundle1.putString("iconurl", bean.getAvatar());
                 openActivity(MyAccountActivity.class, bundle1);
 
                 break;

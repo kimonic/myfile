@@ -45,7 +45,6 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
     }
 
     @SuppressLint("SetJavaScriptEnabled")

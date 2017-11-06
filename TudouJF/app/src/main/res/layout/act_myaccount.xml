@@ -54,6 +54,7 @@
                     android:orientation="vertical"
                     >
                     <TextView
+                        android:id="@+id/tv_act_myaccount_username"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -65,6 +66,7 @@
                         />
 
                     <ImageView
+                        android:id="@+id/iv_act_myaccount_vip"
                         android:layout_width="23dp"
                         android:layout_height="14dp"
                         android:src="@drawable/frag_my_vipt"
@@ -138,6 +140,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_act_myaccount_bankcard_description"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -191,12 +194,12 @@
 
 
                 <TextView
+                    android:id="@+id/tv_act_myaccount_huifu_description"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp"
-                    android:text="XXXXXXXXXX"
+                    android:textSize="12sp"
                     android:gravity="center_vertical|end"
                     />
 
@@ -253,6 +256,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_act_myaccount_phone_description"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -274,6 +278,7 @@
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_email"
 
@@ -287,24 +292,24 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/act_account_youxiangrenzheng"
-                    />
+                    android:contentDescription="@null"
+                    android:src="@drawable/act_account_youxiangrenzheng" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
-                    android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/youxiangrenzheng"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp"
 
                     />
 
 
                 <TextView
+                    android:id="@+id/tv_act_myaccount_email_description"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -316,13 +321,12 @@
                 <TextView
                     android:layout_width="11dp"
                     android:layout_height="18dp"
-                    android:background="@drawable/xvector_rightarrowlarge"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginStart="10dp"
-                    />
+                    android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
             <LinearLayout
@@ -356,6 +360,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_act_myaccount_name_description"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

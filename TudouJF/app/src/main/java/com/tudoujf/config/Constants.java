@@ -132,41 +132,47 @@ public class Constants {
      * 个人中心首页
      */
     public static final String PERSONAL_CENTER_MAIN = URL + "/phone/member/memberCenter";
-    /**资金详情接口*/
-    public static final String FUND_DETAILS=URL+"/phone/account/memberAccount";
-    /**交易记录接口*/
-    public static final String TRADERECORD = URL+ "/phone/account/accountLog";
+    /**
+     * 资金详情接口
+     */
+    public static final String FUND_DETAILS = URL + "/phone/account/memberAccount";
+    /**
+     * 交易记录接口
+     */
+    public static final String TRADERECORD = URL + "/phone/account/accountLog";
 
-    /**我的的福利红包列表接口*/
-    public static final String BOUNTY=URL+"/phone/bounty/list";
+    /**
+     * 我的的福利红包列表接口
+     */
+    public static final String BOUNTY = URL + "/phone/bounty/list";
 
-    /**我的的福利加息券列表接口*/
-    public static final String COUPOM=URL+"/phone/coupon/list";
-    /**我的的福利返现券列表接口*/
-    public static final String CASH_BACK=URL+"/phone/cashback/list";
- /**我的的福利返现券列表接口*/
-    public static final String FAN_XIAN_QUAN=URL+"/phone/tender/getCashback";
+    /**
+     * 我的的福利加息券列表接口
+     */
+    public static final String COUPOM = URL + "/phone/coupon/list";
+    /**
+     * 我的福利返现券列表接口
+     */
+    public static final String CASH_BACK = URL + "/phone/cashback/list";
+    /**
+     * 我的福利返现券列表接口
+     */
+    public static final String FAN_XIAN_QUAN = URL + "/phone/tender/getCashback";
 
+    /**
+     * 我的账户接口
+     */
+    public static final String MY_ACCOUNT = URL + "/phone/member/myAccountdata";
 
+    /**
+     * 获取绑定的银行卡列表信息
+     */
+    public static final String BANK_CARD_INFO = URL + "/phone/bank/index";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 绑定银行卡,跳转汇付
+     */
+    public static final String YIBAO_BIND_CARD = URL + "/phone/trust/bindBankCard";
 
 
     /**
@@ -476,10 +482,6 @@ public class Constants {
     public static final String CHANGE_BANK_CARD = URL
             + "/phone/bank/editBank";
     /**
-     * 获取银行卡信息
-     */
-    public static final String BANK_CARD_INFO = URL + "/phone/bank/index";
-    /**
      * 获取银行卡头信息
      */
     public static final String BANK_CARD_NID = URL + "/phone/bank/getBankNid";
@@ -562,11 +564,6 @@ public class Constants {
             + "/phone/recharge/rechargeFee";
 
 
-    /**
-     * 易宝绑定银行卡
-     */
-    public static final String YIBAO_BIND_CARD = URL
-            + "/phone/trust/bindBankCard";
     /**
      * 易宝解绑银行卡
      */

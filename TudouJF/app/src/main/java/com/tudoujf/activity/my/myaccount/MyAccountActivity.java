@@ -12,11 +12,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -28,29 +25,35 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.encryptionpackages.AESencrypt;
-import com.example.encryptionpackages.CreateCode;
-import com.lzy.imagepicker.util.BitmapUtil;
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.DrawGestureActivity;
 import com.tudoujf.activity.other.LockActivity;
-import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.AffirmBuyBean;
+import com.tudoujf.bean.databean.MyAccountBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
+import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -89,8 +92,24 @@ public class MyAccountActivity extends BaseActivity {
     TextView tvSignOut;
     @BindView(R.id.tv_act_myaccount_oc)
     TextView tvOC;
+    @BindView(R.id.tv_act_myaccount_username)
+    TextView tvUserName;
+    @BindView(R.id.tv_act_myaccount_bankcard_description)
+    TextView tvBankcardDescription;
+    @BindView(R.id.tv_act_myaccount_huifu_description)
+    TextView tvHuifuDescription;
+    @BindView(R.id.tv_act_myaccount_phone_description)
+    TextView tvPhoneDescription;
+    @BindView(R.id.tv_act_myaccount_email_description)
+    TextView tvEmailDescription;
+@BindView(R.id.tv_act_myaccount_name_description)
+    TextView tvNameDescription;
+
+
     @BindView(R.id.iv_act_myaccount_icon)
     ImageView ivIcon;
+    @BindView(R.id.iv_act_myaccount_vip)
+    ImageView ivVip;
     TextView tvPhotograph;
     TextView tvAlbum;
 
@@ -102,10 +121,13 @@ public class MyAccountActivity extends BaseActivity {
      */
     private boolean isOpen;
     private AlertDialog.Builder dialogOpen, dialogClose;
-    private  String  userName;
+    private String userName;
+
+    private MyAccountBean bean;
 
 
     private int requestCount = 0;
+    private String iconurl;
 
 
     @Override
@@ -204,9 +226,10 @@ public class MyAccountActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        Bundle bundle=getIntent().getExtras();
-        if (bundle!=null){
-            userName=bundle.getString("name");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userName = bundle.getString("name");
+            iconurl = bundle.getString("iconurl");
         }
 
     }
@@ -264,11 +287,58 @@ public class MyAccountActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+
+        HttpMethods.getInstance().POST(this, Constants.MY_ACCOUNT, map, getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----我的账户接口返回数据--------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyAccountBean>() {
+                        }.getType(), MyAccountBean.class, MyAccountActivity.this);
+                        if (bean1 != null) {
+                            bean = (MyAccountBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(MyAccountActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(MyAccountActivity.this, R.string.huoquzhanghuxinxishibai);
+
+                    }
+                });
 
     }
 
     @Override
     public void LoadInternetDataToUi() {
+
+        if (bean != null) {
+            ImageGlideUtils.loadCircularImage(ivIcon, iconurl);
+            tvUserName.setText(userName);
+            if (bean.getIsVip() == 1) {//是否是vip
+                ivVip.setImageResource(R.drawable.frag_my_vipt);
+            } else {
+                ivVip.setImageResource(R.drawable.frag_my_vip);
+            }
+
+            tvBankcardDescription.setText(bean.getBankName());
+            tvHuifuDescription.setText(bean.getTrust_account().getStatus_name());
+            tvPhoneDescription.setText(bean.getIs_phone().getStatus_name());
+            tvEmailDescription.setText(bean.getIs_email().getStatus_name());
+            tvNameDescription.setText(bean.getIs_realname().getStatus_name());
+
+
+        }
 
     }
 
@@ -303,12 +373,12 @@ public class MyAccountActivity extends BaseActivity {
         } else if (requestCode == 111) {//开启手势密码是否成功
             if (data != null && data.getBooleanExtra("result", false)) {
                 tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
-                isOpen=true;
+                isOpen = true;
             }
 
         } else if (requestCode == 222 && data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
             tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
-            isOpen=false;
+            isOpen = false;
         }
 
 
@@ -351,9 +421,9 @@ public class MyAccountActivity extends BaseActivity {
             dialogOpen = DialogUtils.showDialogS(this, R.string.jijiangkaiqishoushimima, R.string.queding, R.string.kaiqishoushimima, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Bundle bundle=new Bundle();
-                    bundle.putString("name",userName);
-                    bundle.putString("type","open");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", userName);
+                    bundle.putString("type", "open");
                     openActivityForResult(DrawGestureActivity.class, bundle, 111);//打开绘制手势密码界面
                 }
             });
@@ -369,9 +439,9 @@ public class MyAccountActivity extends BaseActivity {
             dialogClose = DialogUtils.showDialogS(this, R.string.jijiangguanbishoushimima, R.string.queding, R.string.guanbishoushimima, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Bundle bundle=new Bundle();
-                    bundle.putString("name",userName);
-                    bundle.putString("type","close");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name", userName);
+                    bundle.putString("type", "close");
                     openActivityForResult(LockActivity.class, bundle, 222);//打开手势密码界面
                 }
             });
