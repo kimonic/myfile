@@ -1,6 +1,7 @@
 package com.tudoujf.activity.home;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -52,6 +54,9 @@ public class HomeActivity extends BaseActivity {
     private boolean isLogin = false;
 
     private int beforePosition = 0;
+
+    /**是否已开启手势密码*/
+    private  boolean  isLock=false;
 
     @Override
     public void initDataFromIntent() {
@@ -102,7 +107,15 @@ public class HomeActivity extends BaseActivity {
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
-                } else {
+                }
+                else if (position == 3 &&UserConfig.getInstance().getLockPass(HomeActivity.this)&&!UserConfig.getInstance().isDraw()){//已登录已设置手势密码本次未验证手势密码
+//                    openActivity(LockActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "jiesuo");
+                    openActivityForResult(LockActivity.class, bundle,555);//打开手势密码界面
+                    return false;
+                }
+                else {
                     beforePosition = position;
                     return true;
                 }
@@ -114,7 +127,14 @@ public class HomeActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 if (position == 3 && !isLogin) {
                     openLoginAct();
-                } else {
+                }
+                else if (position == 3 &&UserConfig.getInstance().getLockPass(HomeActivity.this)&&!UserConfig.getInstance().isDraw()){//已登录已设置手势密码本次未验证手势密码
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "jiesuo");
+                    openActivity(LockActivity.class, bundle);//打开手势密码界面
+//                    openActivity(LockActivity.class);
+                }
+                else {
                     beforePosition = position;
                 }
 
@@ -132,6 +152,7 @@ public class HomeActivity extends BaseActivity {
 //            isLogin = true;
 //        }
         checkLogin();
+
 
     }
 
@@ -200,6 +221,10 @@ public class HomeActivity extends BaseActivity {
                 vpActHome.setCurrentItem(3);
             }
 
+        }else if (requestCode==555){
+            if (UserConfig.getInstance().isDraw()){
+                vpActHome.setCurrentItem(3);
+            }
         }
     }
 
@@ -224,7 +249,10 @@ public class HomeActivity extends BaseActivity {
         int flag = intent.getIntExtra("flag", 0);
         if (flag == 555) {
             vpActHome.setCurrentItem(1);
+        }else if (flag==55){
+            vpActHome.setCurrentItem(0);
         }
+
 
     }
 }

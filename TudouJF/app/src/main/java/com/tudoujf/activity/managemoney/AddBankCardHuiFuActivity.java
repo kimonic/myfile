@@ -100,6 +100,7 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
         mtbActHuiFuRegister.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(61);
                 closeActivity();
             }
         });
@@ -170,7 +171,8 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
             
             if (url.contains(Constants.STATUS_CLOSE)) {
 //                UserConfig.getInstance().setCreditorFlush(true);
-                openActivity(RechargeRecordActivity.class);
+//                openActivity(RechargeRecordActivity.class);
+                setResult(61);
                 finish();
             }
 
@@ -268,6 +270,7 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
             wvActHuiFuRegister.goBack();
         } else {
             if (System.currentTimeMillis() - beforeTime < 2000) {
+                setResult(61);
                 closeActivity();
             } else {
                 beforeTime = System.currentTimeMillis();

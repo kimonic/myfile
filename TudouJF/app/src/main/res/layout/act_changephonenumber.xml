@@ -15,6 +15,7 @@
         app:leftImage="@drawable/xvector_back" />
 
     <TextView
+        android:id="@+id/tv_act_changephonenumber_old"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:textColor="@color/color_black"
@@ -24,7 +25,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="20dp"
-        android:text="已绑定的手机号:187****8888"
         />
 
 

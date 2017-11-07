@@ -556,6 +556,15 @@
     <string name="xuanzefanxianquan">选择返现券</string>
     <string name="huoquzhanghuxinxishibai">获取账户信息失败!</string>
     <string name="bangdingyinhangka">绑定银行卡</string>
+    <string name="xiugaimimashibai">修改密码失败!</string>
+    <string name="liangcishurudemimabuyizhi">两次输入的密码不一致!!</string>
+    <string name="mimatishi">密码必须是6-16位数字和字母的组合!!</string>
+    <string name="yanzhengmashurucuowu">验证码输入错误!</string>
+    <string name="yanzhengmahuoqushibai">验证码获取失败!</string>
+    <string name="liushimiaohou">\"60秒后可重新获取验证码!\"</string>
+    <string name="bangdingshoujihaochenggong">绑定手机号成功!</string>
+    <string name="shoujihaobangdingshibai">手机号绑定失败!</string>
+    <string name="qingshurushoujihao">请输入手机号!</string>
 
 
 </resources>

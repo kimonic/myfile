@@ -157,6 +157,24 @@ public class DialogUtils {
     }
 
 
+
+    /**
+     * 不含取消按钮,不含标题  传输文本
+     *
+     * @param activity     context
+     * @param message      消息
+     * @param positiveText 确定按钮文本
+     * @param listener     确定按钮点击事件
+     */
+    public static void showDialogNoTitle(final Activity activity, String message, String positiveText, DialogInterface.OnClickListener listener) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+        dialog.setCancelable(false);
+        dialog.setMessage(message)
+                .setPositiveButton(positiveText, listener)
+                .show();
+    }
+
+
     /**
      * /**
      * 展示土豆进度dialog
@@ -282,7 +300,7 @@ public class DialogUtils {
                 // TODO: 2017/8/1 开通资金托管逻辑
                 Intent intent=new Intent(context, RealNameAuthenticationHuiFuActivity.class);
                 context.startActivity(intent);
-
+                pop.dismiss();
             }
         });
 

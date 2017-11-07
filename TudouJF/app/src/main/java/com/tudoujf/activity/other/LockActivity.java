@@ -141,6 +141,9 @@ public class LockActivity extends BaseActivity {
                     Intent intent=new Intent();
                     intent.putExtra("result",true);
                     setResult(222,intent);
+                }else if ("jiesuo".equals(type)){
+                    UserConfig.getInstance().setDraw(true);
+                    setResult(555);
                 }else {
                     openActivity(HomeActivity.class);//手势密码验证成功后打开的页面
                 }

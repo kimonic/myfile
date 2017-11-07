@@ -1,12 +1,15 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
@@ -30,6 +33,11 @@ public class ChangePhoneNumberActivity extends BaseActivity {
     MTopBarView mtbActChangePhonenumber;
     @BindView(R.id.tv_act_changephonenumber_change)
     TextView tvChange;
+    @BindView(R.id.tv_act_changephonenumber_old)
+    TextView tvOld;
+
+    private String phone;
+    private String hidePhone;
 
     @Override
     public int getLayoutResId() {
@@ -40,7 +48,13 @@ public class ChangePhoneNumberActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_changephonenumber_change://验证已绑定号码
-                openActivity(CheckOldPhoneNumberActivity.class);
+                Intent intent = new Intent(this, CheckOldPhoneNumberActivity.class);
+                intent.putExtra("hidePhone", hidePhone);
+                intent.putExtra("phone", phone);
+                startActivity(intent);
+                closeActivity();
+
+//                openActivity(CheckOldPhoneNumberActivity.class);
                 break;
         }
 
@@ -48,7 +62,7 @@ public class ChangePhoneNumberActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+        phone = UserConfig.getInstance().getBindPhone();
     }
 
     @Override
@@ -57,6 +71,17 @@ public class ChangePhoneNumberActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActChangePhonenumber.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActChangePhonenumber.setLayoutParams(params);
+        Log.e("TAG", "initView:phone -----"+phone);
+        Log.e("TAG", "initView: ----phone.length()-"+phone.length());
+
+
+        if (phone != null && phone.length() == 11) {
+            hidePhone = phone.substring(0, 3) + "****" + phone.substring(7);
+            tvOld.setText(("已绑定的手机号:" + hidePhone));
+        } else {
+            tvOld.setText("已绑定的手机号:***********");
+        }
+
     }
 
     @Override

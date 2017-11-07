@@ -230,5 +230,16 @@ public class LoginActivity extends BaseActivity {
         return map;
     }
 
+    @Override
+    public void onBackPressed() {
 
+        if (type==55){
+            Intent intent=new Intent(this,HomeActivity.class);
+            intent.putExtra("flag",55);
+            startActivity(intent);
+        }else {
+            closeActivity();
+        }
+
+    }
 }

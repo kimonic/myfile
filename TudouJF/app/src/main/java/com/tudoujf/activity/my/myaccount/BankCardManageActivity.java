@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -195,7 +196,7 @@ public class BankCardManageActivity extends BaseActivity {
                 if (bean1 != null) {
                     identityCheckBean = (IdentityCheckBean) bean1;
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-                        openActivity(AddBankCardHuiFuActivity.class);
+                        openActivityForResult(AddBankCardHuiFuActivity.class,null,61);
                     } else {
                         DialogUtils.showHuiFuDialog(BankCardManageActivity.this);
                     }
@@ -214,5 +215,11 @@ public class BankCardManageActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==61){
+            initDataFromInternet();
+        }
+    }
 }

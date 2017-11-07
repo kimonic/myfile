@@ -174,6 +174,54 @@ public class Constants {
      */
     public static final String YIBAO_BIND_CARD = URL + "/phone/trust/bindBankCard";
 
+    /**
+     * 设置修改登录密码
+     */
+    public static final String EDITPWD = URL + "/phone/member/editPwd";
+
+    /**
+     * 验证元手机号获取的验证码是否正确,更改绑定手机时使用
+     */
+    public static final String VERIFY_CODE = URL + "/phone/public/verifyCode";
+
+
+    /**
+     * 修改手机绑定接口
+     */
+    public static final String CHANGE_PHONE = URL + "/phone/approve/resetPhone";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    ------------------------------------------------------------------------------------------------
+//    ------------------------------------------------------------------------------------------------
+//    ------------------------------------------------------------------------------------------------
+//    ------------------------------------------------------------------------------------------------
+//    ------------------------------------------------------------------------------------------------
+//    ------------------------------------------------------------------------------------------------
 
     /**
      * 托管注册
@@ -377,10 +425,6 @@ public class Constants {
      */
     public static final String INVESTINTEREST = URL
             + "/phone/tender/investInterest";
-    /**
-     * 设置修改登录密码
-     */
-    public static final String EDITPWD = URL + "/phone/member/editPwd";
 
     /**
      * 判断用户是否设置支付密码
@@ -424,11 +468,7 @@ public class Constants {
      */
     public static final String INSIDELETTER_STATUS = URL
             + "/phone/member/messageView";
-    /**
-     * 修改手机绑定
-     */
-    public static final String CHANGE_PHONE = URL
-            + "/phone/approve/resetPhone";
+
     /**
      * 修改邮箱绑定
      */

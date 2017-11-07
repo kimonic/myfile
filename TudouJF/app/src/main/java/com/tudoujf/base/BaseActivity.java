@@ -208,6 +208,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         if (!isAppOnForeground()) {
             //app 进入后台
             ToastUtils.showToast(this, "土豆app已经进入后台运行!!");
+            if (UserConfig.getInstance().getLockPass(this)){//已开启手势密码
+                UserConfig.getInstance().setDraw(false);
+            }
+
 //                全局变量 记录当前已经进入后台
             isActive = false;
         }

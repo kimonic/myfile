@@ -96,13 +96,14 @@
         />
 
     <TextView
+        android:id="@+id/tv_act_commitphonenumber_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
-        android:text="已向手机187****8888发送验证码,请输入短信验证码完成绑定."
+        android:visibility="gone"
         android:textColor="@color/color_gray"
         android:textSize="12sp"
         />

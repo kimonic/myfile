@@ -102,7 +102,7 @@ public class MyAccountActivity extends BaseActivity {
     TextView tvPhoneDescription;
     @BindView(R.id.tv_act_myaccount_email_description)
     TextView tvEmailDescription;
-@BindView(R.id.tv_act_myaccount_name_description)
+    @BindView(R.id.tv_act_myaccount_name_description)
     TextView tvNameDescription;
 
 
@@ -151,6 +151,10 @@ public class MyAccountActivity extends BaseActivity {
             case R.id.ll_act_myaccount_huifu://我的汇付账号
                 break;
             case R.id.ll_act_myaccount_phone://手机绑定
+//                Intent intent1 = new Intent(this, ChangePhoneNumberActivity.class);
+//                intent1.putExtra("phone",bean.getPhone());
+//                startActivity(intent1);
+
                 openActivity(ChangePhoneNumberActivity.class);
                 break;
             case R.id.ll_act_myaccount_email://邮箱认证
@@ -330,6 +334,8 @@ public class MyAccountActivity extends BaseActivity {
             } else {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
             }
+
+            UserConfig.getInstance().setBindPhone(bean.getPhone());
 
             tvBankcardDescription.setText(bean.getBankName());
             tvHuifuDescription.setText(bean.getTrust_account().getStatus_name());

@@ -22,7 +22,6 @@
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="原手机号:187****8888"
         android:textColor="@color/color_black"
         android:textSize="16sp" />
 
@@ -101,7 +100,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
-        android:text="已向手机187****8888发送验证码,请输入短信验证码完成绑定."
+        android:visibility="gone"
         android:textColor="@color/color_gray"
         android:textSize="12sp" />
 

@@ -31,6 +31,12 @@ public class UserConfig {
     private String loginToken;
     private boolean lockPass;
 
+    /**本次应用在前台时是否已验证过手势密码*/
+    private boolean isDraw=false;
+    /**绑定的手机号*/
+    private  String  bindPhone;
+
+
     private boolean creditorFlush = false;
 
     public boolean isCreditorFlush() {
@@ -195,6 +201,26 @@ public class UserConfig {
      */
     public void setLockPass(boolean lockPass) {
         this.lockPass = lockPass;
+    }
+
+    /**本次应用在前台时是否已验证过手势密码*/
+    public boolean isDraw() {
+        return isDraw;
+    }
+
+    /**本次应用在前台时是否已验证过手势密码*/
+    public void setDraw(boolean draw) {
+        isDraw = draw;
+    }
+
+    /**绑定的手机号*/
+    public String getBindPhone() {
+        return bindPhone;
+    }
+
+    /**绑定的手机号*/
+    public void setBindPhone(String bindPhone) {
+        this.bindPhone = bindPhone;
     }
 
     /**
