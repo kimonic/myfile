@@ -25,9 +25,15 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
@@ -45,6 +51,8 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.FileUtils;
+import com.tudoujf.utils.GlideImageLoaderUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -53,6 +61,7 @@ import com.tudoujf.utils.ToastUtils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -220,9 +229,32 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.act_myaccount_xiangcexuanqu://相册选取
                 dialog.dismiss();
-                Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
-                albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-                startActivityForResult(albumIntent, 2);
+//                Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
+//                albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+//                startActivityForResult(albumIntent, 2);
+
+                ImagePicker imagePicker = ImagePicker.getInstance();
+                imagePicker.setImageLoader(new GlideImageLoaderUtils());
+                imagePicker.setMultiMode(true);   //多选
+                imagePicker.setShowCamera(true);  //显示拍照按钮
+                imagePicker.setSelectLimit(1);    //最多选择9张
+                imagePicker.setCrop(false);       //不进行裁剪
+
+
+                imagePicker.setCrop(true);        //允许裁剪（单选才有效）
+                imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+                imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
+                imagePicker.setFocusWidth(300);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+                imagePicker.setFocusHeight(300);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+                imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+                imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, 2);
+
+
+
+
                 break;
         }
 
@@ -327,7 +359,7 @@ public class MyAccountActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
         if (bean != null) {
-            ImageGlideUtils.loadCircularImage(ivIcon, iconurl);
+            ImageGlideUtils.loadCircularImage(ivIcon, iconurl + "?aa=" + System.currentTimeMillis());
             tvUserName.setText(userName);
             if (bean.getIsVip() == 1) {//是否是vip
                 ivVip.setImageResource(R.drawable.frag_my_vipt);
@@ -362,20 +394,71 @@ public class MyAccountActivity extends BaseActivity {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
         } else if (requestCode == 2 && data != null) {
-            //遗留问题:小米4手机中,一旦点击图片则返回本activity,无法点击相册中的确定
-            ContentResolver resolver = getContentResolver();
-            try {
-                InputStream inputStream = resolver.openInputStream(data.getData());
+//            //遗留问题:小米4手机中,一旦点击图片则返回本activity,无法点击相册中的确定
+//            ContentResolver resolver = getContentResolver();
+//            try {
+//                InputStream inputStream = resolver.openInputStream(data.getData());
+//
+//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//                //------------------------------------------------------------------------------------------------------------------------------------------
+//                //------------------------------------------------------------------------------------------------------------------------------------------
+//                String path=FileUtils.saveImageToGallery(this,bitmap);
+//                Log.e("TAG", "onActivityResult: ---图片存储路径--"+path);
+//                HttpMethods.getInstance().postFile(this, Constants.POST_FILE, UserConfig.getInstance().getLoginToken(this), path,
+//                        new StringCallback() {
+//                            @Override
+//                            public void onSuccess(Response<String> response) {
+//                                Log.e("TAG", "onSuccess: ---图片存储路径--"+response.body());
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(Response<String> response) {
+//                                super.onError(response);
+//                                Log.e("TAG", "onSuccess: ---图片存储路径--"+response.body());
+//                            }
+//
+//                            @Override
+//                            public void uploadProgress(Progress progress) {
+//                                super.uploadProgress(progress);
+//                                Log.e("TAG", "uploadProgress: --图片存储路径-progress--"+progress);
+//
+//                            }
+//                        });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//                //------------------------------------------------------------------------------------------------------------------------------------------
+//                //------------------------------------------------------------------------------------------------------------------------------------------
+//
+//                int density = ScreenSizeUtils.getDensity(this);
+//                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
+//
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
 
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                int density = ScreenSizeUtils.getDensity(this);
 
-
-                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            ArrayList<ImageItem> imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+            if (imageItems != null && imageItems.size() > 0) {
+                postImage(imageItems.get(0).path);
+//                Bitmap bitmap = BitmapFactory.decodeFile(imageItems.get(0).path);
+//                int density = ScreenSizeUtils.getDensity(this);
+                ImageGlideUtils.loadCircularImage(ivIcon, imageItems.get(0).path);
+//                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
+            } else {
+                ToastUtils.showToast(MyAccountActivity.this, R.string.meiyouxuanzhongtupian);
             }
+
         } else if (requestCode == 111) {//开启手势密码是否成功
             if (data != null && data.getBooleanExtra("result", false)) {
                 tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
@@ -388,6 +471,39 @@ public class MyAccountActivity extends BaseActivity {
         }
 
 
+    }
+
+
+    private void postImage(String path) {
+        showPDialog();
+        HttpMethods.getInstance().postFile(this, Constants.POST_FILE, UserConfig.getInstance().getLoginToken(this), path,
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        Log.e("TAG", "onSuccess: ---图片存储路径--" + response.body());
+                        if (response.body().contains("200")){
+                            ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanchenggong);
+                        }else {
+                            ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanshibai);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanshibai);
+                        Log.e("TAG", "onSuccess: ---图片存储路径--" + response.body());
+                    }
+
+                    @Override
+                    public void uploadProgress(Progress progress) {
+                        super.uploadProgress(progress);
+                        Log.e("TAG", "uploadProgress: --图片存储路径-progress--" + progress);
+
+                    }
+                });
     }
 
     @Override

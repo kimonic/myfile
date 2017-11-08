@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_default_bg_color">#33000000</color>
+    <declare-styleable name="NineGridView"><attr format="dimension" name="ngv_singleImageSize"/><attr format="float" name="ngv_singleImageRatio"/><attr format="dimension" name="ngv_gridSpacing"/><attr format="integer" name="ngv_maxSize"/><attr format="enum" name="ngv_mode">
+        <enum name="fill" value="0"/>
+        <enum name="grid" value="1"/>
+    </attr></declare-styleable>
+    <string name="select">%1$s/%2$s</string>
+</resources>

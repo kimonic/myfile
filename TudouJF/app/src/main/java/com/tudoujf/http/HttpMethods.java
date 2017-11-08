@@ -9,6 +9,7 @@ import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.FileCallback;
 import com.tudoujf.utils.StringUtils;
 
+import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -90,6 +91,19 @@ public class HttpMethods {
                 .cacheKey("sds")
                 .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
                 .params(paramsMap)
+                .execute(callback);
+
+    }
+
+    public void postFile( Context context, String url,   String loginToken,String filePath,
+                          Callback callback) {
+        OkGo.post(url)//
+                .tag(context)
+//                .isMultipart(true)//
+                .params("login_token",loginToken)
+                .params("headImage",new File(filePath))
+                .cacheKey("sds")
+                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
                 .execute(callback);
 
     }

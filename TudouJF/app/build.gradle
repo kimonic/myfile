@@ -118,6 +118,8 @@ dependencies {
     //    数据库操作库
     compile 'org.litepal.android:core:1.5.1'
     compile 'com.android.support:cardview-v7:26.1.0'
+
+    compile 'com.lzy.widget:ninegridview:0.2.1'
 }
 //此处依赖可能有问题----------------------------------------------------------------
 

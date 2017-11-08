@@ -108,6 +108,7 @@ public class InfoView extends View {
         canvas.drawColor(Color.parseColor("#E7FAFF"));//背景色
         float underlineScale=(width*0.9259f)*underlineScale1/100/width;
 
+
         float bitScale1=0.03333f;//位图1高与控件高的比例
         int bitWidth1= (int) (width*bitScale1);//控件的高度
         float initScale=13.5f;//位图1左上角位置与控件宽度的比例
@@ -140,7 +141,6 @@ public class InfoView extends View {
 
         canvas.drawLine(width/1.86f,width/61.74f,width/1.86f,rectImag1.bottom-5,paintCyan);//中分线
 
-        Log.e("TAG", "onDraw: -------------dsdsdsd--------"+underlineScale);
         canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
 
 
@@ -174,8 +174,9 @@ public class InfoView extends View {
         rectF.top=width/4.07f;
 
         rectF.right=rectF.left+width*0.10407f;
-        if (rectF.right>width-rectF.left){
-            rectF.left=width-+width*0.10407f;
+
+        if (rectF.right-rectF.left>width-rectF.left){
+            rectF.left=width-width*0.10407f;
             rectF.right=width;
         }
 
@@ -183,7 +184,7 @@ public class InfoView extends View {
         canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
 
         paintWhite.setTextSize(width*0.02777f);
-        canvas.drawText(handleProgress(),rectF.left+width*0.01f,width*0.2731f,paintWhite);
+        canvas.drawText(handleProgress(),rectF.left+((rectF.right-rectF.left)/2-paintWhite.measureText(handleProgress())/2),width*0.2731f,paintWhite);
 
         canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
         //------------------------------------------投资进度--------------------------------------

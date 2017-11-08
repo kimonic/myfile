@@ -189,6 +189,10 @@ public class Constants {
      * 修改手机绑定接口
      */
     public static final String CHANGE_PHONE = URL + "/phone/approve/resetPhone";
+/**
+     * 上传头像图片接口
+     */
+    public static final String POST_FILE = URL + "/phone/member/avatarSubmit";
 
 
 

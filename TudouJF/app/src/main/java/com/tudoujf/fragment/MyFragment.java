@@ -309,7 +309,7 @@ public class MyFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar());
+            ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar()+"?aa="+System.currentTimeMillis());
             tvUsername.setText((getResources().getString(R.string.huanyingni) + bean.getMember_name()));
             tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getInterest_award()));
             tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));

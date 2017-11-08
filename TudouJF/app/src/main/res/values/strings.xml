@@ -565,6 +565,9 @@
     <string name="bangdingshoujihaochenggong">绑定手机号成功!</string>
     <string name="shoujihaobangdingshibai">手机号绑定失败!</string>
     <string name="qingshurushoujihao">请输入手机号!</string>
+    <string name="meiyouxuanzhongtupian">没有选中图片</string>
+    <string name="tupianshangchuanchenggong">图片上传成功!</string>
+    <string name="tupianshangchuanshibai">图片上传失败!</string>
 
 
 </resources>

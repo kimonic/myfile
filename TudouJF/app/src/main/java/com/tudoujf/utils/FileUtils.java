@@ -1,11 +1,16 @@
 package com.tudoujf.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -151,6 +156,43 @@ public class FileUtils {
 
     }
 
+
+    /**保存图片到本地*/
+    public static String saveImageToGallery(Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
+
+        Log.e("TAG", "saveImageToGallery: --图片存储路径---"+appDir.getAbsolutePath());
+
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+//        String fileName = System.currentTimeMillis() + ".jpg";
+        String fileName =  "icon.jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return appDir.getAbsolutePath()+"/icon.jpg";
+        // 最后通知图库更新
+//        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
+    }
 
     public static void fileDir(Context context) {
         Log.e("TAG", "fileDir:1---------------" + context.getExternalCacheDir());//应用内缓存目录

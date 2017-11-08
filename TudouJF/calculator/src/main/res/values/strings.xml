@@ -6,8 +6,12 @@
     <string name="zongnianhuashouyi">总年化收益率</string>
     <string name="jisuan">计算</string>
     <string name="yi">1</string>
-    <string name="touzijine">投资金额(元)</string>
+    <string name="touzijine">投资金额(千元)</string>
+    <string name="touzijine1">投资金额(元)</string>
+    <string name="touzijine2">投资金额(万元)</string>
     <string name="tianshuzhuanhuaweiyueshu">天数转化为月数(/30)</string>
     <string name="tianshuzhuanhuaweiyueshu1">天数转化为月数(/31)</string>
     <string name="qingshuruyaozhuanhuadetianshu">请输入要转化的天数</string>
+    <string name="dangqianyinianyi">当前以一年12个月的方式计算年化收益,点击改变</string>
+    <string name="dangqianyinianyi1" >当前以一年365/30个月的方式计算年化收益,点击改变</string>
 </resources>

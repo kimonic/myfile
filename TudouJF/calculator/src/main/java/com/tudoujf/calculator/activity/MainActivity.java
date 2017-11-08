@@ -1,10 +1,13 @@
-package com.tudoujf.calculator;
+package com.tudoujf.calculator.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.tudoujf.calculator.R;
 
 import java.text.DecimalFormat;
 
@@ -25,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvZongNianhuaShouYi;
     @BindView(R.id.tv_act_main_calculator)
     TextView tvCalculator;
+    @BindView(R.id.tv_act_main_changeyueshu)
+    TextView tvChangeYueShu;
+    @BindView(R.id.tv_act_main_changeunit)
+    TextView tvChangeUnit;
 
 
     @BindView(R.id.et_act_main_tianshu)
@@ -36,6 +43,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.tv_act_main_translate1)
     TextView tvTranslate1;
     private DecimalFormat decimalFormat;
+
+    /**
+     * 一年中月的计算方式
+     */
+    private float yueShu = 12;
+
+    private int count = 1;
+    private int count1 = 0;
+
+    /**
+     * 当前单位
+     */
+    private int unit = 1000;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvCalculator.setOnClickListener(this);
         tvTranslate.setOnClickListener(this);
         tvTranslate1.setOnClickListener(this);
+        tvChangeYueShu.setOnClickListener(this);
+        tvChangeUnit.setOnClickListener(this);
     }
 
     @Override
@@ -60,19 +83,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 float fanxian = stringTofloat(etFanXian.getText().toString().trim());
                 float nianhuashouyi = stringTofloat(etNianHuaShouYi.getText().toString().trim()) / 100;
                 float touzishijian = stringTofloat(etTouZiShiJian.getText().toString().trim());
-                float touzijine = stringTofloat(etTouZiJinE.getText().toString().trim());
+                float touzijine = stringTofloat(etTouZiJinE.getText().toString().trim()) * unit;
 
-                float temp = (fanxian + touzijine * nianhuashouyi * touzishijian /12)*365/30 / touzishijian/ touzijine * 100;
+                float temp = (fanxian + touzijine * nianhuashouyi * touzishijian / 12) * yueShu / touzishijian / touzijine * 100;
+                Log.e("TAG", "onClick: -temp----" + temp);
+                Log.e("TAG", "onClick: ---yueShu--" + yueShu);
                 tvZongNianhuaShouYi.setText((decimalFormat.format(temp) + "%"));
 
                 break;
             case R.id.tv_act_main_translate:
-                etTouZiShiJian.setText((""+stringTofloat(etTianshu.getText().toString().trim())/30));
+                etTouZiShiJian.setText(("" + stringTofloat(etTianshu.getText().toString().trim()) / 30));
                 etTianshu1.setText("");
                 break;
             case R.id.tv_act_main_translate1:
                 etTianshu.setText("");
-                etTouZiShiJian.setText((""+stringTofloat(etTianshu1.getText().toString().trim())/31));
+                etTouZiShiJian.setText(("" + stringTofloat(etTianshu1.getText().toString().trim()) / 31));
+                break;
+            case R.id.tv_act_main_changeyueshu://改变月的计算方式
+                if (count % 2 == 0) {
+                    yueShu = 12;
+                    tvChangeYueShu.setText(R.string.dangqianyinianyi);
+                } else {
+                    yueShu = 365f / 30;
+                    tvChangeYueShu.setText(R.string.dangqianyinianyi1);
+                }
+                count++;
+                break;
+
+            case R.id.tv_act_main_changeunit:
+                if (count1 % 3 == 0) {
+                    unit = 1;
+                    tvChangeUnit.setText(R.string.touzijine1);
+
+                } else if (count1 % 3 == 1) {
+                    unit = 1000;
+                    tvChangeUnit.setText(R.string.touzijine);
+
+                } else if (count1 % 3 == 2) {
+                    unit = 10000;
+                    tvChangeUnit.setText(R.string.touzijine2);
+
+                }
+                count1++;
                 break;
         }
 
@@ -80,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private float stringTofloat(String str) {
 
-        if (str == null||str.equals("")) {
+        if (str == null || str.equals("")) {
             return 0;
         } else {
             try {
