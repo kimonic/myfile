@@ -113,7 +113,7 @@
                 android:layout_weight="1"
                 android:background="@color/color_green"
                 android:gravity="center"
-                android:text="@string/touzijine"
+                android:text="@string/touzijine2"
                 android:textSize="16sp"
 
                 />

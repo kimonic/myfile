@@ -138,6 +138,9 @@
 -dontwarn com.lzy.okgo.**
 -keep class com.lzy.okgo.**
 
+-dontwarn com.lzy.com.lzy.imagepicker.**
+-keep class com.lzy.com.lzy.imagepicker.**
+
 
 -dontwarn com.tudoujf.config.**
 -keep class com.tudoujf.config.**

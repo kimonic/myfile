@@ -15,10 +15,13 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MLockView;
+import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,6 +58,7 @@ public class LockActivity extends BaseActivity {
 
     private String userName;
     private String type;
+    private String name;
 
     @Override
     public int getLayoutResId() {
@@ -77,19 +81,34 @@ public class LockActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        //******************************************************************************************
+//                            手势密码加用户识别后可能会出错
+        //******************************************************************************************
+
+        String  loginToken= UserConfig.getInstance().getLoginToken(this);
+        name= MD5Utils.md5(loginToken);
+
         handler = new Handler();
-        password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("ciphertext", "");
+        password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString(name+"ciphertext", "");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 //            userName = bundle.getString("name");//用户名
             type = bundle.getString("type");//关闭锁屏密码
         }
         userName= SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString("userName", "");
+
+
     }
 
     @Override
     public void initView() {
-        ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
+        String  path= FileUtils.getIconPath(this);
+        File file=new File(path);
+        if (file.exists()){
+            ImageGlideUtils.loadCircularImage(ivIcon, path);
+        }else {
+            ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
+        }
         mlvActLock.setPassword(password);
         Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
 //        TreeMap<String,String>  map=new TreeMap<>();
@@ -134,8 +153,9 @@ public class LockActivity extends BaseActivity {
                 if ("close".equals(type)){
 
                     UserConfig.getInstance().setLockPass(false);
-                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put("lockPass", false);
-                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put("ciphertext", "");
+
+                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name+"lockPass", false);
+                    SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name+"ciphertext", "");
 
                     ToastUtils.showToast(LockActivity.this, R.string.quxiaoshoushimimachenggong);
                     Intent intent=new Intent();

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.encryptionpackages.AESencrypt;
 import com.example.encryptionpackages.CreateCode;
 import com.tudoujf.activity.other.LoginActivity;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 
@@ -31,10 +32,14 @@ public class UserConfig {
     private String loginToken;
     private boolean lockPass;
 
-    /**本次应用在前台时是否已验证过手势密码*/
-    private boolean isDraw=false;
-    /**绑定的手机号*/
-    private  String  bindPhone;
+    /**
+     * 本次应用在前台时是否已验证过手势密码
+     */
+    private boolean isDraw = false;
+    /**
+     * 绑定的手机号
+     */
+    private String bindPhone;
 
 
     private boolean creditorFlush = false;
@@ -192,7 +197,8 @@ public class UserConfig {
      */
     public boolean getLockPass(Context context) {
 
-        return SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).getBoolean("lockPass", false);
+        return SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).getBoolean(MD5Utils.md5(getLoginToken(context))
+                + "lockPass", false);
 
     }
 
@@ -203,22 +209,30 @@ public class UserConfig {
         this.lockPass = lockPass;
     }
 
-    /**本次应用在前台时是否已验证过手势密码*/
+    /**
+     * 本次应用在前台时是否已验证过手势密码
+     */
     public boolean isDraw() {
         return isDraw;
     }
 
-    /**本次应用在前台时是否已验证过手势密码*/
+    /**
+     * 本次应用在前台时是否已验证过手势密码
+     */
     public void setDraw(boolean draw) {
         isDraw = draw;
     }
 
-    /**绑定的手机号*/
+    /**
+     * 绑定的手机号
+     */
     public String getBindPhone() {
         return bindPhone;
     }
 
-    /**绑定的手机号*/
+    /**
+     * 绑定的手机号
+     */
     public void setBindPhone(String bindPhone) {
         this.bindPhone = bindPhone;
     }

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 当前单位
      */
-    private int unit = 1000;
+    private int unit = 10000;
 
 
     @Override

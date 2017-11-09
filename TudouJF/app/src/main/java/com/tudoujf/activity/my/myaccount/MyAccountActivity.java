@@ -229,32 +229,14 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.act_myaccount_xiangcexuanqu://相册选取
                 dialog.dismiss();
-//                Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
-//                albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-//                startActivityForResult(albumIntent, 2);
-
                 ImagePicker imagePicker = ImagePicker.getInstance();
                 imagePicker.setImageLoader(new GlideImageLoaderUtils());
                 imagePicker.setMultiMode(true);   //多选
                 imagePicker.setShowCamera(true);  //显示拍照按钮
                 imagePicker.setSelectLimit(1);    //最多选择9张
                 imagePicker.setCrop(false);       //不进行裁剪
-
-
-                imagePicker.setCrop(true);        //允许裁剪（单选才有效）
-                imagePicker.setSaveRectangle(true); //是否按矩形区域保存
-                imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
-                imagePicker.setFocusWidth(300);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
-                imagePicker.setFocusHeight(300);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
-                imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
-                imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
-
                 Intent intent = new Intent(this, ImageGridActivity.class);
                 startActivityForResult(intent, 2);
-
-
-
-
                 break;
         }
 
@@ -383,10 +365,8 @@ public class MyAccountActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("TAG", "onActivityResult:相册???--- " + data);
         if (requestCode == 1 && data != null) {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
-            Log.e("TAG", "onActivityResult: --------------------" + photo);
             if (photo != null) {
                 ivIcon.setImageBitmap(photo);
                 // TODO: 2017/9/11 将拍照图片设置为头像并上传服务器,无裁剪
@@ -394,67 +374,11 @@ public class MyAccountActivity extends BaseActivity {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
         } else if (requestCode == 2 && data != null) {
-//            //遗留问题:小米4手机中,一旦点击图片则返回本activity,无法点击相册中的确定
-//            ContentResolver resolver = getContentResolver();
-//            try {
-//                InputStream inputStream = resolver.openInputStream(data.getData());
-//
-//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//                //------------------------------------------------------------------------------------------------------------------------------------------
-//                //------------------------------------------------------------------------------------------------------------------------------------------
-//                String path=FileUtils.saveImageToGallery(this,bitmap);
-//                Log.e("TAG", "onActivityResult: ---图片存储路径--"+path);
-//                HttpMethods.getInstance().postFile(this, Constants.POST_FILE, UserConfig.getInstance().getLoginToken(this), path,
-//                        new StringCallback() {
-//                            @Override
-//                            public void onSuccess(Response<String> response) {
-//                                Log.e("TAG", "onSuccess: ---图片存储路径--"+response.body());
-//
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(Response<String> response) {
-//                                super.onError(response);
-//                                Log.e("TAG", "onSuccess: ---图片存储路径--"+response.body());
-//                            }
-//
-//                            @Override
-//                            public void uploadProgress(Progress progress) {
-//                                super.uploadProgress(progress);
-//                                Log.e("TAG", "uploadProgress: --图片存储路径-progress--"+progress);
-//
-//                            }
-//                        });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//                //------------------------------------------------------------------------------------------------------------------------------------------
-//                //------------------------------------------------------------------------------------------------------------------------------------------
-//
-//                int density = ScreenSizeUtils.getDensity(this);
-//                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
-//
-//
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-
 
             ArrayList<ImageItem> imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
             if (imageItems != null && imageItems.size() > 0) {
                 postImage(imageItems.get(0).path);
-//                Bitmap bitmap = BitmapFactory.decodeFile(imageItems.get(0).path);
-//                int density = ScreenSizeUtils.getDensity(this);
-                ImageGlideUtils.loadCircularImage(ivIcon, imageItems.get(0).path);
-//                ivIcon.setImageBitmap(BitmapUtils.getReduceBitmap(bitmap, 30 * density, 30 * density));
+                // TODO: 2017/11/9 是否将头像文件保存到本地???
             } else {
                 ToastUtils.showToast(MyAccountActivity.this, R.string.meiyouxuanzhongtupian);
             }
@@ -474,7 +398,7 @@ public class MyAccountActivity extends BaseActivity {
     }
 
 
-    private void postImage(String path) {
+    private void postImage(final String path) {
         showPDialog();
         HttpMethods.getInstance().postFile(this, Constants.POST_FILE, UserConfig.getInstance().getLoginToken(this), path,
                 new StringCallback() {
@@ -482,9 +406,18 @@ public class MyAccountActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         Log.e("TAG", "onSuccess: ---图片存储路径--" + response.body());
-                        if (response.body().contains("200")){
+                        if (response.body().contains("200")) {
                             ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanchenggong);
-                        }else {
+                            ImageGlideUtils.loadCircularImage(ivIcon, path);
+                            new Thread() {
+                                @Override
+                                public void run() {
+                                    String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, path);
+                                    Log.e("TAG", "run: -图片存储路径--imPath--"+imPath);
+
+                                }
+                            }.start();
+                        } else {
                             ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanshibai);
                         }
                     }

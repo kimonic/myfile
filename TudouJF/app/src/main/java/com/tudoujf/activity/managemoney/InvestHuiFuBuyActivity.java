@@ -258,6 +258,7 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
                         ws.setLoadWithOverviewMode(true);
                         ws.setBuiltInZoomControls(true);
 
+
                         wvActHuiFuRegister.postUrl(url, params.getBytes());//提交post请求
 
                     } else if (code.equals("100")) {

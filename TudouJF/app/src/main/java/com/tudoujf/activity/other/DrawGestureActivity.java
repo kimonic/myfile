@@ -14,10 +14,13 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.EncryptionLockUtils;
+import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
@@ -84,7 +87,14 @@ public class DrawGestureActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
+        String  path= FileUtils.getIconPath(this);
+        File file=new File(path);
+        if (file.exists()){
+            ImageGlideUtils.loadCircularImage(ivIcon, path);
+        }else {
+            ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
+        }
+
         if ("open".equals(type)) {
             tvPass.setVisibility(View.GONE);
         }
@@ -156,8 +166,11 @@ public class DrawGestureActivity extends BaseActivity {
 
     private void savePassword(List<Integer> list) {
         String temp = EncryptionLockUtils.convertEncryption(this, list);
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("ciphertext", temp);
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("lockPass", true);
+        String  loginToken= UserConfig.getInstance().getLoginToken(this);
+        String name= MD5Utils.md5(loginToken);
+
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name+"ciphertext", temp);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name+"lockPass", true);
     }
 
     @Override

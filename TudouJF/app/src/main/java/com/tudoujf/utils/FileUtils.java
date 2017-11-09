@@ -8,12 +8,17 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.tudoujf.config.UserConfig;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.Date;
 
 /**
  * * ==================================================
@@ -156,31 +161,69 @@ public class FileUtils {
 
     }
 
+    /**返回本地头像图片的保存路径*/
+    public  static String getIconPath(Context context){
+        // 首先确定保存图片的目录
+        String  loginToken= UserConfig.getInstance().getLoginToken(context);
+        String name=MD5Utils.md5(loginToken);
+        File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
+        if (!appDir.exists()) {
+            if (!appDir.mkdir()){
+                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
+            }
+        }
+        String fileName =  name+"icon.jpg";
+        Log.e("TAG", "iconPath: file.getAbsolutePath()-----"+appDir.getAbsolutePath()+"/"+fileName);
+        return appDir.getAbsolutePath()+"/"+fileName;
+    }
+
 
     /**保存图片到本地*/
-    public static String saveImageToGallery(Context context, Bitmap bmp) {
-        // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
+    public static String saveImageToGallery(Context context, String path) {
 
-        Log.e("TAG", "saveImageToGallery: --图片存储路径---"+appDir.getAbsolutePath());
-
+        String  loginToken= UserConfig.getInstance().getLoginToken(context);
+        String name=MD5Utils.md5(loginToken);
+        // 首先确定保存图片的目录
+        File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
-            appDir.mkdir();
+            if (!appDir.mkdir()){
+                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
+            }
         }
-//        String fileName = System.currentTimeMillis() + ".jpg";
-        String fileName =  "icon.jpg";
+        String fileName =  name+"icon.jpg";
         File file = new File(appDir, fileName);
+        File oFile=new File(path);
+        int length=2097152;
+
         try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
+            FileInputStream in = new FileInputStream(oFile);
+            FileOutputStream out=new FileOutputStream(file);
+            FileChannel inC=in.getChannel();
+            FileChannel outC=out.getChannel();
+
+            ByteBuffer b=null;
+            while(true){
+                if(inC.position()==inC.size()){
+                    inC.close();
+                    outC.close();
+                    break;
+                }
+                if((inC.size()-inC.position())<length){
+                    length=(int)(inC.size()-inC.position());
+                }else
+                    length=2097152;
+                b=ByteBuffer.allocateDirect(length);
+                inC.read(b);
+                b.flip();
+                outC.write(b);
+                outC.force(false);
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(),
