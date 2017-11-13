@@ -43,15 +43,15 @@ public class Utils
     }
 
     public static void setEditTextEnable(EditText editText, boolean isEnable){
-
+        //键盘获取焦点
         editText.setFocusable(isEnable);
-
+        //设置是否可用
         editText.setEnabled(isEnable);
-
+        //触摸获取焦点
         editText.setFocusableInTouchMode(isEnable);
 
         if(isEnable){
-
+            //请求焦点
             editText.requestFocus();
 
         }

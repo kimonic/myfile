@@ -20,7 +20,7 @@ import java.util.Locale;
 
 public class TimeUtils {
     /**
-     * @return 返回系统时间--时 分
+     * @return 返回系统当前时间--时 分
      */
     public static String getCurentTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -106,7 +106,7 @@ public class TimeUtils {
 
     /**
      *  获取当前月份
-     * @return  月份字符串
+     * @return  月份字符串  01或11格式
      */
     public static String getCurrentMonthStr() {
         Calendar calendar = Calendar.getInstance();
@@ -115,6 +115,7 @@ public class TimeUtils {
             return "0" + month;
         } else {
             return "" + month;
+
         }
     }
 

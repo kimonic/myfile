@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 float temp = (fanxian + touzijine * nianhuashouyi * touzishijian / 12) * yueShu / touzishijian / touzijine * 100;
                 Log.e("TAG", "onClick: -temp----" + temp);
                 Log.e("TAG", "onClick: ---yueShu--" + yueShu);
-                Log.e("TAG", "onClick: ---yueShu--" + yueShu);
                 tvZongNianhuaShouYi.setText((decimalFormat.format(temp) + "%"));
 
                 break;

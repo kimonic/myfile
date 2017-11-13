@@ -1,6 +1,7 @@
 package com.tudoujf.utils;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 /**
@@ -20,7 +21,7 @@ import android.widget.Toast;
 public class ToastUtils {
 
     /**使用资源id展示*/
-    public static void showToast(Context context,int resId){
+    public static void showToast(Context context,@StringRes int resId){
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
     }
 
@@ -31,5 +32,9 @@ public class ToastUtils {
     /**使用字符串展示*/
     public static void showToast(Context context,String content,int duration ){
         Toast.makeText(context, content,duration).show();
+    }
+    /**使用资源id展示*/
+    public static void showToast(Context context,@StringRes int resId,int duration ){
+        Toast.makeText(context, resId,duration).show();
     }
 }
