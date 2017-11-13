@@ -230,10 +230,10 @@ public class GameView extends View {
                             greenCount++;
                         } else if (random > 40 && random < 76) {
                             listColorFlag.set(count, 3);
-                            yellowCount++;
+                            blueCount++;
                         } else if (random > 75 && random < 95) {
                             listColorFlag.set(count, 2);
-                            blueCount++;
+                            yellowCount++;
                         } else {
                             listColorFlag.set(count, 1);
                             redCount++;

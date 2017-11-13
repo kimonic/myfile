@@ -1,4 +1,4 @@
-package com.tudoujf.utils;
+package com.tudoujf.utils.utils;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -145,7 +145,7 @@ public class TimeUtils {
         return getCurrentYear() + "-" + getCurrentMonthStr() + "-01";
     }
     /**
-     * 获取某年某月
+     * 获取当前月份的1号字符串
      */
     public static String getCurrentFirstOfTheMonteh(int year,int month) {
             return year + "年" +month + "月";

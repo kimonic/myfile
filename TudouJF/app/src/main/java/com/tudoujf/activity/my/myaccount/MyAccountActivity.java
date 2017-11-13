@@ -3,12 +3,10 @@ package com.tudoujf.activity.my.myaccount;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -25,13 +23,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.lzy.imagepicker.view.CropImageView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
@@ -42,14 +38,12 @@ import com.tudoujf.activity.other.DrawGestureActivity;
 import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.AffirmBuyBean;
 import com.tudoujf.bean.databean.MyAccountBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
-import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.GlideImageLoaderUtils;
@@ -59,8 +53,6 @@ import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -122,7 +114,6 @@ public class MyAccountActivity extends BaseActivity {
     TextView tvPhotograph;
     TextView tvAlbum;
 
-    private int count = 0;
     private AlertDialog dialog;
     private View view;
     /**
@@ -413,7 +404,7 @@ public class MyAccountActivity extends BaseActivity {
                                 @Override
                                 public void run() {
                                     String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, path);
-                                    Log.e("TAG", "run: -图片存储路径--imPath--"+imPath);
+                                    Log.e("TAG", "run: -图片存储路径--imPath--" + imPath);
 
                                 }
                             }.start();

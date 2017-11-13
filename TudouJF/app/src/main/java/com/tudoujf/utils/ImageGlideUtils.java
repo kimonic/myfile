@@ -34,6 +34,20 @@ public class ImageGlideUtils {
                 .bitmapTransform(new CropCircleTransformation(view.getContext()))
                 .into(view);
     }
+
+    /**加载圆形网络图片无缓存模式*/
+    public static  void loadCircularImageNoCache(ImageView view, String url) {
+        Glide.with(view.getContext())
+                .load(url)
+                .error(R.mipmap.ic_launcher) //加载图片失败的时候显示的默认图
+                .placeholder(R.mipmap.ic_launcher)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
+                .skipMemoryCache(true)
+                .crossFade()//淡入淡出
+                .centerCrop()
+                .bitmapTransform(new CropCircleTransformation(view.getContext()))
+                .into(view);
+    }
     /**加载圆形本地资源图片*/
     public static  void loadCircularImage(ImageView view, int resId) {
         Glide.with(view.getContext())

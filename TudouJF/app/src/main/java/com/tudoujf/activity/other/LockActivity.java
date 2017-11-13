@@ -105,7 +105,7 @@ public class LockActivity extends BaseActivity {
         String  path= FileUtils.getIconPath(this);
         File file=new File(path);
         if (file.exists()){
-            ImageGlideUtils.loadCircularImage(ivIcon, path);
+            ImageGlideUtils.loadCircularImageNoCache(ivIcon, path);
         }else {
             ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         }

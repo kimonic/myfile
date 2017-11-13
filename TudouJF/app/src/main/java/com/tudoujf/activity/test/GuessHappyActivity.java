@@ -113,28 +113,28 @@ public class GuessHappyActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_test_add1:
-                add(100);
-                break;
-            case R.id.tv_act_test_add2:
-                add(500);
-                break;
-            case R.id.tv_act_test_add3:
                 add(1000);
                 break;
-            case R.id.tv_act_test_add4:
+            case R.id.tv_act_test_add2:
+                add(5000);
+                break;
+            case R.id.tv_act_test_add3:
                 add(10000);
                 break;
+            case R.id.tv_act_test_add4:
+                add(100000);
+                break;
             case R.id.tv_act_test_minus1:
-                minus(100);
-                break;
-            case R.id.tv_act_test_minus2:
-                minus(500);
-                break;
-            case R.id.tv_act_test_minus3:
                 minus(1000);
                 break;
-            case R.id.tv_act_test_minus4:
+            case R.id.tv_act_test_minus2:
+                minus(5000);
+                break;
+            case R.id.tv_act_test_minus3:
                 minus(10000);
+                break;
+            case R.id.tv_act_test_minus4:
+                minus(100000);
                 break;
             case R.id.tv_act_test_red:
                 type = 1;
