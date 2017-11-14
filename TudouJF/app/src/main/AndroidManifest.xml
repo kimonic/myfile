@@ -207,6 +207,8 @@
         <activity android:name=".activity.test.GuessHappyActivity" />
         <!--70.添加银行卡汇付页面activity-->
         <activity android:name=".activity.managemoney.AddBankCardHuiFuActivity" />
+        <!--71.幸运抽奖activity-->
+        <activity android:name=".activity.discover.LuckyLotteryActivity" />
 
         <service
             android:name=".service.MyService"

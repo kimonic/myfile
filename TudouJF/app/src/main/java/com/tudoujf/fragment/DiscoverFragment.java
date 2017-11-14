@@ -5,6 +5,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.discover.LuckyLotteryActivity;
+import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.adapter.DiscoverFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.DiscoverFragBean;
@@ -48,20 +50,33 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_frag_discover_bt1:
+                openActivity(LuckyLotteryActivity.class);
+                break;
+            case R.id.ll_frag_discover_bt2:
+                openActivity(IntegralShopActivity.class);
+                break;
+            case R.id.ll_frag_discover_bt3:
+                break;
+//            case R.id.: break;
+//            case R.id.: break;
+//            case R.id.: break;
+        }
 
     }
 
     @Override
     public void initDataFromIntent() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
 
-        DiscoverFragBean bean1=new DiscoverFragBean();
+        DiscoverFragBean bean1 = new DiscoverFragBean();
         bean1.setTitle("100元红包买你的故事,可好?");
         bean1.setTime("7月10日");
         bean1.setMark("你才不是一个没有故事的同学");
         bean1.setResId(R.drawable.frag_discover_story);
 
-        DiscoverFragBean bean2=new DiscoverFragBean();
+        DiscoverFragBean bean2 = new DiscoverFragBean();
         bean2.setTitle("轻松摇一摇,秒拿现金奖");
         bean2.setTime("6月21日");
         bean2.setMark("啊啊啊,好激动");
@@ -74,7 +89,7 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        DiscoverFragLvAdapter  adapter=new DiscoverFragLvAdapter(list,getActivity());
+        DiscoverFragLvAdapter adapter = new DiscoverFragLvAdapter(list, getActivity());
         lvFragDiscover.setAdapter(adapter);
 
     }
@@ -87,6 +102,9 @@ public class DiscoverFragment extends BaseFragment {
                 closeActivity();
             }
         });
+        llFragDiscoverBt1.setOnClickListener(this);
+        llFragDiscoverBt2.setOnClickListener(this);
+        llFragDiscoverBt3.setOnClickListener(this);
     }
 
     @Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <com.tudoujf.ui.LuckyLotteryLayout
+        android:id="@+id/lll_act_luckylottery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.tudoujf.ui.SudokuView
+            android:id="@+id/sv_act_luckylottery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+        <com.tudoujf.ui.SudokuView
+            android:id="@+id/sv_act_luckylottery_shade"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            />
+
+    </com.tudoujf.ui.LuckyLotteryLayout>
+
+
+
+</LinearLayout>
