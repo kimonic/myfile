@@ -205,7 +205,7 @@ public class HttpTestActivity extends BaseActivity {
                         tvActHttptest1.setText(response.body());
                     }
 
-                    FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据"+ System.currentTimeMillis()+".txt",result);
+                    FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据"+ TimeUtils.getCurentTimeTotal()+".txt",result);
                     //   /phone/loan/loanInfo  loan_id,292
                     Log.e("TAG", "onSuccess:-----------接口测试返回结果---------- " + result);
                 } else {

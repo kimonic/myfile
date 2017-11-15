@@ -268,7 +268,6 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
-        Log.e("TAG", "initDataFromInternet: -----个人中心");
         String loginToken = UserConfig.getInstance().getLoginToken(getActivity());
         if (!"".equals(loginToken)) {
             showPDialog();

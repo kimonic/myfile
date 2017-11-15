@@ -10,11 +10,10 @@ import android.widget.BaseAdapter;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.myproject.MyCreditorRightsDetailsActivity;
 import com.tudoujf.activity.my.myproject.MyInvestDetailsActivity;
+import com.tudoujf.bean.databean.MyCreditorProjectBean;
 import com.tudoujf.bean.databean.MyInvestProjectBean;
-import com.tudoujf.fragment.myprojectfrag.MyProjectTotalFragBean;
 import com.tudoujf.ui.MyProjectBidView;
 import com.tudoujf.utils.StringUtils;
-import com.tudoujf.utils.TimeUtils;
 
 import java.util.List;
 
@@ -25,16 +24,16 @@ import java.util.List;
  * author：          kimonik
  * version：          1.0
  * date：            2017/9/8
- * description：  我的项目-->全部投资项目fragment-->listview适配器
+ * description：  我的项目-->债权投资项目fragment-->listview适配器
  * history：
  * ===================================================
  */
 
-public class MyProjectTotalFragLvAdapter extends BaseAdapter {
+public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
     private Context context;
-    private List<MyInvestProjectBean.ItemsBean> list;
+    private List<MyCreditorProjectBean.TransferListBean.ItemsBean> list;
 
-    public MyProjectTotalFragLvAdapter(Context context, List<MyInvestProjectBean.ItemsBean> list) {
+    public MyProjectCreditorFragLvAdapter(Context context, List<MyCreditorProjectBean.TransferListBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -61,7 +60,7 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lvitem_myprojecttotalfrag, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.bidView= (MyProjectBidView) view.findViewById(R.id.lvitem_myprojecttotal);
+            viewHolder.bidView = (MyProjectBidView) view.findViewById(R.id.lvitem_myprojecttotal);
 
 
             view.setTag(viewHolder);
@@ -69,37 +68,34 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        boolean  skip=false;
-        if (!"".equals(list.get(position).getFlag())){
-            skip=true;
-        }
-        viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标题
+        boolean skip = true;
+
+        viewHolder.bidView.setTitle("1111111");//标题
         viewHolder.bidView.setTransfer("");//右标题
-        viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getAmount());//投资金额
-        viewHolder.bidView.setYuanBiaoNianHuaShouYi(list.get(position).getrecover_interest());//预期收益
-        viewHolder.bidView.setTransferPrice(StringUtils.getStrTime(list.get(position).getExpire_time().toString()));//回款时间
-        viewHolder.bidView.setExplain1("投资金额(元)");
-        viewHolder.bidView.setExplain2("预期收益(元)");
-        viewHolder.bidView.setExplain3("回款时间");
+        viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getWait_principal());//投资金额
+        viewHolder.bidView.setYuanBiaoNianHuaShouYi(list.get(position).getWait_principal_interest());//预期收益
+        viewHolder.bidView.setTransferPrice(list.get(position).getPeriod());//回款时间
+        viewHolder.bidView.setExplain1("待收本息(元)");
+        viewHolder.bidView.setExplain2("债权价值(元)");
+        viewHolder.bidView.setExplain3("还款期限");
         viewHolder.bidView.setInvestProgress(1);//投资进度
         viewHolder.bidView.setShengYuKeTou("00,000.00");
-        viewHolder.bidView.setStatus_name(list.get(position).getStatus_name());
+        viewHolder.bidView.setStatus_name(list.get(position).getTransfer_status_name());
 
-         final boolean finalSkip = skip;
+        final boolean finalSkip = skip;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                if(finalSkip){
-                    Intent intent=new Intent(context, MyCreditorRightsDetailsActivity.class);
+                if (finalSkip) {
+                    Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
                     context.startActivity(intent);
-                }else {
-                    Intent intent=new Intent(context, MyInvestDetailsActivity.class);
+                } else {
+                    Intent intent = new Intent(context, MyInvestDetailsActivity.class);
                     context.startActivity(intent);
                 }
 
             }
         });
-
 
 
         viewHolder.bidView.invalidate();

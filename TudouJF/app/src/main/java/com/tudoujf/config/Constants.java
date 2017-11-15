@@ -195,7 +195,14 @@ public class Constants {
     public static final String POST_FILE = URL + "/phone/member/avatarSubmit";
 
 
-
+    /**
+     * 我的投资项目
+     */
+    public static final String MY_INVESTMENT = URL+ "/phone/tender/myTenderList";
+/**
+     * 我的债权项目
+     */
+    public static final String MY_CREDITOR = URL+ "/phone/transfer/myTransferList";
 
 
 
@@ -450,11 +457,7 @@ public class Constants {
      */
     public static final String INVESTMENT_TENDER = URL
             + "/phone/tender/tender";
-    /**
-     * 我的投资
-     */
-    public static final String MY_INVESTMENT = URL
-            + "/phone/tender/myTenderList";
+
     /**
      * 我的投资详情
      */

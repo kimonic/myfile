@@ -568,6 +568,8 @@
     <string name="meiyouxuanzhongtupian">没有选中图片</string>
     <string name="tupianshangchuanchenggong">图片上传成功!</string>
     <string name="tupianshangchuanshibai">图片上传失败!</string>
+    <string name="huoqutouzixiangmuxinxishiabai">获取投资项目信息失败!</string>
+    <string name="meiyousousuoshuju">没有搜索数据!</string>
 
 
 </resources>

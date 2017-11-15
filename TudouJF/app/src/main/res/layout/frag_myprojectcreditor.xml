@@ -18,14 +18,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
+                android:background="@color/color_white"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:text="@string/frag_myprojectcreditor_title"
                 android:textColor="@color/color_black"
-                android:textSize="14sp"
-                android:background="@color/color_white"
-                />
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -37,10 +36,11 @@
                 android:layout_height="36dp"
                 android:background="@color/act_infopublish_bac"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
-                >
+                android:paddingTop="10dp">
 
                 <TextView
+
+                    android:id="@+id/tv_frag_myprojectcreditor_zhuan_rang_jin_e"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -50,6 +50,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_frag_myprojectcreditor_zhuan_rang_ying_kui"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -59,6 +60,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_frag_myprojectcreditor_gou_ru_jin_e"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -68,6 +70,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/tv_frag_myprojectcreditor_gou_ru_ying_kui"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -83,8 +86,7 @@
                 android:layout_height="36dp"
                 android:background="@color/act_infopublish_bac"
                 android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                >
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:id="@+id/textView2"
@@ -157,6 +159,8 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_frag_myprojectcreditor_gou_mai_ji_lu"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -183,7 +187,8 @@
             <ListView
                 android:id="@+id/lv_frag_myprojectcreditor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@color/color_white"
                 android:dividerHeight="10dp" />
         </LinearLayout>

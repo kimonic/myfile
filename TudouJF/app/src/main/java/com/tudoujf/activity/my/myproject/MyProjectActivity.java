@@ -51,8 +51,9 @@ public class MyProjectActivity extends BaseActivity {
 
 
     private List<UnderlineTextView> list;
-    private List<Fragment>  listFrag;
+    private List<Fragment> listFrag;
     private DateFilterDialog dateFilterDialog;
+    private int currentItem = 0;
 
     @Override
     public int getLayoutResId() {
@@ -83,6 +84,8 @@ public class MyProjectActivity extends BaseActivity {
                     dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
                         @Override
                         public void dismiss(String startTime, String endTime) {
+                            refreshFragment(startTime, endTime);
+
                             // TODO: 2017/9/4  请求网络筛选展示数据
                             ToastUtils.showToast(MyProjectActivity.this, startTime + "-----------" + endTime);
                         }
@@ -97,31 +100,54 @@ public class MyProjectActivity extends BaseActivity {
         }
     }
 
+
+    private void refreshFragment(String startTime, String endTime) {
+        switch (vpActMyproject.getCurrentItem()) {
+            case 0:
+                ((MyProjectTotalFragment) listFrag.get(0)).setStart_time(startTime);
+                ((MyProjectTotalFragment) listFrag.get(0)).setEnd_time(endTime);
+                ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
+                break;
+            case 1:
+                ((MyProjectTotalFragment) listFrag.get(1)).setStart_time(startTime);
+                ((MyProjectTotalFragment) listFrag.get(1)).setEnd_time(endTime);
+                ((MyProjectTotalFragment) listFrag.get(1)).initDataFromInternet();
+                break;
+            case 2:
+                ((MyProjectCreditorFragment) listFrag.get(2)).setStart_time(startTime);
+                ((MyProjectCreditorFragment) listFrag.get(2)).setEnd_time(endTime);
+                ((MyProjectCreditorFragment) listFrag.get(2)).initDataFromInternet();
+                break;
+        }
+    }
+
     @Override
     public void initDataFromIntent() {
-        listFrag=new ArrayList<>();
-        MyProjectTotalFragment fragment1=new MyProjectTotalFragment();
+        listFrag = new ArrayList<>();
+        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
 
 
-        MyProjectTotalFragment  fragment2=new MyProjectTotalFragment();
+        MyProjectTotalFragment fragment2 = new MyProjectTotalFragment();
 
 
-        MyProjectCreditorFragment fragment3=new MyProjectCreditorFragment();
+        MyProjectCreditorFragment fragment3 = new MyProjectCreditorFragment();
 
 
         listFrag.add(fragment1);
         listFrag.add(fragment2);
         listFrag.add(fragment3);
+
+
     }
 
     @Override
     public void initView() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add(utvTotal);
         list.add(utvTouZiXiangMu);
         list.add(utvZhaiQuanXiangMu);
 
-        HomeFragVPAdapter adapter=new HomeFragVPAdapter(getSupportFragmentManager(),listFrag);
+        HomeFragVPAdapter adapter = new HomeFragVPAdapter(getSupportFragmentManager(), listFrag);
         vpActMyproject.setAdapter(adapter);
         vpActMyproject.setOffscreenPageLimit(3);
 
@@ -140,7 +166,7 @@ public class MyProjectActivity extends BaseActivity {
         tvBac.setOnClickListener(this);
         llFiltrate.setOnClickListener(this);
 
-        vpActMyproject.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+        vpActMyproject.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 setButStyle(position);
@@ -160,12 +186,12 @@ public class MyProjectActivity extends BaseActivity {
 
     }
 
-    private void setButStyle(int position){
+    private void setButStyle(int position) {
         for (int i = 0; i < list.size(); i++) {
-            if (i==position){
+            if (i == position) {
                 list.get(i).setUnderlinecolor(R.color.global_theme_background_color);
                 list.get(i).setTextColor(getResources().getColor(R.color.global_theme_background_color));
-            }else {
+            } else {
                 list.get(i).setUnderlinecolor(R.color.color_white);
                 list.get(i).setTextColor(getResources().getColor(R.color.color_black));
             }

@@ -27,6 +27,14 @@ public class TimeUtils {
         Date currentTime = new Date();
         return formatter.format(currentTime);
     }
+    /**
+     * @return 返回系统当前时间--时 分
+     */
+    public static String getCurentTimeTotal() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
+        Date currentTime = new Date();
+        return formatter.format(currentTime);
+    }
 
     /**
      * 获取现在时间

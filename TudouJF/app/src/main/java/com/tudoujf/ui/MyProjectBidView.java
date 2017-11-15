@@ -50,6 +50,9 @@ public class MyProjectBidView extends View {
      */
     private int type;
 
+    /**状态文本*/
+    private String  status_name;
+
 
     /**
      * 奖励的百分比,以浮点型数值表示,实际数值为该值除以100
@@ -195,6 +198,14 @@ public class MyProjectBidView extends View {
      */
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getStatus_name() {
+        return status_name;
+    }
+
+    public void setStatus_name(String status_name) {
+        this.status_name = status_name;
     }
 
     public MyProjectBidView(Context context) {
@@ -398,7 +409,7 @@ public class MyProjectBidView extends View {
 
 
         whitePaint.setTextSize(width * 0.03809f);
-        String invest1 = getButText();
+//        String invest1 = getButText();
 
         if (investNow) {//可点击
             canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
@@ -406,9 +417,9 @@ public class MyProjectBidView extends View {
             canvas.drawRoundRect(rectF, 5, 5, grayPaint);
         }
 
-        float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(invest1) / 2;
+        float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(status_name) / 2;
         float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
-        canvas.drawText(invest1, text11X, text11Y, whitePaint);
+        canvas.drawText(status_name, text11X, text11Y, whitePaint);
 
 
         //------------------------------------------------------------------------------------------
