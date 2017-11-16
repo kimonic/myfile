@@ -68,32 +68,44 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        boolean skip = true;
+//        boolean skip = true;
 
-        viewHolder.bidView.setTitle("1111111");//标题
-        viewHolder.bidView.setTransfer("");//右标题
-        viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getWait_principal());//投资金额
-        viewHolder.bidView.setYuanBiaoNianHuaShouYi(list.get(position).getWait_principal_interest());//预期收益
-        viewHolder.bidView.setTransferPrice(list.get(position).getPeriod());//回款时间
+        viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标题
+        viewHolder.bidView.setTransfer(("转让期数:" + list.get(position).getWait_period() + "/" + list.get(position).getPeriod()));//右标题
+
+        if (list.get(position).getWait_principal_interest() != null) {
+            viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getWait_principal_interest());//待收本息
+            viewHolder.bidView.setExplain3("还款期限");
+
+        } else {
+            viewHolder.bidView.setZhaiQuanJiaZhi(
+                    "" + (StringUtils.string2Float(list.get(position).getWait_recover_principal()) +
+                            StringUtils.string2Float(list.get(position).getWait_recover_interest()))
+
+            );//待收本息
+            viewHolder.bidView.setExplain3("到期时间");
+        }
+
+
+        viewHolder.bidView.setYuanBiaoNianHuaShouYi(list.get(position).getTransfer_money());//债权价值
+        viewHolder.bidView.setTransferPrice(StringUtils.getStrTime(list.get(position).getRepay_time()));//回款时间
         viewHolder.bidView.setExplain1("待收本息(元)");
         viewHolder.bidView.setExplain2("债权价值(元)");
-        viewHolder.bidView.setExplain3("还款期限");
-        viewHolder.bidView.setInvestProgress(1);//投资进度
-        viewHolder.bidView.setShengYuKeTou("00,000.00");
+        viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress()) / 100);//投资进度
+        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
         viewHolder.bidView.setStatus_name(list.get(position).getTransfer_status_name());
 
-        final boolean finalSkip = skip;
+//        final boolean finalSkip = skip;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                if (finalSkip) {
-                    Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
-                    context.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, MyInvestDetailsActivity.class);
-                    context.startActivity(intent);
-                }
-
+//                if (finalSkip) {
+                Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
+                context.startActivity(intent);
+//                } else {
+//                    Intent intent = new Intent(context, MyInvestDetailsActivity.class);
+//                    context.startActivity(intent);
+//                }
             }
         });
 

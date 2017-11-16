@@ -36,6 +36,7 @@
             >
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_cheng_gong_yao_qing"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -200,6 +201,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_ti_cheng_zong_e"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -231,6 +233,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_tou_zi_ti_cheng"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -262,6 +265,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_jie_huan_kuan_ti_cheng"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -294,6 +298,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_sheng_yu_jie_suan_jin_e"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -326,6 +331,7 @@
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_act_mypopularize_jie_suan_zhong"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -357,6 +363,8 @@
                 android:gravity="center"
                 />
             <TextView
+
+                android:id="@+id/tv_act_mypopularize_man_jie_suan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -379,11 +387,13 @@
         </LinearLayout>
 
         <TextView
+
+            android:id="@+id/tv_act_mypopularize_btn_jie_suan"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/xshape_roundrect_themecolor"
+            android:background="@drawable/xshape_roundrect_mgray1"
             android:textSize="16sp"
             android:textColor="@color/color_white"
             android:text="@string/act_mypopularize_lijijiesuan"

@@ -203,6 +203,10 @@ public class Constants {
      * 我的债权项目
      */
     public static final String MY_CREDITOR = URL+ "/phone/transfer/myTransferList";
+/**
+     * 我的推广首页接口
+     */
+    public static final String MY_POPULARIZE = URL+ "/phone/spread/spreadRewardData";
 
 
 

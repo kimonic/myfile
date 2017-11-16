@@ -19,20 +19,19 @@ import java.util.List;
 
 public class MyInvestProjectBean implements BaseBean {
 
+
     /**
      * page : 1
      * epage : 10
      * total_items : 68
      * total_pages : 7
-     * items : [{"award_amount":0,"auto_status":-1,"recover_count":0,"transfer_status":-1,"cancel_count":0,"recover_interest":0,"success_time":null,"recover_interest_yes":0,"deposit_certificate":-1,"experience_return":0,"recover_prepayment_fee":0,"recover_count_yes":0,"loan_member_name":"ljq001","id":4015,"amount":1000,"status_name":"投标中","ind":"17111323350106811267","invest_source":0,"recover_status":-1,"repay_type":4,"transfer_member_name":"","serialno":20171113233513,"tenderId":4015,"recover_principal":0,"status":-2,"transfer_member_id":0,"trust_status":-2,"loan_name":"test房产抵押借款","expire_time":null,"member_id":12267,"add_ip":2130706433,"recover_overdue_fee":0,"loan_member_id":12231,"award_interest":0,"recover_amount":0,"recover_amount_yes":0,"add_time":1510587313,"member_name":"18011111111","loanId":305,"recover_principal_yes":0,"loan_id":305}]
-     * params : null
+     * items : [{"progress":6,"award_amount":0,"auto_status":-1,"recover_count":0,"transfer_status":-1,"cancel_count":0,"recover_interest":0,"success_time":null,"recover_interest_yes":0,"deposit_certificate":-1,"experience_return":0,"recover_prepayment_fee":0,"recover_count_yes":0,"loan_member_name":"ljq001","id":4015,"amount":1000,"status_name":"投标中","ind":"17111323350106811267","invest_source":0,"recover_status":-1,"repay_type":4,"transfer_member_name":"","serialno":20171113233513,"tenderId":4015,"recover_principal":0,"amount_surplus":94000,"status":-2,"transfer_member_id":0,"trust_status":-2,"loan_name":"test房产抵押借款","expire_time":null,"member_id":12267,"add_ip":2130706433,"recover_overdue_fee":0,"loan_member_id":12231,"award_interest":0,"recover_amount":0,"recover_amount_yes":0,"add_time":1510587313,"member_name":"18011111111","loanId":305,"recover_principal_yes":0,"loan_id":305}]
      */
 
     private int page;
     private int epage;
     private int total_items;
     private int total_pages;
-    private JsonElement params;
     private List<ItemsBean> items;
 
     public int getPage() {
@@ -67,14 +66,6 @@ public class MyInvestProjectBean implements BaseBean {
         this.total_pages = total_pages;
     }
 
-    public JsonElement getParams() {
-        return params;
-    }
-
-    public void setParams(JsonElement params) {
-        this.params = params;
-    }
-
     public List<ItemsBean> getItems() {
         return items;
     }
@@ -85,21 +76,22 @@ public class MyInvestProjectBean implements BaseBean {
 
     public static class ItemsBean {
         /**
-         * award_amount : 0
+         * progress : 6.0
+         * award_amount : 0.0
          * auto_status : -1
          * recover_count : 0
          * transfer_status : -1
          * cancel_count : 0
-         * recover_interest : 0
+         * recover_interest : 0.0
          * success_time : null
          * recover_interest_yes : 0
          * deposit_certificate : -1
          * experience_return : 0
-         * recover_prepayment_fee : 0
+         * recover_prepayment_fee : 0.0
          * recover_count_yes : 0
          * loan_member_name : ljq001
          * id : 4015
-         * amount : 1000
+         * amount : 1000.0
          * status_name : 投标中
          * ind : 17111323350106811267
          * invest_source : 0
@@ -108,7 +100,8 @@ public class MyInvestProjectBean implements BaseBean {
          * transfer_member_name : 
          * serialno : 20171113233513
          * tenderId : 4015
-         * recover_principal : 0
+         * recover_principal : 0.0
+         * amount_surplus : 94000.0
          * status : -2
          * transfer_member_id : 0
          * trust_status : -2
@@ -116,18 +109,19 @@ public class MyInvestProjectBean implements BaseBean {
          * expire_time : null
          * member_id : 12267
          * add_ip : 2130706433
-         * recover_overdue_fee : 0
+         * recover_overdue_fee : 0.0
          * loan_member_id : 12231
-         * award_interest : 0
+         * award_interest : 0.0
          * recover_amount : 0
-         * recover_amount_yes : 0
+         * recover_amount_yes : 0.0
          * add_time : 1510587313
          * member_name : 18011111111
          * loanId : 305
-         * recover_principal_yes : 0
+         * recover_principal_yes : 0.0
          * loan_id : 305
          */
 
+        private String progress;
         private String award_amount;
         private String auto_status;
         private String recover_count;
@@ -152,6 +146,7 @@ public class MyInvestProjectBean implements BaseBean {
         private String serialno;
         private String tenderId;
         private String recover_principal;
+        private String amount_surplus;
         private String status;
         private String transfer_member_id;
         private String trust_status;
@@ -161,7 +156,7 @@ public class MyInvestProjectBean implements BaseBean {
         private String add_ip;
         private String recover_overdue_fee;
         private String loan_member_id;
-        private String award_Stringerest;
+        private String award_interest;
         private String recover_amount;
         private String recover_amount_yes;
         private String add_time;
@@ -169,8 +164,7 @@ public class MyInvestProjectBean implements BaseBean {
         private String loanId;
         private String recover_principal_yes;
         private String loan_id;
-
-        private  String flag="";
+        private String flag="";
 
         public String getFlag() {
             return flag;
@@ -178,6 +172,14 @@ public class MyInvestProjectBean implements BaseBean {
 
         public void setFlag(String flag) {
             this.flag = flag;
+        }
+
+        public String getProgress() {
+            return progress;
+        }
+
+        public void setProgress(String progress) {
+            this.progress = progress;
         }
 
         public String getAward_amount() {
@@ -220,11 +222,11 @@ public class MyInvestProjectBean implements BaseBean {
             this.cancel_count = cancel_count;
         }
 
-        public String getrecover_interest() {
+        public String getRecover_interest() {
             return recover_interest;
         }
 
-        public void setrecover_interest(String recover_interest) {
+        public void setRecover_interest(String recover_interest) {
             this.recover_interest = recover_interest;
         }
 
@@ -236,11 +238,11 @@ public class MyInvestProjectBean implements BaseBean {
             this.success_time = success_time;
         }
 
-        public String getrecover_interest_yes() {
+        public String getRecover_interest_yes() {
             return recover_interest_yes;
         }
 
-        public void setrecover_interest_yes(String recover_interest_yes) {
+        public void setRecover_interest_yes(String recover_interest_yes) {
             this.recover_interest_yes = recover_interest_yes;
         }
 
@@ -372,6 +374,14 @@ public class MyInvestProjectBean implements BaseBean {
             this.recover_principal = recover_principal;
         }
 
+        public String getAmount_surplus() {
+            return amount_surplus;
+        }
+
+        public void setAmount_surplus(String amount_surplus) {
+            this.amount_surplus = amount_surplus;
+        }
+
         public String getStatus() {
             return status;
         }
@@ -444,12 +454,12 @@ public class MyInvestProjectBean implements BaseBean {
             this.loan_member_id = loan_member_id;
         }
 
-        public String getAward_Stringerest() {
-            return award_Stringerest;
+        public String getAward_interest() {
+            return award_interest;
         }
 
-        public void setAward_Stringerest(String award_Stringerest) {
-            this.award_Stringerest = award_Stringerest;
+        public void setAward_interest(String award_interest) {
+            this.award_interest = award_interest;
         }
 
         public String getRecover_amount() {

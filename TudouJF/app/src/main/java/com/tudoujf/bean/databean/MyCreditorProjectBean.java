@@ -20,19 +20,34 @@ import java.util.List;
 
 public class MyCreditorProjectBean implements BaseBean {
 
+
     /**
      * transfer_buy_total : 62780.6
      * transfer_buy_interest_total : 2032.4
-     * transfer_list : {"page":1,"epage":15,"total_items":15,"total_pages":1,"items":[{"wait_interest":1350,"repay_status":-1,"transfer_buy_interest_total":-613.05,"transfer_amount":30039.45,"transfer_status":2,"buy_repay_status":"回收中","wait_principal_interest":31350,"transfer_money":30652.5,"period":1,"buy_repay":2,"transfer_interest _total":null,"id":3673,"wait_period":1,"transfer_status_name":"回收中","transfer_buy_total":30039.45,"transfer_total":null,"transfer_id":5,"wait_principal":30000}],"params":null}
-     * transfer_total : 0
-     * transfer_interest_total : 0
+     * transfer_list : {"page":1,"epage":15,"total_items":15,"total_pages":1,"items":[{"progress":15,"wait_interest":1350,"repay_status":-1,"transfer_buy_interest_total":-613.05,"amount_surplus":170000,"transfer_amount":30039.45,"transfer_status":2,"buy_repay_status":"回收中","loan_name":"测试借款","repay_time":1490492841,"wait_principal_interest":31350,"transfer_money":30652.5,"period":1,"buy_repay":2,"transfer_interest _total":null,"id":3673,"wait_period":1,"transfer_status_name":"回收中","transfer_buy_total":30039.45,"transfer_total":null,"transfer_id":5,"wait_principal":30000,"loan_id":154}]}
      */
 
     private String transfer_buy_total;
     private String transfer_buy_interest_total;
-    private TransferListBean transfer_list;
     private String transfer_total;
     private String transfer_interest_total;
+    private TransferListBean transfer_list;
+
+    public String getTransfer_total() {
+        return transfer_total;
+    }
+
+    public void setTransfer_total(String transfer_total) {
+        this.transfer_total = transfer_total;
+    }
+
+    public String getTransfer_interest_total() {
+        return transfer_interest_total;
+    }
+
+    public void setTransfer_interest_total(String transfer_interest_total) {
+        this.transfer_interest_total = transfer_interest_total;
+    }
 
     public String getTransfer_buy_total() {
         return transfer_buy_total;
@@ -58,21 +73,7 @@ public class MyCreditorProjectBean implements BaseBean {
         this.transfer_list = transfer_list;
     }
 
-    public String getTransfer_total() {
-        return transfer_total;
-    }
 
-    public void setTransfer_total(String transfer_total) {
-        this.transfer_total = transfer_total;
-    }
-
-    public String getTransfer_interest_total() {
-        return transfer_interest_total;
-    }
-
-    public void setTransfer_interest_total(String transfer_interest_total) {
-        this.transfer_interest_total = transfer_interest_total;
-    }
 
     public static class TransferListBean {
         /**
@@ -80,15 +81,13 @@ public class MyCreditorProjectBean implements BaseBean {
          * epage : 15
          * total_items : 15
          * total_pages : 1
-         * items : [{"wait_interest":1350,"repay_status":-1,"transfer_buy_interest_total":-613.05,"transfer_amount":30039.45,"transfer_status":2,"buy_repay_status":"回收中","wait_principal_interest":31350,"transfer_money":30652.5,"period":1,"buy_repay":2,"transfer_interest _total":null,"id":3673,"wait_period":1,"transfer_status_name":"回收中","transfer_buy_total":30039.45,"transfer_total":null,"transfer_id":5,"wait_principal":30000}]
-         * params : null
+         * items : [{"progress":15,"wait_interest":1350,"repay_status":-1,"transfer_buy_interest_total":-613.05,"amount_surplus":170000,"transfer_amount":30039.45,"transfer_status":2,"buy_repay_status":"回收中","loan_name":"测试借款","repay_time":1490492841,"wait_principal_interest":31350,"transfer_money":30652.5,"period":1,"buy_repay":2,"transfer_interest _total":null,"id":3673,"wait_period":1,"transfer_status_name":"回收中","transfer_buy_total":30039.45,"transfer_total":null,"transfer_id":5,"wait_principal":30000,"loan_id":154}]
          */
 
         private int page;
         private int epage;
         private int total_items;
         private int total_pages;
-        private JsonElement params;
         private List<ItemsBean> items;
 
         public int getPage() {
@@ -123,14 +122,6 @@ public class MyCreditorProjectBean implements BaseBean {
             this.total_pages = total_pages;
         }
 
-        public JsonElement getParams() {
-            return params;
-        }
-
-        public void setParams(JsonElement params) {
-            this.params = params;
-        }
-
         public List<ItemsBean> getItems() {
             return items;
         }
@@ -141,13 +132,17 @@ public class MyCreditorProjectBean implements BaseBean {
 
         public static class ItemsBean {
             /**
-             * wait_interest : 1350`
+             * progress : 15.0
+             * wait_interest : 1350.0
              * repay_status : -1
              * transfer_buy_interest_total : -613.05
+             * amount_surplus : 170000.0
              * transfer_amount : 30039.45
              * transfer_status : 2
              * buy_repay_status : 回收中
-             * wait_principal_interest : 31350
+             * loan_name : 测试借款
+             * repay_time : 1490492841
+             * wait_principal_interest : 31350.0
              * transfer_money : 30652.5
              * period : 1
              * buy_repay : 2
@@ -158,21 +153,26 @@ public class MyCreditorProjectBean implements BaseBean {
              * transfer_buy_total : 30039.45
              * transfer_total : null
              * transfer_id : 5
-             * wait_principal : 30000
+             * wait_principal : 30000.0
+             * loan_id : 154
              */
 
+            private String progress;
             private String wait_interest;
             private String repay_status;
             private String transfer_buy_interest_total;
+            private String amount_surplus;
             private String transfer_amount;
             private String transfer_status;
             private String buy_repay_status;
+            private String loan_name;
+            private String repay_time;
             private String wait_principal_interest;
             private String transfer_money;
             private String period;
             private String buy_repay;
             @SerializedName("transfer_interest _total")
-            private JsonElement _$Transfer_interest_total173; // FIXME check this code
+            private JsonElement _$Transfer_interest_total123; // FIXME check this code
             private String id;
             private String wait_period;
             private String transfer_status_name;
@@ -180,6 +180,89 @@ public class MyCreditorProjectBean implements BaseBean {
             private JsonElement transfer_total;
             private String transfer_id;
             private String wait_principal;
+            private String loan_id;
+
+
+//---------------------------------------------transer专有字段--------------------------------------
+            private String expire_date;
+            private String apr;
+            private String recover_count;
+            private String wait_recover_principal;
+            private String changeStatus;
+            private String wait_recover_interest;
+            private String wait_recover_count;
+
+            public String getExpire_date() {
+                return expire_date;
+            }
+
+            public void setExpire_date(String expire_date) {
+                this.expire_date = expire_date;
+            }
+
+            public String getApr() {
+                return apr;
+            }
+
+            public void setApr(String apr) {
+                this.apr = apr;
+            }
+
+            public String getRecover_count() {
+                return recover_count;
+            }
+
+            public void setRecover_count(String recover_count) {
+                this.recover_count = recover_count;
+            }
+
+            public String getWait_recover_principal() {
+                return wait_recover_principal;
+            }
+
+            public void setWait_recover_principal(String wait_recover_principal) {
+                this.wait_recover_principal = wait_recover_principal;
+            }
+
+            public String getChangeStatus() {
+                return changeStatus;
+            }
+
+            public void setChangeStatus(String changeStatus) {
+                this.changeStatus = changeStatus;
+            }
+
+            public String getWait_recover_interest() {
+                return wait_recover_interest;
+            }
+
+            public void setWait_recover_interest(String wait_recover_interest) {
+                this.wait_recover_interest = wait_recover_interest;
+            }
+
+            public String getWait_recover_count() {
+                return wait_recover_count;
+            }
+
+            public void setWait_recover_count(String wait_recover_count) {
+                this.wait_recover_count = wait_recover_count;
+            }
+
+
+            //--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+            public String getProgress() {
+                return progress;
+            }
+
+            public void setProgress(String progress) {
+                this.progress = progress;
+            }
 
             public String getWait_interest() {
                 return wait_interest;
@@ -205,6 +288,14 @@ public class MyCreditorProjectBean implements BaseBean {
                 this.transfer_buy_interest_total = transfer_buy_interest_total;
             }
 
+            public String getAmount_surplus() {
+                return amount_surplus;
+            }
+
+            public void setAmount_surplus(String amount_surplus) {
+                this.amount_surplus = amount_surplus;
+            }
+
             public String getTransfer_amount() {
                 return transfer_amount;
             }
@@ -227,6 +318,22 @@ public class MyCreditorProjectBean implements BaseBean {
 
             public void setBuy_repay_status(String buy_repay_status) {
                 this.buy_repay_status = buy_repay_status;
+            }
+
+            public String getLoan_name() {
+                return loan_name;
+            }
+
+            public void setLoan_name(String loan_name) {
+                this.loan_name = loan_name;
+            }
+
+            public String getRepay_time() {
+                return repay_time;
+            }
+
+            public void setRepay_time(String repay_time) {
+                this.repay_time = repay_time;
             }
 
             public String getWait_principal_interest() {
@@ -261,12 +368,12 @@ public class MyCreditorProjectBean implements BaseBean {
                 this.buy_repay = buy_repay;
             }
 
-            public JsonElement get_$Transfer_interest_total173() {
-                return _$Transfer_interest_total173;
+            public JsonElement get_$Transfer_interest_total123() {
+                return _$Transfer_interest_total123;
             }
 
-            public void set_$Transfer_interest_total173(JsonElement _$Transfer_interest_total173) {
-                this._$Transfer_interest_total173 = _$Transfer_interest_total173;
+            public void set_$Transfer_interest_total123(JsonElement _$Transfer_interest_total123) {
+                this._$Transfer_interest_total123 = _$Transfer_interest_total123;
             }
 
             public String getId() {
@@ -323,6 +430,14 @@ public class MyCreditorProjectBean implements BaseBean {
 
             public void setWait_principal(String wait_principal) {
                 this.wait_principal = wait_principal;
+            }
+
+            public String getLoan_id() {
+                return loan_id;
+            }
+
+            public void setLoan_id(String loan_id) {
+                this.loan_id = loan_id;
             }
         }
     }
