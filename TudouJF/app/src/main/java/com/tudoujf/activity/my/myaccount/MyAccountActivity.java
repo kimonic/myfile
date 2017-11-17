@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -207,6 +208,21 @@ public class MyAccountActivity extends BaseActivity {
                     localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
                     localIntent.setData(Uri.fromParts("package", getPackageName(), null));
                     startActivity(localIntent);
+                    /**
+                     * Intent intentFromCapture = newIntent(MediaStore.ACTION_IMAGE_CAPTURE);
+                     File file = newFile(Environment.getExternalStorageDirectory().getPath()+"/wood/head/");
+                     //是否是文件夹，不是就创建文件夹
+                     if (!file.exists()) file.mkdirs();
+                     //指定保存路径
+                     cameraPath = Environment.getExternalStorageDirectory().getPath()+"/wood/head/" +
+                     format.format(new Date()) + ".jpg";
+                     File imageFile = new File(cameraPath);
+                     //创建一个图片保存的Uri
+                     Uri imageFileUri = Uri.fromFile(imageFile);
+                     intentFromCapture.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+                     //设置MediaStore.EXTRA_OUTPUT的输出路径为imageFileUri
+                     intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+                     startActivityForResult(intentFromCapture, CAMERA_REQUEST_CODE);*/
 
 
                 } else {
@@ -360,7 +376,9 @@ public class MyAccountActivity extends BaseActivity {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
             if (photo != null) {
                 ivIcon.setImageBitmap(photo);
-                // TODO: 2017/9/11 将拍照图片设置为头像并上传服务器,无裁剪
+                String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, Environment.getExternalStorageDirectory()+"/temp");
+                postImage(imPath);
+                // TODO: 2017/9/11 将拍照图片设置为头像并上传服务器,无裁剪----------------------------------
             } else {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
@@ -498,3 +516,31 @@ public class MyAccountActivity extends BaseActivity {
 
 
 }
+
+
+/**
+
+ -------------------------------------------------------------------------------------------------
+ onActivityResult（）方法中获取数据
+ -------------------------------------------------------------------------------------------------
+ /相机的请求编码
+ case CAMERA_REQUEST_CODE:
+ isCamera =true;
+ startPhotoZoom(Uri.fromFile(new File(cameraPath)));
+ break;
+ //相机、相册的图片再 剪辑完 在这地方上传
+ case RESULT_REQUEST_CODE:
+ if (isCamera){
+ upLoadPictrue(new File(cameraPath));
+ } else {
+ String path = null;
+ if (android.os.Build.VERSION_CODES.KITKAT >= 19) {
+ path = new GetPicPath().getPath_above19(getActivity(), uri1);
+ }else {
+ path = getFilePath_below19(uri1);
+ }
+ upLoadPictrue(new File(path));
+ }
+ break;
+
+ */

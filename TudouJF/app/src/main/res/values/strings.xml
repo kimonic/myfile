@@ -573,6 +573,7 @@
     <string name="huoquwodetuiguangxinxishibai">获取我的推广信息失败!!</string>
     <string name="chakanzhuanrangjilu">查看转让记录</string>
     <string name="chakangoumaijilu">查看购买记录</string>
+    <string name="huoquwodexiangmuxiangqingshibai">获取我的项目详情失败!</string>
 
 
 </resources>

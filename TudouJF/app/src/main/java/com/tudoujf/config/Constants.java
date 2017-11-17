@@ -189,7 +189,7 @@ public class Constants {
      * 修改手机绑定接口
      */
     public static final String CHANGE_PHONE = URL + "/phone/approve/resetPhone";
-/**
+    /**
      * 上传头像图片接口
      */
     public static final String POST_FILE = URL + "/phone/member/avatarSubmit";
@@ -198,15 +198,22 @@ public class Constants {
     /**
      * 我的投资项目
      */
-    public static final String MY_INVESTMENT = URL+ "/phone/tender/myTenderList";
-/**
+    public static final String MY_INVESTMENT = URL + "/phone/tender/myTenderList";
+    /**
      * 我的债权项目
      */
-    public static final String MY_CREDITOR = URL+ "/phone/transfer/myTransferList";
-/**
+    public static final String MY_CREDITOR = URL + "/phone/transfer/myTransferList";
+    /**
      * 我的推广首页接口
      */
-    public static final String MY_POPULARIZE = URL+ "/phone/spread/spreadRewardData";
+    public static final String MY_POPULARIZE = URL + "/phone/spread/spreadRewardData";
+
+
+    /**
+     * 我的投资详情
+     */
+    public static final String MY_INVESTMENT_DETAIL = URL + "/phone/tender/tenderInfo";
+
 
 
 
@@ -461,12 +468,6 @@ public class Constants {
      */
     public static final String INVESTMENT_TENDER = URL
             + "/phone/tender/tender";
-
-    /**
-     * 我的投资详情
-     */
-    public static final String MY_INVESTMENT_DETAIL = URL
-            + "/phone/tender/tenderInfo";
 
 
     /**

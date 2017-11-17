@@ -55,7 +55,7 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         View view;
         if (convertView == null) {
@@ -69,10 +69,10 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        boolean  skip=false;
-        if (!"".equals(list.get(position).getFlag())){
-            skip=true;
-        }
+//        boolean  skip=false;
+//        if (!"".equals(list.get(position).getFlag())){
+//            skip=true;
+//        }
         viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标题
         viewHolder.bidView.setTransfer("");//右标题
         viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getAmount());//投资金额
@@ -85,17 +85,19 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
         viewHolder.bidView.setStatus_name(list.get(position).getStatus_name());
 
-         final boolean finalSkip = skip;
+//         final boolean finalSkip = skip;
+        final int  mPosition=position;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                if(finalSkip){
-                    Intent intent=new Intent(context, MyCreditorRightsDetailsActivity.class);
-                    context.startActivity(intent);
-                }else {
+//                if(finalSkip){
+//                    Intent intent=new Intent(context, MyCreditorRightsDetailsActivity.class);
+//                    context.startActivity(intent);
+//                }else {
                     Intent intent=new Intent(context, MyInvestDetailsActivity.class);
+                    intent.putExtra("id",list.get(mPosition).getId());
                     context.startActivity(intent);
-                }
+//                }
 
             }
         });
