@@ -214,28 +214,20 @@ public class Constants {
      */
     public static final String MY_INVESTMENT_DETAIL = URL + "/phone/tender/tenderInfo";
 
+    /**
+     * 债权购买详情
+     */
+    public static final String CREDITER_BUY_DETAILS = URL + "/phone/transfer/myTransferBuyInfo";
 
+    /**
+     * 债权转让详情
+     */
+    public static final String CREDITER_TRANSFER_DETAILS = URL + "/phone/transfer/myTransferDetail";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 债权转让请求接口
+     */
+    public static final String IMMEDIATE_TRANSFER = URL + "/phone/transfer/transferSub";
 
 
 //    ------------------------------------------------------------------------------------------------
@@ -366,14 +358,11 @@ public class Constants {
      */
     public static final String TRANSFER_INDEX = URL + "/phone/transfer/index";
 
-    /**
-     * 债权转让详情
-     */
-    public static final String CREDITER_TRANSFER_DETAILS = URL + "/phone/transfer/transferInfo";
-    /**
-     * 债权购买详情
-     */
-    public static final String CREDITER_BUY_DETAILS = URL + "/phone/transfer/myTransferBuyInfo";
+//    /**
+//     * 债权转让详情
+//     */
+//    public static final String CREDITER_TRANSFER_DETAILS = URL + "/phone/transfer/transferInfo";
+
     /**
      * 购买债权
      */
@@ -546,11 +535,7 @@ public class Constants {
      */
     public static final String PROVINCE_CITY_INFO = URL
             + "/phone/common/getProvinceCity";
-    /**
-     * 立即转让
-     */
-    public static final String IMMEDIATE_TRANSFER = URL
-            + "/phone/transfer/transferSub";
+
     /**
      * 撤销转让
      */

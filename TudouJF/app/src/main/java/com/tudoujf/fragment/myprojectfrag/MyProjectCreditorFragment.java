@@ -61,7 +61,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
     TextView gouRuYingKui;
     @BindView(R.id.tv_frag_myprojectcreditor_gou_mai_ji_lu)
     TextView gouMaiJiLu;
- @BindView(R.id.tv_frag_myprojectcreditor_kzr_hsz)
+    @BindView(R.id.tv_frag_myprojectcreditor_kzr_hsz)
     TextView tvKzrHsz;
 
 
@@ -78,8 +78,9 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
     private int beforePage;
     private int beforeTotalPage;
-    private String status_nid="buy";
-    private  int  count=0;
+    private String status_nid = "transfer";
+    private int count = 0;
+    private int type = 2;
 
     public void setStart_time(String start_time) {
         initSearch();
@@ -110,16 +111,18 @@ public class MyProjectCreditorFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_frag_myprojectcreditor_gou_mai_ji_lu:
-                page=1;
-                bean=null;
-                if (count%2==0){
-                    status_nid="transfer";
+                page = 1;
+                bean = null;
+                if (count % 2 == 0) {
+                    status_nid = "buy";
                     gouMaiJiLu.setText(R.string.chakanzhuanrangjilu);
-                    tvKzrHsz.setText(R.string.kezhuanrang);
-                }else {
-                    status_nid="buy";
-                    gouMaiJiLu.setText(R.string.chakangoumaijilu);
                     tvKzrHsz.setText(R.string.huishouzhong);
+                    type = 1;//1,债权购买记录
+                } else {
+                    status_nid = "transfer";
+                    gouMaiJiLu.setText(R.string.chakangoumaijilu);
+                    tvKzrHsz.setText(R.string.kezhuanrang);
+                    type = 2;//2,债权转让记录
                 }
                 listBean.clear();
                 initDataFromInternet();
@@ -185,7 +188,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
         srlTotal.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (bean != null && page < bean.getTransfer_list().getTotal_pages()) {
+                if (bean != null && page < beforeTotalPage) {
                     page = page + 1;
                     initDataFromInternet();
                 } else {
@@ -222,7 +225,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
                         end_time = "";
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的债权项目接口返回数据--------" +status_nid+"----"+ result);
+                        Log.e("TAG", "onSuccess:----我的债权项目接口返回数据--------" + status_nid + "----" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
                         }.getType(), MyCreditorProjectBean.class, getActivity());
                         if (bean1 != null) {
@@ -256,9 +259,10 @@ public class MyProjectCreditorFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
 
-        if (bean != null && bean.getTransfer_list() != null
-                && bean.getTransfer_list().getItems().size() > 0) {
+        if (bean != null && bean.getTransfer_list() != null) {
+//                && bean.getTransfer_list().getItems().size() > 0) {
 
+            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
             if (flag) {
                 listBean.clear();
                 flag = false;
@@ -271,6 +275,11 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
 
             listBean.addAll(bean.getTransfer_list().getItems());
+
+            for (int i = 0; i < listBean.size(); i++) {
+                listBean.get(i).setType(type);
+            }
+
             if (adapter == null) {
                 adapter = new MyProjectCreditorFragLvAdapter(getActivity(), listBean);
                 lvTotal.setAdapter(adapter);
@@ -280,8 +289,8 @@ public class MyProjectCreditorFragment extends BaseFragment {
             HeightUtils.setListviewHeight(lvTotal);
 
         } else if (bean != null) {
-            bean.getTransfer_list().setTotal_pages(beforeTotalPage);
-            page = beforePage;
+//            page = beforePage;
+            adapter.notifyDataSetChanged();
             ToastUtils.showToast(getActivity(), R.string.meiyousousuoshuju);
         }
     }

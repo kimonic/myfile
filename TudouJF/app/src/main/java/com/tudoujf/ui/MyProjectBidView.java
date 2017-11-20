@@ -50,8 +50,10 @@ public class MyProjectBidView extends View {
      */
     private int type;
 
-    /**状态文本*/
-    private String  status_name;
+    /**
+     * 状态文本
+     */
+    private String status_name;
 
 
     /**
@@ -357,7 +359,7 @@ public class MyProjectBidView extends View {
 
 
         //---------------------右侧展示文本介绍-----------------------------------------------------
-        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 -grayLinePaint.measureText(explain3) / 2;
+        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 - grayLinePaint.measureText(explain3) / 2;
         canvas.drawText(explain3, text8X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
@@ -411,11 +413,11 @@ public class MyProjectBidView extends View {
         whitePaint.setTextSize(width * 0.03809f);
 //        String invest1 = getButText();
 
-        if (investNow) {//可点击
-            canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
-        } else {//不可点击
-            canvas.drawRoundRect(rectF, 5, 5, grayPaint);
-        }
+//        if (investNow) {//可点击
+        canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
+//        } else {//不可点击
+//            canvas.drawRoundRect(rectF, 5, 5, grayPaint);
+//        }
 
         float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(status_name) / 2;
         float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tudoujf.bean.GlobalBean;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -184,7 +185,7 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTimeBias(String cc_time) {
-        String re_StrTime ;
+        String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         try {
             long lcc_time = Long.valueOf(cc_time);
@@ -218,6 +219,23 @@ public class StringUtils {
     }
 
     /**
+     * 补齐两位小数
+     */
+    public static String getTwoDecimalsStrUD(String fStr) {
+        double f = string2Float(fStr);
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);//舍去多余位
+
+//        BigDecimal bd = new BigDecimal(fStr).setScale(2, BigDecimal.ROUND_HALF_UP);
+//        f = bd.doubleValue();
+//        return ""+f;//format 返回的是字符串
+        return decimalFormat.format(f);//format 返回的是字符串
+    }
+
+
+
+
+    /**
      * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
@@ -236,27 +254,27 @@ public class StringUtils {
                     fStr = fStr + "0";
                     break;
             }
-            if (se.length()>2){
-                fStr = s + "."+se.substring(0,2);
+            if (se.length() > 2) {
+                fStr = s + "." + se.substring(0, 2);
             }
-            return getCommaDecimalsStrAssist(s, fStr,2);
+            return getCommaDecimalsStrAssist(s, fStr, 2);
 
         } else {
-            return getCommaDecimalsStrAssist(fStr, fStr + ".00",2);
+            return getCommaDecimalsStrAssist(fStr, fStr + ".00", 2);
         }
     }
 
     /**
      * getCommaDecimalsStr(String s)方法辅助
      */
-    private static String getCommaDecimalsStrAssist(String s, String fStr,int flag) {
+    private static String getCommaDecimalsStrAssist(String s, String fStr, int flag) {
         if (s.length() > 3) {
             StringBuilder builder = new StringBuilder(fStr);
             int start = s.length() % 3;
-            int  tem=0;
+            int tem = 0;
             if (start != 0) {
                 builder.insert(s.length() % 3, ",");
-                tem=1;
+                tem = 1;
             }
 //              12,345678,910.00    -6
 //              12,345,678,910.00   -10
@@ -266,14 +284,14 @@ public class StringUtils {
             //123,456,789  -7
 
             int i = 1;
-            while (s.length()-3*i >= 3) {
-                if (flag==2){
-                    builder.insert(fStr.length()+tem - 6-(i-1)*4, ",");
-                }else if (flag==0){
-                    builder.insert(fStr.length()+tem - 3-(i-1)*4, ",");
+            while (s.length() - 3 * i >= 3) {
+                if (flag == 2) {
+                    builder.insert(fStr.length() + tem - 6 - (i - 1) * 4, ",");
+                } else if (flag == 0) {
+                    builder.insert(fStr.length() + tem - 3 - (i - 1) * 4, ",");
                 }
                 tem++;
-                Log.e("TAG", "getCommaDecimalsStrAssist: -----"+builder.toString()+"------------"+s.length());
+                Log.e("TAG", "getCommaDecimalsStrAssist: -----" + builder.toString() + "------------" + s.length());
                 i++;
             }
 //            while (s.length()+tem - 3 * i >= 3) {
@@ -298,10 +316,10 @@ public class StringUtils {
         if (fStr.contains(".")) {
             int temp = fStr.indexOf(".");
             String s = fStr.substring(0, temp);
-            return getCommaDecimalsStrAssist(s, s,0);
+            return getCommaDecimalsStrAssist(s, s, 0);
 
         } else {
-            return getCommaDecimalsStrAssist(fStr, fStr,0);
+            return getCommaDecimalsStrAssist(fStr, fStr, 0);
         }
     }
 
@@ -351,4 +369,8 @@ public class StringUtils {
         m.appendTail(sb);//将未匹配到的地方添加到sb中
         return sb.toString();
     }
+
+
+
+
 }

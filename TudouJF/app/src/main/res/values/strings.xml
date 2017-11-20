@@ -574,6 +574,9 @@
     <string name="chakanzhuanrangjilu">查看转让记录</string>
     <string name="chakangoumaijilu">查看购买记录</string>
     <string name="huoquwodexiangmuxiangqingshibai">获取我的项目详情失败!</string>
+    <string name="zhuanrangshouxufei">转让手续费</string>
+    <string name="zhaiquanzhuanrangshibai">债权转让失败!</string>
+    <string name="zhaiquanzhuanrangchenggong">债权转让成功!</string>
 
 
 </resources>

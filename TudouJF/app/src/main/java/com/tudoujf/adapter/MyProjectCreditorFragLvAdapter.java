@@ -96,11 +96,22 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setStatus_name(list.get(position).getTransfer_status_name());
 
 //        final boolean finalSkip = skip;
+        final int  mPosition=position;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
 //                if (finalSkip) {
                 Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
+                intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
+
+                int   type=list.get(mPosition).getType();
+//                1,债权转让记录,2,债权购买记录
+                intent.putExtra("type",type);
+                if (type==2){
+                    intent.putExtra("tender_id",list.get(mPosition).getId());
+                }else {
+                    intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
+                }
                 context.startActivity(intent);
 //                } else {
 //                    Intent intent = new Intent(context, MyInvestDetailsActivity.class);

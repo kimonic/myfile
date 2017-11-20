@@ -74,7 +74,6 @@ public class MyCreditorProjectBean implements BaseBean {
     }
 
 
-
     public static class TransferListBean {
         /**
          * page : 1
@@ -181,9 +180,13 @@ public class MyCreditorProjectBean implements BaseBean {
             private String transfer_id;
             private String wait_principal;
             private String loan_id;
+            //---------------------------------------------transer与buy的标识--------------------------------------
+            private  int  type;
+
+            //---------------------------------------------transer与buy的标识--------------------------------------
 
 
-//---------------------------------------------transer专有字段--------------------------------------
+            //---------------------------------------------transer专有字段--------------------------------------
             private String expire_date;
             private String apr;
             private String recover_count;
@@ -191,6 +194,16 @@ public class MyCreditorProjectBean implements BaseBean {
             private String changeStatus;
             private String wait_recover_interest;
             private String wait_recover_count;
+            //---------------------------------------------transer专有字段--------------------------------------
+
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
 
             public String getExpire_date() {
                 return expire_date;
@@ -250,10 +263,6 @@ public class MyCreditorProjectBean implements BaseBean {
 
 
             //--------------------------------------------------------------------------------------------------
-
-
-
-
 
 
             public String getProgress() {
