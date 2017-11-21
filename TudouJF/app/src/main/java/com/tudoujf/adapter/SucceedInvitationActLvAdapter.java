@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.my.mypopularize.SucceedInvitationActBean;
+import com.tudoujf.bean.databean.SucceedInvitationBean;
 
 import java.util.List;
 
@@ -28,9 +29,9 @@ import java.util.List;
 public class SucceedInvitationActLvAdapter extends BaseAdapter {
 
     private Context context;
-    private List<SucceedInvitationActBean> list;
+    private List<SucceedInvitationBean.ItemsBean> list;
 
-    public SucceedInvitationActLvAdapter(Context context, List<SucceedInvitationActBean> list) {
+    public SucceedInvitationActLvAdapter(Context context, List<SucceedInvitationBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -74,9 +75,9 @@ public class SucceedInvitationActLvAdapter extends BaseAdapter {
             viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
         }
 
-        viewHolder.textView1.setText(list.get(position).getUserName());
-        viewHolder.textView2.setText(list.get(position).getTouZiZongE());
-        viewHolder.textView3.setText(list.get(position).getHuanKuanZongE());
+        viewHolder.textView1.setText(list.get(position).getMember_name());
+        viewHolder.textView2.setText(list.get(position).getTender_success_amount());
+        viewHolder.textView3.setText(list.get(position).getRepay_amount_yes());
 
 
 

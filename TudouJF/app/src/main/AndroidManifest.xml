@@ -209,6 +209,8 @@
         <activity android:name=".activity.managemoney.AddBankCardHuiFuActivity" />
         <!--71.幸运抽奖activity-->
         <activity android:name=".activity.discover.LuckyLotteryActivity" />
+        <!--72.申请VIPactivity-->
+        <activity android:name=".activity.my.myaccount.VIPActivity" />
 
         <service
             android:name=".service.MyService"

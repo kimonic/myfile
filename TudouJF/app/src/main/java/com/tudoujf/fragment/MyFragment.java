@@ -26,6 +26,7 @@ import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
 import com.tudoujf.activity.my.myaccount.MyAccountActivity;
+import com.tudoujf.activity.my.myaccount.VIPActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
@@ -178,6 +179,9 @@ public class MyFragment extends BaseFragment {
             case R.id.fl_frag_my_message://我的消息页面
                 openActivity(MyMessageActivity.class);
                 break;
+                case R.id.tv_frag_my_vipapply://申请vip
+                openActivity(VIPActivity.class);
+                break;
         }
     }
 
@@ -252,6 +256,7 @@ public class MyFragment extends BaseFragment {
         llMyAccount.setOnClickListener(this);
         tvRealName.setOnClickListener(this);
         flMessage.setOnClickListener(this);
+        tvVipapply.setOnClickListener(this);
 
         srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
             @Override

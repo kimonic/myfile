@@ -229,6 +229,11 @@ public class Constants {
      */
     public static final String IMMEDIATE_TRANSFER = URL + "/phone/transfer/transferSub";
 
+    /**
+     * 我的推广成功邀请请求接口
+     */
+    public static final String SUCCEED_INVITATION= URL + "/phone/spread/mySpread";
+
 
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------

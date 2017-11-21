@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.myproject;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +14,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.MTextWatchAdapter;
+import com.tudoujf.adapter.MyCreditorDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
@@ -24,15 +24,16 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
-import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -91,6 +92,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     private String tender_id;
     private int type;
     private TransferableDetailsBean bean;
+    private List<TransferableDetailsBean.RecoverBean.ItemsBean> list;
 
     @Override
     public int getLayoutResId() {
@@ -109,6 +111,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        list = new ArrayList<>();
 
         type = getIntent().getIntExtra("type", 1);
         tender_id = getIntent().getStringExtra("tender_id");
@@ -126,7 +129,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-///**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtb.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtb.setLayoutParams(params);
@@ -142,12 +144,12 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     @Override
     public void initListener() {
         tvBuyNow.setOnClickListener(this);
-        etTransferScale.addTextChangedListener(new MTextWatchAdapter(){
+        etTransferScale.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
-                if (bean!=null){
-                    String  temp=""+StringUtils.string2Float(editable.toString())*StringUtils.string2Float(bean.getAmount_money())/100;
-                    String  temp1=""+ StringUtils.string2Float(bean.getTransfer_fee().split(",")[0])*StringUtils.string2Float(editable.toString())*StringUtils.string2Float(bean.getAmount_money())/100;
+                if (bean != null) {
+                    String temp = "" + StringUtils.string2Float(editable.toString()) * StringUtils.string2Float(bean.getAmount_money()) / 100;
+                    String temp1 = "" + StringUtils.string2Float(bean.getTransfer_fee().split(",")[0]) * StringUtils.string2Float(editable.toString()) * StringUtils.string2Float(bean.getAmount_money()) / 100;
                     tvTransferPrice.setText(temp);
                     tvPredictEarings.setText(StringUtils.getTwoDecimalsStrUD(temp1));
                 }
@@ -165,6 +167,11 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
         } else {
             map.put("tender_id", tender_id);
         }
+
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -login_token----"+ UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -tender_id----"+ tender_id);
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -url----"+ url);
+
 
         HttpMethods.getInstance().POST(this, url, map, this.getLocalClassName(),
                 new StringCallback() {
@@ -184,6 +191,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                         }
                     }
 
+
+
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
@@ -196,24 +205,39 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            if (type==1){
+            if (type == 1) {
+                tvBidNameBuy.setText(bean.getLoan_name());
+                tvCreditorValueBuy.setText(bean.getAmount_money());
+                tvCreditorValueBuy.setText(bean.getAmount_money());
 
-            }else {
+
+                tvExpireDateBuy.setText(bean.getExpire_time());
+                tvPeriodsBuy.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));
+
+                tvTransferValueBuy.setText(bean.getAmount());
+                tvEaringsBuy.setText(bean.getIncome());
+
+                if (bean.getRecover().getItems() != null && bean.getRecover().getItems().size() > 0) {
+                    list.addAll(bean.getRecover().getItems());
+                    MyCreditorDetailsActLvAdapter adapter = new MyCreditorDetailsActLvAdapter(this, list);
+                    lvBuy.setAdapter(adapter);
+                    HeightUtils.setListviewHeight(lvBuy);
+                }
+
+
+            } else {
                 tvBidName.setText(bean.getLoan_name());
                 tvCreditorsValue.setText(bean.getAmount_money());
-
-                tvReturnDate.setText(bean.getRecover_time());//-------------------------
+                tvReturnDate.setText(bean.getRecover_time());
                 tvPeriods.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));
-
                 etTransferScale.setHint(("请输入转让系数:" + bean.getTransfer_coefficient_min() + "-" + bean.getTransfer_coefficient_max()));
-//                tvTransferPrice.setText(bean.getAmount());
-//                tvPredictEarings.setText("");
             }
 
 
         }
 
     }
+
 
     private void transferNow() {
         String scale = etTransferScale.getText().toString();
@@ -234,9 +258,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("tender_id", bean.getTender_id());
         map.put("coefficient", "" + temp);
-        Log.e("TAG", "我的债权项目详情接口返回数据: tender_id-----" + bean.getTender_id());
-        Log.e("TAG", "我的债权项目详情接口返回数据: coefficient-----" + temp);
-        Log.e("TAG", "我的债权项目详情接口返回数据: login_token-----" + UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.IMMEDIATE_TRANSFER, map, this.getLocalClassName(),
                 new StringCallback() {
@@ -245,19 +266,14 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----请求债权转让接口返回数据------------" + result);
-//                        if (result.contains("200")){
-//                            ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanzhuanrangchenggong);
-//                        }else {
-//                            ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanzhuanrangchenggong);
-//
-//                        }
-
                         Gson gson = new Gson();
                         CommonBean bean1 = gson.fromJson(result, CommonBean.class);
-                        if (bean1 != null && bean1.getCode().equals("200")) {
+                        if (bean1 != null && "200".equals(bean1.getCode())) {
                             ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanzhuanrangchenggong);
                         } else {
-                            ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, bean1.getDescription().toString());
+                            if (bean1 != null && bean1.getDescription() != null) {
+                                ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, bean1.getDescription().toString());
+                            }
                         }
                     }
 

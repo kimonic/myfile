@@ -577,6 +577,20 @@
     <string name="zhuanrangshouxufei">转让手续费</string>
     <string name="zhaiquanzhuanrangshibai">债权转让失败!</string>
     <string name="zhaiquanzhuanrangchenggong">债权转让成功!</string>
+    <string name="apply_for_vip">申请VIP</string>
+    <string name="apply_record">申请记录</string>
+    <string name="qingxuanzeninyaoshenqingdetaocan">请选择您需要申请的套餐</string>
+    <string name="onemonth">1个月</string>
+    <string name="priceone">￥\t\t30元</string>
+    <string name="threemonth">3个月</string>
+    <string name="sixmonth">6个月</string>
+    <string name="oneyear">12个月</string>
+    <string name="pricethree">￥\t\t50元</string>
+    <string name="pricesix">￥\t\t80元</string>
+    <string name="priceyear">￥\t120元</string>
+    <string name="dangqiankeyongyue">当前可用余额</string>
+    <string name="xxxxxx">xxxxxx</string>
+    <string name="lijishenqing">立即申请</string>
 
 
 </resources>

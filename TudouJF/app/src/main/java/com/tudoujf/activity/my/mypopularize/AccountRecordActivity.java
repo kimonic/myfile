@@ -78,8 +78,8 @@ public class AccountRecordActivity extends BaseActivity {
         srlActAccountRecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         srlActAccountRecord.setRefreshFooter(new BallPulseFooter(this));
 
-        SucceedInvitationActLvAdapter adapter=new SucceedInvitationActLvAdapter(this,list);
-        lvActAccountRecord.setAdapter(adapter);
+//        SucceedInvitationActLvAdapter adapter=new SucceedInvitationActLvAdapter(this,list);
+//        lvActAccountRecord.setAdapter(adapter);
     }
 
     @Override
