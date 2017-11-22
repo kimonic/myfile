@@ -12,12 +12,12 @@
        android:id="@+id/vp_actguide"
        />
 
-    <com.tudoujf.ui.DotView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="30dp"
-        android:id="@+id/dv_actguide"
-        />
+    <!--<com.tudoujf.ui.DotView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:id="@+id/dv_actguide"-->
+        <!--/>-->
 
 </FrameLayout>

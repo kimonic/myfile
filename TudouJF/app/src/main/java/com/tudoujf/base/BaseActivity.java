@@ -16,6 +16,18 @@ import android.view.WindowManager;
 import com.lzy.imagepicker.view.SystemBarTintManager;
 import com.lzy.okgo.OkGo;
 import com.tudoujf.R;
+import com.tudoujf.activity.discover.LuckyLotteryActivity;
+import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
+import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
+import com.tudoujf.activity.my.myaccount.CheckOldPhoneNumberActivity;
+import com.tudoujf.activity.my.myaccount.CommitPhoneNumberActivity;
+import com.tudoujf.activity.my.myaccount.MyAccountActivity;
+import com.tudoujf.activity.my.myaccount.VIPActivity;
+import com.tudoujf.activity.my.myproject.MyProjectActivity;
+import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -43,22 +55,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
      */
     private boolean isActive = true;
 
-    private AlertDialog  bDialog;
+    private AlertDialog bDialog;
 
     public void showPDialog() {
-        if (bDialog==null){
-            bDialog= DialogUtils.showProgreessDialog(this,getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
-        }else {
+        if (bDialog == null) {
+            bDialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        } else {
             bDialog.show();
         }
     }
 
-    public void dismissPDialog(){
-        if (bDialog!=null){
+    public void dismissPDialog() {
+        if (bDialog != null) {
             bDialog.dismiss();
         }
     }
-
 
 
     @Override
@@ -150,12 +161,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     /**
      * 启动下一个activity
      */
-    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, Bundle parameter,int requestCode) {
+    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, Bundle parameter, int requestCode) {
         Intent intent = new Intent(this, toActivity);
         if (parameter != null) {
             intent.putExtras(parameter);
         }
-        startActivityForResult(intent,requestCode);
+        startActivityForResult(intent, requestCode);
     }
 
     /**
@@ -208,7 +219,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         if (!isAppOnForeground()) {
             //app 进入后台
             ToastUtils.showToast(this, "土豆app已经进入后台运行!!");
-            if (UserConfig.getInstance().getLockPass(this)){//已开启手势密码
+            if (UserConfig.getInstance().getLockPass(this)) {//已开启手势密码
                 UserConfig.getInstance().setDraw(false);
             }
 
@@ -225,5 +236,31 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             ToastUtils.showToast(this, "土豆app已经回到前台!!");
             isActive = true;
         }
+//开启解锁界面
+        if (!UserConfig.getInstance().isDraw() && (this instanceof HomeActivity)//首页我的
+
+
+                ) {
+            if (((HomeActivity) this).getVpActHome().getCurrentItem() == 3) {
+                Bundle bundle = new Bundle();
+                bundle.putString("type", "jiesuo");
+                openActivity(LockActivity.class, bundle);//打开手势密码界面
+            }
+        } else if (!UserConfig.getInstance().isDraw() && ((this instanceof RechargeActivity)//充值
+                || (this instanceof FundDetailsActivity)//资金详情
+                || (this instanceof WithdrawActivity)//提现
+                || (this instanceof MyAccountActivity)//我的账户
+                || (this instanceof VIPActivity)//VIP
+                || (this instanceof LuckyLotteryActivity)//幸运抽奖
+                || (this instanceof RealNameAuthenticationHuiFuActivity)//实名认证
+                || (this instanceof CheckOldPhoneNumberActivity)//验证旧手机号
+                || (this instanceof CommitPhoneNumberActivity)//绑定新号
+                || (this instanceof MyProjectActivity))//我的项目
+                ) {
+            Bundle bundle = new Bundle();
+            bundle.putString("type", "jiesuo");
+            openActivity(LockActivity.class, bundle);//打开手势密码界面
+        }
+
     }
 }

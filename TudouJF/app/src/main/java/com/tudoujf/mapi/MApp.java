@@ -12,6 +12,8 @@ import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import org.litepal.LitePal;
 
@@ -28,6 +30,15 @@ public class MApp extends Application {
     public static MApp app = null;
     private boolean isLogin = false;
 
+    /**---------------------友盟平台配置-----------------------------------------------------------*/
+    {
+        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+    }
+    /**---------------------友盟平台配置-----------------------------------------------------------*/
+
+
     public boolean isLogin() {
         return isLogin;
     }
@@ -43,6 +54,9 @@ public class MApp extends Application {
         initOkGo();
         LitePal.initialize(this);
         CreateCode.initCreatCode(this);
+        /**---------------------友盟平台配置-----------------------------------------------------------*/
+        UMShareAPI.get(this);
+        /**---------------------友盟平台配置-----------------------------------------------------------*/
     }
 
 

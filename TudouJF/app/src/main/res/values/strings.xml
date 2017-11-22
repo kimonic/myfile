@@ -591,6 +591,7 @@
     <string name="dangqiankeyongyue">当前可用余额</string>
     <string name="xxxxxx">xxxxxx</string>
     <string name="lijishenqing">立即申请</string>
+    <string name="shoushimimacuowucishuguoduo">手势密码错误次数过多!</string>
 
 
 </resources>

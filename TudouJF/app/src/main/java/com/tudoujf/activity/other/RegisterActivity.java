@@ -450,5 +450,13 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected int setStatusBarColor() {
+        return getResources().getColor(R.color.login_statusbar_color);
+    }
 
+    @Override
+    protected boolean translucentStatusBar() {
+        return true;
+    }
 }

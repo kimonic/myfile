@@ -34,7 +34,7 @@ android {
             keyAlias "hunxiao"
             keyPassword "hunxiao"
         }
-    }
+ }
 
     buildTypes {
         debug {
@@ -58,6 +58,18 @@ android {
             proguardFiles 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+
+        //-------------------------------------友盟配置------------------------------------------------------
+        signingConfigs {
+            debug {
+                storeFile file('debug.keystore')
+                storePassword "android"
+                keyAlias "androiddebugkey"
+                keyPassword "android"
+            }
+        }
+        //-------------------------------------友盟配置------------------------------------------------------
+
     }
     // 移除lint检查的error
     lintOptions {

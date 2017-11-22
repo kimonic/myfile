@@ -11,6 +11,7 @@ import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 
@@ -74,8 +75,20 @@ public class WelcomeActivity extends BaseActivity {
                     Intent intent = new Intent(WelcomeActivity.this, GuideActivity.class);
                     startActivity(intent);
                 } else if (isLock) {//有手势密码
+                    String loginToken = UserConfig.getInstance().getLoginToken(WelcomeActivity.this);
+                    String name = MD5Utils.md5(loginToken);
+                    long  start=SharedPreferencesUtils.getInstance(WelcomeActivity.this,
+                            Constants.USER_CONFIG).getLong(name + "startlocktime", 0);
+                    int  surplus;
+                    if (System.currentTimeMillis()-start<300000){//锁定时间未满
+                        surplus= 300-(int) ((System.currentTimeMillis()-start)/1000);
+                    }else {
+                        surplus=0;
+                    }
                     Intent intent = new Intent(WelcomeActivity.this, LockActivity.class);
+                    intent.putExtra("surplus",surplus);
                     startActivity(intent);
+
                 } else {//无手势密码
                     Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                     startActivity(intent);
@@ -102,7 +115,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected int setStatusBarColor() {
-        return getResources().getColor(R.color.global_theme_background_color);
+        return getResources().getColor(R.color.welcome_statusbar_color);
     }
 
     @Override

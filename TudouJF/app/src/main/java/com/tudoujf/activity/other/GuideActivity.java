@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.GuideVPAdapter;
+import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.ui.DotView;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -35,33 +36,35 @@ import butterknife.ButterKnife;
  */
 
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends BaseActivity {
 
     @BindView(R.id.vp_actguide)
     ViewPager vpActguide;
-    @BindView(R.id.dv_actguide)
-    DotView dvActguide;
+//    @BindView(R.id.dv_actguide)
+//    DotView dvActguide;
 
     private float x;
 
-    private int images[] = new int[]{R.drawable.act_guide_page1,
-            R.drawable.act_guide_page2,
-            R.drawable.act_guide_page3,
-            R.drawable.act_guide_page4};
+    private int images[] = new int[]{R.drawable.act_guide1,
+            R.drawable.act_guide2,
+            R.drawable.act_guide3
+    };
     private List<ImageView> list;
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_guide);
-        ButterKnife.bind(this);
-        initView();
-
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("isguide",true);
-
+    public int getLayoutResId() {
+        return R.layout.act_guide;
     }
 
-    private void initView() {
+    @Override
+    public void initDataFromIntent() {
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("isguide",true);
+    }
+
+    @Override
+    public void initView() {
 
         list = new ArrayList<>();
         for (int image : images) {
@@ -88,14 +91,21 @@ public class GuideActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
 
-                dvActguide.setPosition(position);
-                dvActguide.invalidate();
+//                dvActguide.setPosition(position);
+//                dvActguide.invalidate();
 
             }
 
 
         });
 
+
+
+    }
+
+
+    @Override
+    public void initListener() {
         vpActguide.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -118,10 +128,30 @@ public class GuideActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
+    @Override
+    public void initDataFromInternet() {
 
-        dvActguide.setViewPager(vpActguide);
-        dvActguide.invalidate();
+    }
 
+    @Override
+    public void LoadInternetDataToUi() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    protected int setStatusBarColor() {
+        return getResources().getColor(R.color.welcome_statusbar_color);
+    }
+
+    @Override
+    protected boolean translucentStatusBar() {
+        return true;
     }
 }

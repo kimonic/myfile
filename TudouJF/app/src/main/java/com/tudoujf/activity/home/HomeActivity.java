@@ -58,6 +58,10 @@ public class HomeActivity extends BaseActivity {
     /**是否已开启手势密码*/
     private  boolean  isLock=false;
 
+    public ViewPager getVpActHome() {
+        return vpActHome;
+    }
+
     @Override
     public void initDataFromIntent() {
 
@@ -104,6 +108,8 @@ public class HomeActivity extends BaseActivity {
         nbvActHome.setListener(new NaviButtonView.CurrentPositionListener() {
             @Override
             public boolean currentPosition(int position) {
+
+
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
@@ -125,6 +131,8 @@ public class HomeActivity extends BaseActivity {
         vpActHome.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+
+
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                 }

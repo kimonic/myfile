@@ -198,9 +198,13 @@ public class LoginActivity extends BaseActivity {
                             .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
                                     CreateCode.getSEND_AES_KEY(), bean.getLogin_token()));
                     UserConfig.getInstance().setLoginToken(bean.getLogin_token());//每次登陆重置logintoken
+                    UserConfig.getInstance().setDraw(true);//密码登录时,本次前台不再需要手势密码
                     MApp.getInstance().setLogin(true);
                     if (type != 888) {//直接从登陆界面进入应用时
                         openActivity(HomeActivity.class);
+                    }
+                    if (type==888){
+                        setResult(888);
                     }
                     closeActivity();
                 }
@@ -241,5 +245,15 @@ public class LoginActivity extends BaseActivity {
             closeActivity();
         }
 
+    }
+
+    @Override
+    protected int setStatusBarColor() {
+        return getResources().getColor(R.color.login_statusbar_color);
+    }
+
+    @Override
+    protected boolean translucentStatusBar() {
+        return true;
     }
 }

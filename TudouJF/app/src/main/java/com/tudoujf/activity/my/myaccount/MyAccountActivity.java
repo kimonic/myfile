@@ -514,7 +514,11 @@ public class MyAccountActivity extends BaseActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UserConfig.getInstance().setDraw(true);
+    }
 }
 
 

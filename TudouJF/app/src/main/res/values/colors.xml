@@ -58,5 +58,7 @@
     <color name="color_green">#85CE20</color>
     <color name="color_add">#F96937</color>
     <color name="color_minus">#64D0B6</color>
+    <color name="welcome_statusbar_color">#21B7DA</color>
+    <color name="login_statusbar_color">#F0F0E8</color>
 
 </resources>

@@ -12,6 +12,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
+    <!--////////////////////////////友盟分享权限////////////////////////////////////-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!--////////////////////////////友盟分享权限////////////////////////////////////-->
+
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera"
@@ -45,10 +51,22 @@
         <!-- 1.欢迎页activity -->
         <activity android:name=".activity.other.WelcomeActivity">
 
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN" />-->
-             <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
+
+        <!-- 21.预览各个activity的界面 -->
+        <activity android:name=".activity.other.PreviewActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+                <!--&lt;!&ndash; 监听拦截home键 &ndash;&gt;-->
+                <!--&lt;!&ndash; <category android:name="android.intent.category.HOME" /> &ndash;&gt;-->
+                <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
+            <!--</intent-filter>-->
         </activity>
         <!-- 2.初次引导页activity -->
         <activity android:name=".activity.other.GuideActivity" />
@@ -92,17 +110,7 @@
         <activity android:name=".activity.other.TestActivity"/>
 
 
-        <!-- 21.预览各个activity的界面 -->
-        <activity android:name=".activity.other.PreviewActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-                <!-- 监听拦截home键 -->
-                <!-- <category android:name="android.intent.category.HOME" /> -->
-                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            </intent-filter>
-        </activity>
         <!-- 22.忘记密码activity -->
         <activity android:name=".activity.other.FindPasswordActivity" />
         <!-- 23.手势密码activity -->
@@ -224,6 +232,95 @@
         <service
             android:name=".service.SignInService"
             android:exported="false" />
+
+        <!--//////////////////友盟分享activity///////////////////////////////////////////////////-->
+
+        <!--//////////////////新浪需要的activity///////////////////////////////////////////////////-->
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+        <!--//////////////////新浪需要的activity///////////////////////////////////////////////////-->
+
+
+        <!--//////////////////支付宝需要的activity///////////////////////////////////////////////////-->
+        <activity
+            android:name=".apshare.ShareEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--//////////////////支付宝需要的activity///////////////////////////////////////////////////-->
+
+
+
+        <!--//////////////////钉钉要的activity///////////////////////////////////////////////////-->
+
+        <activity
+            android:name=".ddshare.DDShareActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--//////////////////钉钉要的activity///////////////////////////////////////////////////-->
+
+
+        <!--//////////////////QQ完整版要的activity///////////////////////////////////////////////////-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <!--//////////////////QQ完整版要的activity///////////////////////////////////////////////////-->
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="561cae6ae0f55abd990035bf" >
+        </meta-data>
+
+
+
+
+
+        <!--//////////////////友盟分享activity///////////////////////////////////////////////////-->
+
+
+
+
+
     </application>
 
 </manifest>
