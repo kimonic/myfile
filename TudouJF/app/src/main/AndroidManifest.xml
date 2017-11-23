@@ -30,7 +30,7 @@
     <application
         android:name=".mapi.MApp"
         android:allowBackup="true"
-        android:icon="@drawable/act_lock_icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/act_lock_icon"
         android:supportsRtl="true"
@@ -219,6 +219,10 @@
         <activity android:name=".activity.discover.LuckyLotteryActivity" />
         <!--72.申请VIPactivity-->
         <activity android:name=".activity.my.myaccount.VIPActivity" />
+        <!--73.VIP购买汇付跳转页activity-->
+        <activity android:name=".activity.my.myaccount.VIPHuiFuBuyActivity" />
+        <!--74.VIP申请记录activity-->
+        <activity android:name=".activity.my.myaccount.VIPRecordActivity" />
 
         <service
             android:name=".service.MyService"

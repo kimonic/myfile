@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,6 +68,7 @@ public class SetActivity extends BaseActivity {
                 openActivity(FeedbackActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
+                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
                 break;
         }
 

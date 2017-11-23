@@ -136,6 +136,11 @@ public class LockActivity extends BaseActivity {
         name = MD5Utils.md5(loginToken);
 
         password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString(name + "ciphertext", "");
+        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
+        if ("".equals(password)){
+            UserConfig.getInstance().setDraw(true);
+            closeActivity();
+        }
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 //            userName = bundle.getString("name");//用户名
@@ -162,7 +167,6 @@ public class LockActivity extends BaseActivity {
             ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         }
         mlvActLock.setPassword(password);
-        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
 //        TreeMap<String,String>  map=new TreeMap<>();
 //        map.put("login_token","12267");
 //        Log.e("TAG", "initView:------------加密字符串---------- " + StringUtils.getRequestParams(map));

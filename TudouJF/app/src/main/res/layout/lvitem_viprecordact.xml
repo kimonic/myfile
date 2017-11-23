@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_lvitem_succeedinvitation"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        >
+
+        <TextView
+            android:id="@+id/tv_lvitem_succeedinvitation1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/global_theme_background_color"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_succeedinvitation2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_orange"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_succeedinvitation3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_succeedinvitation4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/color_black"
+            android:gravity="center"
+            android:text="@string/act_succeedinvitation_default1"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

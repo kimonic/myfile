@@ -11,6 +11,7 @@ import com.tudoujf.adapter.DiscoverFragLvAdapter;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.DiscoverFragBean;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class DiscoverFragment extends BaseFragment {
                 openActivity(IntegralShopActivity.class);
                 break;
             case R.id.ll_frag_discover_bt3:
+                ToastUtils.showToast(getActivity(), R.string.jijiangkaiqijingqingqidai);
                 break;
 //            case R.id.: break;
 //            case R.id.: break;

@@ -1,4 +1,4 @@
-package com.tudoujf.activity.my.mypopularize;
+package com.tudoujf.activity.my.myaccount;
 
 import android.util.Log;
 import android.view.View;
@@ -16,10 +16,10 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
+import com.tudoujf.adapter.VIPRecordActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.MyPopularizeBean;
-import com.tudoujf.bean.databean.SucceedInvitationBean;
+import com.tudoujf.bean.databean.VIPRecordBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -35,35 +35,35 @@ import java.util.TreeMap;
 
 import butterknife.BindView;
 
-
 /**
- * * ================================================
- * name:            SucceedInvitationActivity
+ * * ===============================================================
+ * name:             VIPRecordActivity
  * guide:
  * author：          kimonik
  * version：          1.0
- * date：            2017/9/5
- * description：  我的推广页面-->成功邀请activity
+ * date：             2017/11/23
+ * description：  VIP申请记录activity
  * history：
- * ===================================================
+ * *==================================================================
  */
 
-public class SucceedInvitationActivity extends BaseActivity {
-    @BindView(R.id.mtb_act_succeedinvitation)
-    MTopBarView mtbActSucceedInvitation;
-    @BindView(R.id.lv_act_succeedinvitation)
-    ListView lvActSucceedInvitation;
-    @BindView(R.id.srl_act_succeedinvitation)
-    SmartRefreshLayout srlActSucceedInvitation;
+public class VIPRecordActivity extends BaseActivity {
+    @BindView(R.id.mtb_act_viprecord)
+    MTopBarView mtbActViprecord;
+    @BindView(R.id.lv_act_viprecord)
+    ListView lvActViprecord;
+    @BindView(R.id.srl_act_viprecord)
+    SmartRefreshLayout srlActViprecord;
 
-    private List<SucceedInvitationBean.ItemsBean> list;
+
     private int page = 1;
-    private SucceedInvitationBean bean;
-    private SucceedInvitationActLvAdapter adapter;
+    private List<VIPRecordBean.ItemsBean> list;
+    private VIPRecordBean bean;
+    private VIPRecordActLvAdapter adapter;
 
     @Override
     public int getLayoutResId() {
-        return R.layout.act_succeedinvitation;
+        return R.layout.act_viprecord;
     }
 
     @Override
@@ -73,47 +73,32 @@ public class SucceedInvitationActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        //临时数据源
         list = new ArrayList<>();
-
-//        for (int i = 0; i < 50; i++) {
-//            SucceedInvitationActBean bean=new SucceedInvitationActBean();
-//            bean.setUserName("用户XXXXXX");
-//            bean.setTouZiZongE("000,000.00");
-//            bean.setHuanKuanZongE("000,000.00");
-//
-//            if (i%2==1){
-//                bean.setBacFlag(2);
-//            }
-//            list.add(bean);
-//        }
 
     }
 
     @Override
     public void initView() {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActSucceedInvitation.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActViprecord.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        mtbActSucceedInvitation.setLayoutParams(params);
+        mtbActViprecord.setLayoutParams(params);
 
-        srlActSucceedInvitation.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlActSucceedInvitation.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
-        srlActSucceedInvitation.setRefreshFooter(new BallPulseFooter(this));
-        srlActSucceedInvitation.setEnableLoadmoreWhenContentNotFull(true);
-
-
+        srlActViprecord.setPrimaryColorsId(R.color.global_theme_background_color);
+        srlActViprecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+        srlActViprecord.setRefreshFooter(new BallPulseFooter(this));
+        srlActViprecord.setEnableLoadmoreWhenContentNotFull(true);
     }
 
     @Override
     public void initListener() {
-        mtbActSucceedInvitation.getLeftTV().setOnClickListener(new View.OnClickListener() {
+        mtbActViprecord.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeActivity();
             }
         });
 
-        srlActSucceedInvitation.setOnRefreshListener(new OnRefreshListener() {
+        srlActViprecord.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 page = 1;
@@ -123,15 +108,15 @@ public class SucceedInvitationActivity extends BaseActivity {
         });
 
 
-        srlActSucceedInvitation.setOnLoadmoreListener(new OnLoadmoreListener() {
+        srlActViprecord.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 if (bean != null && page < bean.getTotal_pages()) {
                     page = page + 1;
                     initDataFromInternet();
                 } else {
-                    ToastUtils.showToast(SucceedInvitationActivity.this, R.string.meiyougengduola);
-                    srlActSucceedInvitation.finishLoadmore();
+                    ToastUtils.showToast(VIPRecordActivity.this, R.string.meiyougengduola);
+                    srlActViprecord.finishLoadmore();
                 }
             }
         });
@@ -144,25 +129,25 @@ public class SucceedInvitationActivity extends BaseActivity {
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
 
-        Log.e("TAG", "initDataFromInternet:我的推广成功邀请好友接口返回数据 -----" + page);
-        Log.e("TAG", "initDataFromInternet:我的推广成功邀请好友接口返回数据 -----" + UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "initDataFromInternet:VIP申请记录 -----" + page);
+        Log.e("TAG", "initDataFromInternet:VIP申请记录 -----" + UserConfig.getInstance().getLoginToken(this));
 
 
-        HttpMethods.getInstance().POST(this, Constants.SUCCEED_INVITATION, map, this.getLocalClassName(),
+        HttpMethods.getInstance().POST(this, Constants.VIP_LOG, map, this.getLocalClassName(),
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的推广成功邀请好友接口返回数据--------" + result);
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SucceedInvitationBean>() {
-                        }.getType(), SucceedInvitationBean.class, SucceedInvitationActivity.this);
+                        Log.e("TAG", "onSuccess:----VIP申请记录--------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<VIPRecordBean>() {
+                        }.getType(), VIPRecordBean.class, VIPRecordActivity.this);
                         if (bean1 != null) {
-                            bean = (SucceedInvitationBean) bean1;
+                            bean = (VIPRecordBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(SucceedInvitationActivity.this, R.string.shujujiazaichucuo);
+                            ToastUtils.showToast(VIPRecordActivity.this, R.string.shujujiazaichucuo);
                         }
                     }
 
@@ -170,12 +155,10 @@ public class SucceedInvitationActivity extends BaseActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(SucceedInvitationActivity.this, R.string.huoquwodetuiguangxinxishibai);
+                        ToastUtils.showToast(VIPRecordActivity.this, R.string.huoquwodetuiguangxinxishibai);
 
                     }
                 });
-
-
     }
 
     @Override
@@ -192,20 +175,19 @@ public class SucceedInvitationActivity extends BaseActivity {
             }
 
             if (adapter == null) {
-                adapter = new SucceedInvitationActLvAdapter(this, list);
-                lvActSucceedInvitation.setAdapter(adapter);
+                adapter = new VIPRecordActLvAdapter(this, list);
+                lvActViprecord.setAdapter(adapter);
             } else {
                 adapter.notifyDataSetChanged();
             }
         }
-
     }
 
     private void finishSrl() {
-        if (srlActSucceedInvitation.isRefreshing()) {
-            srlActSucceedInvitation.finishRefresh();
-        } else if (srlActSucceedInvitation.isLoading()) {
-            srlActSucceedInvitation.finishLoadmore();
+        if (srlActViprecord.isRefreshing()) {
+            srlActViprecord.finishRefresh();
+        } else if (srlActViprecord.isLoading()) {
+            srlActViprecord.finishLoadmore();
         }
 
     }
@@ -219,6 +201,5 @@ public class SucceedInvitationActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
-
 
 }

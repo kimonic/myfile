@@ -286,6 +286,7 @@ public class ProductDetailsActivity extends BaseActivity {
             if (!(StringUtils.string2Float(bean.getLoan_info().getProgress()) < 100 && StringUtils.string2Float(bean.getLoan_info().getStatus()) <= 3)) {
                 tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
                 tvBuyNow.setText(hint);
+                tvBuyNow.setClickable(false);//禁止点击
             }
 
 

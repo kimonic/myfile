@@ -26,6 +26,7 @@ public class Utils
     }
 
     public static String handleJson(JSONObject jo) {
+
         String result = "";
         Iterator<String> keys = jo.keys();
         while (keys.hasNext()) {
@@ -37,8 +38,6 @@ public class Utils
             result += "&" + key + "=" + jo.optString(key);
         }
         result=result.replaceFirst("&","");
-        Log.e("TAG", "handleJson: -----"+result);
-
         return result;
     }
 

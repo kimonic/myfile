@@ -232,7 +232,17 @@ public class Constants {
     /**
      * 我的推广成功邀请请求接口
      */
-    public static final String SUCCEED_INVITATION= URL + "/phone/spread/mySpread";
+    public static final String SUCCEED_INVITATION = URL + "/phone/spread/mySpread";
+
+    /**
+     * 申请VIP接口
+     */
+    public static final String VIP_APPLY = URL + "/phone/trust/vipApply";
+
+    /**
+     * 申请VIP接口
+     */
+    public static final String VIP_LOG = URL + "/phone/member/viplog";
 
 
 //    ------------------------------------------------------------------------------------------------

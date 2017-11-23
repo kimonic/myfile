@@ -592,6 +592,14 @@
     <string name="xxxxxx">xxxxxx</string>
     <string name="lijishenqing">立即申请</string>
     <string name="shoushimimacuowucishuguoduo">手势密码错误次数过多!</string>
+    <string name="shenqingvipshibai">申请VIP失败!</string>
+    <string name="qingxianshimingrenzheng">请先进行实名认证!</string>
+    <string name="goumaivip">购买VIP</string>
+    <string name="vipname">VIP名称</string>
+    <string name="zhifujine">支付金额</string>
+    <string name="applytime">申请时间</string>
+    <string name="status">状态</string>
+    <string name="jijiangkaiqijingqingqidai">即将开启,敬请期待!</string>
 
 
 </resources>

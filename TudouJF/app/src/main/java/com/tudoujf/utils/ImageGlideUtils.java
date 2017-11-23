@@ -26,8 +26,8 @@ public class ImageGlideUtils {
     public static  void loadCircularImage(ImageView view, String url) {
         Glide.with(view.getContext())
                 .load(url)
-                .error(R.mipmap.ic_launcher) //加载图片失败的时候显示的默认图
-                .placeholder(R.mipmap.ic_launcher)
+                .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
+                .placeholder(R.drawable.act_lock_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .centerCrop()
@@ -39,8 +39,8 @@ public class ImageGlideUtils {
     public static  void loadCircularImageNoCache(ImageView view, String url) {
         Glide.with(view.getContext())
                 .load(url)
-                .error(R.mipmap.ic_launcher) //加载图片失败的时候显示的默认图
-                .placeholder(R.mipmap.ic_launcher)
+                .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
+                .placeholder(R.drawable.act_lock_icon)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
                 .skipMemoryCache(true)
                 .crossFade()//淡入淡出
@@ -52,8 +52,8 @@ public class ImageGlideUtils {
     public static  void loadCircularImage(ImageView view, int resId) {
         Glide.with(view.getContext())
                 .load(resId)
-                .error(R.mipmap.ic_launcher) //加载图片失败的时候显示的默认图
-                .placeholder(R.mipmap.ic_launcher)
+                .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
+                .placeholder(R.drawable.act_lock_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .centerCrop()
@@ -65,8 +65,8 @@ public class ImageGlideUtils {
     public static  void loadImageFromUrl(ImageView view, String url) {
         Glide.with(view.getContext())
                 .load(url)
-                .error(R.mipmap.ic_launcher) //加载图片失败的时候显示的默认图
-                .placeholder(R.mipmap.ic_launcher)
+                .error(R.drawable.ic_error) //加载图片失败的时候显示的默认图
+                .placeholder(R.drawable.ic_error)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .into(view);

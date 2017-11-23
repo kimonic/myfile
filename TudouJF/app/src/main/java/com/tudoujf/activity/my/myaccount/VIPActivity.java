@@ -1,20 +1,32 @@
 package com.tudoujf.activity.my.myaccount;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.TransferableDetailsBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -45,6 +57,9 @@ public class VIPActivity extends BaseActivity {
     TextView tvActVipApplyNow;
 
     private List<LinearLayout> list;
+    private String money="30";
+    private String cycle="1";
+    private String categoryInd="vip1";
 
     @Override
     public int getLayoutResId() {
@@ -55,18 +70,36 @@ public class VIPActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_vip_one:
+                money="30";
+                cycle="1";
+                categoryInd="vip1";
                 setBac(0);
                 break;
             case R.id.ll_act_vip_three:
+                money="50.00";
+                cycle="3";
+                categoryInd="vip3";
                 setBac(1);
                 break;
             case R.id.ll_act_vip_six:
+                money="80.00";
+                cycle="6";
+                categoryInd="vip6";
                 setBac(2);
                 break;
             case R.id.ll_act_vip_year:
+                money="120.00";
+                cycle="12";
+                categoryInd="vip";
                 setBac(3);
                 break;
             case R.id.tv_act_vip_apply_now:
+//                applyVip();
+                Intent intent=new Intent(this,VIPHuiFuBuyActivity.class);
+                intent.putExtra("money",money);
+                intent.putExtra("cycle",cycle);
+                intent.putExtra("categoryInd",categoryInd);
+                startActivity(intent);
                 break;
 //                 case R.id.:break;
         }
@@ -85,7 +118,8 @@ public class VIPActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+        String balance = getIntent().getStringExtra("balance");
+        tvActVipAmount.setText(balance);
     }
 
     @Override
@@ -111,6 +145,12 @@ public class VIPActivity extends BaseActivity {
                 closeActivity();
             }
         });
+        mtbActVip.getRightTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               openActivity(VIPRecordActivity.class);
+            }
+        });
 
         llActVipOne.setOnClickListener(this);
         llActVipSix.setOnClickListener(this);
@@ -123,6 +163,45 @@ public class VIPActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
 
+
+    }
+    private void applyVip(){
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("money", money);
+        map.put("cycle", cycle);
+        map.put("categoryInd", categoryInd);
+
+        Log.e("TAG", "VIP申请接口返回数据: -login_token----"+ UserConfig.getInstance().getLoginToken(this));
+
+        HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----VIP申请接口返回数据------------" + result);
+//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
+//                        }.getType(), TransferableDetailsBean.class, VIPActivity.this);
+//                        if (bean1 != null) {
+//                            bean = (TransferableDetailsBean) bean1;
+//                            LoadInternetDataToUi();
+//                        } else {
+//                            ToastUtils.showToast(VIPActivity.this, R.string.shujujiazaichucuo);
+//                        }
+                    }
+
+
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(VIPActivity.this, R.string.shenqingvipshibai);
+                    }
+                });
     }
 
     @Override

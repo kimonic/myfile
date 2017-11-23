@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.StringUtils;
@@ -171,7 +173,6 @@ public class MyFragment extends BaseFragment {
                 bundle1.putString("name", bean.getMember_name());
                 bundle1.putString("iconurl", bean.getAvatar());
                 openActivity(MyAccountActivity.class, bundle1);
-
                 break;
             case R.id.tv_frag_my_realname://跳转实名认证页面
                 openActivity(RealNameAuthenticationHuiFuActivity.class);
@@ -179,8 +180,19 @@ public class MyFragment extends BaseFragment {
             case R.id.fl_frag_my_message://我的消息页面
                 openActivity(MyMessageActivity.class);
                 break;
-                case R.id.tv_frag_my_vipapply://申请vip
-                openActivity(VIPActivity.class);
+            case R.id.tv_frag_my_vipapply://申请vip
+                if (bean != null && "1".equals(bean.getIs_trust())) {
+                    Intent intent1 = new Intent(getActivity(), VIPActivity.class);
+                    intent1.putExtra("balance", StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
+                    startActivity(intent1);
+                } else {
+                    DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng, R.string.queding, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            openActivity(RealNameAuthenticationHuiFuActivity.class);
+                        }
+                    });
+                }
                 break;
         }
     }
@@ -313,12 +325,20 @@ public class MyFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar()+"?aa="+System.currentTimeMillis());
+            ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar() + "?aa=" + System.currentTimeMillis());
             tvUsername.setText((getResources().getString(R.string.huanyingni) + bean.getMember_name()));
             tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getInterest_award()));
             tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
+
+
+            if ("1".equals(bean.getIsVip())) {
+                ivVip.setImageResource(R.drawable.frag_my_vipt);
+            } else {
+                ivVip.setImageResource(R.drawable.frag_my_vip);
+
+            }
             int count = StringUtils.string2Integer(bean.getCount());
             if (count < 100) {
                 tvMessage.setText(bean.getCount());
