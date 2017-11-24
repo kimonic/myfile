@@ -7,9 +7,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.tudoujf.mynotebook.base.BaseActivity;
-import com.tudoujf.mynotebook.data.IncomeAndExpensesBean;
+import com.tudoujf.mynotebook.data.TextRecordBean;
 import com.tudoujf.mynotebook.data.TotalBean;
-import com.tudoujf.mynotebook.utils.StringUtils;
 import com.tudoujf.mynotebook.utils.TimeUtils;
 
 import org.litepal.LitePal;
@@ -18,8 +17,18 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 import butterknife.BindView;
-
-public class MainActivity extends BaseActivity {
+/**
+ * * ==================================================
+ * name:            TextRecordActivity
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/11/24
+ * description：   文本记录activity
+ * history：
+ * * ==================================================
+ */
+public class TextRecordActivity extends BaseActivity {
 
     @BindView(R.id.et_title)
     EditText etTitle;
@@ -52,8 +61,8 @@ public class MainActivity extends BaseActivity {
                 } else {//存在记录时
                     currentId = listTotal.get(0).getTotal();
                 }
-                IncomeAndExpensesBean bean = new IncomeAndExpensesBean();
-                bean.setPurpose("二牛");
+                TextRecordBean bean = new TextRecordBean();
+                bean.setTitle("二牛");
                 bean.setSaveId(currentId + 1);
                 if (bean.save()) {
                     listTotal.get(0).setTotal(currentId + 1);
@@ -79,10 +88,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        List<IncomeAndExpensesBean> list = DataSupport.findAll(IncomeAndExpensesBean.class);
+        List<TextRecordBean> list = DataSupport.findAll(TextRecordBean.class);
         if (list.size() > 0) {
-            etTitle.setText(list.get(0).getPurpose());
-            Log.e("TAG", "initView: -----" + list.get(0).getPurpose());
+            etTitle.setText(list.get(0).getTitle());
+            Log.e("TAG", "initView: -----" + list.get(0).getTitle());
         }
 
         etendTime.setText(TimeUtils.getNowDateShort());

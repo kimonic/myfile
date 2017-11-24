@@ -30,7 +30,7 @@ public class Utils
         Iterator<String> keys = jo.keys();
         while (keys.hasNext()) {
             String key = keys.next();
-//                Log.e("MainActivity", key);
+//                Log.e("TextRecordActivity", key);
             if ("submit_url".equals(key)) {
                 continue;
             }
