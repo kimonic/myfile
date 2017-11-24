@@ -1,23 +1,40 @@
 package com.tudoujf.activity.my.mypopularize;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.RecommendRecordActLvAdapter;
+import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.RecommendRecordBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.DateFilterDialog;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -48,8 +65,15 @@ public class RecommendRecordActivity extends BaseActivity {
     LinearLayout llFiltrate;
 
 
-    private List<RecommendRecordActBean> list;
+    private List<RecommendRecordBean.ItemsBean> list;
     private DateFilterDialog dateFilterDialog;
+
+    private int page = 1;
+    private RecommendRecordBean bean;
+    private RecommendRecordActLvAdapter adapter;
+    private String name="";
+    private String start_time="";
+    private String end_time="";
 
     @Override
 
@@ -87,19 +111,19 @@ public class RecommendRecordActivity extends BaseActivity {
         //临时数据源
 
         list = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            RecommendRecordActBean bean = new RecommendRecordActBean();
-            bean.setUserName("用户XXXXXX");
-            bean.setTiChengBiLi("0.125%");
-            bean.setTouZiTiCheng("000,000.00");
-            bean.setJieKuanTiCheng("000,000.00");
-            bean.setDate("20XX/XX/XX");
-
-            if (i % 2 == 1) {
-                bean.setBacFlag(2);
-            }
-            list.add(bean);
-        }
+//        for (int i = 0; i < 50; i++) {
+//            RecommendRecordBean bean = new RecommendRecordBean();
+//            bean.setUserName("用户XXXXXX");
+//            bean.setTiChengBiLi("0.125%");
+//            bean.setTouZiTiCheng("000,000.00");
+//            bean.setJieKuanTiCheng("000,000.00");
+//            bean.setDate("20XX/XX/XX");
+//
+//            if (i % 2 == 1) {
+//                bean.setBacFlag(2);
+//            }
+//            list.add(bean);
+//        }
 
     }
 
@@ -114,23 +138,109 @@ public class RecommendRecordActivity extends BaseActivity {
         srlActRecommendrecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         srlActRecommendrecord.setRefreshFooter(new BallPulseFooter(this));
 
-        RecommendRecordActLvAdapter adapter = new RecommendRecordActLvAdapter(this, list);
-        lvActRecommendrecord.setAdapter(adapter);
+
     }
 
     @Override
     public void initListener() {
         tvBac.setOnClickListener(this);
         llFiltrate.setOnClickListener(this);
+
+
+        srlActRecommendrecord.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page = 1;
+                list.clear();
+                initDataFromInternet();
+            }
+        });
+
+
+        srlActRecommendrecord.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean != null && page < bean.getTotal_pages()) {
+                    page = page + 1;
+                    initDataFromInternet();
+                } else {
+                    ToastUtils.showToast(RecommendRecordActivity.this, R.string.meiyougengduola);
+                    srlActRecommendrecord.finishLoadmore();
+                }
+            }
+        });
     }
 
     @Override
     public void initDataFromInternet() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("page", "" + page);
+        map.put("start_time", start_time);
+        map.put("end_time", end_time);
+        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + page);
+        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + UserConfig.getInstance().getLoginToken(this));
+
+
+        HttpMethods.getInstance().POST(this, Constants.RECOMMEND_LOG, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        finishSrl();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----我的推广--推广记录--接口返回数据--------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RecommendRecordBean>() {
+                        }.getType(), RecommendRecordBean.class, RecommendRecordActivity.this);
+                        if (bean1 != null) {
+                            bean = (RecommendRecordBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(RecommendRecordActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(RecommendRecordActivity.this, R.string.huoquwodetuiguangxinxishibai);
+
+                    }
+                });
 
     }
 
     @Override
     public void LoadInternetDataToUi() {
+
+        if (bean != null && bean.getItems() != null && bean.getItems().size() > 0) {
+            list.addAll(bean.getItems());
+
+            for (int i = 0; i < list.size(); i++) {
+                if (i % 2 == 0) {
+                    list.get(i).setBacFlag(1);
+                } else {
+                    list.get(i).setBacFlag(2);
+                }
+            }
+
+            if (adapter == null) {
+                adapter = new RecommendRecordActLvAdapter(this, list);
+                lvActRecommendrecord.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private void finishSrl() {
+        if (srlActRecommendrecord.isRefreshing()) {
+            srlActRecommendrecord.finishRefresh();
+        } else if (srlActRecommendrecord.isLoading()) {
+            srlActRecommendrecord.finishLoadmore();
+        }
 
     }
 

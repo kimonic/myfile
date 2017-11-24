@@ -244,6 +244,12 @@ public class Constants {
      */
     public static final String VIP_LOG = URL + "/phone/member/viplog";
 
+/**
+     * 我的推广-->推广记录-->接口
+     */
+    public static final String RECOMMEND_LOG = URL + "/phone/spread/spreadLog";
+
+
 
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------

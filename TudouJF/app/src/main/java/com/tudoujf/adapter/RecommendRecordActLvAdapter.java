@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.my.mypopularize.RecommendRecordActBean;
+import com.tudoujf.bean.databean.RecommendRecordBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -27,9 +29,9 @@ import java.util.List;
 
 public class RecommendRecordActLvAdapter extends BaseAdapter {
     private Context context;
-    private List<RecommendRecordActBean> list;
+    private List<RecommendRecordBean.ItemsBean> list;
 
-    public RecommendRecordActLvAdapter(Context context, List<RecommendRecordActBean> list) {
+    public RecommendRecordActLvAdapter(Context context, List<RecommendRecordBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -75,11 +77,11 @@ public class RecommendRecordActLvAdapter extends BaseAdapter {
             viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
         }
 
-        viewHolder.textView1.setText(list.get(position).getUserName());
-        viewHolder.textView2.setText(list.get(position).getTouZiTiCheng());
-        viewHolder.textView3.setText(list.get(position).getTiChengBiLi());
-        viewHolder.textView4.setText(list.get(position).getJieKuanTiCheng());
-        viewHolder.textView5.setText(list.get(position).getDate());
+        viewHolder.textView1.setText(list.get(position).getSpreaded_member_name());
+        viewHolder.textView2.setText(list.get(position).getSpread_type());
+        viewHolder.textView3.setText(list.get(position).getProportion());
+        viewHolder.textView4.setText(list.get(position).getAward());
+        viewHolder.textView5.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
 
 
 

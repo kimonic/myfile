@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -46,6 +47,8 @@ public class SetActivity extends BaseActivity {
     private View view;
     private AlertDialog dialog;
 
+    private int count = 0;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_set;
@@ -55,9 +58,9 @@ public class SetActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_set_kefudianhua://客服电话
-                if (dialog==null){
-                    dialog=showCustomDialog(view);
-                }else {
+                if (dialog == null) {
+                    dialog = showCustomDialog(view);
+                } else {
                     dialog.show();
                 }
                 break;
@@ -68,6 +71,10 @@ public class SetActivity extends BaseActivity {
                 openActivity(FeedbackActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
+                count++;
+                if (count == 10) {
+                    openActivity(PreviewActivity.class);
+                }
                 ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
                 break;
         }
@@ -86,7 +93,7 @@ public class SetActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         tvActSetTitle.setLayoutParams(params);
 
-        view =LayoutInflater.from(this).inflate(R.layout.dialog_phone, null);
+        view = LayoutInflater.from(this).inflate(R.layout.dialog_phone, null);
 
     }
 
