@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.mypopularize;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,7 +24,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -58,7 +56,7 @@ public class MyPopularizeActivity extends BaseActivity {
     TextView tvJieHuanKuanTiCheng;
     @BindView(R.id.tv_act_mypopularize_cheng_gong_yao_qing)
     TextView tvChengGongYaoQing;
-     @BindView(R.id.tv_act_mypopularize_man_jie_suan)
+    @BindView(R.id.tv_act_mypopularize_man_jie_suan)
     TextView tvManJieSuan;
     @BindView(R.id.tv_act_mypopularize_sheng_yu_jie_suan_jin_e)
     TextView tvShengYuJieSuanJinE;
@@ -83,12 +81,53 @@ public class MyPopularizeActivity extends BaseActivity {
                 openActivity(InvitationAwardExplainActivity.class);
                 break;
             case R.id.ll_act_mypopularize_recommendrecord://推广记录
-                openActivity(RecommendRecordActivity.class);
+                openActivity(SucceedInvitationRecommendRecordActivity.class);
                 break;
             case R.id.ll_act_mypopularize_succeedinvitation://成功邀请
                 openActivity(SucceedInvitationActivity.class);
                 break;
+            case R.id.tv_act_mypopularize_btn_jie_suan://立即结算
+
+                settleNow();
+
+                break;
         }
+
+    }
+
+    /**
+     * 立即结算
+     */
+    private void settleNow() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+
+        HttpMethods.getInstance().POST(this, Constants.SETTLEMENT_NOW, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----我的推广首页--立即结算--接口返回数据--------" + result);
+//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyPopularizeBean>() {
+//                        }.getType(), MyPopularizeBean.class, MyPopularizeActivity.this);
+//                        if (bean1 != null) {
+//                            bean = (MyPopularizeBean) bean1;
+//                            LoadInternetDataToUi();
+//                        } else {
+//                            ToastUtils.showToast(MyPopularizeActivity.this, R.string.shujujiazaichucuo);
+//                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(MyPopularizeActivity.this, R.string.huoquwodetuiguangxinxishibai);
+
+                    }
+                });
 
     }
 
@@ -127,6 +166,7 @@ public class MyPopularizeActivity extends BaseActivity {
         llAccountRecord.setOnClickListener(this);
         llRecommendAward.setOnClickListener(this);
         llRecommendRecord.setOnClickListener(this);
+        tvBtnJieSuan.setOnClickListener(this);
 
     }
 
@@ -158,7 +198,6 @@ public class MyPopularizeActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         ToastUtils.showToast(MyPopularizeActivity.this, R.string.huoquwodetuiguangxinxishibai);
-
                     }
                 });
 
@@ -173,14 +212,14 @@ public class MyPopularizeActivity extends BaseActivity {
             tvJieHuanKuanTiCheng.setText(bean.getRepay_income());
             tvShengYuJieSuanJinE.setText(bean.getTotal().getUnAaccount());
             tvJieSuanZhong.setText(bean.getTotal().getAccounted());
-            tvManJieSuan.setText((bean.getLimit()+"元"));
-            tvChengGongYaoQing.setText(("成功邀请好友"+bean.getCountInfo().getPerson_count()+"位"));
+            tvManJieSuan.setText((bean.getLimit() + "元"));
+            tvChengGongYaoQing.setText(("成功邀请好友" + bean.getCountInfo().getPerson_count() + "位"));
 
-            if ("Y".equals(bean.getTotal().getTodayAccounted())&&
-                    StringUtils.string2Float(bean.getTotal().getUnAaccount())>StringUtils.string2Float(bean.getLimit())){
+            if ("Y".equals(bean.getTotal().getTodayAccounted()) &&
+                    StringUtils.string2Float(bean.getTotal().getUnAaccount()) > StringUtils.string2Float(bean.getLimit())) {
                 tvBtnJieSuan.setBackgroundResource(R.drawable.xshape_roundrect_themecolor);
                 tvBtnJieSuan.setClickable(true);
-            }else {
+            } else {
                 tvBtnJieSuan.setBackgroundResource(R.drawable.xshape_roundrect_mgray1);
                 tvBtnJieSuan.setClickable(false);
             }
@@ -198,7 +237,6 @@ public class MyPopularizeActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
-
 
 
 }

@@ -1,7 +1,9 @@
 package com.tudoujf.activity.my.mypopularize;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -133,6 +135,14 @@ public class SucceedInvitationActivity extends BaseActivity {
                     ToastUtils.showToast(SucceedInvitationActivity.this, R.string.meiyougengduola);
                     srlActSucceedInvitation.finishLoadmore();
                 }
+            }
+        });
+        lvActSucceedInvitation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(SucceedInvitationActivity.this,SucceedInvitationRecommendRecordActivity.class);
+                intent.putExtra("name",list.get(position).getMember_name());
+                startActivity(intent);
             }
         });
     }

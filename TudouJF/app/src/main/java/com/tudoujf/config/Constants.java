@@ -1,5 +1,7 @@
 package com.tudoujf.config;
 
+import java.net.URL;
+
 /**
  * * ====================================================================
  * name:            Constants
@@ -244,11 +246,24 @@ public class Constants {
      */
     public static final String VIP_LOG = URL + "/phone/member/viplog";
 
-/**
+    /**
      * 我的推广-->推广记录-->接口
      */
     public static final String RECOMMEND_LOG = URL + "/phone/spread/spreadLog";
 
+
+    /**
+     * 结算记录接口
+     */
+    public static final String SETTLEMENT_RECORD = URL + "/phone/spread/getSettleLog";
+
+    /**
+     * 结算记录--立即结算接口
+     */
+    public static final String SETTLEMENT_NOW = URL + "/phone/spread/doAccount";
+
+    /**推广奖励总额*/
+    public static final String SUM_MONEY=URL+"/phone/spread/sumMoney";
 
 
 //    ------------------------------------------------------------------------------------------------
@@ -581,16 +596,8 @@ public class Constants {
      */
     public static final String PROMOTION_RECORD = URL
             + "/phone/spread/mySpreadLog";
-    /**
-     * 结算记录
-     */
-    public static final String SETTLEMENT_RECORD = URL
-            + "/phone/spread/getSettleLog";
-    /**
-     * 立即结算
-     */
-    public static final String SETTLEMENT_NOW = URL
-            + "/phone/spread/doAccount";
+
+
     /**
      * 我的推广
      */

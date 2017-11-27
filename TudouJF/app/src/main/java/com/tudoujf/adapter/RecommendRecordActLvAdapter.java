@@ -29,9 +29,9 @@ import java.util.List;
 
 public class RecommendRecordActLvAdapter extends BaseAdapter {
     private Context context;
-    private List<RecommendRecordBean.ItemsBean> list;
+    private List<RecommendRecordBean.PageObjBean.ItemsBean> list;
 
-    public RecommendRecordActLvAdapter(Context context, List<RecommendRecordBean.ItemsBean> list) {
+    public RecommendRecordActLvAdapter(Context context, List<RecommendRecordBean.PageObjBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -82,10 +82,6 @@ public class RecommendRecordActLvAdapter extends BaseAdapter {
         viewHolder.textView3.setText(list.get(position).getProportion());
         viewHolder.textView4.setText(list.get(position).getAward());
         viewHolder.textView5.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
-
-
-
-
         return view;
     }
 

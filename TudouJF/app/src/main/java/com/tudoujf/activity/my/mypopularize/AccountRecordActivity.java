@@ -1,20 +1,36 @@
 package com.tudoujf.activity.my.mypopularize;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
+import com.tudoujf.adapter.AcountRecordActLvAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.AccountRecordBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -37,7 +53,10 @@ public class AccountRecordActivity extends BaseActivity {
     ListView lvActAccountRecord;
     @BindView(R.id.srl_act_accountrecord)
     SmartRefreshLayout srlActAccountRecord;
-    private List<SucceedInvitationActBean> list;
+    private List<AccountRecordBean.ItemsBean> list;
+    private int page=1;
+    private AccountRecordBean bean;
+    private AcountRecordActLvAdapter adapter;
 
     @Override
     public int getLayoutResId() {
@@ -54,17 +73,17 @@ public class AccountRecordActivity extends BaseActivity {
         //临时数据源
         list=new ArrayList<>();
 
-        for (int i = 0; i < 50; i++) {
-            SucceedInvitationActBean bean=new SucceedInvitationActBean();
-            bean.setUserName("20XX/XX/XX");
-            bean.setTouZiZongE("000,000.00");
-            bean.setHuanKuanZongE("结算成功");
-
-            if (i%2==1){
-                bean.setBacFlag(2);
-            }
-            list.add(bean);
-        }
+//        for (int i = 0; i < 50; i++) {
+//            SucceedInvitationActBean bean=new SucceedInvitationActBean();
+//            bean.setUserName("20XX/XX/XX");
+//            bean.setTouZiZongE("000,000.00");
+//            bean.setHuanKuanZongE("结算成功");
+//
+//            if (i%2==1){
+//                bean.setBacFlag(2);
+//            }
+//            list.add(bean);
+//        }
     }
 
     @Override
@@ -78,8 +97,7 @@ public class AccountRecordActivity extends BaseActivity {
         srlActAccountRecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         srlActAccountRecord.setRefreshFooter(new BallPulseFooter(this));
 
-//        SucceedInvitationActLvAdapter adapter=new SucceedInvitationActLvAdapter(this,list);
-//        lvActAccountRecord.setAdapter(adapter);
+
     }
 
     @Override
@@ -90,15 +108,101 @@ public class AccountRecordActivity extends BaseActivity {
                 closeActivity();
             }
         });
+
+
+        srlActAccountRecord.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page = 1;
+                list.clear();
+                initDataFromInternet();
+            }
+        });
+
+
+        srlActAccountRecord.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean != null && page < bean.getTotal_pages()) {
+                    page = page + 1;
+                    initDataFromInternet();
+                } else {
+                    ToastUtils.showToast(AccountRecordActivity.this, R.string.meiyougengduola);
+                    srlActAccountRecord.finishLoadmore();
+                }
+            }
+        });
     }
 
     @Override
     public void initDataFromInternet() {
 
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("page", "" + page);
+        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + page);
+        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + UserConfig.getInstance().getLoginToken(this));
+
+
+        HttpMethods.getInstance().POST(this, Constants.SETTLEMENT_RECORD, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        finishSrl();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----我的推广--结算记录--接口返回数据--------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AccountRecordBean>() {
+                        }.getType(), AccountRecordBean.class, AccountRecordActivity.this);
+                        if (bean1 != null) {
+                            bean = (AccountRecordBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(AccountRecordActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(AccountRecordActivity.this, R.string.huoquwodetuiguangxinxishibai);
+
+                    }
+                });
+
     }
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean != null && bean.getItems() != null && bean.getItems().size() > 0) {
+            list.addAll(bean.getItems());
+//        SucceedInvitationActLvAdapter adapter=new SucceedInvitationActLvAdapter(this,list);
+//        lvActAccountRecord.setAdapter(adapter);
+            for (int i = 0; i < list.size(); i++) {
+                if (i % 2 == 0) {
+                    list.get(i).setBacFlag(1);
+                } else {
+                    list.get(i).setBacFlag(2);
+                }
+            }
+
+            if (adapter == null) {
+                adapter = new AcountRecordActLvAdapter(this, list);
+                lvActAccountRecord.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private void finishSrl() {
+        if (srlActAccountRecord.isRefreshing()) {
+            srlActAccountRecord.finishRefresh();
+        } else if (srlActAccountRecord.isLoading()) {
+            srlActAccountRecord.finishLoadmore();
+        }
 
     }
 

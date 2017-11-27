@@ -86,7 +86,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center"
-            android:text="@string/act_recommendrecord_touzitichengyuan"
+            android:text="@string/tichengleixing"
             android:textColor="@color/color_black"
             android:textSize="14sp" />
 
@@ -104,7 +104,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center"
-            android:text="@string/act_recommendrecord_jiekuantichengyuan"
+            android:text="@string/tichengjineyuan"
             android:textColor="@color/color_black"
             android:textSize="14sp" />
 

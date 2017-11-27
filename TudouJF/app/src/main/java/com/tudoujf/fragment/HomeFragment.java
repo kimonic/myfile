@@ -30,6 +30,7 @@ import com.tudoujf.activity.home.NewbieWelfareActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.BannerVPAdapter;
 import com.tudoujf.assist.ViewPagerScroller;
@@ -219,7 +220,11 @@ public class HomeFragment extends BaseFragment {
                 openActivity(InfoPublishActivity.class);
                 break;
             case R.id.iv_frag_home_signin:
-                openActivity(SignInActivity.class);
+                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
+                    openActivity(LoginActivity.class);
+                }else {
+                    openActivity(SignInActivity.class);
+                }
                 break;
             case R.id.fl_frag_msgcount://启动我的消息页面
                 Intent intent = new Intent(getActivity(), MyMessageActivity.class);

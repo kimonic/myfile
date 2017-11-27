@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TudouJF.iml" filepath="$PROJECT_DIR$/TudouJF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UdeskSDKUI/UdeskSDKUI.iml" filepath="$PROJECT_DIR$/UdeskSDKUI/UdeskSDKUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calculator/calculator.iml" filepath="$PROJECT_DIR$/calculator/calculator.iml" />
       <module fileurl="file://$PROJECT_DIR$/mynotebook/mynotebook.iml" filepath="$PROJECT_DIR$/mynotebook/mynotebook.iml" />

@@ -20,11 +20,13 @@
 
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera"
-        tools:ignore="UnsupportedChromeOsHardware" />
-    <uses-feature android:name="android.hardware.camera.autofocus"
-        tools:ignore="UnsupportedChromeOsHardware" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        tools:ignore="UnsupportedChromeOsHardware" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        tools:ignore="UnsupportedChromeOsHardware" />
 
 
     <application
@@ -51,21 +53,21 @@
         <!-- 1.欢迎页activity -->
         <activity android:name=".activity.other.WelcomeActivity">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- 21.预览各个activity的界面 -->
         <activity android:name=".activity.other.PreviewActivity">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-                <!--&lt;!&ndash; 监听拦截home键 &ndash;&gt;-->
-                <!--&lt;!&ndash; <category android:name="android.intent.category.HOME" /> &ndash;&gt;-->
-                <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--&lt;!&ndash; 监听拦截home键 &ndash;&gt;-->
+            <!--&lt;!&ndash; <category android:name="android.intent.category.HOME" /> &ndash;&gt;-->
+            <!--&lt;!&ndash; <category android:name="android.intent.category.DEFAULT" /> &ndash;&gt;-->
             <!--</intent-filter>-->
         </activity>
         <!-- 2.初次引导页activity -->
@@ -73,9 +75,9 @@
         <!--3. 网络测试activity -->
         <activity android:name=".activity.other.HttpTestActivity" />
         <!--4. 主页activity -->
-        <activity android:name=".activity.home.HomeActivity"
-            android:launchMode="singleTask"
-            />
+        <activity
+            android:name=".activity.home.HomeActivity"
+            android:launchMode="singleTask" />
         <!-- 5.登录页activity -->
         <activity android:name=".activity.other.LoginActivity" />
         <!-- 6.注册页activity -->
@@ -99,16 +101,15 @@
         <!--15.新手福利activity-->
         <activity android:name=".activity.home.NewbieWelfareActivity" />
         <!--16.签到activity-->
-        <activity android:name=".activity.home.SignInActivity"/>
+        <activity android:name=".activity.home.SignInActivity" />
         <!--17.积分商城activity-->
-        <activity android:name=".activity.home.IntegralShopActivity"/>
+        <activity android:name=".activity.home.IntegralShopActivity" />
         <!--18.汇付支付activity-->
-        <activity android:name=".activity.other.HuiFuRegisterActivity"/>
+        <activity android:name=".activity.other.HuiFuRegisterActivity" />
         <!--19.我的收益activity-->
-        <activity android:name=".activity.my.myearnings.MyEarningsActivity"/>
+        <activity android:name=".activity.my.myearnings.MyEarningsActivity" />
         <!--20.测试用的activity,正式发布时删除-->
-        <activity android:name=".activity.other.TestActivity"/>
-
+        <activity android:name=".activity.other.TestActivity" />
 
 
         <!-- 22.忘记密码activity -->
@@ -134,17 +135,17 @@
         <!--32.积分记录activity-->
         <activity android:name=".activity.home.IntegralRecodeActivity" />
         <!--33.我的消息&#45;&#45;消息详情activity-->
-        <activity android:name=".activity.home.MessageDetailsActivity"/>
+        <activity android:name=".activity.home.MessageDetailsActivity" />
         <!--34.webview加titleactivity-->
         <activity android:name=".activity.common.WebActivity" />
         <!--35.我的推广activity-->
         <activity android:name=".activity.my.mypopularize.MyPopularizeActivity" />
         <!--36.成功邀请activity-->
-        <activity android:name=".activity.my.mypopularize.SucceedInvitationActivity"/>
-        <!--37.算记录activity-->
-        <activity android:name=".activity.my.mypopularize.AccountRecordActivity"/>
-        <!--38.推广记录activity-->
-        <activity android:name=".activity.my.mypopularize.RecommendRecordActivity" />
+        <activity android:name=".activity.my.mypopularize.SucceedInvitationActivity" />
+        <!--37.结算记录activity-->
+        <activity android:name=".activity.my.mypopularize.AccountRecordActivity" />
+        <!--38.我的推广页面-成功邀请-推广记录activity-->
+        <activity android:name=".activity.my.mypopularize.SucceedInvitationRecommendRecordActivity" />
         <!--39.立即推荐activity-->
         <activity android:name=".activity.my.mypopularize.NowRecommendActivity" />
         <!--40.推广奖励说明activity-->
@@ -152,9 +153,9 @@
         <!--41.我的项目activity-->
         <activity android:name=".activity.my.myproject.MyProjectActivity" />
         <!--42.我的债权详情activity-->
-        <activity android:name=".activity.my.myproject.MyCreditorRightsDetailsActivity"/>
+        <activity android:name=".activity.my.myproject.MyCreditorRightsDetailsActivity" />
         <!--43.我的投资详情activity-->
-        <activity android:name=".activity.my.myproject.MyInvestDetailsActivity"/>
+        <activity android:name=".activity.my.myproject.MyInvestDetailsActivity" />
         <!--44.资金详情activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.FundDetailsActivity" />
         <!--45.交易记录activity-->
@@ -162,15 +163,15 @@
         <!--46.充值activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.RechargeActivity" />
         <!--47.充值记录activity-->
-        <activity android:name=".activity.my.funddetailschongzhitixian.RechargeRecordActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".activity.my.funddetailschongzhitixian.RechargeRecordActivity"
+            android:launchMode="singleTop" />
         <!--48.提现activity-->
         <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawActivity" />
         <!--49.提现记录activity-->
-        <activity android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity"
-            android:launchMode="singleTop"
-            />
+        <activity
+            android:name=".activity.my.funddetailschongzhitixian.WithdrawRecordActivity"
+            android:launchMode="singleTop" />
         <!--50.设置activity-->
         <activity android:name=".activity.my.set.SetActivity" />
         <!--51.意见反馈activity-->
@@ -243,20 +244,20 @@
         <activity
             android:name="com.umeng.socialize.media.WBShareCallBackActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <activity
+            android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
         <activity
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
-            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -276,7 +277,6 @@
         <!--//////////////////支付宝需要的activity///////////////////////////////////////////////////-->
 
 
-
         <!--//////////////////钉钉要的activity///////////////////////////////////////////////////-->
 
         <activity
@@ -292,12 +292,14 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
 
@@ -305,24 +307,21 @@
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--//////////////////QQ完整版要的activity///////////////////////////////////////////////////-->
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="561cae6ae0f55abd990035bf" >
-        </meta-data>
+            android:value="5a1ba2c48f4a9d46730000ab" />
 
-
-
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="xiaomiyingyongshichang" />
 
 
         <!--//////////////////友盟分享activity///////////////////////////////////////////////////-->
-
-
-
 
 
     </application>

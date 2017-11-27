@@ -2,7 +2,6 @@ package com.tudoujf.activity.my.mypopularize;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,7 +18,6 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.RecommendRecordActLvAdapter;
-import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.RecommendRecordBean;
@@ -40,17 +38,17 @@ import butterknife.BindView;
 
 /**
  * * ================================================
- * name:            RecommendRecordActivity
+ * name:            SucceedInvitationRecommendRecordActivity
  * guide:
  * author：          kimonik
  * version：          1.0
  * date：            2017/9/6
- * description：  我的推广页面-->推广记录activity
+ * description：  我的推广页面-->成功邀请-->推广记录activity
  * history：
  * ===================================================
  */
 
-public class RecommendRecordActivity extends BaseActivity {
+public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
     @BindView(R.id.mtb_act_recommendrecord)
     FrameLayout mtbActRecommendrecord;
     @BindView(R.id.lv_act_recommendrecord)
@@ -65,15 +63,16 @@ public class RecommendRecordActivity extends BaseActivity {
     LinearLayout llFiltrate;
 
 
-    private List<RecommendRecordBean.ItemsBean> list;
+    private List<RecommendRecordBean.PageObjBean.ItemsBean> list;
     private DateFilterDialog dateFilterDialog;
 
     private int page = 1;
     private RecommendRecordBean bean;
     private RecommendRecordActLvAdapter adapter;
-    private String name="";
-    private String start_time="";
-    private String end_time="";
+    private String name = "";
+    private String start_time = "";
+    private String end_time = "";
+    private boolean selFlag = false;
 
     @Override
 
@@ -94,8 +93,14 @@ public class RecommendRecordActivity extends BaseActivity {
                     dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
                         @Override
                         public void dismiss(String startTime, String endTime) {
+                            start_time = startTime;
+                            end_time = endTime;
+                            page = 1;
+                            selFlag = true;
+//                            list.clear();
+                            initDataFromInternet();
                             // TODO: 2017/9/4  请求网络筛选展示数据
-                            ToastUtils.showToast(RecommendRecordActivity.this, startTime + "-----------" + endTime);
+//                            ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, startTime + "-----------" + endTime);
                         }
                     });
                 }
@@ -109,7 +114,7 @@ public class RecommendRecordActivity extends BaseActivity {
     public void initDataFromIntent() {
 
         //临时数据源
-
+        name = getIntent().getStringExtra("name");
         list = new ArrayList<>();
 //        for (int i = 0; i < 50; i++) {
 //            RecommendRecordBean bean = new RecommendRecordBean();
@@ -151,6 +156,8 @@ public class RecommendRecordActivity extends BaseActivity {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 page = 1;
+                start_time = "";
+                end_time = "";
                 list.clear();
                 initDataFromInternet();
             }
@@ -160,11 +167,11 @@ public class RecommendRecordActivity extends BaseActivity {
         srlActRecommendrecord.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (bean != null && page < bean.getTotal_pages()) {
+                if (bean != null && page < bean.getPageObj().getTotal_pages()) {
                     page = page + 1;
                     initDataFromInternet();
                 } else {
-                    ToastUtils.showToast(RecommendRecordActivity.this, R.string.meiyougengduola);
+                    ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, R.string.meiyougengduola);
                     srlActRecommendrecord.finishLoadmore();
                 }
             }
@@ -177,6 +184,7 @@ public class RecommendRecordActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
+        map.put("name", name);
         map.put("start_time", start_time);
         map.put("end_time", end_time);
         Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + page);
@@ -192,12 +200,12 @@ public class RecommendRecordActivity extends BaseActivity {
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的推广--推广记录--接口返回数据--------" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RecommendRecordBean>() {
-                        }.getType(), RecommendRecordBean.class, RecommendRecordActivity.this);
+                        }.getType(), RecommendRecordBean.class, SucceedInvitationRecommendRecordActivity.this);
                         if (bean1 != null) {
                             bean = (RecommendRecordBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(RecommendRecordActivity.this, R.string.shujujiazaichucuo);
+                            ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, R.string.shujujiazaichucuo);
                         }
                     }
 
@@ -205,7 +213,7 @@ public class RecommendRecordActivity extends BaseActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(RecommendRecordActivity.this, R.string.huoquwodetuiguangxinxishibai);
+                        ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, R.string.huoquwodetuiguangxinxishibai);
 
                     }
                 });
@@ -215,8 +223,14 @@ public class RecommendRecordActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
 
-        if (bean != null && bean.getItems() != null && bean.getItems().size() > 0) {
-            list.addAll(bean.getItems());
+        if (bean != null && bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
+            tvActRecommendrecord.setText(("总计(元):"+StringUtils.getCommaDecimalsStr(bean.getAward())));
+            if (selFlag) {
+                list.clear();
+                selFlag = false;
+            }
+
+            list.addAll(bean.getPageObj().getItems());
 
             for (int i = 0; i < list.size(); i++) {
                 if (i % 2 == 0) {
@@ -232,6 +246,12 @@ public class RecommendRecordActivity extends BaseActivity {
             } else {
                 adapter.notifyDataSetChanged();
             }
+        }
+        if (selFlag) {
+            list.clear();
+            selFlag = false;
+            adapter.notifyDataSetChanged();
+            ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, R.string.meiyousousuoshuju);
         }
     }
 

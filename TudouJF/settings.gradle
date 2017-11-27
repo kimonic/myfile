@@ -1,1 +1,1 @@
-include ':app', ':calculator', ':utils', ':mynotebook'
+include ':app', ':calculator', ':utils', ':mynotebook', ':UdeskSDKUI'
