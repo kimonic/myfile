@@ -5,8 +5,8 @@
 
 
     <!-- 顶部TitleBar的背景色 -->
-    <color name="udesk_titlebar_bg1">#0093FF</color>
-    <color name="udesk_titlebar_bg2">#00BAD4</color>
+    <color name="udesk_titlebar_bg1">#149BBB</color>
+    <color name="udesk_titlebar_bg2">#149BBB</color>
 
     <!-- 顶部TitleBar，左右两侧文字的颜色 -->
     <color name="udesk_color_navi_text1">#FFFFFF</color>

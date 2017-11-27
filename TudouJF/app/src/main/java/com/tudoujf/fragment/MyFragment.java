@@ -49,10 +49,14 @@ import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import cn.udesk.UdeskConst;
+import cn.udesk.UdeskSDKManager;
 
 /**
  * * ====================================================================
@@ -144,6 +148,19 @@ public class MyFragment extends BaseFragment {
                 ToastUtils.showToast(getActivity(), "我将关闭客服界面!");
                 break;
             case R.id.iv_frag_my://关闭客服
+                UdeskSDKManager.getInstance().initApiKey(getActivity(), "udesksdk.udesk.cn",
+                        "08919a2194e9844795c8f589854ad559", "6a424855941db2d1");
+                String sdktoken = "用户唯一的标识";
+                Map<String, String> info = new HashMap<String, String>();
+                //sdktoken 必填
+                info.put(UdeskConst.UdeskUserInfo.USER_SDK_TOKEN, sdktoken);
+                //以下信息是可选
+                info.put(UdeskConst.UdeskUserInfo.NICK_NAME, "昵称");
+                info.put(UdeskConst.UdeskUserInfo.EMAIL, "0631@163.com");
+                info.put(UdeskConst.UdeskUserInfo.CELLPHONE, "15651818750");
+                info.put(UdeskConst.UdeskUserInfo.DESCRIPTION, "描述信息");
+                UdeskSDKManager.getInstance().setUserInfo(getActivity(), sdktoken, info);
+                UdeskSDKManager.getInstance().entryChat(getActivity());
                 ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值

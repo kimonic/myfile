@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -31,6 +32,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -38,11 +41,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.lzy.imagepicker.view.SystemBarTintManager;
 
 import org.json.JSONObject;
 
@@ -532,9 +537,48 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
         } catch (OutOfMemoryError error) {
             error.printStackTrace();
         }
+        initSystemBarTint();
 
     }
 
+//------------------------------------自行添加------------------------------------------------------
+//------------------------------------自行添加------------------------------------------------------
+//------------------------------------自行添加------------------------------------------------------
+
+    /**
+     * 设置状态栏颜色
+     */
+    protected void initSystemBarTint() {
+        Window window = getWindow();
+//            if (translucentStatusBar()) {
+        // 设置状态栏全透明
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//21
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//19
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+//            }
+        // 沉浸式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//21
+            //5.0以上使用原生方法
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.udesk_titlebar_bg1));//直接设置状态栏的颜色
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//19
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.udesk_titlebar_bg1));//直接设置状态栏的颜色
+        }
+
+
+    }
+
+//------------------------------------自行添加------------------------------------------------------
+//------------------------------------自行添加------------------------------------------------------
+//------------------------------------自行添加------------------------------------------------------
 
     //在指定客服组ID  或者指定客服ID  会传入值  其它的方式进入不会传值
     private void initIntent() {
@@ -581,7 +625,38 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
         }
     }
 
+    //------------------------------------自行添加------------------------------------------------------
+    //------------------------------------自行添加------------------------------------------------------
+    //------------------------------------自行添加------------------------------------------------------
+    /**
+     * 获取状态栏的高度px值
+     * @param context  上下文
+     * @return    状态栏高度--单位px
+     */
+    public static int getStatusHeight(Context context){
+        int statusBarHeight = -1;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
+    //------------------------------------自行添加------------------------------------------------------
+    //------------------------------------自行添加------------------------------------------------------
+    //------------------------------------自行添加------------------------------------------------------
+
     private void initView() {
+        //------------------------------------自行添加------------------------------------------------------
+        //------------------------------------自行添加------------------------------------------------------
+        //------------------------------------自行添加------------------------------------------------------
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mTitlebar.getLayoutParams();
+        params.setMargins(0, getStatusHeight(this), 0, 0);
+        mTitlebar.setLayoutParams(params);
+        //------------------------------------自行添加------------------------------------------------------
+        //------------------------------------自行添加------------------------------------------------------
+        //------------------------------------自行添加------------------------------------------------------
+
+
         try {
             popWindow = new UdeskConfirmPopWindow(this);
             sendBtn = (Button) findViewById(R.id.udesk_bottom_send);
