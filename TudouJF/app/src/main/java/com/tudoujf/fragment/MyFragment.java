@@ -148,8 +148,8 @@ public class MyFragment extends BaseFragment {
                 ToastUtils.showToast(getActivity(), "我将关闭客服界面!");
                 break;
             case R.id.iv_frag_my://关闭客服
-                UdeskSDKManager.getInstance().initApiKey(getActivity(), "udesksdk.udesk.cn",
-                        "08919a2194e9844795c8f589854ad559", "6a424855941db2d1");
+                UdeskSDKManager.getInstance().initApiKey(getActivity(), "tudoujf.udesk.cn",
+                        "9a35912706aaecaf9f4f5ca4ae1efe34", "b8686eaf829c0678");
                 String sdktoken = "用户唯一的标识";
                 Map<String, String> info = new HashMap<String, String>();
                 //sdktoken 必填
@@ -161,7 +161,7 @@ public class MyFragment extends BaseFragment {
                 info.put(UdeskConst.UdeskUserInfo.DESCRIPTION, "描述信息");
                 UdeskSDKManager.getInstance().setUserInfo(getActivity(), sdktoken, info);
                 UdeskSDKManager.getInstance().entryChat(getActivity());
-                ToastUtils.showToast(getActivity(), "我将打开客服界面!");
+//                ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 Bundle bundle = new Bundle();

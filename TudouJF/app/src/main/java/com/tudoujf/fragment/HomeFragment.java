@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -178,8 +180,13 @@ public class HomeFragment extends BaseFragment {
      * 将要打开的标的详情idbean
      */
     private HomeBidIdBean homeBidIdBean;
-    /**banner 的页面个数*/
+    /**
+     * banner 的页面个数
+     */
     private int bannerCount;
+    private FrameLayout.LayoutParams params;
+    /**屏幕像素密度*/
+    private  int  density;
 
     @Override
     public int layoutRes() {
@@ -220,10 +227,19 @@ public class HomeFragment extends BaseFragment {
                 openActivity(InfoPublishActivity.class);
                 break;
             case R.id.iv_frag_home_signin:
-                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
+
+
+
+                retractAnim(1);
+
+
+                if (params.getMarginEnd()==0&&"".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
                     openActivity(LoginActivity.class);
+                }else if (params.getMarginEnd()<0){
+                    params.setMarginEnd(0);
+                    ivSignIn.setLayoutParams(params);
                 }else {
-                    openActivity(SignInActivity.class);
+                    openActivityForResult(SignInActivity.class,666);
                 }
                 break;
             case R.id.fl_frag_msgcount://启动我的消息页面
@@ -234,6 +250,27 @@ public class HomeFragment extends BaseFragment {
                 break;
         }
 
+    }
+
+    /**签到缩进动画*/
+    private void retractAnim(int flag) {
+        params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
+        int marginEnd=params.getMarginEnd();
+        ValueAnimator animator;
+        if (flag==1){
+            animator=ValueAnimator.ofInt(marginEnd,0);
+        }else {
+            animator=ValueAnimator.ofInt(0,-50*density);
+        }
+        animator.setDuration(1000);
+        animator.start();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                params.setMarginEnd((Integer) animation.getAnimatedValue());
+                ivSignIn.setLayoutParams(params);
+            }
+        });
     }
 
     /**
@@ -274,18 +311,20 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
         if (requestCode == 1) {//我的消息返回数据
+            Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
             int msgCount = data.getIntExtra("msgcount", 0);
             if (msgCount != 0) {
                 Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
-                if (msgCount<100){
+                if (msgCount < 100) {
                     tvMsgCount.setText(("" + msgCount));
-                }else {
+                } else {
                     tvMsgCount.setText(getResources().getString(R.string.ninenine));
                 }
             }
 
+        }else if (requestCode==666){//签到界面返回
+            initDataFromInternet();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -310,6 +349,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        density=ScreenSizeUtils.getDensity(getActivity());
         initAutoCarousel();
         initDataFromInternet();
 
@@ -372,7 +412,7 @@ public class HomeFragment extends BaseFragment {
             list.add(imageview);
         }
 
-        bannerCount=listUrl.size()-1;
+        bannerCount = listUrl.size() - 1;
         BannerVPAdapter adpter = new BannerVPAdapter(list, listUrl);
         vpFragHome.setAdapter(adpter);
         ViewPagerScroller mPagerScroller = new ViewPagerScroller(getActivity());
@@ -452,7 +492,6 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-
     private void showInfo(final TextView tv) {
         tv.setText(R.string.licaiyoufengxian);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -465,8 +504,7 @@ public class HomeFragment extends BaseFragment {
         tv.setAnimation(animation);
 
 
-        animation.setAnimationListener(new Animation.AnimationListener()
-        {
+        animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -549,10 +587,13 @@ public class HomeFragment extends BaseFragment {
             initBallViews();
             initImagesViews();
             initOtherView(0);
+
+            params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
             if ("-1".equals(bean.getSign_status())) {
-                ivSignIn.setVisibility(View.VISIBLE);
+                params.setMarginEnd(0);
+                ivSignIn.setLayoutParams(params);
             } else {
-                ivSignIn.setVisibility(View.GONE);
+                retractAnim(2);
             }
         }
     }
@@ -593,10 +634,10 @@ public class HomeFragment extends BaseFragment {
                 tvMsgCount.setText("");
             } else {
                 ivMsgCount.setImageResource(R.drawable.frag_home_info);
-                int  count=StringUtils.string2Integer(bean.getMessage_count());
-                if (count<100){
+                int count = StringUtils.string2Integer(bean.getMessage_count());
+                if (count < 100) {
                     tvMsgCount.setText(bean.getMessage_count());
-                }else {
+                } else {
                     tvMsgCount.setText(getResources().getString(R.string.ninenine));
                 }
             }

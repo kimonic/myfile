@@ -12,7 +12,6 @@
         android:textColor="@color/color_white"
         android:gravity="center"
         android:textSize="18sp"
-        android:text="我要理财"
         />
 
     <ExpandableListView

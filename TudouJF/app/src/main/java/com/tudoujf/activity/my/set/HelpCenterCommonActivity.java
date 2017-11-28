@@ -1,18 +1,34 @@
 package com.tudoujf.activity.my.set;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HelpCenterCommonExpanableAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.SafetyControlActBean;
+import com.tudoujf.bean.databean.HelpCenterCommonBean;
+import com.tudoujf.bean.databean.PersonalCenterBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -35,7 +51,11 @@ public class HelpCenterCommonActivity extends BaseActivity {
     @BindView(R.id.elv_act_helpcentercommon)
     ExpandableListView lvActHelpcenterCommon;
 
-    private List<SafetyControlActBean> list;
+    private List<HelpCenterCommonBean.DataBean> list;
+    private int page = 1;
+    private String category_id = "";
+    private HelpCenterCommonBean bean;
+    private String title;
 
     @Override
     public int getLayoutResId() {
@@ -49,16 +69,21 @@ public class HelpCenterCommonActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        list=new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            SafetyControlActBean bean=new SafetyControlActBean();
-            bean.setImaUrl(R.drawable.act_safetycontrol_icon1);
-            bean.setTitle("百里挑一,优质借款人");
-            bean.setContent("百里挑一,优质借款人百里挑一,优质借款人百里挑一,优质借款人百里挑一," +
-                    "优质借款人百里挑一,优质借款人百里挑一,优质借款人百里挑一," +
-                    "优质借款人百里挑一,优质借款人v百里挑一,优质借款人");
-            list.add(bean);
-        }
+
+        category_id = getIntent().getStringExtra("category_id");
+        title = getIntent().getStringExtra("title");
+
+
+        list = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            SafetyControlActBean bean = new SafetyControlActBean();
+//            bean.setImaUrl(R.drawable.act_safetycontrol_icon1);
+//            bean.setTitle("百里挑一,优质借款人");
+//            bean.setContent("百里挑一,优质借款人百里挑一,优质借款人百里挑一,优质借款人百里挑一," +
+//                    "优质借款人百里挑一,优质借款人百里挑一,优质借款人百里挑一," +
+//                    "优质借款人百里挑一,优质借款人v百里挑一,优质借款人");
+//            list.add(bean);
+//        }
     }
 
     @Override
@@ -68,10 +93,10 @@ public class HelpCenterCommonActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         tvActHelpcenterCommon.setLayoutParams(params);
 
+        tvActHelpcenterCommon.setText(title);
 
-        lvActHelpcenterCommon.setGroupIndicator(null);
-        HelpCenterCommonExpanableAdapter adapter=new HelpCenterCommonExpanableAdapter(this,list);
-        lvActHelpcenterCommon.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -82,11 +107,69 @@ public class HelpCenterCommonActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
 
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("category_id", category_id);
+        map.put("page", "" + page);
+        HttpMethods.getInstance().POST(this, Constants.HELP_CENTER, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----帮助中心通用接口返回数据--------" + category_id + "------" + result);
+                        Gson gson = new Gson();
+                        bean = gson.fromJson(result, HelpCenterCommonBean.class);
+                        if (bean!=null&&"200".equals(bean.getCode())){
+                            LoadInternetDataToUi();
+                        }else {
+                            ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.shujujiazaichucuo);
+                        }
+
+
+//                            if (srl.isRefreshing()) {
+//                                srl.finishRefresh();
+//                            }
+//
+//                            BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<PersonalCenterBean>() {
+//                            }.getType(), PersonalCenterBean.class, HelpCenterCommonActivity.this);
+//                            if (bean1 != null) {
+//                                bean = (PersonalCenterBean) bean1;
+//                                LoadInternetDataToUi();
+//                            } else {
+//                                ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.shujujiazaichucuo);
+//                            }
+
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.huoqugerenzhongxinshujushibai);
+                    }
+                });
+
     }
 
     @Override
     public void LoadInternetDataToUi() {
+        if (bean!=null&&"200".equals(bean.getCode())){
+            if (bean.getData().size()>0){
+                list.addAll(bean.getData());
 
+                lvActHelpcenterCommon.setGroupIndicator(null);
+                HelpCenterCommonExpanableAdapter adapter = new HelpCenterCommonExpanableAdapter(this, list);
+                lvActHelpcenterCommon.setAdapter(adapter);
+
+
+            }else {
+                ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.meiyoukexianshishuju);
+            }
+
+
+
+        }
     }
 
     @Override

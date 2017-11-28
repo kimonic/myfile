@@ -179,6 +179,28 @@ public class StringUtils {
 
 
     /**
+            * 将时间戳转为字符串
+     *
+             * @param cc_time 时间戳字符串,到秒
+     * @return yyyy-MM-dd
+     */
+    public static String getStrTimeFull(String cc_time) {
+        String re_StrTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss", Locale.getDefault());
+        try {
+            long lcc_time = Long.valueOf(cc_time);
+            re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+
+        } catch (NumberFormatException e) {
+            return "****-**-**";
+        }
+        Log.e("TAG", "getStrTimeFull: -----"+re_StrTime);
+        
+        return re_StrTime;
+    }
+
+
+    /**
      * 将时间戳转为字符串
      *
      * @param cc_time 时间戳字符串,到秒

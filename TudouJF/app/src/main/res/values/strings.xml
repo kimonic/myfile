@@ -602,6 +602,8 @@
     <string name="jijiangkaiqijingqingqidai">即将开启,敬请期待!</string>
     <string name="tichengleixing">提成类型</string>
     <string name="tichengjineyuan">提成金额(元)</string>
+    <string name="huoquwodeshouyixinxishibai">获取我的收益信息失败!</string>
+    <string name="meiyoukexianshishuju">没有可显示数据!</string>
 
 
 </resources>

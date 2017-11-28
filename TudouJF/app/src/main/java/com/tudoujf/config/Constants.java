@@ -262,8 +262,20 @@ public class Constants {
      */
     public static final String SETTLEMENT_NOW = URL + "/phone/spread/doAccount";
 
-    /**推广奖励总额*/
-    public static final String SUM_MONEY=URL+"/phone/spread/sumMoney";
+    /**
+     * 推广奖励总额
+     */
+    public static final String SUM_MONEY = URL + "/phone/spread/sumMoney";
+
+    /**
+     * 推广奖励总额
+     */
+    public static final String MY_EARNINGS = URL + "/phone/tender/getTenderRecover";
+ /**
+     * 帮助中心接口
+     */
+    public static final String HELP_CENTER = URL + "/phone/articles/helpCenter";
+
 
 
 //    ------------------------------------------------------------------------------------------------

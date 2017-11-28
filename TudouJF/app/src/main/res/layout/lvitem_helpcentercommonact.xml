@@ -5,17 +5,19 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/color_white"
         >
         <TextView
             android:id="@+id/tv_lvitem_helpcentercommon_titile"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:textSize="16sp"
             android:gravity="center_vertical"
             android:textColor="@color/color_gray"

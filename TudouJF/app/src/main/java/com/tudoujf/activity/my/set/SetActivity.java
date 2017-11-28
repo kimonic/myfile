@@ -75,7 +75,7 @@ public class SetActivity extends BaseActivity {
                 if (count == 10) {
                     openActivity(PreviewActivity.class);
                 }
-                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
+//                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
                 break;
         }
 

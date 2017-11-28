@@ -1,26 +1,29 @@
 package com.tudoujf.fragment.myearnings;
 
-import android.graphics.Paint;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.tudoujf.R;
 import com.tudoujf.adapter.DueInInterestFragLvAdapterO;
 import com.tudoujf.base.BaseFragment;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -55,6 +58,10 @@ public class DueInInterestFragment extends BaseFragment {
 
     private int type = 1;
     private List<DueInInterestFragBean> list;
+    private int page=1;
+    private String status;
+    private String start_time;
+    private String end_time;
 
     @Override
     public int layoutRes() {
@@ -116,6 +123,40 @@ public class DueInInterestFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
+
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+        map.put("page", ""+page);
+        map.put("status", ""+status);
+        map.put("start_time", ""+start_time);
+        map.put("end_time", ""+end_time);
+        
+
+        HttpMethods.getInstance().POST(getActivity(), Constants.MY_EARNINGS, map, getActivity().getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----我的推广首页接口返回数据--------" + result);
+//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyPopularizeBean>() {
+//                        }.getType(), MyPopularizeBean.class, getActivity());
+//                        if (bean1 != null) {
+//                            bean = (MyPopularizeBean) bean1;
+//                            LoadInternetDataToUi();
+//                        } else {
+//                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+//                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(getActivity(), R.string.huoquwodeshouyixinxishibai);
+                    }
+                });
 
     }
 

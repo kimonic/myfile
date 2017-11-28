@@ -103,6 +103,7 @@ public class SignInActivity extends BaseActivity {
         mtbActSignIn.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(666);
                 closeActivity();
             }
         });
@@ -187,6 +188,12 @@ public class SignInActivity extends BaseActivity {
             sivSignIn.invalidate();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(666);
+        closeActivity();
     }
 
     @Override

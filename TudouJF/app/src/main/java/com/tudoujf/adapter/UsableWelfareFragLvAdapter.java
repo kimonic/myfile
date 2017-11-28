@@ -96,7 +96,7 @@ public class UsableWelfareFragLvAdapter extends BaseAdapter {
                 }
                 viewHolder.textView4.setText(status);
                 viewHolder.redView.setOneText(StringUtils.getCommaDecimalsStrZeroDot(list.get(position).getAmount()));
-                viewHolder.redView.setFourText(StringUtils.getStrTime(list.get(position).getEnd_time()));
+                viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
 //        viewHolder.redView.setTwoText(list.get(position).getContent7());
                 viewHolder.redView.setValid(isValid);
                 viewHolder.redView.setRedPackageOrQuan(true);
@@ -123,7 +123,7 @@ public class UsableWelfareFragLvAdapter extends BaseAdapter {
                 }
                 viewHolder.textView4.setText(statusQ);
                 viewHolder.redView.setOneText(list.get(position).getInterest());
-                viewHolder.redView.setFourText(StringUtils.getStrTime(list.get(position).getEnd_time()));
+                viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
                 viewHolder.redView.setTwoText("%");
                 viewHolder.redView.setValid(isValidQ);
                 viewHolder.redView.setRedPackageOrQuan(false);
@@ -152,7 +152,7 @@ public class UsableWelfareFragLvAdapter extends BaseAdapter {
                 }
                 viewHolder.textView4.setText(statusF);
                 viewHolder.redView.setOneText(list.get(position).getProportion());
-                viewHolder.redView.setFourText(StringUtils.getStrTime(list.get(position).getEnd_time()));
+                viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
                 viewHolder.redView.setTwoText("%");
                 viewHolder.redView.setValid(isValidF);
                 viewHolder.redView.setRedPackageOrQuan(false);

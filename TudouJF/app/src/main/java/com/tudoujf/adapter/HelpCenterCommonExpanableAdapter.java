@@ -1,6 +1,7 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.SafetyControlActBean;
+import com.tudoujf.bean.databean.HelpCenterCommonBean;
 
 import java.util.List;
 
@@ -29,9 +31,9 @@ import java.util.List;
 public class HelpCenterCommonExpanableAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<SafetyControlActBean> groupList;
+    private List<HelpCenterCommonBean.DataBean> groupList;
 
-    public HelpCenterCommonExpanableAdapter(Context context, List<SafetyControlActBean> groupList) {
+    public HelpCenterCommonExpanableAdapter(Context context, List<HelpCenterCommonBean.DataBean> groupList) {
         this.context = context;
         this.groupList = groupList;
     }
@@ -145,7 +147,7 @@ public class HelpCenterCommonExpanableAdapter extends BaseExpandableListAdapter 
         } else {
             itemHolder = (ItemHolder) convertView.getTag();
         }
-        itemHolder.txt.setText(groupList.get(groupPosition).getContent());
+        itemHolder.txt.setText(Html.fromHtml(groupList.get(groupPosition).getContents()));
         return convertView;
     }
 

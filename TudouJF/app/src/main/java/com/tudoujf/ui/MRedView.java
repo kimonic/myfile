@@ -253,7 +253,8 @@ public class MRedView extends View {
         float fourTY = width * 0.71f;
         float textFourS = width * 0.1f;
         whitePaint.setTextSize(textFourS);
-        canvas.drawText(fourText, oneTX, fourTY, whitePaint);
+        float fourTX=(width-whitePaint.measureText(fourText))/2;
+        canvas.drawText(fourText, fourTX, fourTY, whitePaint);
 //---------------------------绘制第四行文字---------------------------------------------------------
 
     }

@@ -77,6 +77,7 @@ public class BallView extends View {
         linePaint = new Paint();
         linePaint.setAntiAlias(true);
         linePaint.setStyle(Paint.Style.FILL);
+        linePaint.setStrokeCap(Paint.Cap.ROUND);
         linePaint.setColor(Color.parseColor("#45C1E0"));
         linePaint.setStrokeWidth(lineBorderWidth);
 
@@ -110,7 +111,7 @@ public class BallView extends View {
         float lineStartX = (float) (width / 2 - Math.sqrt(length * length / 4 - length * length * 0.01));
         float lineEndX = (float) (width / 2 + Math.sqrt(length * length / 4 - length * length * 0.01));
         float lineHeight = height / 2 + 0.1f * length / 2;
-        canvas.drawLine(lineStartX, lineHeight, lineEndX, lineHeight, linePaint);
+        canvas.drawLine(lineStartX+12, lineHeight, lineEndX-12, lineHeight, linePaint);
 
         float angle = (float) (360 * Math.asin((0.1 * length - lineBorderWidth) / (0.5 * length)) / (2 * Math.PI));
 
@@ -123,13 +124,15 @@ public class BallView extends View {
 
 
         float textY=height/2-length*0.11f;
-        shadowpaint.setTextSize(length*0.2f);
+//        shadowpaint.setTextSize(length*0.2f);
+        shadowpaint.setTextSize(length*0.1658f);
         float  textLength=shadowpaint.measureText(text);
         float textX=width/2-textLength/2;
 
         canvas.drawText(text,textX,textY,shadowpaint);
 
-        textPaint.setTextSize(length*0.12f);
+//        textPaint.setTextSize(length*0.12f);
+        textPaint.setTextSize(length*0.09024f);
         float bottomTextLength=textPaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi));
         float textX1=width/2-bottomTextLength/2;
         float textY1=height/2+length*0.27f;

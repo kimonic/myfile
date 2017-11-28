@@ -61,12 +61,9 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
-        //        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivActWelcome.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         ivActWelcome.setLayoutParams(params);
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -95,7 +92,7 @@ public class WelcomeActivity extends BaseActivity {
                 }
                 WelcomeActivity.this.finish();
             }
-        }, 2000);
+        }, 5000);
     }
 
     @Override

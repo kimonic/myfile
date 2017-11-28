@@ -12,10 +12,16 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray"
+        />
+
     <com.tudoujf.ui.NaviButtonView
         android:id="@+id/nbv_act_home"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="46dp"
         android:orientation="horizontal"
         android:background="@color/color_white"
         app:imagesSelArray="@array/imagesSelR"

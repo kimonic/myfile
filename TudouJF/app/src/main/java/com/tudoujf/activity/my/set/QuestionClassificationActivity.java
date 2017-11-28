@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.set;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class QuestionClassificationActivity extends BaseActivity {
     @BindView(R.id.lv_act_questionclassification)
     ListView lvActQuestionClassification;
 
-    private int[]  strResId=new int[]{
+    private int[] strResId = new int[]{
             R.string.xinshouzhiyin,
             R.string.chongzhitixian,
 
@@ -52,7 +53,7 @@ public class QuestionClassificationActivity extends BaseActivity {
             R.string.mingcijieshi
     };
 
-    private int[]  imageResId=new int[]{
+    private int[] imageResId = new int[]{
             R.drawable.act_questionclassification_xinshouzhiyin,
             R.drawable.act_questionclassification_chongzhitixian,
 
@@ -83,10 +84,10 @@ public class QuestionClassificationActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
-        list=new ArrayList<>();
+        list = new ArrayList<>();
 
         for (int i = 0; i < strResId.length; i++) {
-            ResouseBean bean=new ResouseBean();
+            ResouseBean bean = new ResouseBean();
             bean.setImageResId(imageResId[i]);
             bean.setTextResId(strResId[i]);
             list.add(bean);
@@ -96,12 +97,11 @@ public class QuestionClassificationActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActQuestionClassification.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActQuestionClassification.setLayoutParams(params);
 
-        LVAdapter adapter=new LVAdapter();
+        LVAdapter adapter = new LVAdapter();
         lvActQuestionClassification.setAdapter(adapter);
     }
 
@@ -117,10 +117,46 @@ public class QuestionClassificationActivity extends BaseActivity {
         lvActQuestionClassification.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openActivity(HelpCenterCommonActivity.class);
+
+                switch (position) {
+                    case 0://新手指引
+                        openActivitySpecial("xinshouzhiyin",getResources().getString(strResId[0]));
+                        break;
+                    case 1://充值提现
+                        openActivitySpecial("chongzhitixian",getResources().getString(strResId[1]));
+                        break;
+                    case 2://我要理财
+                        openActivitySpecial("woyaolicai",getResources().getString(strResId[2]));
+                        break;
+                    case 3://我要融资
+                        openActivitySpecial("woyaorongzi",getResources().getString(strResId[3]));
+                        break;
+                    case 4://债权转让
+                        openActivitySpecial("zhaiquanzhuanrang",getResources().getString(strResId[4]));
+                        break;
+                    case 5://网站费用
+                        openActivitySpecial("wangzhanfeiyong",getResources().getString(strResId[5]));
+                        break;
+                    case 6://法律法规
+                        openActivitySpecial("falvfagui",getResources().getString(strResId[6]));
+                        break;
+                    case 7://名词解释
+                        openActivitySpecial("mingcijieshi",getResources().getString(strResId[7]));
+                        break;
+                }
+
+
             }
         });
 
+    }
+
+    /**打开指定页面*/
+    private void openActivitySpecial(String   category_id,String title){
+        Intent intent = new Intent(QuestionClassificationActivity.this, HelpCenterCommonActivity.class);
+        intent.putExtra("category_id", category_id);
+        intent.putExtra("title", title);
+        startActivity(intent);
     }
 
     @Override
@@ -144,8 +180,8 @@ public class QuestionClassificationActivity extends BaseActivity {
     }
 
 
-    private class ResouseBean{
-        private int  textResId;
+    private class ResouseBean {
+        private int textResId;
         private int imageResId;
 
         int getTextResId() {
@@ -165,7 +201,7 @@ public class QuestionClassificationActivity extends BaseActivity {
         }
     }
 
-    private class LVAdapter extends BaseAdapter{
+    private class LVAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
@@ -186,16 +222,16 @@ public class QuestionClassificationActivity extends BaseActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View view;
             ViewHolder viewHolder;
-            if (convertView==null){
-                view= LayoutInflater.from(QuestionClassificationActivity.this).inflate(R.layout.lvitem_questionclassifition,parent,false);
-                viewHolder=new ViewHolder();
-                viewHolder.textView= (TextView) view.findViewById(R.id.tv_lvitem_questionclassificationact);
-                viewHolder.imageView= (ImageView) view.findViewById(R.id.iv_lvitem_questionclassificationact);
+            if (convertView == null) {
+                view = LayoutInflater.from(QuestionClassificationActivity.this).inflate(R.layout.lvitem_questionclassifition, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.textView = (TextView) view.findViewById(R.id.tv_lvitem_questionclassificationact);
+                viewHolder.imageView = (ImageView) view.findViewById(R.id.iv_lvitem_questionclassificationact);
 
                 view.setTag(viewHolder);
-            }else {
-                view=convertView;
-                viewHolder= (ViewHolder) view.getTag();
+            } else {
+                view = convertView;
+                viewHolder = (ViewHolder) view.getTag();
             }
 
             viewHolder.textView.setText(list.get(position).getTextResId());
@@ -203,7 +239,7 @@ public class QuestionClassificationActivity extends BaseActivity {
             return view;
         }
 
-        private  class ViewHolder{
+        private class ViewHolder {
             TextView textView;
             ImageView imageView;
         }

@@ -83,6 +83,14 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     }
 
     /**
+     * 启动下一个activity
+     */
+    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, int  requestCode) {
+        Intent intent = new Intent(getActivity(), toActivity);
+        startActivityForResult(intent,requestCode);
+    }
+
+    /**
      * 关闭activity
      */
     protected void closeActivity() {

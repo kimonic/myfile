@@ -21,8 +21,8 @@
                 android:background="@color/global_theme_background_color"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <LinearLayout
                     android:id="@+id/ll_frag_my_myaccount"
@@ -71,7 +71,7 @@
                     android:paddingRight="10dp"
                     android:text="@string/frag_my_shenqingvip"
                     android:textColor="@color/global_theme_background_color"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <FrameLayout
                     android:id="@+id/fl_frag_my_message"
@@ -99,10 +99,10 @@
                 android:background="@color/global_theme_background_color"
                 android:gravity="center"
                 android:paddingBottom="5dp"
-                android:paddingTop="5dp"
+                android:paddingTop="24dp"
                 android:text="@string/frag_my_zongshouyi"
                 android:textColor="@color/color_white"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_frag_my_amount"
@@ -110,10 +110,10 @@
                 android:layout_height="wrap_content"
                 android:background="@color/global_theme_background_color"
                 android:gravity="center"
-                android:paddingBottom="5dp"
+                android:paddingBottom="16dp"
                 android:textColor="@color/color_white"
                 android:textIsSelectable="true"
-                android:textSize="22sp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                         android:paddingTop="5dp"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -185,7 +185,7 @@
                         android:gravity="center"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
@@ -223,7 +223,7 @@
                         android:gravity="center"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -261,7 +261,7 @@
                         android:id="@+id/ll_frag_my_chongzhi"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="7"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -269,6 +269,7 @@
                             android:layout_width="36dp"
                             android:layout_height="36dp"
                             android:contentDescription="@null"
+                            android:layout_marginTop="12dp"
                             android:src="@drawable/frag_my_recharge" />
 
                         <TextView
@@ -278,7 +279,8 @@
                             android:gravity="center"
                             android:text="@string/frag_my_recharge"
                             android:textColor="@color/color_black"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"
 
                             />
                     </LinearLayout>
@@ -287,13 +289,14 @@
                         android:id="@+id/ll_frag_my_tixian"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="6"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="36dp"
                             android:layout_height="36dp"
+                            android:layout_marginTop="12dp"
                             android:contentDescription="@null"
                             android:src="@drawable/frag_my_withdrawals" />
 
@@ -304,7 +307,8 @@
                             android:gravity="center"
                             android:text="@string/frag_my_withdrawals"
                             android:textColor="@color/color_black"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
+                            android:layout_marginBottom="12dp"
 
                             />
                     </LinearLayout>
@@ -313,13 +317,14 @@
                         android:id="@+id/ll_frag_my_funddetails"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="7"
                         android:gravity="center"
                         android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="36dp"
                             android:layout_height="36dp"
+                            android:layout_marginTop="12dp"
                             android:contentDescription="@null"
                             android:src="@drawable/frag_my_funddetails" />
 
@@ -330,8 +335,10 @@
                             android:gravity="center"
                             android:text="@string/frag_my_funddetails"
                             android:textColor="@color/color_black"
-                            android:textSize="18sp" />
+                            android:layout_marginBottom="12dp"
+                            android:textSize="16sp" />
                     </LinearLayout>
+
                 </LinearLayout>
             </FrameLayout>
 
@@ -341,7 +348,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/xshape_roundrect_mcyan_twoconner"
                 android:orientation="horizontal">
 
@@ -382,8 +389,8 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="67dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end|top"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
@@ -392,16 +399,16 @@
 
                     <TextView
                         android:id="@+id/tv_frag_my"
-                        android:layout_width="21dp"
-                        android:layout_height="17dp"
+                        android:layout_width="30dp"
+                        android:layout_height="24dp"
                         android:layout_gravity="end"
                         android:textIsSelectable="true"
                         android:background="@drawable/xvector_close" />
 
                     <ImageView
                         android:id="@+id/iv_frag_my"
-                        android:layout_width="46dp"
-                        android:layout_height="46dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:contentDescription="@null"
                         android:src="@drawable/frag_my_onlineservice"
 
