@@ -129,7 +129,9 @@ public class DrawGestureActivity extends BaseActivity {
 
                         savePassword(positionSet);//保存手势密码
                         UserConfig.getInstance().setLockPass(true);//已开启手势密码
-
+                        SharedPreferencesUtils.getInstance(DrawGestureActivity.this, Constants.USER_CONFIG).put(MD5Utils.md5(
+                                UserConfig.getInstance().getLoginToken(DrawGestureActivity.this))
+                                + "lockPass", true);
 
                         mlvActDrawgesture.setOpenOrCloseDraw(false);
                         Handler handler = new Handler();

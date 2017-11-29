@@ -1,8 +1,11 @@
 package com.tudoujf.activity.my.set;
 
+import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,7 +22,6 @@ import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -86,15 +88,38 @@ public class SetActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tvActSetTitle.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         tvActSetTitle.setLayoutParams(params);
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_phone, null);
+        TextView tvCall1 = view.findViewById(R.id.tv_call1);
+        TextView tvCall2 = view.findViewById(R.id.tv_call2);
+        tvCall1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call();
+            }
+        });
+        tvCall2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call();
+            }
+        });
+    }
 
+    private void call() {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(getResources().getString(R.string.phone)));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException exception) {
+            ToastUtils.showToast(SetActivity.this, R.string.chucuola);
+        }
     }
 
     @Override
@@ -126,16 +151,10 @@ public class SetActivity extends BaseActivity {
     }
 
 
-    /**
-     * 显示提示dialog
-     *
-     * @return alertdialog(v7)
-     */
     public AlertDialog showCustomDialog(View view) {
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
-        //一定得在show完dialog后来set属性
         Window window = dialog.getWindow();
         if (window != null) {
             window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -144,10 +163,8 @@ public class SetActivity extends BaseActivity {
             window.setBackgroundDrawable(drawable);
             window.setContentView(view);
         }
-
         return dialog;
     }
-
 }
 
 

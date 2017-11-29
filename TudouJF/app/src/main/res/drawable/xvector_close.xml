@@ -47,11 +47,11 @@
 "
             />
         <path android:strokeColor="#4B4B4B"
-            android:strokeWidth="24"
-            android:pathData="M60 50,
-                            L150 120
-                           M150 50
-                           L60  120
+            android:strokeWidth="16"
+            android:pathData="M70 50,
+                            L140 120
+                           M140 50
+                           L70  120
 
 "
             />

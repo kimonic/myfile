@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.encryptionpackages.AESencrypt;
+import com.example.encryptionpackages.CreateCode;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
+import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -98,13 +101,14 @@ public class LockActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_act_lock_forget://忘记密码操作
-                Intent intent = new Intent(this, LoginActivity.class);
-                intent.putExtra("cleargesture", "clear");
-                intent.putExtra("logintoken", UserConfig.getInstance().getLoginToken(this));
-
-
-                // TODO: 2017/7/12 忘记密码操作
-                openActivity(FindPasswordActivity.class);
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                intent.putExtra("cleargesture", "clear");
+//                intent.putExtra("logintoken", UserConfig.getInstance().getLoginToken(this));
+//
+//
+//                // TODO: 2017/7/12 忘记密码操作
+//                openActivity(FindPasswordActivity.class);
+                openActivity(LoginActivity.class);
 
                 break;
             case R.id.tv_act_lock_other://使用其他账号登陆
@@ -122,8 +126,8 @@ public class LockActivity extends BaseActivity {
 
         //----------------------------------继续锁定------------------------------------------------
         surplus = getIntent().getIntExtra("surplus", 0);
-        if (surplus!=0){
-            count=surplus;
+        if (surplus != 0) {
+            count = surplus;
             mlvActLock.setOpenOrCloseDraw(false);
             flag = true;
             tvHint.setTextColor(getResources().getColor(R.color.colorRed));
@@ -137,7 +141,7 @@ public class LockActivity extends BaseActivity {
 
         password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString(name + "ciphertext", "");
         Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
-        if ("".equals(password)){
+        if ("".equals(password)) {
             UserConfig.getInstance().setDraw(true);
             closeActivity();
         }
@@ -191,9 +195,27 @@ public class LockActivity extends BaseActivity {
                 flag = true;
                 tvHint.setTextColor(getResources().getColor(R.color.colorRed));
                 tvHint.setText(R.string.shoushimimacuowucishuguoduo);
-                //记录锁定起始时间
-                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name + "startlocktime", System.currentTimeMillis());
-                countDownThread();
+
+
+                //清空用户信息
+                UserConfig.getInstance().clear(LockActivity.this);
+
+//                //清空手势密码,清空logintoken
+//                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name + "lockPass", false);//是否开启手势密码
+//                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name + "ciphertext", "");//手势密码
+//                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put("userName", "");//用户名
+//                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG)
+//                        .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(CreateCode.getSEND_AES_KEY(), ""));//logintoken
+//                UserConfig.getInstance().setLoginToken("");//重置logintoken
+//                UserConfig.getInstance().setDraw(true);//密码登录时,本次前台不再需要手势密码
+//                MApp.getInstance().setLogin(false);152111111
+
+                openActivity(LoginActivity.class);
+                closeActivity();
+
+//                //记录锁定起始时间
+//                SharedPreferencesUtils.getInstance(LockActivity.this, Constants.USER_CONFIG).put(name + "startlocktime", System.currentTimeMillis());
+//                countDownThread();
 
             }
 

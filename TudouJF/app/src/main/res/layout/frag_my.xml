@@ -17,12 +17,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="36dp"
                 android:background="@color/global_theme_background_color"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
-                android:paddingRight="8dp">
+                android:paddingRight="8dp"
+                >
 
                 <LinearLayout
                     android:id="@+id/ll_frag_my_myaccount"
@@ -43,8 +44,8 @@
                         android:id="@+id/tv_frag_my_username"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_white"
                         android:textSize="14sp" />
@@ -63,8 +64,8 @@
                     android:id="@+id/tv_frag_my_vipapply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:background="@drawable/xshape_roundrect_mwhite1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -127,7 +128,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
+                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
                         android:textSize="12sp" />
@@ -157,14 +157,12 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/act_affirmbuy_bac" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -183,6 +181,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
                         android:textSize="12sp" />
@@ -193,14 +193,12 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/act_affirmbuy_bac" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
 
@@ -221,6 +219,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
                         android:textSize="12sp" />
@@ -229,7 +229,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp">
+                android:layout_height="82dp"
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -266,8 +267,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:contentDescription="@null"
                             android:layout_marginTop="12dp"
                             android:src="@drawable/frag_my_recharge" />
@@ -275,11 +276,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="@string/frag_my_recharge"
                             android:textColor="@color/color_black"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_marginBottom="12dp"
 
                             />
@@ -294,8 +295,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@null"
                             android:src="@drawable/frag_my_withdrawals" />
@@ -303,11 +304,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="@string/frag_my_withdrawals"
                             android:textColor="@color/color_black"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:layout_marginBottom="12dp"
 
                             />
@@ -322,8 +323,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_marginTop="12dp"
                             android:contentDescription="@null"
                             android:src="@drawable/frag_my_funddetails" />
@@ -331,12 +332,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
+                            android:layout_marginTop="11dp"
                             android:gravity="center"
                             android:text="@string/frag_my_funddetails"
                             android:textColor="@color/color_black"
                             android:layout_marginBottom="12dp"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -348,7 +349,6 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginTop="12dp"
                 android:background="@drawable/xshape_roundrect_mcyan_twoconner"
                 android:orientation="horizontal">
 
@@ -357,13 +357,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:text="@string/frag_my_shimingrenzheng"
                     android:textColor="@color/frag_home_bac"
-                    android:textSize="12sp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:layout_width="16dp"
@@ -388,14 +388,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <FrameLayout
+
+                    android:id="@+id/fl_frag_my"
+                    android:layout_width="95dp"
+                    android:layout_height="75dp"
                     android:layout_gravity="end|top"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
                     android:layout_marginTop="50dp"
                     android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_frag_my"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:contentDescription="@null"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/frag_my_onlineservice"
+
+                        />
 
                     <TextView
                         android:id="@+id/tv_frag_my"
@@ -404,16 +416,7 @@
                         android:layout_gravity="end"
                         android:textIsSelectable="true"
                         android:background="@drawable/xvector_close" />
-
-                    <ImageView
-                        android:id="@+id/iv_frag_my"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/frag_my_onlineservice"
-
-                        />
-                </LinearLayout>
+                </FrameLayout>
 
             </FrameLayout>
 

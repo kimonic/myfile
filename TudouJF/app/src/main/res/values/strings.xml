@@ -604,6 +604,16 @@
     <string name="tichengjineyuan">提成金额(元)</string>
     <string name="huoquwodeshouyixinxishibai">获取我的收益信息失败!</string>
     <string name="meiyoukexianshishuju">没有可显示数据!</string>
+    <string name="fankuiyijiantijiaochenggong">反馈意见提交成功!</string>
+    <string name="fankuiyijiantijiaoshibai">反馈意见提交失败!</string>
+    <string name="qsrfkyjbqfkyjbncglbz">请输入反馈意见并且反馈意见不能超过200字!</string>
+    <string name="qsrndlxfs">请输入您的联系方式!</string>
+    <string name="loginerror">登录出错!</string>
+    <string name="chucuola">出错啦!!</string>
+    <string name="phone">tel:400-066-5811</string>
+    <string name="domain">tudoujf.udesk.cn</string>
+    <string name="appkey">9a35912706aaecaf9f4f5ca4ae1efe34</string>
+    <string name="appid">b8686eaf829c0678</string>
 
 
 </resources>

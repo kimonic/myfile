@@ -1,85 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv_act_lock_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@null"
-        />
-    <TextView
-        android:id="@+id/tv_act_lock_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:text="@string/act_lock_welcom"
-        android:textColor="@color/act_lock_textcolor1"
-
-        />
-
-    <TextView
-        android:id="@+id/tv_act_lock_hint"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:text="@string/qinghuizhishoushimima"
-        android:textColor="@color/act_lock_textcolor1"
-
-        />
-
-
-
-
-    <com.tudoujf.ui.MLockView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mlv_act_lock"
-
-        />
-
+    >
     <LinearLayout
-        android:id="@+id/ll_act_lock_btn"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_act_lock_icon"
+            android:layout_width="92dp"
+            android:layout_height="92dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="62dp"
+            android:contentDescription="@null"
+            />
+        <TextView
+            android:id="@+id/tv_act_lock_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:text="@string/act_lock_welcom"
+            android:textColor="@color/act_lock_textcolor1"
 
-        >
-        <TextView
-            android:id="@+id/tv_act_lock_forget"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:textColor="@color/act_lock_textcolor2"
-            android:textSize="16sp"
-            android:gravity="center_vertical"
-            android:text="@string/act_lock_forget"
             />
+
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:id="@+id/tv_act_lock_hint"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:text="@string/qinghuizhishoushimima"
+            android:textColor="@color/act_lock_textcolor1"
+
             />
-        <TextView
-            android:id="@+id/tv_act_lock_other"
-            android:layout_width="wrap_content"
+
+
+
+
+        <com.tudoujf.ui.MLockView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:textColor="@color/act_lock_textcolor2"
-            android:textSize="16sp"
-            android:gravity="center_vertical|end"
-            android:text="@string/act_lock_other"
+            android:id="@+id/mlv_act_lock"
+
             />
+
+        <LinearLayout
+            android:id="@+id/ll_act_lock_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+
+            >
+            <TextView
+                android:id="@+id/tv_act_lock_forget"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:textColor="@color/act_lock_textcolor2"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:text="@string/act_lock_forget"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+            <TextView
+                android:id="@+id/tv_act_lock_other"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:textColor="@color/act_lock_textcolor2"
+                android:textSize="16sp"
+                android:gravity="center_vertical|end"
+                android:text="@string/act_lock_other"
+                />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

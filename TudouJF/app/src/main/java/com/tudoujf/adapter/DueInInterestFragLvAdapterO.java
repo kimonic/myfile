@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.bean.databean.DueInInterestBean;
 import com.tudoujf.fragment.myearnings.DueInInterestFragBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -26,10 +28,10 @@ import java.util.List;
 
 public class DueInInterestFragLvAdapterO extends BaseAdapter {
     private Context context;
-    private List<DueInInterestFragBean> list;
+    private List<DueInInterestBean.PageObjBean.ItemsBean> list;
     private int flag=1;
 
-    public DueInInterestFragLvAdapterO(Context context, List<DueInInterestFragBean> list,int flag) {
+    public DueInInterestFragLvAdapterO(Context context, List<DueInInterestBean.PageObjBean.ItemsBean> list, int flag) {
         this.context = context;
         this.list = list;
         this.flag=flag;
@@ -69,16 +71,16 @@ public class DueInInterestFragLvAdapterO extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getDate());
-        viewHolder.textView2.setText(list.get(position).getName());
+        viewHolder.textView1.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
+        viewHolder.textView2.setText(list.get(position).getLoan_name());
 
         if (flag==1){
-            viewHolder.textView3.setText(list.get(position).getJine());
+            viewHolder.textView3.setText(list.get(position).getPrincipal());
         }else {
             viewHolder.textView3.setVisibility(View.GONE);
         }
 
-        viewHolder.textView4.setText(list.get(position).getShouYi());
+        viewHolder.textView4.setText(list.get(position).getInterest());
         return view;
     }
 

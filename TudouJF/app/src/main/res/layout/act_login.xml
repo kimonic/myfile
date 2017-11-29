@@ -7,11 +7,13 @@
     >
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="133dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="50dp"
         >
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="80dp"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
             android:contentDescription="@null"
             android:layout_gravity="center"
             android:src="@drawable/act_login_bac"
@@ -21,9 +23,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
@@ -63,12 +65,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/xshape_roundrect_edittextbac"
         >
         <ImageView
@@ -116,12 +118,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="32dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="40dp"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -155,13 +157,13 @@
     <TextView
         android:id="@+id/tv_act_login_login"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="16sp"
+        android:layout_height="40dp"
+        android:textSize="14sp"
         android:gravity="center"
         android:text="@string/act_login_login"
         android:background="@drawable/xshape_roundrect_mblue"
         android:textColor="@color/act_login_textcolor1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         />
 </LinearLayout>

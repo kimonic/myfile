@@ -356,6 +356,10 @@ public class MyAccountActivity extends BaseActivity {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
             }
 
+
+
+
+
             UserConfig.getInstance().setBindPhone(bean.getPhone());
 
             tvBankcardDescription.setText(bean.getBankName());
@@ -398,9 +402,11 @@ public class MyAccountActivity extends BaseActivity {
                 isOpen = true;
             }
 
-        } else if (requestCode == 222 && data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
+        } else if (requestCode == 222 && data!=null&&data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
             tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
             isOpen = false;
+        }else if (requestCode==222){
+            openActivity(HomeActivity.class);
         }
 
 

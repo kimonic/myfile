@@ -101,7 +101,17 @@ public class HelpCenterCommonActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        lvActHelpcenterCommon.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                int count = lvActHelpcenterCommon.getExpandableListAdapter().getGroupCount();
+                for(int j = 0; j < count; j++){
+                    if(j != groupPosition){
+                        lvActHelpcenterCommon.collapseGroup(j);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -161,6 +171,8 @@ public class HelpCenterCommonActivity extends BaseActivity {
                 lvActHelpcenterCommon.setGroupIndicator(null);
                 HelpCenterCommonExpanableAdapter adapter = new HelpCenterCommonExpanableAdapter(this, list);
                 lvActHelpcenterCommon.setAdapter(adapter);
+                
+                
 
 
             }else {

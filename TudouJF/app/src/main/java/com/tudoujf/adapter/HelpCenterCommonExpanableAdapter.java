@@ -147,7 +147,7 @@ public class HelpCenterCommonExpanableAdapter extends BaseExpandableListAdapter 
         } else {
             itemHolder = (ItemHolder) convertView.getTag();
         }
-        itemHolder.txt.setText(Html.fromHtml(groupList.get(groupPosition).getContents()));
+        itemHolder.txt.setText(("        "+Html.fromHtml(groupList.get(groupPosition).getContents())));
         return convertView;
     }
 

@@ -23,20 +23,29 @@ import java.util.logging.Level;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Administrator on 2017/7/6.
+ * * ================================================
+ * name:            MApp
+ * guide:
+ * author：          kimonik
+ * version：          1.0
+ * date：            2017/07/04
+ * description：     入口
+ * history：
+ * ===================================================
  */
-
 public class MApp extends Application {
     public static MApp app = null;
     private boolean isLogin = false;
 
-    /**---------------------友盟平台配置-----------------------------------------------------------*/
-    {
+    /**---------------------友盟平台配置-----------------------------------------------------------*/ {
         PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
     }
-    /**---------------------友盟平台配置-----------------------------------------------------------*/
+
+    /**
+     * ---------------------友盟平台配置-----------------------------------------------------------
+     */
 
 
     public boolean isLogin() {
@@ -93,9 +102,9 @@ public class MApp extends Application {
 //        builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);     //全局的写入超时时间
 //        builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);   //全局的连接超时时间
 // //超时时间设置，默认60秒
-        builder.readTimeout(10000, TimeUnit.MILLISECONDS);      //全局的读取超时时间
-        builder.writeTimeout(10000, TimeUnit.MILLISECONDS);     //全局的写入超时时间
-        builder.connectTimeout(10000, TimeUnit.MILLISECONDS);   //全局的连接超时时间
+        builder.readTimeout(5000, TimeUnit.MILLISECONDS);      //全局的读取超时时间
+        builder.writeTimeout(5000, TimeUnit.MILLISECONDS);     //全局的写入超时时间
+        builder.connectTimeout(5000, TimeUnit.MILLISECONDS);   //全局的连接超时时间
 //
         //自动管理cookie（或者叫session的保持），以下几种任选其一就行
         //builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));            //使用sp保持cookie，如果cookie不过期，则一直有效
@@ -121,7 +130,7 @@ public class MApp extends Application {
                 .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置会使用默认的
                 .setCacheMode(CacheMode.NO_CACHE)               //全局统一缓存模式，默认不使用缓存，可以不传
                 .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
-                .setRetryCount(2)//全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
+                .setRetryCount(1)//全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
                 .addCommonHeaders(headers)                      //全局公共头
                 .addCommonParams(params);                       //全局公共参数
     }

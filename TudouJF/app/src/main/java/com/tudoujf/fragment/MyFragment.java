@@ -78,6 +78,8 @@ public class MyFragment extends BaseFragment {
     FrameLayout flMessage;
     @BindView(R.id.tv_frag_my)
     TextView tvFragMy;
+    @BindView(R.id.fl_frag_my)
+    FrameLayout flFragMy;
     @BindView(R.id.tv_frag_my_realname)
     TextView tvRealName;
     @BindView(R.id.iv_frag_my)
@@ -144,24 +146,21 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_frag_my://打开客服界面
-                ToastUtils.showToast(getActivity(), "我将关闭客服界面!");
+            case R.id.tv_frag_my://关闭客服
+                flFragMy.setVisibility(View.GONE);
                 break;
-            case R.id.iv_frag_my://关闭客服
-                UdeskSDKManager.getInstance().initApiKey(getActivity(), "tudoujf.udesk.cn",
-                        "9a35912706aaecaf9f4f5ca4ae1efe34", "b8686eaf829c0678");
-                String sdktoken = "用户唯一的标识";
-                Map<String, String> info = new HashMap<String, String>();
-                //sdktoken 必填
+            case R.id.iv_frag_my://打开客服界面
+                UdeskSDKManager.getInstance().initApiKey(getActivity(), getResources().getString(R.string.domain),
+                        getResources().getString(R.string.appkey), getResources().getString(R.string.appid));
+                String sdktoken = UserConfig.getInstance().getLoginToken(getActivity());
+                Map<String, String> info = new HashMap<>();
                 info.put(UdeskConst.UdeskUserInfo.USER_SDK_TOKEN, sdktoken);
-                //以下信息是可选
-                info.put(UdeskConst.UdeskUserInfo.NICK_NAME, "昵称");
-                info.put(UdeskConst.UdeskUserInfo.EMAIL, "0631@163.com");
-                info.put(UdeskConst.UdeskUserInfo.CELLPHONE, "15651818750");
-                info.put(UdeskConst.UdeskUserInfo.DESCRIPTION, "描述信息");
+                info.put(UdeskConst.UdeskUserInfo.NICK_NAME, bean.getMember_name());
+//                info.put(UdeskConst.UdeskUserInfo.EMAIL, "0631@163.com");
+//                info.put(UdeskConst.UdeskUserInfo.CELLPHONE, "15651818750");
+//                info.put(UdeskConst.UdeskUserInfo.DESCRIPTION, "描述信息");
                 UdeskSDKManager.getInstance().setUserInfo(getActivity(), sdktoken, info);
                 UdeskSDKManager.getInstance().entryChat(getActivity());
-//                ToastUtils.showToast(getActivity(), "我将打开客服界面!");
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 Bundle bundle = new Bundle();
@@ -173,13 +172,18 @@ public class MyFragment extends BaseFragment {
                 openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
-                Intent intent = new Intent(getActivity(), WithdrawActivity.class);
-                if (bean != null) {
-                    intent.putExtra("amount", bean.getAmount_balance());
-                } else {
-                    intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                if (bean!=null&&"-1".equals(bean.getIs_trust())){
+                ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                }else {
+                    Intent intent = new Intent(getActivity(), WithdrawActivity.class);
+                    if (bean != null) {
+                        intent.putExtra("amount", bean.getAmount_balance());
+                    } else {
+                        intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
 //                openActivity(WithdrawActivity.class);
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
@@ -212,6 +216,10 @@ public class MyFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+    public void showService(){
+        flFragMy.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -354,8 +362,14 @@ public class MyFragment extends BaseFragment {
                 ivVip.setImageResource(R.drawable.frag_my_vipt);
             } else {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
-
             }
+
+            if ("1".equals(bean.getIs_trust())) {
+                llRealname.setVisibility(View.GONE);
+            } else {
+                llRealname.setVisibility(View.VISIBLE);
+            }
+
             int count = StringUtils.string2Integer(bean.getCount());
             if (count < 100) {
                 tvMessage.setText(bean.getCount());

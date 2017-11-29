@@ -110,6 +110,11 @@ public class HomeActivity extends BaseActivity {
             public boolean currentPosition(int position) {
 
 
+                if (position==3){
+                    ((MyFragment)list.get(3)).showService();
+                }
+
+
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
@@ -132,6 +137,9 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
 
+                if (position==3){
+                    ((MyFragment)list.get(3)).showService();
+                }
 
                 if (position == 3 && !isLogin) {
                     openLoginAct();

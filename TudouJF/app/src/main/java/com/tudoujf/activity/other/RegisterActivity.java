@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.encryptionpackages.AESencrypt;
+import com.example.encryptionpackages.CreateCode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -22,11 +25,16 @@ import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.CheckPhoneIsExistRegisterActBean;
+import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.bean.databean.PhoneCodeBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.mapi.MApp;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -54,10 +62,10 @@ public class RegisterActivity extends BaseActivity {
     EditText etUsername;
     @BindView(R.id.iv_act_register_clear)
     ImageView ivClear;
-    @BindView(R.id.et_act_register_code)
-    EditText etCode;
-    @BindView(R.id.iv_act_register_codeimage)
-    ImageView ivCodeimage;//自动加载图形验证码
+//    @BindView(R.id.et_act_register_code)
+//    EditText etCode;
+//    @BindView(R.id.iv_act_register_codeimage)
+//    ImageView ivCodeimage;//自动加载图形验证码
     @BindView(R.id.et_act_register_phonecode)
     EditText etPhonecode;
     @BindView(R.id.tv_act_register_getcode)
@@ -78,6 +86,10 @@ public class RegisterActivity extends BaseActivity {
     LinearLayout llAgree;
     @BindView(R.id.cb_act_register)
     TextView cbActRegister;
+     @BindView(R.id.view_placeholder)
+    View view;
+     @BindView(R.id.scrollview_act_register)
+     ScrollView scrollView;
     private int count = 0, countAgree = 0;
     /**
      * 手机验证码
@@ -132,6 +144,8 @@ public class RegisterActivity extends BaseActivity {
      */
     private boolean agreeRule = false;
 
+    private boolean  fosousOne,fosousTwo;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_register;
@@ -163,8 +177,8 @@ public class RegisterActivity extends BaseActivity {
                 }
 
                 break;
-            case R.id.iv_act_register_codeimage://点击可刷新图形验证码
-                break;
+//            case R.id.iv_act_register_codeimage://点击可刷新图形验证码
+//                break;
 
             case R.id.iv_act_register_openclose://明文密文显示
                 inputTypeConfig(count, ivOpenclose, etPassword);
@@ -202,6 +216,9 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.height= ScreenSizeUtils.getScreenHeight(this);
+        view.setLayoutParams(params);
 
     }
 
@@ -218,7 +235,24 @@ public class RegisterActivity extends BaseActivity {
             }
         });
         etUsername.setOnClickListener(this);
+//--------------------------------------------------------------------------------------------------------
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                fosousOne=hasFocus;
+                visibilityplaceHolder();
 
+            }
+        });
+
+        etReferrer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                fosousTwo=hasFocus;
+                visibilityplaceHolder();
+            }
+        });
+//-----------------------------------------------------------------------------------------------------------
         etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -262,11 +296,19 @@ public class RegisterActivity extends BaseActivity {
         ivClear.setOnClickListener(this);
         ivClear1.setOnClickListener(this);
         tvGetcode.setOnClickListener(this);
-        ivCodeimage.setOnClickListener(this);
+//        ivCodeimage.setOnClickListener(this);
         ivOpenclose.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         llAgree.setOnClickListener(this);
+    }
+
+    private void visibilityplaceHolder() {
+        if (fosousOne||fosousTwo){
+            view.setVisibility(View.VISIBLE);
+        }else {
+            view.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -379,6 +421,26 @@ public class RegisterActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
                 // TODO: 2017/8/15 保存完数据之后,跳转手势密码页面
+
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
+                        }.getType(),
+                        LoginBean.class, RegisterActivity.this);
+                if (bean1 != null) {
+                    LoginBean bean = (LoginBean) bean1;
+                    //加密存储logintoken,username到本地
+                    SharedPreferencesUtils.getInstance(RegisterActivity.this, Constants.USER_CONFIG).put("userName", bean.getMember().getName());
+                    SharedPreferencesUtils.getInstance(RegisterActivity.this, Constants.USER_CONFIG)
+                            .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
+                                    CreateCode.getSEND_AES_KEY(), bean.getLogin_token()));
+                    UserConfig.getInstance().setLoginToken(bean.getLogin_token());//每次登陆重置logintoken
+                    UserConfig.getInstance().setDraw(true);//密码登录时,本次前台不再需要手势密码
+                    MApp.getInstance().setLogin(true);
+
+                }else {
+                    ToastUtils.showToast(RegisterActivity.this, R.string.loginerror);
+
+                }
+
                 openActivity(DrawGestureActivity.class);
                 closeActivity();
             }
@@ -459,4 +521,36 @@ public class RegisterActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
 }
+
+
+
+
+
+/**
+ * [java] view plain copy
+ InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ // 接受软键盘输入的编辑文本或其它视图
+ imm.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
+
+ 二、关闭输入法窗口
+ [java] view plain copy
+ InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ inputMethodManager.hideSoftInputFromWindow(OpeListActivity.this.getCurrentFocus().getWindowToken()
+ ,InputMethodManager.HIDE_NOT_ALWAYS);
+
+ //接受软键盘输入的编辑文本或其它视图
+ inputMethodManager.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
+
+ 三、如果输入法打开则关闭，如果没打开则打开
+ [java] view plain copy  在CODE上查看代码片派生到我的代码片
+ InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+ m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
+ 四、获取输入法打开的状态
+ [java] view plain copy  在CODE上查看代码片派生到我的代码片
+ InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ boolean isOpen=imm.isActive();
+ */

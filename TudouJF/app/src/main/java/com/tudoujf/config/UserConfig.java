@@ -240,10 +240,26 @@ public class UserConfig {
     /**
      * 清除用户信息
      */
-    public synchronized void clear() {
-        this.userKey = null;
-        this.userId = null;
-        this.userName = null;
-        this.isLogin = null;
+    public synchronized void clear(Context context) {
+//        this.userKey = null;
+//        this.userId = null;
+//        this.userName = null;
+//        this.isLogin = null;
+        String name = MD5Utils.md5(getLoginToken(context));
+
+        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(name + "ciphertext", "");//清除手势密码
+        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(name + "lockPass", false);//清除已保存锁屏密码状态
+        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(Constants.SHARE_USERNAME, "");//清除username
+        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(Constants.SHARE_LOGINTOKEN, "");//清除logintoken
+
+        this.userId = "";
+        this.userKey = "";
+        this.userName = "";
+        this.isLogin = "";
+        this.loginToken = "";
+        this.lockPass = false;
+        this.isDraw = true;
+
+
     }
 }

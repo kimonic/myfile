@@ -150,7 +150,7 @@ public class MLockView extends View {
         hollowPaint = initPaint("#FE7B20", 1, 5);
         shadePaint = initPaint("#A6D3D8", 2, 0);
         innerPaint = initPaint("#3EACC5", 2, 0);
-        linePaint = initPaint("#1898BF", 2, 20);
+        linePaint = initPaint("#1898BF", 2, 10);
 
         positionSet = new ArrayList<>();
         positionSet.add(-1);
@@ -266,21 +266,10 @@ public class MLockView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
+        int width = screenWidth;
+        int height = screenWidth;
+        setMeasuredDimension(width, height);
 
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-
-        int newSize = Math.min(width, height);
-
-        if (widthMode == MeasureSpec.AT_MOST || heightMode == MeasureSpec.AT_MOST) {
-            if (newSize > screenWidth) {
-                setMeasuredDimension(screenWidth, screenWidth);
-            } else {
-                setMeasuredDimension(newSize, newSize);
-            }
-        }
     }
 
     @Override
@@ -333,7 +322,7 @@ public class MLockView extends View {
                 afreshDraw();
                 inputCount--;
             } else {
-                Toast.makeText(getContext(), R.string.errormoretimes, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), R.string.errormoretimes, Toast.LENGTH_SHORT).show();
                 afreshDraw();
                 openOrCloseDraw = false;
                 inputCount = 4;

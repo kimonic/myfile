@@ -9,7 +9,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.mypopularize.SucceedInvitationRecommendRecordActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.myearnings.DueInInterestFragment;
@@ -60,10 +64,12 @@ public class MyEarningsActivity extends BaseActivity {
     private DateFilterDialog dateFilterDialog;
 
 
+    private  int  position=0;
 
 
-    /**加载进度dialog*/
-    private AlertDialog dialog;
+
+
+
 
     @Override
     public int getLayoutResId() {
@@ -76,14 +82,20 @@ public class MyEarningsActivity extends BaseActivity {
             case R.id.utv_act_myearnings_daishoulixi:
                 vpActMyEarnings.setCurrentItem(0);
                 setButStyle(0);
+                position=0;
+                tvTotal.setText(((DueInInterestFragment)(listFrag.get(0))).getTotal());
                 break;
             case R.id.utv_act_myearnings_yishoulixi:
                 vpActMyEarnings.setCurrentItem(1);
                 setButStyle(1);
+                position=1;
+                tvTotal.setText(((DueInInterestFragment)(listFrag.get(1))).getTotal());
                 break;
             case R.id.utv_act_myearnings_huodongshouyi:
                 vpActMyEarnings.setCurrentItem(2);
                 setButStyle(2);
+                position=2;
+                tvTotal.setText(((DueInInterestFragment)(listFrag.get(2))).getTotal());
                 break;
             case R.id.tv_act_myearnings_bac:
                closeActivity();
@@ -94,6 +106,8 @@ public class MyEarningsActivity extends BaseActivity {
                     dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
                         @Override
                         public void dismiss(String startTime, String endTime) {
+
+                            ((DueInInterestFragment)(listFrag.get(position))).setStart_time(startTime,endTime);
                             // TODO: 2017/9/4  请求网络筛选展示数据
                             ToastUtils.showToast(MyEarningsActivity.this, startTime + "-----------" + endTime);
                         }
@@ -186,6 +200,9 @@ public class MyEarningsActivity extends BaseActivity {
 
 
 
+
+
+
     }
 
     @Override
@@ -198,6 +215,8 @@ public class MyEarningsActivity extends BaseActivity {
 
     }
 
+
+
     @Override
     protected int setStatusBarColor() {
         return getResources().getColor(R.color.global_theme_background_color);
@@ -206,5 +225,10 @@ public class MyEarningsActivity extends BaseActivity {
     @Override
     protected boolean translucentStatusBar() {
         return true;
+    }
+
+
+    public void setTotal(String total){
+        tvTotal.setText(total);
     }
 }

@@ -271,11 +271,15 @@ public class Constants {
      * 推广奖励总额
      */
     public static final String MY_EARNINGS = URL + "/phone/tender/getTenderRecover";
- /**
+    /**
      * 帮助中心接口
      */
     public static final String HELP_CENTER = URL + "/phone/articles/helpCenter";
 
+ /**
+     * 意见反馈接口
+     */
+    public static final String FEEDBACK = URL + "/phone/articles/suggestion";
 
 
 //    ------------------------------------------------------------------------------------------------
