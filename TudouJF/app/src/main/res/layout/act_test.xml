@@ -7,6 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_erniu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/kefuerweima"
+            />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

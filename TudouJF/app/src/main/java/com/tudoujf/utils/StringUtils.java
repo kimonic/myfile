@@ -50,11 +50,14 @@ public class StringUtils {
      */
     public static String getDecodeString(String json) {
         String temp;
+        Log.e("TAG", "getDecodeString: -----"+json);
+
         GlobalBean bean = firstParseJson(json);
 
         //MD5验证
         if (MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
+            Log.e("TAG", "getDecodeString: -----"+temp);
             return temp;
         } else {
             return null;

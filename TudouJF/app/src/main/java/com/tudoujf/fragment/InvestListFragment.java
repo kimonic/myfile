@@ -85,7 +85,7 @@ public class InvestListFragment extends BaseFragment {
     private int type = 1;
 
     private int count1 = 0, count2 = 0;
-    private  int  flag=1;
+    private int flag = 1;
 
     private InvestListBean bean;
     private String requestUrl;
@@ -175,19 +175,19 @@ public class InvestListFragment extends BaseFragment {
             case R.id.tv_dialog_dengebenxi:
                 pop.dismiss();
                 dialog.show();
-                repayType="1";
+                repayType = "1";
                 initDataFromInternet();
                 break;
             case R.id.tv_dialog_daoqihuanbenxi:
                 pop.dismiss();
                 dialog.show();
-                repayType="3";
+                repayType = "3";
                 initDataFromInternet();
                 break;
             case R.id.tv_dialog_anyuefuxi:
                 pop.dismiss();
                 dialog.show();
-                repayType="4";
+                repayType = "4";
                 initDataFromInternet();
                 break;
         }
@@ -218,7 +218,7 @@ public class InvestListFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
-            requestUrl = Constants.INVESTMENT_LIST;
+        requestUrl = Constants.INVESTMENT_LIST;
     }
 
     @Override
@@ -292,20 +292,12 @@ public class InvestListFragment extends BaseFragment {
         map.put("repay_type", repayType);//还款方式,1等额本息--3到期本息---4按月付息----5按天计息到期还本息
 
 
-
         HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        finishRL();
                         dialog.dismiss();
-
-                        if (page > 1) {
-                            swipeRefreshLayout.finishLoadmore();
-                        } else {
-                            swipeRefreshLayout.finishRefresh();
-                        }
-
-
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----理财投资列表接口返回数据-- " + type + "------" + result);
 
@@ -315,12 +307,23 @@ public class InvestListFragment extends BaseFragment {
                             bean = (InvestListBean) bean1;
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(getActivity(),R.string.shujujiazaichucuo);
+                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                         }
 
                     }
                 });
 
+    }
+
+    private void finishRL() {
+        Log.e("TAG", "finishRL: isRefreshing-----"+swipeRefreshLayout.isRefreshing());
+        Log.e("TAG", "finishRL:isLoading -----"+swipeRefreshLayout.isLoading());
+
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.finishRefresh();
+        } else if (swipeRefreshLayout.isLoading()) {
+            swipeRefreshLayout.finishLoadmore();
+        }
     }
 
     @Override
@@ -400,7 +403,7 @@ public class InvestListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (flag!=1){
+        if (flag != 1) {
             page = 1;
             initDataFromInternet();
         }

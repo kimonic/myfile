@@ -105,7 +105,6 @@ public class BallView extends View {
         int length = Math.min(width, height);
 
 
-        canvas.drawCircle(width / 2, height / 2, length / 2 - circleBorderWidth, circlePaint);
 
 
         float lineStartX = (float) (width / 2 - Math.sqrt(length * length / 4 - length * length * 0.01));
@@ -139,6 +138,7 @@ public class BallView extends View {
         canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi),textX1,textY1,textPaint);
 
 
+        canvas.drawCircle(width / 2, height / 2, length / 2 - circleBorderWidth, circlePaint);
 
 
 

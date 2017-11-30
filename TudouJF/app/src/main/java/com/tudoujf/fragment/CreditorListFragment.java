@@ -292,13 +292,10 @@ public class CreditorListFragment extends BaseFragment {
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+
+                        finishRL();
                         dismissPDialog();
 
-                        if (page > 1) {
-                            swipeRefreshLayout.finishLoadmore();
-                        } else {
-                            swipeRefreshLayout.finishRefresh();
-                        }
 
 
                         String result = StringUtils.getDecodeString(response.body());
@@ -350,6 +347,15 @@ public class CreditorListFragment extends BaseFragment {
 
         } else {
             ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
+        }
+
+    }
+
+    private void finishRL() {
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.finishRefresh();
+        } else if (swipeRefreshLayout.isLoading()) {
+            swipeRefreshLayout.finishLoadmore();
         }
 
     }

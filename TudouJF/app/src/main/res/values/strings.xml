@@ -614,6 +614,14 @@
     <string name="domain">tudoujf.udesk.cn</string>
     <string name="appkey">9a35912706aaecaf9f4f5ca4ae1efe34</string>
     <string name="appid">b8686eaf829c0678</string>
+    <string name="qxjc">检测到您有权限未授予,可能会影响APP的功能使用,是否前去授权?</string>
+    <string name="quanxianshenqingshibai">权限申请失败!</string>
+    <string name="quanxianshenqingchenggong">权限申请成功!</string>
+    <string name="bufenquanxianshouquanshibai">部分权限授权失败,本应用需要开启获取手机信息,读写手机存储,手机拍照三种主要权限,未授权可能会导致位置错误,是否前往应用详情查看设置!</string>
+    <string name="copyerror">复制失败!</string>
+    <string name="gzhyfz">公众号已复制,您可直接打开微信粘贴搜索,完成关注</string>
+    <string name="quzhantie">去粘贴</string>
+    <string name="ninweianzhuangweixin">您未安装微信,请先安装!</string>
 
 
 </resources>

@@ -185,6 +185,7 @@ public class MyAccountActivity extends BaseActivity {
                 SharedPreferencesUtils.getInstance(MyAccountActivity.this, Constants.USER_CONFIG)
                         .put(Constants.SHARE_LOGINTOKEN, "");
                 UserConfig.getInstance().setLoginToken("");
+                SharedPreferencesUtils.getInstance(this, "popshow").put("show", true);
                 openActivity(HomeActivity.class);
                 closeActivity();
                 break;

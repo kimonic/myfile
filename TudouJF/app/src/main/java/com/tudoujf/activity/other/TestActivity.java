@@ -1,14 +1,18 @@
 package com.tudoujf.activity.other;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bolex.pressscan.ScanTools;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +60,8 @@ public class TestActivity extends BaseActivity {
     TextView tvTransation;
     @BindView(R.id.et_transation)
     EditText etTransation;
+    @BindView(R.id.iv_erniu)
+    ImageView imageView;
 
     @Override
     public int getLayoutResId() {
@@ -115,6 +121,21 @@ public class TestActivity extends BaseActivity {
     public void initListener() {
         tvBtn.setOnClickListener(this);
         tvTransation.setOnClickListener(this);
+
+        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ScanTools.scanCode(imageView, new ScanTools.ScanCall() {
+                    @Override
+                    public void getCode(String s) {
+                        Log.e("TAG", "v: -----"+s);
+
+                        ToastUtils.showToast(TestActivity.this, s);
+                    }
+                });
+                return false;
+            }
+        });
 
     }
 

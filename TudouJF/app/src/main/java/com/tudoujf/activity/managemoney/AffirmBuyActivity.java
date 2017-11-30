@@ -211,6 +211,7 @@ public class AffirmBuyActivity extends BaseActivity {
         intent.putExtra("id", loan_id);//标的id
         intent.putExtra("coupon", jiaXiQuanId);//加息券id
         intent.putExtra("redBag", redId);//红包id
+        intent.putExtra("cashback ", fanXianQuanId);//返现券id
         intent.putExtra("paypassword", paypassword);//投资密码
         startActivity(intent);
     }

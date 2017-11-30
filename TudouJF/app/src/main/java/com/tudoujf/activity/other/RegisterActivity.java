@@ -62,7 +62,7 @@ public class RegisterActivity extends BaseActivity {
     EditText etUsername;
     @BindView(R.id.iv_act_register_clear)
     ImageView ivClear;
-//    @BindView(R.id.et_act_register_code)
+    //    @BindView(R.id.et_act_register_code)
 //    EditText etCode;
 //    @BindView(R.id.iv_act_register_codeimage)
 //    ImageView ivCodeimage;//自动加载图形验证码
@@ -86,10 +86,10 @@ public class RegisterActivity extends BaseActivity {
     LinearLayout llAgree;
     @BindView(R.id.cb_act_register)
     TextView cbActRegister;
-     @BindView(R.id.view_placeholder)
+    @BindView(R.id.view_placeholder)
     View view;
-     @BindView(R.id.scrollview_act_register)
-     ScrollView scrollView;
+    @BindView(R.id.scrollview_act_register)
+    ScrollView scrollView;
     private int count = 0, countAgree = 0;
     /**
      * 手机验证码
@@ -144,7 +144,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private boolean agreeRule = false;
 
-    private boolean  fosousOne,fosousTwo;
+    private boolean fosousOne, fosousTwo;
 
     @Override
     public int getLayoutResId() {
@@ -216,8 +216,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) view.getLayoutParams();
-        params.height= ScreenSizeUtils.getScreenHeight(this);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.height = ScreenSizeUtils.getScreenHeight(this);
         view.setLayoutParams(params);
 
     }
@@ -239,7 +239,7 @@ public class RegisterActivity extends BaseActivity {
         etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                fosousOne=hasFocus;
+                fosousOne = hasFocus;
                 visibilityplaceHolder();
 
             }
@@ -248,7 +248,7 @@ public class RegisterActivity extends BaseActivity {
         etReferrer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                fosousTwo=hasFocus;
+                fosousTwo = hasFocus;
                 visibilityplaceHolder();
             }
         });
@@ -304,9 +304,9 @@ public class RegisterActivity extends BaseActivity {
     }
 
     private void visibilityplaceHolder() {
-        if (fosousOne||fosousTwo){
+        if (fosousOne || fosousTwo) {
             view.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             view.setVisibility(View.GONE);
         }
     }
@@ -377,7 +377,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private void commitInfo() {
         if (checkSubmit()) {
-            dialog= DialogUtils.showProgreessDialog(this,"再点击一次将结束注册退出!");
+            dialog = DialogUtils.showProgreessDialog(this, "再点击一次将结束注册退出!");
             TreeMap<String, String> map = new TreeMap<>();
             map.put("phone", userName);
             map.put("password", password);
@@ -392,7 +392,7 @@ public class RegisterActivity extends BaseActivity {
                         JSONObject json = new JSONObject(StringUtils.getDecodeString(response.body()));
                         if (json.getString("code").equals("200")) {
                             login();//登陆
-                        }else {
+                        } else {
                             dialog.dismiss();
                             ToastUtils.showToast(RegisterActivity.this, json.getString("description"));
 
@@ -436,7 +436,7 @@ public class RegisterActivity extends BaseActivity {
                     UserConfig.getInstance().setDraw(true);//密码登录时,本次前台不再需要手势密码
                     MApp.getInstance().setLogin(true);
 
-                }else {
+                } else {
                     ToastUtils.showToast(RegisterActivity.this, R.string.loginerror);
 
                 }
@@ -453,6 +453,11 @@ public class RegisterActivity extends BaseActivity {
     public void getSms() {
         randomCode = StringUtils.getRandomCode();
         Log.e(TAG, "getSms: --------------------" + randomCode);
+        //-----------------------------------------待删除-------------------------------------------------------
+        //-----------------------------------------待删除-------------------------------------------------------
+        ToastUtils.showToast(RegisterActivity.this, randomCode);
+        //-----------------------------------------待删除-------------------------------------------------------
+        //-----------------------------------------待删除-------------------------------------------------------
         TreeMap<String, String> map = new TreeMap<>();
         map.put("type", "reg");//类型注册
         map.put("phone", userName);//手机号码
@@ -465,9 +470,9 @@ public class RegisterActivity extends BaseActivity {
                 Gson gson = new Gson();
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());
-                    if (phoneCodeBean.getCode().equals("200")) {
-                        ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
-                    }
+                if (phoneCodeBean.getCode().equals("200")) {
+                    ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
+                }
 
 
             }
@@ -526,31 +531,28 @@ public class RegisterActivity extends BaseActivity {
 }
 
 
-
-
-
 /**
  * [java] view plain copy
- InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- // 接受软键盘输入的编辑文本或其它视图
- imm.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
-
- 二、关闭输入法窗口
- [java] view plain copy
- InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- inputMethodManager.hideSoftInputFromWindow(OpeListActivity.this.getCurrentFocus().getWindowToken()
- ,InputMethodManager.HIDE_NOT_ALWAYS);
-
- //接受软键盘输入的编辑文本或其它视图
- inputMethodManager.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
-
- 三、如果输入法打开则关闭，如果没打开则打开
- [java] view plain copy  在CODE上查看代码片派生到我的代码片
- InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
- m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-
- 四、获取输入法打开的状态
- [java] view plain copy  在CODE上查看代码片派生到我的代码片
- InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- boolean isOpen=imm.isActive();
+ * InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ * // 接受软键盘输入的编辑文本或其它视图
+ * imm.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
+ * <p>
+ * 二、关闭输入法窗口
+ * [java] view plain copy
+ * InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ * inputMethodManager.hideSoftInputFromWindow(OpeListActivity.this.getCurrentFocus().getWindowToken()
+ * ,InputMethodManager.HIDE_NOT_ALWAYS);
+ * <p>
+ * //接受软键盘输入的编辑文本或其它视图
+ * inputMethodManager.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
+ * <p>
+ * 三、如果输入法打开则关闭，如果没打开则打开
+ * [java] view plain copy  在CODE上查看代码片派生到我的代码片
+ * InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+ * m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+ * <p>
+ * 四、获取输入法打开的状态
+ * [java] view plain copy  在CODE上查看代码片派生到我的代码片
+ * InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ * boolean isOpen=imm.isActive();
  */

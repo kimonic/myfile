@@ -28,6 +28,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 
@@ -197,6 +198,10 @@ public class LoginActivity extends BaseActivity {
                     SharedPreferencesUtils.getInstance(LoginActivity.this, Constants.USER_CONFIG)
                             .put(Constants.SHARE_LOGINTOKEN, AESencrypt.encrypt2PHP(
                                     CreateCode.getSEND_AES_KEY(), bean.getLogin_token()));
+                    SharedPreferencesUtils.getInstance(LoginActivity.this, Constants.USER_CONFIG)
+                            .put(MD5Utils.md5(bean.getLogin_token()) + "isrealname", bean.getMember().getIsRealname());
+
+                    UserConfig.getInstance().setIsRealName(bean.getMember().getIsRealname());//保存并设置是否实名
                     UserConfig.getInstance().setLoginToken(bean.getLogin_token());//每次登陆重置logintoken
                     UserConfig.getInstance().setDraw(true);//密码登录时,本次前台不再需要手势密码
                     MApp.getInstance().setLogin(true);

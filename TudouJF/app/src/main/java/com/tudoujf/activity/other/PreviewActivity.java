@@ -3,6 +3,7 @@ package com.tudoujf.activity.other;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
@@ -231,6 +232,23 @@ public class PreviewActivity extends BaseActivity {
         }
     }
 
+
+    // List of mandatory application permissions.
+    private static final String[] MANDATORY_PERMISSIONS =
+            { "android.permission.MODIFY_AUDIO_SETTINGS",
+                    "android.permission.RECORD_AUDIO",
+                    "android.permission.INTERNET" };
+    private void checkPersition(){
+        // Check for mandatory permissions.
+        for (String permission : MANDATORY_PERMISSIONS) {
+            if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                Log.e("TAG", "checkPersition: -----"+permission);
+            }else {
+                Log.e("TAG", "checkPersition: --PERMISSION_GRANTED---"+permission);
+            }
+        }
+    }
+
     @Override
     public void initDataFromIntent() {
 
@@ -239,6 +257,8 @@ public class PreviewActivity extends BaseActivity {
         for (int i = 0; i < sensors.size(); i++) {
             Log.e("TAG", "onStart: ---------------------"+sensors.get(i).getName());
         }
+
+        checkPersition();
 
 
 

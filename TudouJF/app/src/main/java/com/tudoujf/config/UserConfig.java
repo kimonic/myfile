@@ -31,6 +31,7 @@ public class UserConfig {
     private String isLogin;
     private String loginToken;
     private boolean lockPass;
+    private String isRealName;
 
     /**
      * 本次应用在前台时是否已验证过手势密码
@@ -156,6 +157,18 @@ public class UserConfig {
         this.loginToken = loginToken;
     }
 
+    /**
+     * 是否已实名
+     */
+    public String getIsRealName(Context context) {
+        return SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG)
+                .getString(MD5Utils.md5(getLoginToken(context)) + "isrealname", "0");
+
+    }
+
+    public void setIsRealName(String isRealName) {
+        this.isRealName = isRealName;
+    }
 
     /**
      * username
@@ -247,10 +260,12 @@ public class UserConfig {
 //        this.isLogin = null;
         String name = MD5Utils.md5(getLoginToken(context));
 
+        SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).getString(name + "isrealname", "");//清除实名信息
         SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(name + "ciphertext", "");//清除手势密码
         SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(name + "lockPass", false);//清除已保存锁屏密码状态
         SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(Constants.SHARE_USERNAME, "");//清除username
         SharedPreferencesUtils.getInstance(context, Constants.USER_CONFIG).put(Constants.SHARE_LOGINTOKEN, "");//清除logintoken
+        SharedPreferencesUtils.getInstance(context, "popshow").put("show", true);
 
         this.userId = "";
         this.userKey = "";

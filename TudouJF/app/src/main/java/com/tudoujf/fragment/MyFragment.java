@@ -1,7 +1,12 @@
 package com.tudoujf.fragment;
 
+import android.content.ClipboardManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
@@ -172,9 +178,9 @@ public class MyFragment extends BaseFragment {
                 openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
-                if (bean!=null&&"-1".equals(bean.getIs_trust())){
-                ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
-                }else {
+                if (bean != null && "-1".equals(bean.getIs_trust())) {
+                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                } else {
                     Intent intent = new Intent(getActivity(), WithdrawActivity.class);
                     if (bean != null) {
                         intent.putExtra("amount", bean.getAmount_balance());
@@ -184,7 +190,6 @@ public class MyFragment extends BaseFragment {
                     startActivity(intent);
                 }
 
-//                openActivity(WithdrawActivity.class);
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
                 openActivity(FundDetailsActivity.class);
@@ -218,8 +223,10 @@ public class MyFragment extends BaseFragment {
         }
     }
 
-    public void showService(){
-        flFragMy.setVisibility(View.VISIBLE);
+    public void showService() {
+        if (flFragMy!=null){
+            flFragMy.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -229,7 +236,7 @@ public class MyFragment extends BaseFragment {
             MyFragBean bean = new MyFragBean();
             bean.setTitle(getResources().getString(titleResId[i]));
             bean.setResId1(iconResId[i]);
-            if (i == 6) {
+            if (i == 5) {
                 bean.setMark(getResources().getString(R.string.weixinguanzhu));
             }
             list.add(bean);
@@ -244,12 +251,8 @@ public class MyFragment extends BaseFragment {
         HeightUtils.setListviewHeight(lvFragMy);
 
 
-        //设置全区背景色
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
-        //设置 Header 为 Material风格
-//        swipeRefreshLayout.setEnableRefresh(true);
         srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
-        //设置 Footer 为 球脉冲
         srl.setEnableLoadmore(false);
         initDataFromInternet();
 
@@ -277,6 +280,29 @@ public class MyFragment extends BaseFragment {
                         openActivity(MyWelfareActivity.class);
                         break;
                     case 5://专属客服
+
+                        ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                        if (cm != null) {
+                            cm.setText("豆小妹");
+                            DialogUtils.showDialog(getActivity(), R.string.gzhyfz, R.string.quzhantie, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (isWeixinAvilible(getActivity())){
+                                        Intent intent = new Intent();
+                                        ComponentName cmp=new ComponentName("com.tencent.mm","com.tencent.mm.ui.LauncherUI");
+                                        intent.setAction(Intent.ACTION_MAIN);
+                                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.setComponent(cmp);
+                                        startActivity(intent);
+                                    }else {
+                                        ToastUtils.showToast(getActivity(), R.string.ninweianzhuangweixin);
+                                    }
+                                }
+                            });
+                        } else {
+                            ToastUtils.showToast(getActivity(), R.string.copyerror);
+                        }
                         break;
                     case 6://设置
                         openActivity(SetActivity.class);
@@ -298,8 +324,6 @@ public class MyFragment extends BaseFragment {
         srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-//                page = 1;
-//                initDataFromInternet();
                 initDataFromInternet();
 
             }
@@ -385,4 +409,19 @@ public class MyFragment extends BaseFragment {
         super.onResume();
         initDataFromInternet();
     }
+
+    private boolean isWeixinAvilible(Context context) {
+        final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals("com.tencent.mm")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
