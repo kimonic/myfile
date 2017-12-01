@@ -140,6 +140,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/global_background_color"
+        app:srlEnableHeaderTranslationContent="false"
+
         >
     <ListView
         android:id="@+id/lv_act_integralrecode"
@@ -148,6 +150,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/color_white"
+
         />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

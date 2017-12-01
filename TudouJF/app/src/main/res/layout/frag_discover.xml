@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_frag_discover"
         android:layout_width="match_parent"
@@ -12,124 +12,145 @@
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/frag_discover_discover"
         app:leftImage="@drawable/xvector_back" />
-    <View
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_frag_discover"
+        style="@style/SmartRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:background="@color/global_background_color"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="105dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@color/color_white"
+        android:layout_height="match_parent"
         >
-        <LinearLayout
-            android:id="@+id/ll_frag_discover_bt1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1"
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants"
+
             >
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@null"
-                android:src="@drawable/frag_discover_luck"
-                />
-            <TextView
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/color_black"
-                android:gravity="center"
-                android:text="@string/frag_discover_xinyunchoujiang"
-                android:layout_marginTop="12dp"
+                android:orientation="vertical">
 
-                />
-        </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/global_background_color"
-            />
-        <LinearLayout
-            android:id="@+id/ll_frag_discover_bt2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@null"
-                android:src="@drawable/frag_discover_jifenshangcheng"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/color_black"
-                android:gravity="center"
-                android:text="@string/frag_discover_jifenshangcheng"
-                android:layout_marginTop="12dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:background="@color/global_background_color" />
 
-                />
-        </LinearLayout>
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@color/global_background_color"
-            />
-        <LinearLayout
-            android:id="@+id/ll_frag_discover_bt3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1"
-            >
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@null"
-                android:src="@drawable/frag_discover_haoliduihuan"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/color_black"
-                android:gravity="center"
-                android:text="@string/frag_discover_haoliduihuan"
-                android:layout_marginTop="12dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="105dp"
+                    android:background="@color/color_white"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                />
-        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_frag_discover_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="12dp"
-        android:background="@color/global_background_color"
-        />
-    <ListView
-        android:id="@+id/lv_frag_discover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="10dp"
-        android:divider="@color/global_background_color"
-        />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/global_background_color"
-        />
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_discover_luck" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_discover_xinyunchoujiang"
+                            android:textColor="@color/color_black"
+                            android:textSize="14sp"
+
+                            />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/global_background_color" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_frag_discover_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_discover_jifenshangcheng" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_discover_jifenshangcheng"
+                            android:textColor="@color/color_black"
+                            android:textSize="14sp"
+
+                            />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/global_background_color" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_frag_discover_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/frag_discover_haoliduihuan" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="@string/frag_discover_haoliduihuan"
+                            android:textColor="@color/color_black"
+                            android:textSize="14sp"
+
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="12dp"
+                    android:background="@color/global_background_color" />
+
+                <com.tudoujf.ui.MListView
+                    android:id="@+id/lv_frag_discover"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/global_background_color"
+                    android:dividerHeight="10dp" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>

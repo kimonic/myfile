@@ -3,6 +3,7 @@
     android:id="@+id/srl_frag_my"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SmartRefreshLayout"
     android:background="@color/global_background_color">
 
     <ScrollView

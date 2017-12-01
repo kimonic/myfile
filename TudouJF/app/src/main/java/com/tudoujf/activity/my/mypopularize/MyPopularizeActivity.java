@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.mypopularize;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -124,7 +125,7 @@ public class MyPopularizeActivity extends BaseActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(MyPopularizeActivity.this, R.string.huoquwodetuiguangxinxishibai);
+                        ToastUtils.showToast(MyPopularizeActivity.this, R.string.jisuanshibai);
 
                     }
                 });
@@ -138,7 +139,6 @@ public class MyPopularizeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyPopularize.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActMyPopularize.setLayoutParams(params);
@@ -159,7 +159,12 @@ public class MyPopularizeActivity extends BaseActivity {
         mtbActMyPopularize.getRightTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity(NowRecommendActivity.class);
+                Intent intent=new Intent(MyPopularizeActivity.this,NowRecommendActivity.class);
+                intent.putExtra("share_url",bean.getShare_url());
+                startActivity(intent);
+
+
+//                openActivity(NowRecommendActivity.class);
             }
         });
         llSucceedInvitation.setOnClickListener(this);

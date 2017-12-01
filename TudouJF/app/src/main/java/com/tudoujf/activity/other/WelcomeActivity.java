@@ -87,9 +87,11 @@ public class WelcomeActivity extends BaseActivity {
 
 
         //-------------------------------检查权限授予情况-------------------------------------------
-        list = new ArrayList<>();
-        list = PermissionUtils.checkAPPNeedPermission(this);
-        permissionGranted = list.size() > 0;
+        if (!isgudie){
+            list = new ArrayList<>();
+            list = PermissionUtils.checkAPPNeedPermission(this);
+            permissionGranted = list.size() > 0;
+        }
         //-------------------------------检查权限授予情况-------------------------------------------
 
         new Handler().postDelayed(new Runnable() {

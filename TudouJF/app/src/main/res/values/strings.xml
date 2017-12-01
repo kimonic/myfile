@@ -622,6 +622,7 @@
     <string name="gzhyfz">公众号已复制,您可直接打开微信粘贴搜索,完成关注</string>
     <string name="quzhantie">去粘贴</string>
     <string name="ninweianzhuangweixin">您未安装微信,请先安装!</string>
+    <string name="jisuanshibai">结算失败!</string>
 
 
 </resources>

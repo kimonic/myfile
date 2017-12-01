@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.DiscoverFragBean;
+import com.tudoujf.bean.databean.DiscoverBean;
+import com.tudoujf.utils.ImageGlideUtils;
 
 import java.util.List;
 
@@ -25,10 +27,10 @@ import java.util.List;
  * ===================================================
  */
 public class DiscoverFragLvAdapter extends BaseAdapter {
-    private List<DiscoverFragBean> list;
+    private List<DiscoverBean.ItemsBean> list;
     private Context context;
 
-    public DiscoverFragLvAdapter(List<DiscoverFragBean> list, Context context) {
+    public DiscoverFragLvAdapter(List<DiscoverBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -67,10 +69,11 @@ public class DiscoverFragLvAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getTime());
-        viewHolder.textView3.setText(list.get(position).getMark());
-        viewHolder.imageView.setImageResource(list.get(position).getResId());
+        viewHolder.textView1.setText(list.get(position).getName());
+        viewHolder.textView2.setText(list.get(position).getSort_index());
+        viewHolder.textView3.setText(list.get(position).getContents());
+        ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
+//        viewHolder.imageView.setImageResource(list.get(position).getResId());
 
 
 

@@ -38,7 +38,8 @@ public class MApp extends Application {
     private boolean isLogin = false;
 
     /**---------------------友盟平台配置-----------------------------------------------------------*/ {
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setWeixin("wx6f589e2246c21a8a", "782776a6b5e55c34ecc61ea18e310d02");
+//        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
     }

@@ -281,6 +281,11 @@ public class Constants {
      */
     public static final String FEEDBACK = URL + "/phone/articles/suggestion";
 
+ /**
+     * 意见反馈接口
+     */
+    public static final String DISCOVER = URL + "/phone/activity/view";
+
 
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------

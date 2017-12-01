@@ -36,10 +36,10 @@ public class PermissionUtils {
             "android.permission.INTERNET",
             "android.permission.READ_EXTERNAL_STORAGE",
             "android.permission.WRITE_EXTERNAL_STORAGE",
-            "android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
+//            "android.permission.MOUNT_UNMOUNT_FILESYSTEMS",
             "android.permission.READ_PHONE_STATE",
             "android.permission.ACCESS_NETWORK_STATE",
-            "android.permission.SYSTEM_ALERT_WINDOW",
+//            "android.permission.SYSTEM_ALERT_WINDOW",
             "android.permission.CALL_PHONE",
             "android.permission.CAMERA",
             "android.permission.ACCESS_FINE_LOCATION",
@@ -56,7 +56,6 @@ public class PermissionUtils {
             for (String permission : permissionName) {
                 if (context.checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                     Log.e("TAG", "checkAPPNeedPermission: -----"+permission);
-                    
                     permissionList.add(permission);
                 }
             }
