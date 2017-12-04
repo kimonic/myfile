@@ -12,6 +12,7 @@ import com.tudoujf.R;
 import com.tudoujf.bean.DiscoverFragBean;
 import com.tudoujf.bean.databean.DiscoverBean;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class DiscoverFragLvAdapter extends BaseAdapter {
         }
 
         viewHolder.textView1.setText(list.get(position).getName());
-        viewHolder.textView2.setText(list.get(position).getSort_index());
+        viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getAddTime()));
         viewHolder.textView3.setText(list.get(position).getContents());
         ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
 //        viewHolder.imageView.setImageResource(list.get(position).getResId());

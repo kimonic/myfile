@@ -77,7 +77,7 @@ public class BitmapUtils {
         inBitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
 
 
-        // TODO: 2017/9/14 将图片数据baos保存到本地
+        //  将图片数据baos保存到本地
 
         Log.e("TAG", "getFixation: ----------baos.toByteArray()-22----------" + baos.toByteArray().length);
 
@@ -177,7 +177,6 @@ public class BitmapUtils {
 //            bitmap.recycle();
 //            bitmap = null;
 //        } catch (IOException e) {
-//            // TODO Auto-generated catch block
 //            e.printStackTrace();
 //        }
 //    }

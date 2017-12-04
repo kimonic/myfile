@@ -297,7 +297,7 @@ public class DialogUtils {
         tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/8/1 开通资金托管逻辑
+//                  2017/8/1 开通资金托管逻辑
                 Intent intent=new Intent(context, RealNameAuthenticationHuiFuActivity.class);
                 context.startActivity(intent);
                 pop.dismiss();
@@ -346,13 +346,13 @@ public class DialogUtils {
         if (window != null) {
             window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             window.setContentView(view);
-//            WindowManager.LayoutParams lp = window.getAttributes();
-////            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
-//            int wh = 90 * ScreenSizeUtils.getDensity(context);
-//            lp.width = wh;
-//            lp.height = wh;
-//            lp.gravity = Gravity.CENTER;
-//            window.setAttributes(lp);
+            WindowManager.LayoutParams lp = window.getAttributes();
+//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
+            int wh = 90 * ScreenSizeUtils.getDensity(context);
+            lp.width = wh;
+            lp.height = wh;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
         }
         return dialog;
     }

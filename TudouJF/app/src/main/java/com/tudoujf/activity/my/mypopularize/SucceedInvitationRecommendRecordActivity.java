@@ -97,10 +97,7 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
                             end_time = endTime;
                             page = 1;
                             selFlag = true;
-//                            list.clear();
                             initDataFromInternet();
-                            // TODO: 2017/9/4  请求网络筛选展示数据
-//                            ToastUtils.showToast(SucceedInvitationRecommendRecordActivity.this, startTime + "-----------" + endTime);
                         }
                     });
                 }
@@ -224,7 +221,7 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
         if (bean != null && bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
-            tvActRecommendrecord.setText(("总计(元):"+StringUtils.getCommaDecimalsStr(bean.getAward())));
+            tvActRecommendrecord.setText(("总计(元):" + StringUtils.getCommaDecimalsStr(bean.getAward())));
             if (selFlag) {
                 list.clear();
                 selFlag = false;

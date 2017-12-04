@@ -1,9 +1,11 @@
 package com.tudoujf.utils.utils;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
@@ -68,16 +70,12 @@ public class BitmapUtils {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         inBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-
-        Log.e("TAG", "getFixation: ----------baos.toByteArray()-11----------" + baos.toByteArray().length);
-
-
         int options = 100*100 * 1024 / (baos.toByteArray().length);//将图片压缩到100kb的压缩比
         baos.reset();
         inBitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
 
 
-        // TODO: 2017/9/14 将图片数据baos保存到本地
+        // 将图片数据baos保存到本地
 
         Log.e("TAG", "getFixation: ----------baos.toByteArray()-22----------" + baos.toByteArray().length);
 
@@ -105,6 +103,22 @@ public class BitmapUtils {
         newOpts.inSampleSize = 1;
         newOpts.inPreferredConfig = Config.RGB_565;
         return BitmapFactory.decodeFile(imgPath, newOpts);
+    }
+
+    /**
+     * 获取bitmap的大小
+     * @param bitmap
+     * @return
+     */
+    @SuppressLint("ObsoleteSdkInt")
+    public static int getBitmapSize(Bitmap bitmap){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){    //API 19
+            return bitmap.getAllocationByteCount();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1){//API 12
+            return bitmap.getByteCount();
+        }
+        return bitmap.getRowBytes() * bitmap.getHeight();                //earlier version
     }
 
 //
@@ -177,7 +191,6 @@ public class BitmapUtils {
 //            bitmap.recycle();
 //            bitmap = null;
 //        } catch (IOException e) {
-//            // TODO Auto-generated catch block
 //            e.printStackTrace();
 //        }
 //    }

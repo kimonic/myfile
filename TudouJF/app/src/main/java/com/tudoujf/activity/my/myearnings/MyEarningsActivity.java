@@ -57,18 +57,14 @@ public class MyEarningsActivity extends BaseActivity {
     TextView tvTotal;
 
 
-    private List<UnderlineTextView>  list;
-    private List<Fragment>  listFrag;
+    private List<UnderlineTextView> list;
+    private List<Fragment> listFrag;
 
 
     private DateFilterDialog dateFilterDialog;
 
 
-    private  int  position=0;
-
-
-
-
+    private int position = 0;
 
 
     @Override
@@ -82,23 +78,23 @@ public class MyEarningsActivity extends BaseActivity {
             case R.id.utv_act_myearnings_daishoulixi:
                 vpActMyEarnings.setCurrentItem(0);
                 setButStyle(0);
-                position=0;
-                tvTotal.setText(((DueInInterestFragment)(listFrag.get(0))).getTotal());
+                position = 0;
+                tvTotal.setText(((DueInInterestFragment) (listFrag.get(0))).getTotal());
                 break;
             case R.id.utv_act_myearnings_yishoulixi:
                 vpActMyEarnings.setCurrentItem(1);
                 setButStyle(1);
-                position=1;
-                tvTotal.setText(((DueInInterestFragment)(listFrag.get(1))).getTotal());
+                position = 1;
+                tvTotal.setText(((DueInInterestFragment) (listFrag.get(1))).getTotal());
                 break;
             case R.id.utv_act_myearnings_huodongshouyi:
                 vpActMyEarnings.setCurrentItem(2);
                 setButStyle(2);
-                position=2;
-                tvTotal.setText(((DueInInterestFragment)(listFrag.get(2))).getTotal());
+                position = 2;
+                tvTotal.setText(((DueInInterestFragment) (listFrag.get(2))).getTotal());
                 break;
             case R.id.tv_act_myearnings_bac:
-               closeActivity();
+                closeActivity();
                 break;
             case R.id.ll_act_myearnings_filtrate:
                 if (dateFilterDialog == null) {
@@ -107,28 +103,23 @@ public class MyEarningsActivity extends BaseActivity {
                         @Override
                         public void dismiss(String startTime, String endTime) {
 
-                            ((DueInInterestFragment)(listFrag.get(position))).setStart_time(startTime,endTime);
-                            // TODO: 2017/9/4  请求网络筛选展示数据
+                            ((DueInInterestFragment) (listFrag.get(position))).setStart_time(startTime, endTime);
                             ToastUtils.showToast(MyEarningsActivity.this, startTime + "-----------" + endTime);
                         }
                     });
                 }
                 dateFilterDialog.show();
-
-
-                // TODO: 2017/8/21 根据选择的时间进行条件查询展示
-
                 break;
         }
 
     }
 
-    private void setButStyle(int position){
+    private void setButStyle(int position) {
         for (int i = 0; i < list.size(); i++) {
-            if (i==position){
+            if (i == position) {
                 list.get(i).setUnderlinecolor(R.color.global_theme_background_color);
                 list.get(i).setTextColor(getResources().getColor(R.color.global_theme_background_color));
-            }else {
+            } else {
                 list.get(i).setUnderlinecolor(R.color.color_white);
                 list.get(i).setTextColor(getResources().getColor(R.color.color_black));
             }
@@ -138,20 +129,20 @@ public class MyEarningsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        listFrag=new ArrayList<>();
-        DueInInterestFragment  fragment1=new DueInInterestFragment();
-        Bundle bundle1=new Bundle();
-        bundle1.putInt("type",1);
+        listFrag = new ArrayList<>();
+        DueInInterestFragment fragment1 = new DueInInterestFragment();
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("type", 1);
         fragment1.setArguments(bundle1);
 
-        DueInInterestFragment  fragment2=new DueInInterestFragment();
-        Bundle bundle2=new Bundle();
-        bundle2.putInt("type",2);
+        DueInInterestFragment fragment2 = new DueInInterestFragment();
+        Bundle bundle2 = new Bundle();
+        bundle2.putInt("type", 2);
         fragment2.setArguments(bundle2);
 
-        DueInInterestFragment  fragment3=new DueInInterestFragment();
-        Bundle bundle3=new Bundle();
-        bundle3.putInt("type",3);
+        DueInInterestFragment fragment3 = new DueInInterestFragment();
+        Bundle bundle3 = new Bundle();
+        bundle3.putInt("type", 3);
         fragment3.setArguments(bundle3);
 
         listFrag.add(fragment1);
@@ -164,13 +155,12 @@ public class MyEarningsActivity extends BaseActivity {
     public void initView() {
 
 
-
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add(utvDaiShouLiXi);
         list.add(utvYiShouLiXi);
         list.add(utvHuoDongShouYi);
 
-        HomeFragVPAdapter  adapter=new HomeFragVPAdapter(getSupportFragmentManager(),listFrag);
+        HomeFragVPAdapter adapter = new HomeFragVPAdapter(getSupportFragmentManager(), listFrag);
         vpActMyEarnings.setAdapter(adapter);
         vpActMyEarnings.setOffscreenPageLimit(3);
 
@@ -191,16 +181,12 @@ public class MyEarningsActivity extends BaseActivity {
         tvBac.setOnClickListener(this);
         llFiltrate.setOnClickListener(this);
 
-        vpActMyEarnings.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+        vpActMyEarnings.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 setButStyle(position);
             }
         });
-
-
-
-
 
 
     }
@@ -216,7 +202,6 @@ public class MyEarningsActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected int setStatusBarColor() {
         return getResources().getColor(R.color.global_theme_background_color);
@@ -228,7 +213,7 @@ public class MyEarningsActivity extends BaseActivity {
     }
 
 
-    public void setTotal(String total){
+    public void setTotal(String total) {
         tvTotal.setText(total);
     }
 }

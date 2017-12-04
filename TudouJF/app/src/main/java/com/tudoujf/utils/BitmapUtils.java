@@ -12,12 +12,14 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
@@ -92,11 +94,6 @@ public class BitmapUtils {
         baos.reset();
         inBitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
 
-
-        // TODO: 2017/9/14 将图片数据baos保存到本地
-
-        Log.e("TAG", "getFixation: ----------baos.toByteArray()-22----------" + baos.toByteArray().length);
-
         outBitmap = BitmapFactory.decodeByteArray(baos.toByteArray(), 0, baos.toByteArray().length);
 
 
@@ -121,6 +118,17 @@ public class BitmapUtils {
         newOpts.inSampleSize = 1;
         newOpts.inPreferredConfig = Config.RGB_565;
         return BitmapFactory.decodeFile(imgPath, newOpts);
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    public static int getBitmapSize(Bitmap bitmap){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){    //API 19
+            return bitmap.getAllocationByteCount();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1){//API 12
+            return bitmap.getByteCount();
+        }
+        return bitmap.getRowBytes() * bitmap.getHeight();                //earlier version
     }
 
 //
@@ -193,7 +201,6 @@ public class BitmapUtils {
 //            bitmap.recycle();
 //            bitmap = null;
 //        } catch (IOException e) {
-//            // TODO Auto-generated catch block
 //            e.printStackTrace();
 //        }
 //    }

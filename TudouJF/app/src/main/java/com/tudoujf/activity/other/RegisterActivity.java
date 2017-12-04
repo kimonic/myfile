@@ -368,8 +368,6 @@ public class RegisterActivity extends BaseActivity {
         gson.disableHtmlEscaping();
         gson.serializeNulls();
         return gson.create().toJson(obj);
-        // TODO: 2017/8/14 无用待删除
-
     }
 
     /**
@@ -387,7 +385,7 @@ public class RegisterActivity extends BaseActivity {
                 @Override
                 public void onSuccess(Response<String> response) {
                     Log.e(TAG, "onSuccess:---------注册账号返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
-                    // TODO: 2017/8/14  调用登陆接口进行登陆,注册成功保存login_token,跳转设置手势密码页面
+                    // 调用登陆接口进行登陆,注册成功保存login_token,跳转设置手势密码页面
                     try {
                         JSONObject json = new JSONObject(StringUtils.getDecodeString(response.body()));
                         if (json.getString("code").equals("200")) {

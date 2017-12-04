@@ -283,7 +283,7 @@ public class MyFragment extends BaseFragment {
 
                         ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                         if (cm != null) {
-                            cm.setText("豆小妹");
+                            cm.setText(bean.getWeChatID());
                             DialogUtils.showDialog(getActivity(), R.string.gzhyfz, R.string.quzhantie, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

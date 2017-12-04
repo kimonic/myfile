@@ -89,7 +89,7 @@ public class SignInService extends Service {
             @Override
             public void onClick(View v) {
                 SignInService.this.stopSelf();
-                // TODO: 2017/7/31 此处控制悬浮窗接下来的行为
+                // 此处控制悬浮窗接下来的行为
             }
         });
 

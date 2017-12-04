@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -28,7 +27,6 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.ui.CalendarDialog;
 import com.tudoujf.ui.CalendarDialogScroll;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
@@ -153,10 +151,8 @@ public class IntegralRecodeActivity extends BaseActivity {
                 }
                 page=1;
                 initDataFromInternet();
-                Log.e(TAG, "onClick:-----------true,第一个日期较大---------------- "+TimeUtils.compareDate(date1,date2) );
                 timeSelDialog.dismiss();
 
-                // TODO: 2017/8/21 根据选择的时间进行条件查询展示
 
                 break;
             case R.id.tv_act_integralrecode_integralrecode:

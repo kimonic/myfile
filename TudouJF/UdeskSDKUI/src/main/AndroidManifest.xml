@@ -40,7 +40,9 @@
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Udesk_Theme" />
+            android:theme="@style/Udesk_Theme"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name="cn.udesk.activity.UdeskZoomImageActivty"
             android:configChanges="screenSize|orientation|keyboardHidden"

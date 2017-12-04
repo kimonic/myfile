@@ -106,13 +106,11 @@ public class LockActivity extends BaseActivity {
 //                intent.putExtra("logintoken", UserConfig.getInstance().getLoginToken(this));
 //
 //
-//                // TODO: 2017/7/12 忘记密码操作
 //                openActivity(FindPasswordActivity.class);
                 openActivity(LoginActivity.class);
 
                 break;
             case R.id.tv_act_lock_other://使用其他账号登陆
-                // TODO: 2017/7/12   使用其他账号登陆
                 openActivity(LoginActivity.class);
                 break;
         }

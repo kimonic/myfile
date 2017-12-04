@@ -51,7 +51,6 @@ public class FanXianQuanSelActivity extends BaseActivity {
         if (bundle!=null){
             type=bundle.getInt("type",2);
         }
-        // TODO: 2017/7/26   获取传输过来的数据,来确定要展示的标题和展示的图片,内容
     }
 
     @Override

@@ -125,6 +125,7 @@ public class FeedbackActivity extends BaseActivity {
                         if (bean != null){
                             if ("200".equals(bean.getCode())) {
                                 ToastUtils.showToast(FeedbackActivity.this, R.string.fankuiyijiantijiaochenggong);
+                                closeActivity();
                             } else {
                                 ToastUtils.showToast(FeedbackActivity.this, bean.getDescription().toString());
                             }

@@ -168,7 +168,6 @@ public class SystemMessageFragment extends BaseFragment {
                             String result = StringUtils.getDecodeString(response.body());
                             CommonBean bean=gson.fromJson(result, CommonBean.class);
                             if (bean!=null&&bean.getCode().equals("200")){
-                                // TODO: 2017/8/18 从接口获取未读消息数量
                                 try {
                                     JSONObject json=new JSONObject(bean.getData().toString());
                                     ((MyMessageActivity)getActivity()).unreadMessageCount(json.getInt("message_count"));
@@ -292,7 +291,6 @@ public class SystemMessageFragment extends BaseFragment {
     }
 
     private void openDetailsActivity(){
-        // TODO: 2017/8/17 传入打开详情时需要传入的参数
         Bundle bundle = new Bundle();
         bundle.putString("title", list.get(positionInner).getTitle());
         bundle.putString("content", list.get(positionInner).getContents());

@@ -72,7 +72,6 @@ public class MyIntentService extends IntentService {
      在子线程中处理相应action的任务
      */
     private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -80,7 +79,6 @@ public class MyIntentService extends IntentService {
      在子线程中处理相应action的任务
      */
     private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

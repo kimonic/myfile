@@ -102,7 +102,6 @@ public class DueInInterestFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
-        // TODO: 2017/8/30   此处获得该fragment的类型进行相关逻辑处理
         list = new ArrayList<>();
 //        for (int i = 0; i < 50; i++) {
 //            DueInInterestFragBean bean = new DueInInterestFragBean();

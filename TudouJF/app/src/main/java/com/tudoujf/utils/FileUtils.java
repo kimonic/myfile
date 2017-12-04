@@ -210,8 +210,9 @@ public class FileUtils {
                 }
                 if((inC.size()-inC.position())<length){
                     length=(int)(inC.size()-inC.position());
-                }else
+                }else{
                     length=2097152;
+                }
                 b=ByteBuffer.allocateDirect(length);
                 inC.read(b);
                 b.flip();

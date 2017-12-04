@@ -19,12 +19,13 @@ import java.util.List;
 
 public class DiscoverBean implements BaseBean {
 
+
     /**
      * page : 1
      * epage : 20
-     * total_items : 1
+     * total_items : 2
      * total_pages : 1
-     * items : [{"id":9,"image":"http://imgview.test.tudoujf.com/shop/activity/20171201/1ca7bce3f3aa68ff766b7be472d995b6.jpg","forever_status":1,"contents":"<p style=\"text-align: center;\"><strong>hhhhhhh<\/strong><\/p><p style=\"text-align: left;\"><em>额喂喂喂个人体会有人提问而其他前额发个给我更多广告的规定发放过好几天雨同一天通融通融<\/em><\/p>","sort_index":1,"name":"tgggggg"}]
+     * items : [{"id":10,"name":"te","summary":null,"sortIndex":"0","foreverStatus":"-1","category":null,"status":null,"startTime":"1512057600","endTime":"1515081600","image":"http://imgview.test.tudoujf.com/shop/activity/20171201/f23d89857148395b22c14d8fa7d8d9cc.jpg","jumpurl":"http://www.baidu.com","contents":null,"addTime":null,"ranking":null},{"id":9,"name":"tgggggg","summary":null,"sortIndex":"1","foreverStatus":"1","category":null,"status":null,"startTime":null,"endTime":null,"image":"http://imgview.test.tudoujf.com/shop/activity/20171201/1ca7bce3f3aa68ff766b7be472d995b6.jpg","jumpurl":"http://mp.weixin.qq.com/s/G7X2Rud9MHiUajLCvxNuYA","contents":"<p style=\"text-align: center;\"><strong>hhhhhhh<\/strong><\/p><p style=\"text-align: left;\"><em>额喂喂喂个人体会有人提问而其他前额发个给我更多广告的规定发放过好几天雨同一天通融通融<\/em><\/p>","addTime":null,"ranking":null}]
      * params : null
      */
 
@@ -85,20 +86,36 @@ public class DiscoverBean implements BaseBean {
 
     public static class ItemsBean {
         /**
-         * id : 9
-         * image : http://imgview.test.tudoujf.com/shop/activity/20171201/1ca7bce3f3aa68ff766b7be472d995b6.jpg
-         * forever_status : 1
-         * contents : <p style="text-align: center;"><strong>hhhhhhh</strong></p><p style="text-align: left;"><em>额喂喂喂个人体会有人提问而其他前额发个给我更多广告的规定发放过好几天雨同一天通融通融</em></p>
-         * sort_index : 1
-         * name : tgggggg
+         * id : 10
+         * name : te
+         * summary : null
+         * sortIndex : 0
+         * foreverStatus : -1
+         * category : null
+         * status : null
+         * startTime : 1512057600
+         * endTime : 1515081600
+         * image : http://imgview.test.tudoujf.com/shop/activity/20171201/f23d89857148395b22c14d8fa7d8d9cc.jpg
+         * jumpurl : http://www.baidu.com
+         * contents : null
+         * addTime : null
+         * ranking : null
          */
 
         private String id;
-        private String image;
-        private String forever_status;
-        private String contents;
-        private String sort_index;
         private String name;
+        private String summary;
+        private String sortIndex;
+        private String foreverStatus;
+        private String category;
+        private String status;
+        private String startTime;
+        private String endTime;
+        private String image;
+        private String jumpurl;
+        private String contents;
+        private String addTime;
+        private String ranking;
 
         public String getId() {
             return id;
@@ -106,6 +123,70 @@ public class DiscoverBean implements BaseBean {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSummary() {
+            return summary;
+        }
+
+        public void setSummary(String summary) {
+            this.summary = summary;
+        }
+
+        public String getSortIndex() {
+            return sortIndex;
+        }
+
+        public void setSortIndex(String sortIndex) {
+            this.sortIndex = sortIndex;
+        }
+
+        public String getForeverStatus() {
+            return foreverStatus;
+        }
+
+        public void setForeverStatus(String foreverStatus) {
+            this.foreverStatus = foreverStatus;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(String startTime) {
+            this.startTime = startTime;
+        }
+
+        public String getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(String endTime) {
+            this.endTime = endTime;
         }
 
         public String getImage() {
@@ -116,12 +197,12 @@ public class DiscoverBean implements BaseBean {
             this.image = image;
         }
 
-        public String getForever_status() {
-            return forever_status;
+        public String getJumpurl() {
+            return jumpurl;
         }
 
-        public void setForever_status(String forever_status) {
-            this.forever_status = forever_status;
+        public void setJumpurl(String jumpurl) {
+            this.jumpurl = jumpurl;
         }
 
         public String getContents() {
@@ -132,20 +213,20 @@ public class DiscoverBean implements BaseBean {
             this.contents = contents;
         }
 
-        public String getSort_index() {
-            return sort_index;
+        public String getAddTime() {
+            return addTime;
         }
 
-        public void setSort_index(String sort_index) {
-            this.sort_index = sort_index;
+        public void setAddTime(String addTime) {
+            this.addTime = addTime;
         }
 
-        public String getName() {
-            return name;
+        public String getRanking() {
+            return ranking;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setRanking(String ranking) {
+            this.ranking = ranking;
         }
     }
 }

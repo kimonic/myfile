@@ -45,6 +45,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.GlideImageLoaderUtils;
@@ -162,7 +163,9 @@ public class MyAccountActivity extends BaseActivity {
                 openActivity(BindEmailActivity.class);
                 break;
             case R.id.ll_act_myaccount_name://实名认证
-                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                if (!"1".equals(bean.getIs_trust())) {
+                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                }
                 break;
             case R.id.ll_act_myaccount_login://登陆密码
                 openActivity(ChangePasswordActivity.class);
@@ -192,7 +195,6 @@ public class MyAccountActivity extends BaseActivity {
             case R.id.act_myaccount_paishe://拍照
                 dialog.dismiss();
                 // TODO: 2017/9/14 此处权限申请需真机测试,不同机型对应不同的处理方案
-
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED && requestCount == 0) {
                     requestCount++;
@@ -200,7 +202,6 @@ public class MyAccountActivity extends BaseActivity {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
                 } else if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED && requestCount != 0) {
-
                     requestCount++;
                     ToastUtils.showToast(this, "需要相机使用权限,否则无法使用此功能,请在应用权限设置中进行授权!");
 
@@ -339,10 +340,8 @@ public class MyAccountActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         ToastUtils.showToast(MyAccountActivity.this, R.string.huoquzhanghuxinxishibai);
-
                     }
                 });
-
     }
 
     @Override
@@ -356,9 +355,6 @@ public class MyAccountActivity extends BaseActivity {
             } else {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
             }
-
-
-
 
 
             UserConfig.getInstance().setBindPhone(bean.getPhone());
@@ -379,11 +375,15 @@ public class MyAccountActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && data != null) {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
+
             if (photo != null) {
-                ivIcon.setImageBitmap(photo);
-                String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, Environment.getExternalStorageDirectory()+"/temp");
-                postImage(imPath);
-                // TODO: 2017/9/11 将拍照图片设置为头像并上传服务器,无裁剪----------------------------------
+                if (BitmapUtils.getBitmapSize(photo) > 2091752) {
+                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
+                } else {
+                    ivIcon.setImageBitmap(photo);
+                    String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, Environment.getExternalStorageDirectory() + "/temp");
+                    postImage(imPath);
+                }
             } else {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
@@ -391,8 +391,11 @@ public class MyAccountActivity extends BaseActivity {
 
             ArrayList<ImageItem> imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
             if (imageItems != null && imageItems.size() > 0) {
-                postImage(imageItems.get(0).path);
-                // TODO: 2017/11/9 是否将头像文件保存到本地???
+                if (imageItems.get(0).size < 2091752) {
+                    postImage(imageItems.get(0).path);
+                } else {
+                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
+                }
             } else {
                 ToastUtils.showToast(MyAccountActivity.this, R.string.meiyouxuanzhongtupian);
             }
@@ -403,10 +406,10 @@ public class MyAccountActivity extends BaseActivity {
                 isOpen = true;
             }
 
-        } else if (requestCode == 222 && data!=null&&data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
+        } else if (requestCode == 222 && data != null && data.getBooleanExtra("result", false)) {//关闭手势密码是否成功
             tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
             isOpen = false;
-        }else if (requestCode==222){
+        } else if (requestCode == 222) {
             openActivity(HomeActivity.class);
         }
 
@@ -530,28 +533,26 @@ public class MyAccountActivity extends BaseActivity {
 
 
 /**
-
- -------------------------------------------------------------------------------------------------
- onActivityResult（）方法中获取数据
- -------------------------------------------------------------------------------------------------
- /相机的请求编码
- case CAMERA_REQUEST_CODE:
- isCamera =true;
- startPhotoZoom(Uri.fromFile(new File(cameraPath)));
- break;
- //相机、相册的图片再 剪辑完 在这地方上传
- case RESULT_REQUEST_CODE:
- if (isCamera){
- upLoadPictrue(new File(cameraPath));
- } else {
- String path = null;
- if (android.os.Build.VERSION_CODES.KITKAT >= 19) {
- path = new GetPicPath().getPath_above19(getActivity(), uri1);
- }else {
- path = getFilePath_below19(uri1);
- }
- upLoadPictrue(new File(path));
- }
- break;
-
+ * -------------------------------------------------------------------------------------------------
+ * onActivityResult（）方法中获取数据
+ * -------------------------------------------------------------------------------------------------
+ * /相机的请求编码
+ * case CAMERA_REQUEST_CODE:
+ * isCamera =true;
+ * startPhotoZoom(Uri.fromFile(new File(cameraPath)));
+ * break;
+ * //相机、相册的图片再 剪辑完 在这地方上传
+ * case RESULT_REQUEST_CODE:
+ * if (isCamera){
+ * upLoadPictrue(new File(cameraPath));
+ * } else {
+ * String path = null;
+ * if (android.os.Build.VERSION_CODES.KITKAT >= 19) {
+ * path = new GetPicPath().getPath_above19(getActivity(), uri1);
+ * }else {
+ * path = getFilePath_below19(uri1);
+ * }
+ * upLoadPictrue(new File(path));
+ * }
+ * break;
  */

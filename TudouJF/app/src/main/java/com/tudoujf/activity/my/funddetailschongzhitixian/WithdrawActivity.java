@@ -147,7 +147,7 @@ public class WithdrawActivity extends BaseActivity {
         etJinE.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
-                // TODO: 2017/9/7 当前提现金额大于余额时
+                // 当前提现金额大于余额时
 //                tvActWithdrawHint.setText("账号余额不足");
                 float input = StringUtils.string2Float(editable.toString());
                 float fAmount = StringUtils.string2Float(amount);

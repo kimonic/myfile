@@ -1,7 +1,6 @@
 package com.tudoujf.ui;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -124,7 +123,7 @@ public class DateFilterDialog implements View.OnClickListener {
 
                 String date1 = startTime.getText().toString();
                 String date2 = endTime.getText().toString();
-                String temp ;
+                String temp;
                 if (TimeUtils.compareDate(date1, date2)) {
                     temp = date1;
                     date1 = date2;
@@ -134,9 +133,6 @@ public class DateFilterDialog implements View.OnClickListener {
                     lisenter.dismiss(date1, date2);
                 }
                 timeSelDialog.dismiss();
-
-                // TODO: 2017/8/21 根据选择的时间进行条件查询展示
-
                 break;
         }
     }

@@ -92,10 +92,6 @@ public class MyProjectActivity extends BaseActivity {
                     });
                 }
                 dateFilterDialog.show();
-
-
-                // TODO: 2017/8/21 根据选择的时间进行条件查询展示
-
                 break;
         }
     }

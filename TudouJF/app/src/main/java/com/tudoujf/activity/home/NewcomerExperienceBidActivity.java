@@ -83,7 +83,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        // TODO: 2017/8/24  需要获取的参数---login_token--12267,loan_id--153,page默认1
 
 
         list = new ArrayList<>();

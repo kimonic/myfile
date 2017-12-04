@@ -5,14 +5,12 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -21,7 +19,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -32,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -58,6 +56,7 @@ import java.util.List;
 
 import cn.udesk.PreferenceHelper;
 import cn.udesk.R;
+import cn.udesk.ScreenUtil;
 import cn.udesk.UdeskConst;
 import cn.udesk.UdeskSDKManager;
 import cn.udesk.UdeskUtil;
@@ -164,6 +163,12 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
     private boolean isWait = false;
     private boolean isfirstWaitTips = true;
     private boolean isDestroyed = false;
+
+
+    //-------------------------自行添加-------------------------------------------------------------
+    private LinearLayout udeskRoot;
+    private  int  count1=0,count2=0;
+    //-------------------------自行添加-------------------------------------------------------------
 
     public static class MessageWhat {
         public static final int loadHistoryDBMsg = 1;
@@ -524,6 +529,47 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
             initIntent();
             settingTitlebar();
             initView();
+            //------------------------自行添加------------------------------------------------------
+            udeskRoot = (LinearLayout) findViewById(R.id.udesk_im_content);
+//            udeskRoot.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                @Override
+//                public void onGlobalLayout() {
+//                    int heightDiff = udeskRoot.getRootView().getHeight() - udeskRoot.getHeight();
+//                    Log.e("TAG", "onGlobalLayout: --heightDiff---"+heightDiff);
+//                    if (heightDiff > 100) { //高度变小100像素则认为键盘弹出
+//                        //这里执行需要的处理
+//                    }
+//                }
+//            });
+            ScreenUtil screenUtil = new ScreenUtil(this);
+            screenUtil.observeInputlayout(udeskRoot, new ScreenUtil.OnInputActionListener() {
+                @Override
+                public void onOpen(int inputHeight) {
+                    if (count1==0){
+                        count1++;
+                        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) udeskImContainer.getLayoutParams();
+                        params.setMargins(params.getMarginStart(), params.topMargin, params.getMarginEnd(), inputHeight);
+                        udeskImContainer.setLayoutParams(params);
+                        count2=0;
+                    }
+
+
+                }
+
+                @Override
+                public void onClose() {
+                    if (count2==0){
+                        count2++;
+                        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) udeskImContainer.getLayoutParams();
+                        params.setMargins(params.getMarginStart(), params.topMargin, params.getMarginEnd(), params.topMargin);
+                        udeskImContainer.setLayoutParams(params);
+                        count1=0;
+                    }
+
+
+                }
+            });
+            //------------------------自行添加------------------------------------------------------
             //进入会话界面 关闭推送
             if (!TextUtils.isEmpty(UdeskSDKManager.getInstance().getRegisterId(UdeskChatActivity.this)) && UdeskConfig.isUserSDkPush) {
                 UdeskSDKManager.getInstance().setSdkPushStatus(UdeskSDKManager.getInstance().getDomain(this),
@@ -628,12 +674,14 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
     //------------------------------------自行添加------------------------------------------------------
     //------------------------------------自行添加------------------------------------------------------
     //------------------------------------自行添加------------------------------------------------------
+
     /**
      * 获取状态栏的高度px值
-     * @param context  上下文
-     * @return    状态栏高度--单位px
+     *
+     * @param context 上下文
+     * @return 状态栏高度--单位px
      */
-    public static int getStatusHeight(Context context){
+    public static int getStatusHeight(Context context) {
         int statusBarHeight = -1;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {

@@ -70,6 +70,7 @@ public class ClaimsBidView extends View {
      * 按钮文本显示判断
      */
     private String status = "";
+    private Paint topLinePaint;
 
     public void setStatus(String status) {
         this.status = status;
@@ -189,6 +190,13 @@ public class ClaimsBidView extends View {
         whitePaint.setStyle(Paint.Style.FILL);
 
 
+        topLinePaint = new Paint();
+        topLinePaint.setAntiAlias(true);
+        topLinePaint.setColor(Color.parseColor("#D6D6D6"));
+        topLinePaint.setStyle(Paint.Style.FILL);
+        topLinePaint.setStrokeWidth(3);
+
+
     }
 
     /**
@@ -223,26 +231,44 @@ public class ClaimsBidView extends View {
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
+        int heigt=getHeight();
+
+        //---------------------------------上下边线---------------------------------------------------------
+        canvas.drawLine(0, 0, width, 0, topLinePaint);
+        canvas.drawLine(0, heigt, width, heigt, topLinePaint);
+        //---------------------------------上下边线---------------------------------------------------------
+
 
         //-----------------------标题--房产抵押贷款20170327003--------------------------------------
-        float text1X = width * 0.03809f;
-        float text1Y = width * 0.06666f;
-        blackPaint.setTextSize(width * 0.03809f);
+//        float text1X = width * 0.03809f;
+//        float text1Y = width * 0.06666f;
+//        blackPaint.setTextSize(width * 0.03809f);
+//        canvas.drawText(title, text1X, text1Y, blackPaint);
+
+        float text1X = width * 0.03148f;
+        float text1Y = width * 0.071296f;
+        blackPaint.setTextSize(width * 0.037037f);
         canvas.drawText(title, text1X, text1Y, blackPaint);
         //------------------------------------------------------------------------------------------
 
         //-----------------------转让期数:7/12------------------------------------------------------
-        float text2X = width * 0.6666f;
-        float text2Y = width * 0.06666f;
-        cyanPaint.setTextSize(width * 0.03809f);
+//        float text2X = width * 0.6666f;
+//        float text2Y = width * 0.06666f;
+//        cyanPaint.setTextSize(width * 0.03809f);
+//        canvas.drawText(transfer, text2X, text2Y, cyanPaint);
+
+        float text2X = width * 0.6759f;
+        float text2Y = width * 0.075925f;
+        cyanPaint.setTextSize(width * 0.046296f);
         canvas.drawText(transfer, text2X, text2Y, cyanPaint);
         //------------------------------------------------------------------------------------------
 
         //----------------------------标题下直线----------------------------------------------------
         float line1X = width * 0.03809f;
         float line2X = width * 0.9619f;
-        float lineY = width * 0.09523f;
-        grayLinePaint.setStrokeWidth(2);
+//        float lineY = width * 0.09523f;
+        float lineY = width * 0.093518f;
+        grayLinePaint.setStrokeWidth(3);
         canvas.drawLine(line1X, lineY, line2X, lineY, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
@@ -252,6 +278,7 @@ public class ClaimsBidView extends View {
         float text3Y = width * 0.1809f;
         orangePaint.setTextSize(width * 0.05714f);
         canvas.drawText(zhaiQuanJiaZhi, text3X, text3Y, orangePaint);
+
         //------------------------------------------------------------------------------------------
 
 

@@ -24,10 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/act_redpackage_danbitouzi"
                 android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_redpackage_tv2"
@@ -37,7 +37,7 @@
                 android:layout_marginStart="10dp"
                 android:text="@string/act_redpackage_touziyueshu"
                 android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_redpackage_tv3"
@@ -49,13 +49,13 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/act_redpackage_hongbaodaxiao"
                 android:textColor="@color/color_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_redpackage_tv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/act_redpackage_zhuangtai"

@@ -213,7 +213,7 @@ public class LoginActivity extends BaseActivity {
                     }
                     closeActivity();
                 }
-//                     TODO: 2017/8/8 做对应返回错误码的处理
+//                   做对应返回错误码的处理
             }
 
             @Override

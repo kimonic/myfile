@@ -74,12 +74,12 @@ public class RedPackageActLvAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText("单笔投资满" + list.get(position).getTender_amount_min() + "元、最低");
-        viewHolder.textView2.setText("投资" + list.get(position).getTime_limit() + "个月可使用");
+        viewHolder.textView1.setText(("单笔投资满" + list.get(position).getTender_amount_min() + "元、最低"));
+        viewHolder.textView2.setText(("投资" + list.get(position).getTime_limit() + "个月可使用"));
         viewHolder.textView3.setText((list.get(position).getAmount() + "元   "));
         viewHolder.textView4.setText(context.getResources().getString(R.string.keshiyong));
         viewHolder.redView.setOneText(list.get(position).getAmount());
-        viewHolder.redView.setFourText(StringUtils.getStrTimeBias(list.get(position).getEnd_time()));
+        viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
 
 
         if (type == 1) {//红包界面

@@ -63,7 +63,11 @@
             android:gravity="center_vertical|end"
             android:text="@string/wangzhi"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:enabled="true"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true"/>
     </LinearLayout>
 
     <View
@@ -100,7 +104,11 @@
             android:gravity="center_vertical|end"
             android:text="@string/weixinhaon"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:enabled="true"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true"/>
     </LinearLayout>
 
     <View
@@ -118,7 +126,6 @@
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-
         android:layout_marginTop="10dp"
         >
 

@@ -32,13 +32,13 @@ public class EncryptionLockUtils {
      * 将list转化为字符串
      */
     public static String convertList(List<Integer> list) {
-        String temp = "";
+        StringBuilder temp = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) != -1) {
-                temp += list.get(i);
+                temp.append(list.get(i));
             }
         }
-        return temp;
+        return temp.toString();
     }
 
 }

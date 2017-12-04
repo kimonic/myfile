@@ -247,7 +247,7 @@ public class RealNameAuthenticationHuiFuActivity extends BaseActivity {
                     } else if (code.equals("")) {
                         ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.denglushibai);
                     }
-                    // TODO: 2017/8/8 做对应返回错误码的处理
+                    // 做对应返回错误码的处理
                 } else {
                     ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.denglushibai);
                 }

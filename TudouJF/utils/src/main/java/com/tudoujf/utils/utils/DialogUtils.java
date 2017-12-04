@@ -296,7 +296,6 @@ public class DialogUtils {
 //        tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                // TODO: 2017/8/1 开通资金托管逻辑
 //                Intent intent=new Intent(context, RealNameAuthenticationHuiFuActivity.class);
 //                context.startActivity(intent);
 //                pop.dismiss();

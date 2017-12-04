@@ -284,7 +284,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     } else {
-                        // TODO: 2017/10/11 弹出汇付托管开通页面
+                        //  弹出汇付托管开通页面
                         DialogUtils.showHuiFuDialog(CreditorRightsDetailsActivity.this);
                     }
                 } else {

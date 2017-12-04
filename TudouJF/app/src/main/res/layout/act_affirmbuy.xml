@@ -67,7 +67,7 @@
         </LinearLayout>
 
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
@@ -100,7 +100,7 @@
 
         </LinearLayout>
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
@@ -112,14 +112,14 @@
             android:orientation="vertical"
             android:gravity="center_vertical"
             >
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="@string/act_affirmbuy_lixishouyi"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
             <TextView
                 android:id="@+id/tv_act_affirmbuy_lixi"
                 android:layout_width="match_parent"
@@ -132,7 +132,7 @@
 
         </LinearLayout>
         <View
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="22dp"
             android:layout_gravity="center_vertical"
             android:background="@color/act_affirmbuy_bac"
@@ -169,15 +169,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_ketouzijine"
             />
@@ -212,15 +212,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_zhanghuyue"
             />
@@ -252,7 +252,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
             android:gravity="center|end"
             android:orientation="horizontal">
             <TextView
@@ -264,8 +263,8 @@
                 android:textColor="@color/color_white"
                 android:textSize="14sp"
                 android:background="@color/global_theme_background_color"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 />
@@ -274,15 +273,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_touzijine"
             />
@@ -320,15 +319,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyonghongbao"
             />
@@ -373,15 +372,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyongjiaxiquan"
             />
@@ -427,15 +426,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/act_affirmbuy2_keyongfanxianquan"
             />
@@ -523,7 +522,7 @@
         android:gravity="center"
         android:text="@string/act_affirmbuy_querengoumai"
         android:textColor="@color/color_white"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
 
 </LinearLayout>

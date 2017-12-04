@@ -185,8 +185,10 @@ public class HomeFragment extends BaseFragment {
      */
     private int bannerCount;
     private FrameLayout.LayoutParams params;
-    /**屏幕像素密度*/
-    private  int  density;
+    /**
+     * 屏幕像素密度
+     */
+    private int density;
 
     @Override
     public int layoutRes() {
@@ -198,7 +200,7 @@ public class HomeFragment extends BaseFragment {
 
 
         switch (view.getId()) {
-            case R.id.tv_frag_home:
+            case R.id.tv_frag_home://立即投资
                 requestLoanId();
                 break;
             case R.id.tv_frag_home_leftarrow:
@@ -229,17 +231,16 @@ public class HomeFragment extends BaseFragment {
             case R.id.iv_frag_home_signin:
 
 
-
                 retractAnim(1);
 
 
-                if (params.getMarginEnd()==0&&"".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
+                if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                     openActivity(LoginActivity.class);
-                }else if (params.getMarginEnd()<0){
+                } else if (params.getMarginEnd() < 0) {
                     params.setMarginEnd(0);
                     ivSignIn.setLayoutParams(params);
-                }else {
-                    openActivityForResult(SignInActivity.class,666);
+                } else {
+                    openActivityForResult(SignInActivity.class, 666);
                 }
                 break;
             case R.id.fl_frag_msgcount://启动我的消息页面
@@ -252,15 +253,17 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    /**签到缩进动画*/
+    /**
+     * 签到缩进动画
+     */
     private void retractAnim(int flag) {
         params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
-        int marginEnd=params.getMarginEnd();
+        int marginEnd = params.getMarginEnd();
         ValueAnimator animator;
-        if (flag==1){
-            animator=ValueAnimator.ofInt(marginEnd,0);
-        }else {
-            animator=ValueAnimator.ofInt(0,-50*density);
+        if (flag == 1) {
+            animator = ValueAnimator.ofInt(marginEnd, 0);
+        } else {
+            animator = ValueAnimator.ofInt(0, -50 * density);
         }
         animator.setDuration(1000);
         animator.start();
@@ -277,7 +280,6 @@ public class HomeFragment extends BaseFragment {
      * 请求对应标的id
      */
     private void requestLoanId() {
-//        dialog.show();
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", "");
@@ -288,7 +290,6 @@ public class HomeFragment extends BaseFragment {
         HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, getActivity().getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-//                dialog.dismiss();
                 dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
@@ -299,6 +300,7 @@ public class HomeFragment extends BaseFragment {
                 if (bean1 != null) {
                     homeBidIdBean = (HomeBidIdBean) bean1;
                     Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据loan_id----------------" + homeBidIdBean.getLoan_id());
+                    // TODO: 2017/12/4 新手体验标要跳转不同的页面
                     Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                     intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
                     startActivity(intent);
@@ -323,7 +325,7 @@ public class HomeFragment extends BaseFragment {
                 }
             }
 
-        }else if (requestCode==666){//签到界面返回
+        } else if (requestCode == 666) {//签到界面返回
             initDataFromInternet();
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -349,7 +351,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        density=ScreenSizeUtils.getDensity(getActivity());
+        density = ScreenSizeUtils.getDensity(getActivity());
         initAutoCarousel();
         initDataFromInternet();
 
@@ -689,22 +691,35 @@ public class HomeFragment extends BaseFragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        if (plummet) {
+  //------------------------------钟摆循环----------------------------------------------------------
+//                        if (plummet) {
+//                            autoCount++;
+//                            if (autoCount > bannerCount) {
+//                                plummet = !plummet;
+//                                autoCount = autoCount - 2;
+//                            }
+//                        } else {
+//                            autoCount--;
+//                            if (autoCount < 0) {
+//                                plummet = !plummet;
+//                                autoCount = autoCount + 2;
+//                            }
+//                        }
+//------------------------------钟摆循环----------------------------------------------------------
+
+
+                        if (autoCount>=bannerCount){
+                            autoCount=0;
+                        }else {
                             autoCount++;
-                            if (autoCount > bannerCount) {
-                                plummet = !plummet;
-                                autoCount = autoCount - 2;
-                            }
-                        } else {
-                            autoCount--;
-                            if (autoCount < 0) {
-                                plummet = !plummet;
-                                autoCount = autoCount + 2;
-                            }
                         }
+
+
+
                         Message msg = Message.obtain();
                         msg.what = autoCount;
                         handler.sendMessage(msg);
+
                     } else {
                         notify = true;
                         try {

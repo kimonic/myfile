@@ -256,7 +256,7 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
                     } else if (code.equals("")) {
                         ToastUtils.showToast(AddBankCardHuiFuActivity.this, R.string.denglushibai);
                     }
-                    // TODO: 2017/8/8 做对应返回错误码的处理
+                    // 做对应返回错误码的处理
                 } else {
                     ToastUtils.showToast(AddBankCardHuiFuActivity.this, R.string.shujujiazaichucuo);
                 }

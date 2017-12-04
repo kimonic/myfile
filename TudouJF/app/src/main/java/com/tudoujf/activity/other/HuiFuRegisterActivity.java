@@ -197,7 +197,7 @@ public class HuiFuRegisterActivity extends BaseActivity {
                     }else if (code.equals("")){
                         ToastUtils.showToast(HuiFuRegisterActivity.this, R.string.denglushibai);
                     }
-                    // TODO: 2017/8/8 做对应返回错误码的处理
+                    // 做对应返回错误码的处理
                 } else {
                     ToastUtils.showToast(HuiFuRegisterActivity.this, R.string.denglushibai);
                 }

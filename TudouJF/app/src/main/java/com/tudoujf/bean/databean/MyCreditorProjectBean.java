@@ -171,7 +171,7 @@ public class MyCreditorProjectBean implements BaseBean {
             private String period;
             private String buy_repay;
             @SerializedName("transfer_interest _total")
-            private JsonElement _$Transfer_interest_total123; // FIXME check this code
+            private JsonElement _$Transfer_interest_total123;
             private String id;
             private String wait_period;
             private String transfer_status_name;
