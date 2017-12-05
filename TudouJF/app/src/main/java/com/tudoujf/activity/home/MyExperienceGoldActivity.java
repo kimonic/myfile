@@ -1,8 +1,5 @@
 package com.tudoujf.activity.home;
 
-import android.graphics.Path;
-import android.os.Bundle;
-import android.support.v7.view.menu.ListMenuItemView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,6 +15,7 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.MyExperienceGoldBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
@@ -28,7 +26,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -53,7 +50,7 @@ public class MyExperienceGoldActivity extends BaseActivity {
     TextView tvAmountBalance;
     @BindView(R.id.lv_act_myexperience)
     ListView listview;
-    private List<MyExperienceGoldBean.TenderListBean.ItemsBean>  list;
+    private List<MyExperienceGoldBean.TenderListBean.ItemsBean> list;
 
 
     private MyExperienceGoldBean bean;
@@ -76,7 +73,6 @@ public class MyExperienceGoldActivity extends BaseActivity {
 
     @Override
     public void initView() {
-/**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbMyExperienceGold.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbMyExperienceGold.setLayoutParams(params);
@@ -98,7 +94,7 @@ public class MyExperienceGoldActivity extends BaseActivity {
     public void initDataFromInternet() {
 
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "12267");
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "1");
 
         HttpMethods.getInstance().POST(this, Constants.MY_EXPERIENCE, map, "MyExperienceGoldActivity",
@@ -121,18 +117,16 @@ public class MyExperienceGoldActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
+
         if (bean != null) {
             tvAmount.setText(bean.getExperience_amount());
             tvAmountAll.setText(bean.getAmount_all());
             tvAmountBalance.setText(bean.getAmount_balance());
-            if (bean.getTender_list().getItems()!=null&&bean.getTender_list().getItems().size()>0){
-                list=bean.getTender_list().getItems();
-                MyExperienceGoldLvAdapter adapter=new MyExperienceGoldLvAdapter(this,list);
+            if (bean.getTender_list().getItems() != null && bean.getTender_list().getItems().size() > 0) {
+                list = bean.getTender_list().getItems();
+                MyExperienceGoldLvAdapter adapter = new MyExperienceGoldLvAdapter(this, list);
                 listview.setAdapter(adapter);
-
             }
-
-
         }
 
     }

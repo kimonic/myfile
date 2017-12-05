@@ -53,6 +53,8 @@ public class InfoView extends View {
     private String jieKuanQiXian="8个月";
     /**是否是新手标*/
     private boolean  ifNew=true;
+    private boolean drawImage=true;
+
 
     public void setUnderlineScale1(float underlineScale1) {
         this.underlineScale1 = underlineScale1;
@@ -86,6 +88,14 @@ public class InfoView extends View {
     public InfoView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView();
+    }
+
+    public boolean isDrawImage() {
+        return drawImage;
+    }
+
+    public void setDrawImage(boolean drawImage) {
+        this.drawImage = drawImage;
     }
 
     private void initView() {
@@ -153,18 +163,22 @@ public class InfoView extends View {
 
 
             //-------------------------新手专享图片------------------------------------
-            float bitScale2=0.16f;//位图1高与控件高的比例
-            int bitWidth2= (int) (width*bitScale2);//控件的高度
-            float initScale2=1.29f;//位图1左上角位置与控件宽度的比例
-            float initScaleh2=21f;//位图1左上角位置与控件宽度的比例
 
-            rectImag2.left= (int) (width/initScale2);
-            rectImag2.top= (int) (width/initScaleh2);
-            rectImag2.right=rectImag2.left+bitWidth2;
-            rectImag2.bottom=rectImag2.top+bitWidth2;
+            if (drawImage){
+                float bitScale2=0.16f;//位图1高与控件高的比例
+                int bitWidth2= (int) (width*bitScale2);//控件的高度
+                float initScale2=1.29f;//位图1左上角位置与控件宽度的比例
+                float initScaleh2=21f;//位图1左上角位置与控件宽度的比例
+
+                rectImag2.left= (int) (width/initScale2);
+                rectImag2.top= (int) (width/initScaleh2);
+                rectImag2.right=rectImag2.left+bitWidth2;
+                rectImag2.bottom=rectImag2.top+bitWidth2;
 
 
-            canvas.drawBitmap(bitmapRight,null,rectImag2,null);
+                canvas.drawBitmap(bitmapRight,null,rectImag2,null);
+            }
+
         }
         //------------------------------------------新手标相关--------------------------------------
 

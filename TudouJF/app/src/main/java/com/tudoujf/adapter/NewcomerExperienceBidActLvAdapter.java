@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.ProductDetailsActBean;
+import com.tudoujf.bean.databean.NewcomerExperienceBidBean;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -27,9 +29,9 @@ import java.util.List;
 
 public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
     private Context context;
-    private List<ProductDetailsActBean> list;
+    private List<NewcomerExperienceBidBean.TenderListBean> list;
 
-    public NewcomerExperienceBidActLvAdapter(Context context, List<ProductDetailsActBean> list) {
+    public NewcomerExperienceBidActLvAdapter(Context context, List<NewcomerExperienceBidBean.TenderListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -65,9 +67,9 @@ public class NewcomerExperienceBidActLvAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getTouBiaoRen());
-        viewHolder.textView2.setText(list.get(position).getTouZiJinE());
-        viewHolder.textView3.setText(list.get(position).getTouZiTime());
+        viewHolder.textView1.setText(list.get(position).getMember_name());
+        viewHolder.textView2.setText(list.get(position).getAmount());
+        viewHolder.textView3.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
 
 
 

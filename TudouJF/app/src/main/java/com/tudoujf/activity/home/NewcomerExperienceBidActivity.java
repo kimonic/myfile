@@ -1,6 +1,5 @@
 package com.tudoujf.activity.home;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,9 +13,9 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.NewcomerExperienceBidActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.ProductDetailsActBean;
 import com.tudoujf.bean.databean.NewcomerExperienceBidBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.InfoView;
@@ -29,7 +28,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -63,7 +61,9 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
     private NewcomerExperienceBidBean bean;
 
-    List<ProductDetailsActBean> list;
+    List<NewcomerExperienceBidBean.TenderListBean> list;
+    private String loan_id;
+    private NewcomerExperienceBidActLvAdapter adapter;
 
     @Override
     public int getLayoutResId() {
@@ -74,6 +74,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_newcomerexperiencebid_bidnow://立即投标
+                openActivity(MyExperienceGoldActivity.class);
                 break;
             case R.id.tv_act_newcomerexperiencebid_loadmore://点击加载更多
                 break;
@@ -83,27 +84,25 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
-
+        loan_id = getIntent().getStringExtra("loan_id");
         list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ProductDetailsActBean bean = new ProductDetailsActBean();
-
-            bean.setTouZiTime("20XX-XX-XX 00:00:00");
-            bean.setTouBiaoRen("XXXXX");
-            bean.setTouZiJinE("28888");
-            list.add(bean);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            ProductDetailsActBean bean = new ProductDetailsActBean();
+//
+//            bean.setTouZiTime("20XX-XX-XX 00:00:00");
+//            bean.setTouBiaoRen("XXXXX");
+//            bean.setTouZiJinE("28888");
+//            list.add(bean);
+//        }
 
     }
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
+
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbNewcomerExperienceBid.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbNewcomerExperienceBid.setLayoutParams(params);
-
         mtbNewcomerExperienceBid.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,9 +110,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             }
         });
 
-
-        NewcomerExperienceBidActLvAdapter adapter = new NewcomerExperienceBidActLvAdapter(this, list);
-        lvNewcomerExperienceBid.setAdapter(adapter);
     }
 
     @Override
@@ -126,14 +122,18 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", "12267");
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "1");
-        map.put("loan_id", "153");
+
+        Log.e("TAG", "initDataFromInternet: -----" + loan_id);
+
+        map.put("loan_id", loan_id);
 
         HttpMethods.getInstance().POST(this, Constants.MY_EXPERIENCE_LOAN_INFO, map, "NewcomerExperienceBidActivity",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----体验标详情接口返回数据------------------- " + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewcomerExperienceBidBean>() {
@@ -151,14 +151,27 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
+            Log.e("TAG", "LoadInternetDataToUi: -----" + bean.getAttaList());
+
             tvHuanKuanFangShi.setText(bean.getRepay_type().getContents());
-            tvYiTouJinE.setText(bean.getMember_loan_info().getLoan_success_amount());
-            tvTouZiRenShu.setText(bean.getMember_loan_info().getLoan_success_count());
-            infoView.setJieKuanQiXian((bean.getLoan_info().getPeriod()+"个月"));
+            tvTouZiRenShu.setText(bean.getLoan_info().getTender_count());
+            tvYiTouJinE.setText(bean.getLoan_info().getCredited_amount());
+            infoView.setJieKuanQiXian((bean.getLoan_info().getPeriod() + "天"));
             infoView.setIfNew(true);
-            infoView.setNianHuaShouYi((bean.getLoan_info().getApr()+"%"));
-            infoView.setUnderlineScale1(StringUtils.string2Float(bean.getLoan_info().getProgress())/100f);
+            infoView.setDrawImage(false);
+            infoView.setNianHuaShouYi((bean.getLoan_info().getApr() + "%"));
+            infoView.setUnderlineScale1(StringUtils.string2Float(bean.getLoan_info().getProgress()) / 100f);
             infoView.invalidate();
+
+
+            list.addAll(bean.getTender_list());
+            if (adapter == null) {
+                adapter = new NewcomerExperienceBidActLvAdapter(this, list);
+                lvNewcomerExperienceBid.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+
         }
 
     }

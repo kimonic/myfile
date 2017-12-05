@@ -23,12 +23,18 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
+import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewbieWelfareActivity;
+import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
@@ -291,7 +297,6 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
-
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBidIdBean>() {
@@ -300,10 +305,18 @@ public class HomeFragment extends BaseFragment {
                 if (bean1 != null) {
                     homeBidIdBean = (HomeBidIdBean) bean1;
                     Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据loan_id----------------" + homeBidIdBean.getLoan_id());
-                    // TODO: 2017/12/4 新手体验标要跳转不同的页面
-                    Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                    intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                    startActivity(intent);
+
+                    if ("1".equals(loanBeanList.get(ballviewPosition).getExperience_status())) {
+                        // TODO: 2017/12/4 新手体验标要跳转不同的页面
+                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                        startActivity(intent1);
+                    } else {
+                        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                        intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                        startActivity(intent);
+                    }
+
                 } else {
                     ToastUtils.showToast(getActivity(), R.string.qingqiushujuchucuo);
                 }
@@ -444,36 +457,66 @@ public class HomeFragment extends BaseFragment {
         ivSignIn.setOnClickListener(this);
         flMsgCount.setOnClickListener(this);
 
-        vpBall.setOnTouchListener(new View.OnTouchListener() {
+        //显示隐藏控件
+        srl.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                srl.setEnableRefresh(false);
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        currentY = event.getY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if (flag) {
-                            if (event.getY() - currentY > 0) {
-                                showInfo(tvFengXianTiShi1);
-                            } else {
-                                showInfo(tvFengXianTiShi2);
-                            }
-                            flag = false;
-                        }
-                        srl.setEnableRefresh(true);
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        if (Math.abs(event.getY() - currentY) > 36) {
-                            flag = true;
-                        }
-                        break;
+            public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
+                if (offset > 36) {
+                    showInfo(tvFengXianTiShi1);
                 }
-                return false;
             }
 
+            @Override
+            public void onFooterPulling(RefreshFooter footer, float percent, int offset, int footerHeight, int extendHeight) {
+                if (offset > 36) {
+                    showInfo(tvFengXianTiShi2);
+                }
+            }
         });
+
+
+//
+//        vpBall.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                srl.setEnableRefresh(false);
+//                srl.setEnableHeaderTranslationContent(false);
+//
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        Log.e("TAG", "onTouch: ---555--");
+//                        currentY = event.getY();
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        Log.e("TAG", "onTouch: ---333--"+flag);
+//                        if (flag) {
+//                            if (event.getY() - currentY > 0) {
+//                                showInfo(tvFengXianTiShi1);
+//                                Log.e("TAG", "onTouch: ---11111--");
+//                            } else {
+//                                showInfo(tvFengXianTiShi2);
+//                                Log.e("TAG", "onTouch: -2222----");
+//                            }
+//                            flag = false;
+//                        }
+//                        Log.e("TAG", "onTouch: ---444--");
+//
+//
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        if (Math.abs(event.getY() - currentY) > 36) {
+//                            flag = true;
+//                        }
+//                        Log.e("TAG", "onTouch: ---666--"+(Math.abs(event.getY() - currentY)) );
+//
+//                        break;
+//                }
+//                srl.setEnableRefresh(true);
+//                srl.setEnableHeaderTranslationContent(true);
+//                return false;
+//            }
+//
+//        });
 
         vpBall.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -490,6 +533,7 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
+
 
     }
 
@@ -691,7 +735,7 @@ public class HomeFragment extends BaseFragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-  //------------------------------钟摆循环----------------------------------------------------------
+                        //------------------------------钟摆循环----------------------------------------------------------
 //                        if (plummet) {
 //                            autoCount++;
 //                            if (autoCount > bannerCount) {
@@ -708,12 +752,11 @@ public class HomeFragment extends BaseFragment {
 //------------------------------钟摆循环----------------------------------------------------------
 
 
-                        if (autoCount>=bannerCount){
-                            autoCount=0;
-                        }else {
+                        if (autoCount >= bannerCount) {
+                            autoCount = 0;
+                        } else {
                             autoCount++;
                         }
-
 
 
                         Message msg = Message.obtain();
