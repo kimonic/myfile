@@ -27,9 +27,9 @@ import java.util.List;
  */
 public class MyExperienceGoldLvAdapter extends BaseAdapter {
     private Context context;
-    private List<MyExperienceGoldBean.TenderListBean.ItemsBean> list;
+    private List<MyExperienceGoldBean.PageObjBean.ItemsBean> list;
 
-    public MyExperienceGoldLvAdapter(Context context, List<MyExperienceGoldBean.TenderListBean.ItemsBean> list) {
+    public MyExperienceGoldLvAdapter(Context context, List<MyExperienceGoldBean.PageObjBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -69,9 +69,9 @@ public class MyExperienceGoldLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
         viewHolder.textView2.setText(list.get(position).getAmount());
-        viewHolder.textView3.setText(list.get(position).getInterest_earned());
-        viewHolder.textView4.setText(list.get(position).getInterest_earning());
-        viewHolder.textView5.setText(list.get(position).getStatus());
+        viewHolder.textView3.setText(list.get(position).getRecover_interest_yes());
+        viewHolder.textView4.setText(list.get(position).getRecover_interest_wait());
+        viewHolder.textView5.setText(list.get(position).getRecover_status());
 
 
 

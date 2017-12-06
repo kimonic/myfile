@@ -168,7 +168,7 @@ public class MRedView extends View {
 
         //----------------绘制第一行文字相关--------------------------------------------------------
         float oneTX;
-        float textOneS = width * 0.2f;
+        float textOneS = width * 0.2285f;
         whitePaint.setTextSize(textOneS);
         //----------------绘制第一行文字相关--------------------------------------------------------
 
@@ -203,7 +203,7 @@ public class MRedView extends View {
             canvas.drawLine(fiveX, sixY, sixX, sixY, redPackagePaint);
             //------------------------绘制红包背景--------------------------------------------------
 
-            oneTX = width * 0.1f;
+            oneTX = width * 0.12f;
 
         } else {
             //------------------------绘制券背景----------------------------------------------------
@@ -228,21 +228,21 @@ public class MRedView extends View {
 
 
         //---------------------------绘制第一行文字---------------------------------------------------------
-        float oneTY = width * 0.38f;
+        float oneTY = width * 0.4457f;
 
         canvas.drawText(oneText, oneTX, oneTY, whitePaint);
 //---------------------------绘制第一行文字---------------------------------------------------------
 
 //---------------------------绘制第二行文字---------------------------------------------------------
         float twoTX = oneTX + 10 + whitePaint.measureText(oneText);
-        float textTwoS = width * 0.15f;
+        float textTwoS = width * 0.1657f;
         whitePaint.setTextSize(textTwoS);
         canvas.drawText(twoText, twoTX, oneTY, whitePaint);
 //---------------------------绘制第二行文字---------------------------------------------------------
 
 
 //---------------------------绘制第三行文字---------------------------------------------------------
-        float threeTY = width * 0.58f;
+        float threeTY = width * 0.60f;
         float textThreeS = width * 0.1f;
         whitePaint.setTextSize(textThreeS);
         canvas.drawText(threeText, oneTX, threeTY, whitePaint);
@@ -250,7 +250,7 @@ public class MRedView extends View {
 
 
 //---------------------------绘制第四行文字---------------------------------------------------------
-        float fourTY = width * 0.71f;
+        float fourTY = width * 0.73f;
         float textFourS = width * 0.1f;
         whitePaint.setTextSize(textFourS);
         float fourTX=(width-whitePaint.measureText(fourText))/2;

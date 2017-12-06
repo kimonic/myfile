@@ -28,8 +28,17 @@ public class HomeBean implements BaseBean {
 
     private String sign_status;
     private String message_count;
+    private String experience_amount;
     private List<LoanBean> loan;
     private List<BannerBean> banner;
+
+    public String getExperience_amount() {
+        return experience_amount;
+    }
+
+    public void setExperience_amount(String experience_amount) {
+        this.experience_amount = experience_amount;
+    }
 
     public String getSign_status() {
         return sign_status;

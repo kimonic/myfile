@@ -624,6 +624,8 @@
     <string name="ninweianzhuangweixin">您未安装微信,请先安装!</string>
     <string name="jisuanshibai">结算失败!</string>
     <string name="touxiantupiandaxiao">头像图片大小不能朝富哦2M!</string>
+    <string name="xitongjiancedaoninweishiming">系统检测到您尚未实名,是否前去实名认证?</string>
+    <string name="tiyanjintouzishiabi">体验金投资失败!!</string>
 
 
 </resources>

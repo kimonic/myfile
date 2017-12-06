@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/lvitem_specialoffer_iv"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="90dp"
             android:contentDescription="@null"
 
             />

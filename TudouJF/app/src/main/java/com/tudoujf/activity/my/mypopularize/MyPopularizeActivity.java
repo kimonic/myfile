@@ -88,9 +88,7 @@ public class MyPopularizeActivity extends BaseActivity {
                 openActivity(SucceedInvitationActivity.class);
                 break;
             case R.id.tv_act_mypopularize_btn_jie_suan://立即结算
-
                 settleNow();
-
                 break;
         }
 

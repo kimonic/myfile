@@ -1,6 +1,5 @@
 package com.tudoujf.bean.databean;
 
-import com.google.gson.JsonElement;
 import com.tudoujf.base.BaseBean;
 
 import java.util.List;
@@ -20,56 +19,56 @@ import java.util.List;
 public class MyExperienceGoldBean implements BaseBean {
 
     /**
-     * amount_all : 9807308.96
-     * Experience_amount : 0
-     * tender_list : {"page":1,"epage":20,"total_items":1,"total_pages":1,"items":[{"id":3720,"amount":28888,"status":"已结清","interest_earning":0,"interest_earned":20.06,"add_time":1475974910,"member_name":"18011111111"}],"params":null}
-     * amount_balance : 9781108.96
+     * my_account_balance : 9797506.45
+     * pageObj : {"page":1,"epage":20,"total_items":1,"total_pages":1,"items":[{"recover_status":"已回款","amount":28888,"add_time":1475974910,"recover_interest_wait":0,"recover_interest_yes":20.06}],"params":null}
+     * my_experience_balance : 0
+     * my_account_amount : 9844766.45
      */
 
-    private String amount_all;
-    private String Experience_amount;
-    private TenderListBean tender_list;
-    private String amount_balance;
+    private String my_account_balance;
+    private PageObjBean pageObj;
+    private String my_experience_balance;
+    private String my_account_amount;
 
-    public String getAmount_all() {
-        return amount_all;
+    public String getMy_account_balance() {
+        return my_account_balance;
     }
 
-    public void setAmount_all(String amount_all) {
-        this.amount_all = amount_all;
+    public void setMy_account_balance(String my_account_balance) {
+        this.my_account_balance = my_account_balance;
     }
 
-    public String getExperience_amount() {
-        return Experience_amount;
+    public PageObjBean getPageObj() {
+        return pageObj;
     }
 
-    public void setExperience_amount(String Experience_amount) {
-        this.Experience_amount = Experience_amount;
+    public void setPageObj(PageObjBean pageObj) {
+        this.pageObj = pageObj;
     }
 
-    public TenderListBean getTender_list() {
-        return tender_list;
+    public String getMy_experience_balance() {
+        return my_experience_balance;
     }
 
-    public void setTender_list(TenderListBean tender_list) {
-        this.tender_list = tender_list;
+    public void setMy_experience_balance(String my_experience_balance) {
+        this.my_experience_balance = my_experience_balance;
     }
 
-    public String getAmount_balance() {
-        return amount_balance;
+    public String getMy_account_amount() {
+        return my_account_amount;
     }
 
-    public void setAmount_balance(String amount_balance) {
-        this.amount_balance = amount_balance;
+    public void setMy_account_amount(String my_account_amount) {
+        this.my_account_amount = my_account_amount;
     }
 
-    public static class TenderListBean {
+    public static class PageObjBean {
         /**
          * page : 1
          * epage : 20
          * total_items : 1
          * total_pages : 1
-         * items : [{"id":3720,"amount":28888,"status":"已结清","interest_earning":0,"interest_earned":20.06,"add_time":1475974910,"member_name":"18011111111"}]
+         * items : [{"recover_status":"已回款","amount":28888,"add_time":1475974910,"recover_interest_wait":0,"recover_interest_yes":20.06}]
          * params : null
          */
 
@@ -77,7 +76,7 @@ public class MyExperienceGoldBean implements BaseBean {
         private String epage;
         private String total_items;
         private String total_pages;
-        private JsonElement params;
+        private Object params;
         private List<ItemsBean> items;
 
         public String getPage() {
@@ -112,11 +111,11 @@ public class MyExperienceGoldBean implements BaseBean {
             this.total_pages = total_pages;
         }
 
-        public JsonElement getParams() {
+        public Object getParams() {
             return params;
         }
 
-        public void setParams(JsonElement params) {
+        public void setParams(Object params) {
             this.params = params;
         }
 
@@ -130,29 +129,25 @@ public class MyExperienceGoldBean implements BaseBean {
 
         public static class ItemsBean {
             /**
-             * id : 3720
+             * recover_status : 已回款
              * amount : 28888
-             * status : 已结清
-             * interest_earning : 0
-             * interest_earned : 20.06
              * add_time : 1475974910
-             * member_name : 18011111111
+             * recover_interest_wait : 0
+             * recover_interest_yes : 20.06
              */
 
-            private String id;
+            private String recover_status;
             private String amount;
-            private String status;
-            private String interest_earning;
-            private String interest_earned;
             private String add_time;
-            private String member_name;
+            private String recover_interest_wait;
+            private String recover_interest_yes;
 
-            public String getId() {
-                return id;
+            public String getRecover_status() {
+                return recover_status;
             }
 
-            public void setId(String id) {
-                this.id = id;
+            public void setRecover_status(String recover_status) {
+                this.recover_status = recover_status;
             }
 
             public String getAmount() {
@@ -163,30 +158,6 @@ public class MyExperienceGoldBean implements BaseBean {
                 this.amount = amount;
             }
 
-            public String getStatus() {
-                return status;
-            }
-
-            public void setStatus(String status) {
-                this.status = status;
-            }
-
-            public String getInterest_earning() {
-                return interest_earning;
-            }
-
-            public void setInterest_earning(String interest_earning) {
-                this.interest_earning = interest_earning;
-            }
-
-            public String getInterest_earned() {
-                return interest_earned;
-            }
-
-            public void setInterest_earned(String interest_earned) {
-                this.interest_earned = interest_earned;
-            }
-
             public String getAdd_time() {
                 return add_time;
             }
@@ -195,12 +166,20 @@ public class MyExperienceGoldBean implements BaseBean {
                 this.add_time = add_time;
             }
 
-            public String getMember_name() {
-                return member_name;
+            public String getRecover_interest_wait() {
+                return recover_interest_wait;
             }
 
-            public void setMember_name(String member_name) {
-                this.member_name = member_name;
+            public void setRecover_interest_wait(String recover_interest_wait) {
+                this.recover_interest_wait = recover_interest_wait;
+            }
+
+            public String getRecover_interest_yes() {
+                return recover_interest_yes;
+            }
+
+            public void setRecover_interest_yes(String recover_interest_yes) {
+                this.recover_interest_yes = recover_interest_yes;
             }
         }
     }

@@ -276,15 +276,25 @@ public class Constants {
      */
     public static final String HELP_CENTER = URL + "/phone/articles/helpCenter";
 
- /**
+    /**
      * 意见反馈接口
      */
     public static final String FEEDBACK = URL + "/phone/articles/suggestion";
 
- /**
+    /**
      * 意见反馈接口
      */
     public static final String DISCOVER = URL + "/phone/activity/view";
+
+    /**
+     * 体验金确认投资接口
+     */
+    public static final String EXPERIENCE_INVEST = URL + "/phone/tender/experienceInvest";
+
+/**
+     * 体验金确认投资接口
+     */
+    public static final String EXPERIENCE_TENDERLIST = URL + "/phone/experience/tenderList";
 
 
 //    ------------------------------------------------------------------------------------------------

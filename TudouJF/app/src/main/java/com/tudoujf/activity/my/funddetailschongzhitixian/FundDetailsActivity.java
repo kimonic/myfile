@@ -56,6 +56,7 @@ public class FundDetailsActivity extends BaseActivity {
     @BindView(R.id.fdv_act_funddetails_details)
     FundDetailsView fdvDetails;
     private FundDetailsBean bean;
+    private String is_trust;
 
     @Override
     public int getLayoutResId() {
@@ -72,23 +73,32 @@ public class FundDetailsActivity extends BaseActivity {
                 openActivity(TransactionRecordActivity.class);
                 break;
             case R.id.tv_act_funddetails_withdraw:
-                Intent intent = new Intent(this, WithdrawActivity.class);
-                if (bean != null) {
-                    intent.putExtra("amount", bean.getBalance_amount());
+                if ("-1".equals(is_trust)) {
+                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
-                    intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                    Intent intent = new Intent(this, WithdrawActivity.class);
+                    if (bean != null) {
+                        intent.putExtra("amount", bean.getBalance_amount());
+                    } else {
+                        intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
+
 //                openActivity(WithdrawActivity.class);
                 break;
             case R.id.tv_act_funddetails_recharge:
-                Bundle bundle = new Bundle();
-                if (bean != null) {
-                    bundle.putString("balance", bean.getBalance_amount());
+                if ("-1".equals(is_trust)) {
+                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
-                    bundle.putString("balance", getResources().getString(R.string.zanwu));
+                    Bundle bundle = new Bundle();
+                    if (bean != null) {
+                        bundle.putString("balance", bean.getBalance_amount());
+                    } else {
+                        bundle.putString("balance", getResources().getString(R.string.zanwu));
+                    }
+                    openActivity(RechargeActivity.class, bundle);
                 }
-                openActivity(RechargeActivity.class, bundle);
 
 //                openActivity(RechargeActivity.class);
                 break;
@@ -98,7 +108,7 @@ public class FundDetailsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+        is_trust = getIntent().getStringExtra("is_trust");
     }
 
     @Override

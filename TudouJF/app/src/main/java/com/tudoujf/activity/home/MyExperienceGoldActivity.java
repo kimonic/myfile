@@ -50,7 +50,7 @@ public class MyExperienceGoldActivity extends BaseActivity {
     TextView tvAmountBalance;
     @BindView(R.id.lv_act_myexperience)
     ListView listview;
-    private List<MyExperienceGoldBean.TenderListBean.ItemsBean> list;
+    private List<MyExperienceGoldBean.PageObjBean.ItemsBean> list;
 
 
     private MyExperienceGoldBean bean;
@@ -119,11 +119,11 @@ public class MyExperienceGoldActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
         if (bean != null) {
-            tvAmount.setText(bean.getExperience_amount());
-            tvAmountAll.setText(bean.getAmount_all());
-            tvAmountBalance.setText(bean.getAmount_balance());
-            if (bean.getTender_list().getItems() != null && bean.getTender_list().getItems().size() > 0) {
-                list = bean.getTender_list().getItems();
+            tvAmount.setText(bean.getMy_experience_balance());
+            tvAmountAll.setText(bean.getMy_account_amount());
+            tvAmountBalance.setText(bean.getMy_account_balance());
+            if (bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
+                list = bean.getPageObj().getItems();
                 MyExperienceGoldLvAdapter adapter = new MyExperienceGoldLvAdapter(this, list);
                 listview.setAdapter(adapter);
             }

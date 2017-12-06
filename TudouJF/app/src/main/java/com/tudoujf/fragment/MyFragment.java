@@ -169,13 +169,17 @@ public class MyFragment extends BaseFragment {
                 UdeskSDKManager.getInstance().entryChat(getActivity());
                 break;
             case R.id.ll_frag_my_chongzhi://充值
-                Bundle bundle = new Bundle();
-                if (bean != null) {
-                    bundle.putString("balance", bean.getAmount_balance());
+                if (bean != null && "-1".equals(bean.getIs_trust())) {
+                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
                 } else {
-                    bundle.putString("balance", getResources().getString(R.string.zanwu));
+                    Bundle bundle = new Bundle();
+                    if (bean != null) {
+                        bundle.putString("balance", bean.getAmount_balance());
+                    } else {
+                        bundle.putString("balance", getResources().getString(R.string.zanwu));
+                    }
+                    openActivity(RechargeActivity.class, bundle);
                 }
-                openActivity(RechargeActivity.class, bundle);
                 break;
             case R.id.ll_frag_my_tixian://提现
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
@@ -192,7 +196,11 @@ public class MyFragment extends BaseFragment {
 
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
-                openActivity(FundDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), FundDetailsActivity.class);
+                intent.putExtra("is_trust",bean.getIs_trust());
+                startActivity(intent);
+
+//                openActivity(FundDetailsActivity.class);
                 break;
             case R.id.ll_frag_my_myaccount://我的账户
                 Bundle bundle1 = new Bundle();
@@ -224,7 +232,7 @@ public class MyFragment extends BaseFragment {
     }
 
     public void showService() {
-        if (flFragMy!=null){
+        if (flFragMy != null) {
             flFragMy.setVisibility(View.VISIBLE);
         }
     }
@@ -287,15 +295,15 @@ public class MyFragment extends BaseFragment {
                             DialogUtils.showDialog(getActivity(), R.string.gzhyfz, R.string.quzhantie, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (isWeixinAvilible(getActivity())){
+                                    if (isWeixinAvilible(getActivity())) {
                                         Intent intent = new Intent();
-                                        ComponentName cmp=new ComponentName("com.tencent.mm","com.tencent.mm.ui.LauncherUI");
+                                        ComponentName cmp = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI");
                                         intent.setAction(Intent.ACTION_MAIN);
                                         intent.addCategory(Intent.CATEGORY_LAUNCHER);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.setComponent(cmp);
                                         startActivity(intent);
-                                    }else {
+                                    } else {
                                         ToastUtils.showToast(getActivity(), R.string.ninweianzhuangweixin);
                                     }
                                 }

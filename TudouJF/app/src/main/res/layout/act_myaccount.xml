@@ -32,15 +32,15 @@
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_icon"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="46dp"
                 android:orientation="horizontal"
                 android:background="@color/color_white"
                 >
 
                 <ImageView
                     android:id="@+id/iv_act_myaccount_icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
@@ -118,8 +118,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
@@ -130,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/yinhangkaguanli"
@@ -145,7 +145,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:text="@string/weibangding"
                     android:gravity="center_vertical|end"
                     />
@@ -172,8 +172,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
@@ -184,7 +184,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/wodehuifuzhanghao"
@@ -234,8 +234,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
@@ -246,7 +246,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/shoujibangding"
@@ -261,7 +261,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:text="@string/weibangding"
                     android:gravity="center_vertical|end"
                     />
@@ -291,8 +291,8 @@
                 >
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -305,7 +305,7 @@
                     android:gravity="center"
                     android:text="@string/youxiangrenzheng"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
 
                     />
 
@@ -318,7 +318,7 @@
                     android:gravity="center_vertical|end"
                     android:text="@string/weirenzheng"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="11dp"
@@ -340,8 +340,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
                     android:layout_marginLeft="20dp"
@@ -352,7 +352,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/shimingrenzheng"
@@ -367,7 +367,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:text="@string/weirenzheng"
                     android:gravity="center_vertical|end"
                     />
@@ -404,8 +404,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -418,7 +418,7 @@
                     android:gravity="center"
                     android:text="@string/denglumima"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
 
                     />
 
@@ -430,7 +430,7 @@
                     android:gravity="center_vertical|end"
                     android:text="@string/xiugai"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="11dp"
@@ -453,8 +453,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
@@ -467,7 +467,7 @@
                     android:gravity="center"
                     android:text="@string/shoushimima"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
 
                     />
 
@@ -478,7 +478,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical|end"
                     android:textColor="@color/color_orange"
-                    android:textSize="16sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myaccount_oc"
@@ -495,7 +495,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="40dp"
                 android:background="@color/global_background_color"
                 />
 
@@ -504,7 +504,7 @@
                 android:id="@+id/tv_act_myaccount_signout"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/color_white"
                 android:gravity="center"
                 android:layout_marginLeft="20dp"

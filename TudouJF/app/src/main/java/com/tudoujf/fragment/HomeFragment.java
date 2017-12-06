@@ -7,12 +7,10 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,12 +24,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.InfoPublishActivity;
+import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewbieWelfareActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
@@ -46,6 +43,7 @@ import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.HomeBean;
 import com.tudoujf.bean.databean.HomeBidIdBean;
+import com.tudoujf.bean.databean.IdentityCheckBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -53,7 +51,6 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
-import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -308,9 +305,20 @@ public class HomeFragment extends BaseFragment {
 
                     if ("1".equals(loanBeanList.get(ballviewPosition).getExperience_status())) {
                         // TODO: 2017/12/4 新手体验标要跳转不同的页面
-                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
-                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                        startActivity(intent1);
+
+                        Log.e("TAG", "onSuccess: bean.getExperience_amount()-----" + bean.getExperience_amount());
+
+                        //体验金大于0,未登录,已登录未实名,跳转体验金详情
+                        if (StringUtils.string2Integer(bean.getExperience_amount()) > 0 || "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+                            Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                            intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                            startActivity(intent1);
+                        } else {
+                            // TODO: 2017/12/6 检测是否已实名
+                            checkIdentity();
+//                            openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
+                        }
+
                     } else {
                         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                         intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
@@ -322,6 +330,45 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
+    }
+
+    /**
+     * 检测是否已实名
+     */
+    private void checkIdentity() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+        HttpMethods.getInstance().POST(getActivity(), Constants.IDENTITY_CHECK, map, getActivity().getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
+                }.getType(), IdentityCheckBean.class, getActivity());
+                if (bean1 != null) {
+                    IdentityCheckBean identityCheckBean = (IdentityCheckBean) bean1;
+                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
+                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
+                    } else {//未实名
+                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                        startActivity(intent1);
+                    }
+                } else {
+                    ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(getActivity(), R.string.yanzhengshimingxinxishibai);
+            }
+        });
+
     }
 
     @Override

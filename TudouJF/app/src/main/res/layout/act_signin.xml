@@ -26,7 +26,7 @@
     <LinearLayout
         android:id="@+id/ll_act_signin_shop"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="42dp"
         android:gravity="center_vertical"
         android:background="@color/color_white"
         android:orientation="horizontal">
@@ -53,13 +53,13 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_gray"/>
+        android:layout_height="2px"
+        android:background="@color/color_gray2"/>
 
     <LinearLayout
         android:id="@+id/ll_act_signin_jilu"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="42dp"
         android:background="@color/color_white"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -87,13 +87,13 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_gray"/>
+        android:layout_height="2px"
+        android:background="@color/color_gray2"/>
 
     <LinearLayout
         android:id="@+id/ll_act_signin_shuoming"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="42dp"
         android:gravity="center_vertical"
         android:background="@color/color_white"
         android:orientation="horizontal">
@@ -119,8 +119,8 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_gray"/>
+        android:layout_height="2px"
+        android:background="@color/color_gray2"/>
 
     <View
         android:layout_width="match_parent"
