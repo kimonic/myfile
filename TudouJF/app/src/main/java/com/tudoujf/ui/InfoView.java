@@ -43,6 +43,8 @@ public class InfoView extends View {
     private int width;
     /**该控件的宽高比*/
     private static final float whScale=3.5f;
+    /**最底部白色矩形框*/
+    private Rect rect=new Rect();
 
 
     /**投资进度--0.88f*/
@@ -149,9 +151,11 @@ public class InfoView extends View {
         int textX2= (int) (width/1.5f+textWidth2/2-paintOrange.measureText(jieKuanQiXian)/2);
         canvas.drawText(jieKuanQiXian,textX2,width/9.1f,paintOrange);
 
+        paintCyan.setStrokeWidth(5);
         canvas.drawLine(width/1.86f,width/61.74f,width/1.86f,rectImag1.bottom-5,paintCyan);//中分线
 
-        canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
+//        paintCyan.setStrokeWidth(10);
+
 
 
 
@@ -184,6 +188,8 @@ public class InfoView extends View {
 
 
         //------------------------------------------投资进度--------------------------------------
+
+
         rectF.left=width*underlineScale;
         rectF.top=width/4.07f;
 
@@ -195,12 +201,28 @@ public class InfoView extends View {
         }
 
         rectF.bottom=width*0.277f;
+
+        //-------------------------------------------------
+        rect.left=0;
+        rect.top= (int) (width*0.2638f);
+        rect.right=width;
+        rect.bottom=getHeight();
+        canvas.drawRect(rect,paintWhite);
+        //-------------------------------------------------
+
+
         canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
 
         paintWhite.setTextSize(width*0.02777f);
         canvas.drawText(handleProgress(),rectF.left+((rectF.right-rectF.left)/2-paintWhite.measureText(handleProgress())/2),width*0.2731f,paintWhite);
 
+        Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
+        paintGray.setStrokeWidth(8);
         canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
+
+        paintCyan.setStrokeWidth(8);
+        canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
+
         //------------------------------------------投资进度--------------------------------------
 
 

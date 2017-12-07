@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -35,6 +36,7 @@ import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
+import com.tudoujf.activity.my.mypopularize.MyPopularizeActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.BallViewVPAdapter;
 import com.tudoujf.adapter.BannerVPAdapter;
@@ -48,6 +50,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.service.SignInService;
 import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
@@ -119,6 +122,8 @@ public class HomeFragment extends BaseFragment {
     ImageView ivMsgCount;
     @BindView(R.id.tv_frag_msgcount)
     TextView tvMsgCount;
+//    @BindView(R.id.drag_frame)
+//    FrameLayout dragFrame;
     private List<ImageView> list;
     private List<BallView> listBall;
     private float currentY;
@@ -192,6 +197,9 @@ public class HomeFragment extends BaseFragment {
      * 屏幕像素密度
      */
     private int density;
+//    private int screenWidth, screenHeight;
+//    private int right, bottom;
+//    private float downX, downY;
 
     @Override
     public int layoutRes() {
@@ -227,6 +235,7 @@ public class HomeFragment extends BaseFragment {
                 openActivity(NewbieWelfareActivity.class);
                 break;
             case R.id.ll_frag_home_tuijianyouli:
+                openActivity(MyPopularizeActivity.class);
                 break;
             case R.id.ll_frag_home_xinxipilu:
                 openActivity(InfoPublishActivity.class);
@@ -415,7 +424,7 @@ public class HomeFragment extends BaseFragment {
         initAutoCarousel();
         initDataFromInternet();
 
-//         开启悬浮窗
+//         开启悬浮窗-----------------------------------------------------------------------------------------------------------------------------------
 //        Intent intent = new Intent(getActivity(), SignInService.class);
 //        getActivity().startService(intent);
 
@@ -520,6 +529,43 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
+
+
+//        //-------------------------签到可滑动-------------------------------------------------------
+//        screenWidth = ScreenSizeUtils.getScreenWidth(getActivity());
+//        screenHeight = ScreenSizeUtils.getScreenHeight(getActivity());
+//        params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
+//        right = params.rightMargin;
+//        bottom = params.bottomMargin;
+//
+//        dragFrame.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        downX = event.getRawX();
+//                        downY = event.getRawY();
+//                        return  true;
+//                    case MotionEvent.ACTION_MOVE:
+//                        float distanceX = event.getRawX()-downX;//负值左移,正值右移
+//                        float distanceY = event.getRawY()-downY;
+//
+//                        Log.e("TAG", "onTouch: ---distanceX--"+distanceX);
+//                        Log.e("TAG", "onTouch: ---distanceY--"+distanceY);
+//
+//
+//                        params.rightMargin= (int) (right-distanceX);
+//                        params.bottomMargin= (int) (bottom-distanceY);
+//                        ivSignIn.setLayoutParams(params);
+//
+//                        return  true;
+//                    case MotionEvent.ACTION_UP:
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
+//        //-------------------------签到可滑动-------------------------------------------------------
 
 
 //

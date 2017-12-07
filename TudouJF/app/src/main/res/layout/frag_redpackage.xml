@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:orientation="horizontal"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/color_white"
         >
 
         <TextView
@@ -22,6 +24,13 @@
             android:text="@string/keyonghongbao"
             android:textColor="@color/global_theme_background_color"
             android:textSize="16sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/color_line"
+            />
 
         <TextView
             android:id="@+id/tv_frag_redpackage_yiyonghongbao"
@@ -32,6 +41,13 @@
             android:text="@string/yiyonghongbao"
             android:textColor="@color/color_black"
             android:textSize="16sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/color_line"
+            />
 
         <TextView
             android:id="@+id/tv_frag_redpackage_guoqihongbao"

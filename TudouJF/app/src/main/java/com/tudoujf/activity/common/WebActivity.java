@@ -33,6 +33,9 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.wv_act_web)
     WebView wvActWeb;
 
+    private  String  url;
+    private  String  title;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_web;
@@ -45,6 +48,9 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+        url=getIntent().getStringExtra("url");
+        title=getIntent().getStringExtra("title");
+//        url="https://www.baidu.com/";
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -54,6 +60,8 @@ public class WebActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActWeb.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActWeb.setLayoutParams(params);
+
+        mtbActWeb.setCenterTitle(title);
 
 
         wvActWeb.setWebViewClient(new MyWebClient());
@@ -65,10 +73,25 @@ public class WebActivity extends BaseActivity {
         ws.setUseWideViewPort(true);
         ws.setLoadWithOverviewMode(true);
         ws.setBuiltInZoomControls(true);
+
+//        ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+//        ws.setSaveFormData(true);
+//        ws.setGeolocationEnabled(true);
+        ws.setDomStorageEnabled(true);
+//        wvActWeb.requestFocus();
+//        wvActWeb.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+
+        wvActWeb.loadUrl(url);
     }
 
     @Override
     public void initListener() {
+        mtbActWeb.getLeftTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -97,12 +120,13 @@ public class WebActivity extends BaseActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            dismissPDialog();
         }
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
             super.onPageStarted(view, url, favicon);
+            showPDialog();
         }
 
 

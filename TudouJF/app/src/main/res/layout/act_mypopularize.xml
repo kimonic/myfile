@@ -69,7 +69,11 @@
                     android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_mypopularize_recommendrecord"
                 android:layout_width="match_parent"
@@ -106,7 +110,11 @@
                     android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_mypopularize_accountrecord"
                 android:layout_width="match_parent"
@@ -143,7 +151,11 @@
                     android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_mypopularize_recommendaward"
                 android:layout_width="match_parent"
@@ -181,7 +193,11 @@
 
             </LinearLayout>
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
@@ -213,7 +229,11 @@
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
@@ -244,7 +264,11 @@
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
@@ -275,7 +299,11 @@
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
@@ -306,7 +334,11 @@
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
@@ -337,7 +369,11 @@
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -376,9 +412,12 @@
                     android:textColor="@color/color_gray"
                     android:textSize="14sp" />
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <TextView
-
                 android:id="@+id/tv_act_mypopularize_btn_jie_suan"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"

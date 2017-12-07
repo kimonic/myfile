@@ -321,13 +321,15 @@ public class ClaimsBidView extends View {
         //--------------------进度显示直线---已进行部分---------------------------------------------
         float line4X = (width * 0.6666f) * investProgress + line1X;
         float line2Y = width * 0.2857f;
-        cyanPaint.setStrokeWidth(width * 0.0057f);
+//        cyanPaint.setStrokeWidth(width * 0.0057f);
+        cyanPaint.setStrokeWidth(8);
         canvas.drawLine(line1X, line2Y, line4X, line2Y, cyanPaint);
         //------------------------------------------------------------------------------------------
 
         //--------------------进度显示直线---未完成部分---------------------------------------------
         grayLinePaint.setStrokeWidth(width * 0.0057f);
         float line6X = width * 0.7047f;
+        grayLinePaint.setStrokeWidth(8);
         canvas.drawLine(line4X, line2Y, line6X, line2Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 

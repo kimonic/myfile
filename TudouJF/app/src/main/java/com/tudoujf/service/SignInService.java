@@ -8,10 +8,12 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.tudoujf.R;
+import com.tudoujf.utils.ToastUtils;
 
 /**
  * * ====================================================================
@@ -21,7 +23,9 @@ import com.tudoujf.R;
  * version：          1.0
  * date：            2017/7/31
  * description：  启动签到悬浮窗的service
- * history：
+ * history：用法
+ *           Intent intent = new Intent(getActivity(), SignInService.class);
+ *          getActivity().startService(intent);
  * * ====================================================================
  */
 
@@ -31,12 +35,13 @@ public class SignInService extends Service {
     private WindowManager mWindowManager;
     private View view;
     private WindowManager.LayoutParams wmParams;
-
+    private float downX, downY;
 
 
     public SignInService() {
 
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -56,7 +61,7 @@ public class SignInService extends Service {
 
     @Override
     public void onDestroy() {
-        if (view!=null){
+        if (view != null) {
             mWindowManager.removeView(view);
         }
         super.onDestroy();
@@ -78,9 +83,8 @@ public class SignInService extends Service {
         wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        LayoutInflater inflater=LayoutInflater.from(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
         view = inflater.inflate(R.layout.view_popitem_fraghome, null);
-
 
 
         mWindowManager.addView(view, wmParams);
@@ -88,11 +92,46 @@ public class SignInService extends Service {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignInService.this.stopSelf();
+//                SignInService.this.stopSelf();
                 // 此处控制悬浮窗接下来的行为
+
+                ToastUtils.showToast(SignInService.this, "点击事件");
+
             }
         });
 
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        downX = event.getRawX();
+                        downY = event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+//                        float distanceX = event.getRawX()-downX;//负值左移,正值右移
+//                        float distanceY = event.getRawY()-downY;
+
+                        wmParams.x -= event.getRawX() - downX;
+                        wmParams.y -= event.getRawY() - downY;
+                        if (wmParams.x < 0) {
+                            wmParams.x = 0;
+                        }
+                        if (wmParams.y < 0) {
+                            wmParams.y = 0;
+                        }
+                        mWindowManager.updateViewLayout(view, wmParams);
+                        downX = event.getRawX();
+                        downY = event.getRawY();
+
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+                return false;
+            }
+        });
 
 
     }

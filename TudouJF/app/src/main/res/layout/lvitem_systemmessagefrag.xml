@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
         >
         <TextView
             android:id="@+id/lvitem_systemmessage_tv1"

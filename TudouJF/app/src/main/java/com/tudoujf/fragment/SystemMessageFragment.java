@@ -61,14 +61,14 @@ import butterknife.BindView;
 public class SystemMessageFragment extends BaseFragment {
     @BindView(R.id.lv_frag_systemmessage)
     ListView lvFragSystemMessage;
-    @BindView(R.id.tv_frag_systemmessage_previous)
-    TextView tvPrevious;
-    @BindView(R.id.tv_frag_systemmessage_next)
-    TextView tvNext;
+    //    @BindView(R.id.tv_frag_systemmessage_previous)
+//    TextView tvPrevious;
+//    @BindView(R.id.tv_frag_systemmessage_next)
+//    TextView tvNext;
     @BindView(R.id.srl_frag_systemmessage)
     SmartRefreshLayout srlFragSystemMessage;
 
-    private List<MyMessageBean.ItemsBean> list=new ArrayList<>();
+    private List<MyMessageBean.ItemsBean> list = new ArrayList<>();
 
     private int type = 0;
     private int page = 1;
@@ -78,10 +78,10 @@ public class SystemMessageFragment extends BaseFragment {
      * 上拉加载与下拉刷新标识
      */
     private int refreshFlag = 0;
-    private static final int  REFRESH=1;
-    private static final int  LOADMORE=2;
+    private static final int REFRESH = 1;
+    private static final int LOADMORE = 2;
     private SystemMessageFragLvAdapter adapter;
-    private Gson gson=new Gson();
+    private Gson gson = new Gson();
     private int positionInner;
 
 
@@ -93,31 +93,31 @@ public class SystemMessageFragment extends BaseFragment {
     @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_frag_systemmessage_previous:
-                if (page > 1) {
-                    page--;
-                    dialog.show();
-                    initDataFromInternet();
-                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
-                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
-                } else {
-                    tvPrevious.setTextColor(getResources().getColor(R.color.color_gray));
-
-                }
-                break;
-            case R.id.tv_frag_systemmessage_next:
-                if (bean != null && page < StringUtils.string2Integer(bean.getTotal_pages())) {
-                    dialog.show();
-                    page++;
-                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
-                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
-                    initDataFromInternet();
-                } else {
-                    tvNext.setTextColor(getResources().getColor(R.color.color_gray));
-                }
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.tv_frag_systemmessage_previous:
+//                if (page > 1) {
+//                    page--;
+//                    dialog.show();
+//                    initDataFromInternet();
+//                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+//                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+//                } else {
+//                    tvPrevious.setTextColor(getResources().getColor(R.color.color_gray));
+//
+//                }
+//                break;
+//            case R.id.tv_frag_systemmessage_next:
+//                if (bean != null && page < StringUtils.string2Integer(bean.getTotal_pages())) {
+//                    dialog.show();
+//                    page++;
+//                    tvNext.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+//                    tvPrevious.setTextColor(getResources().getColor(R.color.global_theme_background_color));
+//                    initDataFromInternet();
+//                } else {
+//                    tvNext.setTextColor(getResources().getColor(R.color.color_gray));
+//                }
+//                break;
+//        }
 
     }
 
@@ -152,11 +152,11 @@ public class SystemMessageFragment extends BaseFragment {
         lvFragSystemMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                positionInner=position;
-                if (!list.get(position).getStatus().equals("2")){
+                positionInner = position;
+                if (!list.get(position).getStatus().equals("2")) {
                     dialog.show();
                     list.get(position).setStatus("2");
-                    TreeMap<String,String>  map=new TreeMap<>();
+                    TreeMap<String, String> map = new TreeMap<>();
 
                     map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
                     map.put("message_id", list.get(position).getId());
@@ -166,32 +166,30 @@ public class SystemMessageFragment extends BaseFragment {
                         public void onSuccess(Response<String> response) {
                             dialog.dismiss();
                             String result = StringUtils.getDecodeString(response.body());
-                            CommonBean bean=gson.fromJson(result, CommonBean.class);
-                            if (bean!=null&&bean.getCode().equals("200")){
+                            CommonBean bean = gson.fromJson(result, CommonBean.class);
+                            if (bean != null && bean.getCode().equals("200")) {
                                 try {
-                                    JSONObject json=new JSONObject(bean.getData().toString());
-                                    ((MyMessageActivity)getActivity()).unreadMessageCount(json.getInt("message_count"));
+                                    JSONObject json = new JSONObject(bean.getData().toString());
+                                    ((MyMessageActivity) getActivity()).unreadMessageCount(json.getInt("message_count"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                                 openDetailsActivity();
-                            }else {
-                                ToastUtils.showToast(getActivity(),"网络不太给力哟!");
+                            } else {
+                                ToastUtils.showToast(getActivity(), "网络不太给力哟!");
                             }
                             Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
                         }
                     });
-                }else {
+                } else {
                     openDetailsActivity();
                 }
 
 
-
-
             }
         });
-        tvPrevious.setOnClickListener(this);
-        tvNext.setOnClickListener(this);
+//        tvPrevious.setOnClickListener(this);
+//        tvNext.setOnClickListener(this);
 
 
 //        /**上拉加载与下拉刷新监听*/
@@ -208,11 +206,11 @@ public class SystemMessageFragment extends BaseFragment {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 dialog.show();
-                if (bean!=null&&page < StringUtils.string2Integer(bean.getTotal_pages())) {
+                if (bean != null && page < StringUtils.string2Integer(bean.getTotal_pages())) {
                     page++;
                     initDataFromInternet();
                     refreshFlag = 2;
-                }else {
+                } else {
                     stopRefresh(2);
                     dialog.dismiss();
                 }
@@ -262,23 +260,26 @@ public class SystemMessageFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            if (page==1){
+            if (page == 1) {
                 list.clear();
             }
             list.addAll(bean.getItems());
             if (list.size() == 0) {
                 ToastUtils.showToast(getActivity(), "当前页没有要展示的数据");
-            }else {
-                if (adapter!=null){
+            } else {
+                if (adapter != null) {
                     adapter.notifyDataSetChanged();
-                }else {
+                } else {
                     adapter = new SystemMessageFragLvAdapter(list, getActivity());
                     lvFragSystemMessage.setAdapter(adapter);
                 }
             }
         }
     }
-    /**终止刷新加载*/
+
+    /**
+     * 终止刷新加载
+     */
     private void stopRefresh(int flag) {
         switch (flag) {
             case REFRESH:
@@ -290,7 +291,7 @@ public class SystemMessageFragment extends BaseFragment {
         }
     }
 
-    private void openDetailsActivity(){
+    private void openDetailsActivity() {
         Bundle bundle = new Bundle();
         bundle.putString("title", list.get(positionInner).getTitle());
         bundle.putString("content", list.get(positionInner).getContents());

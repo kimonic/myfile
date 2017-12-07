@@ -147,8 +147,8 @@ public class MLockView extends View {
 
     private void initView() {
         screenWidth = ScreenSizeUtils.getScreenWidth(getContext());
-        hollowPaint = initPaint("#FE7B20", 1, 5);
-        shadePaint = initPaint("#A6D3D8", 2, 0);
+        hollowPaint = initPaint("#F48029", 1, 5);
+        shadePaint = initPaint("#E7FAFF", 2, 0);
         innerPaint = initPaint("#3EACC5", 2, 0);
         linePaint = initPaint("#1898BF", 2, 10);
 

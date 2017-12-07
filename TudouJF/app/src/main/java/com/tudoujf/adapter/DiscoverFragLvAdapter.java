@@ -1,6 +1,7 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,17 +73,14 @@ public class DiscoverFragLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText(list.get(position).getName());
         viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getAddTime()));
-        viewHolder.textView3.setText(list.get(position).getContents());
+
+        if (list.get(position).getContents()!=null){
+            viewHolder.textView3.setText(Html.fromHtml(list.get(position).getContents()));
+        }else {
+            viewHolder.textView3.setText("");
+        }
         ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
 //        viewHolder.imageView.setImageResource(list.get(position).getResId());
-
-
-
-
-
-
-
-
 
         return view;
     }

@@ -1,7 +1,9 @@
 package com.tudoujf.fragment;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.discover.LuckyLotteryActivity;
 import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.adapter.DiscoverFragLvAdapter;
@@ -144,6 +147,17 @@ public class DiscoverFragment extends BaseFragment {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 finishRL();
+            }
+        });
+
+        lvFragDiscover.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url",list.get(position).getJumpurl());
+                intent.putExtra("title",list.get(position).getName());
+                startActivity(intent);
+//                openActivity(WebActivity.class);
             }
         });
 

@@ -16,7 +16,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,13 +115,13 @@
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dddddd"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,13 +151,13 @@
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dddddd"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,13 +187,13 @@
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dddddd"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -221,24 +223,25 @@
                     android:textColor="@color/act_productdetails_tvcolor"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#dddddd"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                />
+                android:background="@color/color_line" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/global_background_color" />
 
-            <LinearLayout
+            <com.tudoujf.ui.WhiteLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:background="@color/act_productdetails_baccolor1"
                 android:orientation="horizontal">
+
 
                 <com.tudoujf.ui.UnderlineTextView
                     android:id="@+id/utv_act_productdetails1"
@@ -275,7 +278,7 @@
                     android:text="@string/act_productdetails_touziliebiao"
                     android:textColor="@color/color_black"
                     android:textSize="16sp" />
-            </LinearLayout>
+            </com.tudoujf.ui.WhiteLinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_act_productdetails_xiangmuxiangqing"
@@ -292,11 +295,11 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
                         android:scaleType="fitXY"
-                        android:layout_gravity="center_vertical"
 
                         android:src="@drawable/act_productdetails2_xiangmumiaoshu" />
 
@@ -338,11 +341,11 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
                         android:scaleType="fitXY"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/act_productdetails2_huankuanbaozhang" />
 
                     <TextView
@@ -381,11 +384,11 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
                         android:scaleType="fitXY"
-                        android:layout_gravity="center_vertical"
                         android:src="@drawable/act_productdetails2_fengkongyijian" />
 
                     <TextView
@@ -424,10 +427,10 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
-                        android:layout_gravity="center_vertical"
                         android:scaleType="fitXY"
                         android:src="@drawable/act_productdetails2_baozhangjigou" />
 
@@ -467,10 +470,10 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:contentDescription="@null"
-                        android:layout_gravity="center_vertical"
                         android:scaleType="fitXY"
                         android:src="@drawable/act_productdetails2_fengxiantishi" />
 
@@ -508,7 +511,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+
+                >
 
                 <ListView
                     android:id="@+id/lv_act_productdetails"
@@ -578,10 +583,10 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:contentDescription="@null"
-                    android:layout_gravity="center_vertical"
                     android:scaleType="fitXY"
                     android:src="@drawable/act_productdetails2_xiangmuziliao" />
 
@@ -617,20 +622,22 @@
                 android:layout_height="5dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
 
-            <TextView
-                android:id="@+id/tv_act_productdetails_buynow"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_marginTop="30dp"
-                android:background="@color/global_theme_background_color"
-                android:gravity="center"
-                android:text="@string/act_productdetails_lijigoumai"
-                android:textColor="@color/color_white"
-                android:textSize="14sp" />
+                />
 
 
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_act_productdetails_buynow"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/global_theme_background_color"
+        android:gravity="center"
+        android:text="@string/act_productdetails_lijigoumai"
+        android:textColor="@color/color_white"
+        android:textSize="14sp" />
 </LinearLayout>

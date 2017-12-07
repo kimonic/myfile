@@ -123,6 +123,7 @@
         android:id="@+id/srl_act_recommendrecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/SmartRefreshLayout"
         android:layout_weight="1">
         <ListView
             android:id="@+id/lv_act_recommendrecord"
