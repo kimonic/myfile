@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@color/color_white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="8dp"
         >
         <TextView
             android:id="@+id/lvitem_act_rechargerecord_tv1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center_vertical"
             android:text="@string/default1"
@@ -26,7 +27,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_gray"
             android:gravity="center_vertical"
             android:text="@string/yuan"
@@ -37,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center_vertical|end"
 
@@ -48,17 +49,19 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@color/color_white"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
         >
         <TextView
             android:id="@+id/lvitem_act_rechargerecord_tv4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_gray"
             android:gravity="center_vertical"
             android:text="@string/chongzhijine"

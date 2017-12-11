@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_productdetails"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_productdetails_temptitle"
         app:leftImage="@drawable/xvector_back" />
@@ -17,8 +17,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +83,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="8dp"
                 android:background="@color/global_background_color" />
 
             <LinearLayout
@@ -233,7 +232,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="12dp"
                 android:background="@color/global_background_color" />
 
             <com.tudoujf.ui.WhiteLinearLayout
@@ -253,7 +252,7 @@
                     android:gravity="center"
                     android:text="@string/act_productdetails_xiangmuxiangqing"
                     android:textColor="@color/act_productdetails_tvcolor"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <com.tudoujf.ui.UnderlineTextView
                     android:id="@+id/utv_act_productdetails2"
@@ -265,7 +264,7 @@
                     android:gravity="center"
                     android:text="@string/act_productdetails_changjianwenti"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <com.tudoujf.ui.UnderlineTextView
                     android:id="@+id/utv_act_productdetails3"
@@ -277,8 +276,13 @@
                     android:gravity="center"
                     android:text="@string/act_productdetails_touziliebiao"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </com.tudoujf.ui.WhiteLinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/global_background_color" />
 
             <LinearLayout
                 android:id="@+id/ll_act_productdetails_xiangmuxiangqing"
@@ -289,12 +293,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -309,9 +312,16 @@
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_xiangmumiaoshu"
                         android:textSize="14sp"
+                        android:textColor="@color/color_black2"
 
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/color_line" />
 
                 <TextView
                     android:id="@+id/tv_act_productdetails_xiangmumiaoshu"
@@ -339,8 +349,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -354,9 +364,16 @@
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_huankuanbaozhang"
                         android:textSize="14sp"
+                        android:textColor="@color/color_black2"
 
                         />
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/color_line" />
 
                 <TextView
                     android:id="@+id/tv_act_productdetails_huankuanbaozhang"
@@ -382,8 +399,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -397,10 +414,16 @@
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_fengkongyijian"
                         android:textSize="14sp"
+                        android:textColor="@color/color_black2"
 
                         />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/color_line" />
                 <TextView
                     android:id="@+id/tv_act_productdetails_fengkongyijian"
                     android:layout_width="match_parent"
@@ -425,8 +448,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -440,10 +463,16 @@
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_baozhangjigou"
                         android:textSize="14sp"
+                        android:textColor="@color/color_black2"
 
                         />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/color_line" />
                 <TextView
                     android:id="@+id/tv_act_productdetails_baozhangjigou"
                     android:layout_width="match_parent"
@@ -468,8 +497,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
@@ -483,10 +512,16 @@
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_fengxiantishi"
                         android:textSize="14sp"
+                        android:textColor="@color/color_black2"
 
                         />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/color_line" />
                 <TextView
                     android:id="@+id/tv_act_productdetails_fengxiantishi"
                     android:layout_width="match_parent"
@@ -581,8 +616,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -596,10 +631,17 @@
                     android:gravity="center_vertical|start"
                     android:text="@string/act_productdetails_xiangmuziliao"
                     android:textSize="14sp"
+                    android:textColor="@color/color_black2"
 
                     />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_line" />
             <com.tudoujf.ui.MHorizontalScrollView
                 android:id="@+id/hsv_act_productdetails"
                 android:layout_width="wrap_content"
@@ -620,10 +662,10 @@
                 android:id="@+id/iv_act_productdetails"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
+                android:layout_marginBottom="30dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
 
                 />
 

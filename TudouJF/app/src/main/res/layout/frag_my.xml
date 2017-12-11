@@ -18,7 +18,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="30dp"
                 android:background="@color/global_theme_background_color"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -36,8 +36,8 @@
                     <ImageView
 
                         android:id="@+id/iv_frag_my_icon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:contentDescription="@null"
                         android:src="@drawable/act_lock_icon" />
 
@@ -49,15 +49,15 @@
                         android:layout_marginRight="12dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
 
                 <ImageView
                     android:id="@+id/iv_frag_my_vip"
-                    android:layout_width="18dp"
-                    android:layout_height="11dp"
+                    android:layout_width="15dp"
+                    android:layout_height="9dp"
                     android:contentDescription="@null"
                     android:src="@drawable/frag_my_vip" />
 
@@ -69,25 +69,30 @@
                     android:layout_marginStart="16dp"
                     android:background="@drawable/xshape_roundrect_mwhite1"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
                     android:text="@string/frag_my_shenqingvip"
                     android:textColor="@color/global_theme_background_color"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
 
                 <FrameLayout
                     android:id="@+id/fl_frag_my_message"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="end|center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_marginRight="7dp"
                     android:background="@drawable/frag_home_info">
 
                     <TextView
                         android:id="@+id/tv_frag_my_message"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
                         android:layout_gravity="end|top"
                         android:gravity="center"
                         android:textColor="@color/color_white"
@@ -100,8 +105,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/global_theme_background_color"
                 android:gravity="center"
-                android:paddingBottom="5dp"
-                android:paddingTop="24dp"
+                android:paddingTop="8dp"
                 android:text="@string/frag_my_zongshouyi"
                 android:textColor="@color/color_white"
                 android:textSize="12sp" />
@@ -112,14 +116,13 @@
                 android:layout_height="wrap_content"
                 android:background="@color/global_theme_background_color"
                 android:gravity="center"
-                android:paddingBottom="16dp"
                 android:textColor="@color/color_white"
                 android:textIsSelectable="true"
-                android:textSize="30sp" />
+                android:textSize="28sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:background="@color/global_theme_background_color"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
@@ -128,7 +131,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -138,19 +141,18 @@
                         android:gravity="center"
                         android:paddingTop="5dp"
                         android:text="@string/frag_my_zhanghuzongzichan"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="2dp"
                         android:textColor="@color/color_white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_frag_my_total"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
                         android:textIsSelectable="true"
+                        android:paddingBottom="3dp"
                         android:textSize="12sp" />
 
                 </LinearLayout>
@@ -159,12 +161,13 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/act_affirmbuy_bac" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -172,20 +175,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="2dp"
                         android:paddingTop="5dp"
                         android:text="@string/frag_my_keyongyue"
                         android:textColor="@color/color_white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_frag_my_canuse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
+                        android:paddingBottom="3dp"
                         android:textIsSelectable="true"
                         android:textSize="12sp" />
 
@@ -195,12 +197,13 @@
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/act_affirmbuy_bac" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="3dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
 
@@ -210,20 +213,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="2dp"
                         android:paddingTop="5dp"
                         android:text="@string/frag_my_wodetiyanjin"
                         android:textColor="@color/color_white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_frag_my_experience"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="7dp"
                         android:textColor="@color/color_white"
+                        android:paddingBottom="3dp"
                         android:textIsSelectable="true"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -253,7 +255,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="82dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:background="@drawable/xshape_roundrect_mcyan"
@@ -385,26 +387,32 @@
                 android:layout_marginRight="12dp"
                 android:layout_weight="1">
 
-                <ListView
-                    android:id="@+id/lv_frag_my"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <ListView
+                        android:id="@+id/lv_frag_my"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dividerHeight="0dp"
+                        android:divider="#f4f4f4"
+                        />
+
+
+
 
                 <FrameLayout
 
                     android:id="@+id/fl_frag_my"
-                    android:layout_width="95dp"
-                    android:layout_height="75dp"
+                    android:layout_width="85dp"
+                    android:layout_height="65dp"
                     android:layout_gravity="end|top"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/iv_frag_my"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:contentDescription="@null"
                         android:layout_gravity="bottom"
                         android:src="@drawable/frag_my_onlineservice"
@@ -413,8 +421,8 @@
 
                     <TextView
                         android:id="@+id/tv_frag_my"
-                        android:layout_width="30dp"
-                        android:layout_height="24dp"
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="end"
                         android:textIsSelectable="true"
                         android:background="@drawable/xvector_close" />

@@ -53,6 +53,10 @@ public class HomeActivity extends BaseActivity {
 
     /**是否已开启手势密码*/
     private  boolean  isLock=false;
+    @Override
+    public int getLayoutResId() {
+        return R.layout.act_home;
+    }
 
     public ViewPager getVpActHome() {
         return vpActHome;
@@ -173,10 +177,7 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    @Override
-    public int getLayoutResId() {
-        return R.layout.act_home;
-    }
+
 
 
     @Override

@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:paddingTop="10dp"
-        android:background="@color/color_white"
+        android:layout_height="36dp"
+        android:paddingTop="6dp"
         android:orientation="horizontal"
         >
 
@@ -33,14 +33,14 @@
             android:layout_weight="1"
             android:gravity="center_vertical|end"
             android:text="20XX-XX-XX  XX:XX"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp" />
+            android:textColor="@color/color_gray3"
+            android:textSize="12sp" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:orientation="horizontal">
 
@@ -51,8 +51,8 @@
             android:layout_marginStart="20dp"
             android:gravity="center_vertical"
             android:text="@string/guanlianxiangmu"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp" />
+            android:textColor="@color/color_gray3"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/lvitem_transactiondetails_tv3"
@@ -63,14 +63,13 @@
             android:layout_weight="1"
             android:gravity="center_vertical|start"
             android:text="XXXXXXXXXXX"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp" />
+            android:textColor="@color/color_gray3"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:orientation="horizontal">
 
@@ -81,8 +80,8 @@
             android:layout_marginStart="20dp"
             android:gravity="center_vertical"
             android:text="@string/yue"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp" />
+            android:textColor="@color/color_gray3"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/lvitem_transactiondetails_tv4"
@@ -94,7 +93,7 @@
             android:gravity="center_vertical"
             android:text="000,000,000.00元"
             android:textColor="@color/color_orange"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/lvitem_transactiondetails_tv5"
@@ -105,8 +104,16 @@
             android:gravity="center_vertical|end"
             android:text="Y+000,000,000.00"
             android:textColor="@color/color_orange"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_marginRight="20dp"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_line"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="6dp"
+        />
 
 </LinearLayout>

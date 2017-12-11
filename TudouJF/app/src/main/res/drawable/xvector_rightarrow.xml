@@ -33,12 +33,21 @@
         <!--"-->
             <!--/>-->
         <path android:strokeColor="#B5B5B5"
-            android:strokeWidth="50"
-            android:pathData="M375 450,
+            android:strokeWidth="35"
+            android:pathData="M360 420,
                             L460 600
-                          375 750
+                          360 780
 
 "
             />
+
+        <!--<path android:strokeColor="#B5B5B5"-->
+            <!--android:strokeWidth="35"-->
+            <!--android:pathData="M375 450,-->
+                            <!--L460 600-->
+                          <!--375 750-->
+
+<!--"-->
+            <!--/>-->
         </group>
     </vector>

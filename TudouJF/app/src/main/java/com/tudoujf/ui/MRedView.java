@@ -175,7 +175,7 @@ public class MRedView extends View {
 
         if (redPackageOrQuan) {
             //------------------------绘制红包背景------------------------------------------------------
-            redPackagePaint.setStrokeWidth(6);
+            redPackagePaint.setStrokeWidth(3);
             redRect.left = width * 0.6383f;
             redRect.top = width * 0.02128f;
             redRect.right = width * 0.9362f;

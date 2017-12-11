@@ -147,7 +147,7 @@ public class MLockView extends View {
 
     private void initView() {
         screenWidth = ScreenSizeUtils.getScreenWidth(getContext());
-        hollowPaint = initPaint("#F48029", 1, 5);
+        hollowPaint = initPaint("#F48029", 1, 3);
         shadePaint = initPaint("#E7FAFF", 2, 0);
         innerPaint = initPaint("#3EACC5", 2, 0);
         linePaint = initPaint("#1898BF", 2, 10);
@@ -187,7 +187,7 @@ public class MLockView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         int width=getWidth();
-        distancePX= (int) (width*0.1333f);
+        distancePX= (int) (width*0.1352f);
         mPadding= (int) (width*0.12f);
 
         radius = (getWidth() - mPadding * 2 - distancePX * 2) / 6;
@@ -200,9 +200,9 @@ public class MLockView extends View {
         circleX[2] = circleX3;
 
 
-        int circleY1 = mPadding + radius;
-        int circleY2 = mPadding + radius * 3 + distancePX;
-        int circleY3 = mPadding + radius * 5 + distancePX * 2;
+        int circleY1 = mPadding + radius-50;
+        int circleY2 = mPadding + radius * 3 + distancePX-50;
+        int circleY3 = mPadding + radius * 5 + distancePX * 2-50;
         circleY[0] = circleY1;
         circleY[1] = circleY2;
         circleY[2] = circleY3;

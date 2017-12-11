@@ -7,13 +7,13 @@
     <FrameLayout
         android:id="@+id/mtb_act_myproject"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:background="@color/global_theme_background_color">
 
         <TextView
             android:id="@+id/tv_act_myproject_bac"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
@@ -60,6 +60,7 @@
         android:background="@color/act_infopublish_bac"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
+        android:paddingTop="3dp"
         android:orientation="horizontal">
 
         <com.tudoujf.ui.UnderlineTextView
@@ -70,7 +71,7 @@
             android:gravity="center"
             android:text="@string/act_myproject_total"
             android:textColor="@color/global_theme_background_color"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:underlinecolor="@color/global_theme_background_color" />
 
         <com.tudoujf.ui.UnderlineTextView
@@ -83,7 +84,7 @@
             android:textColor="@color/color_black"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <com.tudoujf.ui.UnderlineTextView
             android:id="@+id/utv_act_myproject_zhaiquanxiangmu"
@@ -93,7 +94,7 @@
             android:gravity="center"
             android:text="@string/act_myproject_zhaiquanxiangmu"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

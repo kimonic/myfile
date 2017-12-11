@@ -195,10 +195,10 @@ public class AffirmBuyActivity extends BaseActivity {
             case R.id.ll_act_affirmbuy_xieyi://同意居间服务协议
                 count++;
                 if (count % 2 == 0) {
-                    ivSel.setImageResource(R.drawable.act_affirm2_check);
+                    ivSel.setImageResource(R.drawable.xvector_checkbox_sel);
                     agree = true;
                 } else {
-                    ivSel.setImageResource(R.drawable.act_affirm_uncheck);
+                    ivSel.setImageResource(R.drawable.xvector_checkbox_unsel);
                     agree = false;
                 }
                 break;

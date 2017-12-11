@@ -96,6 +96,7 @@ public class MyProjectBidView extends View {
      * 转让期数
      */
     private String transfer = "转让期数:7/12";
+    private Paint topLinePaint;
 
 
     /**
@@ -263,6 +264,13 @@ public class MyProjectBidView extends View {
         whitePaint.setStyle(Paint.Style.FILL);
 
 
+        topLinePaint = new Paint();
+        topLinePaint.setAntiAlias(true);
+        topLinePaint.setColor(Color.parseColor("#D6D6D6"));
+        topLinePaint.setStyle(Paint.Style.FILL);
+        topLinePaint.setStrokeWidth(3);
+
+
     }
 
     /**
@@ -297,6 +305,13 @@ public class MyProjectBidView extends View {
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
+        int heigt=getHeight();
+
+
+        //---------------------------------上下边线---------------------------------------------------------
+        canvas.drawLine(0,0,width,0,topLinePaint);
+        canvas.drawLine(0,heigt,width,heigt,topLinePaint);
+        //---------------------------------上下边线---------------------------------------------------------
 
         //-----------------------标题--房产抵押贷款20170327003--------------------------------------
         float text1X = width * 0.03809f;
@@ -323,17 +338,21 @@ public class MyProjectBidView extends View {
 
         //-----------------左侧介绍文本上的数字显示/债权价值(元)上方数字显示------------------------
         float text3X = width * 0.07714f;
-        float text3Y = width * 0.1809f;
-        orangePaint.setTextSize(width * 0.05714f);
+        float text3Y = width * 0.1709f;
+//        float text3Y = width * 0.1809f;
+        orangePaint.setTextSize(width * 0.03714f);
+//        orangePaint.setTextSize(width * 0.05714f);
         canvas.drawText(zhaiQuanJiaZhi, text3X, text3Y, orangePaint);
         //------------------------------------------------------------------------------------------
 
 
         //-----------------------左侧介绍文本/债权价值(元)------------------------------------------
-        grayLinePaint.setTextSize(width * 0.03777f);
+        grayLinePaint.setTextSize(width * 0.03077f);
+//        grayLinePaint.setTextSize(width * 0.03777f);
         float text4X = text3X + orangePaint.measureText(zhaiQuanJiaZhi) / 2
                 - grayLinePaint.measureText(explain1) / 2;
-        float text4Y = width * 0.2381f;
+        float text4Y = width * 0.2481f;
+//        float text4Y = width * 0.2381f;
         canvas.drawText(explain1, text4X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
@@ -346,7 +365,7 @@ public class MyProjectBidView extends View {
 
 
         //---------------中间展示文本介绍/原标年化收益----------------------------------------------
-        float text6X = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(explain2) / 2;
+        float text6X = text5X + (orangePaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(explain2) / 2);
         canvas.drawText(explain2, text6X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
@@ -366,7 +385,8 @@ public class MyProjectBidView extends View {
 
         //--------------------进度显示直线---已进行部分---------------------------------------------
         float line4X = (width * 0.6666f) * investProgress + line1X;
-        float line2Y = width * 0.2857f;
+        float line2Y = width * 0.2957f;
+//        float line2Y = width * 0.2857f;
         cyanPaint.setStrokeWidth(width * 0.0057f);
         canvas.drawLine(line1X, line2Y, line4X, line2Y, cyanPaint);
         //------------------------------------------------------------------------------------------
@@ -380,7 +400,7 @@ public class MyProjectBidView extends View {
 
         //--------------------进度显示文本--50.00%--------------------------------------------------
         float text9Y = width * 0.35f;
-        blackPaint.setTextSize(width * 0.03809f);
+        blackPaint.setTextSize(width * 0.03009f);
 
         if (investProgress * 100 != 0) {
             canvas.drawText(decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
@@ -391,7 +411,7 @@ public class MyProjectBidView extends View {
 
 
         //------------------------剩余可投:--固定文本-----------------------------------------------
-        grayLinePaint.setTextSize(width * 0.03809f);
+        grayLinePaint.setTextSize(width * 0.03009f);
         float text10X = width * 0.3219f;
         canvas.drawText(getResources().getString(R.string.shengyuketou), text10X, text9Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
@@ -405,9 +425,11 @@ public class MyProjectBidView extends View {
 
         //-----------------按钮部分-----------------------------------------------------------------
         rectF.left = width * 0.7428f;
-        rectF.top = width * 0.2761f;
+        rectF.top = width * 0.2861f;
+//        rectF.top = width * 0.2761f;
         rectF.right = width * 0.9619f;
-        rectF.bottom = width * 0.3523f;
+        rectF.bottom = width * 0.3623f;
+//        rectF.bottom = width * 0.3523f;
 
 
         whitePaint.setTextSize(width * 0.03809f);
@@ -466,10 +488,12 @@ public class MyProjectBidView extends View {
 
         if (widthMode == MeasureSpec.AT_MOST || widthMode == MeasureSpec.UNSPECIFIED) {
             width = ScreenSizeUtils.getScreenWidth(getContext());
-            height = (int) (width * 0.3866);
+//            height = (int) (width * 0.3866);
+            height = (int) (width * 0.4016);
             setMeasuredDimension(width, height);
         } else {
-            height = (int) (width * 0.3866);
+            height = (int) (width * 0.4016);
+//            height = (int) (width * 0.3866);
             setMeasuredDimension(width, height);
         }
 

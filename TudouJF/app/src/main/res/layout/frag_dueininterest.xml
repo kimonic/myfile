@@ -18,7 +18,8 @@
             android:gravity="center"
             android:text="@string/frag_dueininterest_date"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:background="@drawable/xshape_fourboder"/>
 
         <TextView
             android:id="@+id/tv_frag_dueininterest2"
@@ -28,7 +29,9 @@
             android:gravity="center"
             android:text="@string/frag_dueininterest_name"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:background="@drawable/xshape_threeboderql"
+            />
 
         <TextView
             android:id="@+id/tv_frag_dueininterest3"
@@ -38,6 +41,7 @@
             android:gravity="center"
             android:text="@string/frag_dueininterest_toubiaojineyuan"
             android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
             android:textSize="14sp" />
 
         <TextView
@@ -48,6 +52,7 @@
             android:gravity="center"
             android:text="@string/frag_dueininterest_shouyi"
             android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -62,7 +67,11 @@
             android:id="@+id/lv_frag_dueininterest"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_white" />
+            android:background="@color/color_white"
+            android:dividerHeight="0dp"
+            android:divider="#00000000"
+
+            />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

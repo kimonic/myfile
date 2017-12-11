@@ -2,9 +2,13 @@ package com.tudoujf.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +18,13 @@ import com.lzy.okgo.OkGo;
 import com.tudoujf.R;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.ToastUtils;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
 /**
  * * ================================================
  * name:            BaseActivity
@@ -27,7 +35,6 @@ import butterknife.Unbinder;
  * description：     fragment基类
  * history：
  * ===================================================
- *
  */
 
 public abstract class BaseFragment extends Fragment implements BaseMethod, View.OnClickListener {
@@ -35,16 +42,55 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
     private AlertDialog bDialog;
 
+
+    //-----------------------------------------联网请求计时---------------------------------------------------------
+
+    private boolean isProgressing = false;
+
+    private MyHandler handler;
+
+    private class MyHandler extends Handler {
+        // 弱引用 ，防止内存泄露
+        private WeakReference<FragmentActivity> weakReference;
+
+        public MyHandler(FragmentActivity handlerMemoryActivity) {
+            weakReference = new WeakReference<FragmentActivity>(handlerMemoryActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.e("TAG", "run: BaseFragment-----超时线程取消加载");
+            FragmentActivity handlerMemoryActivity = weakReference.get();
+            Log.e("TAG", "run: BaseFragment-----超时线程取消加载");
+            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + handlerMemoryActivity);
+            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + isProgressing);
+            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + msg.what);
+            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
+                OkGo.getInstance().cancelAll();
+                ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+            }
+            dismissPDialog();
+        }
+    }
+
+
+    //------------------------------------------联网请求计时--------------------------------------------------------
+
+
     public void showPDialog() {
-        if (bDialog==null){
-            bDialog= DialogUtils.showProgreessDialog(getActivity(),getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
-        }else {
+        isProgressing = true;
+        timeThread();
+        if (bDialog == null) {
+            bDialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        } else {
             bDialog.show();
         }
     }
 
-    public void dismissPDialog(){
-        if (bDialog!=null){
+    public void dismissPDialog() {
+        isProgressing = false;
+        if (bDialog != null) {
             bDialog.dismiss();
         }
     }
@@ -58,9 +104,13 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         initDataFromIntent();
         initView();
         initListener();
+        handler = new MyHandler(getActivity());
         return view;
     }
-    /**设置fragment的布局资源id*/
+
+    /**
+     * 设置fragment的布局资源id
+     */
     public abstract int layoutRes();
 
 
@@ -85,9 +135,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     /**
      * 启动下一个activity
      */
-    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, int  requestCode) {
+    protected void openActivityForResult(Class<? extends BaseActivity> toActivity, int requestCode) {
         Intent intent = new Intent(getActivity(), toActivity);
-        startActivityForResult(intent,requestCode);
+        startActivityForResult(intent, requestCode);
     }
 
     /**
@@ -103,5 +153,23 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         super.onDestroyView();
         OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
         unbinder.unbind();
+    }
+
+    private void timeThread() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.e("TAG", "run: -----超时线程已启动");
+
+                Message msg = Message.obtain();
+                msg.what = 1;
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 }

@@ -24,11 +24,12 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class ImageGlideUtils {
     /**加载圆形网络图片*/
     public static  void loadCircularImage(ImageView view, String url) {
+
         Glide.with(view.getContext())
                 .load(url)
                 .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
                 .placeholder(R.drawable.act_lock_icon)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
+                .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .centerCrop()
                 .bitmapTransform(new CropCircleTransformation(view.getContext()))
@@ -71,4 +72,6 @@ public class ImageGlideUtils {
                 .crossFade()//淡入淡出
                 .into(view);
     }
+
+
 }

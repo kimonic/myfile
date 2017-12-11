@@ -85,7 +85,7 @@ public class BallView extends View {
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
         textPaint.setStyle(Paint.Style.FILL);
-        textPaint.setColor(Color.parseColor("#FFF9FD"));
+        textPaint.setColor(Color.parseColor("#FFFFFF"));
         textPaint.setStrokeWidth(10);
 
 
@@ -137,7 +137,7 @@ public class BallView extends View {
         textPaint.setTextSize(37);
         float bottomTextLength=textPaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi));
         float textX1=width/2-bottomTextLength/2;
-        float textY1=height/2+length*0.27f;
+        float textY1=height/2+length*0.32f;
         canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi),textX1,textY1,textPaint);
 
 

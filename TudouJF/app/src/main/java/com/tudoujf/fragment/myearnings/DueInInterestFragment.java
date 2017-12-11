@@ -65,7 +65,7 @@ public class DueInInterestFragment extends BaseFragment {
     Unbinder unbinder;
 
     private boolean first = true;
-    private String total = "合计(元):000,000.00";
+    private String total = "合计(元):    000,000.00";
 
 
     private int type = 1;
@@ -216,19 +216,24 @@ public class DueInInterestFragment extends BaseFragment {
         if (bean != null && bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
             list.addAll(bean.getPageObj().getItems());
 
-            total = "合计(元):" + StringUtils.getCommaDecimalsStr(bean.getAmount());
+            total = "合计(元):    " + StringUtils.getCommaDecimalsStr(bean.getAmount());
 
             if (!first) {
                 ((MyEarningsActivity) getActivity()).setTotal(total);
             }
-            Log.e("TAG", "LoadInternetDataToUi: -----first已执行"+first);
-            Log.e("TAG", "LoadInternetDataToUi: -----type"+type);
 
             if (first && type == 1) {
-                Log.e("TAG", "LoadInternetDataToUi: -----已执行");
                 ((MyEarningsActivity) getActivity()).setTotal(total);
             }
             first = false;
+
+            for (int i = 0; i < list.size(); i++) {
+                if (i%2==0){
+                    list.get(i).setColorFlag(0);
+                }else {
+                    list.get(i).setColorFlag(1);
+                }
+            }
 
 
             if (adapterO == null) {

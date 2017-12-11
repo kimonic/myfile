@@ -117,7 +117,8 @@ public class FundDetailsView extends View {
 
 
         int width = getWidth();
-        float radius = width * 0.03666f;
+//        float radius = width * 0.03666f;
+        float radius = width * 0.02833f;
 
 
         //--------背景色----------------------------------------------------------------------------
@@ -128,37 +129,38 @@ public class FundDetailsView extends View {
 
 
         //--------线段----圆------------------------------------------------------------------------
-        canvas.drawLine(width * 0.1133f, 0, width * 0.1133f, width * 0.6666f, grayPaint);
+        canvas.drawLine(width * 0.1133f, 0, width * 0.1133f, width * 0.75f, grayPaint);
 
         canvas.drawCircle(width * 0.1133f, width * 0.1399f, radius, redPaint);
-        canvas.drawCircle(width * 0.1133f, width * 0.2732f, radius, bluePaint);
-        canvas.drawCircle(width * 0.1133f, width * 0.4065f, radius, violetPaint);
-        canvas.drawCircle(width * 0.1133f, width * 0.5398f, radius, greenPaint);
-        canvas.drawCircle(width * 0.1133f, width * 0.6731f, radius, yellowPaint);
+        canvas.drawCircle(width * 0.1133f, width * (0.2732f+0.02f), radius, bluePaint);
+        canvas.drawCircle(width * 0.1133f, width * (0.4065f+0.04f), radius, violetPaint);
+        canvas.drawCircle(width * 0.1133f, width * (0.5398f+0.06f), radius, greenPaint);
+        canvas.drawCircle(width * 0.1133f, width * (0.6731f+0.08f), radius, yellowPaint);
         //--------线段----圆------------------------------------------------------------------------
 
 
         //--------圆内文字--------------------------------------------------------------------------
         whitePaint.setTextSize(width * 0.03933f);
         canvas.drawText("可", width * 0.0953f, width * 0.1519f, whitePaint);
-        canvas.drawText("冻", width * 0.0953f, width * 0.2852f, whitePaint);
-        canvas.drawText("已", width * 0.0953f, width * 0.4185f, whitePaint);
-        canvas.drawText("本", width * 0.0953f, width * 0.5518f, whitePaint);
-        canvas.drawText("利", width * 0.0953f, width * 0.6851f, whitePaint);
+        canvas.drawText("冻", width * 0.0953f, width * (0.2852f+0.02f), whitePaint);
+        canvas.drawText("已", width * 0.0953f, width * (0.4185f+0.04f), whitePaint);
+        canvas.drawText("本", width * 0.0953f, width * (0.5518f+0.06f), whitePaint);
+        canvas.drawText("利", width * 0.0953f, width * (0.6851f+0.08f), whitePaint);
         //--------圆内文字--------------------------------------------------------------------------
 
 
         //----------------文本----------------------------------------------------------------------
 
-        blackPaint.setTextSize(width * 0.03933f);
+//        blackPaint.setTextSize(width * 0.03933f);
+        blackPaint.setTextSize(width * 0.03333f);
         orangePaint.setTextSize(width * 0.05033f);
 //        orangePaint.setTextSize(width*0.03333f);
 
         canvas.drawText("可用余额", width * 0.25f, width * 0.1519f, blackPaint);
-        canvas.drawText("冻结金额", width * 0.25f, width * 0.2852f, blackPaint);
-        canvas.drawText("已收利息", width * 0.25f, width * 0.4185f, blackPaint);
-        canvas.drawText("待收本金", width * 0.25f, width * 0.5518f, blackPaint);
-        canvas.drawText("待收利息", width * 0.25f, width * 0.6851f, blackPaint);
+        canvas.drawText("冻结金额", width * 0.25f, width * (0.2852f+0.02f), blackPaint);
+        canvas.drawText("已收利息", width * 0.25f, width * (0.4185f+0.04f), blackPaint);
+        canvas.drawText("待收本金", width * 0.25f, width * (0.5518f+0.06f), blackPaint);
+        canvas.drawText("待收利息", width * 0.25f, width * (0.6851f+0.08f), blackPaint);
 
 //        canvas.drawText(balance_amount,width*0.4f,width*0.1519f,orangePaint);
 //        canvas.drawText(freeze_amount,width*0.4f,width*0.2852f,orangePaint);
@@ -167,17 +169,17 @@ public class FundDetailsView extends View {
 //        canvas.drawText(interest_wait_total,width*0.4f,width*0.6851f,orangePaint);
 
         canvas.drawText(balance_amount, width * 0.6333f - orangePaint.measureText(balance_amount) / 2, width * 0.1519f, orangePaint);
-        canvas.drawText(freeze_amount, width * 0.6333f - orangePaint.measureText(freeze_amount) / 2, width * 0.2852f, orangePaint);
-        canvas.drawText(interest_yes_total, width * 0.6333f - orangePaint.measureText(interest_yes_total) / 2, width * 0.4185f, orangePaint);
-        canvas.drawText(principal_wait_total, width * 0.6333f - orangePaint.measureText(principal_wait_total) / 2, width * 0.5518f, orangePaint);
-        canvas.drawText(interest_wait_total, width * 0.6333f - orangePaint.measureText(interest_wait_total) / 2, width * 0.6851f, orangePaint);
+        canvas.drawText(freeze_amount, width * 0.6333f - orangePaint.measureText(freeze_amount) / 2, width * (0.2852f+0.02f), orangePaint);
+        canvas.drawText(interest_yes_total, width * 0.6333f - orangePaint.measureText(interest_yes_total) / 2, width *(0.4185f+0.04f), orangePaint);
+        canvas.drawText(principal_wait_total, width * 0.6333f - orangePaint.measureText(principal_wait_total) / 2, width * (0.5518f+0.06f), orangePaint);
+        canvas.drawText(interest_wait_total, width * 0.6333f - orangePaint.measureText(interest_wait_total) / 2, width * (0.6851f+0.08f), orangePaint);
 
 
         canvas.drawText("元", width * 0.8666f, width * 0.1519f, blackPaint);
-        canvas.drawText("元", width * 0.8666f, width * 0.2852f, blackPaint);
-        canvas.drawText("元", width * 0.8666f, width * 0.4185f, blackPaint);
-        canvas.drawText("元", width * 0.8666f, width * 0.5518f, blackPaint);
-        canvas.drawText("元", width * 0.8666f, width * 0.6851f, blackPaint);
+        canvas.drawText("元", width * 0.8666f, width * (0.2852f+0.02f), blackPaint);
+        canvas.drawText("元", width * 0.8666f, width * (0.4185f+0.04f), blackPaint);
+        canvas.drawText("元", width * 0.8666f, width * (0.5518f+0.06f), blackPaint);
+        canvas.drawText("元", width * 0.8666f, width * (0.6851f+0.08f), blackPaint);
 
 
         //----------------文本----------------------------------------------------------------------

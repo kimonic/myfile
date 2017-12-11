@@ -67,7 +67,7 @@ public class UnderlineTextView extends AppCompatTextView {
 
 
         underlinePaint = new Paint();
-        underlinePaint.setStrokeWidth(6);
+        underlinePaint.setStrokeWidth(3);
         underlinePaint.setAntiAlias(true);
         underlinePaint.setStyle(Paint.Style.FILL);
 

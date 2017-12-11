@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,6 +61,7 @@ public class CalendarDialogScroll implements View.OnClickListener {
     private List<DayBean> monthList;
 
 
+
     public OnCalendarDialogDismissListener getListener() {
         return listener;
     }
@@ -68,8 +70,9 @@ public class CalendarDialogScroll implements View.OnClickListener {
         this.listener = listener;
     }
 
-    public CalendarDialogScroll(Context context) {
+    public CalendarDialogScroll(Context context,int buttonFlag) {
         this.context = context;
+        this.buttonFlag=buttonFlag;
         initData();
         initView();
         initListener();
@@ -147,6 +150,8 @@ public class CalendarDialogScroll implements View.OnClickListener {
     /**初始化控件*/
     private void initView() {
 
+
+
         view = LayoutInflater.from(context).inflate(R.layout.dialog_act_integralrecode_calendarscroll, null);
         tvStartTime = (TextView) view.findViewById(R.id.tv_dialog_canlendar_starttime);
         tvEndTime = (TextView) view.findViewById(R.id.tv_dialog_canlendar_endtime);
@@ -168,6 +173,7 @@ public class CalendarDialogScroll implements View.OnClickListener {
 
         tvStartTime.setText(TimeUtils.getCurrentFirstOfTheMonteh());
         tvEndTime.setText(TimeUtils.getNowDateShort());
+
 
     }
 
@@ -212,7 +218,18 @@ public class CalendarDialogScroll implements View.OnClickListener {
         }
     }
 
-    public void showDialog(){
+    public void showDialog(int buttonFlag){
+        this.buttonFlag=buttonFlag;
+        //-------------------------------标识开始时间还是结束时间----2017.12.08----------------------------------------------------------------
+        if (buttonFlag!=1){
+            tvCurrentTime.setBackgroundResource(R.drawable.dialog_canlendarsel_tableheader_right);
+            Log.e("TAG", "initView: -----右边");
+        }else {
+            tvCurrentTime.setBackgroundResource(R.drawable.dialog_canlendarsel_tableheader_left);
+            Log.e("TAG", "initView: -----左边");
+        }
+//-------------------------------标识开始时间还是结束时间-----2017.12.08---------------------------------------------------------------
+
         if (dialog==null){
             show();
         }else {

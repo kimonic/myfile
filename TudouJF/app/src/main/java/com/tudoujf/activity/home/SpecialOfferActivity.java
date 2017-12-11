@@ -82,7 +82,6 @@ public class SpecialOfferActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbSpecialOffer.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbSpecialOffer.setLayoutParams(params);
@@ -106,7 +105,7 @@ public class SpecialOfferActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
         Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- " );
-
+        showPDialog();
         TreeMap<String,String>  map=new TreeMap<>();
         map.put("login_token","");
         map.put("page_count","30");
@@ -114,12 +113,14 @@ public class SpecialOfferActivity extends BaseActivity {
         HttpMethods.getInstance().POST(this, Constants.HUO_DONG_ZHUAN_QU, map, "specialofferactivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+                dismissPDialog();
                 String result= StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- "+result );
             }
 
             @Override
             public void onError(Response<String> response) {
+                dismissPDialog();
                 Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- "+response.code() );
                 super.onError(response);
             }

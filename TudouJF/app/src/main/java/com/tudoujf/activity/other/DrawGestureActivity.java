@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
@@ -17,6 +19,7 @@ import com.tudoujf.utils.EncryptionLockUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.MD5Utils;
+import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -87,6 +90,17 @@ public class DrawGestureActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        new Thread(){
+            @Override
+            public void run() {
+                Glide.get(DrawGestureActivity.this).clearDiskCache();
+            }
+        }.start();
+        Glide.get(this).clearMemory();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivIcon.getLayoutParams();
+        params.setMargins(0, ScreenSizeUtils.getStatusHeight(this)+150, 0, 0);
+        ivIcon.setLayoutParams(params);
+
         String  path= FileUtils.getIconPath(this);
         File file=new File(path);
         if (file.exists()){
@@ -194,6 +208,16 @@ public class DrawGestureActivity extends BaseActivity {
             closeActivity();
         }
 
+    }
+
+    @Override
+    protected int setStatusBarColor() {
+        return getResources().getColor(R.color.global_background_color);
+    }
+
+    @Override
+    protected boolean translucentStatusBar() {
+        return true;
     }
 }
 

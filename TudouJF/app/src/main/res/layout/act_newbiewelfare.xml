@@ -13,13 +13,13 @@
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_newbiewelfare_title"
         app:leftImage="@drawable/xvector_back" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         android:contentDescription="@null"
-        android:scaleType="fitXY"
-        android:src="@drawable/temp1"
-        />
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+         <!--android:contentDescription="@null"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/temp1"-->
+        <!--/>-->
 
 
 </LinearLayout>

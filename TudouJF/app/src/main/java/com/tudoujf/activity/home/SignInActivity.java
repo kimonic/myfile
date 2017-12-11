@@ -56,7 +56,7 @@ public class SignInActivity extends BaseActivity {
     SignInView sivSignIn;
 
     private SignInBean bean;
-    private AlertDialog dialog;
+//    private AlertDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -90,7 +90,7 @@ public class SignInActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+//        dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
 
 //        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActSignIn.getLayoutParams();
@@ -114,8 +114,9 @@ public class SignInActivity extends BaseActivity {
         sivSignIn.setListener(new SignInView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                dialog.show();
+//                dialog.show();
 
+                showPDialog();
                 TreeMap<String, String> map = new TreeMap<>();
                 map.put("login_token", UserConfig.getInstance().getLoginToken(SignInActivity.this));
                 Log.e(TAG, "clickEvent: ------logintoken--------" + UserConfig.getInstance().getLoginToken(SignInActivity.this));
@@ -124,7 +125,9 @@ public class SignInActivity extends BaseActivity {
                 HttpMethods.getInstance().POST(SignInActivity.this, Constants.SIGN_IN_SAVE, map, getLocalClassName(), new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        dialog.dismiss();
+//                        dialog.dismiss();
+
+                        dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e(TAG, "onSuccess: -----------请求签到返回的json数据----------------" + result);
                         Gson gson = new Gson();
@@ -134,6 +137,12 @@ public class SignInActivity extends BaseActivity {
                             initDataFromInternet();//再次请求接口刷新界面积分
                         }
                     }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                    }
                 });
 
             }
@@ -142,7 +151,7 @@ public class SignInActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(SignInActivity.this));
 //        map.put("login_token", "12267");
@@ -151,11 +160,12 @@ public class SignInActivity extends BaseActivity {
         HttpMethods.getInstance().POST(this, Constants.SIGN_IN, map, "SignInActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SignInBean>() {
-                        }.getType(), SignInBean.class, SignInActivity.this);
+                }.getType(), SignInBean.class, SignInActivity.this);
 
                 if (bean1 != null) {
                     bean = (SignInBean) bean1;
@@ -166,7 +176,8 @@ public class SignInActivity extends BaseActivity {
 
             @Override
             public void onError(Response<String> response) {
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
                 Log.e(TAG, "onSuccess:------------签到请求json数据失败----------------- " + response.code());
                 super.onError(response);
             }

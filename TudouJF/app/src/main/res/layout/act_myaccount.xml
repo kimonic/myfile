@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_myaccount"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_myaccount_title"
         app:leftImage="@drawable/xvector_back" />
@@ -28,7 +28,11 @@
                 android:background="@color/global_background_color"
                 />
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_icon"
                 android:layout_width="match_parent"
@@ -58,6 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:layout_marginTop="3dp"
                         android:textSize="14sp"
                         android:textColor="@color/color_black"
                         android:gravity="center"
@@ -67,8 +72,8 @@
 
                     <ImageView
                         android:id="@+id/iv_act_myaccount_vip"
-                        android:layout_width="23dp"
-                        android:layout_height="14dp"
+                        android:layout_width="18dp"
+                        android:layout_height="11dp"
                         android:src="@drawable/frag_my_vipt"
                         android:layout_gravity="center_vertical"
                         android:contentDescription="@null"
@@ -81,7 +86,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
                     android:text="@string/genggaitouxiang"
                     android:gravity="center_vertical|end"
                     />
@@ -98,22 +103,32 @@
                     />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <TextView
                 android:layout_width="match_parent"
+                android:paddingTop="8dp"
                 android:layout_height="38dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textSize="16sp"
-                android:textColor="@color/color_black"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
                 android:gravity="center_vertical"
                 android:text="@string/yonghuxinxi"
                 />
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_bankcard"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -122,15 +137,15 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/act_account_bankcard"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/yinhangkaguanli"
@@ -162,12 +177,15 @@
                     />
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_huifu"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -176,15 +194,15 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/act_account_huifuzhanghao"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/wodehuifuzhanghao"
@@ -215,21 +233,31 @@
                     />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
+                android:paddingTop="8dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:text="@string/anquanrenzheng"
-                android:textColor="@color/color_black"
-                android:textSize="16sp" />
-
+                android:textColor="@color/color_black2"
+                android:textSize="12sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_phone"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -238,15 +266,15 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/act_account_shoujibangding"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/shoujibangding"
@@ -283,7 +311,7 @@
                 android:id="@+id/ll_act_myaccount_email"
 
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal"
@@ -331,11 +359,15 @@
                     android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_name"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -344,15 +376,15 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/act_account_shimingrenzheng"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     android:textColor="@color/color_black"
                     android:gravity="center"
                     android:text="@string/shimingrenzheng"
@@ -384,22 +416,31 @@
                     />
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="8dp"
+                android:paddingRight="15dp"
                 android:text="@string/mimashezhi"
-                android:textColor="@color/color_black"
-                android:textSize="16sp" />
-
+                android:textColor="@color/color_black2"
+                android:textSize="12sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_login"
 
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -407,8 +448,8 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:contentDescription="@null"
                     android:src="@drawable/act_account_denglumima" />
 
@@ -418,7 +459,7 @@
                     android:gravity="center"
                     android:text="@string/denglumima"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
 
                     />
 
@@ -443,12 +484,16 @@
                     android:background="@drawable/xvector_rightarrowlarge" />
 
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
 
             <LinearLayout
                 android:id="@+id/ll_act_myaccount_gesture"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="38dp"
                 android:background="@color/color_white"
                 android:orientation="horizontal">
 
@@ -456,8 +501,8 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:contentDescription="@null"
                     android:src="@drawable/act_account_shoushimima" />
 
@@ -467,7 +512,7 @@
                     android:gravity="center"
                     android:text="@string/shoushimima"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
 
                     />
 
@@ -504,7 +549,7 @@
                 android:id="@+id/tv_act_myaccount_signout"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/color_white"
                 android:gravity="center"
                 android:layout_marginLeft="20dp"

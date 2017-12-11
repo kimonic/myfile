@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/SmartRefreshLayout"
+    android:background="@color/global_background_color"
     >
 
     <ScrollView
@@ -137,39 +138,40 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="38dp"
                 android:background="@color/global_background_color"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                >
 
                 <TextView
                     android:id="@+id/tv_frag_myprojectcreditor_kzr_hsz"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/frag_myprojectcreditor_kezhuanrang"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="15dp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tv_frag_myprojectcreditor_gou_mai_ji_lu"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/frag_myprojectcreditor_chakangoumaijilu"
                         android:textColor="@color/global_theme_background_color"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -184,7 +186,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
 
             <ListView
@@ -193,7 +195,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@color/color_white"
-                android:dividerHeight="10dp" />
+                android:divider="@color/global_background_color"
+                android:dividerHeight="12dp" />
         </LinearLayout>
 
     </ScrollView>

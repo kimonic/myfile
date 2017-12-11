@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
+
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_affirmbuy"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:leftImage="@drawable/xvector_back" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="12sp"
-        android:textColor="@color/color_white"
-        android:text="@string/act_affirmbuy_yujihuodeshouyi"
         android:background="@color/global_theme_background_color"
-        />
+        android:gravity="center"
+        android:text="@string/act_affirmbuy_yujihuodeshouyi"
+        android:paddingTop="8dp"
+        android:textColor="@color/color_white"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/tv_act_affirmbuy_earings"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="@color/color_white"
-        android:text="00,000.00"
+        android:layout_height="wrap_content"
         android:background="@color/global_theme_background_color"
-        />
+        android:gravity="center"
+        android:text="00,000.00"
+        android:textColor="@color/color_white"
+        android:textSize="28sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/global_theme_background_color"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:gravity="center_vertical"
-        android:background="@color/global_theme_background_color"
-        >
+        android:paddingRight="20dp">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="@string/act_affirmbuy_qitoujine"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_qitou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="00,000.00"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
-            android:layout_height="22dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/act_affirmbuy_bac"
-            />
+            android:background="@color/act_affirmbuy_bac" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="@string/act_affirmbuy_touzishangxian"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="00,000.00"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="1dp"
-            android:layout_height="22dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/act_affirmbuy_bac"
-            />
+            android:background="@color/act_affirmbuy_bac" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
@@ -120,182 +120,197 @@
                 android:text="@string/act_affirmbuy_lixishouyi"
                 android:textColor="@color/color_white"
                 android:textSize="10sp" />
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_lixi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="00,000.00"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="1dp"
-            android:layout_height="22dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="@color/act_affirmbuy_bac"
-            />
+            android:background="@color/act_affirmbuy_bac" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
             android:gravity="center_vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="@string/act_affirmbuy_jianglishouyi"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:textColor="@color/color_white"
                 android:gravity="center"
                 android:text="00,000.00"
-                />
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:background="@color/color_white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_ketouzijine"
-            />
+            android:src="@drawable/act_affirmbuy2_ketouzijine" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_ketouzijine"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_weight="1"
-            />
+            android:gravity="center_vertical|start"
+            android:text="@string/act_affirmbuy_ketouzijine"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/tv_act_affirmbuy_wait_amount"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor"
-            android:text="00,000.00元"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00,000.00元"
+            android:textColor="@color/act_productdetails_tvcolor"
+            android:textSize="12sp" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:background="@color/color_white"
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_zhanghuyue"
-            />
+            android:src="@drawable/act_affirmbuy2_zhanghuyue" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_zhanghuyue"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="@string/act_affirmbuy_zhanghuyue"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
+
         <TextView
 
             android:id="@+id/tv_act_affirmbuy_balance"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-           android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:textColor="@color/global_theme_background_color"
-            android:text="00,000.00元"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="00,000.00元"
+            android:textColor="@color/global_theme_background_color"
+            android:textSize="12sp" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center|end"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_chongzhi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/act_affirmbuy_chongzhi"
-                android:gravity="center"
-                android:textColor="@color/color_white"
-                android:textSize="14sp"
                 android:background="@color/global_theme_background_color"
-                android:paddingTop="3dp"
+                android:gravity="center"
                 android:paddingBottom="3dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                />
+                android:paddingTop="3dp"
+                android:text="@string/act_affirmbuy_chongzhi"
+                android:textColor="@color/color_white"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:background="@color/color_white"
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_touzijine"
-            />
+            android:src="@drawable/act_affirmbuy2_touzijine" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/touzijineyuan"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_weight="1"
-            />
+            android:gravity="center_vertical|start"
+            android:text="@string/touzijineyuan"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/et_act_affirm_touzijine"
@@ -303,45 +318,47 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:gravity="center"
-            android:textColor="@color/act_productdetails_tvcolor"
             android:background="@null"
-            android:textSize="12sp"
-            android:inputType="number"
+            android:gravity="center"
             android:hint="@string/qingshurunindetouzijine"
-            />
+            android:inputType="number"
+            android:textColor="@color/act_productdetails_tvcolor"
+            android:textSize="12sp" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
+        android:background="@color/color_white"
         android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_keyonghongbao"
-            />
+            android:src="@drawable/act_affirmbuy2_keyonghongbao" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_keyonghongbao"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="@string/act_affirmbuy_keyonghongbao"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:id="@+id/ll_act_affirmbuy_redpackage"
@@ -350,51 +367,54 @@
             android:layout_weight="1"
             android:gravity="center|end"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_redpackage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dianjixuanzekeyonghongbao"
                 android:gravity="center"
-                android:textColor="@color/act_productdetails_tvcolor"
-                android:textSize="12sp"
-                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                />
+                android:paddingTop="5dp"
+                android:text="@string/dianjixuanzekeyonghongbao"
+                android:textColor="@color/act_productdetails_tvcolor"
+                android:textSize="12sp" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@null"
-                android:src="@drawable/arrow2_right"
-                />
+                android:src="@drawable/arrow2_right" />
         </LinearLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:background="@color/color_white"
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_keyongjiaxiquan"
-            />
+            android:src="@drawable/act_affirmbuy2_keyongjiaxiquan" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_keyongjiaxiquan"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="@string/act_affirmbuy_keyongjiaxiquan"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:id="@+id/ll_act_affirmbuy_jiaxiquan"
@@ -419,36 +439,38 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@null"
-                android:src="@drawable/arrow2_right"
-                />
+                android:src="@drawable/arrow2_right" />
         </LinearLayout>
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:background="@color/color_white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:paddingRight="20dp">
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:contentDescription="@null"
-            android:src="@drawable/act_affirmbuy2_keyongfanxianquan"
-            />
+            android:src="@drawable/act_affirmbuy2_keyongfanxianquan" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical|start"
-            android:textSize="12sp"
-            android:textColor="@color/act_productdetails_tvcolor1"
-            android:text="@string/act_affirmbuy_keyongfanxianquan"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            />
+            android:layout_weight="1"
+            android:gravity="center_vertical|start"
+            android:text="@string/act_affirmbuy_keyongfanxianquan"
+            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textSize="12sp" />
 
         <LinearLayout
             android:id="@+id/ll_act_affirmbuy_fanxianquan"
@@ -457,58 +479,61 @@
             android:layout_weight="1"
             android:gravity="center|end"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tv_act_affirmbuy_fanxianquan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dianjixuanzefanxianquan"
                 android:gravity="center"
-                android:textColor="@color/act_productdetails_tvcolor"
-                android:textSize="12sp"
-                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                />
+                android:paddingTop="5dp"
+                android:text="@string/dianjixuanzefanxianquan"
+                android:textColor="@color/act_productdetails_tvcolor"
+                android:textSize="12sp" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:contentDescription="@null"
-                android:src="@drawable/arrow2_right"
-                />
+                android:src="@drawable/arrow2_right" />
         </LinearLayout>
     </LinearLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/color_line" />
     <LinearLayout
         android:id="@+id/ll_act_affirmbuy_xieyi"
         android:layout_width="match_parent"
         android:layout_height="22dp"
-        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
-        >
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/iv_act_affirmbuy_sel"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:contentDescription="@null"
-            android:layout_marginRight="10dp"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/act_affirm_uncheck"/>
+            android:layout_marginRight="10dp"
+            android:contentDescription="@null"
+            android:src="@drawable/xvector_checkbox_unsel" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/color_black"
             android:text="@string/act_affirmbuy_tongyi"
-            />
+            android:textColor="@color/color_black"
+            android:textSize="12sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/global_theme_background_color"
             android:text="@string/act_affirmbuy_pingtaijujianfuwuxieyi"
-            />
+            android:textColor="@color/global_theme_background_color"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

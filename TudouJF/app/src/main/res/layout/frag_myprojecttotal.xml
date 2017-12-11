@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -15,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_white"
-            android:dividerHeight="10dp" />
+            android:divider="@color/global_background_color"
+            android:dividerHeight="12dp" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

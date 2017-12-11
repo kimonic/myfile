@@ -14,12 +14,12 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
-            android:layout_marginBottom="37dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginBottom="30dp"
             >
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="45dp"
+                android:layout_width="162dp"
+                android:layout_height="43dp"
                 android:contentDescription="@null"
                 android:layout_gravity="center"
                 android:src="@drawable/act_login_bac" />
@@ -28,7 +28,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
@@ -37,8 +37,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="45dp"
+                android:layout_width="20dp"
+                android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
 
@@ -120,17 +120,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/xshape_roundrect_edittextbac"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="45dp"
+                android:layout_width="16dp"
+                android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@null"
@@ -170,17 +170,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/xshape_roundrect_edittextbac"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="45dp"
+                android:layout_width="20dp"
+                android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@null"
@@ -223,17 +223,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/xshape_roundrect_edittextbac"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="45dp"
+                android:layout_width="16dp"
+                android:layout_height="36dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@null"
@@ -261,7 +261,6 @@
             android:id="@+id/tv_act_register_login"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="32dp"
@@ -275,7 +274,7 @@
         <TextView
             android:id="@+id/tv_act_register_register"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="38dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/xshape_roundrect_mblue"
@@ -294,8 +293,10 @@
 
             <TextView
                 android:id="@+id/cb_act_register"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/xvector_checkbox_unsel" />
 
             <TextView
@@ -313,7 +314,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/act_register_tudouxieyi"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="@color/act_register_tvbac1" />
         </LinearLayout>
         <View

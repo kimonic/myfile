@@ -532,30 +532,3 @@ public class RegisterActivity extends BaseActivity {
 
 
 }
-
-
-/**
- * [java] view plain copy
- * InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- * // 接受软键盘输入的编辑文本或其它视图
- * imm.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
- * <p>
- * 二、关闭输入法窗口
- * [java] view plain copy
- * InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- * inputMethodManager.hideSoftInputFromWindow(OpeListActivity.this.getCurrentFocus().getWindowToken()
- * ,InputMethodManager.HIDE_NOT_ALWAYS);
- * <p>
- * //接受软键盘输入的编辑文本或其它视图
- * inputMethodManager.showSoftInput(submitBt,InputMethodManager.SHOW_FORCED);
- * <p>
- * 三、如果输入法打开则关闭，如果没打开则打开
- * [java] view plain copy  在CODE上查看代码片派生到我的代码片
- * InputMethodManager m=(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
- * m.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
- * <p>
- * 四、获取输入法打开的状态
- * [java] view plain copy  在CODE上查看代码片派生到我的代码片
- * InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
- * boolean isOpen=imm.isActive();
- */

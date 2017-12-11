@@ -32,7 +32,7 @@
                     q0,-4 4,-4
                     " />
         <path android:strokeColor="#9A9995"
-            android:strokeWidth="5"
+            android:strokeWidth="2"
             android:pathData="
                     M8,4
                     h24,0

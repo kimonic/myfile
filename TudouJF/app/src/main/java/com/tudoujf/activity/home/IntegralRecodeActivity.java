@@ -124,22 +124,22 @@ public class IntegralRecodeActivity extends BaseActivity {
             case R.id.tv_dialog_starttime://dialog中选择开始时间
                 if (calendarDialog==null){
 //                    calendarDialog=new CalendarDialog(this);
-                    calendarDialog=new CalendarDialogScroll(this);
+                    calendarDialog=new CalendarDialogScroll(this,1);
                 }
-                calendarDialog.showDialog();
+                calendarDialog.showDialog(1);
                 break;
             case R.id.tv_dialog_endtime://dialog中选择结束时间
                 if (calendarDialog==null){
 //                    calendarDialog=new CalendarDialog(this);
-                    calendarDialog=new CalendarDialogScroll(this);
+                    calendarDialog=new CalendarDialogScroll(this,2);
                 }
-                calendarDialog.showDialog();
+                calendarDialog.showDialog(2);
                 break;
             case R.id.tv_dialog_cancel://dialog中取消选择
                 timeSelDialog.dismiss();
                 break;
             case R.id.tv_dialog_confirm://dialog中确认选择
-                dialog.show();
+//                dialog.show();
                 String date1=startTime.getText().toString();
                 String date2=endTime.getText().toString();
                 if (TimeUtils.compareDate(date1,date2)){
@@ -159,7 +159,7 @@ public class IntegralRecodeActivity extends BaseActivity {
                 paramsStartTime="";
                 paramsEndTime="";
                 page=1;
-                dialog.show();
+//                dialog.show();
                 initDataFromInternet();
                 break;
         }
@@ -176,7 +176,6 @@ public class IntegralRecodeActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbIntegralRecode.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbIntegralRecode.setLayoutParams(params);
@@ -190,7 +189,7 @@ public class IntegralRecodeActivity extends BaseActivity {
         //设置 Footer 为 球脉冲
         srlIntegralRecode.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
 
-        dialog = DialogUtils.showProgreessDialog(this, "再次点击将退出该页面!");
+//        dialog = DialogUtils.showProgreessDialog(this, "再次点击将退出该页面!");
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_act_integralrecode_timesel, null);
 
@@ -203,7 +202,7 @@ public class IntegralRecodeActivity extends BaseActivity {
         endTime.setText(TimeUtils.getNowDateShort());
 
 //        calendarDialog=new CalendarDialog(this);
-        calendarDialog=new CalendarDialogScroll(this);
+        calendarDialog=new CalendarDialogScroll(this,1);
     }
 
     @Override
@@ -267,17 +266,19 @@ public class IntegralRecodeActivity extends BaseActivity {
         map.put("page", "" + page);
         Log.e("TAG", "initDataFromInternet: ---------------------??"+paramsStartTime);
         Log.e("TAG", "initDataFromInternet: ---------------------??"+paramsEndTime);
+        showPDialog();
 
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "IntegralRecodeActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+                dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ----------消息接口请求返回数据-----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralRecodeBean>() {
                         }.getType(),IntegralRecodeBean.class, IntegralRecodeActivity.this);
 
                 if (page == 1 && bean1 != null) {
-                    dialog.dismiss();
+//                    dialog.dismiss();
                     bean = (IntegralRecodeBean) bean1;
                     LoadInternetDataToUi();
                 } else if (page > 1 && bean1 != null) {
@@ -290,7 +291,8 @@ public class IntegralRecodeActivity extends BaseActivity {
             @Override
             public void onError(Response<String> response) {
                 Log.e("TAG", "onSuccess: ----------消息接口请求返回错误信息-----------------" + response.message());
-                dialog.dismiss();
+//                dialog.dismiss();
+                dismissPDialog();
                 super.onError(response);
             }
         });

@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -25,7 +26,7 @@ import java.text.DecimalFormat;
  * version：          1.0
  * date：            2017/7/21
  * description：   managemoneymattersfragment理财页-投标信息展示view
- * history：
+ * history：  最后修改17.12.11
  * * ==================================================
  */
 
@@ -34,7 +35,8 @@ public class BidView extends View {
     /**
      * 画笔
      */
-    private Paint blackPaint, cyanPaint, grayLinePaint, orangePaint, whitePaint, grayPaint,topLinePaint;
+    private Paint blackPaint, cyanPaint, grayLinePaint, orangePaint, whitePaint, grayPaint, topLinePaint,orangePaintS,blackPaintS
+            ,strokePaint;
 
     private Path path = new Path(), textPath = new Path();
     private RectF rectF = new RectF();
@@ -81,9 +83,11 @@ public class BidView extends View {
     /**
      * 立即投资,已还完,还款中等状态
      */
-    private String buttonText="";
-    /**是否是新手标*/
-    private String  isNewer;
+    private String buttonText = "";
+    /**
+     * 是否是新手标
+     */
+    private String isNewer;
 
 
     public BidView(Context context) {
@@ -111,10 +115,21 @@ public class BidView extends View {
         blackPaint.setColor(Color.parseColor("#343434"));
         blackPaint.setStyle(Paint.Style.FILL);
 
+        blackPaintS = new Paint();
+        blackPaintS.setAntiAlias(true);
+        blackPaintS.setColor(Color.parseColor("#343434"));
+        blackPaintS.setStyle(Paint.Style.FILL);
+
+        strokePaint = new Paint();
+        strokePaint.setAntiAlias(true);
+        strokePaint.setColor(Color.parseColor("#0b657b"));
+        strokePaint.setStyle(Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(1);
+
 
         cyanPaint = new Paint();
         cyanPaint.setAntiAlias(true);
-        cyanPaint.setColor(Color.parseColor("#129CB8"));
+        cyanPaint.setColor(Color.parseColor("#149bbc"));
         cyanPaint.setStyle(Paint.Style.FILL);
 
         grayLinePaint = new Paint();
@@ -132,6 +147,11 @@ public class BidView extends View {
         orangePaint.setAntiAlias(true);
         orangePaint.setColor(Color.parseColor("#F48029"));
         orangePaint.setStyle(Paint.Style.FILL);
+
+        orangePaintS = new Paint();
+        orangePaintS.setAntiAlias(true);
+        orangePaintS.setColor(Color.parseColor("#F48029"));
+        orangePaintS.setStyle(Paint.Style.FILL);
 
         whitePaint = new Paint();
         whitePaint.setAntiAlias(true);
@@ -152,7 +172,7 @@ public class BidView extends View {
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
-        int heigt=getHeight();
+        int heigt = getHeight();
 
 ////-------------------------------原代码-----------------------------------
 //        float text1X = width * 0.03809f;
@@ -168,8 +188,8 @@ public class BidView extends View {
 ////-----------------------------原代码-------------------------------------
 
 //---------------------------------上下边线---------------------------------------------------------
-        canvas.drawLine(0,0,width,0,topLinePaint);
-        canvas.drawLine(0,heigt,width,heigt,topLinePaint);
+        canvas.drawLine(0, 0, width, 0, topLinePaint);
+        canvas.drawLine(0, heigt, width, heigt, topLinePaint);
 //---------------------------------上下边线---------------------------------------------------------
 
 
@@ -177,7 +197,7 @@ public class BidView extends View {
 
         float text1X = width * 0.03148f;
         float text1Y = width * 0.071296f;
-        blackPaint.setTextSize(width * 0.037037f);
+        blackPaint.setTextSize(width * 0.038888f);
         canvas.drawText(title, text1X, text1Y, blackPaint);
 //---------------------------------标题-------------------------------------------------------------
 
@@ -237,15 +257,23 @@ public class BidView extends View {
 
         float text3X = width * 0.10714f;
         float text3Y = width * 0.1809f;
-        orangePaint.setTextSize(width * 0.06944f);
+        orangePaint.setTextSize(width * 0.05555f);
+
+
+        Log.e("TAG", "onDraw: --理财列表---" + nianHuaShouYi);
+
         canvas.drawText(nianHuaShouYi, text3X, text3Y, orangePaint);
+        float eX = text3X + orangePaint.measureText(nianHuaShouYi);
+        orangePaintS.setTextSize(width * 0.03333f);
+        canvas.drawText("%", eX, text3Y, orangePaintS);
+
 
         //-----------------------------8.00%--------------------------------------------------------
 
 
         //-----------------------------文本预期年化收益--------------------------------------------------------
-        grayPaint.setTextSize(width * 0.029629f);
-        float text4X = text3X + orangePaint.measureText(nianHuaShouYi) / 2
+        grayPaint.setTextSize(width * 0.033333f);
+        float text4X = text3X + orangePaint.measureText(nianHuaShouYi) / 2+orangePaintS.measureText("%")/2
                 - grayPaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi)) / 2;
         float text4Y = width * 0.24537f;
         canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi), text4X, text4Y, grayPaint);
@@ -253,21 +281,23 @@ public class BidView extends View {
 
         //-----------------------------一个月--------------------------------------------------------
         float text5X = width * 0.4074f;
-        blackPaint.setTextSize(width * 0.05370f);
+        blackPaint.setTextSize(width * 0.05555f);
         canvas.drawText(investTime, text5X, text3Y, blackPaint);
+        blackPaintS.setTextSize(width * 0.03611f);
+        canvas.drawText("个月", text5X+blackPaint.measureText(investTime), text3Y, blackPaintS);
+
         //-----------------------------一个月--------------------------------------------------------
 
 
         //-----------------------------文本期限--------------------------------------------------------
-        float text6X = text5X + blackPaint.measureText(investTime) / 2 - grayPaint.measureText(getResources().getString(R.string.qixian)) / 2;
+        float text6X = text5X + blackPaint.measureText(investTime) / 2+blackPaintS.measureText("个月") / 2 - grayPaint.measureText(getResources().getString(R.string.qixian)) / 2;
         canvas.drawText(getResources().getString(R.string.qixian), text6X, text4Y, grayPaint);
         //-----------------------------文本期限--------------------------------------------------------
 
 
-
         //-----------------------------30000元--------------------------------------------------------
         float text7X = width * 0.67129f;
-        blackPaint.setTextSize(width * 0.037037f);
+        blackPaint.setTextSize(width * 0.033333f);
         canvas.drawText(investSum, text7X, text3Y, blackPaint);
         //-----------------------------30000元--------------------------------------------------------
 
@@ -280,7 +310,7 @@ public class BidView extends View {
         //-----------------------------文本金额(元)--------------------------------------------------------
 
 
-     //--------------------------------------进度条蓝色线-------------------------------------------
+        //--------------------------------------进度条蓝色线-------------------------------------------
         float line4X = (width * 0.6795f) * investProgress + line1X;
         float line2Y = width * 0.2857f;
 //        cyanPaint.setStrokeWidth(width * 0.0057f);
@@ -298,12 +328,12 @@ public class BidView extends View {
         //--------------------------------------进度文本:100.00%-------------------------------------------
 
         float text9Y = width * 0.35f;
-        blackPaint.setTextSize(width * 0.03809f);
+        blackPaint.setTextSize(width * 0.02962f);
 
         if (investProgress * 100 != 0) {
             canvas.drawText(decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         } else {
-            canvas.drawText(0+decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
+            canvas.drawText(0 + decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         }
         //--------------------------------------进度文本:100.00%-------------------------------------------
 
@@ -330,12 +360,16 @@ public class BidView extends View {
             float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(buttonText) / 2;
             float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
             canvas.drawText(buttonText, text11X, text11Y, whitePaint);
+            strokePaint.setColor(Color.parseColor("#0b657b"));
+            canvas.drawRoundRect(rectF, 5, 5, strokePaint);
         } else {
 //            String invest1 = getResources().getString(R.string.huankuanzhong);
             canvas.drawRoundRect(rectF, 5, 5, grayPaint);
             float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(buttonText) / 2;
             float text11Y = rectF.top + (rectF.bottom - rectF.top) / 2 + whitePaint.getTextSize() / 2.5f;
             canvas.drawText(buttonText, text11X, text11Y, whitePaint);
+            strokePaint.setColor(Color.parseColor("#666666"));
+            canvas.drawRoundRect(rectF, 5, 5, strokePaint);
         }
 
 
@@ -352,15 +386,13 @@ public class BidView extends View {
             width = ScreenSizeUtils.getScreenWidth(getContext());
             height = (int) (width * 0.4);
             setMeasuredDimension(width, height);
-        }else {
+        } else {
             height = (int) (width * 0.4);
             setMeasuredDimension(width, height);
         }
 
 
-
     }
-
 
 
     @Override
@@ -370,7 +402,7 @@ public class BidView extends View {
             float currentY = event.getY();
             if (rectF.contains(currentX, currentY)) {
 //                if (listener != null && investNow) {
-                if (listener != null ) {
+                if (listener != null) {
                     listener.clickEvent();
                 }
             }
@@ -382,22 +414,32 @@ public class BidView extends View {
         void clickEvent();
     }
 
-    /**是否是新手标*/
+    /**
+     * 是否是新手标
+     */
     public String getIsNewer() {
         return isNewer;
     }
-    /**是否是新手标*/
+
+    /**
+     * 是否是新手标
+     */
 
     public void setIsNewer(String isNewer) {
         this.isNewer = isNewer;
     }
 
 
-    /**按钮文本*/
+    /**
+     * 按钮文本
+     */
     public String getButtonText() {
         return buttonText;
     }
-    /**按钮文本*/
+
+    /**
+     * 按钮文本
+     */
 
     public void setButtonText(String buttonText) {
         this.buttonText = buttonText;

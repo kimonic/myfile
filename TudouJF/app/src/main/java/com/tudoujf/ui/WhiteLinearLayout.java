@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -22,7 +23,8 @@ import android.widget.LinearLayout;
  */
 
 public class WhiteLinearLayout extends LinearLayout {
-    private Paint whitePaint;
+    private Paint whitePaint,cyanPaint;
+    private Rect rect;
 
     public WhiteLinearLayout(Context context) {
         super(context);
@@ -46,6 +48,13 @@ public class WhiteLinearLayout extends LinearLayout {
         whitePaint.setStrokeWidth(3);
         whitePaint.setAlpha(1);
         whitePaint.setColor(Color.parseColor("#ffffff"));
+
+        cyanPaint = new Paint();
+        cyanPaint.setAntiAlias(true);
+        cyanPaint.setStyle(Paint.Style.FILL);
+        cyanPaint.setColor(Color.parseColor("#E7FAFF"));
+
+        rect=new Rect();
     }
 
     @TargetApi(21)
@@ -59,6 +68,11 @@ public class WhiteLinearLayout extends LinearLayout {
         super.onDraw(canvas);
         int width = getWidth();
         int height = getHeight();
+        rect.top=0;
+        rect.left=0;
+        rect.right=width;
+        rect.top=height-4;
+        canvas.drawRect(rect,cyanPaint);
         canvas.drawLine(0, height - 3, width, height - 3, whitePaint);
     }
 }

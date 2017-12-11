@@ -200,6 +200,7 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
             @SuppressLint("SetJavaScriptEnabled")
             @Override
             public void onSuccess(Response<String> response) {
+                dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e("TAG", "onSuccess: -----------请求绑定银行卡页面接口返回的json数据----------------" + result);
@@ -260,6 +261,12 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
                 } else {
                     ToastUtils.showToast(AddBankCardHuiFuActivity.this, R.string.shujujiazaichucuo);
                 }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                dismissPDialog();
+                super.onError(response);
             }
         });
     }

@@ -1,10 +1,12 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
@@ -64,6 +66,7 @@ public class DueInInterestFragLvAdapterO extends BaseAdapter {
             viewHolder.textView2 = (TextView) view.findViewById(R.id.tv_lvitem_frag_dueininterest2);
             viewHolder.textView3 = (TextView) view.findViewById(R.id.tv_lvitem_frag_dueininterest3);
             viewHolder.textView4 = (TextView) view.findViewById(R.id.tv_lvitem_frag_dueininterest4);
+            viewHolder.linearLayout = (LinearLayout) view.findViewById(R.id.ll__lvitem_frag_dueininterest);
             view.setTag(viewHolder);
 
         } else {
@@ -80,11 +83,18 @@ public class DueInInterestFragLvAdapterO extends BaseAdapter {
             viewHolder.textView3.setVisibility(View.GONE);
         }
 
+        if (list.get(position).getColorFlag()==1){
+            viewHolder.linearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }else {
+            viewHolder.linearLayout.setBackgroundColor(Color.parseColor("#F6F5EB"));
+        }
+
         viewHolder.textView4.setText(list.get(position).getInterest());
         return view;
     }
 
     private class ViewHolder {
         public TextView textView1, textView2, textView3, textView4;
+        private LinearLayout linearLayout;
     }
 }

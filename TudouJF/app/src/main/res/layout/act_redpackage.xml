@@ -4,53 +4,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F0E8"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_redpackage"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_redpackage_hongbao"
         app:leftImage="@drawable/xvector_back" />
-    <TextView
-        android:id="@+id/tv_act_redpackage1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:textSize="14sp"
-        android:text="@string/act_redpackage_keshiyong"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="3dp"
-        />
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/lv_act_redpackage"
-        android:dividerHeight="10dp"
-        android:divider="#F0F0E8"
-        />
-
-    <TextView
-        android:id="@+id/tv_act_redpackage2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="18sp"
-        android:textColor="@color/color_white"
-        android:text="@string/act_redpacksge_qingxuanze"
-        android:background="@drawable/xshape_roundrect_munsel"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:gravity="center"
-        android:layout_marginTop="38dp"
-        android:layout_marginBottom="30dp"
-        />
-
     <LinearLayout
-        android:id="@+id/ll_act_redpackage_nothing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/ll_have"
+        >
+        <TextView
+            android:id="@+id/tv_act_redpackage1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            android:text="@string/act_redpackage_keshiyong"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="3dp"
+            />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/lv_act_redpackage"
+            android:dividerHeight="10dp"
+            android:divider="@color/global_background_color"
+            />
+
+        <TextView
+            android:id="@+id/tv_act_redpackage2"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_white"
+            android:text="@string/act_redpacksge_qingxuanze"
+            android:background="@drawable/xshape_roundrect_munsel"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="30dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_act_redpackage_nothing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:id="@+id/iv_act_redpackage_baoquan"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                />
+            <TextView
+                android:id="@+id/tv_act_redpackage_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textColor="@color/color_black"
+                android:paddingTop="20dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_nothing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -58,14 +90,14 @@
         android:visibility="gone"
         >
         <ImageView
-            android:id="@+id/iv_act_redpackage_baoquan"
+            android:id="@+id/iv_baoquan"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
             />
         <TextView
-            android:id="@+id/tv_act_redpackage_description"
+            android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -74,6 +106,8 @@
             android:paddingTop="20dp"
             />
     </LinearLayout>
+
+
 
 
 </LinearLayout>

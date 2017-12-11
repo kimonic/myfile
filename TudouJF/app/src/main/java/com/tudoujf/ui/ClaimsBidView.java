@@ -170,7 +170,7 @@ public class ClaimsBidView extends View {
 
         grayLinePaint = new Paint();
         grayLinePaint.setAntiAlias(true);
-        grayLinePaint.setColor(Color.parseColor("#939393"));
+        grayLinePaint.setColor(Color.parseColor("#dddddd"));
         grayLinePaint.setStyle(Paint.Style.FILL);
 
 
@@ -231,7 +231,7 @@ public class ClaimsBidView extends View {
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
-        int heigt=getHeight();
+        int heigt = getHeight();
 
         //---------------------------------上下边线---------------------------------------------------------
         canvas.drawLine(0, 0, width, 0, topLinePaint);
@@ -283,11 +283,11 @@ public class ClaimsBidView extends View {
 
 
         //-----------------------债权价值(元)-------------------------------------------------------
-        grayLinePaint.setTextSize(width * 0.02777f);
+        grayPaint.setTextSize(width * 0.02777f);
         float text4X = text3X + orangePaint.measureText(zhaiQuanJiaZhi) / 2
-                - grayLinePaint.measureText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan)) / 2;
+                - grayPaint.measureText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan)) / 2;
         float text4Y = width * 0.2381f;
-        canvas.drawText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan), text4X, text4Y, grayLinePaint);
+        canvas.drawText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan), text4X, text4Y, grayPaint);
         //------------------------------------------------------------------------------------------
 
 
@@ -299,8 +299,8 @@ public class ClaimsBidView extends View {
 
 
         //---------------原标年化收益---------------------------------------------------------------
-        float text6X = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(getResources().getString(R.string.yuanbiaonianhuashouyi)) / 2;
-        canvas.drawText(getResources().getString(R.string.yuanbiaonianhuashouyi), text6X, text4Y, grayLinePaint);
+        float text6X = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayPaint.measureText(getResources().getString(R.string.yuanbiaonianhuashouyi)) / 2;
+        canvas.drawText(getResources().getString(R.string.yuanbiaonianhuashouyi), text6X, text4Y, grayPaint);
         //------------------------------------------------------------------------------------------
 
 
@@ -312,9 +312,8 @@ public class ClaimsBidView extends View {
 
 
         //------------------------------------------------------------------------------------------
-        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 -
-                grayLinePaint.measureText(getResources().getString(R.string.zhuanrangjiageyuan)) / 2;
-        canvas.drawText(getResources().getString(R.string.zhuanrangjiageyuan), text8X, text4Y, grayLinePaint);
+        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 - grayPaint.measureText(getResources().getString(R.string.zhuanrangjiageyuan)) / 2;
+        canvas.drawText(getResources().getString(R.string.zhuanrangjiageyuan), text8X, text4Y, grayPaint);
         //------------------------------------------------------------------------------------------
 
 
@@ -347,14 +346,14 @@ public class ClaimsBidView extends View {
 
 
         //------------------------剩余可投:--固定文本-----------------------------------------------
-        grayLinePaint.setTextSize(width * 0.03809f);
+        grayPaint.setTextSize(width * 0.03809f);
         float text10X = width * 0.3219f;
-        canvas.drawText(getResources().getString(R.string.shengyuketou), text10X, text9Y, grayLinePaint);
+        canvas.drawText(getResources().getString(R.string.shengyuketou), text10X, text9Y, grayPaint);
         //------------------------------------------------------------------------------------------
 
 
         //------------------------剩余可投金额--999,999.00元----------------------------------------
-        float text12X = text10X + grayLinePaint.measureText(getResources().getString(R.string.shengyuketou)) + 3;
+        float text12X = text10X + grayPaint.measureText(getResources().getString(R.string.shengyuketou)) + 3;
         canvas.drawText(shengYuKeTou, text12X, text9Y, blackPaint);
         //------------------------------------------------------------------------------------------
 

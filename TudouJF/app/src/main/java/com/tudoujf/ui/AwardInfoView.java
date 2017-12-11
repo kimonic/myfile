@@ -84,15 +84,15 @@ public class AwardInfoView extends View {
 
 
         bacPath.moveTo(0,0);
-        bacPath.lineTo(width*0.56f,0);
-        bacPath.lineTo(width,height*0.43f);
+        bacPath.lineTo(width*0.45f,0);
+        bacPath.lineTo(width,height*0.55f);
         bacPath.lineTo(width,height);
         bacPath.close();
 
         canvas.drawPath(bacPath,bacPaint);
 
-        textPath.moveTo(width*0.35f,height*0.18f);
-        textPath.lineTo(width*0.86f,height*0.7f);
+        textPath.moveTo(width*0.37f,height*0.25f);
+        textPath.lineTo(width*0.86f,height*0.77f);
 
         textPaint.setTextSize(width*0.2f);
         canvas.drawTextOnPath(text,textPath,0,0,textPaint);

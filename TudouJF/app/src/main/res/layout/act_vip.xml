@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
 
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_vip"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/apply_for_vip"
         app:leftImage="@drawable/xvector_back"
@@ -25,8 +26,8 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="@string/qingxuanzeninyaoshenqingdetaocan"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textColor="@color/color_black2"
+        android:textSize="14sp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
@@ -42,15 +43,15 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:background="@color/color_white"
-        android:paddingTop="14dp"
+        android:paddingTop="10dp"
         >
 
         <LinearLayout
             android:id="@+id/ll_act_vip_one"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
             android:background="@drawable/act_vip_sel"
             android:gravity="center"
             android:orientation="vertical">
@@ -58,29 +59,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/onemonth"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
 
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="3dp"
                 android:text="@string/priceone"
                 android:textColor="@color/color_orange"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
             android:background="@drawable/act_vip_unsel"
             android:gravity="center"
             android:id="@+id/ll_act_vip_three"
@@ -89,100 +91,178 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/threemonth"
-                android:textSize="16sp"
-
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="@string/pricethree"
                 android:textColor="@color/color_orange"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:orientation="horizontal"
-        android:background="@color/color_white"
-        android:paddingTop="20dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingBottom="10dp"
+    android:orientation="horizontal"
+    android:background="@color/color_white"
+    android:paddingTop="20dp"
         >
 
         <LinearLayout
             android:id="@+id/ll_act_vip_six"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/act_vip_unsel"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/act_vip_sel"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/sixmonth"
-                android:textSize="16sp"
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
 
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="3dp"
                 android:text="@string/pricesix"
                 android:textColor="@color/color_orange"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_act_vip_year"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
             android:background="@drawable/act_vip_unsel"
             android:gravity="center"
+            android:id="@+id/ll_act_vip_year"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="6dp"
                 android:text="@string/oneyear"
-                android:textSize="16sp"
-
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="3dp"
                 android:text="@string/priceyear"
                 android:textColor="@color/color_orange"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
 
         </LinearLayout>
     </LinearLayout>
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingBottom="20dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/color_white"-->
+        <!--android:paddingTop="20dp"-->
+        <!--&gt;-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_act_vip_six"-->
+            <!--android:layout_width="130dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="40dp"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:background="@drawable/act_vip_unsel"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="@string/sixmonth"-->
+                <!--android:textSize="16sp"-->
+
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:text="@string/pricesix"-->
+                <!--android:textColor="@color/color_orange"-->
+                <!--android:textSize="16sp" />-->
+
+
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_act_vip_year"-->
+            <!--android:layout_width="130dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/act_vip_unsel"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginRight="40dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:text="@string/oneyear"-->
+                <!--android:textSize="16sp"-->
+
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:text="@string/priceyear"-->
+                <!--android:textColor="@color/color_orange"-->
+                <!--android:textSize="16sp" />-->
+
+
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -256,8 +336,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="3dp"
         android:orientation="horizontal"
         android:background="@color/color_white"
         android:paddingLeft="20dp"
@@ -269,7 +349,7 @@
             android:gravity="center"
             android:text="@string/dangqiankeyongyue"
             android:textColor="@color/color_black"
-            android:textSize="16sp"
+            android:textSize="12sp"
             />
 
         <TextView
@@ -279,7 +359,7 @@
             android:gravity="center"
             android:text="@string/xxxxxx"
             android:textColor="@color/color_blue"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             />
@@ -303,9 +383,9 @@
         android:gravity="center"
         android:text="@string/lijishenqing"
         android:textColor="@color/color_white"
-        android:textSize="18sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:textSize="14sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="30dp"
         />
 

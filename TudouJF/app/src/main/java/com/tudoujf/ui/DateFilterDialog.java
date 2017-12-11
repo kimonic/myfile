@@ -72,7 +72,7 @@ public class DateFilterDialog implements View.OnClickListener {
         startTime.setText(TimeUtils.getCurrentFirstOfTheMonteh());
         endTime.setText(TimeUtils.getNowDateShort());
 
-        calendarDialog = new CalendarDialogScroll(context);
+        calendarDialog = new CalendarDialogScroll(context,1);
 
         initLisenter();
     }
@@ -105,16 +105,16 @@ public class DateFilterDialog implements View.OnClickListener {
             case R.id.tv_dialog_starttime://dialog中选择开始时间
                 if (calendarDialog == null) {
 //                    calendarDialog=new CalendarDialog(this);
-                    calendarDialog = new CalendarDialogScroll(context);
+                    calendarDialog = new CalendarDialogScroll(context,1);
                 }
-                calendarDialog.showDialog();
+                calendarDialog.showDialog(1);
                 break;
             case R.id.tv_dialog_endtime://dialog中选择结束时间
                 if (calendarDialog == null) {
 //                    calendarDialog=new CalendarDialog(this);
-                    calendarDialog = new CalendarDialogScroll(context);
+                    calendarDialog = new CalendarDialogScroll(context,2);
                 }
-                calendarDialog.showDialog();
+                calendarDialog.showDialog(2);
                 break;
             case R.id.tv_dialog_cancel://dialog中取消选择
                 timeSelDialog.dismiss();

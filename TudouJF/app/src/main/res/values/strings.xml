@@ -7,15 +7,15 @@
     <string name="act_login_username">请输入用户名/手机号</string>
     <string name="act_login_password">请输入密码(6&#8211;16位数字和字母组合)</string>
     <string name="act_login_nozhanghao">没有账号?</string>
-    <string name="act_login_zhuceyouli">注册即可领28888元体验金</string>
-    <string name="act_login_forgetpassword">找回密码</string>
+    <string name="act_login_zhuceyouli"><u>注册即可领28888元体验金</u></string>
+    <string name="act_login_forgetpassword"><u>忘记密码?</u></string>
     <string name="act_login_login">登录</string>
     <string name="act_register_username">请输入手机号</string>
     <string name="act_register_imagecode">请输入图形验证码</string>
     <string name="act_register_phonecodehint">请输入手机验证码</string>
     <string name="act_register_requestcode">获取验证码</string>
     <string name="act_register_referrerhint">请输入推荐人(如无推荐人可不填写)</string>
-    <string name="act_register_login">已有账号,去登录</string>
+    <string name="act_register_login"><u>已有账号,去登录</u></string>
     <string name="act_register_agree">注册即视为同意</string>
     <string name="act_register_tudouxieyi">《土豆金服服务协议》</string>
     <string name="act_affirm_title">确认新密码</string>
@@ -623,7 +623,7 @@
     <string name="quzhantie">去粘贴</string>
     <string name="ninweianzhuangweixin">您未安装微信,请先安装!</string>
     <string name="jisuanshibai">结算失败!</string>
-    <string name="touxiantupiandaxiao">头像图片大小不能朝富哦2M!</string>
+    <string name="touxiantupiandaxiao">头像图片大小不能超过2M!</string>
     <string name="xitongjiancedaoninweishiming">系统检测到您尚未实名,是否前去实名认证?</string>
     <string name="tiyanjintouzishiabi">体验金投资失败!!</string>
 

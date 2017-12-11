@@ -99,7 +99,6 @@ public class WithdrawRecordActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActWithdrawRecord.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActWithdrawRecord.setLayoutParams(params);

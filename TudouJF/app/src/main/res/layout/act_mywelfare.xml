@@ -7,14 +7,14 @@
     <LinearLayout
         android:id="@+id/ll_act_mywelfare_mtb"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/global_theme_background_color"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_act_mywelfare_back"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"

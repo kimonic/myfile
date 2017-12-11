@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_withdrawrecord"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_withdrawrecord_title"
         app:leftImage="@drawable/xvector_back" />
@@ -25,9 +25,10 @@
             android:id="@+id/lv_act_withdrawrecord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:divider="@color/global_background_color"
-            android:dividerHeight="5dp" />
+            android:layout_marginTop="12dp"
+            android:divider="@color/color_line"
+            android:dividerHeight="1dp" />
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <!--<TextView-->

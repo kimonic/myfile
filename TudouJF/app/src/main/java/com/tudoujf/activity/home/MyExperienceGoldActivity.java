@@ -93,6 +93,8 @@ public class MyExperienceGoldActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
 
+        showPDialog();
+
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "1");
@@ -101,6 +103,7 @@ public class MyExperienceGoldActivity extends BaseActivity {
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的体验金接口返回数据------------------- " + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyExperienceGoldBean>() {
@@ -110,6 +113,12 @@ public class MyExperienceGoldActivity extends BaseActivity {
                             LoadInternetDataToUi();
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        dismissPDialog();
+                        super.onError(response);
                     }
                 });
 

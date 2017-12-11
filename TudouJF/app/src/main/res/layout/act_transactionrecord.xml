@@ -10,7 +10,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_transactiondetails"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_transactiondetails_title"
         app:leftImage="@drawable/xvector_back" />
@@ -27,9 +27,11 @@
         android:id="@+id/lv_act_transactiondetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:dividerHeight="0dp"
-        android:divider="@null"
+        android:divider="@color/color_line"
+        android:paddingTop="2px"
+        android:background="@drawable/xshape_onebodertop_line"
         />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

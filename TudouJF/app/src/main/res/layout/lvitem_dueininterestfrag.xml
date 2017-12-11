@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/ll__lvitem_frag_dueininterest"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:orientation="horizontal"
@@ -13,9 +14,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
+            android:background="@drawable/xshape_threeboder"
             android:text="@string/frag_dueininterest_date"
             />
         <TextView
@@ -23,20 +25,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/frag_dueininterest_name"
+            android:background="@drawable/xshape_oneboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_frag_dueininterest3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/frag_dueininterest_toubiaojineyuan"
+            android:background="@drawable/xshape_threeboder"
             />
 
         <TextView
@@ -44,10 +48,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/act_newcomerexperiencebid_tvcolor"
             android:gravity="center"
             android:text="@string/frag_dueininterest_shouyi"
+            android:background="@drawable/xshape_twoboder_right_bottom"
             />
 
     </LinearLayout>

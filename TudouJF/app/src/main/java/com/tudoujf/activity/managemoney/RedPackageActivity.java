@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -59,6 +60,17 @@ public class RedPackageActivity extends BaseActivity {
     ListView lvRedpackage;
     @BindView(R.id.tv_act_redpackage2)
     TextView tvAffirmUse;
+    //-------------------------2017.12.08-----------------------------------------------------------
+    @BindView(R.id.ll_have)
+    LinearLayout llHave;
+    @BindView(R.id.ll_nothing)
+    LinearLayout llNothing;
+
+    @BindView(R.id.iv_baoquan)
+    ImageView ivBaoQuan;
+    @BindView(R.id.tv_description)
+    TextView tvDescription;
+    //-------------------------2017.12.08-----------------------------------------------------------
 
     private List<RedBagBean.ListBean> listRed;
     private List<JiaXiQuanBean.ListBean> listJiaXiQuan;
@@ -146,7 +158,7 @@ public class RedPackageActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.putExtra("redId", redId);
         intent.putExtra("acount", acount);
-        Log.e("TAG", "skip: -----"+together_status);
+        Log.e("TAG", "skip: -----" + together_status);
 
         intent.putExtra("together_status", together_status);
         switch (actType) {
@@ -195,7 +207,7 @@ public class RedPackageActivity extends BaseActivity {
         mtbRedpackage.setLayoutParams(params);
         if (actType == 2) {
             mtbRedpackage.setCenterTitle(R.string.act_redpackage_jiaxiquan);
-        }else if (actType==3){
+        } else if (actType == 3) {
             mtbRedpackage.setCenterTitle(R.string.xuanzefanxianquan);
         }
         mtbRedpackage.getLeftTV().setOnClickListener(new View.OnClickListener() {
@@ -360,27 +372,52 @@ public class RedPackageActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
         if (bean != null && actType == 1) {
             listRed = bean.getList();
-            tvRedpackageCount.setText(("您有" + listRed.size() + "个红包可使用"));
-            adapter = new RedPackageActLvAdapter(bean, this);
-            lvRedpackage.setAdapter(adapter);
-            HeightUtils.setListviewHeight(lvRedpackage);
+
+            if (listRed.size() > 0) {
+                tvRedpackageCount.setText(("您有" + listRed.size() + "个红包可使用"));
+                adapter = new RedPackageActLvAdapter(bean, this);
+                lvRedpackage.setAdapter(adapter);
+                HeightUtils.setListviewHeight(lvRedpackage);
+            } else {
+                llHave.setVisibility(View.GONE);
+                llNothing.setVisibility(View.VISIBLE);
+                ivBaoQuan.setImageResource(R.drawable.act_fanxianquan2_redpackage);
+                tvDescription.setText("暂无红包");
+            }
+
         }
 
         if (jiaXiQuanBean != null && actType == 2) {
             listJiaXiQuan = jiaXiQuanBean.getList();
-            tvRedpackageCount.setText(("您有" + listJiaXiQuan.size() + "个加息券可使用"));
-            adapterJiaXiQuan = new JiaXiQuanActLvAdapter(jiaXiQuanBean, this);
-            lvRedpackage.setAdapter(adapterJiaXiQuan);
-            HeightUtils.setListviewHeight(lvRedpackage);
+            if (listJiaXiQuan.size() > 0) {
+                tvRedpackageCount.setText(("您有" + listJiaXiQuan.size() + "个加息券可使用"));
+                adapterJiaXiQuan = new JiaXiQuanActLvAdapter(jiaXiQuanBean, this);
+                lvRedpackage.setAdapter(adapterJiaXiQuan);
+                HeightUtils.setListviewHeight(lvRedpackage);
+            } else {
+                llHave.setVisibility(View.GONE);
+                llNothing.setVisibility(View.VISIBLE);
+                ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                tvDescription.setText("暂无加息券");
+            }
+
         }
 
 
         if (fanXianQuanBean != null && actType == 3) {
             listFanXianQuan = fanXianQuanBean.getList();
-            tvRedpackageCount.setText(("您有" + listFanXianQuan.size() + "个返现券可使用"));
-            adapterFanXianQuan = new FanXianQuanActLvAdapter(fanXianQuanBean, this);
-            lvRedpackage.setAdapter(adapterFanXianQuan);
-            HeightUtils.setListviewHeight(lvRedpackage);
+
+            if (listFanXianQuan.size() > 0) {
+                tvRedpackageCount.setText(("您有" + listFanXianQuan.size() + "个返现券可使用"));
+                adapterFanXianQuan = new FanXianQuanActLvAdapter(fanXianQuanBean, this);
+                lvRedpackage.setAdapter(adapterFanXianQuan);
+                HeightUtils.setListviewHeight(lvRedpackage);
+            } else {
+                llHave.setVisibility(View.GONE);
+                llNothing.setVisibility(View.VISIBLE);
+                ivBaoQuan.setImageResource(R.drawable.act_fanxianquan_quan);
+                tvDescription.setText("暂无返现券");
+            }
         }
 
     }

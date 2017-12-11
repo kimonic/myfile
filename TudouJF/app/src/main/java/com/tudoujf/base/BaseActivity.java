@@ -7,8 +7,11 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +35,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -54,10 +58,48 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
      * app进入前台后为false,返回后为true
      */
     private boolean isActive = true;
+    //-----------------------------------------联网请求计时---------------------------------------------------------
+
+    private boolean  isProgressing=false;
+
+    private MyHandler handler = new MyHandler(this);
+
+    class MyHandler extends Handler {
+        // 弱引用 ，防止内存泄露
+        private WeakReference<AppCompatActivity> weakReference;
+
+        private MyHandler(AppCompatActivity handlerMemoryActivity) {
+            weakReference = new WeakReference<AppCompatActivity>(handlerMemoryActivity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            AppCompatActivity handlerMemoryActivity = weakReference.get();
+            Log.e("TAG", "run:BaseActivity -----超时线程取消加载");
+            Log.e("TAG", "run: BaseActivity-----超时线程取消加载"+handlerMemoryActivity);
+            Log.e("TAG", "run: BaseActivity-----超时线程取消加载"+isProgressing);
+            Log.e("TAG", "run: BaseActivity-----超时线程取消加载"+msg.what);
+            if (handlerMemoryActivity != null&&isProgressing&&msg.what==1) {
+                OkGo.getInstance().cancelAll();
+                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichucuo);
+                dismissPDialog();
+            }else {
+                dismissPDialog();
+            }
+        }
+    }
+
+
+
+    //------------------------------------------联网请求计时--------------------------------------------------------
 
     private AlertDialog bDialog;
 
     public void showPDialog() {
+        timeThread();
+        isProgressing=true;
         if (bDialog == null) {
             bDialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
         } else {
@@ -66,6 +108,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     }
 
     public void dismissPDialog() {
+        isProgressing=false;
         if (bDialog != null) {
             bDialog.dismiss();
         }
@@ -263,5 +306,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             openActivity(LockActivity.class, bundle);//打开手势密码界面
         }
 
+    }
+
+
+
+    private void timeThread(){
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.e("TAG", "run: -----超时线程已启动");
+
+                Message msg=Message.obtain();
+                msg.what=1;
+                handler.sendMessage(msg);
+            }
+        }.start();
     }
 }

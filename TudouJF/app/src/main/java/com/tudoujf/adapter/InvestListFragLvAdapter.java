@@ -107,12 +107,12 @@ public class InvestListFragLvAdapter extends BaseAdapter {
             viewHolder.bidView.setIsNewer(context.getResources().getString(R.string.xinshouzhuanxiang));
         }
 
-        viewHolder.bidView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr())+"%");//预期年化收益率
+        viewHolder.bidView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr()));//预期年化收益率
 
         viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
 
         viewHolder.bidView.setInvestSum(list.get(position).getAmount()+"元");//总投资金额
-        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限
+        viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限
         viewHolder.bidView.invalidate();
 
         viewHolder.bidView.setListener(new BidView.ClickEventListener() {

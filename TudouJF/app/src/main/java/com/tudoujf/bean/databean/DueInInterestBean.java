@@ -121,6 +121,15 @@ public class DueInInterestBean implements BaseBean {
             private String add_time;
             private String principal;
             private String interest;
+            private  int  colorFlag;
+
+            public int getColorFlag() {
+                return colorFlag;
+            }
+
+            public void setColorFlag(int colorFlag) {
+                this.colorFlag = colorFlag;
+            }
 
             public String getLoan_name() {
                 return loan_name;

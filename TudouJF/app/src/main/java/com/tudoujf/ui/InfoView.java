@@ -217,10 +217,10 @@ public class InfoView extends View {
         canvas.drawText(handleProgress(),rectF.left+((rectF.right-rectF.left)/2-paintWhite.measureText(handleProgress())/2),width*0.2731f,paintWhite);
 
         Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
-        paintGray.setStrokeWidth(8);
+        paintGray.setStrokeWidth(6);
         canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
 
-        paintCyan.setStrokeWidth(8);
+        paintCyan.setStrokeWidth(6);
         canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
 
         //------------------------------------------投资进度--------------------------------------

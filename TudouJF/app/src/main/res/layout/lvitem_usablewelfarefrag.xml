@@ -24,10 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/act_redpackage_danbitouzi"
-                android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textColor="@color/color_black2"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_usablewelfarefrag_tv2"
@@ -36,8 +36,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/act_redpackage_touziyueshu"
-                android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textColor="@color/color_black2"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_usablewelfarefrag_tv3"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/act_redpackage_hongbaodaxiao"
                 android:textColor="@color/color_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_usablewelfarefrag_tv4"
@@ -59,8 +59,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/act_redpackage_zhuangtai"
-                android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textColor="@color/color_black2"
+                android:textSize="12sp" />
 
 
         </LinearLayout>
