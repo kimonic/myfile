@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_accountrecord"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_accountrecord_title"
         app:leftImage="@drawable/xvector_back"
@@ -26,28 +26,31 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/act_accountrecord_date"
+            android:background="@drawable/xshape_fourboder"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/act_accountrecord_jiesuanjine"
+            android:background="@drawable/xshape_threeboderql"
             />
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/act_accountrecord_zhuangtai"
+            android:background="@drawable/xshape_threeboderql"
             />
 
     </LinearLayout>
@@ -62,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="0dp"
-            android:divider="@null"
+            android:divider="#00000000"
             />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

@@ -68,7 +68,18 @@ public class ImageGlideUtils {
                 .load(url)
                 .error(R.drawable.ic_error) //加载图片失败的时候显示的默认图
                 .placeholder(R.drawable.ic_error)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
+                .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
+                .crossFade()//淡入淡出
+                .into(view);
+    }
+
+    /**加载网络图片*/
+    public static  void loadImageFromUrl(ImageView view, int resId) {
+        Glide.with(view.getContext())
+                .load(resId)
+                .error(R.drawable.ic_error) //加载图片失败的时候显示的默认图
+                .placeholder(R.drawable.ic_error)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .into(view);
     }

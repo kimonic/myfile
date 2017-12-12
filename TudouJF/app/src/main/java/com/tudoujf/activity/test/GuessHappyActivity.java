@@ -1,9 +1,18 @@
 package com.tudoujf.activity.test;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -12,7 +21,7 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.test.GuessBean;
 import com.tudoujf.test.ScoreBean;
 import com.tudoujf.ui.mytest.GameView;
-import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -472,7 +481,7 @@ public class GuessHappyActivity extends BaseActivity {
     private void showDialog() {
         if (dialog == null) {
             @SuppressLint("InflateParams") View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_user, null);
-            dialog = DialogUtils.showUserDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian), view);
+            dialog = showUserDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian), view);
             confirm = view.findViewById(R.id.tv_dialog_user_queding);
             user = view.findViewById(R.id.et_dialog_user_name);
             confirm.setOnClickListener(this);
@@ -480,6 +489,57 @@ public class GuessHappyActivity extends BaseActivity {
             dialog.show();
         }
     }
+
+
+    /**
+     *
+     * 简单登录
+     *
+     * @param context 上下文
+     * @param msg     点击back键的提示信息
+     * @return alertdialog
+     */
+    public  AlertDialog showUserDialog(final Context context, final String msg, View view) {
+//        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_user, null);
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            private long beforeTime;
+
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
+                    if (System.currentTimeMillis() - beforeTime < 2000) {
+                        ((Activity) context).finish();
+                    } else {
+                        ToastUtils.showToast(context, msg);
+                        beforeTime = System.currentTimeMillis();
+                    }
+                    return true;
+                } else {
+                    return false; //默认返回 false
+                }
+            }
+        });
+        dialog.show();
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setContentView(view);
+            WindowManager.LayoutParams lp = window.getAttributes();
+//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
+            int wh = 90 * ScreenSizeUtils.getDensity(context);
+            Log.e("TAG", "showUserDialog: ----wh-"+wh);
+            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.height =  WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
 
 
     //    @BindView(R.id.tv_dialog_canlendar_starttime)

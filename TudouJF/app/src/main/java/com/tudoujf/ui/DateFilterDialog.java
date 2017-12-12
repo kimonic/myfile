@@ -27,6 +27,7 @@ import com.tudoujf.utils.TimeUtils;
 public class DateFilterDialog implements View.OnClickListener {
     private Context context;
     private ClickEvent lisenter;
+    private  String  titleContent="";
 
     /**
      * 自定义dialog的展示view
@@ -44,12 +45,18 @@ public class DateFilterDialog implements View.OnClickListener {
      * 加载进度dialog,选择筛选时间dialog
      */
     private AlertDialog timeSelDialog;
+    private TextView title;
 
     /**
      * 构造函数
      */
     public DateFilterDialog(Context context) {
         this.context = context;
+        init();
+    }
+ public DateFilterDialog(Context context,String titleContent) {
+        this.context = context;
+        this.titleContent = titleContent;
         init();
     }
 
@@ -68,6 +75,11 @@ public class DateFilterDialog implements View.OnClickListener {
         endTime = (TextView) view.findViewById(R.id.tv_dialog_endtime);
         cancel = (TextView) view.findViewById(R.id.tv_dialog_cancel);
         confirm = (TextView) view.findViewById(R.id.tv_dialog_confirm);
+        title = (TextView) view.findViewById(R.id.datedialog_title);
+
+        if (!"".equals(titleContent)){
+            title.setText(titleContent);
+        }
 
         startTime.setText(TimeUtils.getCurrentFirstOfTheMonteh());
         endTime.setText(TimeUtils.getNowDateShort());

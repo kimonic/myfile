@@ -262,6 +262,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             infoView.setJieKuanQiXian((bean.getLoan_info().getPeriod() + "天"));
             infoView.setIfNew(true);
             infoView.setDrawImage(false);
+            infoView.setCloseBottomLine(true);
             infoView.setNianHuaShouYi((bean.getLoan_info().getApr() + "%"));
             infoView.setUnderlineScale1(StringUtils.string2Float(bean.getLoan_info().getProgress()) / 100f);
             infoView.invalidate();

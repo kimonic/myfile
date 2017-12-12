@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="36dp"
         android:orientation="horizontal"
         >
         <TextView
@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textColor="@color/act_productdetails_tvcolor1"
+            android:textColor="@color/act_productdetails_tvcolor2"
             android:textSize="12sp"
             android:gravity="center"
             android:background="@drawable/xshape_oneboder"

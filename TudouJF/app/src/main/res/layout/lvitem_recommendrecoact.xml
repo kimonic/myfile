@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/ll_lvitem_recommendrecord"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:orientation="horizontal"
         android:background="@color/color_white"
         >
@@ -15,51 +15,56 @@
             android:id="@+id/tv_lvitem_recommendrecord1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:textSize="14sp"
+            android:layout_weight="5"
+            android:textSize="10sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default"
+            android:background="@drawable/xshape_threeboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_recommendrecord2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_oneboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_recommendrecord3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_threeboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_recommendrecord4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_oneboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_recommendrecord5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:textSize="14sp"
+            android:layout_weight="4"
+            android:textSize="10sp"
             android:textColor="@color/color_gray"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_threeboder"
             />
 
     </LinearLayout>

@@ -79,8 +79,16 @@ public class DiscoverFragLvAdapter extends BaseAdapter {
         }else {
             viewHolder.textView3.setText("");
         }
-        ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
+
+        //-----------------------------------------临时使用,待调整,加载本地图片----------------------
+        if (list.get(position).getImage()==null){
+            ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getResId());
+
+        }else {
+            ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
+        }
 //        viewHolder.imageView.setImageResource(list.get(position).getResId());
+        //-----------------------------------------临时使用,待调整,加载本地图片----------------------
 
         return view;
     }

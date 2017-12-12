@@ -23,8 +23,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingBottom="8dp"
                 android:textColor="@color/color_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/lvitem_discover_tv2"
@@ -49,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/color_gray"
-            android:textSize="14sp"
+            android:textSize="12sp"
+            android:paddingTop="6dp"
             />
 
 

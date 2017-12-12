@@ -19,14 +19,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/color_white"
+        android:background="@color/global_background_color"
         android:orientation="vertical">
 
-        <TextView
+        <ImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginTop="18dp"
-            android:background="@drawable/xshape_roundrect_themecolor" />
+            android:src="@mipmap/ic_launcher"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -192,8 +193,8 @@
             android:textSize="14sp" />
 
         <TextView
-            android:layout_width="12dp"
-            android:layout_height="20dp"
+            android:layout_width="9dp"
+            android:layout_height="15dp"
             android:background="@drawable/xvector_rightarrowlarge"
             />
 
@@ -228,8 +229,8 @@
             android:textSize="14sp" />
 
         <TextView
-            android:layout_width="12dp"
-            android:layout_height="20dp"
+            android:layout_width="9dp"
+            android:layout_height="15dp"
             android:background="@drawable/xvector_rightarrowlarge"
             />
     </LinearLayout>
@@ -263,8 +264,8 @@
             android:textSize="14sp" />
 
         <TextView
-            android:layout_width="12dp"
-            android:layout_height="20dp"
+            android:layout_width="9dp"
+            android:layout_height="15dp"
             android:background="@drawable/xvector_rightarrowlarge"
             />
     </LinearLayout>

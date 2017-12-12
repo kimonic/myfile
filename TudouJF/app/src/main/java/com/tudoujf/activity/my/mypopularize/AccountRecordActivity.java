@@ -181,7 +181,7 @@ public class AccountRecordActivity extends BaseActivity {
 //        SucceedInvitationActLvAdapter adapter=new SucceedInvitationActLvAdapter(this,list);
 //        lvActAccountRecord.setAdapter(adapter);
             for (int i = 0; i < list.size(); i++) {
-                if (i % 2 == 0) {
+                if (i % 2 == 1) {
                     list.get(i).setBacFlag(1);
                 } else {
                     list.get(i).setBacFlag(2);

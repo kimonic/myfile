@@ -29,7 +29,7 @@
     <color name="act_lock_textcolor2">#0C9FCB</color>
     <color name="act_drawgesture_textcolor">#64635F</color>
     <color name="act_register_tvcolor2">#42423A</color>
-    <color name="act_productdetails_tvcolor">#FFB982</color>
+    <color name="act_productdetails_tvcolor">#FD7833</color>
     <color name="act_productdetails_tvcolor1">#9D9D9D</color>
     <color name="act_productdetails_baccolor">#F0EFEA</color>
     <color name="act_productdetails_baccolor1">#E7FAFF</color>
@@ -38,7 +38,7 @@
     <color name="frag_managemoneymatterschild_bac">#E7FAFF</color>
     <color name="color_gray">#919297</color>
     <color name="colorRed">#FC2004</color>
-    <color name="act_productdetails_tvcolor2">#4B4B4B</color>
+    <color name="act_productdetails_tvcolor2">#989898</color>
     <color name="frag_home_textcolor">#646464</color>
     <color name="frag_home_bac">#FD7C28</color>
     <color name="frag_home_textcolor1">#94938F</color>
@@ -65,7 +65,9 @@
 
     <!--线条颜色-->
     <color name="color_line">#F4F4F4</color>
+    <color name="color_line1">#DDDDDD</color>
     <color name="color_black2">#666666</color>
+    <color name="color_black3">#383838</color>
 
 
 </resources>

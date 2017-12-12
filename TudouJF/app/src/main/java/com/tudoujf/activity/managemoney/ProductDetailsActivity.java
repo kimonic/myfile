@@ -60,8 +60,8 @@ public class ProductDetailsActivity extends BaseActivity {
     MTopBarView mtbProductdetails;
     @BindView(R.id.utv_act_productdetails1)
     UnderlineTextView utv1;
-    @BindView(R.id.utv_act_productdetails2)
-    UnderlineTextView utv2;
+//    @BindView(R.id.utv_act_productdetails2)
+//    UnderlineTextView utv2;
     @BindView(R.id.utv_act_productdetails3)
     UnderlineTextView utv3;
     @BindView(R.id.ll_act_productdetails_xiangmuxiangqing)
@@ -153,9 +153,9 @@ public class ProductDetailsActivity extends BaseActivity {
             case R.id.utv_act_productdetails1:
                 setUTVStyle(0);
                 break;
-            case R.id.utv_act_productdetails2:
-                setUTVStyle(1);
-                break;
+//            case R.id.utv_act_productdetails2:
+//                setUTVStyle(1);
+//                break;
             case R.id.utv_act_productdetails3:
                 setUTVStyle(2);
                 break;
@@ -208,7 +208,8 @@ public class ProductDetailsActivity extends BaseActivity {
 
         list = new ArrayList<>();
         list.add(utv1);
-        list.add(utv2);
+        list.add(new UnderlineTextView(this));
+//        list.add(utv2);
         list.add(utv3);
 
         listLL = new ArrayList<>();
@@ -231,7 +232,7 @@ public class ProductDetailsActivity extends BaseActivity {
     @Override
     public void initListener() {
         utv1.setOnClickListener(this);
-        utv2.setOnClickListener(this);
+//        utv2.setOnClickListener(this);
         utv3.setOnClickListener(this);
         tvBuyNow.setOnClickListener(this);
 

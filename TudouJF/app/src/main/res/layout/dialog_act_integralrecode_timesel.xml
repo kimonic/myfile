@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/datedialog_title"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:gravity="center_vertical"
@@ -33,7 +34,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12sp"
-            android:background="@color/color_white"
+            android:background="@drawable/xshape_roundrect_mbordergray_onepx"
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -60,7 +61,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="12sp"
             android:layout_marginRight="12dp"
-            android:background="@color/color_white"
+            android:background="@drawable/xshape_roundrect_mbordergray_onepx"
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
@@ -73,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/color_gray" />
+        android:background="@color/color_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"

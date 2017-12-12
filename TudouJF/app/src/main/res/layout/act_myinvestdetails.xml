@@ -8,7 +8,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_myinvestdetails"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_myinvestdetails_title"
         app:leftImage="@drawable/xvector_back" />
@@ -40,63 +40,73 @@
                 android:paddingRight="15dp"
                 android:text="@string/act_mycreditorrightsdetails_jiekuanxiangqing"
                 android:textColor="@color/color_black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+
                 android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/act_mycreditorrightsdetails_biaodimingcheng"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_bid_name"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="房产抵押贷款201703270003"
                     android:textColor="@color/act_productdetails_tvcolor"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
 
             </LinearLayout>
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/color_line" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/touzijine"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_invest_amount"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="XX,XXX.XX元"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -105,34 +115,35 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
+                android:paddingTop="10dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/zongshouyi"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_total_earnings"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="XX,XXX.XX元"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -141,34 +152,35 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
+                android:paddingTop="10dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/yishoushouyi"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_old_earnings"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="4期/共6期"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -177,42 +189,43 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/daishoubenjin"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_new_capital"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
                     android:text="XX,XXX.XX"
                     android:textColor="@color/act_productdetails_tvcolor"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/act_mycreditorrightsdetails_yuan"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -221,42 +234,43 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
+                android:paddingTop="10dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@string/jianglijine"
                     android:textColor="@color/color_gray"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tv_act_myinvestdetails_award_amount"
                     android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
                     android:text="XX,XXX.XX"
                     android:textColor="@color/act_productdetails_tvcolor"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/act_mycreditorrightsdetails_yuan"
                     android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -265,7 +279,7 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/color_gray" />
+                android:background="@color/color_line" />
 
 
             <TextView
@@ -277,7 +291,7 @@
                 android:paddingRight="20dp"
                 android:text="@string/act_mycreditorrightsdetails_huankuanxiangqing"
                 android:textColor="@color/color_black"
-                android:textSize="14sp"
+                android:textSize="12sp"
 
                 />
 

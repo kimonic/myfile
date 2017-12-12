@@ -116,6 +116,15 @@ public class DiscoverBean implements BaseBean {
         private String contents;
         private String addTime;
         private String ranking;
+        private int resId;
+
+        public int getResId() {
+            return resId;
+        }
+
+        public void setResId(int resId) {
+            this.resId = resId;
+        }
 
         public String getId() {
             return id;

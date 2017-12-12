@@ -19,7 +19,8 @@
             android:text="@string/frag_dueininterest_date"
             android:textColor="@color/color_black"
             android:textSize="14sp"
-            android:background="@drawable/xshape_fourboder"/>
+            android:background="@drawable/xshape_fourboder"
+        />
 
         <TextView
             android:id="@+id/tv_frag_dueininterest2"

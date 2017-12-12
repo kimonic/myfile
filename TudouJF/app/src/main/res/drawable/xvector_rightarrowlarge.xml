@@ -32,8 +32,8 @@
 
         <!--"-->
             <!--/>-->
-        <path android:strokeColor="#B5B5B5"
-            android:strokeWidth="10"
+        <path android:strokeColor="#999999"
+            android:strokeWidth="15"
             android:pathData="M5 5,
                             L80 75
                           5 145

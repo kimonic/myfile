@@ -91,7 +91,8 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,7 +128,8 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -163,7 +165,8 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,7 +202,8 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -254,17 +258,17 @@
                     android:textColor="@color/act_productdetails_tvcolor"
                     android:textSize="14sp" />
 
-                <com.tudoujf.ui.UnderlineTextView
-                    android:id="@+id/utv_act_productdetails2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/act_productdetails_changjianwenti"
-                    android:textColor="@color/color_black"
-                    android:textSize="14sp" />
+                <!--<com.tudoujf.ui.UnderlineTextView-->
+                    <!--android:id="@+id/utv_act_productdetails2"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="30dp"-->
+                    <!--android:layout_marginStart="30dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="@string/act_productdetails_changjianwenti"-->
+                    <!--android:textColor="@color/color_black"-->
+                    <!--android:textSize="14sp" />-->
 
                 <com.tudoujf.ui.UnderlineTextView
                     android:id="@+id/utv_act_productdetails3"
@@ -311,11 +315,12 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_xiangmumiaoshu"
-                        android:textSize="14sp"
                         android:textColor="@color/color_black2"
+                        android:textSize="14sp"
 
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -363,11 +368,12 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_huankuanbaozhang"
-                        android:textSize="14sp"
                         android:textColor="@color/color_black2"
+                        android:textSize="14sp"
 
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -413,17 +419,19 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_fengkongyijian"
-                        android:textSize="14sp"
                         android:textColor="@color/color_black2"
+                        android:textSize="14sp"
 
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/color_line" />
+
                 <TextView
                     android:id="@+id/tv_act_productdetails_fengkongyijian"
                     android:layout_width="match_parent"
@@ -462,17 +470,19 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_baozhangjigou"
-                        android:textSize="14sp"
                         android:textColor="@color/color_black2"
+                        android:textSize="14sp"
 
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/color_line" />
+
                 <TextView
                     android:id="@+id/tv_act_productdetails_baozhangjigou"
                     android:layout_width="match_parent"
@@ -511,17 +521,19 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical|start"
                         android:text="@string/act_productdetails_fengxiantishi"
-                        android:textSize="14sp"
                         android:textColor="@color/color_black2"
+                        android:textSize="14sp"
 
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/color_line" />
+
                 <TextView
                     android:id="@+id/tv_act_productdetails_fengxiantishi"
                     android:layout_width="match_parent"
@@ -630,8 +642,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|start"
                     android:text="@string/act_productdetails_xiangmuziliao"
-                    android:textSize="14sp"
                     android:textColor="@color/color_black2"
+                    android:textSize="14sp"
 
                     />
             </LinearLayout>
@@ -642,6 +654,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/color_line" />
+
             <com.tudoujf.ui.MHorizontalScrollView
                 android:id="@+id/hsv_act_productdetails"
                 android:layout_width="wrap_content"

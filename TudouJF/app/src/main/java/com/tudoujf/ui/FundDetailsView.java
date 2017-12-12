@@ -162,17 +162,17 @@ public class FundDetailsView extends View {
         canvas.drawText("待收本金", width * 0.25f, width * (0.5518f+0.06f), blackPaint);
         canvas.drawText("待收利息", width * 0.25f, width * (0.6851f+0.08f), blackPaint);
 
-//        canvas.drawText(balance_amount,width*0.4f,width*0.1519f,orangePaint);
-//        canvas.drawText(freeze_amount,width*0.4f,width*0.2852f,orangePaint);
-//        canvas.drawText(interest_yes_total,width*0.4f,width*0.4185f,orangePaint);
-//        canvas.drawText(principal_wait_total,width*0.4f,width*0.5518f,orangePaint);
-//        canvas.drawText(interest_wait_total,width*0.4f,width*0.6851f,orangePaint);
+        canvas.drawText(balance_amount,width*0.45f,width*0.1519f,orangePaint);
+        canvas.drawText(freeze_amount,width*0.45f,(width*(0.2852f+0.02f)),orangePaint);
+        canvas.drawText(interest_yes_total,width*0.45f,(width*(0.4185f+0.04f)),orangePaint);
+        canvas.drawText(principal_wait_total,width*0.45f,(width*(0.5518f+0.06f)),orangePaint);
+        canvas.drawText(interest_wait_total,width*0.45f,(width*(0.6851f+0.08f)),orangePaint);
 
-        canvas.drawText(balance_amount, width * 0.6333f - orangePaint.measureText(balance_amount) / 2, width * 0.1519f, orangePaint);
-        canvas.drawText(freeze_amount, width * 0.6333f - orangePaint.measureText(freeze_amount) / 2, width * (0.2852f+0.02f), orangePaint);
-        canvas.drawText(interest_yes_total, width * 0.6333f - orangePaint.measureText(interest_yes_total) / 2, width *(0.4185f+0.04f), orangePaint);
-        canvas.drawText(principal_wait_total, width * 0.6333f - orangePaint.measureText(principal_wait_total) / 2, width * (0.5518f+0.06f), orangePaint);
-        canvas.drawText(interest_wait_total, width * 0.6333f - orangePaint.measureText(interest_wait_total) / 2, width * (0.6851f+0.08f), orangePaint);
+//        canvas.drawText(balance_amount, width * 0.6333f - orangePaint.measureText(balance_amount) / 2, width * 0.1519f, orangePaint);
+//        canvas.drawText(freeze_amount, width * 0.6333f - orangePaint.measureText(freeze_amount) / 2, width * (0.2852f+0.02f), orangePaint);
+//        canvas.drawText(interest_yes_total, width * 0.6333f - orangePaint.measureText(interest_yes_total) / 2, width *(0.4185f+0.04f), orangePaint);
+//        canvas.drawText(principal_wait_total, width * 0.6333f - orangePaint.measureText(principal_wait_total) / 2, width * (0.5518f+0.06f), orangePaint);
+//        canvas.drawText(interest_wait_total, width * 0.6333f - orangePaint.measureText(interest_wait_total) / 2, width * (0.6851f+0.08f), orangePaint);
 
 
         canvas.drawText("元", width * 0.8666f, width * 0.1519f, blackPaint);

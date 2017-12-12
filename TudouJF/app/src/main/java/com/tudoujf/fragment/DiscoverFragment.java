@@ -97,20 +97,20 @@ public class DiscoverFragment extends BaseFragment {
     public void initDataFromIntent() {
         list = new ArrayList<>();
 
-//        DiscoverFragBean bean1 = new DiscoverFragBean();
-//        bean1.setTitle("100元红包买你的故事,可好?");
-//        bean1.setTime("7月10日");
-//        bean1.setMark("你才不是一个没有故事的同学");
-//        bean1.setResId(R.drawable.frag_discover_story);
-//
-//        DiscoverFragBean bean2 = new DiscoverFragBean();
-//        bean2.setTitle("轻松摇一摇,秒拿现金奖");
-//        bean2.setTime("6月21日");
-//        bean2.setMark("啊啊啊,好激动");
-//        bean2.setResId(R.drawable.frag_discover_sharkitoff);
-//
-//        list.add(bean1);
-//        list.add(bean2);
+        DiscoverBean.ItemsBean bean1 = new DiscoverBean.ItemsBean();
+        bean1.setName("100元红包买你的故事,可好?");
+        bean1.setAddTime("7月10日");
+        bean1.setContents("你才不是一个没有故事的同学");
+        bean1.setResId(R.drawable.frag_discover_christmas);
+
+        DiscoverBean.ItemsBean bean2 = new DiscoverBean.ItemsBean();
+        bean2.setName("轻松摇一摇,秒拿现金奖");
+        bean2.setAddTime("6月21日");
+        bean2.setContents("啊啊啊,好激动");
+        bean2.setResId(R.drawable.frag_discover_sharkitoff);
+
+        list.add(bean1);
+        list.add(bean2);
 
     }
 

@@ -80,7 +80,7 @@ public class MyProjectActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myproject_filtrate:
                 if (dateFilterDialog == null) {
-                    dateFilterDialog = new DateFilterDialog(this);
+                    dateFilterDialog = new DateFilterDialog(this,getResources().getString(R.string.qignxuanzeninyaochaxundehuikuanshijian));
                     dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
                         @Override
                         public void dismiss(String startTime, String endTime) {

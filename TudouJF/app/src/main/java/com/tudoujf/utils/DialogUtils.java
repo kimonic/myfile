@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -349,6 +350,7 @@ public class DialogUtils {
             WindowManager.LayoutParams lp = window.getAttributes();
 //            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
             int wh = 90 * ScreenSizeUtils.getDensity(context);
+            Log.e("TAG", "showUserDialog: ----wh-"+wh);
             lp.width = wh;
             lp.height = wh;
             lp.gravity = Gravity.CENTER;

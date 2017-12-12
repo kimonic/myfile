@@ -7,13 +7,13 @@
     <FrameLayout
         android:id="@+id/mtb_act_recommendrecord"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:background="@color/global_theme_background_color">
 
         <TextView
             android:id="@+id/tv_act_recommendrecord_bac"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
@@ -75,11 +75,12 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_username"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:background="@drawable/xshape_fourboder"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -88,7 +89,8 @@
             android:gravity="center"
             android:text="@string/tichengleixing"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -97,7 +99,8 @@
             android:gravity="center"
             android:text="@string/act_recommendrecord_tichengbili"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -106,16 +109,18 @@
             android:gravity="center"
             android:text="@string/tichengjineyuan"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:gravity="center"
             android:text="@string/act_recommendrecord_date"
             android:textColor="@color/color_black"
-            android:textSize="14sp" />
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
 
     </LinearLayout>
 

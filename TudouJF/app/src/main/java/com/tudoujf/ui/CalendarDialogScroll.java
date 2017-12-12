@@ -184,7 +184,7 @@ public class CalendarDialogScroll implements View.OnClickListener {
      */
     public void show() {
         dialog = new AlertDialog.Builder(context).create();
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {

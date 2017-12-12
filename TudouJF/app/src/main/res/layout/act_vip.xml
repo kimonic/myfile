@@ -128,7 +128,7 @@
             android:layout_height="50dp"
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
-            android:background="@drawable/act_vip_sel"
+            android:background="@drawable/act_vip_unsel"
             android:gravity="center"
             android:orientation="vertical">
 

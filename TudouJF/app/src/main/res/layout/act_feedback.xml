@@ -24,14 +24,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:background="@color/color_white"
         android:gravity="left"
         android:hint="@string/qingshurunindebaoguiyijianhejianyi"
-        android:textColor="@color/color_gray"
-        android:background="@color/color_white"
-        android:textSize="12sp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        />
+        android:paddingTop="10dp"
+        android:textColor="@color/color_gray"
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/et_act_feedback_contact"
@@ -40,29 +40,27 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@color/color_white"
         android:gravity="center_vertical"
         android:hint="@string/qingliuxianindelianxifangshi"
-        android:textColor="@color/color_gray"
-        android:background="@color/color_white"
-        android:textSize="12sp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        />
-
+        android:textColor="@color/color_gray"
+        android:textSize="12sp" />
 
 
     <TextView
         android:id="@+id/tv_act_feedback_submit"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:layout_marginTop="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/xshape_roundrect_themecolor"
+        android:gravity="center"
+        android:text="@string/tijiao"
         android:textColor="@color/color_white"
         android:textSize="14sp"
-        android:background="@drawable/xshape_roundrect_themecolor"
-        android:text="@string/tijiao"
-        android:gravity="center"
 
         />
 

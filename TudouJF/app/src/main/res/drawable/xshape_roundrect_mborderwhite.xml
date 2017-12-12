@@ -5,11 +5,11 @@
     android:shape="rectangle" >
 
     <corners
-        android:radius="5dp"
+        android:radius="3dp"
         />
     <gradient android:startColor="#FFFFFF"
         android:endColor="#FFFFFF"/>
     <stroke
-        android:width="2dp"
-        android:color="#D4D4D2" />
+        android:width="1dp"
+        android:color="#9A9B93" />
 </shape>

@@ -16,30 +16,33 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/global_theme_background_color"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default"
+            android:background="@drawable/xshape_threeboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_succeedinvitation2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_oneboder"
             />
         <TextView
             android:id="@+id/tv_lvitem_succeedinvitation3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/color_black"
             android:gravity="center"
             android:text="@string/act_succeedinvitation_default1"
+            android:background="@drawable/xshape_threeboder"
             />
 
     </LinearLayout>

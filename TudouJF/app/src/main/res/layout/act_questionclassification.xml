@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_questionclassification"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_questionclassification_title"
         app:leftImage="@drawable/xvector_back" />
@@ -18,7 +18,7 @@
         android:id="@+id/lv_act_questionclassification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/color_white"
         android:divider="@null"
         android:dividerHeight="0dp"/>

@@ -42,7 +42,7 @@ public class InfoView extends View {
     /**屏幕的宽度*/
     private int width;
     /**该控件的宽高比*/
-    private static final float whScale=3.5f;
+    private static final float whScale=0.3133f;
     /**最底部白色矩形框*/
     private Rect rect=new Rect();
 
@@ -57,6 +57,15 @@ public class InfoView extends View {
     private boolean  ifNew=true;
     private boolean drawImage=true;
 
+    private boolean  closeBottomLine=false;
+
+    public boolean isCloseBottomLine() {
+        return closeBottomLine;
+    }
+
+    public void setCloseBottomLine(boolean closeBottomLine) {
+        this.closeBottomLine = closeBottomLine;
+    }
 
     public void setUnderlineScale1(float underlineScale1) {
         this.underlineScale1 = underlineScale1;
@@ -107,7 +116,7 @@ public class InfoView extends View {
 
         paintGray=initPaint(Color.parseColor("#C1C2C7"));
         paintOrange=initPaint(Color.parseColor("#FD7833"));
-        paintOrange.setTextSize(width*0.07333f);
+        paintOrange.setTextSize(width*0.06933f);
         paintCyan=initPaint(Color.parseColor("#149BBB"));
 
         bitmapLeft= BitmapFactory.decodeResource(getResources(), R.drawable.act_productdetails2_nianhua1);
@@ -117,53 +126,62 @@ public class InfoView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.parseColor("#E7FAFF"));//背景色
+        canvas.drawColor(Color.parseColor("#E6FBFF"));//背景色
         float underlineScale=(width*0.9259f)*underlineScale1/100/width;
 
 
-        float bitScale1=0.03333f;//位图1高与控件高的比例
+        float bitScale1=0.04f;//位图1高与控件高的比例
         int bitWidth1= (int) (width*bitScale1);//控件的高度
-        float initScale=13.5f;//位图1左上角位置与控件宽度的比例
-        float initScaleh=6.6f;//位图1左上角位置与控件宽度的比例
 
-        rectImag1.left= (int) (width/initScale);//位图1左上角x坐标
-        rectImag1.top= (int) (width/initScaleh);//位图1左上角y坐标
+//        float initScale=13.5f;//位图1左上角位置与控件宽度的比例
+//        float initScaleh=6.6f;//位图1左上角位置与控件宽度的比例
+
+        rectImag1.left= (int) (width*0.13333f);//位图1左上角x坐标
+        rectImag1.top= (int) (width*0.19066f);//位图1左上角y坐标
         rectImag1.right=rectImag1.left+bitWidth1;
         rectImag1.bottom=rectImag1.top+bitWidth1;
 
         canvas.drawBitmap(bitmapLeft,null,rectImag1,null);
-        paintGray.setTextSize(width*0.04f);//设置文字大小
+        paintGray.setTextSize(width*0.044f);//设置文字大小
 
         canvas.drawText("预期年化收益",rectImag1.left+bitWidth1+10,rectImag1.bottom-5,paintGray);
 
 
-        canvas.drawText("借款期限",width/1.5f,rectImag1.bottom-5,paintGray);
+        canvas.drawText("借款期限",width*0.63733f,rectImag1.bottom-5,paintGray);
+
+
+        //-------------------------------年化收益---------------------------------------------------
 
         float textWidth1=paintGray.measureText("预期年化收益");
-
-        //年化收益
         int textX1= (int) (rectImag1.left+(textWidth1+bitWidth1+10)/2-paintOrange.measureText(nianHuaShouYi)/2);
-        canvas.drawText(nianHuaShouYi,textX1,width/9.1f,paintOrange);
+        canvas.drawText(nianHuaShouYi,textX1,width*0.13733f,paintOrange);
 
+
+        //-------------------------------年化收益---------------------------------------------------
+
+
+        //--------------------------------借款期限--------------------------------------------------
         float textWidth2=paintGray.measureText("借款期限");
+        int textX2= (int) (width*0.63733f+textWidth2/2-paintOrange.measureText(jieKuanQiXian)/2);
+        canvas.drawText(jieKuanQiXian,textX2,width*0.13733f,paintOrange);
+        //--------------------------------借款期限--------------------------------------------------
 
-        //借款期限
-        int textX2= (int) (width/1.5f+textWidth2/2-paintOrange.measureText(jieKuanQiXian)/2);
-        canvas.drawText(jieKuanQiXian,textX2,width/9.1f,paintOrange);
 
-        paintCyan.setStrokeWidth(5);
-        canvas.drawLine(width/1.86f,width/61.74f,width/1.86f,rectImag1.bottom-5,paintCyan);//中分线
+        //--------------------------------------------中分线----------------------------------------
+        paintCyan.setStrokeWidth(3);
+        canvas.drawLine(width*0.5533f,width*0.048f,width*0.5533f,width*0.24f,paintCyan);//中分线
 
 //        paintCyan.setStrokeWidth(10);
 
+        //--------------------------------------------中分线----------------------------------------
 
 
 
         //------------------------------------------新手标相关--------------------------------------
         if (ifNew){//是否时新手标
-            canvas.drawRect(width*0.4706f,width*0.03333f,width*0.5089f,width*0.07166f,paintCyan);
-            paintWhite.setTextSize(width*.03333f);
-            canvas.drawText("新",width*0.4736f,width*0.06666f,paintWhite);
+            canvas.drawRect(width*0.472f,width*0.048f,width*0.5066f,width*0.08f,paintCyan);
+            paintWhite.setTextSize(width*0.028f);
+            canvas.drawText("新",width*0.4756f,width*0.07366f,paintWhite);
 
 
             //-------------------------新手专享图片------------------------------------
@@ -187,43 +205,48 @@ public class InfoView extends View {
         //------------------------------------------新手标相关--------------------------------------
 
 
-        //------------------------------------------投资进度--------------------------------------
+        if (!closeBottomLine){
+            //------------------------------------------投资进度--------------------------------------
 
 
-        rectF.left=width*underlineScale;
-        rectF.top=width/4.07f;
+            rectF.left=width*underlineScale;
+            rectF.top=width*0.27365f;
 
-        rectF.right=rectF.left+width*0.10407f;
+            rectF.right=rectF.left+width*0.10407f;
 
-        if (rectF.right-rectF.left>width-rectF.left){
-            rectF.left=width-width*0.10407f;
-            rectF.right=width;
+            if (rectF.right-rectF.left>width-rectF.left){
+                rectF.left=width-width*0.10407f;
+                rectF.right=width;
+            }
+
+            rectF.bottom=width*0.30494f;
+
+            //-------------------------------------------------
+            rect.left=0;
+            rect.top= (int) (width*0.2893f);
+            rect.right=width;
+            rect.bottom=getHeight();
+            canvas.drawRect(rect,paintWhite);
+            //-------------------------------------------------
+
+
+            canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
+
+
+
+            Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
+            paintGray.setStrokeWidth(6);
+            canvas.drawLine(rectF.right,width*0.2893f,width,width*0.2893f,paintGray);
+
+            paintCyan.setStrokeWidth(6);
+            canvas.drawLine(0,width*0.2893f,width*underlineScale,width*0.2893f,paintCyan);//底线
+
+            paintWhite.setTextSize(width*0.02777f);
+            canvas.drawText(handleProgress(),rectF.left+((rectF.right-rectF.left)/2-paintWhite.measureText(handleProgress())/2),width*0.3f,paintWhite);
+
+            //------------------------------------------投资进度--------------------------------------
+
         }
-
-        rectF.bottom=width*0.277f;
-
-        //-------------------------------------------------
-        rect.left=0;
-        rect.top= (int) (width*0.2638f);
-        rect.right=width;
-        rect.bottom=getHeight();
-        canvas.drawRect(rect,paintWhite);
-        //-------------------------------------------------
-
-
-        canvas.drawRoundRect(rectF,width*0.01388f,width*0.01388f,paintCyan);
-
-        paintWhite.setTextSize(width*0.02777f);
-        canvas.drawText(handleProgress(),rectF.left+((rectF.right-rectF.left)/2-paintWhite.measureText(handleProgress())/2),width*0.2731f,paintWhite);
-
-        Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
-        paintGray.setStrokeWidth(6);
-        canvas.drawLine(rectF.right,width*0.2638f,width,width*0.2638f,paintGray);
-
-        paintCyan.setStrokeWidth(6);
-        canvas.drawLine(0,width*0.2638f,width*underlineScale,width*0.2638f,paintCyan);//底线
-
-        //------------------------------------------投资进度--------------------------------------
 
 
 
@@ -231,7 +254,7 @@ public class InfoView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            setMeasuredDimension(width, (int) (width/whScale));
+            setMeasuredDimension(width, (int) (width*whScale));
     }
 
     private String handleProgress(){
