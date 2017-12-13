@@ -2,6 +2,8 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,7 +11,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -40,6 +41,11 @@ public class BidView extends View {
 
     private Path path = new Path(), textPath = new Path();
     private RectF rectF = new RectF();
+
+    /**是否是锁定的标的*/
+    private boolean  lock=false;
+    private Bitmap bitmapLock;
+    private RectF rectFLock;
 
     /**
      * 是否包含  奖**.**%
@@ -110,6 +116,8 @@ public class BidView extends View {
     }
 
     private void initView() {
+
+
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
         blackPaint.setColor(Color.parseColor("#343434"));
@@ -201,6 +209,17 @@ public class BidView extends View {
         canvas.drawText(title, text1X, text1Y, blackPaint);
 //---------------------------------标题-------------------------------------------------------------
 
+//----------------------------------绘制锁----------------------------------------------------------
+        if (lock){
+            rectFLock.top=text1Y-41;
+            rectFLock.left=text1X+blackPaint.measureText(title)+50;
+            rectFLock.right=rectFLock.left+32;
+            rectFLock.bottom=text1Y;
+            canvas.drawBitmap(bitmapLock,null,rectFLock,null);
+        }
+//----------------------------------绘制锁----------------------------------------------------------
+
+
 // ---------------------------------新手专享-------------------------------------------------------------
         float text2X = width * 0.6759f;
         float text2Y = width * 0.075925f;
@@ -260,7 +279,6 @@ public class BidView extends View {
         orangePaint.setTextSize(width * 0.05555f);
 
 
-        Log.e("TAG", "onDraw: --理财列表---" + nianHuaShouYi);
 
         canvas.drawText(nianHuaShouYi, text3X, text3Y, orangePaint);
         float eX = text3X + orangePaint.measureText(nianHuaShouYi);
@@ -412,6 +430,17 @@ public class BidView extends View {
 
     public interface ClickEventListener {
         void clickEvent();
+    }
+
+
+
+    /**是否是锁定的标的,初始化锁图片相关*/
+    public void setLock(boolean lock) {
+        this.lock = lock;
+        if (lock){
+            rectFLock=new RectF();
+            bitmapLock= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.lockflag);
+        }
     }
 
     /**

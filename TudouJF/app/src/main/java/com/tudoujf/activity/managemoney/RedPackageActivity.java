@@ -112,6 +112,13 @@ public class RedPackageActivity extends BaseActivity {
      * 请求的url连接
      */
     private String url;
+    //--------------------------------------已选中的红包加息券返现券id------------------------------
+    private String  selId;
+
+
+
+
+    //--------------------------------------已选中的红包加息券返现券id------------------------------
 
     @Override
     public int getLayoutResId() {
@@ -123,34 +130,7 @@ public class RedPackageActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.tv_act_redpackage2:
                 skip();
-//                if (actType == 1) {//红包
-//                    Intent intent = new Intent();
-//                    intent.putExtra("redId", redId);
-//                    intent.putExtra("acount", acount);
-//                    intent.putExtra("together_status", together_status);
-//                    setResult(888, intent);
-//                    closeActivity();
-//                } else if (actType == 2) {//加息券
-//                    Intent intent = new Intent();
-//                    intent.putExtra("redId", redId);
-//                    intent.putExtra("acount", acount);
-//                    intent.putExtra("together_status", together_status);
-//                    setResult(999, intent);
-//                    closeActivity();
-//                } else if (actType == 3) {//返现券--------------------------------------------------------------------------------------------------
-//                    Intent intent = new Intent();
-//                    intent.putExtra("redId", redId);
-//                    intent.putExtra("acount", acount);
-//                    intent.putExtra("together_status", together_status);
-//                    setResult(777, intent);
-//                    closeActivity();
-//                }
                 break;
-//                     case R.id.:break;
-//                     case R.id.:break;
-//                     case R.id.:break;
-//                     case R.id.:break;
-//                     case R.id.:break;
         }
     }
 
@@ -184,7 +164,24 @@ public class RedPackageActivity extends BaseActivity {
             is_beginner = bundle.getString("is_beginner");
             time_limit = bundle.getString("time_limit");
             amount = bundle.getString("amount");
-            together_status = bundle.getString("together_status");//----------------------------------------------------------------
+            together_status = bundle.getString("together_status");
+            selId= bundle.getString("selId");//已选中的红包id
+            //----------------------------------------------------------------
+
+            //--------------------------传递的参数--------------------------------------------------
+            Log.e("TAG", "initDataFromIntent: -----actType"+actType);
+            Log.e("TAG", "initDataFromIntent: -----is_beginner"+is_beginner);
+            Log.e("TAG", "initDataFromIntent: -----time_limit"+time_limit);
+            Log.e("TAG", "initDataFromIntent: -----amount"+amount);
+            Log.e("TAG", "initDataFromIntent: -----together_status"+together_status);
+
+
+
+            //--------------------------传递的参数--------------------------------------------------
+
+
+
+
             if (actType == 1) {
                 url = Constants.RED_BAG;
             } else if (actType == 2) {
@@ -201,7 +198,6 @@ public class RedPackageActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbRedpackage.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbRedpackage.setLayoutParams(params);
@@ -213,9 +209,22 @@ public class RedPackageActivity extends BaseActivity {
         mtbRedpackage.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeActivity();
+                // TODO: 2017/12/13 取消红包修改
+                redId="";
+                acount="";
+                together_status="";
+                skip();
+//                closeActivity();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        redId="";
+        acount="";
+        together_status="";
+        skip();
     }
 
     @Override
@@ -374,6 +383,24 @@ public class RedPackageActivity extends BaseActivity {
             listRed = bean.getList();
 
             if (listRed.size() > 0) {
+                //--------------------------------之前已选中的红包----------------------------------
+                if (selId!=null&&!"".equals(selId)){
+                    for (int i = 0; i < listRed.size(); i++) {
+                        if (selId.equals(listRed.get(i).getId())){
+                            listRed.get(i).setBackground(2);
+                            beforePosition=i;
+                            tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
+                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            count++;
+                        }
+                    }
+                }
+                //--------------------------------之前已选中的红包----------------------------------
+
+
+
+
+
                 tvRedpackageCount.setText(("您有" + listRed.size() + "个红包可使用"));
                 adapter = new RedPackageActLvAdapter(bean, this);
                 lvRedpackage.setAdapter(adapter);
@@ -390,6 +417,23 @@ public class RedPackageActivity extends BaseActivity {
         if (jiaXiQuanBean != null && actType == 2) {
             listJiaXiQuan = jiaXiQuanBean.getList();
             if (listJiaXiQuan.size() > 0) {
+
+
+                //--------------------------------之前已选中的加息券----------------------------------
+                if (selId!=null&&!"".equals(selId)){
+                    for (int i = 0; i < listRed.size(); i++) {
+                        if (selId.equals(listRed.get(i).getId())){
+                            listRed.get(i).setBackground(2);
+                            beforePosition=i;
+                            tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
+                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            count++;
+                        }
+                    }
+                }
+                //--------------------------------之前已选中的加息券----------------------------------
+
+
                 tvRedpackageCount.setText(("您有" + listJiaXiQuan.size() + "个加息券可使用"));
                 adapterJiaXiQuan = new JiaXiQuanActLvAdapter(jiaXiQuanBean, this);
                 lvRedpackage.setAdapter(adapterJiaXiQuan);
@@ -408,6 +452,23 @@ public class RedPackageActivity extends BaseActivity {
             listFanXianQuan = fanXianQuanBean.getList();
 
             if (listFanXianQuan.size() > 0) {
+
+                //--------------------------------之前已选中的返现券----------------------------------
+                if (selId!=null&&!"".equals(selId)){
+                    for (int i = 0; i < listRed.size(); i++) {
+                        if (selId.equals(listRed.get(i).getId())){
+                            listRed.get(i).setBackground(2);
+                            beforePosition=i;
+                            tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
+                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            count++;
+                        }
+                    }
+                }
+                //--------------------------------之前已选中的返现券----------------------------------
+
+
+
                 tvRedpackageCount.setText(("您有" + listFanXianQuan.size() + "个返现券可使用"));
                 adapterFanXianQuan = new FanXianQuanActLvAdapter(fanXianQuanBean, this);
                 lvRedpackage.setAdapter(adapterFanXianQuan);

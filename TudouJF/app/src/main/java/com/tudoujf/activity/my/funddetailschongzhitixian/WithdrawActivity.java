@@ -99,15 +99,24 @@ public class WithdrawActivity extends BaseActivity {
                 openActivity(WithdrawRecordActivity.class);
                 break;
             case R.id.tv_act_withdraw_lijitixian://立即提现
-                if (etJinE.getText().toString().equals("")) {
-                    if (dialog == null) {
-                        dialog = showCustomDialog(LayoutInflater.from(this).inflate(R.layout.dialog_input, null));
-                    } else {
-                        dialog.show();
+                if ("1".equals(bean.getIs_bind())){
+                    if (etJinE.getText().toString().equals("")) {
+                        if (dialog == null) {
+                            dialog = showCustomDialog(LayoutInflater.from(this).inflate(R.layout.dialog_input, null));
+                        } else {
+                            dialog.show();
+                        }
+                    }else if (jump){
+                        checkLogin();//检测实名与登陆状态
                     }
-                }else if (jump){
-                    checkLogin();//检测实名与登陆状态
+                }else {
+                    ToastUtils.showToast(WithdrawActivity.this, R.string.ninshangweibangding);
+
                 }
+
+                break;
+            case R.id.tv_act_withdraw_all://全部提现
+                etJinE.setText(amount);
                 break;
         }
 
@@ -143,6 +152,7 @@ public class WithdrawActivity extends BaseActivity {
         tvBac.setOnClickListener(this);
         tvTiXianJiLu.setOnClickListener(this);
         tvLiJiTiXian.setOnClickListener(this);
+        tvAll.setOnClickListener(this);
 
         etJinE.addTextChangedListener(new MTextWatchAdapter() {
             @Override

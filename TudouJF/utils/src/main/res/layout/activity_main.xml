@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_frag_my"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/SmartRefreshLayout"
+    android:background="@color/global_background_color">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,3 +32,4 @@
         android:layout_height="50dp" />
 
 </LinearLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

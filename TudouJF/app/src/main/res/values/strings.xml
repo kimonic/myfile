@@ -627,6 +627,8 @@
     <string name="xitongjiancedaoninweishiming">系统检测到您尚未实名,是否前去实名认证?</string>
     <string name="tiyanjintouzishiabi">体验金投资失败!!</string>
     <string name="qignxuanzeninyaochaxundehuikuanshijian">请选择您要查询的回款时间</string>
+    <string name="ninshangweibangding">您尚未绑定银行卡,请先绑定银行卡!</string>
+    <string name="xianchengquxiaoshujujiazai">线程取消数据加载!</string>
 
 
 </resources>

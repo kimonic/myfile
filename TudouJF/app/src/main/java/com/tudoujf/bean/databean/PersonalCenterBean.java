@@ -40,6 +40,15 @@ public class PersonalCenterBean implements BaseBean {
     private String interest_award;
     private String vipEndTime;
     private String weChatID;
+    private String experience_loan_id;
+
+    public String getExperience_loan_id() {
+        return experience_loan_id;
+    }
+
+    public void setExperience_loan_id(String experience_loan_id) {
+        this.experience_loan_id = experience_loan_id;
+    }
 
     public String getWeChatID() {
         return weChatID;

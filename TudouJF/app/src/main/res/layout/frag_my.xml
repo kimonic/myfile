@@ -201,6 +201,7 @@
                     android:background="@color/act_affirmbuy_bac" />
 
                 <LinearLayout
+                    android:id="@+id/ll_frag_my_myexperience"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="3dp"
@@ -383,8 +384,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
+
                 android:layout_weight="1">
 
                     <ListView
@@ -393,7 +393,8 @@
                         android:layout_height="wrap_content"
                         android:dividerHeight="0dp"
                         android:divider="#f4f4f4"
-                        />
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"  />
 
 
 

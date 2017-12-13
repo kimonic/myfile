@@ -188,7 +188,7 @@ public class CreditorListFragment extends BaseFragment {
 
     private void setBacStyle(int position, String mOrderType) {
 
-        showPDialog();
+//        showPDialog();
         page = 1;
         orderType = mOrderType;
 
@@ -314,6 +314,8 @@ public class CreditorListFragment extends BaseFragment {
 
                     @Override
                     public void onError(Response<String> response) {
+                        finishRL();
+                        dismissPDialog();
                         super.onError(response);
                     }
                 });

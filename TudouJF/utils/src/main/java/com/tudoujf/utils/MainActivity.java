@@ -13,12 +13,15 @@ import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.tudoujf.utils.utils.ScreenUtil;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText etTest;
     private LinearLayout  root;
+    private SmartRefreshLayout srl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         etTest=findViewById(R.id.et_test);
         root=findViewById(R.id.root);
+        srl=findViewById(R.id.srl_frag_my);
 
         PackageManager pm = getPackageManager();
         try {
@@ -53,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         ScreenUtil screenUtil=new ScreenUtil(this);
+
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+        srl.setRefreshHeader(new TuDouHeader(this));
+        srl.setEnableLoadmore(false);
         Log.e("TAG", "onOpen: ---输入法已打开--"+screenUtil.getAccurateScreenDpi()[0]);
         Log.e("TAG", "onOpen: ---输入法已打开--"+screenUtil.getAccurateScreenDpi()[1]);
 

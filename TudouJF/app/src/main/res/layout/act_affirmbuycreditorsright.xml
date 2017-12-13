@@ -161,13 +161,14 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         >
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+        <TextView
+            android:id="@+id/tv_act_affirm_agree"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
             android:contentDescription="@null"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/act_affirm2_check"/>
+            android:background="@drawable/xvector_checkbox_unsel"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

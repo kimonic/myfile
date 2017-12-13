@@ -128,9 +128,12 @@ public class MyExperienceGoldActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
         if (bean != null) {
-            tvAmount.setText(bean.getMy_experience_balance());
-            tvAmountAll.setText(bean.getMy_account_amount());
-            tvAmountBalance.setText(bean.getMy_account_balance());
+            tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getMy_experience_balance()));
+            tvAmountAll.setText(StringUtils.getCommaDecimalsStr(
+                    StringUtils.changeScientificNotation(bean.getMy_account_amount())));
+
+
+            tvAmountBalance.setText(StringUtils.getCommaDecimalsStr(bean.getMy_account_balance()));
             if (bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
                 list = bean.getPageObj().getItems();
                 MyExperienceGoldLvAdapter adapter = new MyExperienceGoldLvAdapter(this, list);

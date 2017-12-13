@@ -60,17 +60,15 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.e("TAG", "run: BaseFragment-----超时线程取消加载");
+            Log.e("TAG", "run: BaseFragment-----fragmnet超时线程取消加载");
             FragmentActivity handlerMemoryActivity = weakReference.get();
-            Log.e("TAG", "run: BaseFragment-----超时线程取消加载");
-            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + handlerMemoryActivity);
-            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + isProgressing);
-            Log.e("TAG", "run: BaseFragment-----超时线程取消加载" + msg.what);
             if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
                 OkGo.getInstance().cancelAll();
-                ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                ToastUtils.showToast(getActivity(), R.string.xianchengquxiaoshujujiazai);
+                dismissPDialog();
+            }else {
+                dismissPDialog();
             }
-            dismissPDialog();
         }
     }
 
@@ -159,12 +157,12 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         new Thread() {
             @Override
             public void run() {
+                Log.e("TAG", "run: -----fragment超时线程已启动");
                 try {
                     Thread.sleep(15000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Log.e("TAG", "run: -----超时线程已启动");
 
                 Message msg = Message.obtain();
                 msg.what = 1;

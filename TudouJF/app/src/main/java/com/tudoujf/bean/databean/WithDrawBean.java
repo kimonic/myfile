@@ -26,32 +26,32 @@ public class WithDrawBean implements BaseBean {
      * addShow : true
      */
 
-    private int is_bind;
-    private int is_paypassword;
-    private boolean addShow;
+    private String is_bind;
+    private String is_paypassword;
+    private String addShow;
     private List<BankInfoBean> bank_info;
 
-    public int getIs_bind() {
+    public String getIs_bind() {
         return is_bind;
     }
 
-    public void setIs_bind(int is_bind) {
+    public void setIs_bind(String is_bind) {
         this.is_bind = is_bind;
     }
 
-    public int getIs_paypassword() {
+    public String getIs_paypassword() {
         return is_paypassword;
     }
 
-    public void setIs_paypassword(int is_paypassword) {
+    public void setIs_paypassword(String is_paypassword) {
         this.is_paypassword = is_paypassword;
     }
 
-    public boolean isAddShow() {
+    public String isAddShow() {
         return addShow;
     }
 
-    public void setAddShow(boolean addShow) {
+    public void setAddShow(String addShow) {
         this.addShow = addShow;
     }
 
@@ -78,23 +78,23 @@ public class WithDrawBean implements BaseBean {
          * member_id : 1369
          */
 
-        private int id;
+        private String id;
         private String bank_name;
-        private int status;
+        private String status;
         private String name;
         private String bank_nid;
-        private int is_quickpay;
+        private String is_quickpay;
         private String account;
         private String realname;
         private String bank_img;
         private String member_name;
-        private int member_id;
+        private String member_id;
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -106,11 +106,11 @@ public class WithDrawBean implements BaseBean {
             this.bank_name = bank_name;
         }
 
-        public int getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(String status) {
             this.status = status;
         }
 
@@ -130,11 +130,11 @@ public class WithDrawBean implements BaseBean {
             this.bank_nid = bank_nid;
         }
 
-        public int getIs_quickpay() {
+        public String getIs_quickpay() {
             return is_quickpay;
         }
 
-        public void setIs_quickpay(int is_quickpay) {
+        public void setIs_quickpay(String is_quickpay) {
             this.is_quickpay = is_quickpay;
         }
 
@@ -170,11 +170,11 @@ public class WithDrawBean implements BaseBean {
             this.member_name = member_name;
         }
 
-        public int getMember_id() {
+        public String getMember_id() {
             return member_id;
         }
 
-        public void setMember_id(int member_id) {
+        public void setMember_id(String member_id) {
             this.member_id = member_id;
         }
     }

@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.animation.ValueAnimator;
 import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,7 +27,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
+import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
@@ -51,6 +54,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -98,6 +102,8 @@ public class MyFragment extends BaseFragment {
     LinearLayout llMyAccount;
     @BindView(R.id.ll_frag_my_funddetails)
     LinearLayout llFundDetails;
+    @BindView(R.id.ll_frag_my_myexperience)
+    LinearLayout llMyExperience;
     @BindView(R.id.srl_frag_my)
     SmartRefreshLayout srl;
     @BindView(R.id.iv_frag_my_icon)
@@ -123,6 +129,8 @@ public class MyFragment extends BaseFragment {
 
     private List<MyFragBean> list;
 
+    private boolean  hide=false;
+
     private int[] titleResId = new int[]{
             R.string.wodejifen,
             R.string.wodeshouyi,
@@ -143,6 +151,7 @@ public class MyFragment extends BaseFragment {
             R.drawable.frag_my_shezhi,
     };
     private PersonalCenterBean bean;
+    private FrameLayout.LayoutParams params;
 
     @Override
     public int layoutRes() {
@@ -153,20 +162,27 @@ public class MyFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_frag_my://关闭客服
-                flFragMy.setVisibility(View.GONE);
+                retractAnim(24*ScreenSizeUtils.getDensity(getActivity()),-50 * ScreenSizeUtils.getDensity(getActivity()));
+                hide=true;
                 break;
             case R.id.iv_frag_my://打开客服界面
-                UdeskSDKManager.getInstance().initApiKey(getActivity(), getResources().getString(R.string.domain),
-                        getResources().getString(R.string.appkey), getResources().getString(R.string.appid));
-                String sdktoken = UserConfig.getInstance().getLoginToken(getActivity());
-                Map<String, String> info = new HashMap<>();
-                info.put(UdeskConst.UdeskUserInfo.USER_SDK_TOKEN, sdktoken);
-                info.put(UdeskConst.UdeskUserInfo.NICK_NAME, bean.getMember_name());
+                if (hide){
+                    hide=false;
+                    retractAnim(-50 * ScreenSizeUtils.getDensity(getActivity()),24*ScreenSizeUtils.getDensity(getActivity()));
+                }else {
+                    UdeskSDKManager.getInstance().initApiKey(getActivity(), getResources().getString(R.string.domain),
+                            getResources().getString(R.string.appkey), getResources().getString(R.string.appid));
+                    String sdktoken = UserConfig.getInstance().getLoginToken(getActivity());
+                    Map<String, String> info = new HashMap<>();
+                    info.put(UdeskConst.UdeskUserInfo.USER_SDK_TOKEN, sdktoken);
+                    info.put(UdeskConst.UdeskUserInfo.NICK_NAME, bean.getMember_name());
 //                info.put(UdeskConst.UdeskUserInfo.EMAIL, "0631@163.com");
 //                info.put(UdeskConst.UdeskUserInfo.CELLPHONE, "15651818750");
 //                info.put(UdeskConst.UdeskUserInfo.DESCRIPTION, "描述信息");
-                UdeskSDKManager.getInstance().setUserInfo(getActivity(), sdktoken, info);
-                UdeskSDKManager.getInstance().entryChat(getActivity());
+                    UdeskSDKManager.getInstance().setUserInfo(getActivity(), sdktoken, info);
+                    UdeskSDKManager.getInstance().entryChat(getActivity());
+                }
+
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
@@ -197,7 +213,7 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_funddetails://资金详情
                 Intent intent = new Intent(getActivity(), FundDetailsActivity.class);
-                intent.putExtra("is_trust",bean.getIs_trust());
+                intent.putExtra("is_trust", bean.getIs_trust());
                 startActivity(intent);
 
 //                openActivity(FundDetailsActivity.class);
@@ -228,7 +244,39 @@ public class MyFragment extends BaseFragment {
                     });
                 }
                 break;
+            case R.id.ll_frag_my_myexperience://我的体验金入口
+                if (StringUtils.string2Float(bean.getExperience_balance()) > 0) {
+                    Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                    intent1.putExtra("loan_id", bean.getExperience_loan_id());
+                    startActivity(intent1);
+                } else {
+                    if ("1".equals(bean.getIs_trust())) {//已实名
+                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
+                    } else {//未实名
+                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                        intent1.putExtra("loan_id", bean.getExperience_loan_id());
+                        startActivity(intent1);
+                    }
+                }
+
+                break;
         }
+    }
+
+
+    private void retractAnim(int start,int marginEnd) {
+        params = (FrameLayout.LayoutParams) flFragMy.getLayoutParams();
+        ValueAnimator animator;
+            animator = ValueAnimator.ofInt(start, marginEnd);
+        animator.setDuration(1000);
+        animator.start();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                params.setMarginEnd((Integer) animation.getAnimatedValue());
+                flFragMy.setLayoutParams(params);
+            }
+        });
     }
 
     public void showService() {
@@ -328,6 +376,7 @@ public class MyFragment extends BaseFragment {
         tvRealName.setOnClickListener(this);
         flMessage.setOnClickListener(this);
         tvVipapply.setOnClickListener(this);
+        llMyExperience.setOnClickListener(this);
 
         srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
             @Override
@@ -373,6 +422,9 @@ public class MyFragment extends BaseFragment {
                         public void onError(Response<String> response) {
                             super.onError(response);
                             dismissPDialog();
+                            if (srl.isRefreshing()) {
+                                srl.finishRefresh();
+                            }
                             ToastUtils.showToast(getActivity(), R.string.huoqugerenzhongxinshujushibai);
                         }
                     });
@@ -385,7 +437,7 @@ public class MyFragment extends BaseFragment {
             ImageGlideUtils.loadCircularImage(ivIcon, bean.getAvatar() + "?aa=" + System.currentTimeMillis());
             tvUsername.setText((getResources().getString(R.string.huanyingni) + bean.getMember_name()));
             tvAmount.setText(StringUtils.getCommaDecimalsStr(bean.getInterest_award()));
-            tvTotal.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_all()));
+            tvTotal.setText(StringUtils.getCommaDecimalsStr(StringUtils.changeScientificNotation(bean.getAmount_all())));
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
 

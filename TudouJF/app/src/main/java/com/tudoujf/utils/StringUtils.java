@@ -395,6 +395,14 @@ public class StringUtils {
         return sb.toString();
     }
 
+    /**科学计数法转换为诶数字scientific notation*/
+    public static String changeScientificNotation(String num1) {
+
+        BigDecimal bd1 = new BigDecimal(num1);
+        return bd1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+
+    }
+
 
 
 

@@ -34,7 +34,7 @@ public class MyProjectBidView extends View {
     /**
      * 画笔
      */
-    private Paint blackPaint, cyanPaint, grayLinePaint, orangePaint, whitePaint, grayPaint ,strokePaint;
+    private Paint blackPaint, cyanPaint, grayLinePaint, orangePaint, whitePaint, grayPaint, strokePaint;
 
     private Path path = new Path(), textPath = new Path();
     private RectF rectF = new RectF();
@@ -312,12 +312,12 @@ public class MyProjectBidView extends View {
     protected void onDraw(Canvas canvas) {
 
         int width = getWidth();
-        int heigt=getHeight();
+        int heigt = getHeight();
 
 
         //---------------------------------上下边线---------------------------------------------------------
-        canvas.drawLine(0,0,width,0,topLinePaint);
-        canvas.drawLine(0,heigt,width,heigt,topLinePaint);
+        canvas.drawLine(0, 0, width, 0, topLinePaint);
+        canvas.drawLine(0, heigt, width, heigt, topLinePaint);
         //---------------------------------上下边线---------------------------------------------------------
 
         //-----------------------标题--房产抵押贷款20170327003--------------------------------------
@@ -343,51 +343,60 @@ public class MyProjectBidView extends View {
         //------------------------------------------------------------------------------------------
 
 
-        //-----------------左侧介绍文本上的数字显示/债权价值(元)上方数字显示------------------------
-        float text3X = width * 0.07277f;
-        float text3Y = width * 0.1709f;
-//        float text3Y = width * 0.1809f;
-        orangePaint.setTextSize(width * 0.03333f);
-//        orangePaint.setTextSize(width * 0.05714f);
-        canvas.drawText(zhaiQuanJiaZhi, text3X, text3Y, orangePaint);
-        //------------------------------------------------------------------------------------------
-
-
         //-----------------------左侧介绍文本/债权价值(元)------------------------------------------
         grayLinePaint.setTextSize(width * 0.03148f);
 //        grayLinePaint.setTextSize(width * 0.03777f);
-        float text4X = text3X + orangePaint.measureText(zhaiQuanJiaZhi) / 2
-                - grayLinePaint.measureText(explain1) / 2;
+        float text4X = width * 0.05555f;
+//                text3X + orangePaint.measureText(zhaiQuanJiaZhi) / 2
+//                - grayLinePaint.measureText(explain1) / 2;
         float text4Y = width * 0.2581f;
 //        float text4Y = width * 0.2381f;
         canvas.drawText(explain1, text4X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
 
-        //---------------中间展示文本/原标年化收益数字显示14%---------------------------------------
-        float text5X = width * 0.37555f;
-        blackPaint.setTextSize(width * 0.05714f);
-        canvas.drawText(yuanBiaoNianHuaShouYi, text5X, text3Y, orangePaint);
+        //-----------------左侧介绍文本上的数字显示/债权价值(元)上方数字显示------------------------
+        orangePaint.setTextSize(width * 0.03333f);
+        float text3X = text4X + grayLinePaint.measureText(explain1) / 2 - orangePaint.measureText(zhaiQuanJiaZhi) / 2;
+//        float text3X = width * 0.07277f;
+        float text3Y = width * 0.1709f;
+//        float text3Y = width * 0.1809f;
+//        orangePaint.setTextSize(width * 0.05714f);
+        canvas.drawText(zhaiQuanJiaZhi, text3X, text3Y, orangePaint);
         //------------------------------------------------------------------------------------------
 
 
         //---------------中间展示文本介绍/原标年化收益----------------------------------------------
-        float text6X = text5X + (orangePaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(explain2) / 2);
+        float text6X = width * 0.35648f;
+//                text5X + (orangePaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(explain2) / 2);
         canvas.drawText(explain2, text6X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
 
+        //---------------中间展示文本/原标年化收益数字显示14%---------------------------------------
+        blackPaint.setTextSize(width * 0.05714f);
+        float text5X = text6X + (grayLinePaint.measureText(explain2) / 2 - orangePaint.measureText(yuanBiaoNianHuaShouYi) / 2);
+//        float text5X = width * 0.37555f;
+        canvas.drawText(yuanBiaoNianHuaShouYi, text5X, text3Y, orangePaint);
+        //------------------------------------------------------------------------------------------
+
+        //---------------------右侧展示文本介绍-----------------------------------------------------
+        float text8X =width*0.675f;
+//                text7X + blackPaint.measureText(transferPrice) / 2 - grayLinePaint.measureText(explain3) / 2;
+        canvas.drawText(explain3, text8X, text4Y, grayLinePaint);
+        //------------------------------------------------------------------------------------------
+
+
+
         //----------------右侧展示文本/转让价格(元)显示数字-----------------------------------------
-        float text7X = width * 0.6231f;
         blackPaint.setTextSize(width * 0.03809f);
+        float text7X = text8X + grayLinePaint.measureText(explain3) / 2-blackPaint.measureText(transferPrice) / 2;
+//        float text7X = width * 0.6231f;
         canvas.drawText(transferPrice, text7X, text3Y, blackPaint);
         //------------------------------------------------------------------------------------------
 
 
-        //---------------------右侧展示文本介绍-----------------------------------------------------
-        float text8X = text7X + blackPaint.measureText(transferPrice) / 2 - grayLinePaint.measureText(explain3) / 2;
-        canvas.drawText(explain3, text8X, text4Y, grayLinePaint);
-        //------------------------------------------------------------------------------------------
+
 
 
         //--------------------进度显示直线---已进行部分---------------------------------------------

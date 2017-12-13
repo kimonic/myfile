@@ -90,10 +90,10 @@ public class InvestListFragment extends BaseFragment {
     private InvestListBean bean;
     private String requestUrl;
 
-    /**
-     * 加载dialog
-     */
-    private AlertDialog dialog;
+//    /**
+//     * 加载dialog
+//     */
+//    private AlertDialog dialog;
 
     /**
      * 加载的页码
@@ -174,19 +174,19 @@ public class InvestListFragment extends BaseFragment {
                 break;
             case R.id.tv_dialog_dengebenxi:
                 pop.dismiss();
-                dialog.show();
+//                dialog.show();
                 repayType = "1";
                 initDataFromInternet();
                 break;
             case R.id.tv_dialog_daoqihuanbenxi:
                 pop.dismiss();
-                dialog.show();
+//                dialog.show();
                 repayType = "3";
                 initDataFromInternet();
                 break;
             case R.id.tv_dialog_anyuefuxi:
                 pop.dismiss();
-                dialog.show();
+//                dialog.show();
                 repayType = "4";
                 initDataFromInternet();
                 break;
@@ -195,9 +195,10 @@ public class InvestListFragment extends BaseFragment {
     }
 
     private void setBacStyle(int position, String mOrderType) {
-        if (position != 2) {
-            dialog.show();
-        }
+//        if (position != 2) {
+////            dialog.show();
+//            showPDialog();
+//        }
 
         page = 1;
         orderType = mOrderType;
@@ -246,7 +247,7 @@ public class InvestListFragment extends BaseFragment {
         swipeRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
 
 
-        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+//        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
 
         initDataFromInternet();
 
@@ -284,7 +285,7 @@ public class InvestListFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
-
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("page", page + "");
         map.put("order_type", orderType);//排序类别,1全部2利率3期限
@@ -297,7 +298,8 @@ public class InvestListFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Response<String> response) {
                         finishRL();
-                        dialog.dismiss();
+                        dismissPDialog();
+//                        dialog.dismiss();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----理财投资列表接口返回数据-- " + type + "------" + result);
 
@@ -310,6 +312,13 @@ public class InvestListFragment extends BaseFragment {
                             ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                         }
 
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        finishRL();
+                        dismissPDialog();
+                        super.onError(response);
                     }
                 });
 

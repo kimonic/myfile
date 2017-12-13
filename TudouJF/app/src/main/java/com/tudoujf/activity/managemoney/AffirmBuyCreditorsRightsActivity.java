@@ -71,10 +71,14 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     TextView tvBalance;//账户余额
     @BindView(R.id.tv_act_affirmbuycreditors_recharge)
     TextView tvRecharge;//充值
+    @BindView(R.id.tv_act_affirm_agree)
+    TextView tvAgree;//同意协议
 
-    private  String  transfer_id="";
+    private String transfer_id = "";
     private AlertDialog dialog;
-    private AffirmBuyCreditorRightrsBean  bean;
+    private AffirmBuyCreditorRightrsBean bean;
+    private int count = 0;
+    private boolean  agree=false;
 
     @Override
     public int getLayoutResId() {
@@ -85,28 +89,44 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_affirmbuycreditors_affirmbuyright://确认购买按钮
-                if (bean!= null){
-                    if ((StringUtils.string2Float(bean.getBalance_amount())>=StringUtils.string2Float(bean.getAmount()))){
+
+                if (agree){
+                    if (bean != null) {
+                        if ((StringUtils.string2Float(bean.getBalance_amount()) >= StringUtils.string2Float(bean.getAmount()))) {
 //                        showPasswordDialog();
-                        Intent intent=new Intent(this,CreditorRightsHuiFuBuyActivity.class);
-                        Log.e("TAG", "onClick: -----------transfer_id-------"+transfer_id);
-                        intent.putExtra("transferId",transfer_id);
-                        startActivity(intent);
-                    }else {
-                        DialogUtils.showDialog(this, getResources().getString(R.string.zhanghuyuebuzu), R.string.queren, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                openActivity(RechargeActivity.class);
-                            }
-                        });
+                            Intent intent = new Intent(this, CreditorRightsHuiFuBuyActivity.class);
+                            Log.e("TAG", "onClick: -----------transfer_id-------" + transfer_id);
+                            intent.putExtra("transferId", transfer_id);
+                            startActivity(intent);
+                        } else {
+                            DialogUtils.showDialog(this, getResources().getString(R.string.zhanghuyuebuzu), R.string.queren, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    openActivity(RechargeActivity.class);
+                                }
+                            });
+                        }
+                    } else {
+                        ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.shujujiazaichucuoqtchcxjr);
                     }
                 }else {
-                    ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.shujujiazaichucuoqtchcxjr);
+                    ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.qingxiantongyipingtaijujianfuwuxieyi);
                 }
+
 
                 break;
             case R.id.tv_act_affirmbuycreditors_recharge:
                 openActivity(RechargeActivity.class);
+                break;
+            case R.id.tv_act_affirm_agree://同意协议
+                count++;
+                if (count % 2 == 0) {
+                    tvAgree.setBackgroundResource(R.drawable.xvector_checkbox_unsel);
+                    agree=false;
+                } else {
+                    tvAgree.setBackgroundResource(R.drawable.xvector_checkbox_sel);
+                    agree=true;
+                }
                 break;
         }
     }
@@ -152,9 +172,9 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        Intent intent=getIntent();
-        if (intent!=null){
-            transfer_id=intent.getStringExtra("id");
+        Intent intent = getIntent();
+        if (intent != null) {
+            transfer_id = intent.getStringExtra("id");
         }
 
     }
@@ -180,6 +200,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     public void initListener() {
         tvAffirmBuyCreditorsRight.setOnClickListener(this);
         tvRecharge.setOnClickListener(this);
+        tvAgree.setOnClickListener(this);
 
 
     }
@@ -187,9 +208,9 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     @Override
     public void initDataFromInternet() {
         showDialog();
-        TreeMap<String,String> map=new TreeMap<>();
+        TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        map.put("transfer_id",transfer_id);
+        map.put("transfer_id", transfer_id);
         HttpMethods.getInstance().POST(this, Constants.CREDITOR_BUY, map, getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -213,7 +234,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
 
-        if (bean!=null){
+        if (bean != null) {
             mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name());
             tvEarnings.setText(bean.getIncome());
             tvBalance.setText(bean.getBalance_amount());

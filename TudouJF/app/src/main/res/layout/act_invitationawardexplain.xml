@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
 
 
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_invitationawardexplain"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_invitationawardexplain_title"
         app:leftImage="@drawable/xvector_back"
@@ -17,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/color_black"
         android:text="@string/act_invitationawardexplain_1"
         android:layout_marginTop="30dp"
@@ -29,7 +30,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/color_black"
         android:text="@string/act_invitationawardexplain_2"
         android:layout_marginTop="10dp"
@@ -42,7 +43,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/color_black"
         android:text="@string/act_invitationawardexplain_3"
         android:layout_marginTop="10dp"
@@ -54,7 +55,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textColor="@color/color_black"
         android:text="@string/act_invitationawardexplain_4"
         android:layout_marginTop="10dp"

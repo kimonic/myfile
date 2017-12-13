@@ -695,9 +695,7 @@ public class HomeFragment extends BaseFragment {
 //                dialog.dismiss();
                 dismissPDialog();
 
-                if (srl.isRefreshing()) {
-                    srl.finishRefresh();
-                }
+                finishRL();
 
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
@@ -714,9 +712,19 @@ public class HomeFragment extends BaseFragment {
             public void onError(Response<String> response) {
                 super.onError(response);
                 dismissPDialog();
+                finishRL();
                 ToastUtils.showToast(getActivity(), R.string.huoqushouyeshujushibai);
             }
         });
+
+    }
+
+    private void finishRL() {
+        if (srl.isRefreshing()) {
+            srl.finishRefresh();
+        } else if (srl.isLoading()) {
+            srl.finishLoadmore();
+        }
 
     }
 

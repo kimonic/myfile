@@ -14,7 +14,8 @@
         app:leftImage="@drawable/xvector_back" />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/color_white"
         >
         <LinearLayout
@@ -382,15 +383,12 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 />
+
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/global_background_color"
-        />
+
+
     <TextView
         android:id="@+id/tv_act_creditorsrightsdetails_buynow"
         android:layout_width="match_parent"
@@ -401,7 +399,6 @@
         android:textColor="@color/color_white"
         android:gravity="center"
         />
-
 
 
 </LinearLayout>

@@ -138,6 +138,7 @@ public class AffirmBuyActivity extends BaseActivity {
                     } else {
                         together_status = together_status_redbag * together_status_jiaxiquan * together_status_fanxianquan;
                     }
+                    bundle2.putString("selId", fanXianQuanId);
                     bundle2.putString("together_status", "" + together_status);
                     openActivityForResult(RedPackageActivity.class, bundle2, 777);
                 }
@@ -156,6 +157,7 @@ public class AffirmBuyActivity extends BaseActivity {
                     } else {
                         together_status = together_status_redbag * together_status_jiaxiquan * together_status_fanxianquan;
                     }
+                    bundle1.putString("selId", jiaXiQuanId);
                     bundle1.putString("together_status", "" + together_status);
                     openActivityForResult(RedPackageActivity.class, bundle1, 999);
                 }
@@ -169,6 +171,7 @@ public class AffirmBuyActivity extends BaseActivity {
                     bundle.putString("amount", etTouZiJinE.getText().toString());
                     bundle.putString("is_beginner", is_beginner);
                     bundle.putString("time_limit", time_limit);
+                    bundle.putString("selId", redId);
                     if (together_status_redbag == -1) {
                         together_status = 1;
                     } else {
@@ -460,6 +463,12 @@ public class AffirmBuyActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //---------------------------------红包-----------------------------------------------------
         if (requestCode == 888 && data != null) {//红包
+
+
+            redId="";
+            acount="";
+            together_status_redbag = 1;
+
             redId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
             String status = data.getStringExtra("together_status");
