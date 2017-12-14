@@ -12,6 +12,12 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.UsableWelfareFragLvAdapter;
@@ -56,17 +62,19 @@ public class UsableWelfareFragment extends BaseFragment {
     TextView tvDescription;
     @BindView(R.id.ll_frag_usable_nothing)
     LinearLayout llNothing;
+    @BindView(R.id.srl_frag_usablewelfare)
+    SmartRefreshLayout srl;
 
     private UsableWelfareFragLvAdapter adapter;
     /**
      * 当前activity的类型,是红包还是加息券
      */
     private int actType = 1;
-    private int page = 1;
     private String status;
     private String url;
     private WelfareListBean bean;
     private List<WelfareListBean.ItemsBean> listItem;
+    private  int  page=1;
 
     @Override
     public int layoutRes() {
@@ -144,6 +152,15 @@ public class UsableWelfareFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        if (actType==1||actType==2||actType==3){
+            srl.setEnableRefresh(false);
+            srl.setEnableLoadmore(false);
+        }else {
+            srl.setPrimaryColorsId(R.color.global_theme_background_color);
+//        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+            srl.setEnableRefresh(false);
+            srl.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+        }
 
         initDataFromInternet();
     }
@@ -151,6 +168,19 @@ public class UsableWelfareFragment extends BaseFragment {
     @Override
     public void initListener() {
         llFragUsableUse.setOnClickListener(this);
+
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                page++;
+                if (page<=bean.getTotal_pages()){
+                    initDataFromInternet();
+                }else {
+                    finishRl();
+                    ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
+                }
+            }
+        });
     }
 
     @Override
@@ -164,6 +194,7 @@ public class UsableWelfareFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
+                        finishRl();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess: -----------请求我的福利返回的json数据-------" + actType + "---------" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WelfareListBean>() {
@@ -180,12 +211,19 @@ public class UsableWelfareFragment extends BaseFragment {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
+                        finishRl();
                         ToastUtils.showToast(getActivity(), R.string.huoquhongbaoxinxishibai);
                     }
                 }
         );
 
 
+    }
+
+    private void finishRl(){
+        if (srl.isLoading()){
+            srl.finishLoadmore();
+        }
     }
 
     @Override
@@ -197,6 +235,12 @@ public class UsableWelfareFragment extends BaseFragment {
                 llFragUsableUse.setVisibility(View.VISIBLE);
                 lvFragUsableInfo.setVisibility(View.VISIBLE);
                 llNothing.setVisibility(View.GONE);
+
+                if (actType==1){
+                    llFragUsableUse.setVisibility(View.VISIBLE);
+                }else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                }
 
                 if (listItem.size() > 0) {
                     tvCount.setText(("您有" + listItem.size() + "个红包可使用,立即使用>>"));
@@ -223,6 +267,12 @@ public class UsableWelfareFragment extends BaseFragment {
                 lvFragUsableInfo.setVisibility(View.VISIBLE);
                 llNothing.setVisibility(View.GONE);
 
+                if (actType==4){
+                    llFragUsableUse.setVisibility(View.VISIBLE);
+                }else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                }
+
                 if (listItem.size() > 0) {
                     tvCount.setText(("您有" + listItem.size() + "个加息券可使用,立即使用>>"));
                     for (int i = 0; i < listItem.size(); i++) {
@@ -247,6 +297,12 @@ public class UsableWelfareFragment extends BaseFragment {
                 llFragUsableUse.setVisibility(View.VISIBLE);
                 lvFragUsableInfo.setVisibility(View.VISIBLE);
                 llNothing.setVisibility(View.GONE);
+
+                if (actType==7){
+                    llFragUsableUse.setVisibility(View.VISIBLE);
+                }else {
+                    llFragUsableUse.setVisibility(View.GONE);
+                }
 
                 if (listItem.size() > 0) {
                     tvCount.setText(("您有" + listItem.size() + "个返现券可使用,立即使用>>"));

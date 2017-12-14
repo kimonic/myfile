@@ -158,8 +158,6 @@ public class MyProjectTotalFragment extends BaseFragment {
         map.put("start_time", start_time);
         map.put("end_time", end_time);
 
-        Log.e("TAG", "initDataFromInternet: MY_INVESTMENTstart_time-----" + start_time);
-        Log.e("TAG", "initDataFromInternet: MY_INVESTMENTend_time-----" + end_time);
 
 
         HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, getActivity().getLocalClassName(),

@@ -133,7 +133,16 @@ public class InvestListBean implements BaseBean {
         private String repay_type;
         private String repay_type_name;
         private String is_locked;
+        private String award_proportion;
         private long serialno;
+
+        public String getAward_proportion() {
+            return award_proportion;
+        }
+
+        public void setAward_proportion(String award_proportion) {
+            this.award_proportion = award_proportion;
+        }
 
         public String getIs_locked() {
             return is_locked;

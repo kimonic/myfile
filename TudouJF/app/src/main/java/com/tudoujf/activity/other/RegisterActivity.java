@@ -128,7 +128,7 @@ public class RegisterActivity extends BaseActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            tvGetcode.setText(msg.what + "秒后可重新获得验证码!");
+            tvGetcode.setText(msg.what + "s后重新发送");
             if (msg.what == 0) {
                 countTime = 60;
                 tvGetcode.setClickable(true);
@@ -341,7 +341,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private void startCountDown() {
         tvGetcode.setClickable(false);
-        tvGetcode.setText("60秒后可重新获取验证码!");
+        tvGetcode.setText("60s后重新发送");
         new Thread() {
             @Override
             public void run() {

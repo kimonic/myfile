@@ -291,7 +291,7 @@ public class ClaimsBidView extends View {
         //------------------------------------------------------------------------------------------
 
         //-----------------债权价值(元)上方数字显示---------------------------------------------------
-        orangePaint.setTextSize(width * 0.04133f);
+        orangePaint.setTextSize(width * 0.05266f);
         float text3X = text4X + grayPaint.measureText(getResources().getString(R.string.frag_home_zhaiquanjiazhiyuan)) / 2
                 - orangePaint.measureText(zhaiQuanJiaZhi) / 2;
 //        float text3X = width * 0.06133f;
@@ -309,11 +309,16 @@ public class ClaimsBidView extends View {
 
 
         //---------------原标年化收益数字显示14%----------------------------------------------------
-        blackPaint.setTextSize(width * 0.04133f);
+        blackPaint.setTextSize(width * 0.05266f);
         float text5X = text6X + grayPaint.measureText(getResources().getString(R.string.yuanbiaonianhuashouyi)) / 2 -
                 blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2;
 //        float text5X = width * 0.4013f;
         canvas.drawText(yuanBiaoNianHuaShouYi, text5X, text3Y, blackPaint);
+
+        float baiX = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi)+5;
+        blackPaint.setTextSize(width * 0.03566f);
+        canvas.drawText("%", baiX, text3Y, blackPaint);
+
         //------------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------------
@@ -324,7 +329,7 @@ public class ClaimsBidView extends View {
 
 
         //----------------转让价格(元)显示数字------------------------------------------------------
-        blackPaint.setTextSize(width * 0.03066f);
+        blackPaint.setTextSize(width * 0.03566f);
         float text7X = text8X + grayPaint.measureText(getResources().getString(R.string.zhuanrangjiageyuan)) / 2 -
                 blackPaint.measureText(transferPrice) / 2;
 //        float text7X = width * 0.6493f;

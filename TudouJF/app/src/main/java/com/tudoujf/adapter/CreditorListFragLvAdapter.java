@@ -82,11 +82,11 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getAmount_money());//债权价值
 
 
-        viewHolder.bidView.setYuanBiaoNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr()) + "%");//原标年化收益率
+        viewHolder.bidView.setYuanBiaoNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr()));//原标年化收益率
         viewHolder.bidView.setStatus(list.get(position).getStatus());//按钮状态标识
 
 
-        viewHolder.bidView.setTransferPrice(list.get(position).getAmount() + "元");//转让金额
+        viewHolder.bidView.setTransferPrice(list.get(position).getAmount());//转让金额
 //        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限
         viewHolder.bidView.invalidate();
         final String  id=list.get(position).getId();

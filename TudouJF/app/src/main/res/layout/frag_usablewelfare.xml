@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -30,16 +32,24 @@
             android:layout_marginStart="10dp"  />
     </LinearLayout>
 
-
-    <ListView
-        android:id="@+id/lv_frag_usable_info"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_frag_usablewelfare"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        app:srlEnableRefresh="false"
+        app:srlEnableLoadmoreWhenContentNotFull="false"
+        app:srlEnableHeaderTranslationContent="false"
+        android:background="@color/global_background_color">
+    <ListView
+        android:id="@+id/lv_frag_usable_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:dividerHeight="10dp"
         android:divider="#F0F0E8"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     <LinearLayout
         android:id="@+id/ll_frag_usable_nothing"
         android:layout_width="match_parent"

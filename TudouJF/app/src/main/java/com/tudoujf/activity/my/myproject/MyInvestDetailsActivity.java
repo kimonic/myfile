@@ -171,6 +171,7 @@ public class MyInvestDetailsActivity extends BaseActivity {
 
             infoView.setUnderlineScale1(0.5f*100);
             infoView.setIfNew(false);
+            infoView.setCloseBottomLine(true);
 
 //            infoView.setUnderlineScale1(StringUtils.string2Float(bean.getLoan_info().getProgress()));
 //            infoView.setIfNew("1".equals(bean.getLoan_info().getAdditional_status()));

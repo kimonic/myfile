@@ -152,6 +152,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         mtbCreditorRightsDetails.setLayoutParams(params);
 
         ivInfo.setIfNew(false);
+        ivInfo.setCloseBottomLine(true);
         ivInfo.invalidate();
 
         mtbCreditorRightsDetails.getLeftTV().setOnClickListener(new View.OnClickListener() {
@@ -305,7 +306,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 888) {
+        if (requestCode == 888&&resultCode==888) {
             isLogin1 = true;
             checkLogin();
         }

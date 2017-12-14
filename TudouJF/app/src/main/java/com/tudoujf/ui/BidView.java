@@ -263,11 +263,23 @@ public class BidView extends View {
             path.close();
             canvas.drawPath(path, orangePaint);
 
-
-            textPath.moveTo(width * 0.8761f, width * 0.02857f);
-            textPath.lineTo(width * 0.9714f, width * 0.1238f);
             whitePaint.setTextSize(width * 0.03809f);
-            canvas.drawTextOnPath("奖" + awardValue + "%", textPath, 0, 0, whitePaint);
+            String  temp="奖" + awardValue + "%";
+            float  shubian=width*0.0953f;
+            float  hengbian=width*0.09523f;
+            float length= (float) Math.sqrt(Math.pow(shubian,2)+Math.pow(hengbian,2));
+            float textLength=whitePaint.measureText(temp)-30;
+            float  shubianS=shubian*textLength/length;
+            float  hengbianS=hengbian*textLength/length;
+            textPath.moveTo(width * 0.8761f+(hengbian-hengbianS)/2, width * 0.02057f+(shubian-shubianS)/2);
+            textPath.lineTo(width * 0.9714f, width * 0.1168f);
+//            textPath.lineTo(width * 0.9714f-(hengbian-hengbianS)/2, width * 0.1158f-(shubian-shubianS)/2);
+
+
+
+//            textPath.moveTo(width * 0.8761f, width * 0.02857f);
+//            textPath.lineTo(width * 0.9714f, width * 0.1238f);
+            canvas.drawTextOnPath(temp, textPath, 0, 0, whitePaint);
         }
 
 //-------------------------------------------橙色块--奖0.05%----------------------------------------

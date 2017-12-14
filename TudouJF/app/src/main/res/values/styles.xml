@@ -21,7 +21,7 @@
 
     <!--SmartRefreshLayout设置内容不满时也可以上拉加载,设置下拉刷新时内容随header头移动-->
     <style name="SmartRefreshLayout">
-        <item name="srlEnableLoadmoreWhenContentNotFull">true</item>
+        <!--<item name="srlEnableLoadmoreWhenContentNotFull">true</item>-->
         <item name="srlEnableHeaderTranslationContent">true</item>
     </style>
 

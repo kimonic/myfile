@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -50,6 +51,8 @@ public class HomeActivity extends BaseActivity {
     private boolean isLogin = false;
 
     private int beforePosition = 0;
+
+    private  String  signup="";
 
     /**是否已开启手势密码*/
     private  boolean  isLock=false;
@@ -233,6 +236,7 @@ public class HomeActivity extends BaseActivity {
             checkLogin();
             if (isLogin) {
                 vpActHome.setCurrentItem(3);
+                ((HomeFragment)(list.get(0))).initDataFromInternet();
             }
 
         }else if (requestCode==555){
@@ -252,6 +256,7 @@ public class HomeActivity extends BaseActivity {
                 vpActHome.setCurrentItem(beforePosition);
             } else {
                 vpActHome.setCurrentItem(0);
+                ((HomeFragment)(list.get(0))).initDataFromInternet();
             }
         }
     }
@@ -261,12 +266,13 @@ public class HomeActivity extends BaseActivity {
         super.onNewIntent(intent);
 
         int flag = intent.getIntExtra("flag", 0);
+        Log.e("TAG", "onNewIntent: flag-----"+flag);
+
         if (flag == 555) {
             vpActHome.setCurrentItem(1);
         }else if (flag==55){
             vpActHome.setCurrentItem(0);
         }
-
 
     }
 }

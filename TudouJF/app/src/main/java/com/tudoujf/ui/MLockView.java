@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.tudoujf.R;
@@ -33,6 +34,9 @@ import java.util.List;
  */
 
 public class MLockView extends View {
+
+
+    private ScrollView scrollView;
 
     /**
      * 屏幕宽度
@@ -145,6 +149,14 @@ public class MLockView extends View {
         initView();
     }
 
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    public void setScrollView(ScrollView scrollView) {
+        this.scrollView = scrollView;
+    }
+
     private void initView() {
         screenWidth = ScreenSizeUtils.getScreenWidth(getContext());
         hollowPaint = initPaint("#F48029", 1, 3);
@@ -186,6 +198,7 @@ public class MLockView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         int width=getWidth();
         distancePX= (int) (width*0.1352f);
         mPadding= (int) (width*0.12f);
@@ -267,7 +280,7 @@ public class MLockView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
         int width = screenWidth;
-        int height = screenWidth;
+        int height = (int) (screenWidth*0.88f+50);
         setMeasuredDimension(width, height);
 
     }
@@ -281,8 +294,17 @@ public class MLockView extends View {
                 case MotionEvent.ACTION_DOWN://按下
                     break;
                 case MotionEvent.ACTION_MOVE://移动
+
                     currentX = (int) event.getX();
                     currentY = (int) event.getY();
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).contains(currentX,currentY)){
+                            if (scrollView!=null){
+                                scrollView.requestDisallowInterceptTouchEvent(true);
+                            }
+                        }
+                    }
+
                     invalidate();
                     break;
                 case MotionEvent.ACTION_UP://抬起

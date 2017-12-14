@@ -360,7 +360,7 @@
     <string name="act_mycreditorrightsdetails_zhuanrangxishu">转让系数</string>
     <string name="act_mycreditorrightsdetails_baifenhao">%</string>
     <string name="act_myinvestdetails_title">我的投资详情</string>
-    <string name="zongshouyi">总收益</string>
+    <string name="zongshouyi">总收益\t\t</string>
     <string name="yishoushouyi">已收收益</string>
     <string name="daishoubenjin">待收本金</string>
     <string name="jianglijine">奖励金额</string>
@@ -629,6 +629,7 @@
     <string name="qignxuanzeninyaochaxundehuikuanshijian">请选择您要查询的回款时间</string>
     <string name="ninshangweibangding">您尚未绑定银行卡,请先绑定银行卡!</string>
     <string name="xianchengquxiaoshujujiazai">线程取消数据加载!</string>
+    <string name="shujujiazaichaoshi">数据加载超时!</string>
 
 
 </resources>

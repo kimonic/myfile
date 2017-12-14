@@ -37,7 +37,7 @@ import com.scwang.smartrefresh.layout.internal.ProgressDrawable;
 
 public class TuDouHeader extends LinearLayout implements RefreshHeader {
 
-    private ImageView  imageView;
+    private TextView  imageView;
     private TextView textView;
     private View view;
 
@@ -153,8 +153,8 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
         RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         rotate.setInterpolator(lin);
-        rotate.setDuration(1000);//设置动画持续周期
-        rotate.setRepeatCount(-1);//设置重复次数
+        rotate.setDuration(600);//设置动画持续周期
+        rotate.setRepeatCount(Animation.INFINITE);//设置重复次数
         rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
 //        rotate.setStartOffset(10);//执行前的等待时间
 //        imageView.setAnimation(rotate);
@@ -170,6 +170,7 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
     /**结束动画*/
     @Override
     public int onFinish(RefreshLayout layout, boolean success) {
+        imageView.clearAnimation();
         return 0;
     }
 
@@ -185,18 +186,18 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
         switch (newState) {
             case None:
             case PullDownToRefresh:
-//                mHeaderText.setText("下拉开始刷新");
+                textView.setText("下拉开始刷新");
 //                mArrowView.setVisibility(VISIBLE);//显示下拉箭头
 //                mProgressView.setVisibility(GONE);//隐藏动画
 //                mArrowView.animate().rotation(0);//还原箭头方向
                 break;
             case Refreshing:
-//                mHeaderText.setText("正在刷新");
+                textView.setText("正在刷新");
 //                mProgressView.setVisibility(VISIBLE);//显示加载动画
 //                mArrowView.setVisibility(GONE);//隐藏箭头
                 break;
             case ReleaseToRefresh:
-//                mHeaderText.setText("释放立即刷新");
+                textView.setText("释放立即刷新");
 //                mArrowView.animate().rotation(180);//显示箭头改为朝上
                 break;
         }

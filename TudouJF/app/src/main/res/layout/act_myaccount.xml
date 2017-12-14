@@ -527,7 +527,7 @@
 
                 <TextView
                     android:id="@+id/tv_act_myaccount_oc"
-                    android:layout_width="38dp"
+                    android:layout_width="48dp"
                     android:layout_height="22dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="20dp"

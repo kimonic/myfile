@@ -60,11 +60,10 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.e("TAG", "run: BaseFragment-----fragmnet超时线程取消加载");
             FragmentActivity handlerMemoryActivity = weakReference.get();
             if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
                 OkGo.getInstance().cancelAll();
-                ToastUtils.showToast(getActivity(), R.string.xianchengquxiaoshujujiazai);
+                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
                 dismissPDialog();
             }else {
                 dismissPDialog();

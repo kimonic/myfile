@@ -1,50 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_scrollview_draw"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/global_background_color"
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/iv_act_drawgesture_icon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="42dp"
-        android:contentDescription="@null"
-        />
-    <TextView
-        android:id="@+id/tv_act_drawgesture_welcome"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:text="@string/act_lock_welcom"
-        android:textColor="@color/act_lock_textcolor1"
+        android:layout_height="match_parent"
+        android:background="@color/global_background_color"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_act_drawgesture_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="42dp"
+            android:contentDescription="@null"
+            />
+        <TextView
+            android:id="@+id/tv_act_drawgesture_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:text="@string/act_lock_welcom"
+            android:textColor="@color/act_lock_textcolor1"
 
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="@string/qinghuizhishoushimima"
-        android:textColor="@color/act_lock_textcolor1"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="@string/qinghuizhishoushimima"
+            android:textColor="@color/act_lock_textcolor1"
 
-        />
+            />
 
-    <com.tudoujf.ui.MLockView
-        android:id="@+id/mlv_act_drawgesture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        <com.tudoujf.ui.MLockView
+            android:id="@+id/mlv_act_drawgesture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 
 
         <TextView
             android:id="@+id/tv_act_drawgesture_pass"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:textColor="@color/act_drawgesture_textcolor"
             android:textSize="14sp"
             android:gravity="center"
@@ -55,4 +62,5 @@
             android:background="@drawable/xshape_roundrect_mblue1"
             />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

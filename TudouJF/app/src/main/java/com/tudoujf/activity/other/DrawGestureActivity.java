@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +50,8 @@ public class DrawGestureActivity extends BaseActivity {
     MLockView mlvActDrawgesture;
     @BindView(R.id.tv_act_drawgesture_pass)
     TextView tvPass;
+    @BindView(R.id.root_scrollview_draw)
+    ScrollView scrollView;
     /**
      * 需要绘制的次数
      */
@@ -113,6 +116,8 @@ public class DrawGestureActivity extends BaseActivity {
             tvPass.setVisibility(View.GONE);
         }
         tvWelcome.setText((getResources().getString(R.string.huanyingni) + userName));
+
+        mlvActDrawgesture.setScrollView(scrollView);
     }
 
     @Override

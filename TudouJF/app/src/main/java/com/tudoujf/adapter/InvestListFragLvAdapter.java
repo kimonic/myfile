@@ -2,6 +2,7 @@ package com.tudoujf.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,12 +70,12 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 
         if (!"-1".equals(list.get(position).getAward_status())) {//是否额外奖励 -1否 1按金额，2按比例
             viewHolder.bidView.setAward(true);//奖0.02%是否显示
+            viewHolder.bidView.setAwardValue(StringUtils.string2Float(list.get(position).getAward_proportion()));//奖励的数值
         }else {
             viewHolder.bidView.setAward(false);//奖0.02%是否显示
         }
 
 
-//        viewHolder.bidView.setAwardValue(list.get(position).getAwardValue());//奖励的数值
 
 //        if (!"借款中".equals(list.get(position).getStatus_name())){
 //            viewHolder.bidView.setInvestNow(false);
@@ -118,8 +119,11 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
 
+        Log.e("TAG", "getView: --剩余可投---"+(list.get(position).getAmount_surplus()+"元"));
 
-        viewHolder.bidView.setInvestSum(list.get(position).getAmount()+"元");//总投资金额
+
+
+        viewHolder.bidView.setInvestSum(list.get(position).getAmount());//总投资金额
         viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限
         viewHolder.bidView.invalidate();
 

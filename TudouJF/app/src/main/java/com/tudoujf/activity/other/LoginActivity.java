@@ -208,7 +208,7 @@ public class LoginActivity extends BaseActivity {
                     if (type != 888) {//直接从登陆界面进入应用时
                         openActivity(HomeActivity.class);
                     }
-                    if (type==888){
+                    if (type == 888) {
                         setResult(888);
                     }
                     closeActivity();
@@ -242,11 +242,11 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
 
-        if (type==55){
-            Intent intent=new Intent(this,HomeActivity.class);
-            intent.putExtra("flag",55);
+        if (type == 55) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("flag", 55);
             startActivity(intent);
-        }else {
+        } else {
             closeActivity();
         }
 

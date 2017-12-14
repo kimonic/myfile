@@ -57,6 +57,7 @@ public class InfoView extends View {
     private boolean  ifNew=true;
     private boolean drawImage=true;
 
+    /**关闭投资进度条*/
     private boolean  closeBottomLine=false;
 
     public boolean isCloseBottomLine() {

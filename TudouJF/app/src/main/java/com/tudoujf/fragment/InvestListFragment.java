@@ -238,12 +238,8 @@ public class InvestListFragment extends BaseFragment {
         listTV.add(tvTotal);
 
 
-        //设置全区背景色
         swipeRefreshLayout.setPrimaryColorsId(R.color.global_theme_background_color);
-        //设置 Header 为 Material风格
-//        swipeRefreshLayout.setEnableRefresh(true);
         swipeRefreshLayout.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
-        //设置 Footer 为 球脉冲
         swipeRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
 
 

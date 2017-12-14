@@ -77,10 +77,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             super.handleMessage(msg);
 
             AppCompatActivity handlerMemoryActivity = weakReference.get();
-            Log.e("TAG", "run:BaseActivity -----activity超时线程取消加载");
             if (handlerMemoryActivity != null&&isProgressing&&msg.what==1) {
                 OkGo.getInstance().cancelAll();
-                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichucuo);
+                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
                 dismissPDialog();
             }else {
                 dismissPDialog();
@@ -259,7 +258,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
 
         if (!isAppOnForeground()) {
             //app 进入后台
-            ToastUtils.showToast(this, "土豆app已经进入后台运行!!");
+//            ToastUtils.showToast(this, "土豆app已经进入后台运行!!");
             if (UserConfig.getInstance().getLockPass(this)) {//已开启手势密码
                 UserConfig.getInstance().setDraw(false);
             }
@@ -274,7 +273,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         super.onResume();
         if (!isActive) {
 //            app 从后台唤醒，进入前台
-            ToastUtils.showToast(this, "土豆app已经回到前台!!");
+//            ToastUtils.showToast(this, "土豆app已经回到前台!!");
             isActive = true;
         }
 //开启解锁界面

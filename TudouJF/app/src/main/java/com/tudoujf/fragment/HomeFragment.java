@@ -764,7 +764,7 @@ public class HomeFragment extends BaseFragment {
             if ("2".equals(loanBeanList.get(position).getAward_status())) {
                 aivFragHome.setVisibility(View.VISIBLE);
 
-                aivFragHome.setText(loanBeanList.get(position).getAward_proportion().toString());
+                aivFragHome.setText("奖"+loanBeanList.get(position).getAward_proportion().toString()+"%");
                 aivFragHome.invalidate();
             } else {
                 aivFragHome.setVisibility(View.INVISIBLE);

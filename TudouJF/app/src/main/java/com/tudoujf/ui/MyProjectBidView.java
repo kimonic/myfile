@@ -343,7 +343,7 @@ public class MyProjectBidView extends View {
         //------------------------------------------------------------------------------------------
 
 
-        //-----------------------左侧介绍文本/债权价值(元)------------------------------------------
+        //-----------------------左侧介绍文本/待收本息(元)------------------------------------------
         grayLinePaint.setTextSize(width * 0.03148f);
 //        grayLinePaint.setTextSize(width * 0.03777f);
         float text4X = width * 0.05555f;
@@ -366,7 +366,7 @@ public class MyProjectBidView extends View {
         //------------------------------------------------------------------------------------------
 
 
-        //---------------中间展示文本介绍/原标年化收益----------------------------------------------
+        //---------------中间展示文本介绍/债权价值(元)----------------------------------------------
         float text6X = width * 0.35648f;
 //                text5X + (orangePaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayLinePaint.measureText(explain2) / 2);
         canvas.drawText(explain2, text6X, text4Y, grayLinePaint);
@@ -388,8 +388,8 @@ public class MyProjectBidView extends View {
 
 
 
-        //----------------右侧展示文本/转让价格(元)显示数字-----------------------------------------
-        blackPaint.setTextSize(width * 0.03809f);
+        //----------------右侧展示文本/到期时间2018-01-31-----------------------------------------
+        blackPaint.setTextSize(width * 0.03333f);
         float text7X = text8X + grayLinePaint.measureText(explain3) / 2-blackPaint.measureText(transferPrice) / 2;
 //        float text7X = width * 0.6231f;
         canvas.drawText(transferPrice, text7X, text3Y, blackPaint);

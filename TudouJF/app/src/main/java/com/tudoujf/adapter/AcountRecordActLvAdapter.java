@@ -56,7 +56,7 @@ public class AcountRecordActLvAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         View view;
         if (convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.lvitem_succeedinvitationact, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.lvitem_acountrecord, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.linearLayout= (LinearLayout) view.findViewById(R.id.ll_lvitem_succeedinvitation);
             viewHolder.textView1= (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation1);

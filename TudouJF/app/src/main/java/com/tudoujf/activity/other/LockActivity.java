@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.encryptionpackages.AESencrypt;
@@ -55,6 +56,8 @@ public class LockActivity extends BaseActivity {
     TextView tvOther;
     @BindView(R.id.tv_act_lock_hint)
     TextView tvHint;
+    @BindView(R.id.root_scrollview)
+    ScrollView scrollView;
 
     @BindView(R.id.ll_act_lock_btn)
     LinearLayout llBtn;
@@ -179,6 +182,8 @@ public class LockActivity extends BaseActivity {
             tvHint.setText(R.string.qingshurunindeshoushimima);
         }
         tvWelcome.setText((getResources().getString(R.string.huanyingni) + userName));
+
+        mlvActLock.setScrollView(scrollView);
 
 
     }
