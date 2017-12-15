@@ -59,6 +59,7 @@ public class InfoView extends View {
 
     /**关闭投资进度条*/
     private boolean  closeBottomLine=false;
+    private Paint paintGray1;
 
     public boolean isCloseBottomLine() {
         return closeBottomLine;
@@ -115,7 +116,8 @@ public class InfoView extends View {
         paintWhite=initPaint(Color.parseColor("#FEFEFF"));
 
 
-        paintGray=initPaint(Color.parseColor("#C1C2C7"));
+        paintGray1=initPaint(Color.parseColor("#C1C2C7"));
+        paintGray=initPaint(Color.parseColor("#666666"));
         paintOrange=initPaint(Color.parseColor("#FD7833"));
         paintOrange.setTextSize(width*0.06933f);
         paintCyan=initPaint(Color.parseColor("#149BBB"));
@@ -236,8 +238,8 @@ public class InfoView extends View {
 
 
             Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
-            paintGray.setStrokeWidth(6);
-            canvas.drawLine(rectF.right,width*0.2893f,width,width*0.2893f,paintGray);
+            paintGray1.setStrokeWidth(6);
+            canvas.drawLine(rectF.right,width*0.2893f,width,width*0.2893f,paintGray1);
 
             paintCyan.setStrokeWidth(6);
             canvas.drawLine(0,width*0.2893f,width*underlineScale,width*0.2893f,paintCyan);//底线

@@ -8,7 +8,9 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.encryptionpackages.AESencrypt;
@@ -29,12 +31,14 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.MD5Utils;
+import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import cn.udesk.ScreenUtil;
 
 /**
  * * ================================================
@@ -66,6 +70,12 @@ public class LoginActivity extends BaseActivity {
     ImageView ivClear1;
     @BindView(R.id.iv_act_login_openclose)
     ImageView ivOpenclose;
+    @BindView(R.id.frame_login)
+    FrameLayout frameLayout;
+    @BindView(R.id.scroll)
+    View temp;
+   @BindView(R.id.login_root)
+   ScrollView scrollView;
     /**
      * 密码明文或密文表示计数
      */
@@ -126,6 +136,24 @@ public class LoginActivity extends BaseActivity {
         tvForgetpassword.setOnClickListener(this);
         tvLogin.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
+
+
+        ScreenUtil screenUtil = new ScreenUtil(this);
+        screenUtil.observeInputlayout(temp, new ScreenUtil.OnInputActionListener() {
+            @Override
+            public void onOpen(int inputHeight) {
+                int[]   xy=new int[2];
+                tvLogin.getLocationOnScreen(xy);
+                scrollView.smoothScrollTo(0,inputHeight-(ScreenSizeUtils.getScreenHeight(LoginActivity.this)-xy[1])
+                        +40*ScreenSizeUtils.getDensity(LoginActivity.this)+20);
+            }
+
+            @Override
+            public void onClose() {
+                scrollView.smoothScrollTo(0,0);
+
+            }
+        });
     }
 
     @Override
@@ -261,4 +289,6 @@ public class LoginActivity extends BaseActivity {
     protected boolean translucentStatusBar() {
         return true;
     }
+
+
 }

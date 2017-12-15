@@ -17,7 +17,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -131,6 +134,10 @@ public class MyAccountActivity extends BaseActivity {
     private int requestCount = 0;
     private String iconurl;
 
+
+    private ImageView imageView;
+    private boolean  change=false;
+    private AlertDialog dialogImage;
 
     @Override
     public int getLayoutResId() {
@@ -246,14 +253,44 @@ public class MyAccountActivity extends BaseActivity {
                 ImagePicker imagePicker = ImagePicker.getInstance();
                 imagePicker.setImageLoader(new GlideImageLoaderUtils());
                 imagePicker.setMultiMode(true);   //多选
-                imagePicker.setShowCamera(true);  //显示拍照按钮
+                imagePicker.setShowCamera(false);  //显示拍照按钮
                 imagePicker.setSelectLimit(1);    //最多选择9张
                 imagePicker.setCrop(false);       //不进行裁剪
                 Intent intent = new Intent(this, ImageGridActivity.class);
                 startActivityForResult(intent, 2);
                 break;
+
+            case R.id.iv_act_myaccount_icon://头像图片放大
+                if(dialogImage==null){
+                    showImage();
+                }else {
+                    dialogImage.show();
+                }
+                break;
         }
 
+    }
+
+    private void showImage(){
+        Glide.get(this).clearMemory();
+        int  width=ScreenSizeUtils.getScreenWidth(this);
+        LinearLayout.LayoutParams  params=new LinearLayout.LayoutParams(width-200,width-200);
+        imageView.setLayoutParams(params);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        if (!change){
+            ImageGlideUtils.loadImageFromUrl(imageView, iconurl + "?aa=" + System.currentTimeMillis());
+        }
+        dialogImage = new AlertDialog.Builder(this).create();
+        dialogImage.setCanceledOnTouchOutside(true);
+        dialogImage.show();
+        Window window = dialogImage.getWindow();
+        if (window != null) {
+            window.setLayout(900, 900);
+            window.setGravity(Gravity.CENTER);
+            ColorDrawable drawable = new ColorDrawable(Color.WHITE);
+            window.setBackgroundDrawable(drawable);
+            window.setContentView(imageView);
+        }
     }
 
     @Override
@@ -273,6 +310,9 @@ public class MyAccountActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyAccount.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActMyAccount.setLayoutParams(params);
+
+        imageView=new ImageView(this);
+
 
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_act_myaccount, null);
@@ -314,6 +354,8 @@ public class MyAccountActivity extends BaseActivity {
         tvSignOut.setOnClickListener(this);
         tvPhotograph.setOnClickListener(this);
         tvAlbum.setOnClickListener(this);
+
+        ivIcon.setOnClickListener(this);
 
     }
 
@@ -433,6 +475,12 @@ public class MyAccountActivity extends BaseActivity {
                         if (response.body().contains("200")) {
                             ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanchenggong);
                             ImageGlideUtils.loadCircularImage(ivIcon, path);
+
+                            change=true;
+                            ImageGlideUtils.loadImage(imageView,path);
+
+
+
                             new Thread() {
                                 @Override
                                 public void run() {
@@ -536,28 +584,3 @@ public class MyAccountActivity extends BaseActivity {
     }
 }
 
-
-/**
- * -------------------------------------------------------------------------------------------------
- * onActivityResult（）方法中获取数据
- * -------------------------------------------------------------------------------------------------
- * /相机的请求编码
- * case CAMERA_REQUEST_CODE:
- * isCamera =true;
- * startPhotoZoom(Uri.fromFile(new File(cameraPath)));
- * break;
- * //相机、相册的图片再 剪辑完 在这地方上传
- * case RESULT_REQUEST_CODE:
- * if (isCamera){
- * upLoadPictrue(new File(cameraPath));
- * } else {
- * String path = null;
- * if (android.os.Build.VERSION_CODES.KITKAT >= 19) {
- * path = new GetPicPath().getPath_above19(getActivity(), uri1);
- * }else {
- * path = getFilePath_below19(uri1);
- * }
- * upLoadPictrue(new File(path));
- * }
- * break;
- */

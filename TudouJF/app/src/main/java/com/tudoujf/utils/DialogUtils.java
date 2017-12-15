@@ -277,6 +277,7 @@ public class DialogUtils {
         pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
         pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
         pop.setFocusable(true);//获取焦点
+
         pop.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
 
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {

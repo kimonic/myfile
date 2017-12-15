@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +13,18 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.activity.my.myaccount.BankCardManageActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.FundDetailsBean;
+import com.tudoujf.bean.databean.WithDrawBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.FundDetailsView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -72,24 +77,32 @@ public class FundDetailsActivity extends BaseActivity {
             case R.id.tv_act_funddetails_jiaoyijilu://交易记录
                 openActivity(TransactionRecordActivity.class);
                 break;
-            case R.id.tv_act_funddetails_withdraw:
+            case R.id.tv_act_funddetails_withdraw://提现
                 if ("-1".equals(is_trust)) {
-                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
+                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
+                            R.string.queding, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+//                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
-                    Intent intent = new Intent(this, WithdrawActivity.class);
-                    if (bean != null) {
-                        intent.putExtra("amount", bean.getBalance_amount());
-                    } else {
-                        intent.putExtra("amount", getResources().getString(R.string.zanwu));
-                    }
-                    startActivity(intent);
+                   withdraw();
                 }
 
 //                openActivity(WithdrawActivity.class);
                 break;
-            case R.id.tv_act_funddetails_recharge:
+            case R.id.tv_act_funddetails_recharge://充值
                 if ("-1".equals(is_trust)) {
-                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
+                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
+                            R.string.queding, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+//                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
                     Bundle bundle = new Bundle();
                     if (bean != null) {
@@ -182,6 +195,58 @@ public class FundDetailsActivity extends BaseActivity {
     @Override
     protected boolean translucentStatusBar() {
         return true;
+    }
+
+
+    /**调用提现接口*/
+    private void withdraw(){
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(FundDetailsActivity.this));
+        HttpMethods.getInstance().POST(FundDetailsActivity.this, Constants.WITHDRAW, map, FundDetailsActivity.this.getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: ----------提现接口请求返回数据-----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithDrawBean>() {
+                }.getType(), WithDrawBean.class, FundDetailsActivity.this);
+                if (bean1 != null) {
+                    WithDrawBean withDrawBean = (WithDrawBean) bean1;
+
+                    if ("1".equals(withDrawBean.getIs_bind())){
+                        Intent intent = new Intent(FundDetailsActivity.this, WithdrawActivity.class);
+                        if (bean != null) {
+                            intent.putExtra("amount", bean.getBalance_amount());
+                        } else {
+                            intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                        }
+                        startActivity(intent);
+
+
+                    }else {
+                        DialogUtils.showDialog(FundDetailsActivity.this, R.string.qingxianbangdingyinhangka,
+                                R.string.queding, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        openActivity(BankCardManageActivity.class);
+                                    }
+                                });
+                    }
+                } else {
+                    ToastUtils.showToast(FundDetailsActivity.this, R.string.shujujiazaichucuo);
+                }
+
+
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+            }
+        });
+
     }
 
 

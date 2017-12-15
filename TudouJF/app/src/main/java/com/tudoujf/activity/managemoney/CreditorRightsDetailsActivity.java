@@ -1,5 +1,6 @@
 package com.tudoujf.activity.managemoney;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -286,7 +288,15 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                         }
                     } else {
                         //  弹出汇付托管开通页面
-                        DialogUtils.showHuiFuDialog(CreditorRightsDetailsActivity.this);
+                        DialogUtils.showDialog(CreditorRightsDetailsActivity.this, R.string.weilenindezijinanquan,
+                                R.string.queding, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent=new Intent(CreditorRightsDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+//                        DialogUtils.showHuiFuDialog(CreditorRightsDetailsActivity.this);
                     }
                 } else {
                     ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));

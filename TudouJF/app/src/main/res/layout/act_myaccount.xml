@@ -34,7 +34,6 @@
                 android:background="@color/color_line"
                 />
             <LinearLayout
-                android:id="@+id/ll_act_myaccount_icon"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:orientation="horizontal"
@@ -81,26 +80,34 @@
                         />
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/ll_act_myaccount_icon"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/color_black"
-                    android:textSize="12sp"
-                    android:text="@string/genggaitouxiang"
-                    android:gravity="center_vertical|end"
-                    />
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/color_black"
+                        android:textSize="12sp"
+                        android:text="@string/genggaitouxiang"
+                        android:gravity="center_vertical|end"
+                        />
 
-                <TextView
-                    android:layout_width="11dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/xvector_rightarrowlarge"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    />
+                    <TextView
+                        android:layout_width="11dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/xvector_rightarrowlarge"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        />
+                </LinearLayout>
+
 
             </LinearLayout>
             <View

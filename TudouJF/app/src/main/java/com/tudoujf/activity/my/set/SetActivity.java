@@ -46,6 +46,11 @@ public class SetActivity extends BaseActivity {
     LinearLayout llActSetFeedback;
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
+    //-------------------------待删除-----------------------------------------------
+    private boolean  flag=false;
+    //-------------------------待删除-----------------------------------------------
+
+
     private View view;
     private AlertDialog dialog;
 
@@ -74,7 +79,8 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
                 count++;
-                if (count == 10) {
+                if (flag&&count == 10) {
+                    flag=false;
                     openActivity(PreviewActivity.class);
                 }
 //                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
@@ -128,6 +134,16 @@ public class SetActivity extends BaseActivity {
         llActSetCheckUpdate.setOnClickListener(this);
         llActSetHelp.setOnClickListener(this);
         llActSetFeedback.setOnClickListener(this);
+        //-------------------------待删除-----------------------------------------------
+
+        llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                flag=true;
+                return false;
+            }
+        });
+        //-------------------------待删除-----------------------------------------------
     }
 
     @Override

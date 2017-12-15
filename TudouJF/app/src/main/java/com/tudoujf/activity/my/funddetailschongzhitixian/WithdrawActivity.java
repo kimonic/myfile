@@ -205,7 +205,11 @@ public class WithdrawActivity extends BaseActivity {
 
             }
 
-
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+            }
         });
 
 

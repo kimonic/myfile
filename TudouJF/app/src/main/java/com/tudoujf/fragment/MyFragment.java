@@ -31,10 +31,12 @@ import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SignInActivity;
+import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.FundDetailsActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.WithdrawActivity;
+import com.tudoujf.activity.my.myaccount.BankCardManageActivity;
 import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.activity.my.myaccount.VIPActivity;
 import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
@@ -47,6 +49,7 @@ import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.MyFragBean;
 import com.tudoujf.bean.databean.PersonalCenterBean;
+import com.tudoujf.bean.databean.WithDrawBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -129,7 +132,7 @@ public class MyFragment extends BaseFragment {
 
     private List<MyFragBean> list;
 
-    private boolean  hide=false;
+    private boolean hide = false;
 
     private int[] titleResId = new int[]{
             R.string.wodejifen,
@@ -162,14 +165,14 @@ public class MyFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_frag_my://关闭客服
-                retractAnim(24*ScreenSizeUtils.getDensity(getActivity()),-50 * ScreenSizeUtils.getDensity(getActivity()));
-                hide=true;
+                retractAnim(24 * ScreenSizeUtils.getDensity(getActivity()), -50 * ScreenSizeUtils.getDensity(getActivity()));
+                hide = true;
                 break;
             case R.id.iv_frag_my://打开客服界面
-                if (hide){
-                    hide=false;
-                    retractAnim(-50 * ScreenSizeUtils.getDensity(getActivity()),24*ScreenSizeUtils.getDensity(getActivity()));
-                }else {
+                if (hide) {
+                    hide = false;
+                    retractAnim(-50 * ScreenSizeUtils.getDensity(getActivity()), 24 * ScreenSizeUtils.getDensity(getActivity()));
+                } else {
                     UdeskSDKManager.getInstance().initApiKey(getActivity(), getResources().getString(R.string.domain),
                             getResources().getString(R.string.appkey), getResources().getString(R.string.appid));
                     String sdktoken = UserConfig.getInstance().getLoginToken(getActivity());
@@ -186,7 +189,14 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
-                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                    DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng,
+                            R.string.queding, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+//                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
                 } else {
                     Bundle bundle = new Bundle();
                     if (bean != null) {
@@ -199,15 +209,16 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_tixian://提现
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
-                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                    DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng,
+                            R.string.queding, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+//                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
                 } else {
-                    Intent intent = new Intent(getActivity(), WithdrawActivity.class);
-                    if (bean != null) {
-                        intent.putExtra("amount", bean.getAmount_balance());
-                    } else {
-                        intent.putExtra("amount", getResources().getString(R.string.zanwu));
-                    }
-                    startActivity(intent);
+                    withdraw();//判断是否绑卡
                 }
 
                 break;
@@ -260,14 +271,17 @@ public class MyFragment extends BaseFragment {
                 }
 
                 break;
+            case R.id.ll_frag_my_realname://实名认证
+                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                break;
         }
     }
 
 
-    private void retractAnim(int start,int marginEnd) {
+    private void retractAnim(int start, int marginEnd) {
         params = (FrameLayout.LayoutParams) flFragMy.getLayoutParams();
         ValueAnimator animator;
-            animator = ValueAnimator.ofInt(start, marginEnd);
+        animator = ValueAnimator.ofInt(start, marginEnd);
         animator.setDuration(1000);
         animator.start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -377,6 +391,7 @@ public class MyFragment extends BaseFragment {
         flMessage.setOnClickListener(this);
         tvVipapply.setOnClickListener(this);
         llMyExperience.setOnClickListener(this);
+        llRealname.setOnClickListener(this);
 
         srl.setOnRefreshListener(new OnRefreshListener() {//下拉刷新
             @Override
@@ -482,6 +497,58 @@ public class MyFragment extends BaseFragment {
             }
         }
         return false;
+    }
+
+
+    /**
+     * 调用提现接口
+     */
+    private void withdraw() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+        HttpMethods.getInstance().POST(getActivity(), Constants.WITHDRAW, map, getActivity().getLocalClassName(), new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e("TAG", "onSuccess: ----------提现接口请求返回数据-----------------" + result);
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithDrawBean>() {
+                }.getType(), WithDrawBean.class, getActivity());
+                if (bean1 != null) {
+                    WithDrawBean withDrawBean = (WithDrawBean) bean1;
+
+                    if ("1".equals(withDrawBean.getIs_bind())) {
+                        Intent intent = new Intent(getActivity(), WithdrawActivity.class);
+                        if (bean != null) {
+                            intent.putExtra("amount", bean.getAmount_balance());
+                        } else {
+                            intent.putExtra("amount", getResources().getString(R.string.zanwu));
+                        }
+                        startActivity(intent);
+                    } else {
+                        DialogUtils.showDialog(getActivity(), R.string.qingxianbangdingyinhangka,
+                                R.string.queding, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        openActivity(BankCardManageActivity.class);
+                                    }
+                                });
+                    }
+                } else {
+                    ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                }
+
+
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+            }
+        });
+
     }
 
 }

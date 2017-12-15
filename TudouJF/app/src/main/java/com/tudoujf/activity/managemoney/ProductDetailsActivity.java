@@ -1,5 +1,6 @@
 package com.tudoujf.activity.managemoney;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -119,7 +121,7 @@ public class ProductDetailsActivity extends BaseActivity {
     /**
      * 加载进度dialog
      */
-    private AlertDialog dialog;
+//    private AlertDialog dialog;
     private InvestDetailsBean bean;
     /**
      * 按钮之前的位置
@@ -240,7 +242,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-        showProgressDialog();
+        showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
 //        map.put("loan_id", loan_id);
         //----------------------------临时固定id----------------------------------------------------------------------------------------------------------------
@@ -251,7 +253,8 @@ public class ProductDetailsActivity extends BaseActivity {
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        dialog.dismiss();
+//                        dialog.dismiss();
+                        dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----理财投资详情接口返回数据--------" + result);
 
@@ -406,17 +409,17 @@ public class ProductDetailsActivity extends BaseActivity {
         hsvUnShowWidth = hsvImage.getChildAt(0).getWidth() - hsvImage.getWidth();
     }
 
-    /**
-     * 显示加载进度dialog
-     */
-    private void showProgressDialog() {
-        if (dialog == null) {
-            dialog = DialogUtils.showProgreessDialog(this, getString(R.string.zaicidianjijinagtuichugaiyemian));
-        } else {
-            dialog.show();
-        }
-
-    }
+//    /**
+//     * 显示加载进度dialog
+//     */
+//    private void showProgressDialog() {
+//        if (dialog == null) {
+//            dialog = DialogUtils.showProgreessDialog(this, getString(R.string.zaicidianjijinagtuichugaiyemian));
+//        } else {
+//            dialog.show();
+//        }
+//
+//    }
 
     //-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
 
@@ -484,7 +487,15 @@ public class ProductDetailsActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     } else {
-                        DialogUtils.showHuiFuDialog(ProductDetailsActivity.this);
+                        DialogUtils.showDialog(ProductDetailsActivity.this, R.string.weilenindezijinanquan,
+                                R.string.queding, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent=new Intent(ProductDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+//                        DialogUtils.showHuiFuDialog(ProductDetailsActivity.this);
                     }
                 } else {
                     ToastUtils.showToast(ProductDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));

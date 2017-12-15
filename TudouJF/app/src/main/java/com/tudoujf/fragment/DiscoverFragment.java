@@ -97,20 +97,20 @@ public class DiscoverFragment extends BaseFragment {
     public void initDataFromIntent() {
         list = new ArrayList<>();
 
-        DiscoverBean.ItemsBean bean1 = new DiscoverBean.ItemsBean();
-        bean1.setName("100元红包买你的故事,可好?");
-        bean1.setAddTime("7月10日");
-        bean1.setContents("你才不是一个没有故事的同学");
-        bean1.setResId(R.drawable.frag_discover_christmas);
-
-        DiscoverBean.ItemsBean bean2 = new DiscoverBean.ItemsBean();
-        bean2.setName("轻松摇一摇,秒拿现金奖");
-        bean2.setAddTime("6月21日");
-        bean2.setContents("啊啊啊,好激动");
-        bean2.setResId(R.drawable.frag_discover_sharkitoff);
-
-        list.add(bean1);
-        list.add(bean2);
+//        DiscoverBean.ItemsBean bean1 = new DiscoverBean.ItemsBean();
+//        bean1.setName("100元红包买你的故事,可好?");
+//        bean1.setAddTime("7月10日");
+//        bean1.setContents("你才不是一个没有故事的同学");
+//        bean1.setResId(R.drawable.frag_discover_christmas);
+//
+//        DiscoverBean.ItemsBean bean2 = new DiscoverBean.ItemsBean();
+//        bean2.setName("轻松摇一摇,秒拿现金奖");
+//        bean2.setAddTime("6月21日");
+//        bean2.setContents("啊啊啊,好激动");
+//        bean2.setResId(R.drawable.frag_discover_sharkitoff);
+//
+//        list.add(bean1);
+//        list.add(bean2);
 
     }
 
@@ -118,7 +118,7 @@ public class DiscoverFragment extends BaseFragment {
     public void initView() {
 
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
-        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+//        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         srl.setRefreshFooter(new BallPulseFooter(getActivity()));
         srl.setEnableLoadmore(true);
 
@@ -137,12 +137,12 @@ public class DiscoverFragment extends BaseFragment {
         llFragDiscoverBt2.setOnClickListener(this);
         llFragDiscoverBt3.setOnClickListener(this);
 
-        srl.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                finishRL();
-            }
-        });
+//        srl.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                finishRL();
+//            }
+//        });
         srl.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {

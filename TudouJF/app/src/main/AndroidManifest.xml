@@ -81,7 +81,8 @@
             android:name=".activity.home.HomeActivity"
             android:launchMode="singleTask" />
         <!-- 5.登录页activity -->
-        <activity android:name=".activity.other.LoginActivity" />
+        <activity android:name=".activity.other.LoginActivity"
+            android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <!-- 6.注册页activity -->
         <activity android:name=".activity.other.RegisterActivity" />
         <!-- 7.确认密码页activity -->

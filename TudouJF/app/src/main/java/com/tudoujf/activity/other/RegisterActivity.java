@@ -45,6 +45,7 @@ import org.json.JSONObject;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import cn.udesk.ScreenUtil;
 
 /**
  * * ================================================
@@ -235,13 +236,17 @@ public class RegisterActivity extends BaseActivity {
                 }
             }
         });
+
         etUsername.setOnClickListener(this);
 //--------------------------------------------------------------------------------------------------------
         etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                fosousOne = hasFocus;
-                visibilityplaceHolder();
+//                fosousOne = hasFocus;
+//                visibilityplaceHolder();
+                if (hasFocus){
+                    scrollView.smoothScrollTo(0,160*ScreenSizeUtils.getDensity(RegisterActivity.this));
+                }
 
             }
         });
@@ -249,8 +254,24 @@ public class RegisterActivity extends BaseActivity {
         etReferrer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                fosousTwo = hasFocus;
-                visibilityplaceHolder();
+//                fosousTwo = hasFocus;
+//                visibilityplaceHolder();
+                if (hasFocus){
+                    scrollView.smoothScrollTo(0,160*ScreenSizeUtils.getDensity(RegisterActivity.this));
+                }
+            }
+        });
+
+        ScreenUtil screenUtil = new ScreenUtil(this);
+        screenUtil.observeInputlayout(scrollView, new ScreenUtil.OnInputActionListener() {
+            @Override
+            public void onOpen(int inputHeight) {
+            }
+
+            @Override
+            public void onClose() {
+                scrollView.smoothScrollTo(0,0);
+
             }
         });
 //-----------------------------------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.AddBankCardHuiFuActivity;
+import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.adapter.BankCardManageActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -198,7 +200,14 @@ public class BankCardManageActivity extends BaseActivity {
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
                         openActivityForResult(AddBankCardHuiFuActivity.class,null,61);
                     } else {
-                        DialogUtils.showHuiFuDialog(BankCardManageActivity.this);
+                        DialogUtils.showDialog(BankCardManageActivity.this, R.string.qingxianshimingrenzheng,
+                                R.string.queding, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                    }
+                                });
+//                        DialogUtils.showHuiFuDialog(BankCardManageActivity.this);
                     }
                 } else {
                     ToastUtils.showToast(BankCardManageActivity.this, getResources().getString(R.string.shujujiazaichucuo));

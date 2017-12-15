@@ -630,6 +630,8 @@
     <string name="ninshangweibangding">您尚未绑定银行卡,请先绑定银行卡!</string>
     <string name="xianchengquxiaoshujujiazai">线程取消数据加载!</string>
     <string name="shujujiazaichaoshi">数据加载超时!</string>
+    <string name="weilenindezijinanquan">为了您的资金安全,请开通资金托管账户!</string>
+    <string name="qingxianbangdingyinhangka">请先绑定银行卡!</string>
 
 
 </resources>

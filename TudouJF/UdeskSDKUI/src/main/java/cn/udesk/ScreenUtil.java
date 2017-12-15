@@ -30,7 +30,7 @@ public class ScreenUtil {
         this.activity = activity;
     }
 
-    private int getBottomKeyboardHeight() {
+    public int getBottomKeyboardHeight() {
         int screenHeight = getAccurateScreenDpi()[1];
         DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
