@@ -47,7 +47,7 @@
     <string name="gesture_password_guide_creat_btn">创建手势密码</string>
     <string name="act_lock_welcom">欢迎您,XXXXXXXXXXX</string>
     <string name="act_lock_forget">忘记手势密码</string>
-    <string name="act_lock_other">使用其他账号登录</string>
+    <string name="act_lock_other">使用账号登录</string>
     <string name="errormoretimes">输入错误次数过多,请等待5分钟后再次重试</string>
     <string name="inputsucess">输入成功</string>
     <string name="act_drawgesture_pass">直接跳过</string>
@@ -632,6 +632,9 @@
     <string name="shujujiazaichaoshi">数据加载超时!</string>
     <string name="weilenindezijinanquan">为了您的资金安全,请开通资金托管账户!</string>
     <string name="qingxianbangdingyinhangka">请先绑定银行卡!</string>
+    <string name="tishi">提示</string>
+    <string name="qingbangdingyinhangka">请绑定银行卡!</string>
+    <string name="jifen">积分</string>
 
 
 </resources>

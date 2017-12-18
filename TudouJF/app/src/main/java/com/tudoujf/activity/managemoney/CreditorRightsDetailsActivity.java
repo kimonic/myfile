@@ -2,6 +2,7 @@ package com.tudoujf.activity.managemoney;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -88,6 +89,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
      * 验证请求只执行一次
      */
     private boolean request = true;
+    private AlertDialog promptDialog;
 
 
     @Override
@@ -227,6 +229,10 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
 
             status=bean.getTransferMap().getStatus();
 
+            ivInfo.setNianHuaShouYi(bean.getLoanMap().getLoan_info().getApr());
+            ivInfo.setJieKuanQiXian(bean.getLoanMap().getLoan_info().getPeriod_name());
+            ivInfo.invalidate();
+
             if (!"1".equals(status)){
                 tvBuyNow.setClickable(false);
                 tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
@@ -287,15 +293,26 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     } else {
-                        //  弹出汇付托管开通页面
-                        DialogUtils.showDialog(CreditorRightsDetailsActivity.this, R.string.weilenindezijinanquan,
-                                R.string.queding, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent=new Intent(CreditorRightsDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
+                        if (promptDialog==null){
+                            promptDialog=DialogUtils.showPromptDialog(CreditorRightsDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                                @Override
+                                public void onClick() {
+                                    promptDialog.dismiss();
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+                        }else {
+                            promptDialog.show();
+                        }
+//                        //  弹出汇付托管开通页面
+//                        DialogUtils.showDialog(CreditorRightsDetailsActivity.this, R.string.weilenindezijinanquan,
+//                                R.string.queding, new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        Intent intent=new Intent(CreditorRightsDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
+//                                        startActivity(intent);
+//                                    }
+//                                });
 //                        DialogUtils.showHuiFuDialog(CreditorRightsDetailsActivity.this);
                     }
                 } else {

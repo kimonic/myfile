@@ -43,7 +43,7 @@ public class ImageGlideUtils {
         Glide.with(view.getContext())
                 .load(url)
                 .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
-                .placeholder(R.drawable.act_lock_icon)
+                .placeholder(R.drawable.ic_error)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
                 .into(view);

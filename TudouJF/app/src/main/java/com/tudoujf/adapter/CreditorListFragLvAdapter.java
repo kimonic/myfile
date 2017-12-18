@@ -92,15 +92,15 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
         final String  id=list.get(position).getId();
         final String  loan_id=list.get(position).getLoan_id();
 
-        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
-            @Override
-            public void clickEvent() {
-                Intent intent = new Intent(context, CreditorRightsDetailsActivity.class);
-                intent.putExtra("transfer_id",id);
-                intent.putExtra("loan_id",loan_id);
-                context.startActivity(intent);
-            }
-        });
+//        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
+//            @Override
+//            public void clickEvent() {
+//                Intent intent = new Intent(context, CreditorRightsDetailsActivity.class);
+//                intent.putExtra("transfer_id",id);
+//                intent.putExtra("loan_id",loan_id);
+//                context.startActivity(intent);
+//            }
+//        });
 
 
         return view;

@@ -3,6 +3,7 @@ package com.tudoujf.activity.my.funddetailschongzhitixian;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -62,6 +63,8 @@ public class FundDetailsActivity extends BaseActivity {
     FundDetailsView fdvDetails;
     private FundDetailsBean bean;
     private String is_trust;
+    private AlertDialog promptDialog1;
+    private AlertDialog promptDialog;
 
     @Override
     public int getLayoutResId() {
@@ -79,13 +82,24 @@ public class FundDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_act_funddetails_withdraw://提现
                 if ("-1".equals(is_trust)) {
-                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
-                            R.string.queding, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
-                                }
-                            });
+                    if (promptDialog1==null){
+                        promptDialog1=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                            @Override
+                            public void onClick() {
+                                promptDialog1.dismiss();
+                                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                            }
+                        });
+                    }else {
+                        promptDialog1.show();
+                    }
+//                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
+//                            R.string.queding, new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+//                                }
+//                            });
 //                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
                    withdraw();
@@ -95,13 +109,24 @@ public class FundDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_act_funddetails_recharge://充值
                 if ("-1".equals(is_trust)) {
-                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
-                            R.string.queding, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
-                                }
-                            });
+                    if (promptDialog1==null){
+                        promptDialog1=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                            @Override
+                            public void onClick() {
+                                promptDialog1.dismiss();
+                                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                            }
+                        });
+                    }else {
+                        promptDialog1.show();
+                    }
+//                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
+//                            R.string.queding, new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+//                                }
+//                            });
 //                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
                     Bundle bundle = new Bundle();
@@ -225,13 +250,24 @@ public class FundDetailsActivity extends BaseActivity {
 
 
                     }else {
-                        DialogUtils.showDialog(FundDetailsActivity.this, R.string.qingxianbangdingyinhangka,
-                                R.string.queding, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        openActivity(BankCardManageActivity.class);
-                                    }
-                                });
+                        if (promptDialog==null){
+                            promptDialog=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "请绑定银行卡!", new DialogUtils.DialogUtilsClickListener() {
+                                @Override
+                                public void onClick() {
+                                    promptDialog.dismiss();
+                                    openActivity(BankCardManageActivity.class);
+                                }
+                            });
+                        }else {
+                            promptDialog.show();
+                        }
+//                        DialogUtils.showDialog(FundDetailsActivity.this, R.string.qingxianbangdingyinhangka,
+//                                R.string.queding, new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        openActivity(BankCardManageActivity.class);
+//                                    }
+//                                });
                     }
                 } else {
                     ToastUtils.showToast(FundDetailsActivity.this, R.string.shujujiazaichucuo);

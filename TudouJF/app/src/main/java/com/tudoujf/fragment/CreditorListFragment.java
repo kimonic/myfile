@@ -1,7 +1,9 @@
 package com.tudoujf.fragment;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
 import com.tudoujf.adapter.CreditorListFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
@@ -274,6 +277,16 @@ public class CreditorListFragment extends BaseFragment {
             public void onRefresh(RefreshLayout refreshlayout) {
                 page = 1;
                 initDataFromInternet();
+            }
+        });
+
+        lvFragManageMoneyMatters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), CreditorRightsDetailsActivity.class);
+                intent.putExtra("transfer_id",listNew.get(position).getId());
+                intent.putExtra("loan_id",listNew.get(position).getLoan_id());
+                startActivity(intent);
             }
         });
     }

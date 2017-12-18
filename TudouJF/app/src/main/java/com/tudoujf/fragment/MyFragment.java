@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -155,6 +157,8 @@ public class MyFragment extends BaseFragment {
     };
     private PersonalCenterBean bean;
     private FrameLayout.LayoutParams params;
+    private AlertDialog promptDialog;
+    private AlertDialog promptDialog1;
 
     @Override
     public int layoutRes() {
@@ -189,14 +193,17 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_chongzhi://充值
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
-                    DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng,
-                            R.string.queding, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
-                                }
-                            });
-//                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                    if (promptDialog1 == null) {
+                        promptDialog1 = DialogUtils.showPromptDialog(getActivity(), "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                            @Override
+                            public void onClick() {
+                                promptDialog1.dismiss();
+                                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                            }
+                        });
+                    } else {
+                        promptDialog1.show();
+                    }
                 } else {
                     Bundle bundle = new Bundle();
                     if (bean != null) {
@@ -209,14 +216,17 @@ public class MyFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_my_tixian://提现
                 if (bean != null && "-1".equals(bean.getIs_trust())) {
-                    DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng,
-                            R.string.queding, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
-                                }
-                            });
-//                    ToastUtils.showToast(getActivity(), R.string.qingxianshimingrenzheng);
+                    if (promptDialog1 == null) {
+                        promptDialog1 = DialogUtils.showPromptDialog(getActivity(), "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                            @Override
+                            public void onClick() {
+                                promptDialog1.dismiss();
+                                openActivity(RealNameAuthenticationHuiFuActivity.class);
+                            }
+                        });
+                    } else {
+                        promptDialog1.show();
+                    }
                 } else {
                     withdraw();//判断是否绑卡
                 }
@@ -470,9 +480,17 @@ public class MyFragment extends BaseFragment {
             }
 
             int count = StringUtils.string2Integer(bean.getCount());
-            if (count < 100) {
+            if (count == 0) {
+                setImageSize(10);
+                flMessage.setBackgroundResource(R.drawable.frag_home_noinfo);
+                tvMessage.setText("");
+            } else if (count < 100) {
+                setImageSize(18);
+                flMessage.setBackgroundResource(R.drawable.frag_home_info);
                 tvMessage.setText(bean.getCount());
             } else {
+                setImageSize(18);
+                flMessage.setBackgroundResource(R.drawable.frag_home_info);
                 tvMessage.setText(getResources().getString(R.string.ninenine));
             }
         }
@@ -527,13 +545,25 @@ public class MyFragment extends BaseFragment {
                         }
                         startActivity(intent);
                     } else {
-                        DialogUtils.showDialog(getActivity(), R.string.qingxianbangdingyinhangka,
-                                R.string.queding, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        openActivity(BankCardManageActivity.class);
-                                    }
-                                });
+                        if (promptDialog == null) {
+                            promptDialog = DialogUtils.showPromptDialog(getActivity(), "提示", "请绑定银行卡!", new DialogUtils.DialogUtilsClickListener() {
+                                @Override
+                                public void onClick() {
+                                    promptDialog.dismiss();
+                                    openActivity(BankCardManageActivity.class);
+                                }
+                            });
+                        } else {
+                            promptDialog.show();
+                        }
+
+//                        DialogUtils.showDialog(getActivity(), R.string.qingxianbangdingyinhangka,
+//                                R.string.queding, new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        openActivity(BankCardManageActivity.class);
+//                                    }
+//                                });
                     }
                 } else {
                     ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
@@ -549,6 +579,13 @@ public class MyFragment extends BaseFragment {
             }
         });
 
+    }
+
+    private void setImageSize(int  size){
+        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) flMessage.getLayoutParams();
+        params.width=size*ScreenSizeUtils.getDensity(getActivity());
+        params.height=size*ScreenSizeUtils.getDensity(getActivity());
+        flMessage.setLayoutParams(params);
     }
 
 }

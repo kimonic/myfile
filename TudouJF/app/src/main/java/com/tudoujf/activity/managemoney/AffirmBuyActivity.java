@@ -92,6 +92,8 @@ public class AffirmBuyActivity extends BaseActivity {
     EditText etTouZiJinE;
     @BindView(R.id.iv_act_affirmbuy_sel)
     ImageView ivSel;
+    @BindView(R.id.tv_act_affirmbuy_reward)
+    TextView tvReward;
 
     private String loan_id;
     private AffirmBuyBean bean;
@@ -316,11 +318,16 @@ public class AffirmBuyActivity extends BaseActivity {
                     //计算预期收益
                     String temp = decimalFormat.format((StringUtils.string2Float(bean.getApr()) /
                             100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod()));
+                    //尚未测试无奖励金额的
+                    tvReward.setText(decimalFormat.format(StringUtils.string2Float(editable.toString())
+                            * StringUtils.string2Float(bean.getAward_proportion().toString())/100));
+
+
                     tvEarings.setText(temp);
                     tvLiXi.setText(temp);
                     redId = "";
                     jiaXiQuanId = "";
-                    fanXianQuanId="";
+                    fanXianQuanId = "";
                     together_status_redbag = 1;
                     together_status_jiaxiquan = 1;
                     together_status_fanxianquan = 1;
@@ -331,6 +338,7 @@ public class AffirmBuyActivity extends BaseActivity {
                 } else {
                     tvEarings.setText(R.string.ling);
                     tvLiXi.setText(R.string.ling);
+                    tvReward.setText(R.string.ling);
                 }
             }
         });
@@ -465,14 +473,14 @@ public class AffirmBuyActivity extends BaseActivity {
         if (requestCode == 888 && data != null) {//红包
 
 
-            redId="";
-            acount="";
+            redId = "";
+            acount = "";
             together_status_redbag = 1;
 
             redId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
             String status = data.getStringExtra("together_status");
-            Log.e("TAG", "onActivityResult: -----"+status);
+            Log.e("TAG", "onActivityResult: -----" + status);
             if (!status.equals("")) {
                 together_status_redbag = StringUtils.string2Integer(status);
             }
@@ -484,8 +492,6 @@ public class AffirmBuyActivity extends BaseActivity {
             }
         }
         //---------------------------------红包-----------------------------------------------------
-
-
 
 
         //---------------------------------加息券---------------------------------------------------
@@ -507,8 +513,6 @@ public class AffirmBuyActivity extends BaseActivity {
         }
 
         //---------------------------------加息券---------------------------------------------------
-
-
 
 
         //---------------------------------返现券---------------------------------------------------

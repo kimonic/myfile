@@ -2,6 +2,7 @@ package com.tudoujf.activity.home;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -79,6 +80,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
     private int page = 1;
     private ExperienceListBean beanE;
+    private AlertDialog promptDialog1;
 
     @Override
     public int getLayoutResId() {
@@ -326,13 +328,24 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
                         touZi();//确认投资
                     } else {//未实名
-                        DialogUtils.showDialog(NewcomerExperienceBidActivity.this, R.string.xitongjiancedaoninweishiming, R.string.queding, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                openActivity(RealNameAuthenticationHuiFuActivity.class);//打开实名注册
-                            }
-                        });
+                        if (promptDialog1==null){
+                            promptDialog1=DialogUtils.showPromptDialog(NewcomerExperienceBidActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                                @Override
+                                public void onClick() {
+                                    promptDialog1.dismiss();
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+                        }else {
+                            promptDialog1.show();
+                        }
+//                        DialogUtils.showDialog(NewcomerExperienceBidActivity.this, R.string.xitongjiancedaoninweishiming, R.string.queding, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                                openActivity(RealNameAuthenticationHuiFuActivity.class);//打开实名注册
+//                            }
+//                        });
                     }
                 } else {
                     ToastUtils.showToast(NewcomerExperienceBidActivity.this, getResources().getString(R.string.shujujiazaichucuo));

@@ -511,6 +511,7 @@ public class GuessHappyActivity extends BaseActivity {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == MotionEvent.ACTION_UP) {
                     if (System.currentTimeMillis() - beforeTime < 2000) {
+
                         ((Activity) context).finish();
                     } else {
                         ToastUtils.showToast(context, msg);

@@ -444,10 +444,11 @@ public class ClaimsBidView extends View {
 //                if (listener != null && investNow) {
                 if (listener != null) {
                     listener.clickEvent();
+                    return true;
                 }
             }
         }
-        return true;
+        return super.onTouchEvent(event);
     }
 
     public interface ClickEventListener {

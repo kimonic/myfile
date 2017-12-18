@@ -522,13 +522,13 @@ public class MyProjectBidView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            float currentX = event.getX();
-            float currentY = event.getY();
-            if (rectF.contains(currentX, currentY)) {
+//            float currentX = event.getX();
+//            float currentY = event.getY();
+//            if (rectF.contains(currentX, currentY)) {
                 if (listener != null) {
                     listener.clickEvent();
                 }
-            }
+//            }
         }
         return true;
     }

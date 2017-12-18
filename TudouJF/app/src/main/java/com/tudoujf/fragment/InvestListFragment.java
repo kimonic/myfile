@@ -1,6 +1,7 @@
 package com.tudoujf.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -25,6 +27,7 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
@@ -32,6 +35,7 @@ import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.BidView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -277,6 +281,18 @@ public class InvestListFragment extends BaseFragment {
                 initDataFromInternet();
             }
         });
+
+        lvFragManageMoneyMatters.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                intent.putExtra("loan_id", listNew.get(position).getId());
+                intent.putExtra("hint", listNew.get(position).getStatus_name());
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -321,8 +337,8 @@ public class InvestListFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        Log.e("TAG", "finishRL: isRefreshing-----"+swipeRefreshLayout.isRefreshing());
-        Log.e("TAG", "finishRL:isLoading -----"+swipeRefreshLayout.isLoading());
+        Log.e("TAG", "finishRL: isRefreshing-----" + swipeRefreshLayout.isRefreshing());
+        Log.e("TAG", "finishRL:isLoading -----" + swipeRefreshLayout.isLoading());
 
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.finishRefresh();

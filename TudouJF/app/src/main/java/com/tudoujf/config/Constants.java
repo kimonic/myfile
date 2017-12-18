@@ -296,6 +296,11 @@ public class Constants {
      */
     public static final String EXPERIENCE_TENDERLIST = URL + "/phone/experience/tenderList";
 
+/**
+     * 体验金确认投资接口
+     */
+    public static final String INTEGRAL_SHOP = URL + "/phone/mall/index";
+
 
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------

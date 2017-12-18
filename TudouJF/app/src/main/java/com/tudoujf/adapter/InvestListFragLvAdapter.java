@@ -127,15 +127,6 @@ public class InvestListFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限
         viewHolder.bidView.invalidate();
 
-        viewHolder.bidView.setListener(new BidView.ClickEventListener() {
-            @Override
-            public void clickEvent() {
-                Intent intent = new Intent(context, ProductDetailsActivity.class);
-                intent.putExtra("loan_id",list.get(position).getId());
-                intent.putExtra("hint",list.get(position).getStatus_name());
-                context.startActivity(intent);
-            }
-        });
 
 
         return view;

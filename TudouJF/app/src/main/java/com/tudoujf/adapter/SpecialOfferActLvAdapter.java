@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.SpecialOfferActBean;
+import com.tudoujf.bean.databean.SpecialOfferBean;
+import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
 
@@ -27,10 +30,10 @@ import java.util.List;
 
 
 public class SpecialOfferActLvAdapter extends BaseAdapter {
-    private List<SpecialOfferActBean> list;
+    private List<SpecialOfferBean.ItemsBean> list;
     private Context context;
 
-    public SpecialOfferActLvAdapter(List<SpecialOfferActBean> list, Context context) {
+    public SpecialOfferActLvAdapter(List<SpecialOfferBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -68,9 +71,11 @@ public class SpecialOfferActLvAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getTime());
-        viewHolder.imageView.setImageResource(list.get(position).getResId());
+        viewHolder.textView1.setText(list.get(position).getName());
+        viewHolder.textView2.setText((StringUtils.getStrTime(list.get(position).getAddTime().toString())+"--"+
+                StringUtils.getStrTime(list.get(position).getEndTime().toString())));
+//        viewHolder.imageView.setImageResource(list.get(position).getImage());
+        ImageGlideUtils.loadImage(viewHolder.imageView,list.get(position).getImage());
 
 
 

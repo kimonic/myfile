@@ -3,6 +3,7 @@ package com.tudoujf.activity.common;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -136,6 +137,13 @@ public class WebActivity extends BaseActivity {
             return super.shouldOverrideUrlLoading(view, url);
         }
 
+    }
+
+    @Override
+    public void finish() {
+        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.removeAllViews();
+        super.finish();
     }
 
 

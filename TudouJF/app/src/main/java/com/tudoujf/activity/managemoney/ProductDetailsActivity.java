@@ -17,6 +17,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.activity.my.myaccount.BankCardManageActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -142,6 +143,7 @@ public class ProductDetailsActivity extends BaseActivity {
      * 验证请求只执行一次
      */
     private boolean request = true;
+    private AlertDialog promptDialog;
 
 
     @Override
@@ -487,14 +489,26 @@ public class ProductDetailsActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     } else {
-                        DialogUtils.showDialog(ProductDetailsActivity.this, R.string.weilenindezijinanquan,
-                                R.string.queding, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent=new Intent(ProductDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
-                                startActivity(intent);
-                            }
-                        });
+                        if (promptDialog==null){
+                            promptDialog=DialogUtils.showPromptDialog(ProductDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                                @Override
+                                public void onClick() {
+                                    promptDialog.dismiss();
+                                    openActivity(RealNameAuthenticationHuiFuActivity.class);
+                                }
+                            });
+                        }else {
+                            promptDialog.show();
+                        }
+//
+//                        DialogUtils.showDialog(ProductDetailsActivity.this, R.string.weilenindezijinanquan,
+//                                R.string.queding, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent intent=new Intent(ProductDetailsActivity.this, RealNameAuthenticationHuiFuActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        });
 //                        DialogUtils.showHuiFuDialog(ProductDetailsActivity.this);
                     }
                 } else {
