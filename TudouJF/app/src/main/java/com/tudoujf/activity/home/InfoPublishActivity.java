@@ -1,11 +1,14 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
@@ -61,30 +64,41 @@ public class InfoPublishActivity extends BaseActivity {
 
         switch (v.getId()) {
             case R.id.ll_act_infopublish_gsjj://公司简介
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_csr://创始人
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_gsdz://公司地址
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
 
             case R.id.ll_act_infopublish_jcaqd://九重安全盾
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_aqbz://安全保障
-                openActivity(SafetyControlActivity.class);
+//                openActivity(SafetyControlActivity.class);
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_tdsj://土豆视角
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
 
             case R.id.ll_act_infopublish_mtbd://媒体报道
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_tddsj://土豆大事记
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_yyms://运营模式
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
 
             case R.id.ll_act_infopublish_zzjg://组织架构
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
             case R.id.ll_act_infopublish_hzhb://合作伙伴
+                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
                 break;
         }
 
@@ -108,6 +122,13 @@ public class InfoPublishActivity extends BaseActivity {
                 closeActivity();
             }
         });
+    }
+
+    private void openNext(String url,int  title){
+        Intent intent=new Intent(this,WebActivity.class);
+        intent.putExtra("url",url);
+        intent.putExtra("title",getResources().getString(title));
+        startActivity(intent);
     }
 
     @Override

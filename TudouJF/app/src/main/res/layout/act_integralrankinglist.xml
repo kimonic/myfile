@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/global_background_color"
+    android:orientation="vertical">;
+    <com.tudoujf.ui.MTopBarView
+        android:id="@+id/mtb_act_integralrankinglist"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/act_register_tvbac1"
+        app:centerText="@string/act_integralshop_jifenpaihangbang"
+        app:leftImage="@drawable/xvector_back" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/integralbac1"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/paiming"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/color_black2"
+            android:layout_weight="2"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/yonghuming"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/color_black2"
+            android:layout_weight="3"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/zongjifen"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/color_black2"
+            android:layout_weight="3"
+            />
+
+
+    </LinearLayout>
+    <com.tudoujf.ui.MListView
+        android:id="@+id/lv_integralrankinglist"
+        android:background="@drawable/integralbac2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="2px"
+        android:divider="#e1ddd5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    
+
+
+</LinearLayout>

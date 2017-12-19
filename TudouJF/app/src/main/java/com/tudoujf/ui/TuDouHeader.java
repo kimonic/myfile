@@ -152,7 +152,7 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
         RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         rotate.setInterpolator(lin);
-        rotate.setDuration(600);//设置动画持续周期
+        rotate.setDuration(500);//设置动画持续周期
         rotate.setRepeatCount(Animation.INFINITE);//设置重复次数
         rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
 //        rotate.setStartOffset(10);//执行前的等待时间

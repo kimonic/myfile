@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/tv_lvitem_integralrankinglist1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/paiming"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/color_black2"
+                android:visibility="gone"
+                />
+            <ImageView
+                android:id="@+id/iv_lvitem_integralrankinglist"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </LinearLayout>
+        
+        <TextView
+            android:id="@+id/tv_lvitem_integralrankinglist2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/yonghuming"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/color_black2"
+            android:layout_weight="3"
+            />
+        <TextView
+            android:id="@+id/tv_lvitem_integralrankinglist3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/zongjifen"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="@color/color_orange"
+            android:layout_weight="3"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

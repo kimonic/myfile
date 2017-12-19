@@ -635,6 +635,11 @@
     <string name="tishi">提示</string>
     <string name="qingbangdingyinhangka">请绑定银行卡!</string>
     <string name="jifen">积分</string>
+    <string name="huoqujifenshangchengxinxishibai">获取积分商城信息失败!</string>
+    <string name="paiming">排名</string>
+    <string name="yonghuming">用户名</string>
+    <string name="huoqujifenpaihangbangshujushibai">获取积分排行榜数据失败!</string>
+    <string name="huoquremenshangpinxinxishibai">获取热门商品信息失败!</string>
 
 
 </resources>

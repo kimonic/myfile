@@ -22,7 +22,7 @@
             android:gravity="center_vertical"
             android:text="商户充值成功"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/lvitem_transactiondetails_tv2"

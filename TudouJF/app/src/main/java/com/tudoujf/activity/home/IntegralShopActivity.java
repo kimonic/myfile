@@ -1,26 +1,28 @@
 package com.tudoujf.activity.home;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
+import com.tudoujf.activity.discover.ClassificationOfGoodsActivity;
+import com.tudoujf.activity.discover.HotExchangeActivity;
+import com.tudoujf.activity.discover.IntegralRankingListActivity;
 import com.tudoujf.adapter.IntegralShopRvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.IntegralShopBean;
-import com.tudoujf.bean.databean.CreditorRightsDetailsBean;
+import com.tudoujf.bean.databean.IntegralShopMoreBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -58,12 +60,26 @@ public class IntegralShopActivity extends BaseActivity {
     RecyclerView rvActIntegralShop;
     @BindView(R.id.srl_act_integralshop)
     SmartRefreshLayout srl;
+    @BindView(R.id.tv_act_integralshop_myintegral)
+    TextView myIntegral;
+
+    @BindView(R.id.ll_act_integralshop_classification_of_goods)
+    LinearLayout classificationOfGoods;
+    @BindView(R.id.ll_act_integralshop_integral_screen)
+    LinearLayout integralScreen;
+    @BindView(R.id.ll_act_integralshop_hot)
+    LinearLayout hot;
+    @BindView(R.id.ll_act_integralshop_ranking_list)
+    LinearLayout rankingList;
+
     private IntegralShopBean bean;
+    private IntegralShopMoreBean beanMore;
 
 
     private IntegralShopRvAdapter adapter;
 
     private List<IntegralShopBean.GoodsBean.ItemsBean> list;
+    private int page = 1;
 
     @Override
     public int getLayoutResId() {
@@ -72,6 +88,21 @@ public class IntegralShopActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_act_integralshop_classification_of_goods://商品分类
+                break;
+            case R.id.ll_act_integralshop_integral_screen://积分筛选
+                openActivity(ClassificationOfGoodsActivity.class);
+                break;
+            case R.id.ll_act_integralshop_hot://热门兑换
+                openActivity(HotExchangeActivity.class);
+                break;
+            case R.id.ll_act_integralshop_ranking_list://排行榜
+                openActivity(IntegralRankingListActivity.class);
+                break;
+//                 case R.id.:break;
+//                 case R.id.:break;
+        }
 
     }
 
@@ -87,6 +118,7 @@ public class IntegralShopActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActIntegralShop.setLayoutParams(params);
 
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
         srl.setRefreshHeader(new TuDouHeader(this));
 
 
@@ -114,9 +146,30 @@ public class IntegralShopActivity extends BaseActivity {
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                page = 1;
+                list.clear();
                 initDataFromInternet();
             }
         });
+
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (page < bean.getGoods().getTotal_pages()) {
+                    page++;
+                    loadMoreGoods();
+                } else {
+                    ToastUtils.showToast(IntegralShopActivity.this, R.string.meiyougengduola);
+                    srl.finishLoadmore();
+                }
+
+            }
+        });
+
+        classificationOfGoods.setOnClickListener(this);
+        integralScreen.setOnClickListener(this);
+        hot.setOnClickListener(this);
+        rankingList.setOnClickListener(this);
 
 
     }
@@ -151,7 +204,47 @@ public class IntegralShopActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         finishRL();
-                        ToastUtils.showToast(IntegralShopActivity.this, R.string.huoquzhaiquanxiangqignshujushibai);
+                        ToastUtils.showToast(IntegralShopActivity.this, R.string.huoqujifenshangchengxinxishibai);
+
+                    }
+                }
+        );
+    }
+
+    private void loadMoreGoods() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("type_id", "");
+        map.put("point_id", "");
+        map.put("page", "" + page);
+        Log.e("TAG", "loadMoreGoods: -----" + page);
+
+
+        HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP_MORE, map, getLocalClassName(), new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        finishRL();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess: -----------请求积分商城加载更多商品返回的json数据----------------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralShopMoreBean>() {
+                        }.getType(), IntegralShopMoreBean.class, IntegralShopActivity.this);
+                        if (bean1 != null) {
+                            beanMore = (IntegralShopMoreBean) bean1;
+                            LoadInternetDataToUi();
+
+                        } else {
+                            ToastUtils.showToast(IntegralShopActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        finishRL();
+                        ToastUtils.showToast(IntegralShopActivity.this, R.string.huoqujifenshangchengxinxishibai);
 
                     }
                 }
@@ -160,8 +253,17 @@ public class IntegralShopActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
-        if (bean != null && bean.getGoods() != null && bean.getGoods().getItems() != null && bean.getGoods().getItems().size() > 0) {
+        if (page == 1 && bean != null && bean.getGoods() != null && bean.getGoods().getItems() != null && bean.getGoods().getItems().size() > 0) {
+            myIntegral.setText(bean.getMyPoint());
             list.addAll(bean.getGoods().getItems());
+            if (adapter == null) {
+                adapter = new IntegralShopRvAdapter(this, list);
+                rvActIntegralShop.setAdapter(adapter);
+            } else {
+                adapter.notifyDataSetChanged();
+            }
+        } else if (beanMore != null && page > 1 && beanMore.getItems() != null) {
+            list.addAll(beanMore.getItems());
             if (adapter == null) {
                 adapter = new IntegralShopRvAdapter(this, list);
                 rvActIntegralShop.setAdapter(adapter);
@@ -185,9 +287,10 @@ public class IntegralShopActivity extends BaseActivity {
     }
 
     private void finishRL() {
+
         if (srl.isLoading()) {
             srl.finishLoadmore();
-        } else if (srl.isRefreshing()){
+        } else if (srl.isRefreshing()) {
             srl.finishRefresh();
         }
 

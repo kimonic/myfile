@@ -291,15 +291,59 @@ public class Constants {
      */
     public static final String EXPERIENCE_INVEST = URL + "/phone/tender/experienceInvest";
 
-/**
+    /**
      * 体验金确认投资接口
      */
     public static final String EXPERIENCE_TENDERLIST = URL + "/phone/experience/tenderList";
 
-/**
-     * 体验金确认投资接口
+    /**
+     * 积分商城首页接口
      */
     public static final String INTEGRAL_SHOP = URL + "/phone/mall/index";
+
+    /**
+     * 积分商城加载更多商品接口
+     */
+    public static final String INTEGRAL_SHOP_MORE= URL + "/phone/mall/goodList";
+
+  /**
+     * 积分商城积分排行榜借口
+     */
+    public static final String INTEGRAL_RANKING_LIST= URL + "/phone/mall/creditRanking";
+/**
+     * 积分商城积分排行榜借口
+     */
+    public static final String HOT_GOODS= URL + "/phone/mall/hotGoods";
+
+
+    /**公司简介*/
+    public static final String  GONG_SI_JIAN_JIE=URL +"/wap/content/companyProfile?style=app";
+    /**机构信息*/
+    public static final String  JI_GOU_XIN_XI=URL +"/wap/content/orgInfo?style=app";
+    /**主要人员*/
+    public static final String  ZHU_YAO_REN_YUAN=URL +"/wap/content/founder?style=app";
+    /**荣誉资质*/
+    public static final String  RONG_YU_ZI_ZHI=URL +"/wap/content/honor?style=app";
+    /**安全措施*/
+    public static final String  AN_QUAN_CUO_SHI=URL +"/wap/content/sfety?style=app";
+    /** 土豆大事记*/
+    public static final String  TU_DOU_DA_SHI_JI=URL +"/wap/content/event?style=app";
+    /**运营模式*/
+    public static final String  YUN_YIGN_MO_SHI=URL +"/wap/content/operationModel?style=app";
+    /**组织架构*/
+    public static final String  ZU_ZHI_JIA_GOU=URL +"/wap/content/org?style=app";
+    /**合作伙伴*/
+    public static final String  HE_ZUO_HUO_BAN=URL +"/wap/content/partner?style=app";
+    /**土豆视角*/
+    public static final String  TU_DOU_SHI_JIAO=URL +"/wap/content/article/tdsj?style=app";
+    /**媒体报道*/
+    public static final String  MEI_TI_BAO_DAO=URL +"/wap/content/article/mtbd?style=app";
+    /**土豆公益*/
+    public static final String  TU_DOU_GONG_YI=URL +"/wap/content/article/tdgy?style=app";
+    /**平台数据*/
+    public static final String  PING_TAI_SHU_JU=URL +"/wap/content/platformData?style=app";
+    /**联系我们*/
+    public static final String  LIAN_XI_WO_MEN=URL +"/wap/content/contactUs?style=app";
 
 
 //    ------------------------------------------------------------------------------------------------

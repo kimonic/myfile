@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/lvitem_discover_iv"
             android:layout_width="match_parent"
-            android:layout_height="106dp"
+            android:layout_height="186dp"
             android:contentDescription="@null"
             android:scaleType="fitXY"
 

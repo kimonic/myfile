@@ -381,8 +381,10 @@
                 android:textSize="12sp" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:contentDescription="@null"
                 android:src="@drawable/arrow2_right" />
         </LinearLayout>
@@ -435,12 +437,14 @@
                 android:text="@string/dianjixuanzekeyongjiaxiquan"
                 android:textColor="@color/act_productdetails_tvcolor"
                 android:textSize="12sp" />
-
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:contentDescription="@null"
                 android:src="@drawable/arrow2_right" />
+
         </LinearLayout>
     </LinearLayout>
     <View
@@ -493,8 +497,10 @@
                 android:textSize="12sp" />
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:contentDescription="@null"
                 android:src="@drawable/arrow2_right" />
         </LinearLayout>

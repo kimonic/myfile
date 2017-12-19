@@ -22,7 +22,6 @@
     <!--////////////////////////////友盟分享权限////////////////////////////////////-->
 
 
-
     <uses-feature
         android:name="android.hardware.camera"
         tools:ignore="UnsupportedChromeOsHardware" />
@@ -81,7 +80,8 @@
             android:name=".activity.home.HomeActivity"
             android:launchMode="singleTask" />
         <!-- 5.登录页activity -->
-        <activity android:name=".activity.other.LoginActivity"
+        <activity
+            android:name=".activity.other.LoginActivity"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <!-- 6.注册页activity -->
         <activity android:name=".activity.other.RegisterActivity" />
@@ -227,7 +227,12 @@
         <activity android:name=".activity.my.myaccount.VIPHuiFuBuyActivity" />
         <!--74.VIP申请记录activity-->
         <activity android:name=".activity.my.myaccount.VIPRecordActivity" />
-
+        <!--75.积分商城-&#45;&#45;商品分类activity-->
+        <activity android:name=".activity.discover.ClassificationOfGoodsActivity" />
+        <!--76.积分排行榜activity-->
+        <activity android:name=".activity.discover.IntegralRankingListActivity" />
+        <!--热门兑换activity-->
+        <activity android:name=".activity.discover.HotExchangeActivity" />
         <service
             android:name=".service.MyService"
             android:enabled="true" />
@@ -249,7 +254,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -314,6 +319,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".wxapi.WXEntryActivity" />
+
         <!--//////////////////QQ完整版要的activity///////////////////////////////////////////////////-->
 
         <meta-data

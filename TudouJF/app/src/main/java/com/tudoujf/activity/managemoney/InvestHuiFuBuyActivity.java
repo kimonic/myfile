@@ -16,6 +16,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
@@ -178,7 +179,8 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
 //            } else
             if (url.contains(Constants.STATUS_CLOSE)) {
                 UserConfig.getInstance().setCreditorFlush(true);
-                openActivity(HomeActivity.class);
+//                openActivity(HomeActivity.class);
+                openActivity(MyProjectActivity.class);
                 finish();
             }
 
