@@ -20,105 +20,79 @@ import java.util.List;
 public class MyInvestProjectBean implements BaseBean {
 
 
-    /**
-     * page : 1
-     * epage : 10
-     * total_items : 68
-     * total_pages : 7
-     * items : [{"progress":6,"award_amount":0,"auto_status":-1,"recover_count":0,"transfer_status":-1,"cancel_count":0,"recover_interest":0,"success_time":null,"recover_interest_yes":0,"deposit_certificate":-1,"experience_return":0,"recover_prepayment_fee":0,"recover_count_yes":0,"loan_member_name":"ljq001","id":4015,"amount":1000,"status_name":"投标中","ind":"17111323350106811267","invest_source":0,"recover_status":-1,"repay_type":4,"transfer_member_name":"","serialno":20171113233513,"tenderId":4015,"recover_principal":0,"amount_surplus":94000,"status":-2,"transfer_member_id":0,"trust_status":-2,"loan_name":"test房产抵押借款","expire_time":null,"member_id":12267,"add_ip":2130706433,"recover_overdue_fee":0,"loan_member_id":12231,"award_interest":0,"recover_amount":0,"recover_amount_yes":0,"add_time":1510587313,"member_name":"18011111111","loanId":305,"recover_principal_yes":0,"loan_id":305}]
-     */
+    private List<UnderwayBean> underway;
+    private List<UnderwayBean> repayment;
+    private List<UnderwayBean> already;
 
-    private int page;
-    private int epage;
-    private int total_items;
-    private int total_pages;
-    private List<ItemsBean> items;
-
-    public int getPage() {
-        return page;
+    public List<UnderwayBean> getUnderway() {
+        return underway;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setUnderway(List<UnderwayBean> underway) {
+        this.underway = underway;
     }
 
-    public int getEpage() {
-        return epage;
+    public List<UnderwayBean> getRepayment() {
+        return repayment;
     }
 
-    public void setEpage(int epage) {
-        this.epage = epage;
+    public void setRepayment(List<UnderwayBean> repayment) {
+        this.repayment = repayment;
     }
 
-    public int getTotal_items() {
-        return total_items;
+    public List<UnderwayBean> getAlready() {
+        return already;
     }
 
-    public void setTotal_items(int total_items) {
-        this.total_items = total_items;
+    public void setAlready(List<UnderwayBean> already) {
+        this.already = already;
     }
 
-    public int getTotal_pages() {
-        return total_pages;
-    }
-
-    public void setTotal_pages(int total_pages) {
-        this.total_pages = total_pages;
-    }
-
-    public List<ItemsBean> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemsBean> items) {
-        this.items = items;
-    }
-
-    public static class ItemsBean {
+    public static class UnderwayBean {
         /**
-         * progress : 6.0
-         * award_amount : 0.0
+         * progress : 16.4
+         * award_amount : 0
          * auto_status : -1
          * recover_count : 0
          * transfer_status : -1
          * cancel_count : 0
-         * recover_interest : 0.0
+         * recover_interest : 0
          * success_time : null
          * recover_interest_yes : 0
          * deposit_certificate : -1
          * experience_return : 0
-         * recover_prepayment_fee : 0.0
+         * recover_prepayment_fee : 0
          * recover_count_yes : 0
          * loan_member_name : ljq001
-         * id : 4015
-         * amount : 1000.0
+         * id : 4064
+         * amount : 100
          * status_name : 投标中
-         * ind : 17111323350106811267
+         * ind : 17121913581793924467
          * invest_source : 0
          * recover_status : -1
-         * repay_type : 4
+         * repay_type : 3
          * transfer_member_name : 
-         * serialno : 20171113233513
-         * tenderId : 4015
-         * recover_principal : 0.0
-         * amount_surplus : 94000.0
+         * serialno : 20171219135828
+         * tenderId : 4064
+         * recover_principal : 0
+         * amount_surplus : 83600
          * status : -2
          * transfer_member_id : 0
          * trust_status : -2
-         * loan_name : test房产抵押借款
+         * loan_name : 房产抵押借款测试005-奖励
          * expire_time : null
          * member_id : 12267
          * add_ip : 2130706433
-         * recover_overdue_fee : 0.0
+         * recover_overdue_fee : 0
          * loan_member_id : 12231
-         * award_interest : 0.0
+         * award_interest : 0
          * recover_amount : 0
-         * recover_amount_yes : 0.0
-         * add_time : 1510587313
+         * recover_amount_yes : 0
+         * add_time : 1513663108
          * member_name : 18011111111
-         * loanId : 305
-         * recover_principal_yes : 0.0
-         * loan_id : 305
+         * loanId : 315
+         * recover_principal_yes : 0
+         * loan_id : 315
          */
 
         private String progress;
@@ -164,15 +138,6 @@ public class MyInvestProjectBean implements BaseBean {
         private String loanId;
         private String recover_principal_yes;
         private String loan_id;
-        private String flag="";
-
-        public String getFlag() {
-            return flag;
-        }
-
-        public void setFlag(String flag) {
-            this.flag = flag;
-        }
 
         public String getProgress() {
             return progress;
@@ -518,4 +483,6 @@ public class MyInvestProjectBean implements BaseBean {
             this.loan_id = loan_id;
         }
     }
+
+
 }

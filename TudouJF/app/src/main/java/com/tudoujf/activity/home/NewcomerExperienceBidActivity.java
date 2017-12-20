@@ -370,6 +370,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", loginToken);
+        map.put("loan_id", loan_id);
+
         HttpMethods.getInstance().POST(this, Constants.EXPERIENCE_INVEST, map, getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -381,24 +383,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                 } else {
                     ToastUtils.showToast(NewcomerExperienceBidActivity.this, R.string.tiyanjintouzishiabi);
                 }
-//                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
-//                }.getType(), IdentityCheckBean.class, NewcomerExperienceBidActivity.this);
-//                if (bean1 != null) {
-//                    identityCheckBean = (IdentityCheckBean) bean1;
-//                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-//                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
-//                    } else {//未实名
-//                        DialogUtils.showDialog(NewcomerExperienceBidActivity.this, R.string.xitongjiancedaoninweishiming, R.string.queding, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                                openActivity(RealNameAuthenticationHuiFuActivity.class);//打开实名注册
-//                            }
-//                        });
-//                    }
-//                } else {
-//                    ToastUtils.showToast(NewcomerExperienceBidActivity.this, getResources().getString(R.string.shujujiazaichucuo));
-//                }
             }
 
             @Override

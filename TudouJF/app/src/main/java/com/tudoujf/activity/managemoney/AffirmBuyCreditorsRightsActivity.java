@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -73,12 +74,14 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     TextView tvRecharge;//充值
     @BindView(R.id.tv_act_affirm_agree)
     TextView tvAgree;//同意协议
+    @BindView(R.id.tv_zhaiquanxieyi)
+    TextView tvZhaiQuanXieYi;//同意协议
 
     private String transfer_id = "";
     private AlertDialog dialog;
     private AffirmBuyCreditorRightrsBean bean;
     private int count = 0;
-    private boolean  agree=false;
+    private boolean agree = false;
 
     @Override
     public int getLayoutResId() {
@@ -90,7 +93,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.tv_act_affirmbuycreditors_affirmbuyright://确认购买按钮
 
-                if (agree){
+                if (agree) {
                     if (bean != null) {
                         if ((StringUtils.string2Float(bean.getBalance_amount()) >= StringUtils.string2Float(bean.getAmount()))) {
 //                        showPasswordDialog();
@@ -109,7 +112,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                     } else {
                         ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.shujujiazaichucuoqtchcxjr);
                     }
-                }else {
+                } else {
                     ToastUtils.showToast(AffirmBuyCreditorsRightsActivity.this, R.string.qingxiantongyipingtaijujianfuwuxieyi);
                 }
 
@@ -122,11 +125,17 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                 count++;
                 if (count % 2 == 0) {
                     tvAgree.setBackgroundResource(R.drawable.xvector_checkbox_unsel);
-                    agree=false;
+                    agree = false;
                 } else {
                     tvAgree.setBackgroundResource(R.drawable.xvector_checkbox_sel);
-                    agree=true;
+                    agree = true;
                 }
+                break;
+            case R.id.tv_zhaiquanxieyi:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
+                intent.putExtra("title","土豆金服服务协议");
+                startActivity(intent);
                 break;
         }
     }
@@ -201,6 +210,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
         tvAffirmBuyCreditorsRight.setOnClickListener(this);
         tvRecharge.setOnClickListener(this);
         tvAgree.setOnClickListener(this);
+        tvZhaiQuanXieYi.setOnClickListener(this);
 
 
     }

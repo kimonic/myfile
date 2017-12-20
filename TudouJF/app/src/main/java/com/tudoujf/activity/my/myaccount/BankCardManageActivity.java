@@ -3,6 +3,7 @@ package com.tudoujf.activity.my.myaccount;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -53,8 +54,8 @@ public class BankCardManageActivity extends BaseActivity {
     MTopBarView mtbActBankCardManage;
     @BindView(R.id.lv_act_bankcardmanage_info)
     ListView lvInfo;
-    @BindView(R.id.ll_act_bankcardmanage_add)
-    LinearLayout llAdd;
+//    @BindView(R.id.ll_act_bankcardmanage_add)
+//    LinearLayout llAdd;
 
 
     private BankCardManageBean  bean;
@@ -64,6 +65,7 @@ public class BankCardManageActivity extends BaseActivity {
 
     private List<BankCardManageBean.BankInfoBean>  list;
     private IdentityCheckBean identityCheckBean;
+    private View footerView;
 
 
     @Override
@@ -108,6 +110,9 @@ public class BankCardManageActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActBankCardManage.setLayoutParams(params);
 
+        footerView= LayoutInflater.from(this).inflate(R.layout.view_addbank,null);
+        lvInfo.addFooterView(footerView);
+
 
 
 
@@ -122,7 +127,14 @@ public class BankCardManageActivity extends BaseActivity {
             }
         });
 
-        llAdd.setOnClickListener(this);
+//        llAdd.setOnClickListener(this);
+        footerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //需要先验证是否已实名
+                checkIdentity();
+            }
+        });
     }
 
     @Override
@@ -161,7 +173,7 @@ public class BankCardManageActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean!=null){
-            if (bean.getBank_info()!=null&&bean.getBank_info().size()>0){
+            if (bean.getBank_info()!=null){
                 list.addAll(bean.getBank_info());
                 BankCardManageActLvAdapter adapter=new BankCardManageActLvAdapter(list,this);
                 lvInfo.setAdapter(adapter);

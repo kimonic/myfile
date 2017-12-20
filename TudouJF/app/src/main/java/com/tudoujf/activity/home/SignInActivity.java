@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
@@ -77,6 +79,10 @@ public class SignInActivity extends BaseActivity {
                 openActivity(IntegralRecodeActivity.class, bundle);
                 break;
             case R.id.ll_act_signin_shuoming:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", Constants.JI_FEN_SHUO_MING);
+                intent.putExtra("title", getResources().getString(R.string.act_signin_jifenshuoming));
+                startActivity(intent);
                 break;
         }
 

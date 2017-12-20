@@ -32,9 +32,9 @@ import java.util.List;
 
 public class MyProjectTotalFragLvAdapter extends BaseAdapter {
     private Context context;
-    private List<MyInvestProjectBean.ItemsBean> list;
+    private List<MyInvestProjectBean.UnderwayBean> list;
 
-    public MyProjectTotalFragLvAdapter(Context context, List<MyInvestProjectBean.ItemsBean> list) {
+    public MyProjectTotalFragLvAdapter(Context context, List<MyInvestProjectBean.UnderwayBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -82,7 +82,11 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setExplain2("预期收益(元)");
         viewHolder.bidView.setExplain3("回款时间");
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress())/100);//投资进度
-        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
+        if (list.get(position).getAmount_surplus()==null){
+            viewHolder.bidView.setShengYuKeTou("此处获取值为null");
+        }else {
+            viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
+        }
         viewHolder.bidView.setStatus_name(list.get(position).getStatus_name());
 
 //         final boolean finalSkip = skip;
@@ -95,7 +99,7 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
 //                    context.startActivity(intent);
 //                }else {
                     Intent intent=new Intent(context, MyInvestDetailsActivity.class);
-                    intent.putExtra("id",list.get(mPosition).getId());
+                    intent.putExtra("id",list.get(mPosition).getLoan_id());
                     context.startActivity(intent);
 //                }
 

@@ -42,8 +42,8 @@ public class MyProjectActivity extends BaseActivity {
     FrameLayout mtbActMyproject;
     @BindView(R.id.vp_act_myproject)
     ViewPager vpActMyproject;
-    @BindView(R.id.utv_act_myproject_total)
-    UnderlineTextView utvTotal;
+//    @BindView(R.id.utv_act_myproject_total)
+//    UnderlineTextView utvTotal;
     @BindView(R.id.utv_act_myproject_touzixiangmu)
     UnderlineTextView utvTouZiXiangMu;
     @BindView(R.id.utv_act_myproject_zhaiquanxiangmu)
@@ -63,17 +63,17 @@ public class MyProjectActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.utv_act_myproject_total:
+//            case R.id.utv_act_myproject_total:
+//                vpActMyproject.setCurrentItem(0);
+//                setButStyle(0);
+//                break;
+            case R.id.utv_act_myproject_touzixiangmu:
                 vpActMyproject.setCurrentItem(0);
                 setButStyle(0);
                 break;
-            case R.id.utv_act_myproject_touzixiangmu:
+            case R.id.utv_act_myproject_zhaiquanxiangmu:
                 vpActMyproject.setCurrentItem(1);
                 setButStyle(1);
-                break;
-            case R.id.utv_act_myproject_zhaiquanxiangmu:
-                vpActMyproject.setCurrentItem(2);
-                setButStyle(2);
                 break;
             case R.id.tv_act_myproject_bac:
                 closeActivity();
@@ -87,7 +87,7 @@ public class MyProjectActivity extends BaseActivity {
                             refreshFragment(startTime, endTime);
 
                             // TODO: 2017/9/4  请求网络筛选展示数据
-                            ToastUtils.showToast(MyProjectActivity.this, startTime + "-----------" + endTime);
+//                            ToastUtils.showToast(MyProjectActivity.this, startTime + "-----------" + endTime);
                         }
                     });
                 }
@@ -99,20 +99,20 @@ public class MyProjectActivity extends BaseActivity {
 
     private void refreshFragment(String startTime, String endTime) {
         switch (vpActMyproject.getCurrentItem()) {
+//            case 0:
+//                ((MyProjectTotalFragment) listFrag.get(0)).setStart_time(startTime);
+//                ((MyProjectTotalFragment) listFrag.get(0)).setEnd_time(endTime);
+//                ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
+//                break;
             case 0:
                 ((MyProjectTotalFragment) listFrag.get(0)).setStart_time(startTime);
                 ((MyProjectTotalFragment) listFrag.get(0)).setEnd_time(endTime);
                 ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
                 break;
             case 1:
-                ((MyProjectTotalFragment) listFrag.get(1)).setStart_time(startTime);
-                ((MyProjectTotalFragment) listFrag.get(1)).setEnd_time(endTime);
-                ((MyProjectTotalFragment) listFrag.get(1)).initDataFromInternet();
-                break;
-            case 2:
-                ((MyProjectCreditorFragment) listFrag.get(2)).setStart_time(startTime);
-                ((MyProjectCreditorFragment) listFrag.get(2)).setEnd_time(endTime);
-                ((MyProjectCreditorFragment) listFrag.get(2)).initDataFromInternet();
+                ((MyProjectCreditorFragment) listFrag.get(1)).setStart_time(startTime);
+                ((MyProjectCreditorFragment) listFrag.get(1)).setEnd_time(endTime);
+                ((MyProjectCreditorFragment) listFrag.get(1)).initDataFromInternet();
                 break;
         }
     }
@@ -120,7 +120,7 @@ public class MyProjectActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         listFrag = new ArrayList<>();
-        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
+//        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
 
 
         MyProjectTotalFragment fragment2 = new MyProjectTotalFragment();
@@ -129,7 +129,7 @@ public class MyProjectActivity extends BaseActivity {
         MyProjectCreditorFragment fragment3 = new MyProjectCreditorFragment();
 
 
-        listFrag.add(fragment1);
+//        listFrag.add(fragment1);
         listFrag.add(fragment2);
         listFrag.add(fragment3);
 
@@ -139,13 +139,13 @@ public class MyProjectActivity extends BaseActivity {
     @Override
     public void initView() {
         list = new ArrayList<>();
-        list.add(utvTotal);
+//        list.add(new UnderlineTextView(this));
         list.add(utvTouZiXiangMu);
         list.add(utvZhaiQuanXiangMu);
 
         HomeFragVPAdapter adapter = new HomeFragVPAdapter(getSupportFragmentManager(), listFrag);
         vpActMyproject.setAdapter(adapter);
-        vpActMyproject.setOffscreenPageLimit(3);
+        vpActMyproject.setOffscreenPageLimit(2);
 
 
 //        /**设置沉浸式状态栏*/
@@ -156,7 +156,7 @@ public class MyProjectActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        utvTotal.setOnClickListener(this);
+//        utvTotal.setOnClickListener(this);
         utvTouZiXiangMu.setOnClickListener(this);
         utvZhaiQuanXiangMu.setOnClickListener(this);
         tvBac.setOnClickListener(this);

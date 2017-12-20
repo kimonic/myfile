@@ -37,6 +37,7 @@ import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -89,10 +90,15 @@ public class IntegralShopActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_act_integralshop_classification_of_goods://商品分类
+            case R.id.ll_act_integralshop_classification_of_goods://分类筛选
+                Map<String, String> map = new TreeMap<>();
+                map.put("type","fenlei");
+                openActivityParams(ClassificationOfGoodsActivity.class,map);
                 break;
             case R.id.ll_act_integralshop_integral_screen://积分筛选
-                openActivity(ClassificationOfGoodsActivity.class);
+                Map<String, String> map1 = new TreeMap<>();
+                map1.put("type","jifen");
+                openActivityParams(ClassificationOfGoodsActivity.class,map1);
                 break;
             case R.id.ll_act_integralshop_hot://热门兑换
                 openActivity(HotExchangeActivity.class);

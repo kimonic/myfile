@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -65,9 +66,9 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.tv_act_login_register)
     TextView tvRegister;
     @BindView(R.id.iv_act_login_clear)
-    ImageView ivClear;
+    LinearLayout ivClear;
     @BindView(R.id.iv_act_login_clear1)
-    ImageView ivClear1;
+    LinearLayout ivClear1;
     @BindView(R.id.iv_act_login_openclose)
     ImageView ivOpenclose;
     @BindView(R.id.frame_login)
@@ -89,6 +90,9 @@ public class LoginActivity extends BaseActivity {
      */
     private LoginBean bean;
     private int type = 0;
+
+
+    private boolean  flag=true;
 
 
     @Override
@@ -142,15 +146,20 @@ public class LoginActivity extends BaseActivity {
         screenUtil.observeInputlayout(temp, new ScreenUtil.OnInputActionListener() {
             @Override
             public void onOpen(int inputHeight) {
-                int[]   xy=new int[2];
-                tvLogin.getLocationOnScreen(xy);
-                scrollView.smoothScrollTo(0,inputHeight-(ScreenSizeUtils.getScreenHeight(LoginActivity.this)-xy[1])
-                        +40*ScreenSizeUtils.getDensity(LoginActivity.this)+20);
+                if (flag){
+                    int[]   xy=new int[2];
+                    tvLogin.getLocationOnScreen(xy);
+                    scrollView.smoothScrollTo(0,inputHeight-(ScreenSizeUtils.getScreenHeight(LoginActivity.this)-xy[1])
+                            +40*ScreenSizeUtils.getDensity(LoginActivity.this)+20);
+                    flag=false;
+                }
+
             }
 
             @Override
             public void onClose() {
                 scrollView.smoothScrollTo(0,0);
+                flag=true;
 
             }
         });

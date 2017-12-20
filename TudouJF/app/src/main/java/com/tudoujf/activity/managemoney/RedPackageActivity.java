@@ -296,7 +296,8 @@ public class RedPackageActivity extends BaseActivity {
                         together_status = listFanXianQuan.get(position).getTogether_status();
                     }
                     tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
-                    tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                    tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
+//                    tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                 } else {
                     redId = "";
                     acount = "";
@@ -308,7 +309,8 @@ public class RedPackageActivity extends BaseActivity {
                     } else if (actType == 3) {
                         tvAffirmUse.setText(getResources().getString(R.string.qingxuanzeyaoshiyongdefanxianquan));
                     }//----------------------------------------------------------------------------------------------------------------------------------
-                    tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_munsel);
+                    tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+//                    tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_munsel);
                 }
             }
         });
@@ -390,7 +392,8 @@ public class RedPackageActivity extends BaseActivity {
                             listRed.get(i).setBackground(2);
                             beforePosition=i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
-                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
+//                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             count++;
                         }
                     }
@@ -426,7 +429,8 @@ public class RedPackageActivity extends BaseActivity {
                             listRed.get(i).setBackground(2);
                             beforePosition=i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
-                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+//                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
                             count++;
                         }
                     }
@@ -460,7 +464,8 @@ public class RedPackageActivity extends BaseActivity {
                             listRed.get(i).setBackground(2);
                             beforePosition=i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
-                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+//                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
+                            tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
                             count++;
                         }
                     }

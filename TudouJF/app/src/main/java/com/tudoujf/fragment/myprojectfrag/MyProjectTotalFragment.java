@@ -26,6 +26,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.nio.channels.Channels;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -46,19 +47,26 @@ import butterknife.BindView;
 
 public class MyProjectTotalFragment extends BaseFragment {
     @BindView(R.id.lv_frag_myprojecttotal)
-    ListView lvTotal;
-    @BindView(R.id.srl_frag_myprojecttotal)
-    SmartRefreshLayout srlTotal;
+    ListView lvUnderway;
+    @BindView(R.id.lv_frag_myprojecttotal_huikuanzhong)
+    ListView lvRepayment;
+    @BindView(R.id.lv_frag_myprojecttotal_yijieqing)
+    ListView lvAlready;
+//    @BindView(R.id.srl_frag_myprojecttotal)
+//    SmartRefreshLayout srlTotal;
 
     private List<MyProjectTotalFragBean> list;
     private int page = 1;
     private MyInvestProjectBean bean;
-    private List<MyInvestProjectBean.ItemsBean> listBean;
+    private List<MyInvestProjectBean.UnderwayBean> underway;
+    private List<MyInvestProjectBean.UnderwayBean> repayment;
+    private List<MyInvestProjectBean.UnderwayBean> already;
     private MyProjectTotalFragLvAdapter adapter;
     private String start_time = "", end_time = "";
-    private boolean flag = false;
-    private int beforePage;
-    private int beforeTotalPage;
+    private MyProjectTotalFragLvAdapter alreadyAdapter, underwayAdapter, repaymentAdapter;
+//    private boolean flag = false;
+//    private int beforePage;
+//    private int beforeTotalPage;
 
     public void setStart_time(String start_time) {
         initSearch();
@@ -70,13 +78,16 @@ public class MyProjectTotalFragment extends BaseFragment {
         this.end_time = end_time;
     }
 
-    private void initSearch(){
-        if (bean!=null){
-            beforePage = page;
-            beforeTotalPage = bean.getTotal_pages();
-        }
-        page = 1;
-        flag = true;
+    private void initSearch() {
+        underway.clear();
+        repayment.clear();
+        already.clear();
+//        if (bean!=null){
+//            beforePage = page;
+//            beforeTotalPage = bean.getTotal_pages();
+//        }
+//        page = 1;
+//        flag = true;
     }
 
     @Override
@@ -92,7 +103,9 @@ public class MyProjectTotalFragment extends BaseFragment {
     @Override
     public void initDataFromIntent() {
 
-        listBean = new ArrayList<>();
+        underway = new ArrayList<>();
+        repayment = new ArrayList<>();
+        already = new ArrayList<>();
 //
 //        list=new ArrayList<>();
 //
@@ -116,36 +129,40 @@ public class MyProjectTotalFragment extends BaseFragment {
     public void initView() {
 
 
-        srlTotal.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlTotal.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
-        srlTotal.setRefreshFooter(new BallPulseFooter(getActivity()));
+//        srlTotal.setPrimaryColorsId(R.color.global_theme_background_color);
+//        srlTotal.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+//        srlTotal.setRefreshFooter(new BallPulseFooter(getActivity()));
         initDataFromInternet();
     }
 
     @Override
     public void initListener() {
+//
+//        srlTotal.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(RefreshLayout refreshlayout) {
+//                page = 1;
+//                listBean.clear();
+//                start_time = "";
+//                end_time = "";
+//                initDataFromInternet();
+//            }
+//        });
 
-        srlTotal.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                page = 1;
-                listBean.clear();
-                initDataFromInternet();
-            }
-        });
-
-        srlTotal.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                if (bean != null && page < bean.getTotal_pages()) {
-                    page = page + 1;
-                    initDataFromInternet();
-                } else {
-                    srlTotal.finishLoadmore();
-                    ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
-                }
-            }
-        });
+//        srlTotal.setOnLoadmoreListener(new OnLoadmoreListener() {
+//            @Override
+//            public void onLoadmore(RefreshLayout refreshlayout) {
+//                if (bean != null && page < bean.getTotal_pages()) {
+//                    page = page + 1;
+//                    initDataFromInternet();
+//                    Log.e("TAG", "onLoadmore:我的投资项目接口返回数据 -----"+page);
+//
+//                } else {
+//                    srlTotal.finishLoadmore();
+//                    ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
+//                }
+//            }
+//        });
 
     }
 
@@ -158,6 +175,7 @@ public class MyProjectTotalFragment extends BaseFragment {
         map.put("start_time", start_time);
         map.put("end_time", end_time);
 
+        Log.e("TAG", "onSuccess:----我的投资项目接口返回数据-login_token------" + UserConfig.getInstance().getLoginToken(getActivity()));
 
 
         HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, getActivity().getLocalClassName(),
@@ -166,9 +184,8 @@ public class MyProjectTotalFragment extends BaseFragment {
                     public void onSuccess(Response<String> response) {
 
                         dismissPDialog();
-                        finishSRL();
-                        start_time = "";
-                        end_time = "";
+//                        finishRL();
+
 
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的投资项目接口返回数据--------" + result);
@@ -186,7 +203,7 @@ public class MyProjectTotalFragment extends BaseFragment {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        finishSRL();
+//                        finishRL();
                         ToastUtils.showToast(getActivity(), R.string.huoqutouzixiangmuxinxishiabai);
 
                     }
@@ -194,36 +211,74 @@ public class MyProjectTotalFragment extends BaseFragment {
 
     }
 
-    private void finishSRL() {
-        if (srlTotal.isRefreshing()) {
-            srlTotal.finishRefresh();
-        } else if (srlTotal.isLoading()) {
-            srlTotal.finishLoadmore();
-        }
-    }
+//    private void finishRL() {
+//        if (srlTotal.isRefreshing()) {
+//            srlTotal.finishRefresh();
+//        } else if (srlTotal.isLoading()) {
+//            srlTotal.finishLoadmore();
+//        }
+//    }
 
     @Override
     public void LoadInternetDataToUi() {
 
-        if (bean != null && bean.getItems().size() > 0) {
+        if (bean != null) {
 
-            if (flag) {
-                listBean.clear();
-                flag = false;
+            if (bean.getAlready() != null) {
+                already.addAll(bean.getAlready());
+            }
+            if (bean.getUnderway() != null) {
+                underway.addAll(bean.getUnderway());
+            }
+            if (bean.getRepayment() != null) {
+                repayment.addAll(bean.getRepayment());
             }
 
-            listBean.addAll(bean.getItems());
-            if (adapter == null) {
-                adapter = new MyProjectTotalFragLvAdapter(getActivity(), listBean);
-                lvTotal.setAdapter(adapter);
+            if (alreadyAdapter == null) {
+                alreadyAdapter = new MyProjectTotalFragLvAdapter(getActivity(), already);
+                lvAlready.setAdapter(alreadyAdapter);
             } else {
-                adapter.notifyDataSetChanged();
+                alreadyAdapter.notifyDataSetChanged();
             }
-        } else if (bean != null) {
-            bean.setTotal_pages(beforeTotalPage);
-            page=beforePage;
-            ToastUtils.showToast(getActivity(), R.string.meiyousousuoshuju);
+
+            if (underwayAdapter == null) {
+                underwayAdapter = new MyProjectTotalFragLvAdapter(getActivity(), underway);
+                lvUnderway.setAdapter(underwayAdapter);
+            } else {
+                underwayAdapter.notifyDataSetChanged();
+            }
+
+            if (repaymentAdapter == null) {
+                repaymentAdapter = new MyProjectTotalFragLvAdapter(getActivity(), repayment);
+                lvRepayment.setAdapter(repaymentAdapter);
+            } else {
+                repaymentAdapter.notifyDataSetChanged();
+            }
+
+
         }
+
+//        if (bean != null && bean.getItems().size() > 0) {
+//
+//            if (flag) {
+//                listBean.clear();
+//                flag = false;
+//            }
+//
+//            listBean.addAll();
+//            if (adapter == null) {
+//                adapter = new MyProjectTotalFragLvAdapter(getActivity(), listBean);
+//                lvTotal.setAdapter(adapter);
+//            } else {
+//                adapter.notifyDataSetChanged();
+//            }
+//        } else if (bean != null) {
+////            bean.setTotal_pages(beforeTotalPage);
+//            listBean.clear();
+//            adapter.notifyDataSetChanged();
+////            page=beforePage;
+//            ToastUtils.showToast(getActivity(), R.string.meiyousousuoshuju);
+//        }
     }
 
 

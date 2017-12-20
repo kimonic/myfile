@@ -36,7 +36,9 @@ import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 
@@ -79,7 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             AppCompatActivity handlerMemoryActivity = weakReference.get();
             if (handlerMemoryActivity != null&&isProgressing&&msg.what==1) {
                 OkGo.getInstance().cancelAll();
-                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
+//                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
                 dismissPDialog();
             }else {
                 dismissPDialog();
@@ -185,6 +187,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
      */
     protected void openActivity(Class<? extends BaseActivity> toActivity) {
         openActivity(toActivity, null);
+    }
+ /**
+     * 启动下一个activity
+     */
+    protected void openActivityParams(Class<? extends BaseActivity> toActivity, Map<String,String> map) {
+        Intent intent = new Intent(this, toActivity);
+        if (map.size()>0){
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                intent.putExtra(entry.getKey(), entry.getValue());
+            }
+        }
+        startActivity(intent);
     }
 
     /**
@@ -315,8 +329,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Log.e("TAG", "run: -----activity超时线程已启动");
-
                 Message msg=Message.obtain();
                 msg.what=1;
                 handler.sendMessage(msg);

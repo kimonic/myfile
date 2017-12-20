@@ -10,7 +10,9 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.RegisterActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
@@ -127,6 +129,10 @@ public class WebActivity extends BaseActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            if (url.contains(Constants.XIN_SHOU_FU_LI_ZHU_CE)){
+                openActivity(RegisterActivity.class);
+                closeActivity();
+            }
             showPDialog();
         }
 
@@ -146,5 +152,13 @@ public class WebActivity extends BaseActivity {
         super.finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (wvActWeb.canGoBack()){
+            wvActWeb.goBack();
+        }else {
+            closeActivity();
+        }
 
+    }
 }

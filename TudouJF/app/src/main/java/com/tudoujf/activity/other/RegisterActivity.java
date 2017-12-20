@@ -1,5 +1,6 @@
 package com.tudoujf.activity.other;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -63,7 +65,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.et_act_register_username)
     EditText etUsername;
     @BindView(R.id.iv_act_register_clear)
-    ImageView ivClear;
+    LinearLayout ivClear;
     //    @BindView(R.id.et_act_register_code)
 //    EditText etCode;
 //    @BindView(R.id.iv_act_register_codeimage)
@@ -75,7 +77,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.et_act_register_password)
     EditText etPassword;
     @BindView(R.id.iv_act_register_clear1)
-    ImageView ivClear1;
+    LinearLayout ivClear1;
     @BindView(R.id.iv_act_register_openclose)
     ImageView ivOpenclose;
     @BindView(R.id.et_act_register_referrer)
@@ -88,6 +90,8 @@ public class RegisterActivity extends BaseActivity {
     LinearLayout llAgree;
     @BindView(R.id.cb_act_register)
     TextView cbActRegister;
+    @BindView(R.id.tv_zhucexieyi)
+    TextView tvZhuCeXieYi;
     @BindView(R.id.view_placeholder)
     View view;
     @BindView(R.id.scrollview_act_register)
@@ -206,6 +210,12 @@ public class RegisterActivity extends BaseActivity {
             case R.id.et_act_register_username:
                 etUsername.requestFocus();
                 break;
+            case R.id.tv_zhucexieyi:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", Constants.ZHU_CE_XIE_YI);
+                intent.putExtra("title","土豆金服服务协议");
+                startActivity(intent);
+                break;
 
         }
     }
@@ -244,8 +254,8 @@ public class RegisterActivity extends BaseActivity {
             public void onFocusChange(View v, boolean hasFocus) {
 //                fosousOne = hasFocus;
 //                visibilityplaceHolder();
-                if (hasFocus){
-                    scrollView.smoothScrollTo(0,160*ScreenSizeUtils.getDensity(RegisterActivity.this));
+                if (hasFocus) {
+                    scrollView.smoothScrollTo(0, 160 * ScreenSizeUtils.getDensity(RegisterActivity.this));
                 }
 
             }
@@ -256,8 +266,8 @@ public class RegisterActivity extends BaseActivity {
             public void onFocusChange(View v, boolean hasFocus) {
 //                fosousTwo = hasFocus;
 //                visibilityplaceHolder();
-                if (hasFocus){
-                    scrollView.smoothScrollTo(0,160*ScreenSizeUtils.getDensity(RegisterActivity.this));
+                if (hasFocus) {
+                    scrollView.smoothScrollTo(0, 160 * ScreenSizeUtils.getDensity(RegisterActivity.this));
                 }
             }
         });
@@ -270,7 +280,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onClose() {
-                scrollView.smoothScrollTo(0,0);
+                scrollView.smoothScrollTo(0, 0);
 
             }
         });
@@ -323,6 +333,7 @@ public class RegisterActivity extends BaseActivity {
         tvLogin.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         llAgree.setOnClickListener(this);
+        tvZhuCeXieYi.setOnClickListener(this);
     }
 
     private void visibilityplaceHolder() {

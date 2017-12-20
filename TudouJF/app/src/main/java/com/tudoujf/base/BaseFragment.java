@@ -63,7 +63,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
             FragmentActivity handlerMemoryActivity = weakReference.get();
             if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
                 OkGo.getInstance().cancelAll();
-                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
+//                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
                 dismissPDialog();
             }else {
                 dismissPDialog();
@@ -156,7 +156,6 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         new Thread() {
             @Override
             public void run() {
-                Log.e("TAG", "run: -----fragment超时线程已启动");
                 try {
                     Thread.sleep(15000);
                 } catch (InterruptedException e) {

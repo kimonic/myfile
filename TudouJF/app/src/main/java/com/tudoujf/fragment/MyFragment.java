@@ -481,7 +481,7 @@ public class MyFragment extends BaseFragment {
 
             int count = StringUtils.string2Integer(bean.getCount());
             if (count == 0) {
-                setImageSize(10);
+                setImageSize(16);
                 flMessage.setBackgroundResource(R.drawable.frag_home_noinfo);
                 tvMessage.setText("");
             } else if (count < 100) {

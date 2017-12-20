@@ -76,8 +76,8 @@ public class MyProjectCreditorFragment extends BaseFragment {
      */
     private boolean flag = false;
 
-    private int beforePage;
-    private int beforeTotalPage;
+//    private int beforePage;
+//    private int beforeTotalPage;
     private String status_nid = "transfer";
     private int count = 0;
     private int type = 2;
@@ -93,10 +93,10 @@ public class MyProjectCreditorFragment extends BaseFragment {
     }
 
     private void initSearch() {
-        if (bean != null) {
-            beforePage = page;
-            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
-        }
+//        if (bean != null) {
+//            beforePage = page;
+//            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
+//        }
         page = 1;
         flag = true;
     }
@@ -180,6 +180,8 @@ public class MyProjectCreditorFragment extends BaseFragment {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 page = 1;
+                start_time = "";
+                end_time = "";
                 listBean.clear();
                 initDataFromInternet();
             }
@@ -188,7 +190,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
         srlTotal.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (bean != null && page < beforeTotalPage) {
+                if (bean != null && page < bean.getTransfer_list().getTotal_pages()) {
                     page = page + 1;
                     initDataFromInternet();
                 } else {
@@ -221,19 +223,17 @@ public class MyProjectCreditorFragment extends BaseFragment {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         finishSRL();
-                        start_time = "";
-                        end_time = "";
 
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的债权项目接口返回数据--------" + status_nid + "----" + result);
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
-                        }.getType(), MyCreditorProjectBean.class, getActivity());
-                        if (bean1 != null) {
-                            bean = (MyCreditorProjectBean) bean1;
-                            LoadInternetDataToUi();
-                        } else {
-                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
-                        }
+//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
+//                        }.getType(), MyCreditorProjectBean.class, getActivity());
+//                        if (bean1 != null) {
+//                            bean = (MyCreditorProjectBean) bean1;
+//                            LoadInternetDataToUi();
+//                        } else {
+//                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+//                        }
                     }
 
                     @Override
@@ -262,7 +262,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
         if (bean != null && bean.getTransfer_list() != null) {
 //                && bean.getTransfer_list().getItems().size() > 0) {
 
-            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
+//            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
             if (flag) {
                 listBean.clear();
                 flag = false;
@@ -290,6 +290,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
         } else if (bean != null) {
 //            page = beforePage;
+            listBean.clear();
             adapter.notifyDataSetChanged();
             ToastUtils.showToast(getActivity(), R.string.meiyousousuoshuju);
         }

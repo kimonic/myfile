@@ -119,8 +119,7 @@ public class ParseJson {
                 ToastUtils.showToast(context, "解析错误!");
                 return null;
             case BEAN_COMMON:
-                ToastUtils.showToast(context, (context.getResources().getString(R.string.jiekoufanhuicuowumiaoshu)
-                        +((CommonBean) bean).getDescription().toString()));
+                ToastUtils.showToast(context, (((CommonBean) bean).getDescription().toString()));
                 return null;
             case BEAN_DATA:
                 return bean;

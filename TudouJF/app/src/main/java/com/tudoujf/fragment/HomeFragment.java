@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.home.InfoPublishActivity;
 import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
@@ -60,7 +62,10 @@ import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -232,7 +237,11 @@ public class HomeFragment extends BaseFragment {
                 openActivity(SpecialOfferActivity.class);
                 break;
             case R.id.ll_frag_home_xinshoufuli:
-                openActivity(NewbieWelfareActivity.class);
+                Intent intent1 = new Intent(getActivity(), WebActivity.class);
+                intent1.putExtra("url", Constants.XIN_SHOU_FU_LI);
+                intent1.putExtra("title", getResources().getString(R.string.frag_home_xinshoufuli));
+                startActivity(intent1);
+//                openActivity(NewbieWelfareActivity.class);
                 break;
             case R.id.ll_frag_home_tuijianyouli:
                 openActivity(MyPopularizeActivity.class);

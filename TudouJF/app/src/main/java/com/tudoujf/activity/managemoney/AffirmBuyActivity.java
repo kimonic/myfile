@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -94,6 +95,8 @@ public class AffirmBuyActivity extends BaseActivity {
     ImageView ivSel;
     @BindView(R.id.tv_act_affirmbuy_reward)
     TextView tvReward;
+    @BindView(R.id.tv_touzixieyi)
+    TextView tvTouZiXieYi;
 
     private String loan_id;
     private AffirmBuyBean bean;
@@ -206,6 +209,13 @@ public class AffirmBuyActivity extends BaseActivity {
                     ivSel.setImageResource(R.drawable.xvector_checkbox_unsel);
                     agree = false;
                 }
+                break;
+
+            case R.id.tv_touzixieyi:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
+                intent.putExtra("title","土豆金服服务协议");
+                startActivity(intent);
                 break;
         }
     }
@@ -320,7 +330,7 @@ public class AffirmBuyActivity extends BaseActivity {
                             100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod()));
                     //尚未测试无奖励金额的
                     tvReward.setText(decimalFormat.format(StringUtils.string2Float(editable.toString())
-                            * StringUtils.string2Float(bean.getAward_proportion().toString())/100));
+                            * StringUtils.string2Float(bean.getAward_proportion().toString()) / 100));
 
 
                     tvEarings.setText(temp);
@@ -363,6 +373,7 @@ public class AffirmBuyActivity extends BaseActivity {
         tvAffirmbuy.setOnClickListener(this);
         tvChongZhi.setOnClickListener(this);
         llXieYi.setOnClickListener(this);
+        tvTouZiXieYi.setOnClickListener(this);
 
 
     }

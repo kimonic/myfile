@@ -63,16 +63,16 @@
         android:paddingTop="3dp"
         android:orientation="horizontal">
 
-        <com.tudoujf.ui.UnderlineTextView
-            android:id="@+id/utv_act_myproject_total"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/act_myproject_total"
-            android:textColor="@color/global_theme_background_color"
-            android:textSize="14sp"
-            app:underlinecolor="@color/global_theme_background_color" />
+        <!--<com.tudoujf.ui.UnderlineTextView-->
+            <!--android:id="@+id/utv_act_myproject_total"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/act_myproject_total"-->
+            <!--android:textColor="@color/global_theme_background_color"-->
+            <!--android:textSize="14sp"-->
+            <!--app:underlinecolor="@color/global_theme_background_color" />-->
 
         <com.tudoujf.ui.UnderlineTextView
             android:id="@+id/utv_act_myproject_touzixiangmu"
@@ -81,9 +81,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/act_myproject_touzixiangmu"
-            android:textColor="@color/color_black"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:textColor="@color/global_theme_background_color"
+            app:underlinecolor="@color/global_theme_background_color"
             android:textSize="14sp" />
 
         <com.tudoujf.ui.UnderlineTextView

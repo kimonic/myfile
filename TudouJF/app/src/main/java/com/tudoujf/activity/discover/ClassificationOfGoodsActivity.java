@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -18,8 +19,11 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.ClassificationOfGoodsLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.IntegralShopBean;
+import com.tudoujf.bean.databean.IntegralRankingListBean;
 import com.tudoujf.bean.databean.IntegralShopMoreBean;
+import com.tudoujf.bean.databean.TypeInfoBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -58,12 +62,20 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     ListView lv;
     @BindView(R.id.srl_act_classificationofgoods)
     SmartRefreshLayout srl;
+    @BindView(R.id.tv_act_classificationofgoods_content)
+    TextView tvContent;
+
+    private String type;
 
     private IntegralShopMoreBean bean;
     private int page = 1;
     private String point_id = "";
-    private List<IntegralShopBean.GoodsBean.ItemsBean>  list;
+    private List<IntegralShopBean.GoodsBean.ItemsBean> list;
     private ClassificationOfGoodsLvAdapter adapter;
+
+    private String requestUrl = "";
+    private String type_id = "";
+    private TypeInfoBean inBean;
 
     @Override
     public int getLayoutResId() {
@@ -88,7 +100,60 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        list=new ArrayList<>();
+        list = new ArrayList<>();
+
+        type = getIntent().getStringExtra("type");
+        if ("fenlei".equals(type)) {//分类筛选
+            requestUrl = Constants.GOODS_TYPES;
+            tvContent.setText(R.string.fenleishaixuan);
+        } else if ("jifen".equals(type)) {//积分筛选
+            requestUrl = Constants.POINT_RANK;
+            tvContent.setText(R.string.act_integralshop_jifenshaixuan);
+        }
+        requestType();
+
+    }
+
+    private void requestType() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+//        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+//        map.put("type_id", type_id);
+//        map.put("point_id", point_id);
+//        map.put("page", "" + page);
+//        Log.e("TAG", "loadMoreGoods: -----" + page);
+
+
+        HttpMethods.getInstance().POST(this, requestUrl, map, getLocalClassName(), new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+//                        finishRL();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess: -----------积分商城--商品分类--分类类型返回的json数据----------------" + result);
+
+                        Gson gson = new Gson();
+                        CommonBean bean = gson.fromJson(result, CommonBean.class);
+                        String rankingList = "{items:" + bean.getData().toString() + "}";
+                        inBean = gson.fromJson(rankingList, TypeInfoBean.class);
+                        if (inBean != null) {
+
+                        } else {
+                            ToastUtils.showToast(ClassificationOfGoodsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        finishRL();
+                        ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.huoqushaixuanxinxishibai);
+
+                    }
+                }
+        );
 
     }
 
@@ -110,8 +175,8 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                point_id="";
-                page=1;
+                point_id = "";
+                page = 1;
                 initDataFromInternet();
             }
         });
@@ -122,7 +187,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        map.put("type_id", "");
+        map.put("type_id", type_id);
         map.put("point_id", point_id);
         map.put("page", "" + page);
         Log.e("TAG", "loadMoreGoods: -----" + page);
@@ -166,10 +231,10 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
 
             list.addAll(bean.getItems());
 
-            if (adapter==null){
-                adapter=new ClassificationOfGoodsLvAdapter(list,this);
+            if (adapter == null) {
+                adapter = new ClassificationOfGoodsLvAdapter(list, this);
                 lv.setAdapter(adapter);
-            }else {
+            } else {
                 adapter.notifyDataSetChanged();
             }
 

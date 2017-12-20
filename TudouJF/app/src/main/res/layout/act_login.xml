@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_root"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@color/global_background_color"
-        >
+        android:orientation="vertical">
+
         <FrameLayout
             android:id="@+id/frame_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
             android:layout_marginBottom="25dp"
-            >
+            android:layout_marginTop="80dp">
+
             <ImageView
                 android:layout_width="162dp"
                 android:layout_height="43dp"
-                android:contentDescription="@null"
                 android:layout_gravity="center"
-                android:src="@drawable/act_login_bac"
-                />
+                android:contentDescription="@null"
+                android:src="@drawable/act_login_bac" />
         </FrameLayout>
 
 
@@ -33,19 +31,18 @@
             android:layout_height="42dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginTop="5dp"
             android:background="@drawable/xshape_roundrect_edittextbac"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:contentDescription="@null"
-                android:src="@drawable/act_login2_phone"
                 android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/act_login2_phone" />
 
             <EditText
                 android:id="@+id/et_act_login_username"
@@ -60,67 +57,81 @@
                 android:inputType="textEmailAddress"
                 android:textSize="12sp" />
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/iv_act_login_clear"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:contentDescription="@null"
-                android:src="@drawable/xvector_clear"
-                android:visibility="gone" />
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/xvector_clear" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/xshape_roundrect_edittextbac"
-            >
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:contentDescription="@null"
-                android:src="@drawable/act_login2_lock"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                />
+                android:contentDescription="@null"
+                android:src="@drawable/act_login2_lock" />
 
             <EditText
                 android:id="@+id/et_act_login_password"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:hint="@string/act_login_password"
-                android:textSize="12sp"
-                android:background="@null"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/act_login_password"
                 android:inputType="textPassword"
-                />
-            <ImageView
+                android:textSize="12sp" />
+
+            <LinearLayout
                 android:id="@+id/iv_act_login_clear1"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:contentDescription="@null"
-                android:visibility="gone"
-                android:src="@drawable/xvector_clear" />
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="3dp"
+                android:layout_marginRight="3dp"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/xvector_clear" />
+            </LinearLayout>
+
             <ImageView
                 android:id="@+id/iv_act_login_openclose"
                 android:layout_width="20dp"
                 android:layout_height="30dp"
-                android:contentDescription="@null"
-                android:src="@drawable/act_login2_eyeopen"
-                android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp"
-                />
+                android:layout_marginRight="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/act_login2_eyeopen" />
+
         </LinearLayout>
 
 
@@ -166,17 +177,17 @@
             android:id="@+id/tv_act_login_login"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:text="@string/act_login_login"
-            android:background="@drawable/xshape_roundrect_mblue"
-            android:textColor="@color/act_login_textcolor1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            />
+            android:background="@drawable/xshape_roundrect_mblue"
+            android:gravity="center"
+            android:text="@string/act_login_login"
+            android:textColor="@color/act_login_textcolor1"
+            android:textSize="14sp" />
+
         <View
             android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="360dp"/>
+            android:layout_height="360dp" />
     </LinearLayout>
 </ScrollView>

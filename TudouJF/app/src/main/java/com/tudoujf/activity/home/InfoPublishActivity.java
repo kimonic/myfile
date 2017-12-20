@@ -35,8 +35,8 @@ public class InfoPublishActivity extends BaseActivity {
     LinearLayout llGsjj;
     @BindView(R.id.ll_act_infopublish_csr)
     LinearLayout llCsr;
-    @BindView(R.id.ll_act_infopublish_gsdz)
-    LinearLayout llGsdz;
+//    @BindView(R.id.ll_act_infopublish_gsdz)
+//    LinearLayout llGsdz;
     @BindView(R.id.ll_act_infopublish_jcaqd)
     LinearLayout llJcaqd;
     @BindView(R.id.ll_act_infopublish_aqbz)
@@ -53,6 +53,16 @@ public class InfoPublishActivity extends BaseActivity {
     LinearLayout llZzjg;
     @BindView(R.id.ll_act_infopublish_hzhb)
     LinearLayout llHzhb;
+    @BindView(R.id.ll_act_infopublish_ptsj)
+    LinearLayout llPtsj;
+    @BindView(R.id.ll_act_infopublish_tdgy)
+    LinearLayout llTdgy;
+    @BindView(R.id.ll_act_infopublish_jgxx)
+    LinearLayout llJgxx;
+    @BindView(R.id.ll_act_infopublish_wzgg)
+    LinearLayout llWzgg;
+    @BindView(R.id.ll_act_infopublish_lxwm)
+    LinearLayout llLxwm;
 
     @Override
     public int getLayoutResId() {
@@ -64,42 +74,59 @@ public class InfoPublishActivity extends BaseActivity {
 
         switch (v.getId()) {
             case R.id.ll_act_infopublish_gsjj://公司简介
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.GONG_SI_JIAN_JIE, R.string.act_infopublish_gongsijianjie);
                 break;
-            case R.id.ll_act_infopublish_csr://创始人
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+            case R.id.ll_act_infopublish_csr://主要人员
+                openNext(Constants.ZHU_YAO_REN_YUAN, R.string.act_infopublish_zhuyaorenyuan);
                 break;
-            case R.id.ll_act_infopublish_gsdz://公司地址
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
-                break;
+//            case R.id.ll_act_infopublish_gsdz://公司地址
+//                openNext(Constants.LIAN_XI_WO_MEN, R.string.act_infopublish_gongsidizhi);
+//                break;
 
-            case R.id.ll_act_infopublish_jcaqd://九重安全盾
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+            case R.id.ll_act_infopublish_jcaqd://荣誉资质
+                openNext(Constants.RONG_YU_ZI_ZHI, R.string.act_infopublish_rongyuzizhi);
                 break;
-            case R.id.ll_act_infopublish_aqbz://安全保障
+            case R.id.ll_act_infopublish_aqbz://安全措施
 //                openActivity(SafetyControlActivity.class);
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.AN_QUAN_CUO_SHI, R.string.act_infopublish_anquancuoshi);
                 break;
             case R.id.ll_act_infopublish_tdsj://土豆视角
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.TU_DOU_SHI_JIAO, R.string.act_infopublish_tudoushijiao);
                 break;
 
             case R.id.ll_act_infopublish_mtbd://媒体报道
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.MEI_TI_BAO_DAO, R.string.act_infopublish_meitibaodao);
                 break;
             case R.id.ll_act_infopublish_tddsj://土豆大事记
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.TU_DOU_DA_SHI_JI, R.string.act_infopublish_tudoudashiji);
                 break;
             case R.id.ll_act_infopublish_yyms://运营模式
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.YUN_YIGN_MO_SHI, R.string.act_infopublish_yunyingmoshi);
                 break;
 
             case R.id.ll_act_infopublish_zzjg://组织架构
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.ZU_ZHI_JIA_GOU, R.string.act_infopublish_zuzhijiagou);
                 break;
             case R.id.ll_act_infopublish_hzhb://合作伙伴
-                openNext(Constants.GONG_SI_JIAN_JIE,R.string.act_infopublish_gongsijianjie);
+                openNext(Constants.HE_ZUO_HUO_BAN, R.string.act_infopublish_hezuohuoban);
                 break;
+            case R.id.ll_act_infopublish_ptsj://平台数据
+                openNext(Constants.PING_TAI_SHU_JU, R.string.act_infopublish_pingtaishuju);
+                break;
+            case R.id.ll_act_infopublish_tdgy://土豆公益
+                openNext(Constants.TU_DOU_GONG_YI, R.string.act_infopublish_tudougongyi);
+                break;
+            case R.id.ll_act_infopublish_jgxx://机构信息
+                openNext(Constants.JI_GOU_XIN_XI, R.string.act_infopublish_jigouxinxi);
+                break;
+            case R.id.ll_act_infopublish_wzgg://网站公告
+                openNext(Constants.WANG_ZHAN_GONG_GAO, R.string.act_infopublish_wangzhangonggao);
+                break;
+            case R.id.ll_act_infopublish_lxwm://联系我们
+                openNext(Constants.LIAN_XI_WO_MEN, R.string.act_infopublish_lianxiwomen);
+                break;
+
+
         }
 
     }
@@ -124,10 +151,10 @@ public class InfoPublishActivity extends BaseActivity {
         });
     }
 
-    private void openNext(String url,int  title){
-        Intent intent=new Intent(this,WebActivity.class);
-        intent.putExtra("url",url);
-        intent.putExtra("title",getResources().getString(title));
+    private void openNext(String url, int title) {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("title", getResources().getString(title));
         startActivity(intent);
     }
 
@@ -135,7 +162,7 @@ public class InfoPublishActivity extends BaseActivity {
     public void initListener() {
         llGsjj.setOnClickListener(this);
         llCsr.setOnClickListener(this);
-        llGsdz.setOnClickListener(this);
+//        llGsdz.setOnClickListener(this);
 
 
         llJcaqd.setOnClickListener(this);
@@ -150,6 +177,12 @@ public class InfoPublishActivity extends BaseActivity {
 
         llZzjg.setOnClickListener(this);
         llHzhb.setOnClickListener(this);
+        llPtsj.setOnClickListener(this);
+
+        llTdgy.setOnClickListener(this);
+        llJgxx.setOnClickListener(this);
+        llWzgg.setOnClickListener(this);
+        llLxwm.setOnClickListener(this);
 
     }
 

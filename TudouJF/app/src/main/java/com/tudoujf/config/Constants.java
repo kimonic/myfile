@@ -304,48 +304,121 @@ public class Constants {
     /**
      * 积分商城加载更多商品接口
      */
-    public static final String INTEGRAL_SHOP_MORE= URL + "/phone/mall/goodList";
+    public static final String INTEGRAL_SHOP_MORE = URL + "/phone/mall/goodList";
 
-  /**
-     * 积分商城积分排行榜借口
+    /**
+     * 积分商城积分排行榜接口
      */
-    public static final String INTEGRAL_RANKING_LIST= URL + "/phone/mall/creditRanking";
-/**
-     * 积分商城积分排行榜借口
+    public static final String INTEGRAL_RANKING_LIST = URL + "/phone/mall/creditRanking";
+    /**
+     * 积分商城热门兑换接口
      */
-    public static final String HOT_GOODS= URL + "/phone/mall/hotGoods";
+    public static final String HOT_GOODS = URL + "/phone/mall/hotGoods";
+    /**
+     * 积分商城获取商品类别接口
+     */
+    public static final String GOODS_TYPES = URL + "/phone/mall/goodTypes";
+
+    /**
+     * 积分商城获取积分类别接口
+     */
+    public static final String POINT_RANK = URL + "/phone/mall/pointRank";
 
 
-    /**公司简介*/
-    public static final String  GONG_SI_JIAN_JIE=URL +"/wap/content/companyProfile?style=app";
-    /**机构信息*/
-    public static final String  JI_GOU_XIN_XI=URL +"/wap/content/orgInfo?style=app";
-    /**主要人员*/
-    public static final String  ZHU_YAO_REN_YUAN=URL +"/wap/content/founder?style=app";
-    /**荣誉资质*/
-    public static final String  RONG_YU_ZI_ZHI=URL +"/wap/content/honor?style=app";
-    /**安全措施*/
-    public static final String  AN_QUAN_CUO_SHI=URL +"/wap/content/sfety?style=app";
-    /** 土豆大事记*/
-    public static final String  TU_DOU_DA_SHI_JI=URL +"/wap/content/event?style=app";
-    /**运营模式*/
-    public static final String  YUN_YIGN_MO_SHI=URL +"/wap/content/operationModel?style=app";
-    /**组织架构*/
-    public static final String  ZU_ZHI_JIA_GOU=URL +"/wap/content/org?style=app";
-    /**合作伙伴*/
-    public static final String  HE_ZUO_HUO_BAN=URL +"/wap/content/partner?style=app";
-    /**土豆视角*/
-    public static final String  TU_DOU_SHI_JIAO=URL +"/wap/content/article/tdsj?style=app";
-    /**媒体报道*/
-    public static final String  MEI_TI_BAO_DAO=URL +"/wap/content/article/mtbd?style=app";
-    /**土豆公益*/
-    public static final String  TU_DOU_GONG_YI=URL +"/wap/content/article/tdgy?style=app";
-    /**平台数据*/
-    public static final String  PING_TAI_SHU_JU=URL +"/wap/content/platformData?style=app";
-    /**联系我们*/
-    public static final String  LIAN_XI_WO_MEN=URL +"/wap/content/contactUs?style=app";
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 
 
+    /**
+     * 公司简介
+     */
+    public static final String GONG_SI_JIAN_JIE = URL + "/wap/content/companyProfile?style=app";
+    /**
+     * 机构信息
+     */
+    public static final String JI_GOU_XIN_XI = URL + "/wap/content/orgInfo?style=app";
+    /**
+     * 主要人员
+     */
+    public static final String ZHU_YAO_REN_YUAN = URL + "/wap/content/founder?style=app";
+    /**
+     * 荣誉资质
+     */
+    public static final String RONG_YU_ZI_ZHI = URL + "/wap/content/honor?style=app";
+    /**
+     * 安全措施
+     */
+    public static final String AN_QUAN_CUO_SHI = URL + "/wap/content/safety?style=app";
+    /**
+     * 土豆大事记
+     */
+    public static final String TU_DOU_DA_SHI_JI = URL + "/wap/content/event?style=app";
+    /**
+     * 运营模式
+     */
+    public static final String YUN_YIGN_MO_SHI = URL + "/wap/content/operationModel?style=app";
+    /**
+     * 组织架构
+     */
+    public static final String ZU_ZHI_JIA_GOU = URL + "/wap/content/org?style=app";
+    /**
+     * 合作伙伴
+     */
+    public static final String HE_ZUO_HUO_BAN = URL + "/wap/content/partner?style=app";
+    /**
+     * 土豆视角
+     */
+    public static final String TU_DOU_SHI_JIAO = URL + "/wap/content/article/tdsj?style=app";
+    /**
+     * 媒体报道
+     */
+    public static final String MEI_TI_BAO_DAO = URL + "/wap/content/article/mtbd?style=app";
+    /**
+     * 土豆公益
+     */
+    public static final String TU_DOU_GONG_YI = URL + "/wap/content/article/tdgy?style=app";
+    /**
+     * 平台数据
+     */
+    public static final String PING_TAI_SHU_JU = URL + "/wap/content/platformData?style=app";
+    /**
+     * 联系我们
+     */
+    public static final String LIAN_XI_WO_MEN = URL + "/wap/content/contactUs?style=app";
+
+    /**
+     * 网站公告
+     */
+    public static final String WANG_ZHAN_GONG_GAO = URL + "/phone/content/notice";
+
+    /**
+     * 注册协议
+     */
+    public static final String ZHU_CE_XIE_YI = URL + "/phone/agreement/getone?id=1";
+    /**
+     * 投资协议
+     */
+    public static final String TOU_ZI_XIE_YI = URL + "/phone/agreement/loanProtocol";
+    /**
+     * 新手福利
+     */
+    public static final String XIN_SHOU_FU_LI = URL + "/phone/welfare/newUser";
+
+    /**
+     * 积分说明
+     */
+    public static final String JI_FEN_SHUO_MING = URL + "/phone/articles/pointDirection";
+ /**
+     * 新手福利注册链接
+     */
+    public static final String XIN_SHOU_FU_LI_ZHU_CE = "http://mob.tudoujf.com/wap/system/register2?originate=app";
+
+//http://mob.tudoujf.com/wap/system/register2?originate=app   新手福利注册链接
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------
 //    ------------------------------------------------------------------------------------------------

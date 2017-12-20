@@ -640,6 +640,16 @@
     <string name="yonghuming">用户名</string>
     <string name="huoqujifenpaihangbangshujushibai">获取积分排行榜数据失败!</string>
     <string name="huoquremenshangpinxinxishibai">获取热门商品信息失败!</string>
+    <string name="act_infopublish_tudougongyi">土豆公益</string>
+    <string name="act_infopublish_zhuyaorenyuan">主要人员</string>
+    <string name="act_infopublish_jigouxinxi">机构信息</string>
+    <string name="act_infopublish_rongyuzizhi">荣誉资质</string>
+    <string name="act_infopublish_wangzhangonggao">网站公告</string>
+    <string name="act_infopublish_lianxiwomen">联系我们</string>
+    <string name="act_infopublish_gongsidongtai">公司动态</string>
+    <string name="huoqushaixuanxinxishibai">获取筛选信息失败!</string>
+    <string name="fenleishaixuan">分类筛选</string>
+    <string name="toubiaozhong">投标中</string>
 
 
 </resources>
