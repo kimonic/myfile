@@ -15,6 +15,7 @@ import com.tudoujf.fragment.myprojectfrag.MyProjectTotalFragBean;
 import com.tudoujf.ui.MyProjectBidView;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.TimeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
@@ -83,14 +84,20 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setExplain3("回款时间");
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress())/100);//投资进度
         if (list.get(position).getAmount_surplus()==null){
-            viewHolder.bidView.setShengYuKeTou("此处获取值为null");
+            viewHolder.bidView.setShengYuKeTou("0 元");
         }else {
-            viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
+            viewHolder.bidView.setShengYuKeTou((list.get(position).getAmount_surplus()+" 元"));
         }
         viewHolder.bidView.setStatus_name(list.get(position).getStatus_name());
 
+        if (!"投标中".equals(list.get(position).getStatus_name())){
+            viewHolder.bidView.setShowDaiHouGuanLi(true);
+        }else {
+            viewHolder.bidView.setShowDaiHouGuanLi(false);
+        }
+
 //         final boolean finalSkip = skip;
-        final int  mPosition=position;
+//        final int  mPosition=position;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
@@ -98,9 +105,11 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
 //                    Intent intent=new Intent(context, MyCreditorRightsDetailsActivity.class);
 //                    context.startActivity(intent);
 //                }else {
-                    Intent intent=new Intent(context, MyInvestDetailsActivity.class);
-                    intent.putExtra("id",list.get(mPosition).getLoan_id());
-                    context.startActivity(intent);
+
+                ToastUtils.showToast(context, "打开贷后管理");
+//                Intent intent=new Intent(context, MyInvestDetailsActivity.class);
+//                    intent.putExtra("id",list.get(mPosition).getId());
+//                    context.startActivity(intent);
 //                }
 
             }

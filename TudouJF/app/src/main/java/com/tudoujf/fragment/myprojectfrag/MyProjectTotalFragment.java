@@ -1,7 +1,9 @@
 package com.tudoujf.fragment.myprojectfrag;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.myproject.MyInvestDetailsActivity;
 import com.tudoujf.adapter.MyProjectTotalFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
@@ -163,6 +166,31 @@ public class MyProjectTotalFragment extends BaseFragment {
 //                }
 //            }
 //        });
+
+        lvAlready.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), MyInvestDetailsActivity.class);
+                intent.putExtra("id",already.get(position).getId());
+                startActivity(intent);
+            }
+        });
+        lvRepayment.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), MyInvestDetailsActivity.class);
+                intent.putExtra("id",repayment.get(position).getId());
+                startActivity(intent);
+            }
+        });
+        lvUnderway.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getActivity(), MyInvestDetailsActivity.class);
+                intent.putExtra("id",underway.get(position).getId());
+                startActivity(intent);
+            }
+        });
 
     }
 

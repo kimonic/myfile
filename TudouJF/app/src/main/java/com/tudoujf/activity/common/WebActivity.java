@@ -161,4 +161,12 @@ public class WebActivity extends BaseActivity {
         }
 
     }
+
+    @Override
+    protected void onDestroy() {
+        if(wvActWeb!=null){
+            wvActWeb.destroy();
+        }
+        super.onDestroy();
+    }
 }

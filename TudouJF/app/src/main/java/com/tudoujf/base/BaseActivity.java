@@ -98,16 +98,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     public void showPDialog() {
         timeThread();
         isProgressing=true;
-        if (bDialog == null) {
+        if (bDialog == null&&!isFinishing()) {
             bDialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
-        } else {
+        } else if (!isFinishing()){
             bDialog.show();
         }
     }
 
     public void dismissPDialog() {
         isProgressing=false;
-        if (bDialog != null) {
+        if (bDialog != null&&bDialog.isShowing()) {
             bDialog.dismiss();
         }
     }

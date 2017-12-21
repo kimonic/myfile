@@ -78,16 +78,21 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     public void showPDialog() {
         isProgressing = true;
         timeThread();
-        if (bDialog == null) {
-            bDialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
-        } else {
-            bDialog.show();
+        try {
+            if (bDialog == null) {
+                bDialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+            } else {
+                bDialog.show();
+            }
+        }catch (Exception e){
+            Log.e("TAG", "showPDialog: -----窗体泄露");
         }
+
     }
 
     public void dismissPDialog() {
         isProgressing = false;
-        if (bDialog != null) {
+        if (bDialog != null&&bDialog.isShowing()) {
             bDialog.dismiss();
         }
     }

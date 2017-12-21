@@ -326,14 +326,17 @@ public class AffirmBuyActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 if (bean != null && StringUtils.string2Float(editable.toString()) >= 10) {
                     //计算预期收益
-                    String temp = decimalFormat.format((StringUtils.string2Float(bean.getApr()) /
-                            100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod()));
+                    float liXiShouYi=(StringUtils.string2Float(bean.getApr()) /
+                            100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod());
+                    float  jiangLiShouYi=StringUtils.string2Float(editable.toString())
+                            * StringUtils.string2Float(bean.getAward_proportion().toString()) / 100;
+                    float zongShouYi=liXiShouYi+jiangLiShouYi;
+                    String temp = decimalFormat.format(liXiShouYi);
                     //尚未测试无奖励金额的
-                    tvReward.setText(decimalFormat.format(StringUtils.string2Float(editable.toString())
-                            * StringUtils.string2Float(bean.getAward_proportion().toString()) / 100));
+                    tvReward.setText(decimalFormat.format(jiangLiShouYi));
 
 
-                    tvEarings.setText(temp);
+                    tvEarings.setText(decimalFormat.format(zongShouYi));
                     tvLiXi.setText(temp);
                     redId = "";
                     jiaXiQuanId = "";

@@ -28,8 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone"
-                >
+            android:visibility="gone"
+            >
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
@@ -308,6 +309,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_zhaiquanzhuanrangxieyi"
                         android:layout_width="wrap_content"
                         android:layout_height="34dp"
                         android:background="@color/global_background_color"

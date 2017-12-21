@@ -56,6 +56,7 @@ import com.tudoujf.service.SignInService;
 import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -444,7 +445,8 @@ public class HomeFragment extends BaseFragment {
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
         //设置 Header 为 Material风格
 //        swipeRefreshLayout.setEnableRefresh(true);
-        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        srl.setRefreshHeader(new TuDouHeader(getActivity()));
+//        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         //设置 Footer 为 球脉冲
         srl.setEnableLoadmore(false);
 

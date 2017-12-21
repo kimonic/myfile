@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.myproject;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.managemoney.AffirmBuyCreditorsRightsActivity;
 import com.tudoujf.adapter.MyInvestDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -51,8 +53,8 @@ public class MyInvestDetailsActivity extends BaseActivity {
     MTopBarView mtb;
     @BindView(R.id.tv_act_myinvestdetails_bid_name)
     TextView tvBidName;
-     @BindView(R.id.iv_act_myinvestdetails)
-     InfoView infoView;
+    @BindView(R.id.iv_act_myinvestdetails)
+    InfoView infoView;
     @BindView(R.id.tv_act_myinvestdetails_invest_amount)
     TextView tvInvestAmount;
     @BindView(R.id.tv_act_myinvestdetails_total_earnings)
@@ -84,6 +86,12 @@ public class MyInvestDetailsActivity extends BaseActivity {
             case R.id.tv_act_creditorsrightsdetails_buynow:
                 openActivity(AffirmBuyCreditorsRightsActivity.class);
                 break;
+            case R.id.ll_act_myinvestdetails_see_protocol:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
+                intent.putExtra("title","土豆金服服务协议");
+                startActivity(intent);
+                break;
         }
 
     }
@@ -112,6 +120,7 @@ public class MyInvestDetailsActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+        llSeeProtocol.setOnClickListener(this);
     }
 
     @Override
@@ -167,9 +176,9 @@ public class MyInvestDetailsActivity extends BaseActivity {
             tvNewCapital.setText(bean.getTender_info().getWait_principal());
             tvAwardAmount.setText(bean.getTender_info().getAward_amount());
             infoView.setJieKuanQiXian(bean.getLoan_info().getPeriod_name());
-            infoView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(bean.getLoan_info().getApr())+"%");
+            infoView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(bean.getLoan_info().getApr()) + "%");
 
-            infoView.setUnderlineScale1(0.5f*100);
+            infoView.setUnderlineScale1(0.5f * 100);
             infoView.setIfNew(false);
             infoView.setCloseBottomLine(true);
 

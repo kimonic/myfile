@@ -29,10 +29,10 @@ import java.util.List;
  */
 
 public class SystemMessageFragLvAdapter extends BaseAdapter {
-    private List<MyMessageBean.ItemsBean> list;
+    private List<MyMessageBean.PageObjBean.ItemsBean> list;
     private Context context;
 
-    public SystemMessageFragLvAdapter(List<MyMessageBean.ItemsBean> list, Context context) {
+    public SystemMessageFragLvAdapter(List<MyMessageBean.PageObjBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -71,7 +71,7 @@ public class SystemMessageFragLvAdapter extends BaseAdapter {
         }
 
         viewHolder.textView1.setText(list.get(position).getTitle());
-        viewHolder.textView2.setText(list.get(position).getTime());
+        viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getSend_time()));
         if (list.get(position).getStatus().equals("1")){
             viewHolder.textView1.setTextColor(context.getResources().getColor(R.color.color_black));
             viewHolder.textView2.setTextColor(context.getResources().getColor(R.color.color_black));

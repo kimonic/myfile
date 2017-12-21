@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.myproject;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.adapter.MyCreditorDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -84,6 +86,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     TextView tvTransferValueBuy;
     @BindView(R.id.tv_act_mycreditorsrightsdetails_earings_buy)
     TextView tvEaringsBuy;
+    @BindView(R.id.tv_zhaiquanzhuanrangxieyi)
+    TextView tvXieYi;
     @BindView(R.id.lv_act_mycreditorsrightsdetails_buy)
     ListView lvBuy;
 
@@ -104,6 +108,14 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.tv_act_mycreditorsrightsdetails_buynow:
                 transferNow();
+                break;
+            case R.id.tv_zhaiquanzhuanrangxieyi://债权转让协议
+                Intent intent = new Intent(this, WebActivity.class);
+                Log.e("TAG", "onClick:tender_idtender_idtender_id -----" + tender_id);
+
+                intent.putExtra("url", Constants.ZHAI_QUAN_XIE_YI + tender_id);
+                intent.putExtra("title", getResources().getString(R.string.zhaiquanzhuanrangxieyi));
+                startActivity(intent);
                 break;
         }
 
@@ -144,6 +156,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     @Override
     public void initListener() {
         tvBuyNow.setOnClickListener(this);
+        tvXieYi.setOnClickListener(this);
         etTransferScale.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
@@ -168,9 +181,9 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
             map.put("tender_id", tender_id);
         }
 
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -login_token----"+ UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -tender_id----"+ tender_id);
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -url----"+ url);
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -login_token----" + UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -tender_id----" + tender_id);
+        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -url----" + url);
 
 
         HttpMethods.getInstance().POST(this, url, map, this.getLocalClassName(),
@@ -190,7 +203,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                             ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.shujujiazaichucuo);
                         }
                     }
-
 
 
                     @Override

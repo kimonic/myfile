@@ -1,7 +1,9 @@
 package com.tudoujf.fragment.myprojectfrag;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.myproject.MyCreditorRightsDetailsActivity;
 import com.tudoujf.adapter.MyProjectCreditorFragLvAdapter;
 import com.tudoujf.adapter.MyProjectTotalFragLvAdapter;
 import com.tudoujf.base.BaseBean;
@@ -24,6 +27,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -169,7 +173,8 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
 
         srlTotal.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlTotal.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        srlTotal.setRefreshHeader(new TuDouHeader(getActivity()));
+//        srlTotal.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         srlTotal.setRefreshFooter(new BallPulseFooter(getActivity()));
         initDataFromInternet();
     }
@@ -202,6 +207,24 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
         gouMaiJiLu.setOnClickListener(this);
 
+        lvTotal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), MyCreditorRightsDetailsActivity.class);
+                intent.putExtra("tender_id",listBean.get(position).getTransfer_id());
+
+                int   type=listBean.get(position).getType();
+//                1,债权转让记录,2,债权购买记录
+                intent.putExtra("type",type);
+                if (type==2){
+                    intent.putExtra("tender_id",listBean.get(position).getId());
+                }else {
+                    intent.putExtra("tender_id",listBean.get(position).getTransfer_id());
+                }
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -226,14 +249,14 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的债权项目接口返回数据--------" + status_nid + "----" + result);
-//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
-//                        }.getType(), MyCreditorProjectBean.class, getActivity());
-//                        if (bean1 != null) {
-//                            bean = (MyCreditorProjectBean) bean1;
-//                            LoadInternetDataToUi();
-//                        } else {
-//                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
-//                        }
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
+                        }.getType(), MyCreditorProjectBean.class, getActivity());
+                        if (bean1 != null) {
+                            bean = (MyCreditorProjectBean) bean1;
+                            LoadInternetDataToUi();
+                        } else {
+                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                        }
                     }
 
                     @Override
@@ -261,7 +284,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
         if (bean != null && bean.getTransfer_list() != null) {
 //                && bean.getTransfer_list().getItems().size() > 0) {
-
+//
 //            beforeTotalPage = bean.getTransfer_list().getTotal_pages();
             if (flag) {
                 listBean.clear();

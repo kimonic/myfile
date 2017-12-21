@@ -131,7 +131,7 @@
         <activity android:name=".activity.home.MyExperienceGoldActivity" />
         <!--29.活动专区activity-->
         <activity android:name=".activity.home.SpecialOfferActivity" />
-        <!--30.我的信息activity-->
+        <!--30.我的消息-->
         <activity android:name=".activity.home.MyMessageActivity" />
         <!--31.公司地址显示activity-->
         <activity android:name=".activity.home.AdressActivity" />

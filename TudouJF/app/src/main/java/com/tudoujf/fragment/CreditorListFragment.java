@@ -28,6 +28,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -242,7 +243,8 @@ public class CreditorListFragment extends BaseFragment {
         swipeRefreshLayout.setPrimaryColorsId(R.color.global_theme_background_color);
         //设置 Header 为 Material风格
 //        swipeRefreshLayout.setEnableRefresh(true);
-        swipeRefreshLayout.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        swipeRefreshLayout.setRefreshHeader(new TuDouHeader(getActivity()));
+//        swipeRefreshLayout.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         //设置 Footer 为 球脉冲
         swipeRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
 

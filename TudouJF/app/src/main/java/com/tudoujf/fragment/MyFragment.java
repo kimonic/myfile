@@ -56,6 +56,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -331,8 +332,9 @@ public class MyFragment extends BaseFragment {
         HeightUtils.setListviewHeight(lvFragMy);
 
 
-        srl.setPrimaryColorsId(R.color.global_theme_background_color);
-        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+//        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+        srl.setRefreshHeader(new TuDouHeader(getActivity()));
+//        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         srl.setEnableLoadmore(false);
         initDataFromInternet();
 

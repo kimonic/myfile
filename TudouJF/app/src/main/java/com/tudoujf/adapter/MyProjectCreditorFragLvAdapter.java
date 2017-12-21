@@ -68,7 +68,6 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-//        boolean skip = true;
 
         viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标题
         viewHolder.bidView.setTransfer(("转让期数:" + list.get(position).getWait_period() + "/" + list.get(position).getPeriod()));//右标题
@@ -92,31 +91,28 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setExplain1("待收本息(元)");
         viewHolder.bidView.setExplain2("债权价值(元)");
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress()) / 100);//投资进度
-        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus());
+        viewHolder.bidView.setShengYuKeTou((list.get(position).getAmount_surplus()+" 元"));
         viewHolder.bidView.setStatus_name(list.get(position).getTransfer_status_name());
 
-//        final boolean finalSkip = skip;
         final int  mPosition=position;
         viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-//                if (finalSkip) {
-                Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
-                intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
 
-                int   type=list.get(mPosition).getType();
-//                1,债权转让记录,2,债权购买记录
-                intent.putExtra("type",type);
-                if (type==2){
-                    intent.putExtra("tender_id",list.get(mPosition).getId());
-                }else {
-                    intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
-                }
-                context.startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(context, MyInvestDetailsActivity.class);
-//                    context.startActivity(intent);
+
+//                Intent intent = new Intent(context, MyCreditorRightsDetailsActivity.class);
+//                intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
+//
+//                int   type=list.get(mPosition).getType();
+////                1,债权转让记录,2,债权购买记录
+//                intent.putExtra("type",type);
+//                if (type==2){
+//                    intent.putExtra("tender_id",list.get(mPosition).getId());
+//                }else {
+//                    intent.putExtra("tender_id",list.get(mPosition).getTransfer_id());
 //                }
+//                context.startActivity(intent);
+
             }
         });
 

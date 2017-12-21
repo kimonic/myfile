@@ -413,10 +413,14 @@ public class Constants {
      * 积分说明
      */
     public static final String JI_FEN_SHUO_MING = URL + "/phone/articles/pointDirection";
- /**
+    /**
      * 新手福利注册链接
      */
     public static final String XIN_SHOU_FU_LI_ZHU_CE = "http://mob.tudoujf.com/wap/system/register2?originate=app";
+    /**
+     * 债权协议链接
+     */
+    public static final String ZHAI_QUAN_XIE_YI = "http://mob.tudoujf.com/wap/transfer/appTransferAgreement#?id=";
 
 //http://mob.tudoujf.com/wap/system/register2?originate=app   新手福利注册链接
 //    ------------------------------------------------------------------------------------------------

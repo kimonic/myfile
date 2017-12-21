@@ -75,7 +75,7 @@ public class BidView extends View {
      * 投资进度
      */
     private float investProgress = 0.5f;
-    private DecimalFormat decimalFormat = new DecimalFormat(".00");
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private String shengYuKeTou = "999,999.00元";
 
     /**

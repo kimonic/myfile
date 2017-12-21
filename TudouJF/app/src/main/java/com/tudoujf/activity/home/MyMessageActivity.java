@@ -38,6 +38,10 @@ public class MyMessageActivity extends BaseActivity {
     TextView tvMyMessage;
     @BindView(R.id.tv_act_mymessage_bac)
     TextView tvBac;
+     @BindView(R.id.tv_act_mymessage_myshengyu)
+    TextView tvMyShengYu;
+     @BindView(R.id.tv_act_mymessage_systemshengyu)
+    TextView tvSystemShengYu;
     @BindView(R.id.vp_act_mymessage)
     ViewPager vpActMymessage;
     @BindView(R.id.fl_act_mymessage)
@@ -86,7 +90,6 @@ public class MyMessageActivity extends BaseActivity {
         vpActMymessage.setAdapter(adapter);
         vpActMymessage.setOffscreenPageLimit(4);
 
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) flActMymessage.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         flActMymessage.setLayoutParams(params);
@@ -174,4 +177,33 @@ public class MyMessageActivity extends BaseActivity {
     }
 
 
+
+    public void setTvMyShengYu(String s,int  flag){
+        tvMyShengYu.setText(s);
+        if (flag==1){
+            tvMyShengYu.setVisibility(View.GONE);
+        }else {
+            tvMyShengYu.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setTvSystemShengYu(String s,int  flag){
+        tvSystemShengYu.setText(s);
+        if (flag==1){
+            tvSystemShengYu.setVisibility(View.GONE);
+        }else {
+            tvSystemShengYu.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            tvMyMessage.setTextColor(getResources().getColor(R.color.color_white));
+            tvSystemMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+            vpActMymessage.setCurrentItem(1);
+        }
+    }
 }

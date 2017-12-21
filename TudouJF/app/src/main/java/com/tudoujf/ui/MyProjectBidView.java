@@ -2,6 +2,8 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +16,7 @@ import android.view.View;
 
 import com.tudoujf.R;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.text.DecimalFormat;
 
@@ -80,7 +83,7 @@ public class MyProjectBidView extends View {
      * 投资进度
      */
     private float investProgress = 0.5f;
-    private DecimalFormat decimalFormat = new DecimalFormat(".00");
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private String shengYuKeTou = "999,999.00元";
 
     /**
@@ -98,6 +101,17 @@ public class MyProjectBidView extends View {
     private String transfer = "转让期数:7/12";
     private Paint topLinePaint;
 
+    /**
+     * 贷后管理显示
+     */
+    private boolean showDaiHouGuanLi = false;
+    private Bitmap bitmapDaiHouGuanLi;
+    private RectF rectFDaiHouGuanLi;
+
+
+    public void setShowDaiHouGuanLi(boolean showDaiHouGuanLi) {
+        this.showDaiHouGuanLi = showDaiHouGuanLi;
+    }
 
     /**
      * 奖励的数值
@@ -231,6 +245,10 @@ public class MyProjectBidView extends View {
     }
 
     private void initView() {
+
+        rectFDaiHouGuanLi = new RectF();
+        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
+
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
         blackPaint.setColor(Color.parseColor("#343434"));
@@ -327,6 +345,20 @@ public class MyProjectBidView extends View {
         canvas.drawText(title, text1X, text1Y, blackPaint);
         //------------------------------------------------------------------------------------------
 
+        //-----------------------------显示贷后管理-------------------------------------------------
+        if (showDaiHouGuanLi){
+        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.04f;
+        rectFDaiHouGuanLi.top = width * 0.02777f;
+        rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
+        rectFDaiHouGuanLi.bottom = width * 0.072f;
+
+        canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
+
+        }
+
+
+        //-----------------------------显示贷后管理-------------------------------------------------
+
         //-----------------------转让期数:7/12------------------------------------------------------
         float text2X = width * 0.6666f;
         float text2Y = width * 0.06666f;
@@ -381,22 +413,18 @@ public class MyProjectBidView extends View {
         //------------------------------------------------------------------------------------------
 
         //---------------------右侧展示文本介绍-----------------------------------------------------
-        float text8X =width*0.675f;
+        float text8X = width * 0.675f;
 //                text7X + blackPaint.measureText(transferPrice) / 2 - grayLinePaint.measureText(explain3) / 2;
         canvas.drawText(explain3, text8X, text4Y, grayLinePaint);
         //------------------------------------------------------------------------------------------
 
 
-
         //----------------右侧展示文本/到期时间2018-01-31-----------------------------------------
         blackPaint.setTextSize(width * 0.03333f);
-        float text7X = text8X + grayLinePaint.measureText(explain3) / 2-blackPaint.measureText(transferPrice) / 2;
+        float text7X = text8X + grayLinePaint.measureText(explain3) / 2 - blackPaint.measureText(transferPrice) / 2;
 //        float text7X = width * 0.6231f;
         canvas.drawText(transferPrice, text7X, text3Y, blackPaint);
         //------------------------------------------------------------------------------------------
-
-
-
 
 
         //--------------------进度显示直线---已进行部分---------------------------------------------
@@ -452,12 +480,21 @@ public class MyProjectBidView extends View {
 //        String invest1 = getButText();
 
 //        if (investNow) {//可点击
-        canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
+//        canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
 //        } else {//不可点击
 //            canvas.drawRoundRect(rectF, 5, 5, grayPaint);
 //        }
+
+        if ("可转让".equals(status_name)) {
+            canvas.drawRoundRect(rectF, 5, 5, cyanPaint);
+            strokePaint.setColor(Color.parseColor("#0b657b"));
+        } else {
+            canvas.drawRoundRect(rectF, 5, 5, grayPaint);
+            strokePaint.setColor(Color.parseColor("#666666"));
+        }
         //--------------------绘制按钮边框----------------------------------------------------------
-        strokePaint.setColor(Color.parseColor("#0b657b"));
+//        strokePaint.setColor(Color.parseColor("#666666"));
+//        strokePaint.setColor(Color.parseColor("#0b657b"));
         canvas.drawRoundRect(rectF, 5, 5, strokePaint);
 
         float text11X = rectF.left + (rectF.right - rectF.left) / 2 - whitePaint.measureText(status_name) / 2;
@@ -521,16 +558,23 @@ public class MyProjectBidView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-//            float currentX = event.getX();
-//            float currentY = event.getY();
-//            if (rectF.contains(currentX, currentY)) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//
+//                break;
+//        }
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            float currentX = event.getX();
+            float currentY = event.getY();
+            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
                 if (listener != null) {
                     listener.clickEvent();
                 }
-//            }
+                return true;
+
+            }
         }
-        return true;
+        return super.onTouchEvent(event);
     }
 
     public interface ClickEventListener {

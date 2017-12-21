@@ -650,6 +650,8 @@
     <string name="huoqushaixuanxinxishibai">获取筛选信息失败!</string>
     <string name="fenleishaixuan">分类筛选</string>
     <string name="toubiaozhong">投标中</string>
+    <string name="zhengzaishuaxin">\t\t正在刷新\t\t</string>
+    <string name="zhaiquanzhuanrangxieyi">债权转让协议</string>
 
 
 </resources>
