@@ -109,14 +109,12 @@ public class MyPopularizeActivity extends BaseActivity {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的推广首页--立即结算--接口返回数据--------" + result);
-//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyPopularizeBean>() {
-//                        }.getType(), MyPopularizeBean.class, MyPopularizeActivity.this);
-//                        if (bean1 != null) {
-//                            bean = (MyPopularizeBean) bean1;
-//                            LoadInternetDataToUi();
-//                        } else {
-//                            ToastUtils.showToast(MyPopularizeActivity.this, R.string.shujujiazaichucuo);
-//                        }
+
+                        if (result!=null&&result.contains("200")){
+                            ToastUtils.showToast(MyPopularizeActivity.this, R.string.jiesuanchenggong);
+                        }else {
+                            ToastUtils.showToast(MyPopularizeActivity.this, R.string.jiesuanshibai);
+                        }
                     }
 
                     @Override
@@ -214,7 +212,7 @@ public class MyPopularizeActivity extends BaseActivity {
             tvTouZiTiCheng.setText(bean.getTender_income());
             tvJieHuanKuanTiCheng.setText(bean.getRepay_income());
             tvShengYuJieSuanJinE.setText(bean.getTotal().getUnAaccount());
-            tvJieSuanZhong.setText(bean.getTotal().getAccounted());
+            tvJieSuanZhong.setText(bean.getTotal().getAccounting());
             tvManJieSuan.setText((bean.getLimit() + "元"));
             tvChengGongYaoQing.setText(("成功邀请好友" + bean.getCountInfo().getPerson_count() + "位"));
 

@@ -416,7 +416,7 @@ public class Constants {
     /**
      * 新手福利注册链接
      */
-    public static final String XIN_SHOU_FU_LI_ZHU_CE = "http://mob.tudoujf.com/wap/system/register2?originate=app";
+    public static final String XIN_SHOU_FU_LI_ZHU_CE = "/wap/system/register2";
     /**
      * 债权协议链接
      */

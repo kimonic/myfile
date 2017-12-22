@@ -323,21 +323,24 @@ public class HomeFragment extends BaseFragment {
                     Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据loan_id----------------" + homeBidIdBean.getLoan_id());
 
                     if ("1".equals(loanBeanList.get(ballviewPosition).getExperience_status())) {
-                        // TODO: 2017/12/4 新手体验标要跳转不同的页面
 
-                        Log.e("TAG", "onSuccess: bean.getExperience_amount()-----" + bean.getExperience_amount());
-
-                        //体验金大于0,未登录,已登录未实名,跳转体验金详情
+//                        // TODO: 2017/12/4 新手体验标要跳转不同的页面
+//
+//                        Log.e("TAG", "onSuccess: bean.getExperience_amount()-----" + bean.getExperience_amount());
+//
+//                        //体验金大于0,未登录,已登录未实名,跳转体验金详情
                         if (StringUtils.string2Integer(bean.getExperience_amount()) > 0 || "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                             Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
                             intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                            intent1.putExtra("status", 0);
                             startActivity(intent1);
                         } else {
-                            // TODO: 2017/12/6 检测是否已实名
+//                            // TODO: 2017/12/6 检测是否已实名
                             checkIdentity();
 //                            openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
                         }
 
+//
                     } else {
                         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                         intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
@@ -369,10 +372,15 @@ public class HomeFragment extends BaseFragment {
                 if (bean1 != null) {
                     IdentityCheckBean identityCheckBean = (IdentityCheckBean) bean1;
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
+//                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
+                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
+                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                        intent1.putExtra("status", 1);
+                        startActivity(intent1);
                     } else {//未实名
                         Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
                         intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                        intent1.putExtra("status", 0);
                         startActivity(intent1);
                     }
                 } else {

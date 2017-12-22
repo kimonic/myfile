@@ -137,9 +137,10 @@ public class MyFragment extends BaseFragment {
 
     private boolean hide = false;
 
+    //我的收益暂时取消
     private int[] titleResId = new int[]{
             R.string.wodejifen,
-            R.string.wodeshouyi,
+//            R.string.wodeshouyi,
             R.string.wodetuiguang,
             R.string.wodexiangmu,
             R.string.wodefuli,
@@ -149,7 +150,7 @@ public class MyFragment extends BaseFragment {
 
     private int[] iconResId = new int[]{
             R.drawable.frag_my_wodejifen,
-            R.drawable.frag_my_wodeshouyi,
+//            R.drawable.frag_my_wodeshouyi,
             R.drawable.frag_my_wodetuiguang,
             R.drawable.frag_my_wodexiangmu,
             R.drawable.frag_my_wodefuli,
@@ -349,19 +350,19 @@ public class MyFragment extends BaseFragment {
                     case 0://我的积分
                         openActivity(SignInActivity.class);
                         break;
-                    case 1://我的收益
-                        openActivity(MyEarningsActivity.class);
-                        break;
-                    case 2://我的推广
+//                    case 1://我的收益暂时去掉
+//                        openActivity(MyEarningsActivity.class);
+//                        break;
+                    case 1://我的推广
                         openActivity(MyPopularizeActivity.class);
                         break;
-                    case 3://我的项目
+                    case 2://我的项目
                         openActivity(MyProjectActivity.class);
                         break;
-                    case 4://我的福利
+                    case 3://我的福利
                         openActivity(MyWelfareActivity.class);
                         break;
-                    case 5://专属客服
+                    case 4://专属客服
 
                         ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                         if (cm != null) {
@@ -386,7 +387,7 @@ public class MyFragment extends BaseFragment {
                             ToastUtils.showToast(getActivity(), R.string.copyerror);
                         }
                         break;
-                    case 6://设置
+                    case 5://设置
                         openActivity(SetActivity.class);
                         break;
                 }
@@ -502,6 +503,7 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+
         initDataFromInternet();
     }
 

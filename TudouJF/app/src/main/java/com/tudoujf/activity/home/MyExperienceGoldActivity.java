@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -10,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.adapter.MyExperienceGoldLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -80,6 +82,9 @@ public class MyExperienceGoldActivity extends BaseActivity {
         mtbMyExperienceGold.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(MyExperienceGoldActivity.this,HomeActivity.class);
+                intent.putExtra("flag",666);
+                startActivity(intent);
                 closeActivity();
             }
         });
@@ -154,4 +159,11 @@ public class MyExperienceGoldActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("flag",666);
+        startActivity(intent);
+        closeActivity();
+    }
 }

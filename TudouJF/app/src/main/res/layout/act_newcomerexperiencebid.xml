@@ -137,7 +137,7 @@
         android:paddingRight="10dp"
         android:text="@string/act_newcommerexperiencebid_jiaoyijilu"
         android:textColor="@color/color_black"
-        android:textSize="14sp"
+        android:textSize="12sp"
 
         />
 
@@ -154,7 +154,7 @@
             android:gravity="center"
             android:text="@string/act_newcommerexperiencebid_touziren"
             android:textColor="@color/color_black"
-            android:textSize="14sp"
+            android:textSize="12sp"
 
             />
 
@@ -166,7 +166,7 @@
             android:gravity="center"
             android:text="@string/touzijineyuan"
             android:textColor="@color/color_black"
-            android:textSize="14sp"
+            android:textSize="12sp"
 
             />
 
@@ -178,42 +178,51 @@
             android:gravity="center"
             android:text="@string/touzishijian"
             android:textColor="@color/color_black"
-            android:textSize="14sp"
+            android:textSize="12sp"
 
             />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_act_newcomerexperiencebid"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_act_newcomerexperiencebid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="#00000000"
-        android:dividerHeight="0dp"
-
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/global_background_color"
-
+        app:srlEnableRefresh="false"
+        app:srlEnableHeaderTranslationContent="false"
         >
-        <TextView
-            android:id="@+id/tv_act_newcomerexperiencebid_loadmore"
+        <ListView
+            android:id="@+id/lv_act_newcomerexperiencebid"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/xshape_roundrect_mborderwhite"
-            android:gravity="center"
-            android:text="@string/act_newcommerexperiencebid_dianjijiazaigengduo"
-            android:textColor="@color/color_gray"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:divider="#00000000"
+            android:dividerHeight="0dp"
+            />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/global_background_color"-->
+
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_act_newcomerexperiencebid_loadmore"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="28dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:background="@drawable/xshape_roundrect_mborderwhite"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/act_newcommerexperiencebid_dianjijiazaigengduo"-->
+            <!--android:textColor="@color/color_gray"-->
+            <!--android:textSize="12sp" />-->
+    <!--</LinearLayout>-->
 
 
 
@@ -222,6 +231,7 @@
         android:id="@+id/tv_act_newcomerexperiencebid_bidnow"
         android:layout_width="match_parent"
         android:layout_height="38dp"
+        android:layout_marginTop="5dp"
         android:background="@color/global_theme_background_color"
         android:gravity="center"
         android:text="@string/act_newcommerexperiencebid_lijitoubiao"

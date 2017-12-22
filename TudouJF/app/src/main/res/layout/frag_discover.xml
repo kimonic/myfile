@@ -13,11 +13,13 @@
         app:centerText="@string/frag_discover_discover"
         app:leftImage="@drawable/xvector_back" />
     <View
+        android:id="@+id/view_jiange"
         android:layout_width="match_parent"
         android:layout_height="12dp"
         android:background="@color/global_background_color" />
 
     <LinearLayout
+        android:id="@+id/ll_frag_discover_bttotal"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:background="@color/color_white"

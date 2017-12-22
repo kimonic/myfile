@@ -60,10 +60,14 @@ public class DiscoverFragment extends BaseFragment {
     LinearLayout llFragDiscoverBt2;
     @BindView(R.id.ll_frag_discover_bt3)
     LinearLayout llFragDiscoverBt3;
+    @BindView(R.id.ll_frag_discover_bttotal)
+    LinearLayout llFragDiscoverBtTotal;
     @BindView(R.id.lv_frag_discover)
     ListView lvFragDiscover;
     @BindView(R.id.srl_frag_discover)
     SmartRefreshLayout srl;
+    @BindView(R.id.view_jiange)
+    View vJianGe;
 
     private List<DiscoverBean.ItemsBean> list;
     private int page = 1;
@@ -116,6 +120,11 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        // TODO: 2017/12/22 暂时去掉按钮
+        llFragDiscoverBtTotal.setVisibility(View.GONE);
+        vJianGe.setVisibility(View.GONE);
+
+
 
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
 //        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
@@ -153,9 +162,9 @@ public class DiscoverFragment extends BaseFragment {
         lvFragDiscover.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getActivity(),WebActivity.class);
-                intent.putExtra("url",list.get(position).getJumpurl());
-                intent.putExtra("title",list.get(position).getName());
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", list.get(position).getJumpurl());
+                intent.putExtra("title", list.get(position).getName());
                 startActivity(intent);
 //                openActivity(WebActivity.class);
             }

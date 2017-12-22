@@ -256,7 +256,11 @@ public class HomeActivity extends BaseActivity {
                 vpActHome.setCurrentItem(beforePosition);
             } else {
                 vpActHome.setCurrentItem(0);
-                ((HomeFragment)(list.get(0))).initDataFromInternet();
+                try {
+                    ((HomeFragment)(list.get(0))).initDataFromInternet();
+                }catch (NullPointerException  e){
+
+                }
             }
         }
     }
@@ -272,6 +276,12 @@ public class HomeActivity extends BaseActivity {
             vpActHome.setCurrentItem(1);
         }else if (flag==55){
             vpActHome.setCurrentItem(0);
+        }else if (flag==666){
+            try {
+                ((HomeFragment)(list.get(0))).initDataFromInternet();
+            }catch (NullPointerException  e){
+
+            }
         }
 
     }

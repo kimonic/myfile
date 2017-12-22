@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.LoginActivity;
@@ -63,10 +66,12 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     TextView tvTouZiRenShu;
     @BindView(R.id.tv_act_newcomerexperiencebid_huankuanfangshi)
     TextView tvHuanKuanFangShi;
-    @BindView(R.id.tv_act_newcomerexperiencebid_loadmore)
-    TextView tvLoadMore;
+    //    @BindView(R.id.tv_act_newcomerexperiencebid_loadmore)
+//    TextView tvLoadMore;
     @BindView(R.id.tv_act_newcomerexperiencebid_bidnow)
     TextView tvBidNow;
+    @BindView(R.id.srl_act_newcomerexperiencebid)
+    SmartRefreshLayout srl;
 
     private NewcomerExperienceBidBean bean;
 
@@ -82,6 +87,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     private ExperienceListBean beanE;
     private AlertDialog promptDialog1;
 
+    private int status = 0;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_newcomerexperiencebid;
@@ -91,7 +98,9 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_newcomerexperiencebid_bidnow://立即投标
-                checkLogin();
+                if (status == 0) {
+                    checkLogin();
+                }
 
 //                if ("".equals(UserConfig.getInstance().getLogin(this))){
 //                openActivity(LoginActivity.class);
@@ -101,11 +110,11 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 //                    openActivity(MyExperienceGoldActivity.class);
 //                }
                 break;
-            case R.id.tv_act_newcomerexperiencebid_loadmore://点击加载更多
-//                page++;
-//                initDataFromInternet();
-                loadMore();
-                break;
+//            case R.id.tv_act_newcomerexperiencebid_loadmore://点击加载更多
+////                page++;
+////                initDataFromInternet();
+//                loadMore();
+//                break;
         }
 
     }
@@ -116,6 +125,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     private void loadMore() {
 
         if (beanE != null && !(page < beanE.getTotal_pages())) {
+            srl.finishLoadmore();
 
             ToastUtils.showToast(NewcomerExperienceBidActivity.this, R.string.meiyougengduola);
 
@@ -136,6 +146,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                         public void onError(Response<String> response) {
                             super.onError(response);
                             dismissPDialog();
+                            srl.finishLoadmore();
                             ToastUtils.showToast(NewcomerExperienceBidActivity.this, R.string.shujujiazaichucuo);
 
                         }
@@ -143,6 +154,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                         @Override
                         public void onSuccess(Response<String> response) {
                             dismissPDialog();
+                            srl.finishLoadmore();
                             String result = StringUtils.getDecodeString(response.body());
                             Log.e("TAG", "onSuccess:----体验标投资详情列表接口返回数据------------------- " + result);
                             BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ExperienceListBean>() {
@@ -177,7 +189,10 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
+
         loan_id = getIntent().getStringExtra("loan_id");
+        status = getIntent().getIntExtra("status", 0);
+
         list = new ArrayList<>();
 //        for (int i = 0; i < 10; i++) {
 //            ProductDetailsActBean bean = new ProductDetailsActBean();
@@ -203,12 +218,27 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             }
         });
 
+        if (status == 1) {
+            tvBidNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+        } else {
+            tvBidNow.setBackgroundColor(getResources().getColor(R.color.global_theme_background_color));
+        }
+
+
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
     }
 
     @Override
     public void initListener() {
         tvBidNow.setOnClickListener(this);
-        tvLoadMore.setOnClickListener(this);
+//        tvLoadMore.setOnClickListener(this);
+
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                loadMore();
+            }
+        });
 
     }
 
@@ -328,15 +358,15 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
                         touZi();//确认投资
                     } else {//未实名
-                        if (promptDialog1==null){
-                            promptDialog1=DialogUtils.showPromptDialog(NewcomerExperienceBidActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                        if (promptDialog1 == null) {
+                            promptDialog1 = DialogUtils.showPromptDialog(NewcomerExperienceBidActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
                                 @Override
                                 public void onClick() {
                                     promptDialog1.dismiss();
                                     openActivity(RealNameAuthenticationHuiFuActivity.class);
                                 }
                             });
-                        }else {
+                        } else {
                             promptDialog1.show();
                         }
 //                        DialogUtils.showDialog(NewcomerExperienceBidActivity.this, R.string.xitongjiancedaoninweishiming, R.string.queding, new DialogInterface.OnClickListener() {
@@ -404,6 +434,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     }
 
     //-----------------------------检测用户是否登陆与身份是否已实名-------------------------------------
+
 
 
 }

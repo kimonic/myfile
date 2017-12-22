@@ -10,7 +10,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_web"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_web_title"
         app:leftImage="@drawable/xvector_back" />

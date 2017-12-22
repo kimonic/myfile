@@ -112,7 +112,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
             case R.id.tv_zhaiquanzhuanrangxieyi://债权转让协议
                 Intent intent = new Intent(this, WebActivity.class);
                 Log.e("TAG", "onClick:tender_idtender_idtender_id -----" + tender_id);
-
                 intent.putExtra("url", Constants.ZHAI_QUAN_XIE_YI + tender_id);
                 intent.putExtra("title", getResources().getString(R.string.zhaiquanzhuanrangxieyi));
                 startActivity(intent);
@@ -190,8 +189,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        dismissPDialog();
 
+                        dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的债权项目详情接口返回数据--------" + type + "----" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
@@ -217,11 +216,11 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
+
             if (type == 1) {
                 tvBidNameBuy.setText(bean.getLoan_name());
                 tvCreditorValueBuy.setText(bean.getAmount_money());
                 tvCreditorValueBuy.setText(bean.getAmount_money());
-
 
                 tvExpireDateBuy.setText(bean.getExpire_time());
                 tvPeriodsBuy.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));
@@ -243,6 +242,20 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 tvReturnDate.setText(bean.getRecover_time());
                 tvPeriods.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));
                 etTransferScale.setHint(("请输入转让系数:" + bean.getTransfer_coefficient_min() + "-" + bean.getTransfer_coefficient_max()));
+
+
+                // TODO: 2017/12/22  转让状态调整,待核实
+                if (bean.getCoefficient()!=null){//转让中状态
+                    etTransferScale.setText(bean.getCoefficient());
+
+                    etTransferScale.setKeyListener(null);
+//                    tvBuyNow.setVisibility(View.GONE);
+                    tvBuyNow.setText("转让中");
+                    tvBuyNow.setClickable(false);
+                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+
+
+                }
             }
 
 

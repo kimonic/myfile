@@ -1,6 +1,7 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,8 +73,9 @@ public class SpecialOfferActLvAdapter extends BaseAdapter {
         }
 
         viewHolder.textView1.setText(list.get(position).getName());
-        viewHolder.textView2.setText((StringUtils.getStrTime(list.get(position).getAddTime().toString())+"--"+
-                StringUtils.getStrTime(list.get(position).getEndTime().toString())));
+
+        viewHolder.textView2.setText((StringUtils.getStrTime(list.get(position).getAddTime())+"--"+
+                StringUtils.getStrTime(list.get(position).getEndTime())));
 //        viewHolder.imageView.setImageResource(list.get(position).getImage());
         ImageGlideUtils.loadImage(viewHolder.imageView,list.get(position).getImage());
 

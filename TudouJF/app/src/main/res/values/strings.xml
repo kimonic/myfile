@@ -318,10 +318,10 @@
     <string name="act_recommendrecord_date">日期</string>
     <string name="act_nowrecommend_title">立即推荐</string>
     <string name="act_invitationawardexplain_title">推广奖励说明</string>
-    <string name="act_invitationawardexplain_1">1.邀请好友或其他朋友注册成功,即可简历推广关系;</string>
-    <string name="act_invitationawardexplain_2">2.好友或其他朋友投资成功,系统将自动根据投资提成比例给予奖励;</string>
+    <string name="act_invitationawardexplain_1">1.邀请好友或其他朋友注册成功,即可建立推广关系;</string>
+    <string name="act_invitationawardexplain_2">2.好友或其他朋友投资成功,系统将自动根据投资推广抽成比例给予奖励;</string>
     <string name="act_invitationawardexplain_3">3.好友或其他朋友借款成功,还款时系统自动根据借款推广抽成比例给予奖励;</string>
-    <string name="act_invitationawardexplain_4">4.推广奖励提成的算法;</string>
+    <!--<string name="act_invitationawardexplain_4">4.推广奖励提成的算法;</string>-->
     <string name="huishouzhong">回收中</string>
     <string name="kezhuanrang">可转让</string>
     <string name="huikuanzhong">回款中</string>
@@ -652,6 +652,8 @@
     <string name="toubiaozhong">投标中</string>
     <string name="zhengzaishuaxin">\t\t正在刷新\t\t</string>
     <string name="zhaiquanzhuanrangxieyi">债权转让协议</string>
+    <string name="jiesuanchenggong">结算成功!</string>
+    <string name="jiesuanshibai">结算失败!</string>
 
 
 </resources>

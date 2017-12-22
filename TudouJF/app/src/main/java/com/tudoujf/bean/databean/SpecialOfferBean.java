@@ -1,6 +1,5 @@
 package com.tudoujf.bean.databean;
 
-import com.google.gson.JsonElement;
 import com.tudoujf.base.BaseBean;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class SpecialOfferBean implements BaseBean {
     private int epage;
     private int total_items;
     private int total_pages;
-    private JsonElement params;
+    private String params;
     private List<ItemsBean> items;
 
     public int getPage() {
@@ -67,11 +66,11 @@ public class SpecialOfferBean implements BaseBean {
         this.total_pages = total_pages;
     }
 
-    public JsonElement getParams() {
+    public String getParams() {
         return params;
     }
 
-    public void setParams(JsonElement params) {
+    public void setParams(String params) {
         this.params = params;
     }
 
@@ -103,18 +102,18 @@ public class SpecialOfferBean implements BaseBean {
 
         private String id;
         private String name;
-        private JsonElement summary;
+        private String summary;
         private String sortIndex;
         private String foreverStatus;
-        private JsonElement category;
-        private JsonElement status;
-        private JsonElement startTime;
-        private JsonElement endTime;
+        private String category;
+        private String status;
+        private String startTime;
+        private String endTime;
         private String image;
         private String jumpurl;
-        private JsonElement contents;
-        private JsonElement addTime;
-        private JsonElement ranking;
+        private String contents;
+        private String addTime;
+        private String ranking;
 
         public String getId() {
             return id;
@@ -132,11 +131,11 @@ public class SpecialOfferBean implements BaseBean {
             this.name = name;
         }
 
-        public JsonElement getSummary() {
+        public String getSummary() {
             return summary;
         }
 
-        public void setSummary(JsonElement summary) {
+        public void setSummary(String summary) {
             this.summary = summary;
         }
 
@@ -156,35 +155,35 @@ public class SpecialOfferBean implements BaseBean {
             this.foreverStatus = foreverStatus;
         }
 
-        public JsonElement getCategory() {
+        public String getCategory() {
             return category;
         }
 
-        public void setCategory(JsonElement category) {
+        public void setCategory(String category) {
             this.category = category;
         }
 
-        public JsonElement getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(JsonElement status) {
+        public void setStatus(String status) {
             this.status = status;
         }
 
-        public JsonElement getStartTime() {
+        public String getStartTime() {
             return startTime;
         }
 
-        public void setStartTime(JsonElement startTime) {
+        public void setStartTime(String startTime) {
             this.startTime = startTime;
         }
 
-        public JsonElement getEndTime() {
+        public String getEndTime() {
             return endTime;
         }
 
-        public void setEndTime(JsonElement endTime) {
+        public void setEndTime(String endTime) {
             this.endTime = endTime;
         }
 
@@ -204,27 +203,27 @@ public class SpecialOfferBean implements BaseBean {
             this.jumpurl = jumpurl;
         }
 
-        public JsonElement getContents() {
+        public String getContents() {
             return contents;
         }
 
-        public void setContents(JsonElement contents) {
+        public void setContents(String contents) {
             this.contents = contents;
         }
 
-        public JsonElement getAddTime() {
+        public String getAddTime() {
             return addTime;
         }
 
-        public void setAddTime(JsonElement addTime) {
+        public void setAddTime(String addTime) {
             this.addTime = addTime;
         }
 
-        public JsonElement getRanking() {
+        public String getRanking() {
             return ranking;
         }
 
-        public void setRanking(JsonElement ranking) {
+        public void setRanking(String ranking) {
             this.ranking = ranking;
         }
     }
