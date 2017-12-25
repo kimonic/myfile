@@ -11,6 +11,7 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.myprojectfrag.MyProjectCreditorFragment;
+import com.tudoujf.fragment.myprojectfrag.MyProjectInvestFragment;
 import com.tudoujf.fragment.myprojectfrag.MyProjectTotalFragment;
 import com.tudoujf.ui.DateFilterDialog;
 import com.tudoujf.ui.UnderlineTextView;
@@ -45,12 +46,12 @@ public class MyProjectActivity extends BaseActivity {
 //    @BindView(R.id.utv_act_myproject_total)
 //    UnderlineTextView utvTotal;
     @BindView(R.id.utv_act_myproject_touzixiangmu)
-    UnderlineTextView utvTouZiXiangMu;
+    TextView utvTouZiXiangMu;
     @BindView(R.id.utv_act_myproject_zhaiquanxiangmu)
-    UnderlineTextView utvZhaiQuanXiangMu;
+    TextView utvZhaiQuanXiangMu;
 
 
-    private List<UnderlineTextView> list;
+    private List<TextView> list;
     private List<Fragment> listFrag;
     private DateFilterDialog dateFilterDialog;
     private int currentItem = 0;
@@ -105,9 +106,9 @@ public class MyProjectActivity extends BaseActivity {
 //                ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
 //                break;
             case 0:
-                ((MyProjectTotalFragment) listFrag.get(0)).setStart_time(startTime);
-                ((MyProjectTotalFragment) listFrag.get(0)).setEnd_time(endTime);
-                ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
+                ((MyProjectInvestFragment) listFrag.get(0)).getCurrentFragRefresh(startTime,endTime);
+//                ((MyProjectInvestFragment) listFrag.get(0)).setEnd_time(endTime);
+//                ((MyProjectInvestFragment) listFrag.get(0)).initDataFromInternet();
                 break;
             case 1:
                 ((MyProjectCreditorFragment) listFrag.get(1)).setStart_time(startTime);
@@ -123,7 +124,7 @@ public class MyProjectActivity extends BaseActivity {
 //        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
 
 
-        MyProjectTotalFragment fragment2 = new MyProjectTotalFragment();
+        MyProjectInvestFragment fragment2 = new MyProjectInvestFragment();
 
 
         MyProjectCreditorFragment fragment3 = new MyProjectCreditorFragment();
@@ -148,7 +149,6 @@ public class MyProjectActivity extends BaseActivity {
         vpActMyproject.setOffscreenPageLimit(2);
 
 
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyproject.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActMyproject.setLayoutParams(params);
@@ -185,11 +185,9 @@ public class MyProjectActivity extends BaseActivity {
     private void setButStyle(int position) {
         for (int i = 0; i < list.size(); i++) {
             if (i == position) {
-                list.get(i).setUnderlinecolor(R.color.global_theme_background_color);
-                list.get(i).setTextColor(getResources().getColor(R.color.global_theme_background_color));
+                list.get(i).setTextColor(getResources().getColor(R.color.color_white));
             } else {
-                list.get(i).setUnderlinecolor(R.color.color_white);
-                list.get(i).setTextColor(getResources().getColor(R.color.color_black));
+                list.get(i).setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
             }
         }
 

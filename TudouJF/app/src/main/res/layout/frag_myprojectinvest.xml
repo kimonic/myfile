@@ -7,6 +7,9 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         >
         <TextView
             android:id="@+id/tv_frag_myprojectinvest1"
@@ -16,6 +19,16 @@
             android:text="投标中"
             android:gravity="center"
             android:textSize="14sp"
+            android:textColor="@color/global_theme_background_color"
+            android:background="@color/frag_managemoneymatterschild_bac"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_line"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+
             />
         <TextView
             android:id="@+id/tv_frag_myprojectinvest2"
@@ -25,7 +38,14 @@
             android:text="回款中"
             android:gravity="center"
             android:textSize="14sp"
+            android:textColor="@color/color_black"
             />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_line"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"/>
         <TextView
             android:id="@+id/tv_frag_myprojectinvest3"
             android:layout_width="0dp"
@@ -34,6 +54,7 @@
             android:text="已结清"
             android:gravity="center"
             android:textSize="14sp"
+            android:textColor="@color/color_black"
             />
 
     </LinearLayout>
@@ -41,6 +62,8 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_frag_myprojectinvest"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="14dp"
+        />
 
 </LinearLayout>

@@ -262,26 +262,26 @@ public class MyProjectTotalFragment extends BaseFragment {
                 repayment.addAll(bean.getRepayment());
             }
 
-            if (alreadyAdapter == null) {
-                alreadyAdapter = new MyProjectTotalFragLvAdapter(getActivity(), already);
-                lvAlready.setAdapter(alreadyAdapter);
-            } else {
-                alreadyAdapter.notifyDataSetChanged();
-            }
+//            if (alreadyAdapter == null) {
+//                alreadyAdapter = new MyProjectTotalFragLvAdapter(getActivity(), already);
+//                lvAlready.setAdapter(alreadyAdapter);
+//            } else {
+//                alreadyAdapter.notifyDataSetChanged();
+//            }
 
-            if (underwayAdapter == null) {
-                underwayAdapter = new MyProjectTotalFragLvAdapter(getActivity(), underway);
-                lvUnderway.setAdapter(underwayAdapter);
-            } else {
-                underwayAdapter.notifyDataSetChanged();
-            }
-
-            if (repaymentAdapter == null) {
-                repaymentAdapter = new MyProjectTotalFragLvAdapter(getActivity(), repayment);
-                lvRepayment.setAdapter(repaymentAdapter);
-            } else {
-                repaymentAdapter.notifyDataSetChanged();
-            }
+//            if (underwayAdapter == null) {
+//                underwayAdapter = new MyProjectTotalFragLvAdapter(getActivity(), underway);
+//                lvUnderway.setAdapter(underwayAdapter);
+//            } else {
+//                underwayAdapter.notifyDataSetChanged();
+//            }
+//
+//            if (repaymentAdapter == null) {
+//                repaymentAdapter = new MyProjectTotalFragLvAdapter(getActivity(), repayment);
+//                lvRepayment.setAdapter(repaymentAdapter);
+//            } else {
+//                repaymentAdapter.notifyDataSetChanged();
+//            }
 
 
         }

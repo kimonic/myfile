@@ -654,6 +654,8 @@
     <string name="zhaiquanzhuanrangxieyi">债权转让协议</string>
     <string name="jiesuanchenggong">结算成功!</string>
     <string name="jiesuanshibai">结算失败!</string>
+    <string name="qingxuanzeninxuyaoxufeidetaocan">请选择您需要续费的套餐</string>
+    <string name="lijixufei">立即续费</string>
 
 
 </resources>

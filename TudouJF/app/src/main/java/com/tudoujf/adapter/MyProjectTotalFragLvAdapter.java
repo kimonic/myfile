@@ -11,6 +11,7 @@ import com.tudoujf.R;
 import com.tudoujf.activity.my.myproject.MyCreditorRightsDetailsActivity;
 import com.tudoujf.activity.my.myproject.MyInvestDetailsActivity;
 import com.tudoujf.bean.databean.MyInvestProjectBean;
+import com.tudoujf.bean.databean.MyProjectInvestChildBean;
 import com.tudoujf.fragment.myprojectfrag.MyProjectTotalFragBean;
 import com.tudoujf.ui.MyProjectBidView;
 import com.tudoujf.utils.StringUtils;
@@ -33,9 +34,9 @@ import java.util.List;
 
 public class MyProjectTotalFragLvAdapter extends BaseAdapter {
     private Context context;
-    private List<MyInvestProjectBean.UnderwayBean> list;
+    private List<MyProjectInvestChildBean.ItemsBean> list;
 
-    public MyProjectTotalFragLvAdapter(Context context, List<MyInvestProjectBean.UnderwayBean> list) {
+    public MyProjectTotalFragLvAdapter(Context context, List<MyProjectInvestChildBean.ItemsBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -74,11 +75,11 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
 //        if (!"".equals(list.get(position).getFlag())){
 //            skip=true;
 //        }
-        viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标题
+        viewHolder.bidView.setTitle(list.get(position).getName());//标题
         viewHolder.bidView.setTransfer("");//右标题
         viewHolder.bidView.setZhaiQuanJiaZhi(list.get(position).getAmount());//投资金额
         viewHolder.bidView.setYuanBiaoNianHuaShouYi(list.get(position).getRecover_interest());//预期收益
-        viewHolder.bidView.setTransferPrice(StringUtils.getStrTime(list.get(position).getExpire_time().toString()));//回款时间
+        viewHolder.bidView.setTransferPrice(StringUtils.getStrTime(list.get(position).getNext_repay_time()));//回款时间
         viewHolder.bidView.setExplain1("投资金额(元)");
         viewHolder.bidView.setExplain2("预期收益(元)");
         viewHolder.bidView.setExplain3("回款时间");

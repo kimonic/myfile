@@ -1,6 +1,9 @@
 package com.tudoujf.activity.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,6 +21,8 @@ import com.tudoujf.fragment.DiscoverFragment;
 import com.tudoujf.fragment.HomeFragment;
 import com.tudoujf.fragment.ManageMoneyMattersFragment;
 import com.tudoujf.fragment.MyFragment;
+import com.tudoujf.jpush.ExampleUtil;
+import com.tudoujf.jpush.LocalBroadcastManager;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.DialogUtils;
@@ -28,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * * ================================================
@@ -67,7 +73,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+//        registerMessageReceiver();  //jpush相关
+//        init();//jpush相关
     }
 
     @Override
@@ -248,6 +255,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
+//        isForeground = true;//jpush相关
         super.onResume();
         //----------------------------可能会对页面跳转产生影响-------------------------------------
         checkLogin();
@@ -285,4 +293,72 @@ public class HomeActivity extends BaseActivity {
         }
 
     }
+
+//    @Override
+//    protected void onDestroy() {
+////        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+//        super.onDestroy();
+//    }
+//
+//    @Override
+//    protected void onPause() {
+////        isForeground = false;//jpush相关
+//        super.onPause();
+//    }
+
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    private MessageReceiver mMessageReceiver;
+//    public static boolean isForeground = false;
+//    public static final String MESSAGE_RECEIVED_ACTION = "com.tudoujf.MESSAGE_RECEIVED_ACTION";
+//    public static final String KEY_TITLE = "title";
+//    public static final String KEY_MESSAGE = "message";
+//    public static final String KEY_EXTRAS = "extras";
+//    // 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
+//    private void init(){
+//        JPushInterface.init(getApplicationContext());
+//    }
+//
+//
+//    public void registerMessageReceiver() {
+//        Log.e("TAG", "onReceive: --推送接收-注册通知--");
+//        Log.e("TAG", "onReceive: --推送接收-注册通知--"+getPackageName());
+//        mMessageReceiver = new MessageReceiver();
+//        IntentFilter filter = new IntentFilter();
+//        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+//        filter.addAction(MESSAGE_RECEIVED_ACTION);
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
+//    }
+//
+//
+//    public class MessageReceiver extends BroadcastReceiver {
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            Log.e("TAG", "onReceive: --推送接收---"+intent.getAction());
+//
+//            try {
+//                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+//                    String messge = intent.getStringExtra(KEY_MESSAGE);
+//                    String extras = intent.getStringExtra(KEY_EXTRAS);
+//                    StringBuilder showMsg = new StringBuilder();
+//                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+//                    if (!ExampleUtil.isEmpty(extras)) {
+//                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
+//                    }
+////                    setCostomMsg(showMsg.toString());
+//                }
+//            } catch (Exception e){
+//            }
+//        }
+//    }
+//
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush添加---------------------------------------------
+
 }

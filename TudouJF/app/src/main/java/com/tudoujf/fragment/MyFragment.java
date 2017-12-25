@@ -257,6 +257,7 @@ public class MyFragment extends BaseFragment {
                 if (bean != null && "1".equals(bean.getIs_trust())) {
                     Intent intent1 = new Intent(getActivity(), VIPActivity.class);
                     intent1.putExtra("balance", StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
+                    intent1.putExtra("isvip", bean.getIsVip());
                     startActivity(intent1);
                 } else {
                     DialogUtils.showDialog(getActivity(), R.string.qingxianshimingrenzheng, R.string.queding, new DialogInterface.OnClickListener() {
@@ -471,9 +472,11 @@ public class MyFragment extends BaseFragment {
 
 
             if ("1".equals(bean.getIsVip())) {
-                ivVip.setImageResource(R.drawable.frag_my_vipt);
+                tvVipapply.setText(R.string.frag_my_shenqingvip);
+                tvVipapply.setText("    续费    ");
             } else {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
+                ivVip.setImageResource(R.drawable.frag_my_vipt);
             }
 
             if ("1".equals(bean.getIs_trust())) {

@@ -128,7 +128,7 @@ public class HomeFragment extends BaseFragment {
     ImageView ivMsgCount;
     @BindView(R.id.tv_frag_msgcount)
     TextView tvMsgCount;
-//    @BindView(R.id.drag_frame)
+    //    @BindView(R.id.drag_frame)
 //    FrameLayout dragFrame;
     private List<ImageView> list;
     private List<BallView> listBall;
@@ -266,9 +266,12 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.fl_frag_msgcount://启动我的消息页面
-                Intent intent = new Intent(getActivity(), MyMessageActivity.class);
-                startActivityForResult(intent, 1);
-
+                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+                    openActivity(LoginActivity.class);
+                } else {
+                    Intent intent = new Intent(getActivity(), MyMessageActivity.class);
+                    startActivityForResult(intent, 1);
+                }
 //                openActivity(MyMessageActivity.class);
                 break;
         }
@@ -783,7 +786,7 @@ public class HomeFragment extends BaseFragment {
             if ("2".equals(loanBeanList.get(position).getAward_status())) {
                 aivFragHome.setVisibility(View.VISIBLE);
 
-                aivFragHome.setText("奖"+loanBeanList.get(position).getAward_proportion().toString()+"%");
+                aivFragHome.setText("奖" + loanBeanList.get(position).getAward_proportion().toString() + "%");
                 aivFragHome.invalidate();
             } else {
                 aivFragHome.setVisibility(View.INVISIBLE);

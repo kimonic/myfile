@@ -20,6 +20,7 @@ import org.litepal.LitePal;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 /**
@@ -67,6 +68,8 @@ public class MApp extends Application {
         /**---------------------友盟平台配置-----------------------------------------------------------*/
         UMShareAPI.get(this);
         /**---------------------友盟平台配置-----------------------------------------------------------*/
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
 

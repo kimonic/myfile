@@ -55,11 +55,13 @@ public class VIPActivity extends BaseActivity {
     TextView tvActVipAmount;
     @BindView(R.id.tv_act_vip_apply_now)
     TextView tvActVipApplyNow;
+    @BindView(R.id.tv_act_vip_description)
+    TextView tvDescription;
 
     private List<LinearLayout> list;
-    private String money="30";
-    private String cycle="1";
-    private String categoryInd="vip1";
+    private String money = "30";
+    private String cycle = "1";
+    private String categoryInd = "vip1";
 
     @Override
     public int getLayoutResId() {
@@ -70,35 +72,35 @@ public class VIPActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_vip_one:
-                money="30";
-                cycle="1";
-                categoryInd="vip1";
+                money = "30";
+                cycle = "1";
+                categoryInd = "vip1";
                 setBac(0);
                 break;
             case R.id.ll_act_vip_three:
-                money="50.00";
-                cycle="3";
-                categoryInd="vip3";
+                money = "50.00";
+                cycle = "3";
+                categoryInd = "vip3";
                 setBac(1);
                 break;
             case R.id.ll_act_vip_six:
-                money="80.00";
-                cycle="6";
-                categoryInd="vip6";
+                money = "80.00";
+                cycle = "6";
+                categoryInd = "vip6";
                 setBac(2);
                 break;
             case R.id.ll_act_vip_year:
-                money="120.00";
-                cycle="12";
-                categoryInd="vip";
+                money = "120.00";
+                cycle = "12";
+                categoryInd = "vip";
                 setBac(3);
                 break;
             case R.id.tv_act_vip_apply_now:
 //                applyVip();
-                Intent intent=new Intent(this,VIPHuiFuBuyActivity.class);
-                intent.putExtra("money",money);
-                intent.putExtra("cycle",cycle);
-                intent.putExtra("categoryInd",categoryInd);
+                Intent intent = new Intent(this, VIPHuiFuBuyActivity.class);
+                intent.putExtra("money", money);
+                intent.putExtra("cycle", cycle);
+                intent.putExtra("categoryInd", categoryInd);
                 startActivity(intent);
                 break;
 //                 case R.id.:break;
@@ -120,6 +122,15 @@ public class VIPActivity extends BaseActivity {
     public void initDataFromIntent() {
         String balance = getIntent().getStringExtra("balance");
         tvActVipAmount.setText(balance);
+
+        String isvip=getIntent().getStringExtra("isvip");
+        if ("1".equals(isvip)){
+            tvDescription.setText(R.string.qingxuanzeninxuyaoxufeidetaocan);
+            tvActVipApplyNow.setText(R.string.lijixufei);
+        }else {
+            tvDescription.setText(R.string.qingxuanzeninyaoshenqingdetaocan);
+            tvActVipApplyNow.setText(R.string.lijishenqing);
+        }
     }
 
     @Override
@@ -148,7 +159,7 @@ public class VIPActivity extends BaseActivity {
         mtbActVip.getRightTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               openActivity(VIPRecordActivity.class);
+                openActivity(VIPRecordActivity.class);
             }
         });
 
@@ -165,7 +176,8 @@ public class VIPActivity extends BaseActivity {
 
 
     }
-    private void applyVip(){
+
+    private void applyVip() {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
@@ -173,7 +185,7 @@ public class VIPActivity extends BaseActivity {
         map.put("cycle", cycle);
         map.put("categoryInd", categoryInd);
 
-        Log.e("TAG", "VIP申请接口返回数据: -login_token----"+ UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "VIP申请接口返回数据: -login_token----" + UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, this.getLocalClassName(),
                 new StringCallback() {
@@ -192,7 +204,6 @@ public class VIPActivity extends BaseActivity {
 //                            ToastUtils.showToast(VIPActivity.this, R.string.shujujiazaichucuo);
 //                        }
                     }
-
 
 
                     @Override

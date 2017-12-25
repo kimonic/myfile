@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/global_background_color"
     android:orientation="vertical">
+
     <FrameLayout
         android:id="@+id/mtb_act_myproject"
         android:layout_width="match_parent"
@@ -19,13 +21,45 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/xvector_back" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/act_myproject_title"
-            android:textColor="@color/color_white"
-            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/utv_act_myproject_touzixiangmu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:textColor="@color/color_white"
+                android:textSize="16sp"
+                android:text="@string/act_myproject_touzixiangmu"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:id="@+id/utv_act_myproject_zhaiquanxiangmu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:textColor="@color/act_mymessage_unselcolor"
+                android:textSize="16sp"
+                android:text="@string/act_myproject_zhaiquanxiangmu"
+                android:gravity="center"
+
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_act_myproject_filtrate"
@@ -54,14 +88,14 @@
         </LinearLayout>
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:background="@color/act_infopublish_bac"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingTop="3dp"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:background="@color/act_infopublish_bac"-->
+        <!--android:paddingLeft="30dp"-->
+        <!--android:paddingRight="30dp"-->
+        <!--android:paddingTop="3dp"-->
+        <!--android:orientation="horizontal">-->
 
         <!--<com.tudoujf.ui.UnderlineTextView-->
             <!--android:id="@+id/utv_act_myproject_total"-->
@@ -74,34 +108,33 @@
             <!--android:textSize="14sp"-->
             <!--app:underlinecolor="@color/global_theme_background_color" />-->
 
-        <com.tudoujf.ui.UnderlineTextView
-            android:id="@+id/utv_act_myproject_touzixiangmu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/act_myproject_touzixiangmu"
-            android:textColor="@color/global_theme_background_color"
-            app:underlinecolor="@color/global_theme_background_color"
-            android:textSize="14sp" />
+        <!--<com.tudoujf.ui.UnderlineTextView-->
+            <!--android:id="@+id/utv_act_myproject_touzixiangmu"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/act_myproject_touzixiangmu"-->
+            <!--android:textColor="@color/global_theme_background_color"-->
+            <!--app:underlinecolor="@color/global_theme_background_color"-->
+            <!--android:textSize="14sp" />-->
 
-        <com.tudoujf.ui.UnderlineTextView
-            android:id="@+id/utv_act_myproject_zhaiquanxiangmu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/act_myproject_zhaiquanxiangmu"
-            android:textColor="@color/color_black"
-            android:textSize="14sp" />
-    </LinearLayout>
+        <!--<com.tudoujf.ui.UnderlineTextView-->
+            <!--android:id="@+id/utv_act_myproject_zhaiquanxiangmu"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/act_myproject_zhaiquanxiangmu"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:textSize="14sp" />-->
+    <!--</LinearLayout>-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_act_myproject"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="10dp"
         />
 
 

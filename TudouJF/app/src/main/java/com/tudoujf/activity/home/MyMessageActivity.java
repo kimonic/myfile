@@ -38,9 +38,9 @@ public class MyMessageActivity extends BaseActivity {
     TextView tvMyMessage;
     @BindView(R.id.tv_act_mymessage_bac)
     TextView tvBac;
-     @BindView(R.id.tv_act_mymessage_myshengyu)
+    @BindView(R.id.tv_act_mymessage_myshengyu)
     TextView tvMyShengYu;
-     @BindView(R.id.tv_act_mymessage_systemshengyu)
+    @BindView(R.id.tv_act_mymessage_systemshengyu)
     TextView tvSystemShengYu;
     @BindView(R.id.vp_act_mymessage)
     ViewPager vpActMymessage;
@@ -48,8 +48,10 @@ public class MyMessageActivity extends BaseActivity {
     FrameLayout flActMymessage;
 
     private List<Fragment> list;
-    /**消息未读数量*/
-    private int messageCount=0;
+    /**
+     * 消息未读数量
+     */
+    private int messageCount = 0;
 
     @Override
     public int getLayoutResId() {
@@ -60,20 +62,21 @@ public class MyMessageActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_mymessage_bac:
-                Intent intent=new Intent();
-                intent.putExtra("msgcount",messageCount);
-                setResult(messageCount,intent);//返回结果
+                Intent intent = new Intent();
+                intent.putExtra("msgcount", messageCount);
+                setResult(messageCount, intent);//返回结果
                 closeActivity();
                 break;
             case R.id.tv_act_mymessage_systemmessage:
                 tvSystemMessage.setTextColor(getResources().getColor(R.color.color_white));
                 tvMyMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
-                vpActMymessage.setCurrentItem(0);
+                vpActMymessage.setCurrentItem(1);
+
                 break;
             case R.id.tv_act_mymessage_mymessage:
                 tvMyMessage.setTextColor(getResources().getColor(R.color.color_white));
                 tvSystemMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
-                vpActMymessage.setCurrentItem(1);
+                vpActMymessage.setCurrentItem(0);
                 break;
         }
     }
@@ -96,20 +99,20 @@ public class MyMessageActivity extends BaseActivity {
     }
 
     private void initFragmentList() {
-        list=new ArrayList<>();
-        SystemMessageFragment   fragment1=new SystemMessageFragment();
-        Bundle bundle=new Bundle();
-        bundle.putInt("type",2);
+        list = new ArrayList<>();
+        SystemMessageFragment fragment1 = new SystemMessageFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 2);
         fragment1.setArguments(bundle);
 
 
-        SystemMessageFragment   fragment2=new SystemMessageFragment();
-        Bundle bundle1=new Bundle();
-        bundle1.putInt("type",1);
+        SystemMessageFragment fragment2 = new SystemMessageFragment();
+        Bundle bundle1 = new Bundle();
+        bundle1.putInt("type", 1);
         fragment2.setArguments(bundle1);
 
-        list.add(fragment1);
         list.add(fragment2);
+        list.add(fragment1);
     }
 
     @Override
@@ -125,12 +128,12 @@ public class MyMessageActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position==0){
-                    tvSystemMessage.setTextColor(getResources().getColor(R.color.color_white));
-                    tvMyMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
-                }else {
+                if (position == 0) {
                     tvMyMessage.setTextColor(getResources().getColor(R.color.color_white));
                     tvSystemMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+                } else {
+                    tvSystemMessage.setTextColor(getResources().getColor(R.color.color_white));
+                    tvMyMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
                 }
 
             }
@@ -165,33 +168,34 @@ public class MyMessageActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent();
-        intent.putExtra("msgcount",messageCount);
-        setResult(messageCount,intent);//返回结果
+        Intent intent = new Intent();
+        intent.putExtra("msgcount", messageCount);
+        setResult(messageCount, intent);//返回结果
         super.onBackPressed();
     }
 
-    /**消息未读数量*/
-    public void unreadMessageCount(int  count){
-        messageCount=count;
+    /**
+     * 消息未读数量
+     */
+    public void unreadMessageCount(int count) {
+        messageCount = count;
     }
 
 
-
-    public void setTvMyShengYu(String s,int  flag){
+    public void setTvMyShengYu(String s, int flag) {
         tvMyShengYu.setText(s);
-        if (flag==1){
+        if (flag == 1) {
             tvMyShengYu.setVisibility(View.GONE);
-        }else {
+        } else {
             tvMyShengYu.setVisibility(View.VISIBLE);
         }
     }
 
-    public void setTvSystemShengYu(String s,int  flag){
+    public void setTvSystemShengYu(String s, int flag) {
         tvSystemShengYu.setText(s);
-        if (flag==1){
+        if (flag == 1) {
             tvSystemShengYu.setVisibility(View.GONE);
-        }else {
+        } else {
             tvSystemShengYu.setVisibility(View.VISIBLE);
         }
     }
@@ -200,10 +204,10 @@ public class MyMessageActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus){
-            tvMyMessage.setTextColor(getResources().getColor(R.color.color_white));
-            tvSystemMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
-            vpActMymessage.setCurrentItem(1);
-        }
+//        if (hasFocus){
+//            tvMyMessage.setTextColor(getResources().getColor(R.color.color_white));
+//            tvSystemMessage.setTextColor(getResources().getColor(R.color.act_mymessage_unselcolor));
+//            vpActMymessage.setCurrentItem(1);
+//        }
     }
 }

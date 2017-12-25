@@ -1,8 +1,3 @@
-##########---------------------------------友情提示---------------------------------------##########
-
-#                         本文件非高手不要妄动,否则你会有各种各样的奇妙之旅                        #
-
-##########---------------------------------友情提示---------------------------------------##########
 
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
@@ -464,3 +459,16 @@
 
 
 
+#########################################极光推送##################################################
+
+-dontoptimize
+-dontpreverify
+
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+-keep class * extends cn.jpush.android.helpers.JPushMessageReceiver { *; }
+
+-dontwarn cn.jiguang.**
+-keep class cn.jiguang.** { *; }
+
+#########################################极光推送##################################################
