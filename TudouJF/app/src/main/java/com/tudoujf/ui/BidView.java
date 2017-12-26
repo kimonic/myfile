@@ -344,13 +344,13 @@ public class BidView extends View {
         float line4X = (width * 0.6795f) * investProgress + line1X;
         float line2Y = width * 0.2857f;
 //        cyanPaint.setStrokeWidth(width * 0.0057f);
-        cyanPaint.setStrokeWidth(8);
+        cyanPaint.setStrokeWidth(5);
         canvas.drawLine(line1X, line2Y, line4X, line2Y, cyanPaint);
         //--------------------------------------进度条蓝色线-------------------------------------------
 
         //--------------------------------------进度条灰色线-------------------------------------------
 //        grayLinePaint.setStrokeWidth(width * 0.0057f);
-        grayLinePaint.setStrokeWidth(8);
+        grayLinePaint.setStrokeWidth(5);
         float line6X = width * 0.71759f;
         canvas.drawLine(line4X, line2Y, line6X, line2Y, grayLinePaint);
         //--------------------------------------进度条灰色线-------------------------------------------

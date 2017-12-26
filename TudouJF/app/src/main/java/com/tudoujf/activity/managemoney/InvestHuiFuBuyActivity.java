@@ -178,9 +178,12 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
 //                finish();
 //            } else
             if (url.contains(Constants.STATUS_CLOSE)) {
-                UserConfig.getInstance().setCreditorFlush(true);
+                UserConfig.getInstance().setInvestFlush(true);
 //                openActivity(HomeActivity.class);
-                openActivity(MyProjectActivity.class);
+                Intent intent=new Intent(InvestHuiFuBuyActivity.this,MyProjectActivity.class);
+                intent.putExtra("flag","creditor");
+                startActivity(intent);
+//                openActivity(MyProjectActivity.class);
                 finish();
             }
 

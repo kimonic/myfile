@@ -127,9 +127,11 @@ public class VIPActivity extends BaseActivity {
         if ("1".equals(isvip)){
             tvDescription.setText(R.string.qingxuanzeninxuyaoxufeidetaocan);
             tvActVipApplyNow.setText(R.string.lijixufei);
+            mtbActVip.setCenterTitle(R.string.xufeivip);
         }else {
             tvDescription.setText(R.string.qingxuanzeninyaoshenqingdetaocan);
             tvActVipApplyNow.setText(R.string.lijishenqing);
+            mtbActVip.setCenterTitle(R.string.frag_my_shenqingvip);
         }
     }
 

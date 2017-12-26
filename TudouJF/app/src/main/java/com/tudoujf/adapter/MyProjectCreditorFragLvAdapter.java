@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.activity.my.myproject.MyCreditorRightsDetailsActivity;
 import com.tudoujf.activity.my.myproject.MyInvestDetailsActivity;
 import com.tudoujf.bean.databean.MyCreditorProjectBean;
 import com.tudoujf.bean.databean.MyInvestProjectBean;
 import com.tudoujf.ui.MyProjectBidView;
 import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         View view;
         if (convertView == null) {
@@ -116,7 +118,20 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.bidView.setShowDaiHouGuanLi(true);
 
+        final int pos=position;
+
+        viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
+            @Override
+            public void clickEvent() {
+
+                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+                intent.putExtra("loan_id",list.get(pos).getLoan_id());
+                context.startActivity(intent);
+//                ToastUtils.showToast(context, "打开贷后管理!");
+            }
+        });
         viewHolder.bidView.invalidate();
 
         return view;

@@ -26,6 +26,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -88,6 +89,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     TextView tvEaringsBuy;
     @BindView(R.id.tv_zhaiquanzhuanrangxieyi)
     TextView tvXieYi;
+    @BindView(R.id.tv_act_mycreditorsrightsdetails_zhuangtai)
+    TextView tvTransferStatus;
     @BindView(R.id.lv_act_mycreditorsrightsdetails_buy)
     ListView lvBuy;
 
@@ -97,6 +100,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     private int type;
     private TransferableDetailsBean bean;
     private List<TransferableDetailsBean.RecoverBean.ItemsBean> list;
+    private boolean canCansel = false;
 
     @Override
     public int getLayoutResId() {
@@ -107,7 +111,12 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_mycreditorsrightsdetails_buynow:
-                transferNow();
+                if (canCansel) {
+                    cancelCreditor();
+                } else {
+                    transferNow();
+
+                }
                 break;
             case R.id.tv_zhaiquanzhuanrangxieyi://债权转让协议
                 Intent intent = new Intent(this, WebActivity.class);
@@ -118,6 +127,49 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 break;
         }
 
+    }
+
+    private void cancelCreditor() {
+        DialogUtils.showCreditorCancel(this, bean.getCancel_count(), new DialogUtils.DialogUtilsClickListener() {
+            @Override
+            public void onClick() {
+                requestCancel();
+            }
+        });
+    }
+
+    /**债权转让撤销*/
+    private void requestCancel() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        map.put("transfer_id", tender_id);
+
+        HttpMethods.getInstance().POST(this, Constants.CANCEL_TRANSFER, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----请求债权转让撤销接口返回数据------------" + result);
+                        Gson gson = new Gson();
+                        CommonBean bean1 = gson.fromJson(result, CommonBean.class);
+                        if (bean1 != null && "200".equals(bean1.getCode())) {
+                            ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanchexiaochenggong);
+                        } else {
+                            if (bean1 != null && bean1.getDescription() != null) {
+                                ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, bean1.getDescription().toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanzhuanrangchexiaoshibai);
+                    }
+                });
     }
 
     @Override
@@ -228,6 +280,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 tvTransferValueBuy.setText(bean.getAmount());
                 tvEaringsBuy.setText(bean.getIncome());
 
+
                 if (bean.getRecover().getItems() != null && bean.getRecover().getItems().size() > 0) {
                     list.addAll(bean.getRecover().getItems());
                     MyCreditorDetailsActLvAdapter adapter = new MyCreditorDetailsActLvAdapter(this, list);
@@ -245,16 +298,28 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
 
                 // TODO: 2017/12/22  转让状态调整,待核实
-                if (bean.getCoefficient()!=null){//转让中状态
+                if (bean.getCoefficient() != null) {//转让中状态
                     etTransferScale.setText(bean.getCoefficient());
-
                     etTransferScale.setKeyListener(null);
 //                    tvBuyNow.setVisibility(View.GONE);
-                    tvBuyNow.setText("转让中");
-                    tvBuyNow.setClickable(false);
-                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+//                    tvBuyNow.setText("转让中");
+//                    tvBuyNow.setClickable(false);
+//                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
 
 
+                }
+
+                if ("1".equals(bean.getTransfer_status())) {
+                    tvTransferStatus.setText("转让中");
+                    if (StringUtils.string2Integer(bean.getCancel_count()) < 3) {
+                        tvBuyNow.setText("撤销");
+                        tvBuyNow.setBackgroundColor(getResources().getColor(R.color.global_theme_background_color));
+                        canCansel=true;
+                    }
+                } else if ("-1".equals(bean.getTransfer_status())) {
+                    tvTransferStatus.setText("已撤销");
+                } else {
+                    tvTransferStatus.setText("转让成功");
                 }
             }
 

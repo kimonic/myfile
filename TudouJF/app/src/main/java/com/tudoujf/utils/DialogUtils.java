@@ -416,59 +416,59 @@ public class DialogUtils {
     }
 
 
+    /**
+     *
+     * 债权撤销提示dialog
+     *
+     * @param context 上下文
+     * @param content     点击back键的提示信息
+     * @return alertdialog
+     */
+    public static AlertDialog showCreditorCancel(final Context context,  String  content, final DialogUtilsClickListener  listener) {
 
-//    /**
-//     *
-//     * 类别选择dialog
-//     *
-//     * @param context 上下文
-//     * @param content     点击back键的提示信息
-//     * @return alertdialog
-//     */
-//    public static AlertDialog showPromptDialog(final Context context, String title, String  content, final DialogUtilsClickListener  listener) {
-//
-//        View view= LayoutInflater.from(context).inflate(R.layout.dialog_prompt,null);
-//        final AlertDialog dialog = new AlertDialog.Builder(context).create();
-//        dialog.setCanceledOnTouchOutside(true);
-//        dialog.show();
-//
-//        TextView  tvTitle=view.findViewById(R.id.tv_title);
-//        TextView  tvContent=view.findViewById(R.id.tv_content);
-//        TextView  tvCancle=view.findViewById(R.id.tv_cancle);
-//        TextView  tvQueDing=view.findViewById(R.id.tv_queding);
-//
-//        tvTitle.setText(title);
-//        tvContent.setText(content);
-//        tvCancle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        tvQueDing.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onClick();
-//            }
-//        });
-//
-//
-//
-//
-//        //一定得在show完dialog后来set属性
-//        Window window = dialog.getWindow();
-//        if (window != null) {
-//            window.setContentView(view);
-//            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//            WindowManager.LayoutParams lp = window.getAttributes();
-//            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-//            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//            lp.gravity = Gravity.CENTER;
-//            window.setAttributes(lp);
-//        }
-//        return dialog;
-//    }
+        View view= LayoutInflater.from(context).inflate(R.layout.dialog_creditorcancel,null);
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        TextView  tvContent=view.findViewById(R.id.tv_content);
+        TextView  tvCancle=view.findViewById(R.id.tv_cancle);
+        TextView  tvQueDing=view.findViewById(R.id.tv_queding);
+
+        tvContent.setText(content);
+        tvCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tvQueDing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                listener.onClick();
+            }
+        });
+
+
+
+
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+
 
     public  interface  DialogUtilsClickListener{
         void onClick();

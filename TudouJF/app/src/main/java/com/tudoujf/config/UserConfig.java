@@ -44,6 +44,15 @@ public class UserConfig {
 
 
     private boolean creditorFlush = false;
+    private boolean investFlush = false;
+
+    public boolean isInvestFlush() {
+        return investFlush;
+    }
+
+    public void setInvestFlush(boolean investFlush) {
+        this.investFlush = investFlush;
+    }
 
     public boolean isCreditorFlush() {
         return creditorFlush;

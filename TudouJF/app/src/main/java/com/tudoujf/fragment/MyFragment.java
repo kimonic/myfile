@@ -364,7 +364,6 @@ public class MyFragment extends BaseFragment {
                         openActivity(MyWelfareActivity.class);
                         break;
                     case 4://专属客服
-
                         ClipboardManager cm = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                         if (cm != null) {
                             cm.setText(bean.getWeChatID());
@@ -472,11 +471,11 @@ public class MyFragment extends BaseFragment {
 
 
             if ("1".equals(bean.getIsVip())) {
-                tvVipapply.setText(R.string.frag_my_shenqingvip);
+                ivVip.setImageResource(R.drawable.frag_my_vipt);
                 tvVipapply.setText("    续费    ");
             } else {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
-                ivVip.setImageResource(R.drawable.frag_my_vipt);
+                tvVipapply.setText(R.string.frag_my_shenqingvip);
             }
 
             if ("1".equals(bean.getIs_trust())) {
@@ -588,10 +587,10 @@ public class MyFragment extends BaseFragment {
 
     }
 
-    private void setImageSize(int  size){
-        LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) flMessage.getLayoutParams();
-        params.width=size*ScreenSizeUtils.getDensity(getActivity());
-        params.height=size*ScreenSizeUtils.getDensity(getActivity());
+    private void setImageSize(int size) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) flMessage.getLayoutParams();
+        params.width = size * ScreenSizeUtils.getDensity(getActivity());
+        params.height = size * ScreenSizeUtils.getDensity(getActivity());
         flMessage.setLayoutParams(params);
     }
 

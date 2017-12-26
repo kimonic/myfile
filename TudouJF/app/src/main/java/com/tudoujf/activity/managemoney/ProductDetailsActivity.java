@@ -289,9 +289,14 @@ public class ProductDetailsActivity extends BaseActivity {
 
         if (bean != null) {
 
-            if (!(StringUtils.string2Float(bean.getLoan_info().getProgress()) < 100 && StringUtils.string2Float(bean.getLoan_info().getStatus()) <= 3)) {
+            if (!(StringUtils.string2Float(bean.getLoan_info().getProgress()) < 100 && (StringUtils.string2Float(bean.getLoan_info().getStatus()) == 3||
+                    StringUtils.string2Float(bean.getLoan_info().getStatus()) == 2)) ){
                 tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
-                tvBuyNow.setText(hint);
+                if (hint!=null){
+                    tvBuyNow.setText(hint);
+                }else {
+                    tvBuyNow.setText(bean.getLoan_info().getStatus_name());
+                }
                 tvBuyNow.setClickable(false);//禁止点击
             }
 

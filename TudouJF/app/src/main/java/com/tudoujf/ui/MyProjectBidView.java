@@ -347,7 +347,7 @@ public class MyProjectBidView extends View {
 
         //-----------------------------显示贷后管理-------------------------------------------------
         if (showDaiHouGuanLi){
-        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.04f;
+        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
         rectFDaiHouGuanLi.top = width * 0.02777f;
         rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
         rectFDaiHouGuanLi.bottom = width * 0.072f;
@@ -360,7 +360,7 @@ public class MyProjectBidView extends View {
         //-----------------------------显示贷后管理-------------------------------------------------
 
         //-----------------------转让期数:7/12------------------------------------------------------
-        float text2X = width * 0.6666f;
+        float text2X = width * 0.7432f;
         float text2Y = width * 0.06666f;
         cyanPaint.setTextSize(width * 0.03888f);
         canvas.drawText(transfer, text2X, text2Y, cyanPaint);

@@ -207,6 +207,9 @@ public class HomeFragment extends BaseFragment {
 //    private int right, bottom;
 //    private float downX, downY;
 
+
+    private boolean  theEnd=true;
+
     @Override
     public int layoutRes() {
         return R.layout.frag_home;
@@ -223,15 +226,23 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home_leftarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() - 1);
+                    theEnd=true;
                 } else {
-                    ToastUtils.showToast(getActivity(), "已经没有更多啦!");
+                    if (theEnd){
+                        theEnd=false;
+                        ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
+                    }
                 }
                 break;
             case R.id.tv_frag_home_rightarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
+                    theEnd=true;
                 } else {
-                    ToastUtils.showToast(getActivity(), "已经没有更多啦!");
+                    if (theEnd){
+                        theEnd=false;
+                        ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
+                    }
                 }
                 break;
             case R.id.ll_frag_home_huodongzhuanqu:
@@ -244,8 +255,12 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent1);
 //                openActivity(NewbieWelfareActivity.class);
                 break;
-            case R.id.ll_frag_home_tuijianyouli:
-                openActivity(MyPopularizeActivity.class);
+            case R.id.ll_frag_home_tuijianyouli://推荐有礼
+                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
+                    openActivity(LoginActivity.class);
+                }else {
+                    openActivity(MyPopularizeActivity.class);
+                }
                 break;
             case R.id.ll_frag_home_xinxipilu:
                 openActivity(InfoPublishActivity.class);
@@ -423,6 +438,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initDataFromIntent() {
+        listBall = new ArrayList<>();
+        list = new ArrayList<>();
+
 //        Bundle bundle = getArguments();
 //        if (bundle != null) {
 ////            tvFragHome.setText(bundle.getString("temp"));
@@ -467,7 +485,6 @@ public class HomeFragment extends BaseFragment {
      * 初始化ballview数据
      */
     private void initBallViews() {
-        listBall = new ArrayList<>();
         loanBeanList = bean.getLoan();
         for (int i = 0; i < loanBeanList.size(); i++) {
             BallView view = new BallView(getActivity());
@@ -488,7 +505,6 @@ public class HomeFragment extends BaseFragment {
      * 初始化导航图片数据
      */
     private void initImagesViews() {
-        list = new ArrayList<>();
         listUrl = bean.getBanner();
 
         for (int i = 0; i < listUrl.size(); i++) {
@@ -498,7 +514,11 @@ public class HomeFragment extends BaseFragment {
             imageview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtils.showToast(getActivity(), listUrl.get(vpFragHome.getCurrentItem()).getJumpurl());
+                    Intent intent1 = new Intent(getActivity(), WebActivity.class);
+                    intent1.putExtra("url", listUrl.get(vpFragHome.getCurrentItem()).getJumpurl());
+                    intent1.putExtra("title", getResources().getString(R.string.huodongxinagqing));
+                    startActivity(intent1);
+//                    ToastUtils.showToast(getActivity(), listUrl.get(vpFragHome.getCurrentItem()).getJumpurl());
                     // TODO: 2017/8/15 传递跳转页面的URL
                 }
             });
@@ -522,6 +542,7 @@ public class HomeFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 dvFragHome.setPosition(position);
                 dvFragHome.invalidate();
+                autoCount=position;
             }
         });
 
@@ -716,7 +737,6 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
 //                dialog.dismiss();
                 dismissPDialog();
-
                 finishRL();
 
                 String result = StringUtils.getDecodeString(response.body());
@@ -726,6 +746,13 @@ public class HomeFragment extends BaseFragment {
                         HomeBean.class, getActivity());
                 if (bean1 != null) {
                     bean = (HomeBean) bean1;
+                    if (list.size()>0){
+                        list.clear();
+                    }
+                    if (listBall.size()>0){
+                        listBall.clear();
+                    }
+                    ballviewPosition=0;
                     LoadInternetDataToUi();
                 }
             }
@@ -858,7 +885,7 @@ public class HomeFragment extends BaseFragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        //------------------------------钟摆循环----------------------------------------------------------
+//------------------------------钟摆循环----------------------------------------------------------
 //                        if (plummet) {
 //                            autoCount++;
 //                            if (autoCount > bannerCount) {

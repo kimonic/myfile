@@ -27,6 +27,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -99,9 +100,10 @@ public class SucceedInvitationActivity extends BaseActivity {
         mtbActSucceedInvitation.setLayoutParams(params);
 
         srlActSucceedInvitation.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlActSucceedInvitation.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+//        srlActSucceedInvitation.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+        srlActSucceedInvitation.setRefreshHeader(new TuDouHeader(this));
         srlActSucceedInvitation.setRefreshFooter(new BallPulseFooter(this));
-        srlActSucceedInvitation.setEnableLoadmoreWhenContentNotFull(true);
+        srlActSucceedInvitation.setEnableLoadmoreWhenContentNotFull(false);
 
 
     }

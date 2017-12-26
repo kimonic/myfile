@@ -1,6 +1,8 @@
 package com.tudoujf.mapi;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.example.encryptionpackages.CreateCode;
 import com.lzy.okgo.OkGo;
@@ -56,6 +58,12 @@ public class MApp extends Application {
 
     public void setLogin(boolean login) {
         isLogin = login;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this) ;//分包
     }
 
     @Override

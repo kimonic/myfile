@@ -74,10 +74,6 @@ public class SystemMessageFragment extends BaseFragment {
     private int type = 0;
     private int page = 1;
     private MyMessageBean bean;
-//    private AlertDialog dialog;
-    /**
-     * 上拉加载与下拉刷新标识
-     */
     private int refreshFlag = 0;
     private static final int REFRESH = 1;
     private static final int LOADMORE = 2;
@@ -86,6 +82,7 @@ public class SystemMessageFragment extends BaseFragment {
     private int positionInner;
     private int systemMsgCount;
     private int myMsgCount;
+    private boolean firstIn = true;
 
 
     @Override
@@ -129,7 +126,7 @@ public class SystemMessageFragment extends BaseFragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            type = bundle.getInt("type", 0);
+            type = bundle.getInt("type", 0);//2--我的消息,1---系统消息
         }
     }
 
@@ -181,23 +178,23 @@ public class SystemMessageFragment extends BaseFragment {
                                     //-------------------------------消息已读变化后------------------------------------------------
                                     //-------------------------------消息已读变化后------------------------------------------------
                                     //-------------------------------消息已读变化后------------------------------------------------
-                                    if (type==1){
+                                    if (type == 1) {
                                         myMsgCount--;
-                                        if (myMsgCount<1){
-                                            ((MyMessageActivity)getActivity()).setTvMyShengYu("",1);
-                                        }else if (myMsgCount<100){
-                                            ((MyMessageActivity)getActivity()).setTvMyShengYu(""+myMsgCount,0);
-                                        }else {
-                                            ((MyMessageActivity)getActivity()).setTvMyShengYu("99",0);
+                                        if (myMsgCount < 1) {
+                                            ((MyMessageActivity) getActivity()).setTvMyShengYu("", 1);
+                                        } else if (myMsgCount < 100) {
+                                            ((MyMessageActivity) getActivity()).setTvMyShengYu("" + myMsgCount, 0);
+                                        } else {
+                                            ((MyMessageActivity) getActivity()).setTvMyShengYu("99", 0);
                                         }
-                                    }else {
+                                    } else {
                                         systemMsgCount--;
-                                        if (systemMsgCount<1){
-                                            ((MyMessageActivity)getActivity()).setTvSystemShengYu("",1);
-                                        }else if (systemMsgCount<100){
-                                            ((MyMessageActivity)getActivity()).setTvSystemShengYu(""+systemMsgCount,0);
-                                        }else {
-                                            ((MyMessageActivity)getActivity()).setTvSystemShengYu("99",0);
+                                        if (systemMsgCount < 1) {
+                                            ((MyMessageActivity) getActivity()).setTvSystemShengYu("", 1);
+                                        } else if (systemMsgCount < 100) {
+                                            ((MyMessageActivity) getActivity()).setTvSystemShengYu("" + systemMsgCount, 0);
+                                        } else {
+                                            ((MyMessageActivity) getActivity()).setTvSystemShengYu("99", 0);
                                         }
                                     }
                                     //-------------------------------消息已读变化后------------------------------------------------
@@ -279,7 +276,7 @@ public class SystemMessageFragment extends BaseFragment {
                     bean = (MyMessageBean) baseBean;
                     LoadInternetDataToUi();
                 } else {
-                    ToastUtils.showToast(getActivity(), "没有要展示的数据");
+                    ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                 }
             }
 
@@ -303,39 +300,44 @@ public class SystemMessageFragment extends BaseFragment {
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
-                if (type==1){
-                    ((MyMessageActivity)getActivity()).setTvMyShengYu("0",1);
-                }else {
-                    ((MyMessageActivity)getActivity()).setTvSystemShengYu("0",1);
+                if (type == 1) {
+                    ((MyMessageActivity) getActivity()).setTvMyShengYu("0", 1);
+                } else {
+                    ((MyMessageActivity) getActivity()).setTvSystemShengYu("0", 1);
                 }
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
-                ToastUtils.showToast(getActivity(), "当前页没有要展示的数据");
+                if (type == 1 && firstIn) {
+                    firstIn = false;
+                    ToastUtils.showToast(getActivity(), R.string.zanshimeiyouxiaoxi);
+                } else {
+                    ToastUtils.showToast(getActivity(), R.string.zanshimeiyouxiaoxi);
+                }
             } else {
 
 
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
-                if (type==1){
-                    myMsgCount=StringUtils.string2Integer(bean.getMail());
-                    if (myMsgCount<1){
-                        ((MyMessageActivity)getActivity()).setTvMyShengYu("",1);
-                    }else if (myMsgCount<100){
-                        ((MyMessageActivity)getActivity()).setTvMyShengYu(bean.getMail(),0);
-                    }else {
-                        ((MyMessageActivity)getActivity()).setTvMyShengYu("99",0);
+                if (type == 1) {
+                    myMsgCount = StringUtils.string2Integer(bean.getMail());
+                    if (myMsgCount < 1) {
+                        ((MyMessageActivity) getActivity()).setTvMyShengYu("", 1);
+                    } else if (myMsgCount < 100) {
+                        ((MyMessageActivity) getActivity()).setTvMyShengYu(bean.getMail(), 0);
+                    } else {
+                        ((MyMessageActivity) getActivity()).setTvMyShengYu("99", 0);
                     }
-                }else {
-                    systemMsgCount=StringUtils.string2Integer(bean.getMessage());
+                } else {
+                    systemMsgCount = StringUtils.string2Integer(bean.getMessage());
 
-                    if (systemMsgCount<1){
-                        ((MyMessageActivity)getActivity()).setTvSystemShengYu("",1);
-                    }else if (systemMsgCount<100){
-                        ((MyMessageActivity)getActivity()).setTvSystemShengYu(bean.getMessage(),0);
-                    }else {
-                        ((MyMessageActivity)getActivity()).setTvSystemShengYu("99",0);
+                    if (systemMsgCount < 1) {
+                        ((MyMessageActivity) getActivity()).setTvSystemShengYu("", 1);
+                    } else if (systemMsgCount < 100) {
+                        ((MyMessageActivity) getActivity()).setTvSystemShengYu(bean.getMessage(), 0);
+                    } else {
+                        ((MyMessageActivity) getActivity()).setTvSystemShengYu("99", 0);
                     }
                 }
                 //-----------------------------剩余未读消息显示--------------------------------------

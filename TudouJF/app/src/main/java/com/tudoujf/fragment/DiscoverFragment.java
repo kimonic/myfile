@@ -29,6 +29,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -125,9 +126,9 @@ public class DiscoverFragment extends BaseFragment {
         vJianGe.setVisibility(View.GONE);
 
 
-
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
 //        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+        srl.setRefreshHeader(new TuDouHeader(getActivity()));
         srl.setRefreshFooter(new BallPulseFooter(getActivity()));
         srl.setEnableLoadmore(true);
 
@@ -146,12 +147,15 @@ public class DiscoverFragment extends BaseFragment {
         llFragDiscoverBt2.setOnClickListener(this);
         llFragDiscoverBt3.setOnClickListener(this);
 
-//        srl.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(RefreshLayout refreshlayout) {
+        srl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                page=1;
+                list.clear();
+                initDataFromInternet();
 //                finishRL();
-//            }
-//        });
+            }
+        });
         srl.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
@@ -192,6 +196,7 @@ public class DiscoverFragment extends BaseFragment {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
+                        finishRL();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:---首页发现接口返回数据--------" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<DiscoverBean>() {
@@ -208,6 +213,7 @@ public class DiscoverFragment extends BaseFragment {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
+                        finishRL();
                         ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                     }
                 });

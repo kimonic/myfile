@@ -100,13 +100,13 @@ public class MyMessageActivity extends BaseActivity {
 
     private void initFragmentList() {
         list = new ArrayList<>();
-        SystemMessageFragment fragment1 = new SystemMessageFragment();
+        SystemMessageFragment fragment1 = new SystemMessageFragment();//系统消息
         Bundle bundle = new Bundle();
         bundle.putInt("type", 2);
         fragment1.setArguments(bundle);
 
 
-        SystemMessageFragment fragment2 = new SystemMessageFragment();
+        SystemMessageFragment fragment2 = new SystemMessageFragment();//我的消息
         Bundle bundle1 = new Bundle();
         bundle1.putInt("type", 1);
         fragment2.setArguments(bundle1);

@@ -19,6 +19,7 @@ public class Constants {
      * 固定URL
      */
     public static final String URL = "http://m.test.tudoujf.com";
+//    public static final String URL = "http://mob.tudoujf.com";
 
     /**
      * 活动专区接口
@@ -323,6 +324,16 @@ public class Constants {
      * 积分商城获取积分类别接口
      */
     public static final String POINT_RANK = URL + "/phone/mall/pointRank";
+
+    /**
+     * 债权转让撤销
+     */
+    public static final String CANCEL_TRANSFER = URL + "/phone/transfer/cancel";
+
+  /**
+     * 债权转让撤销
+     */
+    public static final String DAI_HOU_GUAN_LI = URL + "/phone/loan/managementAfter";
 
 
     //----------------------------------------------------------------------------------------------
@@ -729,11 +740,7 @@ public class Constants {
     public static final String PROVINCE_CITY_INFO = URL
             + "/phone/common/getProvinceCity";
 
-    /**
-     * 撤销转让
-     */
-    public static final String CANCEL_TRANSFER = URL
-            + "/phone/transfer/cancel";
+
     /**
      * 获取取现手续费
      */

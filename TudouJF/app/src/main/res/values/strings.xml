@@ -656,6 +656,19 @@
     <string name="jiesuanshibai">结算失败!</string>
     <string name="qingxuanzeninxuyaoxufeidetaocan">请选择您需要续费的套餐</string>
     <string name="lijixufei">立即续费</string>
+    <string name="shifouquerenchexiaozhaiquanzhuanrang">是否确认撤销债权转让</string>
+    <string name="zhaiquanzhuanrangchexiao">债权转让撤销</string>
+    <string name="san">3</string>
+    <string name="cihoujiangbukeyi">次后将不可以再进行转让</string>
+    <string name="gaizhaiquan">该债权您已撤销</string>
+    <string name="danling">0</string>
+    <string name="ci">次</string>
+    <string name="zhaiquanchexiaochenggong">债权撤销成功!</string>
+    <string name="zhaiquanzhuanrangchexiaoshibai">债权转让撤销失败!</string>
+    <string name="xufeivip">续费VIP</string>
+    <string name="huodongxinagqing">活动详情</string>
+    <string name="zanshimeiyouxiaoxi">暂时没有消息记录!</string>
+    <string name="daihouguanli">贷后管理</string>
 
 
 </resources>

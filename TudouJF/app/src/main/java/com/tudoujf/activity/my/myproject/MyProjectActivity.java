@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.myprojectfrag.MyProjectCreditorFragment;
@@ -55,6 +56,7 @@ public class MyProjectActivity extends BaseActivity {
     private List<Fragment> listFrag;
     private DateFilterDialog dateFilterDialog;
     private int currentItem = 0;
+    private  String  flag;
 
     @Override
     public int getLayoutResId() {
@@ -77,7 +79,11 @@ public class MyProjectActivity extends BaseActivity {
                 setButStyle(1);
                 break;
             case R.id.tv_act_myproject_bac:
-                closeActivity();
+                if ("creditor".equals(flag)){
+                    openActivity(HomeActivity.class);
+                }else {
+                    closeActivity();
+                }
                 break;
             case R.id.ll_act_myproject_filtrate:
                 if (dateFilterDialog == null) {
@@ -123,6 +129,7 @@ public class MyProjectActivity extends BaseActivity {
         listFrag = new ArrayList<>();
 //        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
 
+        flag=getIntent().getStringExtra("flag");
 
         MyProjectInvestFragment fragment2 = new MyProjectInvestFragment();
 
@@ -193,6 +200,14 @@ public class MyProjectActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if ("creditor".equals(flag)){
+            openActivity(HomeActivity.class);
+        }else {
+            closeActivity();
+        }
+    }
 
     @Override
     protected int setStatusBarColor() {

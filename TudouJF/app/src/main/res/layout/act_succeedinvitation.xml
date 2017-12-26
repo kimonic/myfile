@@ -54,7 +54,7 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_act_succeedinvitation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         style="@style/SmartRefreshLayout"
         >
         <ListView

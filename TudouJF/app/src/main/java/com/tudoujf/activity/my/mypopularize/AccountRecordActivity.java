@@ -24,6 +24,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -94,7 +95,8 @@ public class AccountRecordActivity extends BaseActivity {
         mtbActAccountRecord.setLayoutParams(params);
 
         srlActAccountRecord.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlActAccountRecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+        srlActAccountRecord.setRefreshHeader(new TuDouHeader(this));
+//        srlActAccountRecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         srlActAccountRecord.setRefreshFooter(new BallPulseFooter(this));
 
 

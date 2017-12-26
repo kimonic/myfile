@@ -26,6 +26,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.DateFilterDialog;
+import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -137,7 +138,8 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
         mtbActRecommendrecord.setLayoutParams(params);
 
         srlActRecommendrecord.setPrimaryColorsId(R.color.global_theme_background_color);
-        srlActRecommendrecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+        srlActRecommendrecord.setRefreshHeader(new TuDouHeader(this));
+//        srlActRecommendrecord.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
         srlActRecommendrecord.setRefreshFooter(new BallPulseFooter(this));
 
 

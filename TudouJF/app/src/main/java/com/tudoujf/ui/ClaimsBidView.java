@@ -2,6 +2,8 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -91,6 +93,8 @@ public class ClaimsBidView extends View {
      */
     private String transfer = "转让期数:7/12";
 
+    private Bitmap bitmapDaiHouGuanLi;
+    private RectF rectFDaiHouGuanLi;
 
     /**
      * 奖励的数值
@@ -158,6 +162,10 @@ public class ClaimsBidView extends View {
     }
 
     private void initView() {
+
+        rectFDaiHouGuanLi = new RectF();
+        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
+
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
         blackPaint.setColor(Color.parseColor("#343434"));
@@ -259,15 +267,28 @@ public class ClaimsBidView extends View {
         canvas.drawText(title, text1X, text1Y, blackPaint);
         //------------------------------------------------------------------------------------------
 
+
+        //-----------------------------显示贷后管理-------------------------------------------------
+        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
+        rectFDaiHouGuanLi.top = width * 0.02777f;
+        rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
+        rectFDaiHouGuanLi.bottom = width * 0.072f;
+
+        canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
+
+
+        //-----------------------------显示贷后管理-------------------------------------------------
+
+
         //-----------------------转让期数:7/12------------------------------------------------------
 //        float text2X = width * 0.6666f;
 //        float text2Y = width * 0.06666f;
 //        cyanPaint.setTextSize(width * 0.03809f);
 //        canvas.drawText(transfer, text2X, text2Y, cyanPaint);
 
-        float text2X = width * 0.6759f;
+        float text2X = width * 0.7432f;
         float text2Y = width * 0.07066f;
-        cyanPaint.setTextSize(width * 0.04133f);
+        cyanPaint.setTextSize(width * 0.04033f);
         canvas.drawText(transfer, text2X, text2Y, cyanPaint);
         //------------------------------------------------------------------------------------------
 
@@ -315,7 +336,7 @@ public class ClaimsBidView extends View {
 //        float text5X = width * 0.4013f;
         canvas.drawText(yuanBiaoNianHuaShouYi, text5X, text3Y, blackPaint);
 
-        float baiX = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi)+5;
+        float baiX = text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) + 5;
         blackPaint.setTextSize(width * 0.03566f);
         canvas.drawText("%", baiX, text3Y, blackPaint);
 
@@ -437,15 +458,27 @@ public class ClaimsBidView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
+//        if (event.getAction() == MotionEvent.ACTION_UP) {
+//            float currentX = event.getX();
+//            float currentY = event.getY();
+//            if (rectF.contains(currentX, currentY)) {
+////                if (listener != null && investNow) {
+//                if (listener != null) {
+//                    listener.clickEvent();
+//                    return true;
+//                }
+//            }
+//        }
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float currentX = event.getX();
             float currentY = event.getY();
-            if (rectF.contains(currentX, currentY)) {
-//                if (listener != null && investNow) {
+            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
                 if (listener != null) {
                     listener.clickEvent();
-                    return true;
                 }
+                return true;
+
             }
         }
         return super.onTouchEvent(event);

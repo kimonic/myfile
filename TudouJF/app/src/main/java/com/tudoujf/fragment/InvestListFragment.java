@@ -33,6 +33,7 @@ import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.BidView;
@@ -431,6 +432,12 @@ public class InvestListFragment extends BaseFragment {
             initDataFromInternet();
         }
         flag++;
+
+        if (UserConfig.getInstance().isInvestFlush()) {
+            UserConfig.getInstance().setInvestFlush(false);
+            page = 1;
+            initDataFromInternet();
+        }
 
     }
 
