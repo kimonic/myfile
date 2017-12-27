@@ -360,10 +360,10 @@ public class RegisterActivity extends BaseActivity {
      */
     private void inputTypeConfig(int count, ImageView ivOpenclose, EditText etPassword) {
         if (count % 2 == 0) {
-            ivOpenclose.setImageResource(R.drawable.act_login2_eyeclose);
+            ivOpenclose.setImageResource(R.drawable.act_login2_eyeopen);
             etPassword.setInputType(InputType.TYPE_CLASS_TEXT);
         } else {
-            ivOpenclose.setImageResource(R.drawable.act_login2_eyeopen);
+            ivOpenclose.setImageResource(R.drawable.act_login2_eyeclose);
             etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
     }

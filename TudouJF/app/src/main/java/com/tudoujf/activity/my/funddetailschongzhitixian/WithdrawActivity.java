@@ -116,7 +116,7 @@ public class WithdrawActivity extends BaseActivity {
 
                 break;
             case R.id.tv_act_withdraw_all://全部提现
-                etJinE.setText(amount);
+                etJinE.setText(StringUtils.getCommaDecimalsStr(amount));
                 break;
         }
 
@@ -159,7 +159,7 @@ public class WithdrawActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 // 当前提现金额大于余额时
 //                tvActWithdrawHint.setText("账号余额不足");
-                float input = StringUtils.string2Float(editable.toString());
+                float input = StringUtils.string2Float(editable.toString().replace(",",""));
                 float fAmount = StringUtils.string2Float(amount);
                 if (input < 100 || input > 500000) {
                     jump=false;

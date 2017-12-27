@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.activity.my.myproject.MyCreditorRightsDetailsActivity;
 import com.tudoujf.activity.my.myproject.MyInvestDetailsActivity;
 import com.tudoujf.bean.databean.MyInvestProjectBean;
@@ -91,30 +92,28 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
         }
         viewHolder.bidView.setStatus_name(list.get(position).getStatus_name());
 
+
+
+        final int pos=position;
+
         if (!"投标中".equals(list.get(position).getStatus_name())){
+
             viewHolder.bidView.setShowDaiHouGuanLi(true);
+            viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
+                @Override
+                public void clickEvent() {
+                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+                    intent.putExtra("loan_id",list.get(pos).getLoanId());
+                    context.startActivity(intent);
+//                    ToastUtils.showToast(context, "打开贷后管理");
+
+                }
+            });
+
         }else {
             viewHolder.bidView.setShowDaiHouGuanLi(false);
         }
 
-//         final boolean finalSkip = skip;
-//        final int  mPosition=position;
-        viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
-            @Override
-            public void clickEvent() {
-//                if(finalSkip){
-//                    Intent intent=new Intent(context, MyCreditorRightsDetailsActivity.class);
-//                    context.startActivity(intent);
-//                }else {
-
-                ToastUtils.showToast(context, "打开贷后管理");
-//                Intent intent=new Intent(context, MyInvestDetailsActivity.class);
-//                    intent.putExtra("id",list.get(mPosition).getId());
-//                    context.startActivity(intent);
-//                }
-
-            }
-        });
 
 
 

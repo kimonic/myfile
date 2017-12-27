@@ -1,9 +1,6 @@
 package com.tudoujf.activity.home;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -11,29 +8,41 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
+import com.tudoujf.activity.my.set.SetActivity;
 import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.NewVersionBean;
+import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.fragment.DiscoverFragment;
 import com.tudoujf.fragment.HomeFragment;
 import com.tudoujf.fragment.ManageMoneyMattersFragment;
 import com.tudoujf.fragment.MyFragment;
-import com.tudoujf.jpush.ExampleUtil;
-import com.tudoujf.jpush.LocalBroadcastManager;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.NaviButtonView;
+import com.tudoujf.utils.AppInfoUtils;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.DownloadAppUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
+import com.tudoujf.utils.StringUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * * ================================================
@@ -58,10 +67,13 @@ public class HomeActivity extends BaseActivity {
 
     private int beforePosition = 0;
 
-    private  String  signup="";
+    private String signup = "";
 
-    /**是否已开启手势密码*/
-    private  boolean  isLock=false;
+    /**
+     * 是否已开启手势密码
+     */
+    private boolean isLock = false;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_home;
@@ -120,23 +132,21 @@ public class HomeActivity extends BaseActivity {
             public boolean currentPosition(int position) {
 
 
-                if (position==3){
-                    ((MyFragment)list.get(3)).showService();
+                if (position == 3) {
+                    ((MyFragment) list.get(3)).showService();
                 }
 
 
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
-                }
-                else if (position == 3 &&UserConfig.getInstance().getLockPass(HomeActivity.this)&&!UserConfig.getInstance().isDraw()){//已登录已设置手势密码本次未验证手势密码
+                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity.this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
 //                    openActivity(LockActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "jiesuo");
-                    openActivityForResult(LockActivity.class, bundle,555);//打开手势密码界面
+                    openActivityForResult(LockActivity.class, bundle, 555);//打开手势密码界面
                     return false;
-                }
-                else {
+                } else {
                     beforePosition = position;
                     return true;
                 }
@@ -147,20 +157,18 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
 
-                if (position==3){
-                    ((MyFragment)list.get(3)).showService();
+                if (position == 3) {
+                    ((MyFragment) list.get(3)).showService();
                 }
 
                 if (position == 3 && !isLogin) {
                     openLoginAct();
-                }
-                else if (position == 3 &&UserConfig.getInstance().getLockPass(HomeActivity.this)&&!UserConfig.getInstance().isDraw()){//已登录已设置手势密码本次未验证手势密码
+                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity.this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "jiesuo");
                     openActivity(LockActivity.class, bundle);//打开手势密码界面
 //                    openActivity(LockActivity.class);
-                }
-                else {
+                } else {
                     beforePosition = position;
                 }
 
@@ -179,15 +187,78 @@ public class HomeActivity extends BaseActivity {
 //        }
         checkLogin();
 
+        checkNew();
+    }
 
+
+    private void checkNew() {
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("phone_type", "1");
+        HttpMethods.getInstance().POST(this, Constants.NEW_VERSION, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----检查版本更新接口返回数据--------------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
+                        }.getType(), NewVersionBean.class, HomeActivity.this);
+                        if (bean1 != null) {
+                            NewVersionBean bean = (NewVersionBean) bean1;
+
+                            String versionName = AppInfoUtils.getVersionName(HomeActivity.this);
+                            final String url = "http://wxz.myapp.com/16891/87A187FA6F46F23256C50D2E03157BF" +
+                                    "0.apk?fsname=com.shoujiduoduo.ringtone_8.5.4.0_6008540.apk&hsr=4d5s";
+
+                            //强制更新
+                            if (versionName.equals(bean.getForce_version())) {
+                                DialogUtils.showPromptDialogAll(HomeActivity.this, "提示", "APP须更新到最新版本,是否前往更新?",
+                                        new DialogUtils.DialogUtilsClickListener() {
+                                            @Override
+                                            public void onClick() {
+                                                DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
+                                                closeActivity();
+                                            }
+                                        }, new DialogUtils.DialogUtilsClickListener() {
+                                            @Override
+                                            public void onClick() {
+                                                closeActivity();
+                                            }
+                                        });
+                            } else if (!versionName.equals(bean.getNew_version())) {//普通更新
+                                DialogUtils.showPromptDialog(HomeActivity.this, "提示", "发现APP有新版本,是否前往更新?",
+                                        new DialogUtils.DialogUtilsClickListener() {
+                                            @Override
+                                            public void onClick() {
+                                                //捕获apk的下载地址
+//                                                Intent intent=new Intent(HomeActivity.this, WebActivity.class);
+//                                                intent.putExtra("url",
+//                                                        "http://android.myapp.com/myapp/detail.htm?apkName=com.shoujiduoduo.ringtone");
+//                                                intent.putExtra("title","下载新版本");
+//                                                startActivity(intent);
+
+                                                DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
+                                            }
+                                        });
+                            }
+
+                        } else {
+                            ToastUtils.showToast(HomeActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(HomeActivity.this, R.string.jianchagengxinshiabai);
+                    }
+                });
     }
 
     @Override
     public void LoadInternetDataToUi() {
 
     }
-
-
 
 
     @Override
@@ -210,7 +281,7 @@ public class HomeActivity extends BaseActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
-            if (!"".equals(UserConfig.getInstance().getLoginToken(this))&&"-1".equals(UserConfig.getInstance().getIsRealName(this))) {
+            if (!"".equals(UserConfig.getInstance().getLoginToken(this)) && "-1".equals(UserConfig.getInstance().getIsRealName(this))) {
                 SharedPreferencesUtils.getInstance(this, "popshow").put("show", false);
                 DialogUtils.showHuiFuDialog(this);
             }
@@ -243,11 +314,11 @@ public class HomeActivity extends BaseActivity {
             checkLogin();
             if (isLogin) {
                 vpActHome.setCurrentItem(3);
-                ((HomeFragment)(list.get(0))).initDataFromInternet();
+                ((HomeFragment) (list.get(0))).initDataFromInternet();
             }
 
-        }else if (requestCode==555){
-            if (UserConfig.getInstance().isDraw()){
+        } else if (requestCode == 555) {
+            if (UserConfig.getInstance().isDraw()) {
                 vpActHome.setCurrentItem(3);
             }
         }
@@ -265,8 +336,8 @@ public class HomeActivity extends BaseActivity {
             } else {
                 vpActHome.setCurrentItem(0);
                 try {
-                    ((HomeFragment)(list.get(0))).initDataFromInternet();
-                }catch (NullPointerException  e){
+                    ((HomeFragment) (list.get(0))).initDataFromInternet();
+                } catch (NullPointerException e) {
 
                 }
             }
@@ -278,16 +349,16 @@ public class HomeActivity extends BaseActivity {
         super.onNewIntent(intent);
 
         int flag = intent.getIntExtra("flag", 0);
-        Log.e("TAG", "onNewIntent: flag-----"+flag);
+        Log.e("TAG", "onNewIntent: flag-----" + flag);
 
         if (flag == 555) {
             vpActHome.setCurrentItem(1);
-        }else if (flag==55){
+        } else if (flag == 55) {
             vpActHome.setCurrentItem(0);
-        }else if (flag==666){
+        } else if (flag == 666) {
             try {
-                ((HomeFragment)(list.get(0))).initDataFromInternet();
-            }catch (NullPointerException  e){
+                ((HomeFragment) (list.get(0))).initDataFromInternet();
+            } catch (NullPointerException e) {
 
             }
         }

@@ -95,6 +95,13 @@ public class BidView extends View {
      */
     private String isNewer;
 
+    /**
+     * 贷后管理显示
+     */
+    private boolean showDaiHouGuanLi = false;
+    private Bitmap bitmapDaiHouGuanLi;
+    private RectF rectFDaiHouGuanLi;
+
 
     public BidView(Context context) {
         this(context, null, 0);
@@ -115,8 +122,18 @@ public class BidView extends View {
         initView();
     }
 
-    private void initView() {
 
+    public boolean isShowDaiHouGuanLi() {
+        return showDaiHouGuanLi;
+    }
+
+    public void setShowDaiHouGuanLi(boolean showDaiHouGuanLi) {
+        this.showDaiHouGuanLi = showDaiHouGuanLi;
+    }
+
+    private void initView() {
+        rectFDaiHouGuanLi = new RectF();
+        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
 
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
@@ -218,6 +235,26 @@ public class BidView extends View {
             canvas.drawBitmap(bitmapLock,null,rectFLock,null);
         }
 //----------------------------------绘制锁----------------------------------------------------------
+
+
+        //-----------------------------显示贷后管理-------------------------------------------------
+        if (showDaiHouGuanLi){
+            if (lock){
+                rectFDaiHouGuanLi.left=rectFLock.right+width * 0.02f;
+            }else {
+                rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
+            }
+            rectFDaiHouGuanLi.top = width * 0.03077f;
+            rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
+            rectFDaiHouGuanLi.bottom = width * 0.075f;
+
+            canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
+
+        }
+
+
+        //-----------------------------显示贷后管理-------------------------------------------------
+
 
 
 // ---------------------------------新手专享-------------------------------------------------------------
@@ -427,15 +464,26 @@ public class BidView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
+//        if (event.getAction() == MotionEvent.ACTION_UP) {
+//            float currentX = event.getX();
+//            float currentY = event.getY();
+//            if (rectF.contains(currentX, currentY)) {
+////                if (listener != null && investNow) {
+//                if (listener != null) {
+//                    listener.clickEvent();
+//                    return true;
+//                }
+//            }
+//        }
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float currentX = event.getX();
             float currentY = event.getY();
-            if (rectF.contains(currentX, currentY)) {
-//                if (listener != null && investNow) {
+            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
                 if (listener != null) {
                     listener.clickEvent();
-                    return true;
                 }
+                return true;
             }
         }
         return super.onTouchEvent(event);

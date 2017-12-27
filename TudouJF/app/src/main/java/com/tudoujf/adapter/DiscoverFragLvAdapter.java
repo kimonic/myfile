@@ -73,17 +73,16 @@ public class DiscoverFragLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText(list.get(position).getName());
         viewHolder.textView2.setText(StringUtils.getStrTime(list.get(position).getAddTime()));
-
-        if (list.get(position).getContents()!=null){
-            viewHolder.textView3.setText(Html.fromHtml(list.get(position).getContents()));
-        }else {
-            viewHolder.textView3.setText("");
-        }
+        viewHolder.textView3.setText(list.get(position).getSummary());
+//        if (list.get(position).getContents()!=null){
+//            viewHolder.textView3.setText(Html.fromHtml(list.get(position).getContents()));
+//        }else {
+//            viewHolder.textView3.setText("");
+//        }
 
         //-----------------------------------------临时使用,待调整,加载本地图片----------------------
         if (list.get(position).getImage()==null){
             ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getResId());
-
         }else {
             ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImage());
         }

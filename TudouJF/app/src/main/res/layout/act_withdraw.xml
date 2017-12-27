@@ -7,13 +7,13 @@
     <FrameLayout
         android:id="@+id/mtb_act_withdraw"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:background="@color/global_theme_background_color">
 
         <TextView
             android:id="@+id/tv_act_withdraw_bac"
-            android:layout_width="24dp"
-            android:layout_height="40dp"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,27 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
+import com.tudoujf.base.BaseBean;
+import com.tudoujf.bean.databean.MyAccountBean;
+import com.tudoujf.bean.databean.NewVersionBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.http.HttpMethods;
+import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.AppInfoUtils;
+import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.DownloadAppUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
+
+import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -47,7 +64,7 @@ public class SetActivity extends BaseActivity {
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
     //-------------------------待删除-----------------------------------------------
-    private boolean  flag=false;
+    private boolean flag = false;
     //-------------------------待删除-----------------------------------------------
 
 
@@ -75,18 +92,70 @@ public class SetActivity extends BaseActivity {
                 openActivity(QuestionClassificationActivity.class);
                 break;
             case R.id.ll_act_set_feedback://意见反馈
-                openActivity(FeedbackActivity.class);
+                openActivity(SetActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
+                checkNew();
                 count++;
-                if (flag&&count == 10) {
-                    flag=false;
+                if (flag && count == 10) {
+                    flag = false;
                     openActivity(PreviewActivity.class);
                 }
+
+
+                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getVersionCode(this));
+                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getAppName(this));
+                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getVersionName(this));
+
 //                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
                 break;
         }
 
+    }
+
+    private void checkNew() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+        map.put("phone_type", "1");
+        HttpMethods.getInstance().POST(this, Constants.NEW_VERSION, map, this.getLocalClassName(),
+                new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        Log.e("TAG", "onSuccess:----检查版本更新接口返回数据--------------" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
+                        }.getType(), NewVersionBean.class, SetActivity.this);
+                        if (bean1 != null) {
+                            NewVersionBean bean = (NewVersionBean) bean1;
+
+                            String versionName = AppInfoUtils.getVersionName(SetActivity.this);
+
+                            if (versionName.equals(bean.getNew_version())) {
+                                DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
+                            } else {
+                                DialogUtils.showPromptDialog(SetActivity.this, "提示", "发现APP有新版本,是否前往更新?",
+                                        new DialogUtils.DialogUtilsClickListener() {
+                                            @Override
+                                            public void onClick() {
+                                                DownloadAppUtils.downloadForWebView(SetActivity.this,
+                                                        "http://wxz.myapp.com/16891/87A187FA6F46F23256C50D2E03157BF0.apk?fsname=com.shoujiduoduo.ringtone_8.5.4.0_6008540.apk&hsr=4d5s");
+                                            }
+                                        });
+                            }
+
+                        } else {
+                            ToastUtils.showToast(SetActivity.this, R.string.shujujiazaichucuo);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(SetActivity.this, R.string.jianchagengxinshiabai);
+                    }
+                });
     }
 
     @Override
@@ -139,7 +208,7 @@ public class SetActivity extends BaseActivity {
         llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                flag=true;
+                flag = true;
                 return false;
             }
         });

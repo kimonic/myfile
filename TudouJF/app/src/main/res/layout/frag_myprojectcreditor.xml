@@ -173,10 +173,10 @@
                         android:textColor="@color/global_theme_background_color"
                         android:textSize="12sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/global_theme_background_color" />
+                    <!--<View-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="1dp"-->
+                        <!--android:background="@color/global_theme_background_color" />-->
 
                 </LinearLayout>
 

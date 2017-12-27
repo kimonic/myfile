@@ -4,11 +4,9 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
@@ -31,9 +28,7 @@ import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.home.InfoPublishActivity;
-import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
-import com.tudoujf.activity.home.NewbieWelfareActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
 import com.tudoujf.activity.home.SignInActivity;
 import com.tudoujf.activity.home.SpecialOfferActivity;
@@ -52,7 +47,6 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.service.SignInService;
 import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
@@ -63,10 +57,7 @@ import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import butterknife.BindView;
@@ -184,6 +175,7 @@ public class HomeFragment extends BaseFragment {
      * 当前ballview的位置
      */
     private int ballviewPosition = 0;
+    private boolean loginFlag = false;
 
 
     /**
@@ -208,7 +200,7 @@ public class HomeFragment extends BaseFragment {
 //    private float downX, downY;
 
 
-    private boolean  theEnd=true;
+    private boolean theEnd = true;
 
     @Override
     public int layoutRes() {
@@ -226,10 +218,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home_leftarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() > 0) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() - 1);
-                    theEnd=true;
+                    theEnd = true;
                 } else {
-                    if (theEnd){
-                        theEnd=false;
+                    if (theEnd) {
+                        theEnd = false;
                         ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
                     }
                 }
@@ -237,10 +229,10 @@ public class HomeFragment extends BaseFragment {
             case R.id.tv_frag_home_rightarrow:
                 if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
-                    theEnd=true;
+                    theEnd = true;
                 } else {
-                    if (theEnd){
-                        theEnd=false;
+                    if (theEnd) {
+                        theEnd = false;
                         ToastUtils.showToast(getActivity(), R.string.meiyougengduola);
                     }
                 }
@@ -256,9 +248,9 @@ public class HomeFragment extends BaseFragment {
 //                openActivity(NewbieWelfareActivity.class);
                 break;
             case R.id.ll_frag_home_tuijianyouli://推荐有礼
-                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))){
+                if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                     openActivity(LoginActivity.class);
-                }else {
+                } else {
                     openActivity(MyPopularizeActivity.class);
                 }
                 break;
@@ -440,6 +432,9 @@ public class HomeFragment extends BaseFragment {
     public void initDataFromIntent() {
         listBall = new ArrayList<>();
         list = new ArrayList<>();
+        if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+            loginFlag = true;
+        }
 
 //        Bundle bundle = getArguments();
 //        if (bundle != null) {
@@ -542,7 +537,7 @@ public class HomeFragment extends BaseFragment {
             public void onPageSelected(int position) {
                 dvFragHome.setPosition(position);
                 dvFragHome.invalidate();
-                autoCount=position;
+                autoCount = position;
             }
         });
 
@@ -746,13 +741,13 @@ public class HomeFragment extends BaseFragment {
                         HomeBean.class, getActivity());
                 if (bean1 != null) {
                     bean = (HomeBean) bean1;
-                    if (list.size()>0){
+                    if (list.size() > 0) {
                         list.clear();
                     }
-                    if (listBall.size()>0){
+                    if (listBall.size() > 0) {
                         listBall.clear();
                     }
-                    ballviewPosition=0;
+                    ballviewPosition = 0;
                     LoadInternetDataToUi();
                 }
             }
@@ -863,6 +858,12 @@ public class HomeFragment extends BaseFragment {
             }
         }
         super.onResume();
+        if (!loginFlag&&"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+            loginFlag = true;
+        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+            loginFlag = false;
+            initDataFromInternet();
+        }
     }
 
     @Override

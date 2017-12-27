@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/huifutuoguan"
             android:textColor="@color/color_gray"
             android:textSize="14sp"
@@ -82,7 +82,8 @@
             android:gravity="center_vertical"
             android:textColor="@color/color_black"
             android:textSize="14sp"
-
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             />
 
 
@@ -114,7 +115,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="XXXXXXXXXX"
             android:textColor="@color/color_gray"
             android:textSize="12sp"
@@ -164,7 +165,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:hint="@string/qingshuruchognzhijine"
             android:inputType="number|numberDecimal"
             android:textColor="@color/color_gray"

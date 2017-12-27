@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
+import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.bean.databean.CreditorListBean;
 import com.tudoujf.ui.ClaimsBidView;
 import com.tudoujf.utils.StringUtils;
@@ -89,10 +90,15 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setTransferPrice(list.get(position).getAmount());//转让金额
 
+        final int pos=position;
+
         viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
             @Override
             public void clickEvent() {
-                ToastUtils.showToast(context, "打开贷后管理");
+                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+                intent.putExtra("loan_id",list.get(pos).getLoan_id());
+                context.startActivity(intent);
+//                ToastUtils.showToast(context, "打开贷后管理");
             }
         });
 //        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限

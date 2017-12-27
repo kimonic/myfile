@@ -91,7 +91,7 @@ public class InvestListFragment extends BaseFragment {
     private int type = 1;
 
     private int count1 = 0, count2 = 0;
-    private int flag = 1;
+//    private int flag = 1;
 
     private InvestListBean bean;
     private String requestUrl;
@@ -340,8 +340,6 @@ public class InvestListFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        Log.e("TAG", "finishRL: isRefreshing-----" + swipeRefreshLayout.isRefreshing());
-        Log.e("TAG", "finishRL:isLoading -----" + swipeRefreshLayout.isLoading());
 
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.finishRefresh();
@@ -427,11 +425,11 @@ public class InvestListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (flag != 1) {
-            page = 1;
-            initDataFromInternet();
-        }
-        flag++;
+//        if (flag != 1) {
+//            page = 1;
+//            initDataFromInternet();
+//        }
+//        flag++;
 
         if (UserConfig.getInstance().isInvestFlush()) {
             UserConfig.getInstance().setInvestFlush(false);

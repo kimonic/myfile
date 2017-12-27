@@ -221,7 +221,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
                 }else {
                     intent.putExtra("tender_id",listBean.get(position).getTransfer_id());
                 }
-                startActivity(intent);
+                startActivityForResult(intent,111);
             }
         });
 
@@ -319,7 +319,18 @@ public class MyProjectCreditorFragment extends BaseFragment {
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==111){
+//            Log.e("TAG", "onActivityResult: ----我的债权项目刷新-");
+            page = 1;
+            start_time = "";
+            end_time = "";
+            listBean.clear();
+            initDataFromInternet();
+        }
+    }
 }
 
 

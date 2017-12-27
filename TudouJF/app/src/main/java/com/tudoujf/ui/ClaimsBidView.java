@@ -270,9 +270,9 @@ public class ClaimsBidView extends View {
 
         //-----------------------------显示贷后管理-------------------------------------------------
         rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
-        rectFDaiHouGuanLi.top = width * 0.02777f;
+        rectFDaiHouGuanLi.top = width * 0.03077f;
         rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
-        rectFDaiHouGuanLi.bottom = width * 0.072f;
+        rectFDaiHouGuanLi.bottom = width * 0.075f;
 
         canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
 

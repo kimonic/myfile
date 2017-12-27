@@ -391,11 +391,11 @@ public class CreditorListFragment extends BaseFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e("TAG", "setUserVisibleHint: -----执行");
+//        Log.e("TAG", "setUserVisibleHint: -----执行");
         if (isVisibleToUser) {
-            Log.e("TAG", "setUserVisibleHint: -----可见");
+//            Log.e("TAG", "setUserVisibleHint: -----可见");
             if (UserConfig.getInstance().isCreditorFlush()) {
-                Log.e("TAG", "setUserVisibleHint: -----可见刷新");
+//                Log.e("TAG", "setUserVisibleHint: -----可见刷新");
 
                 UserConfig.getInstance().setCreditorFlush(false);
                 page = 1;
@@ -403,10 +403,11 @@ public class CreditorListFragment extends BaseFragment {
             }
 
             //相当于Fragment的onResume
-        } else {
-            //相当于Fragment的onPause
-            Log.e("TAG", "setUserVisibleHint: -----不可见");
         }
+//        else {
+//            //相当于Fragment的onPause
+////            Log.e("TAG", "setUserVisibleHint: -----不可见");
+//        }
     }
 
 

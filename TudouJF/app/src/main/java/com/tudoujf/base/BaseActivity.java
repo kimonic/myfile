@@ -331,7 +331,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
                 }
                 Message msg=Message.obtain();
                 msg.what=1;
-                handler.sendMessage(msg);
+                if (handler!=null){
+                    handler.sendMessage(msg);
+                }
             }
         }.start();
     }

@@ -75,8 +75,8 @@ public class LoginActivity extends BaseActivity {
     FrameLayout frameLayout;
     @BindView(R.id.scroll)
     View temp;
-   @BindView(R.id.login_root)
-   ScrollView scrollView;
+    @BindView(R.id.login_root)
+    ScrollView scrollView;
     /**
      * 密码明文或密文表示计数
      */
@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity {
     private int type = 0;
 
 
-    private boolean  flag=true;
+    private boolean flag = true;
 
 
     @Override
@@ -146,20 +146,20 @@ public class LoginActivity extends BaseActivity {
         screenUtil.observeInputlayout(temp, new ScreenUtil.OnInputActionListener() {
             @Override
             public void onOpen(int inputHeight) {
-                if (flag){
-                    int[]   xy=new int[2];
+                if (flag) {
+                    int[] xy = new int[2];
                     tvLogin.getLocationOnScreen(xy);
-                    scrollView.smoothScrollTo(0,inputHeight-(ScreenSizeUtils.getScreenHeight(LoginActivity.this)-xy[1])
-                            +40*ScreenSizeUtils.getDensity(LoginActivity.this)+20);
-                    flag=false;
+                    scrollView.smoothScrollTo(0, inputHeight - (ScreenSizeUtils.getScreenHeight(LoginActivity.this) - xy[1])
+                            + 40 * ScreenSizeUtils.getDensity(LoginActivity.this) + 20);
+                    flag = false;
                 }
 
             }
 
             @Override
             public void onClose() {
-                scrollView.smoothScrollTo(0,0);
-                flag=true;
+                scrollView.smoothScrollTo(0, 0);
+                flag = true;
 
             }
         });
@@ -191,14 +191,14 @@ public class LoginActivity extends BaseActivity {
                 etPassword.setText("");
                 break;
             case R.id.iv_act_login_openclose://密码明文或密文显示
+                count++;
                 if (count % 2 == 1) {
-                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT);
                     ivOpenclose.setImageResource(R.drawable.act_login2_eyeopen);
                 } else {
-                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT);
+                    etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     ivOpenclose.setImageResource(R.drawable.act_login2_eyeclose);
                 }
-                count++;
                 break;
             case R.id.tv_act_login_forgetpassword://跳转忘记密码activity
                 openActivity(FindPasswordActivity.class);

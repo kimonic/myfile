@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
+import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.ui.BidView;
 import com.tudoujf.utils.StringUtils;
@@ -122,6 +123,20 @@ public class InvestListFragLvAdapter extends BaseAdapter {
         Log.e("TAG", "getView: --剩余可投---"+(list.get(position).getAmount_surplus()+"元"));
 
 
+        if ("3".equals(list.get(position).getStatus())||"4".equals(list.get(position).getStatus())){
+            viewHolder.bidView.setShowDaiHouGuanLi(false);
+        }else {
+            final int pos =position;
+            viewHolder.bidView.setShowDaiHouGuanLi(true);
+            viewHolder.bidView.setListener(new BidView.ClickEventListener() {
+                @Override
+                public void clickEvent() {
+                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+                    intent.putExtra("loan_id",list.get(pos).getId());
+                    context.startActivity(intent);
+                }
+            });
+        }
 
         viewHolder.bidView.setInvestSum(list.get(position).getAmount());//总投资金额
         viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限

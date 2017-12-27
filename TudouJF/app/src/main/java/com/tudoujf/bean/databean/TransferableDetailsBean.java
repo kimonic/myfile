@@ -49,6 +49,7 @@ public class TransferableDetailsBean implements BaseBean {
     private String transfer_coefficient_max;
     private String transfer_id;
     private String total_period;
+    private String service_charge;
 
 
     /**
@@ -69,6 +70,13 @@ public class TransferableDetailsBean implements BaseBean {
     private String expire_time;
     private RecoverBean recover;
 
+    public String getService_charge() {
+        return service_charge;
+    }
+
+    public void setService_charge(String service_charge) {
+        this.service_charge = service_charge;
+    }
 
     public String getRepay_status() {
         return repay_status;

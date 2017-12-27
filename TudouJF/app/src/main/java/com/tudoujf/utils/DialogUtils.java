@@ -158,7 +158,6 @@ public class DialogUtils {
     }
 
 
-
     /**
      * 不含取消按钮,不含标题  传输文本
      *
@@ -300,7 +299,7 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
 //                  2017/8/1 开通资金托管逻辑
-                Intent intent=new Intent(context, RealNameAuthenticationHuiFuActivity.class);
+                Intent intent = new Intent(context, RealNameAuthenticationHuiFuActivity.class);
                 context.startActivity(intent);
                 pop.dismiss();
             }
@@ -313,14 +312,13 @@ public class DialogUtils {
 
 
     /**
-     *
      * 简单登录
      *
      * @param context 上下文
      * @param msg     点击back键的提示信息
      * @return alertdialog
      */
-    public static AlertDialog showUserDialog(final Context context, final String msg,View view) {
+    public static AlertDialog showUserDialog(final Context context, final String msg, View view) {
 //        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_user, null);
         AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(false);
@@ -351,7 +349,7 @@ public class DialogUtils {
             WindowManager.LayoutParams lp = window.getAttributes();
 //            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
             int wh = 90 * ScreenSizeUtils.getDensity(context);
-            Log.e("TAG", "showUserDialog: ----wh-"+wh);
+            Log.e("TAG", "showUserDialog: ----wh-" + wh);
             lp.width = wh;
             lp.height = wh;
             lp.gravity = Gravity.CENTER;
@@ -361,26 +359,24 @@ public class DialogUtils {
     }
 
 
-
     /**
-     *
      * 简单提示dialog
      *
      * @param context 上下文
-     * @param content     点击back键的提示信息
+     * @param content 点击back键的提示信息
      * @return alertdialog
      */
-    public static AlertDialog showPromptDialog(final Context context, String title, String  content, final DialogUtilsClickListener  listener) {
+    public static AlertDialog showPromptDialog(final Context context, String title, String content, final DialogUtilsClickListener listener) {
 
-        View view= LayoutInflater.from(context).inflate(R.layout.dialog_prompt,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
 
-        TextView  tvTitle=view.findViewById(R.id.tv_title);
-        TextView  tvContent=view.findViewById(R.id.tv_content);
-        TextView  tvCancle=view.findViewById(R.id.tv_cancle);
-        TextView  tvQueDing=view.findViewById(R.id.tv_queding);
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvCancle = view.findViewById(R.id.tv_cancle);
+        TextView tvQueDing = view.findViewById(R.id.tv_queding);
 
         tvTitle.setText(title);
         tvContent.setText(content);
@@ -394,11 +390,70 @@ public class DialogUtils {
         tvQueDing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick();
+                dialog.dismiss();
+                if (listener != null) {
+                    listener.onClick();
+                }
             }
         });
 
 
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+    /**
+     * 简单提示dialog
+     *
+     * @param context 上下文
+     * @param content 点击back键的提示信息
+     * @return alertdialog
+     */
+    public static AlertDialog showPromptDialogAll(final Context context, String title, String content,
+                                                  final DialogUtilsClickListener agreeListener
+            , final DialogUtilsClickListener cancelListener) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt, null);
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvCancle = view.findViewById(R.id.tv_cancle);
+        TextView tvQueDing = view.findViewById(R.id.tv_queding);
+
+        tvTitle.setText(title);
+        tvContent.setText(content);
+        tvCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (cancelListener != null) {
+                    cancelListener.onClick();
+                }
+            }
+        });
+
+        tvQueDing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (agreeListener != null) {
+                    agreeListener.onClick();
+                }
+            }
+        });
 
 
         //一定得在show完dialog后来set属性
@@ -417,23 +472,22 @@ public class DialogUtils {
 
 
     /**
-     *
      * 债权撤销提示dialog
      *
      * @param context 上下文
-     * @param content     点击back键的提示信息
+     * @param content 点击back键的提示信息
      * @return alertdialog
      */
-    public static AlertDialog showCreditorCancel(final Context context,  String  content, final DialogUtilsClickListener  listener) {
+    public static AlertDialog showCreditorCancel(final Context context, String content, final DialogUtilsClickListener listener) {
 
-        View view= LayoutInflater.from(context).inflate(R.layout.dialog_creditorcancel,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_creditorcancel, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
 
-        TextView  tvContent=view.findViewById(R.id.tv_content);
-        TextView  tvCancle=view.findViewById(R.id.tv_cancle);
-        TextView  tvQueDing=view.findViewById(R.id.tv_queding);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvCancle = view.findViewById(R.id.tv_cancle);
+        TextView tvQueDing = view.findViewById(R.id.tv_queding);
 
         tvContent.setText(content);
         tvCancle.setOnClickListener(new View.OnClickListener() {
@@ -447,11 +501,11 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                listener.onClick();
+                if (listener != null) {
+                    listener.onClick();
+                }
             }
         });
-
-
 
 
         //一定得在show完dialog后来set属性
@@ -469,11 +523,9 @@ public class DialogUtils {
     }
 
 
-
-    public  interface  DialogUtilsClickListener{
+    public interface DialogUtilsClickListener {
         void onClick();
     }
-
 
 
 }

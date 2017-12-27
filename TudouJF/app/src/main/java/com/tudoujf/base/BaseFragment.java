@@ -169,7 +169,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
                 Message msg = Message.obtain();
                 msg.what = 1;
-                handler.sendMessage(msg);
+                if (handler!=null){
+                    handler.sendMessage(msg);
+                }
             }
         }.start();
     }

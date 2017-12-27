@@ -192,7 +192,7 @@
     <string name="frag_discover_haoliduihuan">豪礼兑换</string>
     <string name="queding">确定</string>
     <string name="wuwangluotishi">网络连接异常,请检查是否已打开WiFi或数据流量!!</string>
-    <string name="denglushibai">登陆失败!!</string>
+    <string name="denglushibai">登录失败!!</string>
     <string name="frag_my_shenqingvip">申请VIP</string>
     <string name="frag_my_zongshouyi">总累计收益(元)</string>
     <string name="frag_my_zhanghuzongzichan">账户总资产</string>
@@ -408,7 +408,7 @@
     <string name="qingliuxianindelianxifangshi">请留下您的联系方式(电话、QQ或邮箱)</string>
     <string name="tijiao">提交</string>
     <string name="fuwushijian">服务时间</string>
-    <string name="zaowan">早9:00至晚21:00</string>
+    <string name="zaowan">早8:30至晚21:00</string>
     <string name="bodakefurexian">拨打客服热线</string>
     <string name="act_questionclassification_title">问题分类</string>
     <string name="xinshouzhiyin">新手指引</string>
@@ -431,11 +431,11 @@
     <string name="weirenzheng">未认证</string>
     <string name="shimingrenzheng">实名认证</string>
     <string name="mimashezhi">密码设置</string>
-    <string name="denglumima">登陆密码</string>
+    <string name="denglumima">登录密码</string>
     <string name="xiugai">修改</string>
     <string name="shoushimima">手势密码</string>
-    <string name="tuichudenglu">退出登陆</string>
-    <string name="act_changepassword_title">修改登陆密码</string>
+    <string name="tuichudenglu">退出登录</string>
+    <string name="act_changepassword_title">修改登录密码</string>
     <string name="qingshuruyuanmima">请输入原密码</string>
     <string name="qingshuruxinmima">请输入新密码</string>
     <string name="querenxinmima">确认新密码</string>
@@ -619,7 +619,7 @@
     <string name="quanxianshenqingchenggong">权限申请成功!</string>
     <string name="bufenquanxianshouquanshibai">部分权限授权失败,本应用需要开启获取手机信息,读写手机存储,手机拍照三种主要权限,未授权可能会导致位置错误,是否前往应用详情查看设置!</string>
     <string name="copyerror">复制失败!</string>
-    <string name="gzhyfz">公众号已复制,您可直接打开微信粘贴搜索,完成关注</string>
+    <string name="gzhyfz">微信号已复制,您可直接打开微信粘贴搜索,完成关注</string>
     <string name="quzhantie">去粘贴</string>
     <string name="ninweianzhuangweixin">您未安装微信,请先安装!</string>
     <string name="jisuanshibai">结算失败!</string>
@@ -669,6 +669,8 @@
     <string name="huodongxinagqing">活动详情</string>
     <string name="zanshimeiyouxiaoxi">暂时没有消息记录!</string>
     <string name="daihouguanli">贷后管理</string>
+    <string name="yanzhengmahuoquchenggong">验证码获取成功!</string>
+    <string name="jianchagengxinshiabai">检查更新失败!</string>
 
 
 </resources>

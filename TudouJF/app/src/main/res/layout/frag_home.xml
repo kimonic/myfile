@@ -52,15 +52,15 @@
 
                         <ImageView
                             android:id="@+id/iv_frag_msgcount"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:contentDescription="@null"
                             android:src="@drawable/frag_home_info" />
 
                         <TextView
                             android:id="@+id/tv_frag_msgcount"
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
                             android:layout_gravity="end"
                             android:gravity="center"
                             android:textSize="6sp" />

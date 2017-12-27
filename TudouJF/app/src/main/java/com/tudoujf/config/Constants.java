@@ -1,7 +1,5 @@
 package com.tudoujf.config;
 
-import java.net.URL;
-
 /**
  * * ====================================================================
  * name:            Constants
@@ -330,10 +328,15 @@ public class Constants {
      */
     public static final String CANCEL_TRANSFER = URL + "/phone/transfer/cancel";
 
-  /**
+    /**
      * 债权转让撤销
      */
     public static final String DAI_HOU_GUAN_LI = URL + "/phone/loan/managementAfter";
+
+    /**
+     * 检查版本更新
+     */
+    public static final String NEW_VERSION = URL + "/phone/member/updateVersion";
 
 
     //----------------------------------------------------------------------------------------------
@@ -428,6 +431,11 @@ public class Constants {
      * 新手福利注册链接
      */
     public static final String XIN_SHOU_FU_LI_ZHU_CE = "/wap/system/register2";
+    /**
+     * web页中的登录链接关键字
+     */
+    public static final String LOGIN_CLICK = "/wap/system/reglogin";
+
     /**
      * 债权协议链接
      */

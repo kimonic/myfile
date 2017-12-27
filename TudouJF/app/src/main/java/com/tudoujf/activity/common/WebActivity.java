@@ -2,6 +2,7 @@ package com.tudoujf.activity.common;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -10,6 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.activity.other.RegisterActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
@@ -132,8 +134,16 @@ public class WebActivity extends BaseActivity {
             if (url.contains(Constants.XIN_SHOU_FU_LI_ZHU_CE)){
                 openActivity(RegisterActivity.class);
                 closeActivity();
+            }else if (url.contains(Constants.LOGIN_CLICK)){
+                openActivity(LoginActivity.class);
+                closeActivity();
+            }else {
+                showPDialog();
             }
-            showPDialog();
+
+            Log.e("TAG", "onPageStarted: ---url--"+url);
+
+
         }
 
 

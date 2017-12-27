@@ -89,8 +89,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
     TextView tvEaringsBuy;
     @BindView(R.id.tv_zhaiquanzhuanrangxieyi)
     TextView tvXieYi;
-    @BindView(R.id.tv_act_mycreditorsrightsdetails_zhuangtai)
-    TextView tvTransferStatus;
+//    @BindView(R.id.tv_act_mycreditorsrightsdetails_zhuangtai)
+//    TextView tvTransferStatus;
     @BindView(R.id.lv_act_mycreditorsrightsdetails_buy)
     ListView lvBuy;
 
@@ -115,7 +115,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                     cancelCreditor();
                 } else {
                     transferNow();
-
                 }
                 break;
             case R.id.tv_zhaiquanzhuanrangxieyi://债权转让协议
@@ -143,7 +142,7 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        map.put("transfer_id", tender_id);
+        map.put("transfer_id", bean.getTransfer_id());
 
         HttpMethods.getInstance().POST(this, Constants.CANCEL_TRANSFER, map, this.getLocalClassName(),
                 new StringCallback() {
@@ -156,6 +155,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                         CommonBean bean1 = gson.fromJson(result, CommonBean.class);
                         if (bean1 != null && "200".equals(bean1.getCode())) {
                             ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanchexiaochenggong);
+                            setResult(111);
+                            closeActivity();//返回上一页并刷新
                         } else {
                             if (bean1 != null && bean1.getDescription() != null) {
                                 ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, bean1.getDescription().toString());
@@ -211,11 +212,13 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
         etTransferScale.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
+
                 if (bean != null) {
                     String temp = "" + StringUtils.string2Float(editable.toString()) * StringUtils.string2Float(bean.getAmount_money()) / 100;
                     String temp1 = "" + StringUtils.string2Float(bean.getTransfer_fee().split(",")[0]) * StringUtils.string2Float(editable.toString()) * StringUtils.string2Float(bean.getAmount_money()) / 100;
                     tvTransferPrice.setText(temp);
                     tvPredictEarings.setText(StringUtils.getTwoDecimalsStrUD(temp1));
+
                 }
             }
         });
@@ -290,36 +293,56 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
 
             } else {
-                tvBidName.setText(bean.getLoan_name());
-                tvCreditorsValue.setText(bean.getAmount_money());
-                tvReturnDate.setText(bean.getRecover_time());
-                tvPeriods.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));
+
+                Log.e("TAG", "LoadInternetDataToUi: ---类型2--");
+
+                tvBidName.setText(bean.getLoan_name());//标的名称
+                tvCreditorsValue.setText(bean.getAmount_money());//债权价值
+                tvReturnDate.setText(bean.getRecover_time());//还款期限
+                tvPeriods.setText((bean.getPeriod() + "期/共" + bean.getTotal_period() + "期"));//转让/总期数
+
+                //转让系数
                 etTransferScale.setHint(("请输入转让系数:" + bean.getTransfer_coefficient_min() + "-" + bean.getTransfer_coefficient_max()));
 
 
-                // TODO: 2017/12/22  转让状态调整,待核实
-                if (bean.getCoefficient() != null) {//转让中状态
-                    etTransferScale.setText(bean.getCoefficient());
-                    etTransferScale.setKeyListener(null);
-//                    tvBuyNow.setVisibility(View.GONE);
-//                    tvBuyNow.setText("转让中");
-//                    tvBuyNow.setClickable(false);
-//                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+//                // TODO: 2017/12/22  转让状态调整,待核实
+//                if (bean.getCoefficient() != null) {//转让中状态
+//                    etTransferScale.setText(bean.getCoefficient());//转让中状态系数不变为固定值
+//                    etTransferScale.setKeyListener(null);
+////                    tvBuyNow.setVisibility(View.GONE);
+////                    tvBuyNow.setText("转让中");
+////                    tvBuyNow.setClickable(false);
+////                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray3));
+//                }
 
-
-                }
-
-                if ("1".equals(bean.getTransfer_status())) {
-                    tvTransferStatus.setText("转让中");
+                if ("1".equals(bean.getTransfer_status())&&StringUtils.string2Integer(bean.getCancel_count())<3) {
+//                    tvTransferStatus.setText("转让中");
                     if (StringUtils.string2Integer(bean.getCancel_count()) < 3) {
+                        etTransferScale.setText(bean.getCoefficient());//转让中状态系数不变为固定值
+                        etTransferScale.setKeyListener(null);
                         tvBuyNow.setText("撤销");
                         tvBuyNow.setBackgroundColor(getResources().getColor(R.color.global_theme_background_color));
                         canCansel=true;
+                        Log.e("TAG", "LoadInternetDataToUi: -撤销-11111---"+bean.getService_charge());
+                        tvPredictEarings.setText(bean.getService_charge());//转让系数不可改变时的手续费
                     }
-                } else if ("-1".equals(bean.getTransfer_status())) {
-                    tvTransferStatus.setText("已撤销");
-                } else {
-                    tvTransferStatus.setText("转让成功");
+                } else if ("-1".equals(bean.getTransfer_status())&&StringUtils.string2Integer(bean.getCancel_count())<3) {
+                    Log.e("TAG", "LoadInternetDataToUi: -已撤销-2222---"+bean.getService_charge());
+                    tvPredictEarings.setText(bean.getService_charge());//转让系数不可改变时的手续费
+                    tvBuyNow.setText("立即转让");
+                    tvBuyNow.setClickable(true);
+                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.global_theme_background_color));
+                    canCansel=false;
+//                    tvTransferStatus.setText("已撤销");
+                } else if ("2".equals(bean.getTransfer_status())){
+                    etTransferScale.setText(bean.getCoefficient());//转让中状态系数不变为固定值
+                    etTransferScale.setKeyListener(null);
+                    Log.e("TAG", "LoadInternetDataToUi: -转让成功-3333---"+bean.getService_charge());
+//                    tvTransferStatus.setText("转让成功");
+                    tvBuyNow.setText("转让成功");
+                    tvBuyNow.setClickable(false);
+                    tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
+                    canCansel=false;
                 }
             }
 
@@ -360,6 +383,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                         CommonBean bean1 = gson.fromJson(result, CommonBean.class);
                         if (bean1 != null && "200".equals(bean1.getCode())) {
                             ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, R.string.zhaiquanzhuanrangchenggong);
+                            setResult(111);
+                            closeActivity();//返回上一页
                         } else {
                             if (bean1 != null && bean1.getDescription() != null) {
                                 ToastUtils.showToast(MyCreditorRightsDetailsActivity.this, bean1.getDescription().toString());

@@ -3,6 +3,7 @@ package com.tudoujf.activity.my.set;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,10 @@ import butterknife.BindView;
 public class HelpCenterCommonActivity extends BaseActivity {
     @BindView(R.id.tv_act_helpcentercommon)
     TextView tvActHelpcenterCommon;
+    @BindView(R.id.tv_act_helpcentercommon_bac)
+    TextView tvBac;
+     @BindView(R.id.fl_act_helpcentercommon)
+     FrameLayout fl;
     @BindView(R.id.elv_act_helpcentercommon)
     ExpandableListView lvActHelpcenterCommon;
 
@@ -64,7 +69,16 @@ public class HelpCenterCommonActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tv_act_helpcentercommon_bac:
+                closeActivity();
+                break;
+//            case R.id.: break;
+//            case R.id.: break;
+//            case R.id.: break;
+//            case R.id.: break;
+//            case R.id.: break;
+        }
     }
 
     @Override
@@ -89,12 +103,11 @@ public class HelpCenterCommonActivity extends BaseActivity {
     @Override
     public void initView() {
 //        /**设置沉浸式状态栏*/
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tvActHelpcenterCommon.getLayoutParams();
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        tvActHelpcenterCommon.setLayoutParams(params);
+        fl.setLayoutParams(params);
 
         tvActHelpcenterCommon.setText(title);
-
 
 
     }
@@ -105,13 +118,15 @@ public class HelpCenterCommonActivity extends BaseActivity {
             @Override
             public void onGroupExpand(int groupPosition) {
                 int count = lvActHelpcenterCommon.getExpandableListAdapter().getGroupCount();
-                for(int j = 0; j < count; j++){
-                    if(j != groupPosition){
+                for (int j = 0; j < count; j++) {
+                    if (j != groupPosition) {
                         lvActHelpcenterCommon.collapseGroup(j);
                     }
                 }
             }
         });
+
+        tvBac.setOnClickListener(this);
     }
 
     @Override
@@ -130,9 +145,9 @@ public class HelpCenterCommonActivity extends BaseActivity {
                         Log.e("TAG", "onSuccess:----帮助中心通用接口返回数据--------" + category_id + "------" + result);
                         Gson gson = new Gson();
                         bean = gson.fromJson(result, HelpCenterCommonBean.class);
-                        if (bean!=null&&"200".equals(bean.getCode())){
+                        if (bean != null && "200".equals(bean.getCode())) {
                             LoadInternetDataToUi();
-                        }else {
+                        } else {
                             ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.shujujiazaichucuo);
                         }
 
@@ -164,21 +179,18 @@ public class HelpCenterCommonActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
-        if (bean!=null&&"200".equals(bean.getCode())){
-            if (bean.getData().size()>0){
+        if (bean != null && "200".equals(bean.getCode())) {
+            if (bean.getData().size() > 0) {
                 list.addAll(bean.getData());
 
                 lvActHelpcenterCommon.setGroupIndicator(null);
                 HelpCenterCommonExpanableAdapter adapter = new HelpCenterCommonExpanableAdapter(this, list);
                 lvActHelpcenterCommon.setAdapter(adapter);
-                
-                
 
 
-            }else {
+            } else {
                 ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.meiyoukexianshishuju);
             }
-
 
 
         }

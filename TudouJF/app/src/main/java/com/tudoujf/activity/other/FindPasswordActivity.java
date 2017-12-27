@@ -56,10 +56,10 @@ public class FindPasswordActivity extends BaseActivity {
     EditText etPhonecode;
     @BindView(R.id.tv_act_find_getphonecode)
     TextView tvGetphonecode;
-    @BindView(R.id.et_act_find_imagecode)
-    EditText etImagecode;
-    @BindView(R.id.iv_act_find_getimagecode)
-    ImageView ivGetimagecode;
+//    @BindView(R.id.et_act_find_imagecode)
+//    EditText etImagecode;
+//    @BindView(R.id.iv_act_find_getimagecode)
+//    ImageView ivGetimagecode;
     @BindView(R.id.tv_act_find_next)
     TextView tvNext;
     private String randomCode;
@@ -74,7 +74,7 @@ public class FindPasswordActivity extends BaseActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            tvGetphonecode.setText(msg.what + "秒后可重新获得验证码!");
+            tvGetphonecode.setText(msg.what + "秒后重新发送");
             if (msg.what == 0) {
                 countTime = 60;
                 tvGetphonecode.setClickable(true);
@@ -110,8 +110,8 @@ public class FindPasswordActivity extends BaseActivity {
                 }
 
                 break;
-            case R.id.iv_act_find_getimagecode://点击刷新图形验证码
-                break;
+//            case R.id.iv_act_find_getimagecode://点击刷新图形验证码
+//                break;
             case R.id.tv_act_find_next://手机验证码与图形验证码正确后提交请求,否则重新输入
                 if (etPhonecode.getText().toString().trim().equals(randomCode)){
                     Bundle bundle=new Bundle();
@@ -191,7 +191,7 @@ public class FindPasswordActivity extends BaseActivity {
         });
         ivClear.setOnClickListener(this);
         tvGetphonecode.setOnClickListener(this);
-        ivGetimagecode.setOnClickListener(this);
+//        ivGetimagecode.setOnClickListener(this);
         tvNext.setOnClickListener(this);
 
     }
@@ -236,7 +236,7 @@ public class FindPasswordActivity extends BaseActivity {
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());
                 if (phoneCodeBean.getCode().equals("200")) {
-                    ToastUtils.showToast(FindPasswordActivity.this, "验证码获取成功!!");
+                    ToastUtils.showToast(FindPasswordActivity.this, R.string.yanzhengmahuoquchenggong);
                 }
 
             }
@@ -255,7 +255,7 @@ public class FindPasswordActivity extends BaseActivity {
      */
     private void startCountDown() {
         tvGetphonecode.setClickable(false);
-        tvGetphonecode.setText("60秒后可重新获取验证码!");
+        tvGetphonecode.setText("60秒后重新发送");
         new Thread() {
             @Override
             public void run() {

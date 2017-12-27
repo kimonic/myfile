@@ -62,7 +62,7 @@ public class PasswordView extends AppCompatEditText implements TextWatcher {
     protected void onDraw(Canvas canvas) {
         int width=getWidth();
         int height=getHeight();
-        canvas.drawColor(Color.parseColor("#F0F0E8"));
+        canvas.drawColor(Color.parseColor("#FFFFFF"));
 
         canvas.drawLine(0,0,width,0,borderPaint);
         canvas.drawLine(width,0,width,height-5,borderPaint);
