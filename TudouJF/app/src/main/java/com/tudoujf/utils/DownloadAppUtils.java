@@ -1,8 +1,11 @@
 package com.tudoujf.utils;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import com.tudoujf.R;
 
 
 /**
@@ -31,7 +34,11 @@ public class DownloadAppUtils {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        try {
+            context.startActivity(intent);
+        }catch (ActivityNotFoundException e){
+            ToastUtils.showToast(context, R.string.xiazailianjiechucuo);
+        }
     }
 
 

@@ -37,7 +37,6 @@
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="2017-08-01"
             android:textColor="@color/color_black"
             android:textSize="12sp" />
 
@@ -64,7 +63,6 @@
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="2017-08-01"
             android:textColor="@color/color_black"
             android:textSize="12sp" />
     </LinearLayout>
@@ -90,7 +88,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="2017-08-15"
             android:gravity="center"
             android:textColor="@color/color_white"
             android:textSize="18sp"

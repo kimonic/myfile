@@ -38,8 +38,6 @@ public class StringUtils {
      * 返回未解密的json对象
      */
     private static GlobalBean firstParseJson(String json) {
-
-
         return gson.fromJson(json, new TypeToken<GlobalBean>() {
         }.getType());
     }
@@ -50,14 +48,10 @@ public class StringUtils {
      */
     public static String getDecodeString(String json) {
         String temp;
-        Log.e("TAG", "getDecodeString: -----"+json);
-
         GlobalBean bean = firstParseJson(json);
-
         //MD5验证
         if (MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
-            Log.e("TAG", "getDecodeString: -----"+temp);
             return temp;
         } else {
             return null;
@@ -168,6 +162,9 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTime(String cc_time) {
+        if (cc_time==null){
+            return "****/**/**";
+        }
         String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
@@ -210,6 +207,9 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTimeBias(String cc_time) {
+        if (cc_time==null){
+            return "****/**/**";
+        }
         String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         try {
@@ -237,6 +237,9 @@ public class StringUtils {
      * 补齐两位小数
      */
     public static String getTwoDecimalsStr(String fStr) {
+        if (fStr==null){
+            return "";
+        }
         float f = string2Float(fStr);
         DecimalFormat decimalFormat = new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
         decimalFormat.setRoundingMode(RoundingMode.DOWN);//舍去多余位
@@ -247,6 +250,9 @@ public class StringUtils {
      * 补齐两位小数
      */
     public static String getTwoDecimalsStrUD(String fStr) {
+        if (fStr==null){
+            return "";
+        }
         double f = string2Float(fStr);
         DecimalFormat decimalFormat = new DecimalFormat("#.##");//构造方法的字符格式这里如果小数不足2位,会以0补足.
         decimalFormat.setRoundingMode(RoundingMode.HALF_UP);//舍去多余位
@@ -397,9 +403,13 @@ public class StringUtils {
 
     /**科学计数法转换为诶数字scientific notation*/
     public static String changeScientificNotation(String num1) {
+        if (num1!=null){
+            BigDecimal bd1 = new BigDecimal(num1);
+            return bd1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
+        }else {
+            return "0";
+        }
 
-        BigDecimal bd1 = new BigDecimal(num1);
-        return bd1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
 
     }
 

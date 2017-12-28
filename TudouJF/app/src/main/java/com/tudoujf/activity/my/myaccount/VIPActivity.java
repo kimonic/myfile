@@ -6,17 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.TransferableDetailsBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -62,6 +58,7 @@ public class VIPActivity extends BaseActivity {
     private String money = "30";
     private String cycle = "1";
     private String categoryInd = "vip1";
+    private String balance;
 
     @Override
     public int getLayoutResId() {
@@ -97,11 +94,18 @@ public class VIPActivity extends BaseActivity {
                 break;
             case R.id.tv_act_vip_apply_now:
 //                applyVip();
-                Intent intent = new Intent(this, VIPHuiFuBuyActivity.class);
-                intent.putExtra("money", money);
-                intent.putExtra("cycle", cycle);
-                intent.putExtra("categoryInd", categoryInd);
-                startActivity(intent);
+                if (StringUtils.string2Float(money) > StringUtils.string2Float(balance)) {
+
+                    ToastUtils.showToast(VIPActivity.this, R.string.yuebuzuqing);
+
+                } else {
+                    Intent intent = new Intent(this, VIPHuiFuBuyActivity.class);
+                    intent.putExtra("money", money);
+                    intent.putExtra("cycle", cycle);
+                    intent.putExtra("categoryInd", categoryInd);
+                    startActivity(intent);
+                }
+
                 break;
 //                 case R.id.:break;
         }
@@ -120,15 +124,15 @@ public class VIPActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        String balance = getIntent().getStringExtra("balance");
+        balance = getIntent().getStringExtra("balance");
         tvActVipAmount.setText(balance);
 
-        String isvip=getIntent().getStringExtra("isvip");
-        if ("1".equals(isvip)){
+        String isvip = getIntent().getStringExtra("isvip");
+        if ("1".equals(isvip)) {
             tvDescription.setText(R.string.qingxuanzeninxuyaoxufeidetaocan);
             tvActVipApplyNow.setText(R.string.lijixufei);
             mtbActVip.setCenterTitle(R.string.xufeivip);
-        }else {
+        } else {
             tvDescription.setText(R.string.qingxuanzeninyaoshenqingdetaocan);
             tvActVipApplyNow.setText(R.string.lijishenqing);
             mtbActVip.setCenterTitle(R.string.frag_my_shenqingvip);
@@ -187,7 +191,6 @@ public class VIPActivity extends BaseActivity {
         map.put("cycle", cycle);
         map.put("categoryInd", categoryInd);
 
-        Log.e("TAG", "VIP申请接口返回数据: -login_token----" + UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, this.getLocalClassName(),
                 new StringCallback() {

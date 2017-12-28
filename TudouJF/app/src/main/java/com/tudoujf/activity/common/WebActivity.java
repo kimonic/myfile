@@ -140,10 +140,7 @@ public class WebActivity extends BaseActivity {
             }else {
                 showPDialog();
             }
-
             Log.e("TAG", "onPageStarted: ---url--"+url);
-
-
         }
 
 

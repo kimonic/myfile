@@ -191,7 +191,7 @@ public class DiscoverFragment extends BaseFragment {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("page", "" + page);
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.DISCOVER, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), Constants.DISCOVER, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {

@@ -32,7 +32,6 @@ import java.util.List;
 public class InvestListFragLvAdapter extends BaseAdapter {
     private Context context;
     private List<InvestListBean.ItemsBean> list;
-    private String TAG="ManageMoneyFragAda";
 
     public InvestListFragLvAdapter(Context context, List<InvestListBean.ItemsBean> list) {
         this.context = context;
@@ -120,7 +119,6 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
 
-        Log.e("TAG", "getView: --剩余可投---"+(list.get(position).getAmount_surplus()+"元"));
 
 
         if ("3".equals(list.get(position).getStatus())||"4".equals(list.get(position).getStatus())){

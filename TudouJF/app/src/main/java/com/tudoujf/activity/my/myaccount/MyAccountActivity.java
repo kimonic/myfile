@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.FutureTarget;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -58,8 +59,10 @@ import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 
@@ -136,7 +139,7 @@ public class MyAccountActivity extends BaseActivity {
 
 
     private ImageView imageView;
-    private boolean  change=false;
+    private boolean change = false;
     private AlertDialog dialogImage;
 
     @Override
@@ -261,9 +264,9 @@ public class MyAccountActivity extends BaseActivity {
                 break;
 
             case R.id.iv_act_myaccount_icon://头像图片放大
-                if(dialogImage==null){
+                if (dialogImage == null) {
                     showImage();
-                }else {
+                } else {
                     dialogImage.show();
                 }
                 break;
@@ -271,13 +274,13 @@ public class MyAccountActivity extends BaseActivity {
 
     }
 
-    private void showImage(){
+    private void showImage() {
         Glide.get(this).clearMemory();
-        int  width=ScreenSizeUtils.getScreenWidth(this);
-        LinearLayout.LayoutParams  params=new LinearLayout.LayoutParams(width-200,width-200);
+        int width = ScreenSizeUtils.getScreenWidth(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width - 200, width - 200);
         imageView.setLayoutParams(params);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        if (!change){
+        if (!change) {
             ImageGlideUtils.loadImageFromUrl(imageView, iconurl + "?aa=" + System.currentTimeMillis());
         }
         dialogImage = new AlertDialog.Builder(this).create();
@@ -301,6 +304,10 @@ public class MyAccountActivity extends BaseActivity {
             iconurl = bundle.getString("iconurl");
         }
 
+
+
+
+
     }
 
     @SuppressLint("InflateParams")
@@ -311,8 +318,7 @@ public class MyAccountActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActMyAccount.setLayoutParams(params);
 
-        imageView=new ImageView(this);
-
+        imageView = new ImageView(this);
 
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_act_myaccount, null);
@@ -476,9 +482,8 @@ public class MyAccountActivity extends BaseActivity {
                             ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanchenggong);
                             ImageGlideUtils.loadCircularImage(ivIcon, path);
 
-                            change=true;
-                            ImageGlideUtils.loadImage(imageView,path);
-
+                            change = true;
+                            ImageGlideUtils.loadImage(imageView, path);
 
 
                             new Thread() {

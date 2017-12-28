@@ -72,7 +72,7 @@ public class CheckOldPhoneNumberActivity extends BaseActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            tvGetCode.setText((msg.what + "秒后可重新获得验证码!"));
+            tvGetCode.setText((msg.what + "秒后重新发送"));
             if (msg.what == 0) {
                 countTime = 60;
                 tvGetCode.setClickable(true);
@@ -214,7 +214,7 @@ public class CheckOldPhoneNumberActivity extends BaseActivity {
      */
     private void startCountDown() {
         tvGetCode.setClickable(false);
-        tvGetCode.setText("60秒后可重新获取验证码!");
+        tvGetCode.setText(R.string.liushimiaohou);
         new Thread() {
             @Override
             public void run() {

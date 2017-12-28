@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_checkoldphonenumber"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_changephonenumber_title"
         app:leftImage="@drawable/xvector_back" />
@@ -43,7 +43,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textColor="@color/color_black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
 
@@ -88,7 +88,7 @@
         android:gravity="center"
         android:text="@string/xiayibu"
         android:textColor="@color/color_white"
-        android:textSize="18sp"
+        android:textSize="16sp"
 
         />
 

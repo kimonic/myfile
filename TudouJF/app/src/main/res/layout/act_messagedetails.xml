@@ -32,7 +32,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:gravity="center"
-            android:text="提现成功"
             android:textColor="@color/color_black"
             android:textSize="14sp" />
 
@@ -44,7 +43,6 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:gravity="center_vertical|end"
-            android:text="2017-7-4"
             android:textColor="@color/color_black"
             android:textSize="14sp" />
 
@@ -60,7 +58,6 @@
         android:background="@color/color_white"
         android:textColor="@color/color_gray"
         android:textSize="12sp"
-        android:text="    您申请的体现$[500,001.00]元已成功到账,到账金额$[500,000.00]元,是续费$[1.00]元,请注意查收."
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"

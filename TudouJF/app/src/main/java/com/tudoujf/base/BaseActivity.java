@@ -234,6 +234,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     protected void onDestroy() {
 
 //        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient()); //此处开启会造成不定时的数据无法加载
+
         OkGo.cancelTag(OkGo.getInstance().getOkHttpClient(), getLocalClassName());
         super.onDestroy();
 

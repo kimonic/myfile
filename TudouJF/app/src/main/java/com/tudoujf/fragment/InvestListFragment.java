@@ -308,7 +308,7 @@ public class InvestListFragment extends BaseFragment {
         map.put("repay_type", repayType);//还款方式,1等额本息--3到期本息---4按月付息----5按天计息到期还本息
 
 
-        HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), requestUrl, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {

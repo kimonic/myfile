@@ -286,7 +286,7 @@ public class ClaimsBidView extends View {
 //        cyanPaint.setTextSize(width * 0.03809f);
 //        canvas.drawText(transfer, text2X, text2Y, cyanPaint);
 
-        float text2X = width * 0.7432f;
+        float text2X = width * 0.7232f;
         float text2Y = width * 0.07066f;
         cyanPaint.setTextSize(width * 0.04033f);
         canvas.drawText(transfer, text2X, text2Y, cyanPaint);

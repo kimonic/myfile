@@ -100,7 +100,7 @@ public class NowRecommendActivity extends BaseActivity {
     private void share() {
         Log.e("TAG", "share: 微信是否安装-----" + UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN));
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.act_lock_icon);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         bitmap = drawableBitmapOnWhiteBg(bitmap);
 
         UMImage image = new UMImage(NowRecommendActivity.this, bitmap);//网络图片
@@ -119,9 +119,9 @@ public class NowRecommendActivity extends BaseActivity {
                         SHARE_MEDIA.WEIXIN_CIRCLE,
                         SHARE_MEDIA.QQ,
                         SHARE_MEDIA.QZONE,
-                        SHARE_MEDIA.SINA,
-                        SHARE_MEDIA.SMS,
-                        SHARE_MEDIA.EMAIL,
+//                        SHARE_MEDIA.SINA,
+//                        SHARE_MEDIA.SMS,
+//                        SHARE_MEDIA.EMAIL,
                         SHARE_MEDIA.MORE
                 )
                 .setCallback(shareListener)

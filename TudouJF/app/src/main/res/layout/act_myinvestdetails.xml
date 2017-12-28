@@ -65,7 +65,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="房产抵押贷款201703270003"
                     android:textColor="@color/act_productdetails_tvcolor"
                     android:textSize="12sp" />
 
@@ -104,7 +103,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="XX,XXX.XX元"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -141,7 +139,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="XX,XXX.XX元"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -178,7 +175,6 @@
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="4期/共6期"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -214,7 +210,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
-                    android:text="XX,XXX.XX"
                     android:textColor="@color/act_productdetails_tvcolor"
                     android:textSize="12sp" />
 
@@ -259,7 +254,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
                     android:gravity="center_vertical"
-                    android:text="XX,XXX.XX"
                     android:textColor="@color/act_productdetails_tvcolor"
                     android:textSize="12sp" />
 

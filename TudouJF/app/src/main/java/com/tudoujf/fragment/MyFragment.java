@@ -424,7 +424,7 @@ public class MyFragment extends BaseFragment {
             showPDialog();
             TreeMap<String, String> map = new TreeMap<>();
             map.put("login_token", loginToken);
-            HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, getActivity().getLocalClassName(),
+            HttpMethods.getInstance().POST(getActivity(), Constants.PERSONAL_CENTER_MAIN, map, "",
                     new StringCallback() {
                         @Override
                         public void onSuccess(Response<String> response) {
@@ -531,7 +531,7 @@ public class MyFragment extends BaseFragment {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-        HttpMethods.getInstance().POST(getActivity(), Constants.WITHDRAW, map, getActivity().getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), Constants.WITHDRAW, map, "", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();

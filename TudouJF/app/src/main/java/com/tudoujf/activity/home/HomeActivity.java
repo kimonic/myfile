@@ -206,8 +206,13 @@ public class HomeActivity extends BaseActivity {
                             NewVersionBean bean = (NewVersionBean) bean1;
 
                             String versionName = AppInfoUtils.getVersionName(HomeActivity.this);
-                            final String url = "http://wxz.myapp.com/16891/87A187FA6F46F23256C50D2E03157BF" +
-                                    "0.apk?fsname=com.shoujiduoduo.ringtone_8.5.4.0_6008540.apk&hsr=4d5s";
+                            final String url;
+                            if (bean.getUrl()!=null){
+                                url= bean.getUrl();
+                            }else {
+                                url="";
+                            }
+
 
                             //强制更新
                             if (versionName.equals(bean.getForce_version())) {

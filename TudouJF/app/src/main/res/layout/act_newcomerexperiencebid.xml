@@ -111,7 +111,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/act_newcomerexperiencebid_default1"
             android:textColor="@color/color_black3"
             android:textSize="12sp" />
 

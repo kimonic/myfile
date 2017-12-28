@@ -319,7 +319,7 @@ public class HomeFragment extends BaseFragment {
         map.put("is_experience", loanBeanList.get(ballviewPosition).getExperience_status());
         map.put("is_new", loanBeanList.get(ballviewPosition).getAdditional_status());
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, getActivity().getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, "", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
@@ -330,14 +330,8 @@ public class HomeFragment extends BaseFragment {
                         HomeBidIdBean.class, getActivity());
                 if (bean1 != null) {
                     homeBidIdBean = (HomeBidIdBean) bean1;
-                    Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据loan_id----------------" + homeBidIdBean.getLoan_id());
-
                     if ("1".equals(loanBeanList.get(ballviewPosition).getExperience_status())) {
 
-//                        // TODO: 2017/12/4 新手体验标要跳转不同的页面
-//
-//                        Log.e("TAG", "onSuccess: bean.getExperience_amount()-----" + bean.getExperience_amount());
-//
 //                        //体验金大于0,未登录,已登录未实名,跳转体验金详情
                         if (StringUtils.string2Integer(bean.getExperience_amount()) > 0 || "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                             Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
@@ -345,9 +339,7 @@ public class HomeFragment extends BaseFragment {
                             intent1.putExtra("status", 0);
                             startActivity(intent1);
                         } else {
-//                            // TODO: 2017/12/6 检测是否已实名
                             checkIdentity();
-//                            openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
                         }
 
 //
@@ -371,7 +363,7 @@ public class HomeFragment extends BaseFragment {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-        HttpMethods.getInstance().POST(getActivity(), Constants.IDENTITY_CHECK, map, getActivity().getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), Constants.IDENTITY_CHECK, map, "", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
@@ -382,7 +374,6 @@ public class HomeFragment extends BaseFragment {
                 if (bean1 != null) {
                     IdentityCheckBean identityCheckBean = (IdentityCheckBean) bean1;
                     if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-//                        openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
                         Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
                         intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
                         intent1.putExtra("status", 1);
@@ -435,21 +426,6 @@ public class HomeFragment extends BaseFragment {
         if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
             loginFlag = true;
         }
-
-//        Bundle bundle = getArguments();
-//        if (bundle != null) {
-////            tvFragHome.setText(bundle.getString("temp"));
-//        }
-//
-//        TreeMap<String, String> map = new TreeMap<>();
-//        map.put("login_token", "12267");
-//        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "homeactivity", new StringCallback() {
-//            @Override
-//            public void onSuccess(Response<String> response) {
-//
-//            }
-//        });
-
     }
 
     @Override
@@ -555,9 +531,9 @@ public class HomeFragment extends BaseFragment {
         srl.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
             @Override
             public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
-                if (offset > 36) {
-                    showInfo(tvFengXianTiShi1);
-                }
+//                if (offset > 36) {
+//                    showInfo(tvFengXianTiShi1);
+//                }
             }
 
             @Override
@@ -605,49 +581,6 @@ public class HomeFragment extends BaseFragment {
 //        });
 //        //-------------------------签到可滑动-------------------------------------------------------
 
-
-//
-//        vpBall.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                srl.setEnableRefresh(false);
-//                srl.setEnableHeaderTranslationContent(false);
-//
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        Log.e("TAG", "onTouch: ---555--");
-//                        currentY = event.getY();
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        Log.e("TAG", "onTouch: ---333--"+flag);
-//                        if (flag) {
-//                            if (event.getY() - currentY > 0) {
-//                                showInfo(tvFengXianTiShi1);
-//                                Log.e("TAG", "onTouch: ---11111--");
-//                            } else {
-//                                showInfo(tvFengXianTiShi2);
-//                                Log.e("TAG", "onTouch: -2222----");
-//                            }
-//                            flag = false;
-//                        }
-//                        Log.e("TAG", "onTouch: ---444--");
-//
-//
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        if (Math.abs(event.getY() - currentY) > 36) {
-//                            flag = true;
-//                        }
-//                        Log.e("TAG", "onTouch: ---666--"+(Math.abs(event.getY() - currentY)) );
-//
-//                        break;
-//                }
-//                srl.setEnableRefresh(true);
-//                srl.setEnableHeaderTranslationContent(true);
-//                return false;
-//            }
-//
-//        });
 
         vpBall.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -727,10 +660,9 @@ public class HomeFragment extends BaseFragment {
         //首页的logintoken为null时,会出现系统错误
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, getActivity().getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-//                dialog.dismiss();
                 dismissPDialog();
                 finishRL();
 

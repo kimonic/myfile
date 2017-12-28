@@ -20,11 +20,8 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.HomeActivity;
-import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.MyAccountBean;
 import com.tudoujf.bean.databean.NewVersionBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
@@ -92,15 +89,15 @@ public class SetActivity extends BaseActivity {
                 openActivity(QuestionClassificationActivity.class);
                 break;
             case R.id.ll_act_set_feedback://意见反馈
-                openActivity(SetActivity.class);
+                openActivity(FeedbackActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
                 checkNew();
-                count++;
-                if (flag && count == 10) {
-                    flag = false;
-                    openActivity(PreviewActivity.class);
-                }
+//                count++;
+//                if (flag && count == 10) {
+//                    flag = false;
+//                    openActivity(PreviewActivity.class);
+//                }
 
 
                 Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getVersionCode(this));
@@ -131,6 +128,12 @@ public class SetActivity extends BaseActivity {
 
                             String versionName = AppInfoUtils.getVersionName(SetActivity.this);
 
+                            final String url;
+                            if (bean.getUrl()!=null){
+                                url= bean.getUrl();
+                            }else {
+                                url="";
+                            }
                             if (versionName.equals(bean.getNew_version())) {
                                 DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
                             } else {
@@ -138,8 +141,7 @@ public class SetActivity extends BaseActivity {
                                         new DialogUtils.DialogUtilsClickListener() {
                                             @Override
                                             public void onClick() {
-                                                DownloadAppUtils.downloadForWebView(SetActivity.this,
-                                                        "http://wxz.myapp.com/16891/87A187FA6F46F23256C50D2E03157BF0.apk?fsname=com.shoujiduoduo.ringtone_8.5.4.0_6008540.apk&hsr=4d5s");
+                                                DownloadAppUtils.downloadForWebView(SetActivity.this, url);
                                             }
                                         });
                             }

@@ -171,7 +171,7 @@ public class HelpCenterCommonActivity extends BaseActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.huoqugerenzhongxinshujushibai);
+                        ToastUtils.showToast(HelpCenterCommonActivity.this, R.string.huoqubangzhuxinxishiabai);
                     }
                 });
 

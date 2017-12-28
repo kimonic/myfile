@@ -293,9 +293,10 @@ public class SystemMessageFragment extends BaseFragment {
 
     @Override
     public void LoadInternetDataToUi() {
-        if (bean != null) {
+        if (bean != null&&bean.getPageObj()!=null&&bean.getPageObj().getItems()!=null) {
 
             list.addAll(bean.getPageObj().getItems());
+
             if (list.size() == 0) {
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
@@ -308,9 +309,8 @@ public class SystemMessageFragment extends BaseFragment {
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
                 //-----------------------------剩余未读消息显示--------------------------------------
-                if (type == 1 && firstIn) {
+                if (type == 2 && firstIn) {
                     firstIn = false;
-                    ToastUtils.showToast(getActivity(), R.string.zanshimeiyouxiaoxi);
                 } else {
                     ToastUtils.showToast(getActivity(), R.string.zanshimeiyouxiaoxi);
                 }

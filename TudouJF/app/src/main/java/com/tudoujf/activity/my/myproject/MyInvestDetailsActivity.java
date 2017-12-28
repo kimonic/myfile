@@ -129,8 +129,7 @@ public class MyInvestDetailsActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("id", id);
-
-        Log.e("TAG", "initDataFromInternet: ----id-" + id);
+        Log.e("TAG", "initDataFromInternet: 我的投资详情id-----"+id);
 
 
         HttpMethods.getInstance().POST(this, Constants.MY_INVESTMENT_DETAIL, map, getLocalClassName(),

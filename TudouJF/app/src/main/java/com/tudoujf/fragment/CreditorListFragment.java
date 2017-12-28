@@ -303,7 +303,7 @@ public class CreditorListFragment extends BaseFragment {
         map.put("sort_type", sortType);//排序方式,1升序 2降序
 
 
-        HttpMethods.getInstance().POST(getActivity(), requestUrl, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), requestUrl, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {

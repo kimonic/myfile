@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_bindemail"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_bindemail_title"
         app:leftImage="@drawable/xvector_back" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:textColor="@color/color_black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:gravity="center_vertical"
         android:background="@drawable/xshape_roundrect_mwhite1"
         android:paddingLeft="20dp"
@@ -35,7 +35,7 @@
         android:id="@+id/tv_act_bindemail_next"
         android:layout_width="match_parent"
         android:layout_height="38dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:gravity="center"
         android:textColor="@color/color_white"
         android:background="@drawable/xshape_roundrect_themecolor"

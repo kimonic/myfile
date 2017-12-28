@@ -51,7 +51,7 @@ public class MLockView extends View {
     /**
      * 上下左右外边距px
      */
-    private   int mPadding = 100;
+    private int mPadding = 100;
     /**
      * 圆的半径
      */
@@ -113,7 +113,7 @@ public class MLockView extends View {
      */
 
     private String password;
-    private boolean flag=false;
+    private boolean flag = false;
 
     /**
      * 设置手势密码
@@ -199,10 +199,12 @@ public class MLockView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        int width=getWidth();
-        distancePX= (int) (width*0.1352f);
-        mPadding= (int) (width*0.12f);
+        int width = getWidth();
+        distancePX = (int) (width * 0.1352f);
+        mPadding = (int) (width * 0.12f);
 
+        //--------------------------------------------画圆----------------------------------------------
+        //--------------------------------------------画圆----------------------------------------------
         radius = (getWidth() - mPadding * 2 - distancePX * 2) / 6;
         //中间圆的圆心坐标
         int circleX1 = getWidth() / 2 - 2 * radius - distancePX;
@@ -213,9 +215,9 @@ public class MLockView extends View {
         circleX[2] = circleX3;
 
 
-        int circleY1 = mPadding + radius-50;
-        int circleY2 = mPadding + radius * 3 + distancePX-50;
-        int circleY3 = mPadding + radius * 5 + distancePX * 2-50;
+        int circleY1 = mPadding + radius - 50;
+        int circleY2 = mPadding + radius * 3 + distancePX - 50;
+        int circleY3 = mPadding + radius * 5 + distancePX * 2 - 50;
         circleY[0] = circleY1;
         circleY[1] = circleY2;
         circleY[2] = circleY3;
@@ -232,6 +234,10 @@ public class MLockView extends View {
                 }
             }
         }
+
+        //--------------------------------------------画圆----------------------------------------------
+        //--------------------------------------------画圆----------------------------------------------
+
         rectOpen = false;
 
         if (openOrCloseDraw) {
@@ -247,26 +253,35 @@ public class MLockView extends View {
                 positionSet.add(position);
             }
 
+            //-------------------------------内圈圆及阴影-----------------------------------------------
+
             for (int i = 0; i < positionSet.size(); i++) {//画内圆及阴影圆
                 if (positionSet.get(i) != -1) {
                     canvas.drawCircle(circleX[positionSet.get(i) / 3], circleY[positionSet.get(i) % 3], radius - 5, shadePaint);
                     canvas.drawCircle(circleX[positionSet.get(i) / 3], circleY[positionSet.get(i) % 3], radius / 2, innerPaint);
                 }
             }
+            //-------------------------------内圈圆及阴影-----------------------------------------------
 
+
+            //-------------------------------圆心连线-----------------------------------------------
             for (int i = 0; i < positionSet.size(); i++) {//画圆心连线
                 if (positionSet.get(i) != -1 && i < positionSet.size() - 1) {
                     canvas.drawLine(circleX[positionSet.get(i) / 3], circleY[positionSet.get(i) % 3],
                             circleX[positionSet.get(i + 1) / 3], circleY[positionSet.get(i + 1) % 3], linePaint);
                 }
             }
+            //-------------------------------圆心连线-----------------------------------------------
+
+
+
             if (positionSet.size() > 1 && positionSet.size() < 10 && tail) {
                 canvas.drawLine(circleX[positionSet.get(positionSet.size() - 1) / 3], circleY[positionSet.get(positionSet.size() - 1) % 3],
                         currentX, currentY, linePaint);
             }
 
-            if (flag){
-                openOrCloseDraw=false;
+            if (flag) {
+                openOrCloseDraw = false;
             }
 
 
@@ -280,7 +295,7 @@ public class MLockView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
         int width = screenWidth;
-        int height = (int) (screenWidth*0.88f+50);
+        int height = (int) (screenWidth * 0.88f + 50);
         setMeasuredDimension(width, height);
 
     }
@@ -298,8 +313,8 @@ public class MLockView extends View {
                     currentX = (int) event.getX();
                     currentY = (int) event.getY();
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).contains(currentX,currentY)){
-                            if (scrollView!=null){
+                        if (list.get(i).contains(currentX, currentY)) {
+                            if (scrollView != null) {
                                 scrollView.requestDisallowInterceptTouchEvent(true);
                             }
                         }
@@ -333,7 +348,7 @@ public class MLockView extends View {
         String inputPassword = EncryptionLockUtils.convertEncryption(getContext(), positionSet);
 
         if (password.equals(inputPassword)) {
-            flag=true;
+            flag = true;
             ToastUtils.showToast(getContext(), R.string.mlockview_sucess);
             if (listener != null) {
                 listener.sucess();

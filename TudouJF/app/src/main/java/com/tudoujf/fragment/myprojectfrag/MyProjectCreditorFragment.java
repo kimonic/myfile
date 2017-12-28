@@ -240,7 +240,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
 
         Log.e("TAG", "initDataFromInternet: status_nid-----" + status_nid);
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.MY_CREDITOR, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), Constants.MY_CREDITOR, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -311,7 +311,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
             }
             HeightUtils.setListviewHeight(lvTotal);
 
-        } else if (bean != null) {
+        } else if (bean != null&&adapter!=null) {
 //            page = beforePage;
             listBean.clear();
             adapter.notifyDataSetChanged();

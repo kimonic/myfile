@@ -423,9 +423,9 @@ public class DialogUtils {
                                                   final DialogUtilsClickListener agreeListener
             , final DialogUtilsClickListener cancelListener) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
-        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
         TextView tvTitle = view.findViewById(R.id.tv_title);

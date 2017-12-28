@@ -23,6 +23,15 @@ public class NewVersionBean implements BaseBean {
 
     private String new_version;
     private String force_version;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getNew_version() {
         return new_version;

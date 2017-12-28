@@ -152,9 +152,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
         unbinder.unbind();
+        super.onDestroyView();
     }
 
     private void timeThread() {

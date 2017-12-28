@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
-        app:centerText="@string/act_productdetails_temptitle"
         app:leftImage="@drawable/xvector_back" />
 
     <ScrollView
@@ -338,7 +337,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/act_productdetails_miaoshuneirong"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -389,7 +387,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/act_productdetails_baozhangneirong"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -440,7 +437,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/act_productdetails_fegnkongneirong"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -491,7 +487,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/act_productdetails_jigouneirong"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 
@@ -542,7 +537,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
-                    android:text="@string/act_productdetails_fengxianneirong"
                     android:textColor="@color/color_black"
                     android:textSize="12sp" />
 

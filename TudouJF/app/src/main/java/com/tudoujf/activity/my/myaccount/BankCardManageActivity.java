@@ -66,6 +66,7 @@ public class BankCardManageActivity extends BaseActivity {
     private List<BankCardManageBean.BankInfoBean>  list;
     private IdentityCheckBean identityCheckBean;
     private View footerView;
+    private BankCardManageActLvAdapter adapter;
 
 
     @Override
@@ -174,9 +175,15 @@ public class BankCardManageActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
         if (bean!=null){
             if (bean.getBank_info()!=null){
+                list.clear();
                 list.addAll(bean.getBank_info());
-                BankCardManageActLvAdapter adapter=new BankCardManageActLvAdapter(list,this);
-                lvInfo.setAdapter(adapter);
+                if (adapter==null){
+                    adapter=new BankCardManageActLvAdapter(list,this);
+                    lvInfo.setAdapter(adapter);
+                }else {
+                    adapter.notifyDataSetChanged();
+                }
+
             }
 
         }

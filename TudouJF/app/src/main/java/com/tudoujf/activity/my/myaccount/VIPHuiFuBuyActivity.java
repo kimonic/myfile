@@ -199,11 +199,6 @@ public class VIPHuiFuBuyActivity extends BaseActivity {
         map.put("cycle", cycle);
         map.put("categoryInd", categoryInd);
 
-        Log.e("TAG", "commitInfo: -----money---"+money);
-        Log.e("TAG", "commitInfo: -----cycle---"+cycle);
-        Log.e("TAG", "commitInfo: -----categoryInd---"+categoryInd);
-        Log.e("TAG", "commitInfo: -----login_token----"+UserConfig.getInstance().getLoginToken(this));
-
 
         HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, "999", new StringCallback() {
             @SuppressLint("SetJavaScriptEnabled")
@@ -251,8 +246,6 @@ public class VIPHuiFuBuyActivity extends BaseActivity {
                         ws.setLoadWithOverviewMode(true);
                         ws.setBuiltInZoomControls(true);
 
-                        Log.e("TAG", "commitInfo: -----url---"+url);
-                        Log.e("TAG", "commitInfo: -----params---"+params);
 
                         wvActHuiFuRegister.postUrl(url, params.getBytes());//提交post请求
 

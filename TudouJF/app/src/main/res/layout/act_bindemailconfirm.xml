@@ -9,7 +9,7 @@
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_bindemailconfirm"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/act_register_tvbac1"
         app:centerText="@string/act_bindemail_title"
         app:leftImage="@drawable/xvector_back" />
@@ -90,7 +90,7 @@
         android:gravity="center"
         android:text="@string/querenbangding"
         android:textColor="@color/color_white"
-        android:textSize="18sp"
+        android:textSize="16sp"
 
         />
 
@@ -101,7 +101,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
-        android:text="已向邮箱187****8888@XX.com发送验证码,请输入验证码完成绑定."
         android:textColor="@color/color_gray"
         android:textSize="12sp"
         />

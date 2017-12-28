@@ -183,7 +183,7 @@ public class DueInInterestFragment extends BaseFragment {
         map.put("end_time", end_time);
 
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.MY_EARNINGS, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), Constants.MY_EARNINGS, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {

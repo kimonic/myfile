@@ -133,7 +133,7 @@ public class MyProjectInvestChildFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(getActivity(), MyInvestDetailsActivity.class);
-                intent.putExtra("id",list.get(position).getLoanId());
+                intent.putExtra("id",list.get(position).getTenderId());
                 startActivity(intent);
             }
         });
@@ -154,7 +154,7 @@ public class MyProjectInvestChildFragment extends BaseFragment {
         Log.e("TAG", "onSuccess:----我的投资项目接口返回数据-login_token------" + UserConfig.getInstance().getLoginToken(getActivity()));
 
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, getActivity().getLocalClassName(),
+        HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, "",
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
