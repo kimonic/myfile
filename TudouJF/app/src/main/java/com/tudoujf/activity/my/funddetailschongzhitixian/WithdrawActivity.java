@@ -303,7 +303,7 @@ public class WithdrawActivity extends BaseActivity {
     /**打开汇付提现页面*/
     private void openHuiFu(){
         Intent intent=new Intent(this,WithdrawHuiFuActivity.class);
-        intent.putExtra("amount",etJinE.getText().toString());
+        intent.putExtra("amount",etJinE.getText().toString().replace(",",""));
         startActivity(intent);
         finish();
     }
