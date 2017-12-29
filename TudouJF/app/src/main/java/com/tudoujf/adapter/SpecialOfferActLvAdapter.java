@@ -74,7 +74,7 @@ public class SpecialOfferActLvAdapter extends BaseAdapter {
 
         viewHolder.textView1.setText(list.get(position).getName());
 
-        viewHolder.textView2.setText((StringUtils.getStrTime(list.get(position).getAddTime())+"--"+
+        viewHolder.textView2.setText((StringUtils.getStrTime(list.get(position).getStartTime())+"--"+
                 StringUtils.getStrTime(list.get(position).getEndTime())));
 //        viewHolder.imageView.setImageResource(list.get(position).getImage());
         ImageGlideUtils.loadImage(viewHolder.imageView,list.get(position).getImage());

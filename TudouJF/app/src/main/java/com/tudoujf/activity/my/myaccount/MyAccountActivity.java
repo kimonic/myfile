@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -33,6 +34,8 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
@@ -54,6 +57,7 @@ import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.GlideImageLoaderUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
@@ -305,7 +309,22 @@ public class MyAccountActivity extends BaseActivity {
         }
 
 
+        //---------------------------------保存头像图片---------------------------------------------------
+        if (UserConfig.getInstance().isSaveIcon()) {
+            UserConfig.getInstance().setSaveIcon(false);
+            String iconDir = FileUtils.getIconDir();
+            String loginToken = UserConfig.getInstance().getLoginToken(this);
+            String name = MD5Utils.md5(loginToken);
+            String fileName = name + "icon.jpg";
+            OkGo.<File>get(iconurl).execute(new FileCallback(iconDir, fileName) {
+                @Override
+                public void onSuccess(Response<File> response) {
+                    Log.e("TAG", "onSuccess: ---头像图片保存成功--");
+                }
+            });
+        }
 
+        //---------------------------------保存头像图片---------------------------------------------------
 
 
     }
@@ -313,6 +332,8 @@ public class MyAccountActivity extends BaseActivity {
     @SuppressLint("InflateParams")
     @Override
     public void initView() {
+
+
 //        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyAccount.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
@@ -430,13 +451,15 @@ public class MyAccountActivity extends BaseActivity {
             Bitmap photo = data.getParcelableExtra("data");//获取拍照图片
 
             if (photo != null) {
-                if (BitmapUtils.getBitmapSize(photo) > 2091752) {
-                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
-                } else {
-                    ivIcon.setImageBitmap(photo);
-                    String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, Environment.getExternalStorageDirectory() + "/temp");
-                    postImage(imPath);
-                }
+//                if (BitmapUtils.getBitmapSize(photo) > 2091752) {
+//                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
+//                } else {
+//                    ivIcon.setImageBitmap(photo);
+
+//                    String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, Environment.getExternalStorageDirectory() + "/temp");
+                String imPath = FileUtils.saveBitmap(photo);
+                postImage(imPath);
+//                }
             } else {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
@@ -447,7 +470,14 @@ public class MyAccountActivity extends BaseActivity {
                 if (imageItems.get(0).size < 2091752) {
                     postImage(imageItems.get(0).path);
                 } else {
-                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
+                    try {
+                        Bitmap bitmap = BitmapFactory.decodeFile(imageItems.get(0).path);
+                        String imPath = FileUtils.saveBitmap(bitmap);
+                        postImage(imPath);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+//                    ToastUtils.showToast(MyAccountActivity.this, R.string.touxiantupiandaxiao);
                 }
             } else {
                 ToastUtils.showToast(MyAccountActivity.this, R.string.meiyouxuanzhongtupian);

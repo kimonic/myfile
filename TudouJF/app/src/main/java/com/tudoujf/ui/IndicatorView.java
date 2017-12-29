@@ -31,7 +31,8 @@ public class IndicatorView extends View {
 
     private  int  count=3;
 
-
+    private float  startX=0;
+    private float  stopX=0;
 
     public void setScale(float scale) {
         this.scale = scale;
@@ -81,11 +82,20 @@ public class IndicatorView extends View {
         int width=getWidth();
 
         //左边一个子view的宽度
-        canvas.drawLine(0,0,width*scale/count,0,unselPaint);
+//        canvas.drawLine(0,0,width*scale/count,0,unselPaint);
+        canvas.drawLine(0,0,width,0,unselPaint);
 
-        canvas.drawLine(width*scale/count,0,width*(count-1)/count+width*scale/count,0,selPaint);
+        startX=width*scale/count;
+        stopX=width*(count-1)/count+width*scale/count;
 
-        canvas.drawLine(width*(count-1)/count+width*scale/count,0,width,0,unselPaint);
+        if (stopX-startX>0){
+            canvas.drawLine(startX,0,stopX,0,selPaint);
+        }else {
+            canvas.drawLine(width/6,0,width/6*5,0,selPaint);
+        }
+
+
+//        canvas.drawLine(width*(count-1)/count+width*scale/count,0,width,0,unselPaint);
 
     }
 }

@@ -20,6 +20,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Date;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * * ==================================================
  * name:            FileUtils
@@ -29,8 +31,8 @@ import java.util.Date;
  * date：            2017/7/19
  * description：   文件存储工具类
  * history：
- *
- *
+ * <p>
+ * <p>
  * -----------existSDCard()-----判断是否存在外部SD卡
  * -----------getFilepath(Context context)----获取文件的保存路径--优先外部SD卡缓存目录
  * -----------saveJsonToSDCard(Context context, String fileName, String content)---
@@ -40,7 +42,6 @@ import java.util.Date;
  * -----------
  * -----------
  * * ==================================================
- *
  */
 
 public class FileUtils {
@@ -77,7 +78,7 @@ public class FileUtils {
 
 
         File file = new File(getFilepath(context) + fileName);
-        Log.e("TAG", "saveJsonToSDCard: "+(getFilepath(context) + fileName ));
+        Log.e("TAG", "saveJsonToSDCard: " + (getFilepath(context) + fileName));
 
         FileOutputStream os = null;
         try {
@@ -122,9 +123,10 @@ public class FileUtils {
 
     /**
      * 读取文件
+     *
      * @param context  上下文
-     * @param fileName  文件名称
-     * @return   内容字符串
+     * @param fileName 文件名称
+     * @return 内容字符串
      */
     public static String readFileContent(Context context, String fileName) {
         File file = new File(getFilepath(context) + fileName);
@@ -161,67 +163,69 @@ public class FileUtils {
 
     }
 
-    /**返回本地头像图片的保存路径*/
-    public  static String getIconPath(Context context){
+    /**
+     * 返回本地头像图片的保存路径
+     */
+    public static String getIconPath(Context context) {
         // 首先确定保存图片的目录
-        String  loginToken= UserConfig.getInstance().getLoginToken(context);
-        String name=MD5Utils.md5(loginToken);
+        String loginToken = UserConfig.getInstance().getLoginToken(context);
+        String name = MD5Utils.md5(loginToken);
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
-            if (!appDir.mkdir()){
+            if (!appDir.mkdir()) {
                 Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
-        String fileName =  name+"icon.jpg";
-        Log.e("TAG", "iconPath: file.getAbsolutePath()-----"+appDir.getAbsolutePath()+"/"+fileName);
-        return appDir.getAbsolutePath()+"/"+fileName;
+        String fileName = name + "icon.jpg";
+        Log.e("TAG", "iconPath: file.getAbsolutePath()-----" + appDir.getAbsolutePath() + "/" + fileName);
+        return appDir.getAbsolutePath() + "/" + fileName;
     }
 
 
-    /**保存图片到本地*/
+    /**
+     * 保存图片到本地
+     */
     public static String saveImageToGallery(Context context, String path) {
 
-        String  loginToken= UserConfig.getInstance().getLoginToken(context);
-        String name=MD5Utils.md5(loginToken);
+        String loginToken = UserConfig.getInstance().getLoginToken(context);
+        String name = MD5Utils.md5(loginToken);
         // 首先确定保存图片的目录
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
-            if (!appDir.mkdir()){
+            if (!appDir.mkdir()) {
                 Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
-        String fileName =  name+"icon.jpg";
+        String fileName = name + "icon.jpg";
         File file = new File(appDir, fileName);
-        File oFile=new File(path);
-        int length=2097152;
+        File oFile = new File(path);
+        int length = 2097152;
 
         try {
             FileInputStream in = new FileInputStream(oFile);
-            FileOutputStream out=new FileOutputStream(file);
-            FileChannel inC=in.getChannel();
-            FileChannel outC=out.getChannel();
+            FileOutputStream out = new FileOutputStream(file);
+            FileChannel inC = in.getChannel();
+            FileChannel outC = out.getChannel();
 
-            ByteBuffer b=null;
-            while(true){
-                if(inC.position()==inC.size()){
+            ByteBuffer b = null;
+            while (true) {
+                if (inC.position() == inC.size()) {
                     inC.close();
                     outC.close();
                     break;
                 }
-                if((inC.size()-inC.position())<length){
-                    length=(int)(inC.size()-inC.position());
-                }else{
-                    length=2097152;
+                if ((inC.size() - inC.position()) < length) {
+                    length = (int) (inC.size() - inC.position());
+                } else {
+                    length = 2097152;
                 }
-                b=ByteBuffer.allocateDirect(length);
+                b = ByteBuffer.allocateDirect(length);
                 inC.read(b);
                 b.flip();
                 outC.write(b);
                 outC.force(false);
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -233,10 +237,63 @@ public class FileUtils {
             e.printStackTrace();
         }
 
-        return appDir.getAbsolutePath()+"/icon.jpg";
+        return appDir.getAbsolutePath() + "/icon.jpg";
         // 最后通知图库更新
 //        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
     }
+
+
+    /**
+     * 保存方法
+     */
+    public static String saveBitmap(Bitmap bitmap) {
+
+        // 首先确定保存图片的目录
+        File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
+        if (!appDir.exists()) {
+            if (!appDir.mkdir()) {
+                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
+            }
+        }
+        String fileName = "icon.jpg";
+
+        File f = new File(appDir, fileName);
+        if (f.exists()) {
+            f.delete();
+        }
+        Bitmap  newBitmap;
+
+        if (bitmap.getRowBytes() * bitmap.getHeight() > 2091752) {
+            newBitmap=BitmapUtils.getCompressBitmap(bitmap);
+        }else {
+            newBitmap=bitmap;
+        }
+
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            newBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.e("TAG", "saveBitmap: --f.getAbsolutePath()---"+f.getAbsolutePath());
+
+        return f.getAbsolutePath();
+
+    }
+
+    public static String  getIconDir(){
+        // 首先确定保存图片的目录
+        File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
+        if (!appDir.exists()) {
+            if (!appDir.mkdir()) {
+                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
+            }
+        }
+        return appDir.getAbsolutePath();
+    }
+
 
     public static void fileDir(Context context) {
         Log.e("TAG", "fileDir:1---------------" + context.getExternalCacheDir());//应用内缓存目录

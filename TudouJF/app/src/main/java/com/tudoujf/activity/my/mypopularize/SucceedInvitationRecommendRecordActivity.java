@@ -255,10 +255,12 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
     }
 
     private void finishSrl() {
-        if (srlActRecommendrecord.isRefreshing()) {
-            srlActRecommendrecord.finishRefresh();
-        } else if (srlActRecommendrecord.isLoading()) {
-            srlActRecommendrecord.finishLoadmore();
+        if (srlActRecommendrecord != null) {
+            if (srlActRecommendrecord.isRefreshing()) {
+                srlActRecommendrecord.finishRefresh();
+            } else if (srlActRecommendrecord.isLoading()) {
+                srlActRecommendrecord.finishLoadmore();
+            }
         }
 
     }

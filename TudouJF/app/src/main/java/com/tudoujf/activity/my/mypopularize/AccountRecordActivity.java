@@ -55,7 +55,7 @@ public class AccountRecordActivity extends BaseActivity {
     @BindView(R.id.srl_act_accountrecord)
     SmartRefreshLayout srlActAccountRecord;
     private List<AccountRecordBean.ItemsBean> list;
-    private int page=1;
+    private int page = 1;
     private AccountRecordBean bean;
     private AcountRecordActLvAdapter adapter;
 
@@ -72,7 +72,7 @@ public class AccountRecordActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         //临时数据源
-        list=new ArrayList<>();
+        list = new ArrayList<>();
 
 //        for (int i = 0; i < 50; i++) {
 //            SucceedInvitationActBean bean=new SucceedInvitationActBean();
@@ -200,10 +200,13 @@ public class AccountRecordActivity extends BaseActivity {
     }
 
     private void finishSrl() {
-        if (srlActAccountRecord.isRefreshing()) {
-            srlActAccountRecord.finishRefresh();
-        } else if (srlActAccountRecord.isLoading()) {
-            srlActAccountRecord.finishLoadmore();
+        if (srlActAccountRecord != null) {
+
+            if (srlActAccountRecord.isRefreshing()) {
+                srlActAccountRecord.finishRefresh();
+            } else if (srlActAccountRecord.isLoading()) {
+                srlActAccountRecord.finishLoadmore();
+            }
         }
 
     }

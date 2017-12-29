@@ -50,25 +50,25 @@ public class ClaimsBidView extends View {
     /**
      * 标题
      */
-    private String title = "房产抵押贷款20170327003";
+    private String title = "";
     /**
      * 债权价值
      */
-    private String zhaiQuanJiaZhi = "1,800.00";
+    private String zhaiQuanJiaZhi = "";
     /**
      * 原标年化收益
      */
-    private String yuanBiaoNianHuaShouYi = "14%";
+    private String yuanBiaoNianHuaShouYi = "";
     /**
      * 转让价格元
      */
-    private String transferPrice = "888,888.88";
+    private String transferPrice = "";
     /**
      * 投资进度
      */
-    private float investProgress = 0.5f;
+    private float investProgress = 0.0f;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    private String shengYuKeTou = "999,999.00元";
+    private String shengYuKeTou = "";
     /**
      * 按钮文本显示判断
      */
@@ -91,7 +91,7 @@ public class ClaimsBidView extends View {
     /**
      * 转让期数
      */
-    private String transfer = "转让期数:7/12";
+    private String transfer = "";
 
     private Bitmap bitmapDaiHouGuanLi;
     private RectF rectFDaiHouGuanLi;

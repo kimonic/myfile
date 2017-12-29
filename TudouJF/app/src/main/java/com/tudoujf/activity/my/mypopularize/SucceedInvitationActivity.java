@@ -142,8 +142,8 @@ public class SucceedInvitationActivity extends BaseActivity {
         lvActSucceedInvitation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(SucceedInvitationActivity.this,SucceedInvitationRecommendRecordActivity.class);
-                intent.putExtra("name",list.get(position).getMember_name());
+                Intent intent = new Intent(SucceedInvitationActivity.this, SucceedInvitationRecommendRecordActivity.class);
+                intent.putExtra("name", list.get(position).getMember_name());
                 startActivity(intent);
             }
         });
@@ -214,12 +214,14 @@ public class SucceedInvitationActivity extends BaseActivity {
     }
 
     private void finishSrl() {
-        if (srlActSucceedInvitation.isRefreshing()) {
-            srlActSucceedInvitation.finishRefresh();
-        } else if (srlActSucceedInvitation.isLoading()) {
-            srlActSucceedInvitation.finishLoadmore();
-        }
+        if (srlActSucceedInvitation != null) {
 
+            if (srlActSucceedInvitation.isRefreshing()) {
+                srlActSucceedInvitation.finishRefresh();
+            } else if (srlActSucceedInvitation.isLoading()) {
+                srlActSucceedInvitation.finishLoadmore();
+            }
+        }
     }
 
     @Override

@@ -50,9 +50,9 @@ public class InfoView extends View {
     /**投资进度--0.88f*/
     private float underlineScale1=0;//对应75%\
     /**预期年化收益率*/
-    private String nianHuaShouYi="8.8%";
+    private String nianHuaShouYi="";
     /**借款期限*/
-    private String jieKuanQiXian="8个月";
+    private String jieKuanQiXian="";
     /**是否是新手标*/
     private boolean  ifNew=true;
     private boolean drawImage=true;

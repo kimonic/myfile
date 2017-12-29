@@ -294,10 +294,12 @@ public class IntegralShopActivity extends BaseActivity {
 
     private void finishRL() {
 
-        if (srl.isLoading()) {
-            srl.finishLoadmore();
-        } else if (srl.isRefreshing()) {
-            srl.finishRefresh();
+        if (srl!=null){
+            if (srl.isLoading()) {
+                srl.finishLoadmore();
+            } else if (srl.isRefreshing()) {
+                srl.finishRefresh();
+            }
         }
 
     }

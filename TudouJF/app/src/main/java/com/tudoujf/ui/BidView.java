@@ -54,15 +54,15 @@ public class BidView extends View {
     /**
      * 奖励的百分比,以浮点型数值表示,实际数值为该值除以100
      */
-    private float awardValue = 8.88f;
+    private float awardValue = 0.00f;
     /**
      * 标题
      */
-    private String title = "房产抵押贷款20170327003";
+    private String title = "";
     /**
      * 年化收益
      */
-    private String nianHuaShouYi = "8.00%";
+    private String nianHuaShouYi = "";
     /**
      * 投资期限
      */
@@ -70,13 +70,13 @@ public class BidView extends View {
     /**
      * 投资金额
      */
-    private String investSum = "8,888.88";
+    private String investSum = "";
     /**
      * 投资进度
      */
-    private float investProgress = 0.5f;
+    private float investProgress = 0.0f;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    private String shengYuKeTou = "999,999.00元";
+    private String shengYuKeTou = "";
 
     /**
      * 立即投资点击事件

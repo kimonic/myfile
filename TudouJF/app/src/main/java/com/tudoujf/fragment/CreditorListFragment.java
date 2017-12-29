@@ -369,10 +369,12 @@ public class CreditorListFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        if (swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.finishRefresh();
-        } else if (swipeRefreshLayout.isLoading()) {
-            swipeRefreshLayout.finishLoadmore();
+        if (swipeRefreshLayout!=null){
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.finishRefresh();
+            } else if (swipeRefreshLayout.isLoading()) {
+                swipeRefreshLayout.finishLoadmore();
+            }
         }
 
     }

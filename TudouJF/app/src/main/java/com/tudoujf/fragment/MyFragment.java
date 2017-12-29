@@ -431,7 +431,7 @@ public class MyFragment extends BaseFragment {
                             dismissPDialog();
                             String result = StringUtils.getDecodeString(response.body());
                             Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
-                            if (srl.isRefreshing()) {
+                            if (srl!=null&&srl.isRefreshing()) {
                                 srl.finishRefresh();
                             }
 
@@ -450,7 +450,7 @@ public class MyFragment extends BaseFragment {
                         public void onError(Response<String> response) {
                             super.onError(response);
                             dismissPDialog();
-                            if (srl.isRefreshing()) {
+                            if (srl!=null&&srl.isRefreshing()) {
                                 srl.finishRefresh();
                             }
                             ToastUtils.showToast(getActivity(), R.string.huoqugerenzhongxinshujushibai);

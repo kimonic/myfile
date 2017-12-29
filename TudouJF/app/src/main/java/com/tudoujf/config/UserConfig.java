@@ -41,7 +41,16 @@ public class UserConfig {
      * 绑定的手机号
      */
     private String bindPhone;
+    /**保存头像图片*/
+    private boolean  saveIcon=true;
 
+    public boolean isSaveIcon() {
+        return saveIcon;
+    }
+
+    public void setSaveIcon(boolean saveIcon) {
+        this.saveIcon = saveIcon;
+    }
 
     private boolean creditorFlush = false;
     private boolean investFlush = false;

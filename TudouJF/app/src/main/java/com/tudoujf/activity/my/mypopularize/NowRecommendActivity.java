@@ -110,7 +110,7 @@ public class NowRecommendActivity extends BaseActivity {
         UMWeb web = new UMWeb(share_url);
         web.setTitle("土豆金服");//标题
         web.setThumb(image);  //缩略图
-        web.setDescription("注册就送10元红包!!!\n实名领取28888元体验金!!!");//描述
+        web.setDescription("实名领取28888元体验金!!!");//描述
 
         new ShareAction(NowRecommendActivity.this)
                 .withMedia(web)
@@ -156,7 +156,7 @@ public class NowRecommendActivity extends BaseActivity {
          */
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(NowRecommendActivity.this, "失败" + t.getMessage(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(NowRecommendActivity.this, "失败" + t.getMessage(), Toast.LENGTH_LONG).show();
         }
 
         /**
@@ -165,7 +165,7 @@ public class NowRecommendActivity extends BaseActivity {
          */
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(NowRecommendActivity.this, "取消了", Toast.LENGTH_LONG).show();
+//            Toast.makeText(NowRecommendActivity.this, "取消了", Toast.LENGTH_LONG).show();
 
         }
     };

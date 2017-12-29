@@ -221,7 +221,7 @@ public class UsableWelfareFragment extends BaseFragment {
     }
 
     private void finishRl(){
-        if (srl.isLoading()){
+        if (srl!=null&&srl.isLoading()){
             srl.finishLoadmore();
         }
     }

@@ -80,7 +80,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
      */
     private boolean flag = false;
 
-//    private int beforePage;
+    //    private int beforePage;
 //    private int beforeTotalPage;
     private String status_nid = "transfer";
     private int count = 0;
@@ -211,17 +211,17 @@ public class MyProjectCreditorFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), MyCreditorRightsDetailsActivity.class);
-                intent.putExtra("tender_id",listBean.get(position).getTransfer_id());
+                intent.putExtra("tender_id", listBean.get(position).getTransfer_id());
 
-                int   type=listBean.get(position).getType();
+                int type = listBean.get(position).getType();
 //                1,债权转让记录,2,债权购买记录
-                intent.putExtra("type",type);
-                if (type==2){
-                    intent.putExtra("tender_id",listBean.get(position).getId());
-                }else {
-                    intent.putExtra("tender_id",listBean.get(position).getTransfer_id());
+                intent.putExtra("type", type);
+                if (type == 2) {
+                    intent.putExtra("tender_id", listBean.get(position).getId());
+                } else {
+                    intent.putExtra("tender_id", listBean.get(position).getTransfer_id());
                 }
-                startActivityForResult(intent,111);
+                startActivityForResult(intent, 111);
             }
         });
 
@@ -272,10 +272,12 @@ public class MyProjectCreditorFragment extends BaseFragment {
     }
 
     private void finishSRL() {
-        if (srlTotal.isRefreshing()) {
-            srlTotal.finishRefresh();
-        } else if (srlTotal.isLoading()) {
-            srlTotal.finishLoadmore();
+        if (srlTotal != null) {
+            if (srlTotal.isRefreshing()) {
+                srlTotal.finishRefresh();
+            } else if (srlTotal.isLoading()) {
+                srlTotal.finishLoadmore();
+            }
         }
     }
 
@@ -311,7 +313,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
             }
             HeightUtils.setListviewHeight(lvTotal);
 
-        } else if (bean != null&&adapter!=null) {
+        } else if (bean != null && adapter != null) {
 //            page = beforePage;
             listBean.clear();
             adapter.notifyDataSetChanged();
@@ -322,7 +324,7 @@ public class MyProjectCreditorFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==111){
+        if (resultCode == 111) {
 //            Log.e("TAG", "onActivityResult: ----我的债权项目刷新-");
             page = 1;
             start_time = "";

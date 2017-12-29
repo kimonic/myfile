@@ -177,11 +177,14 @@ public class DiscoverFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        if (srl.isRefreshing()) {
-            srl.finishRefresh();
-        } else if (srl.isLoading()) {
-            srl.finishLoadmore();
+        if (srl!=null){
+            if (srl.isRefreshing()) {
+                srl.finishRefresh();
+            } else if (srl.isLoading()) {
+                srl.finishLoadmore();
+            }
         }
+
     }
 
     @Override

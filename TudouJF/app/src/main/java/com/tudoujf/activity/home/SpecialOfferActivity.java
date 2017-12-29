@@ -198,11 +198,14 @@ public class SpecialOfferActivity extends BaseActivity {
     }
 
     private void finishRl() {
-        if (srl.isRefreshing()) {
-            srl.finishRefresh();
-        } else if (srl.isLoading()) {
-            srl.finishLoadmore();
+        if (srl!=null){
+            if (srl.isRefreshing()) {
+                srl.finishRefresh();
+            } else if (srl.isLoading()) {
+                srl.finishLoadmore();
+            }
         }
+
     }
 
     @Override

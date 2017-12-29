@@ -696,12 +696,13 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        if (srl.isRefreshing()) {
-            srl.finishRefresh();
-        } else if (srl.isLoading()) {
-            srl.finishLoadmore();
+        if (srl != null) {
+            if (srl.isRefreshing()) {
+                srl.finishRefresh();
+            } else if (srl.isLoading()) {
+                srl.finishLoadmore();
+            }
         }
-
     }
 
     @Override
@@ -790,7 +791,7 @@ public class HomeFragment extends BaseFragment {
             }
         }
         super.onResume();
-        if (!loginFlag&&"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
             loginFlag = true;
         } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
             loginFlag = false;

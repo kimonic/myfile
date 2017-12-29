@@ -250,10 +250,12 @@ public class DueInInterestFragment extends BaseFragment {
     }
 
     private void finishSrl() {
-        if (srl.isRefreshing()) {
-            srl.finishRefresh();
-        } else if (srl.isLoading()) {
-            srl.finishLoadmore();
+        if (srl!=null){
+            if (srl.isRefreshing()) {
+                srl.finishRefresh();
+            } else if (srl.isLoading()) {
+                srl.finishLoadmore();
+            }
         }
 
     }
