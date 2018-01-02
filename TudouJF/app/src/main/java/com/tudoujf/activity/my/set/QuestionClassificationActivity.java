@@ -120,28 +120,28 @@ public class QuestionClassificationActivity extends BaseActivity {
 
                 switch (position) {
                     case 0://新手指引
-                        openActivitySpecial("xinshouzhiyin",getResources().getString(strResId[0]));
+                        openActivitySpecial("xinshouzhiyin", getResources().getString(strResId[0]));
                         break;
                     case 1://充值提现
-                        openActivitySpecial("chongzhitixian",getResources().getString(strResId[1]));
+                        openActivitySpecial("chongzhitixian", getResources().getString(strResId[1]));
                         break;
                     case 2://我要理财
-                        openActivitySpecial("woyaolicai",getResources().getString(strResId[2]));
+                        openActivitySpecial("woyaolicai", getResources().getString(strResId[2]));
                         break;
                     case 3://我要融资
-                        openActivitySpecial("woyaorongzi",getResources().getString(strResId[3]));
+                        openActivitySpecial("woyaorongzi", getResources().getString(strResId[3]));
                         break;
                     case 4://债权转让
-                        openActivitySpecial("zhaiquanzhuanrang",getResources().getString(strResId[4]));
+                        openActivitySpecial("zhaiquanzhuanrang", getResources().getString(strResId[4]));
                         break;
                     case 5://网站费用
-                        openActivitySpecial("wangzhanfeiyong",getResources().getString(strResId[5]));
+                        openActivitySpecial("wangzhanfeiyong", getResources().getString(strResId[5]));
                         break;
                     case 6://法律法规
-                        openActivitySpecial("falvfagui",getResources().getString(strResId[6]));
+                        openActivitySpecial("falvfagui", getResources().getString(strResId[6]));
                         break;
                     case 7://名词解释
-                        openActivitySpecial("mingcijieshi",getResources().getString(strResId[7]));
+                        openActivitySpecial("mingcijieshi", getResources().getString(strResId[7]));
                         break;
                 }
 
@@ -151,8 +151,10 @@ public class QuestionClassificationActivity extends BaseActivity {
 
     }
 
-    /**打开指定页面*/
-    private void openActivitySpecial(String   category_id,String title){
+    /**
+     * 打开指定页面
+     */
+    private void openActivitySpecial(String category_id, String title) {
         Intent intent = new Intent(QuestionClassificationActivity.this, HelpCenterCommonActivity.class);
         intent.putExtra("category_id", category_id);
         intent.putExtra("title", title);

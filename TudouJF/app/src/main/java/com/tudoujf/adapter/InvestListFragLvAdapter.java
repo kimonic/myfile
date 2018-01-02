@@ -120,21 +120,22 @@ public class InvestListFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
 
 
-
-        if ("3".equals(list.get(position).getStatus())||"4".equals(list.get(position).getStatus())){
-            viewHolder.bidView.setShowDaiHouGuanLi(false);
-        }else {
-            final int pos =position;
-            viewHolder.bidView.setShowDaiHouGuanLi(true);
-            viewHolder.bidView.setListener(new BidView.ClickEventListener() {
-                @Override
-                public void clickEvent() {
-                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
-                    intent.putExtra("loan_id",list.get(pos).getId());
-                    context.startActivity(intent);
-                }
-            });
-        }
+//---------------------------显示贷后管理-------------------------------------------------------------
+//        if ("3".equals(list.get(position).getStatus())||"4".equals(list.get(position).getStatus())){
+//            viewHolder.bidView.setShowDaiHouGuanLi(false);
+//        }else {
+//            final int pos =position;
+//            viewHolder.bidView.setShowDaiHouGuanLi(true);
+//            viewHolder.bidView.setListener(new BidView.ClickEventListener() {
+//                @Override
+//                public void clickEvent() {
+//                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+//                    intent.putExtra("loan_id",list.get(pos).getId());
+//                    context.startActivity(intent);
+//                }
+//            });
+//        }
+//---------------------------显示贷后管理-------------------------------------------------------------
 
         viewHolder.bidView.setInvestSum(list.get(position).getAmount());//总投资金额
         viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限

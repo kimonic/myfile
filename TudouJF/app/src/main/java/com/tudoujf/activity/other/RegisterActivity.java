@@ -221,6 +221,8 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
+
+
     @Override
     public void initDataFromIntent() {
 
@@ -244,6 +246,9 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     ivClear.setVisibility(View.GONE);
                 }
+                checkPhoneBean=null;
+                tvGetcode.setBackgroundResource(R.drawable.xshape_roundrect_mgray);
+
             }
         });
 
@@ -304,6 +309,8 @@ public class RegisterActivity extends BaseActivity {
                                     checkPhoneBean = (CheckPhoneIsExistRegisterActBean) bean;
                                     if (checkPhoneBean.getStatus().equals("0")) {
                                         tvGetcode.setBackgroundResource(R.drawable.xshape_roundrect_myellow);
+                                    }else {
+                                        ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
                                     }
                                 }
                             }

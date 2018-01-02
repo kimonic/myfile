@@ -1,7 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,7 +13,6 @@ import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -71,8 +69,8 @@ public class ChangePhoneNumberActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActChangePhonenumber.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActChangePhonenumber.setLayoutParams(params);
-        Log.e("TAG", "initView:phone -----"+phone);
-        Log.e("TAG", "initView: ----phone.length()-"+phone.length());
+        Log.e("TAG", "initView:phone -----" + phone);
+        Log.e("TAG", "initView: ----phone.length()-" + phone.length());
 
 
         if (phone != null && phone.length() == 11) {

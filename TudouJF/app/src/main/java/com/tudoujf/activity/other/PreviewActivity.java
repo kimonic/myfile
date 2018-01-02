@@ -4,18 +4,12 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.PopupWindow;
 
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -32,10 +26,7 @@ import com.tudoujf.activity.managemoney.AffirmBuyActivity;
 import com.tudoujf.activity.managemoney.FanXianQuanSelActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
-import com.tudoujf.activity.my.myaccount.MyAccountActivity;
-import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.activity.test.GuessHappyActivity;
-import com.tudoujf.activity.test.ImageScaleActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
@@ -103,8 +94,8 @@ public class PreviewActivity extends BaseActivity {
     Button btActPreview20;
 
 
-    private int oldX = 0, oldY = 0;
-    private int curX, curY;
+//    private int oldX = 0, oldY = 0;
+//    private int curX, curY;
     //获取通信用binder
     private MyService.DownLoadBinder binder;
     /**
@@ -218,7 +209,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(HuiFuRegisterActivity.class);
                 break;
             case R.id.bt_act_preview18:
-                Intent intent=new Intent(this,GuessHappyActivity.class);
+                Intent intent = new Intent(this, GuessHappyActivity.class);
                 startActivity(intent);
 //                openActivity(MyEarningsActivity.class);
                 break;
@@ -235,16 +226,17 @@ public class PreviewActivity extends BaseActivity {
 
     // List of mandatory application permissions.
     private static final String[] MANDATORY_PERMISSIONS =
-            { "android.permission.MODIFY_AUDIO_SETTINGS",
+            {"android.permission.MODIFY_AUDIO_SETTINGS",
                     "android.permission.RECORD_AUDIO",
-                    "android.permission.INTERNET" };
-    private void checkPersition(){
+                    "android.permission.INTERNET"};
+
+    private void checkPersition() {
         // Check for mandatory permissions.
         for (String permission : MANDATORY_PERMISSIONS) {
             if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                Log.e("TAG", "checkPersition: -----"+permission);
-            }else {
-                Log.e("TAG", "checkPersition: --PERMISSION_GRANTED---"+permission);
+                Log.e("TAG", "checkPersition: -----" + permission);
+            } else {
+                Log.e("TAG", "checkPersition: --PERMISSION_GRANTED---" + permission);
             }
         }
     }
@@ -252,14 +244,15 @@ public class PreviewActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
 
-        SensorManager manager= (SensorManager) getSystemService(SENSOR_SERVICE);
-        List<Sensor> sensors=manager.getSensorList(Sensor.TYPE_ALL);
-        for (int i = 0; i < sensors.size(); i++) {
-            Log.e("TAG", "onStart: ---------------------"+sensors.get(i).getName());
+        SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors = manager != null ? manager.getSensorList(Sensor.TYPE_ALL) : null;
+        if (sensors != null) {
+            for (int i = 0; i < sensors.size(); i++) {
+                Log.e("TAG", "onStart: ---------------------" + sensors.get(i).getName());
+            }
         }
 
         checkPersition();
-
 
 
 //        Log.e("initDataFromIntent","1231213"+ NetworkUtils.connectionNetwork());
@@ -289,45 +282,45 @@ public class PreviewActivity extends BaseActivity {
 
     }
 
-    public void showPop() {
-        View view = LayoutInflater.from(this).inflate(R.layout.view_popitem, null);
-        final PopupWindow pop = new PopupWindow(view, 300, 300);
-//        pop.setContentView(view);
-        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
-        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
-        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
-        pop.setFocusable(true);//获取焦点
-        pop.showAtLocation(btActPreview7, Gravity.TOP, 0, 0);//显示位置
-        int out[] = new int[2];
-        btActPreview.getLocationInWindow(out);//获取view在Android坐标系中左上角的坐标点
-        Log.e("TAG", "showPop: ----" + out[0]);
-        Log.e("TAG", "showPop: -----" + out[1]);
-        //pop的监听依靠承载的view来 实现
-        view.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        oldX = (int) event.getRawX();//获取Android坐标系坐标
-                        oldY = (int) event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        curX = (int) (event.getRawX() - oldX);
-                        curY = (int) (event.getRawY() - oldY);
-                        pop.update(curX, curY, -1, -1, true);//更新pop的位置
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        pop.dismiss();//取消pop
-                        break;
-                }
-                return true;
-            }
-        });
-
-
-    }
+//    public void showPop() {
+//        View view = LayoutInflater.from(this).inflate(R.layout.view_popitem, null);
+//        final PopupWindow pop = new PopupWindow(view, 300, 300);
+////        pop.setContentView(view);
+//        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
+//        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
+//        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
+//        pop.setFocusable(true);//获取焦点
+//        pop.showAtLocation(btActPreview7, Gravity.TOP, 0, 0);//显示位置
+//        int out[] = new int[2];
+//        btActPreview.getLocationInWindow(out);//获取view在Android坐标系中左上角的坐标点
+//        Log.e("TAG", "showPop: ----" + out[0]);
+//        Log.e("TAG", "showPop: -----" + out[1]);
+//        //pop的监听依靠承载的view来 实现
+//        view.setOnTouchListener(new View.OnTouchListener() {
+//
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        oldX = (int) event.getRawX();//获取Android坐标系坐标
+//                        oldY = (int) event.getRawY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        curX = (int) (event.getRawX() - oldX);
+//                        curY = (int) (event.getRawY() - oldY);
+//                        pop.update(curX, curY, -1, -1, true);//更新pop的位置
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        pop.dismiss();//取消pop
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+//
+//
+//    }
 
     @Override
     public void initListener() {

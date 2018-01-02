@@ -3,16 +3,13 @@ package com.tudoujf.activity.other;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bolex.pressscan.ScanTools;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
@@ -87,7 +84,7 @@ public class WelcomeActivity extends BaseActivity {
 
 
         //-------------------------------检查权限授予情况-------------------------------------------
-        if (!isgudie){
+        if (!isgudie) {
             list = new ArrayList<>();
             list = PermissionUtils.checkAPPNeedPermission(this);
             permissionGranted = list.size() > 0;
@@ -154,7 +151,7 @@ public class WelcomeActivity extends BaseActivity {
                                     start();
                                 }
                             }).show();
-                }else {
+                } else {
                     start();
                 }
             }

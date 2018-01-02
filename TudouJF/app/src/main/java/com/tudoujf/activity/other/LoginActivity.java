@@ -54,7 +54,6 @@ import cn.udesk.ScreenUtil;
  */
 
 public class LoginActivity extends BaseActivity {
-    private static String TAG = "LoginActivity";
     @BindView(R.id.et_act_login_username)
     EditText etUsername;
     @BindView(R.id.et_act_login_password)
@@ -223,7 +222,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
-                Log.e(TAG, "onSuccess:---------登陆成功后返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                Log.e("TAG", "onSuccess:---------登陆成功后返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
                         }.getType(),

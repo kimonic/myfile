@@ -1,6 +1,5 @@
 package com.tudoujf.activity.other;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +14,6 @@ import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -128,7 +126,7 @@ public class TestActivity extends BaseActivity {
                 ScanTools.scanCode(imageView, new ScanTools.ScanCall() {
                     @Override
                     public void getCode(String s) {
-                        Log.e("TAG", "v: -----"+s);
+                        Log.e("TAG", "v: -----" + s);
 
                         ToastUtils.showToast(TestActivity.this, s);
                     }
@@ -157,8 +155,6 @@ public class TestActivity extends BaseActivity {
 //        bean.save();
         finish();
     }
-
-
 
 
 }

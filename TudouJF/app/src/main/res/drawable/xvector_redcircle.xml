@@ -25,7 +25,7 @@
 <!--"-->
             <!--/>-->
         <path android:fillColor="#FF6D00"
-            android:pathData="M50 1,
+            android:pathData="M48 3,
                             a49 49 1 1 0 1 0
 
 "

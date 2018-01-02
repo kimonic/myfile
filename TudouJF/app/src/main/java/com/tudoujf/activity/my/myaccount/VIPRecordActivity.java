@@ -15,7 +15,6 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
-import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
 import com.tudoujf.adapter.VIPRecordActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -129,9 +128,6 @@ public class VIPRecordActivity extends BaseActivity {
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
 
-        Log.e("TAG", "initDataFromInternet:VIP申请记录 -----" + page);
-        Log.e("TAG", "initDataFromInternet:VIP申请记录 -----" + UserConfig.getInstance().getLoginToken(this));
-
 
         HttpMethods.getInstance().POST(this, Constants.VIP_LOG, map, this.getLocalClassName(),
                 new StringCallback() {
@@ -184,12 +180,13 @@ public class VIPRecordActivity extends BaseActivity {
     }
 
     private void finishSrl() {
-        if (srlActViprecord.isRefreshing()) {
-            srlActViprecord.finishRefresh();
-        } else if (srlActViprecord.isLoading()) {
-            srlActViprecord.finishLoadmore();
+        if (srlActViprecord != null) {
+            if (srlActViprecord.isRefreshing()){
+                srlActViprecord.finishRefresh();
+            } else if (srlActViprecord.isLoading()) {
+                srlActViprecord.finishLoadmore();
+            }
         }
-
     }
 
     @Override

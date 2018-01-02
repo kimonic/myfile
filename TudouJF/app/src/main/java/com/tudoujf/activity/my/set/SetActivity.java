@@ -205,8 +205,8 @@ public class SetActivity extends BaseActivity {
         llActSetCheckUpdate.setOnClickListener(this);
         llActSetHelp.setOnClickListener(this);
         llActSetFeedback.setOnClickListener(this);
-        //-------------------------待删除-----------------------------------------------
 
+        //-------------------------待删除-----------------------------------------------
         llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

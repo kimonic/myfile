@@ -1,18 +1,12 @@
 package com.tudoujf.activity.my.myaccount;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.config.Constants;
-import com.tudoujf.config.UserConfig;
-import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -20,7 +14,6 @@ import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import butterknife.BindView;
 
@@ -183,42 +176,42 @@ public class VIPActivity extends BaseActivity {
 
     }
 
-    private void applyVip() {
-        showPDialog();
-        TreeMap<String, String> map = new TreeMap<>();
-        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        map.put("money", money);
-        map.put("cycle", cycle);
-        map.put("categoryInd", categoryInd);
-
-
-        HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, this.getLocalClassName(),
-                new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        dismissPDialog();
-
-                        String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----VIP申请接口返回数据------------" + result);
-//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
-//                        }.getType(), TransferableDetailsBean.class, VIPActivity.this);
-//                        if (bean1 != null) {
-//                            bean = (TransferableDetailsBean) bean1;
-//                            LoadInternetDataToUi();
-//                        } else {
-//                            ToastUtils.showToast(VIPActivity.this, R.string.shujujiazaichucuo);
-//                        }
-                    }
-
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                        dismissPDialog();
-                        ToastUtils.showToast(VIPActivity.this, R.string.shenqingvipshibai);
-                    }
-                });
-    }
+//    private void applyVip() {
+//        showPDialog();
+//        TreeMap<String, String> map = new TreeMap<>();
+//        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+//        map.put("money", money);
+//        map.put("cycle", cycle);
+//        map.put("categoryInd", categoryInd);
+//
+//
+//        HttpMethods.getInstance().POST(this, Constants.VIP_APPLY, map, this.getLocalClassName(),
+//                new StringCallback() {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//                        dismissPDialog();
+//
+//                        String result = StringUtils.getDecodeString(response.body());
+//                        Log.e("TAG", "onSuccess:----VIP申请接口返回数据------------" + result);
+////                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
+////                        }.getType(), TransferableDetailsBean.class, VIPActivity.this);
+////                        if (bean1 != null) {
+////                            bean = (TransferableDetailsBean) bean1;
+////                            LoadInternetDataToUi();
+////                        } else {
+////                            ToastUtils.showToast(VIPActivity.this, R.string.shujujiazaichucuo);
+////                        }
+//                    }
+//
+//
+//                    @Override
+//                    public void onError(Response<String> response) {
+//                        super.onError(response);
+//                        dismissPDialog();
+//                        ToastUtils.showToast(VIPActivity.this, R.string.shenqingvipshibai);
+//                    }
+//                });
+//    }
 
     @Override
     public void LoadInternetDataToUi() {

@@ -9,20 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.databean.MyAccountBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -68,7 +63,7 @@ public class ChangePasswordActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_changepassword_commit:
-                if (checkPassword()){
+                if (checkPassword()) {
                     commitPWD();
                 }
                 break;
@@ -146,30 +141,29 @@ public class ChangePasswordActivity extends BaseActivity {
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----修改密码接口返回数据--------" + result);
 
-                        Gson gson=new Gson();
-                        CommonBean bean=gson.fromJson(result, CommonBean.class);
-                        if (bean!=null){
-                            if (!"200".equals(bean.getCode())){
+                        Gson gson = new Gson();
+                        CommonBean bean = gson.fromJson(result, CommonBean.class);
+                        if (bean != null) {
+                            if (!"200".equals(bean.getCode())) {
                                 ToastUtils.showToast(ChangePasswordActivity.this, bean.getDescription().toString());
-                            }else {
+                            } else {
                                 DialogUtils.showDialogNoTitle(ChangePasswordActivity.this, bean.getDescription().toString(), "确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         SharedPreferencesUtils.getInstance(ChangePasswordActivity.this, Constants.USER_CONFIG)
                                                 .put(Constants.SHARE_LOGINTOKEN, "");
                                         UserConfig.getInstance().setLoginToken("");//清空登录信息
-                                        Intent intent=new Intent(ChangePasswordActivity.this, LoginActivity.class);
-                                        intent.putExtra("type",55);
+                                        Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
+                                        intent.putExtra("type", 55);
                                         startActivity(intent);
                                         closeActivity();
 //                                        openActivity(LoginActivity.class);
                                     }
                                 });
                             }
-                        }else {
+                        } else {
                             ToastUtils.showToast(ChangePasswordActivity.this, R.string.shujujiazaichucuo);
                         }
-
 
 
                     }

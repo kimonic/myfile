@@ -56,25 +56,25 @@ public class FindPasswordActivity extends BaseActivity {
     EditText etPhonecode;
     @BindView(R.id.tv_act_find_getphonecode)
     TextView tvGetphonecode;
-//    @BindView(R.id.et_act_find_imagecode)
+    //    @BindView(R.id.et_act_find_imagecode)
 //    EditText etImagecode;
 //    @BindView(R.id.iv_act_find_getimagecode)
 //    ImageView ivGetimagecode;
     @BindView(R.id.tv_act_find_next)
     TextView tvNext;
     private String randomCode;
-    private String TAG="FindPasswordActivity";
+    private String TAG = "FindPasswordActivity";
     private String userName;
     private PhoneCodeBean phoneCodeBean;
     private CheckPhoneIsExistRegisterActBean checkPhoneBean;
-    private int countTime=60;
+    private int countTime = 60;
     /**
      * 倒计时handler
      */
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            tvGetphonecode.setText(msg.what + "秒后重新发送");
+            tvGetphonecode.setText((msg.what + "秒后重新发送"));
             if (msg.what == 0) {
                 countTime = 60;
                 tvGetphonecode.setClickable(true);
@@ -82,6 +82,7 @@ public class FindPasswordActivity extends BaseActivity {
             }
         }
     };
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_findpassword;
@@ -94,7 +95,7 @@ public class FindPasswordActivity extends BaseActivity {
                 etUsername.setText("");
                 break;
             case R.id.tv_act_find_getphonecode://提交请求获取手机验证码
-                if (etUsername.hasFocus()){
+                if (etUsername.hasFocus()) {
                     etUsername.clearFocus();
                 }
 
@@ -113,13 +114,13 @@ public class FindPasswordActivity extends BaseActivity {
 //            case R.id.iv_act_find_getimagecode://点击刷新图形验证码
 //                break;
             case R.id.tv_act_find_next://手机验证码与图形验证码正确后提交请求,否则重新输入
-                if (etPhonecode.getText().toString().trim().equals(randomCode)){
-                    Bundle bundle=new Bundle();
-                    bundle.putString("username",userName);
-                    openActivity(AffirmPasswordActivity.class,bundle);
+                if (etPhonecode.getText().toString().trim().equals(randomCode)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", userName);
+                    openActivity(AffirmPasswordActivity.class, bundle);
                     closeActivity();
-                }else {
-                    ToastUtils.showToast(this,"请输入正确的验证码!!");
+                } else {
+                    ToastUtils.showToast(this, "请输入正确的验证码!!");
                 }
                 break;
 
@@ -221,7 +222,7 @@ public class FindPasswordActivity extends BaseActivity {
      */
     public void getSms() {
         randomCode = StringUtils.getRandomCode();
-        userName=etUsername.getText().toString().trim();
+        userName = etUsername.getText().toString().trim();
         Log.e(TAG, "getSms: --------------------" + randomCode);
         TreeMap<String, String> map = new TreeMap<>();
         map.put("type", "pwd");//找回密码
@@ -242,6 +243,7 @@ public class FindPasswordActivity extends BaseActivity {
             }
         });
     }
+
     /**
      * 检测输入的手机号码是否符合规则
      */
@@ -255,7 +257,7 @@ public class FindPasswordActivity extends BaseActivity {
      */
     private void startCountDown() {
         tvGetphonecode.setClickable(false);
-        tvGetphonecode.setText("60秒后重新发送");
+        tvGetphonecode.setText(R.string.liushimiaohou);
         new Thread() {
             @Override
             public void run() {

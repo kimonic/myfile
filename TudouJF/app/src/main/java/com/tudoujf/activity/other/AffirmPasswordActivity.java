@@ -217,7 +217,6 @@ public class AffirmPasswordActivity extends BaseActivity {
         mtbActAffirm.setLayoutParams(params);
 
 
-
     }
 
     @Override
@@ -238,7 +237,6 @@ public class AffirmPasswordActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
     }
-
 
 
     @Override

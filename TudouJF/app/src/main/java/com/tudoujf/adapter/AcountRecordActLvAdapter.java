@@ -58,10 +58,10 @@ public class AcountRecordActLvAdapter extends BaseAdapter {
         if (convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.lvitem_acountrecord, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.linearLayout= (LinearLayout) view.findViewById(R.id.ll_lvitem_succeedinvitation);
-            viewHolder.textView1= (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation1);
-            viewHolder.textView2= (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation2);
-            viewHolder.textView3= (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation3);
+            viewHolder.linearLayout = (LinearLayout) view.findViewById(R.id.ll_lvitem_succeedinvitation);
+            viewHolder.textView1 = (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation1);
+            viewHolder.textView2 = (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation2);
+            viewHolder.textView3 = (TextView) view.findViewById(R.id.tv_lvitem_succeedinvitation3);
 
             view.setTag(viewHolder);
         } else {
@@ -69,17 +69,15 @@ public class AcountRecordActLvAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        if (list.get(position).getBacFlag()==2){
+        if (list.get(position).getBacFlag() == 2) {
             viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.lvbac));
-        }else {
+        } else {
             viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
         }
 
         viewHolder.textView1.setText(StringUtils.getStrTime(list.get(position).getVerify_time()));
         viewHolder.textView2.setText(list.get(position).getMoney());
         viewHolder.textView3.setText(list.get(position).getStatus());
-
-
 
 
         return view;

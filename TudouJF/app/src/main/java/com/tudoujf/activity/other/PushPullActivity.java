@@ -67,11 +67,11 @@ public class PushPullActivity extends BaseActivity {
                 smartrefreshlayout.finishLoadmore(2000);
             }
         });
-        List<String>  list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            list.add("这个item的序号是"+i);
+            list.add("这个item的序号是" + i);
         }
-        SimpleLVAdapter adapter=new SimpleLVAdapter(list,this);
+        SimpleLVAdapter adapter = new SimpleLVAdapter(list, this);
         listview.setAdapter(adapter);
     }
 

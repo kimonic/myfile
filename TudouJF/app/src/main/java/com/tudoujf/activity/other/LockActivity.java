@@ -11,14 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.encryptionpackages.AESencrypt;
-import com.example.encryptionpackages.CreateCode;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
-import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.MLockView;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -73,11 +70,6 @@ public class LockActivity extends BaseActivity {
      */
     private int count = 300;
 
-    /**
-     * 剩余锁定时间
-     */
-    private int surplus;
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -126,7 +118,10 @@ public class LockActivity extends BaseActivity {
         //******************************************************************************************
 
         //----------------------------------继续锁定------------------------------------------------
-        surplus = getIntent().getIntExtra("surplus", 0);
+        /*
+      剩余锁定时间
+     */
+        int surplus = getIntent().getIntExtra("surplus", 0);
         if (surplus != 0) {
             count = surplus;
             mlvActLock.setOpenOrCloseDraw(false);

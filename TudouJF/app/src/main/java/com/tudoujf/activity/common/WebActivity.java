@@ -61,7 +61,6 @@ public class WebActivity extends BaseActivity {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActWeb.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActWeb.setLayoutParams(params);

@@ -1,10 +1,7 @@
 package com.tudoujf.activity.other;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,14 +11,12 @@ import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.adapter.GuideVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
-import com.tudoujf.ui.DotView;
 import com.tudoujf.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -49,8 +44,6 @@ public class GuideActivity extends BaseActivity {
             R.drawable.act_guide2,
             R.drawable.act_guide3
     };
-    private List<ImageView> list;
-
 
 
     @Override
@@ -60,13 +53,13 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("isguide",true);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put("isguide", true);
     }
 
     @Override
     public void initView() {
 
-        list = new ArrayList<>();
+        List<ImageView> list = new ArrayList<>();
         for (int image : images) {
             ImageView imageView = new ImageView(this);
             imageView.setImageResource(image);
@@ -100,7 +93,6 @@ public class GuideActivity extends BaseActivity {
         });
 
 
-
     }
 
 
@@ -117,7 +109,7 @@ public class GuideActivity extends BaseActivity {
 
                         break;
                     case MotionEvent.ACTION_UP:
-                        if (vpActguide.getCurrentItem()==3&&x - motionEvent.getX() > 50) {
+                        if (vpActguide.getCurrentItem() == 3 && x - motionEvent.getX() > 50) {
                             Intent intent = new Intent(GuideActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();

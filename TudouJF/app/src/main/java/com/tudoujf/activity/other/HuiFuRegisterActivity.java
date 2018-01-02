@@ -69,7 +69,6 @@ public class HuiFuRegisterActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActHuiFuRegister.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActHuiFuRegister.setLayoutParams(params);
@@ -111,7 +110,6 @@ public class HuiFuRegisterActivity extends BaseActivity {
     }
 
 
-
     private class myWebClient extends WebViewClient {
         @Override
         public void onPageFinished(WebView view, String url) {
@@ -124,14 +122,13 @@ public class HuiFuRegisterActivity extends BaseActivity {
                 startActivity(new Intent(HuiFuRegisterActivity.this, HomeActivity.class));
                 finish();
             } else if (url.contains(Constants.STATUS_REGISTER_FAIL)) {
-                ToastUtils.showToast(HuiFuRegisterActivity.this,"注册失败1");
+                ToastUtils.showToast(HuiFuRegisterActivity.this, "注册失败1");
                 finish();
-            }else if(url.contains(Constants.STATUS_CLOSE)){
+            } else if (url.contains(Constants.STATUS_CLOSE)) {
                 finish();
             }
             super.onPageStarted(view, url, favicon);
         }
-
 
 
         @Override
@@ -161,15 +158,16 @@ public class HuiFuRegisterActivity extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if (code.equals("200")) {
+                    if ("200".equals(code)) {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
-                        HuiFuRegisterBean dataBean = gson.fromJson(bean.getData().toString(),HuiFuRegisterBean.class);
+                        HuiFuRegisterBean dataBean = gson.fromJson(bean.getData().toString(), HuiFuRegisterBean.class);
 
                         String url = dataBean.getSubmit_url();
-                        JSONObject jo= null;
+                        JSONObject jo = null;
                         try {
-                            jo = new JSONObject(gson.toJson(dataBean,new TypeToken<HuiFuRegisterBean>(){}.getType()));
+                            jo = new JSONObject(gson.toJson(dataBean, new TypeToken<HuiFuRegisterBean>() {
+                            }.getType()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -186,7 +184,7 @@ public class HuiFuRegisterActivity extends BaseActivity {
 
                         wvActHuiFuRegister.postUrl(url, body.getBytes());
 
-                    } else if (code.equals("100")) {
+                    } else if ("100".equals(code)) {
                         try {
                             if (jsonobject != null) {
                                 ToastUtils.showToast(HuiFuRegisterActivity.this, jsonobject.getString("description"));
@@ -194,7 +192,7 @@ public class HuiFuRegisterActivity extends BaseActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    }else if (code.equals("")){
+                    } else if ("".equals(code)) {
                         ToastUtils.showToast(HuiFuRegisterActivity.this, R.string.denglushibai);
                     }
                     // 做对应返回错误码的处理

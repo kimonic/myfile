@@ -91,7 +91,6 @@ public class VIPHuiFuBuyActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActHuiFuRegister.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActHuiFuRegister.setLayoutParams(params);

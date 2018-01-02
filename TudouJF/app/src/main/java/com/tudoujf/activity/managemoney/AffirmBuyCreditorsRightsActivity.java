@@ -190,7 +190,6 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbAffirmBuyCreditorsRight.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbAffirmBuyCreditorsRight.setLayoutParams(params);

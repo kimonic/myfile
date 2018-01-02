@@ -322,7 +322,7 @@ public class StringUtils {
                     builder.insert(fStr.length() + tem - 3 - (i - 1) * 4, ",");
                 }
                 tem++;
-                Log.e("TAG", "getCommaDecimalsStrAssist: -----" + builder.toString() + "------------" + s.length());
+//                Log.e("TAG", "getCommaDecimalsStrAssist: -----" + builder.toString() + "------------" + s.length());
                 i++;
             }
 //            while (s.length()+tem - 3 * i >= 3) {

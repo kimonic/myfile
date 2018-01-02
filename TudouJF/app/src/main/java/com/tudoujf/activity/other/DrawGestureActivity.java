@@ -93,7 +93,7 @@ public class DrawGestureActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 Glide.get(DrawGestureActivity.this).clearDiskCache();
@@ -101,14 +101,14 @@ public class DrawGestureActivity extends BaseActivity {
         }.start();
         Glide.get(this).clearMemory();
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivIcon.getLayoutParams();
-        params.setMargins(0, ScreenSizeUtils.getStatusHeight(this)+150, 0, 0);
+        params.setMargins(0, ScreenSizeUtils.getStatusHeight(this) + 150, 0, 0);
         ivIcon.setLayoutParams(params);
 
-        String  path= FileUtils.getIconPath(this);
-        File file=new File(path);
-        if (file.exists()){
+        String path = FileUtils.getIconPath(this);
+        File file = new File(path);
+        if (file.exists()) {
             ImageGlideUtils.loadCircularImage(ivIcon, path);
-        }else {
+        } else {
             ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         }
 
@@ -187,11 +187,11 @@ public class DrawGestureActivity extends BaseActivity {
 
     private void savePassword(List<Integer> list) {
         String temp = EncryptionLockUtils.convertEncryption(this, list);
-        String  loginToken= UserConfig.getInstance().getLoginToken(this);
-        String name= MD5Utils.md5(loginToken);
+        String loginToken = UserConfig.getInstance().getLoginToken(this);
+        String name = MD5Utils.md5(loginToken);
 
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name+"ciphertext", temp);
-        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name+"lockPass", true);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name + "ciphertext", temp);
+        SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).put(name + "lockPass", true);
     }
 
     @Override

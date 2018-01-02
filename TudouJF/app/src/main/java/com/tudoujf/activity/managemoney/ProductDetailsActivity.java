@@ -196,7 +196,6 @@ public class ProductDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbProductdetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbProductdetails.setLayoutParams(params);

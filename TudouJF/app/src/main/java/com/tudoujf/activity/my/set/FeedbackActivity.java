@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.set;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,6 @@ import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.databean.HelpCenterCommonBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
@@ -24,7 +22,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -67,7 +64,6 @@ public class FeedbackActivity extends BaseActivity {
                     commitContent(etContent.getText().toString(), etContact.getText().toString());
                 }
                 break;
-
         }
 
     }
@@ -93,9 +89,7 @@ public class FeedbackActivity extends BaseActivity {
                 closeActivity();
             }
         });
-
         tvSubmit.setOnClickListener(this);
-
     }
 
     @Override
@@ -122,18 +116,16 @@ public class FeedbackActivity extends BaseActivity {
                         Log.e("TAG", "onSuccess:----反馈意见接口返回数据--------------" + result);
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
-                        if (bean != null){
+                        if (bean != null) {
                             if ("200".equals(bean.getCode())) {
                                 ToastUtils.showToast(FeedbackActivity.this, R.string.fankuiyijiantijiaochenggong);
                                 closeActivity();
                             } else {
                                 ToastUtils.showToast(FeedbackActivity.this, bean.getDescription().toString());
                             }
-                        }else {
-                            ToastUtils.showToast(FeedbackActivity.this,R.string.fankuiyijiantijiaoshibai);
-
+                        } else {
+                            ToastUtils.showToast(FeedbackActivity.this, R.string.fankuiyijiantijiaoshibai);
                         }
-
                     }
 
                     @Override

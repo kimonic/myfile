@@ -12,15 +12,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.FutureTarget;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -52,7 +48,6 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
-import com.tudoujf.utils.BitmapUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.GlideImageLoaderUtils;
@@ -66,7 +61,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 
@@ -229,21 +223,21 @@ public class MyAccountActivity extends BaseActivity {
                     localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
                     localIntent.setData(Uri.fromParts("package", getPackageName(), null));
                     startActivity(localIntent);
-                    /**
-                     * Intent intentFromCapture = newIntent(MediaStore.ACTION_IMAGE_CAPTURE);
-                     File file = newFile(Environment.getExternalStorageDirectory().getPath()+"/wood/head/");
-                     //是否是文件夹，不是就创建文件夹
-                     if (!file.exists()) file.mkdirs();
-                     //指定保存路径
-                     cameraPath = Environment.getExternalStorageDirectory().getPath()+"/wood/head/" +
-                     format.format(new Date()) + ".jpg";
-                     File imageFile = new File(cameraPath);
-                     //创建一个图片保存的Uri
-                     Uri imageFileUri = Uri.fromFile(imageFile);
-                     intentFromCapture.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-                     //设置MediaStore.EXTRA_OUTPUT的输出路径为imageFileUri
-                     intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-                     startActivityForResult(intentFromCapture, CAMERA_REQUEST_CODE);*/
+//                    /**
+//                     * Intent intentFromCapture = newIntent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                     File file = newFile(Environment.getExternalStorageDirectory().getPath()+"/wood/head/");
+//                     //是否是文件夹，不是就创建文件夹
+//                     if (!file.exists()) file.mkdirs();
+//                     //指定保存路径
+//                     cameraPath = Environment.getExternalStorageDirectory().getPath()+"/wood/head/" +
+//                     format.format(new Date()) + ".jpg";
+//                     File imageFile = new File(cameraPath);
+//                     //创建一个图片保存的Uri
+//                     Uri imageFileUri = Uri.fromFile(imageFile);
+//                     intentFromCapture.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+//                     //设置MediaStore.EXTRA_OUTPUT的输出路径为imageFileUri
+//                     intentFromCapture.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+//                     startActivityForResult(intentFromCapture, CAMERA_REQUEST_CODE);*/
 
 
                 } else {
@@ -334,7 +328,6 @@ public class MyAccountActivity extends BaseActivity {
     public void initView() {
 
 
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyAccount.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActMyAccount.setLayoutParams(params);
@@ -507,7 +500,6 @@ public class MyAccountActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
-                        Log.e("TAG", "onSuccess: ---图片存储路径--" + response.body());
                         if (response.body().contains("200")) {
                             ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanchenggong);
                             ImageGlideUtils.loadCircularImage(ivIcon, path);

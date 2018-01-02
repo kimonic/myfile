@@ -119,7 +119,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_zhaiquanzhuanrangxieyi://债权转让协议
                 Intent intent = new Intent(this, WebActivity.class);
-                Log.e("TAG", "onClick:tender_idtender_idtender_id -----" + tender_id);
                 intent.putExtra("url", Constants.ZHAI_QUAN_XIE_YI + tender_id);
                 intent.putExtra("title", getResources().getString(R.string.zhaiquanzhuanrangxieyi));
                 startActivity(intent);
@@ -235,9 +234,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
             map.put("tender_id", tender_id);
         }
 
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -login_token----" + UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -tender_id----" + tender_id);
-        Log.e("TAG", "我的债权项目详情接口返回数据initDataFromInternet: -url----" + url);
 
 
         HttpMethods.getInstance().POST(this, url, map, this.getLocalClassName(),
@@ -294,7 +290,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
             } else {
 
-                Log.e("TAG", "LoadInternetDataToUi: ---类型2--");
 
                 tvBidName.setText(bean.getLoan_name());//标的名称
                 tvCreditorsValue.setText(bean.getAmount_money());//债权价值
@@ -323,11 +318,9 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                         tvBuyNow.setText("撤销");
                         tvBuyNow.setBackgroundColor(getResources().getColor(R.color.global_theme_background_color));
                         canCansel=true;
-                        Log.e("TAG", "LoadInternetDataToUi: -撤销-11111---"+bean.getService_charge());
                         tvPredictEarings.setText(bean.getService_charge());//转让系数不可改变时的手续费
                     }
                 } else if ("-1".equals(bean.getTransfer_status())&&StringUtils.string2Integer(bean.getCancel_count())<3) {
-                    Log.e("TAG", "LoadInternetDataToUi: -已撤销-2222---"+bean.getService_charge());
                     tvPredictEarings.setText(bean.getService_charge());//转让系数不可改变时的手续费
                     tvBuyNow.setText("立即转让");
                     tvBuyNow.setClickable(true);
@@ -337,7 +330,6 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                 } else if ("2".equals(bean.getTransfer_status())){
                     etTransferScale.setText(bean.getCoefficient());//转让中状态系数不变为固定值
                     etTransferScale.setKeyListener(null);
-                    Log.e("TAG", "LoadInternetDataToUi: -转让成功-3333---"+bean.getService_charge());
 //                    tvTransferStatus.setText("转让成功");
                     tvBuyNow.setText("转让成功");
                     tvBuyNow.setClickable(false);

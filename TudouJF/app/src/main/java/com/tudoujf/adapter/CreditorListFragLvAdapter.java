@@ -1,19 +1,16 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.managemoney.CreditorRightsDetailsActivity;
-import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.bean.databean.CreditorListBean;
 import com.tudoujf.ui.ClaimsBidView;
 import com.tudoujf.utils.StringUtils;
-import com.tudoujf.utils.ToastUtils;
 
 import java.util.List;
 
@@ -70,14 +67,16 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
         }
 
 
-
-
-
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress()) / 100);//投资进度
         if (list.get(position).getLoan_name() != null) {
             viewHolder.bidView.setTitle((list.get(position).getLoan_name()));//标的标题
         }
-        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus() + "元");//剩余可投资金额
+
+        if (list.get(position).getAmount_surplus() == null) {
+            viewHolder.bidView.setShengYuKeTou("0.00元");//剩余可投资金额
+        } else {
+            viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus() + "元");//剩余可投资金额
+        }
 
 
         viewHolder.bidView.setTransfer("转让期数:" + list.get(position).getPeriod() + "/" + list.get(position).getTotal_period());//转让期数
@@ -90,21 +89,25 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setTransferPrice(list.get(position).getAmount());//转让金额
 
-        final int pos=position;
+        final int pos = position;
+//---------------------------显示贷后管理-------------------------------------------------------------
 
-        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
-            @Override
-            public void clickEvent() {
-                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
-                intent.putExtra("loan_id",list.get(pos).getLoan_id());
-                context.startActivity(intent);
-//                ToastUtils.showToast(context, "打开贷后管理");
-            }
-        });
+//        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
+//            @Override
+//            public void clickEvent() {
+//                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+//                intent.putExtra("loan_id",list.get(pos).getLoan_id());
+//                context.startActivity(intent);
+////                ToastUtils.showToast(context, "打开贷后管理");
+//            }
+//        });
+
+        //---------------------------显示贷后管理-------------------------------------------------------------
+
 //        viewHolder.bidView.setInvestTime(list.get(position).getPeriod()+"个月");//投资期限
         viewHolder.bidView.invalidate();
-        final String  id=list.get(position).getId();
-        final String  loan_id=list.get(position).getLoan_id();
+//        final String  id=list.get(position).getId();
+//        final String  loan_id=list.get(position).getLoan_id();
 
 //        viewHolder.bidView.setListener(new ClaimsBidView.ClickEventListener() {
 //            @Override

@@ -180,7 +180,7 @@ public class TransactionRecordActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
         if (bean != null) {
             list.addAll(bean.getItems());
-            Log.e("TAG", "LoadInternetDataToUi: ---交易记录--"+list.size());
+            Log.e("TAG", "LoadInternetDataToUi: ---交易记录--" + list.size());
 
             if (adapter == null) {
                 adapter = new TransactionRecordActLvAdapter(list, this);

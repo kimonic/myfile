@@ -19,7 +19,6 @@ import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.databean.WithdrawHuiFuBean;
-import com.tudoujf.bean.databean.WithdrawHuiFuBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -57,7 +56,7 @@ public class WithdrawHuiFuActivity extends BaseActivity {
     private String url = "";
     private String params = "";
 
-    private  String  amount;
+    private String amount;
 
     private long beforeTime = 0;
     private boolean flag = false;
@@ -166,8 +165,8 @@ public class WithdrawHuiFuActivity extends BaseActivity {
 //                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, "注册失败1");
 //                finish();
 //            } else
-            Log.e("TAG", "onPageStarted: -----"+url);
-            
+            Log.e("TAG", "onPageStarted: -----" + url);
+
             if (url.contains(Constants.STATUS_CLOSE)) {
 //                UserConfig.getInstance().setCreditorFlush(true);
                 openActivity(WithdrawRecordActivity.class);
@@ -193,8 +192,8 @@ public class WithdrawHuiFuActivity extends BaseActivity {
         map.put("amount", amount);
         map.put("paymentType", "chinapnrTrust");//paymentType:"chinapnrTrust"
 
-        Log.e("TAG", "commitInfo: -----amount"+amount);
-        Log.e("TAG", "commitInfo: -----login_token"+UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "commitInfo: -----amount" + amount);
+        Log.e("TAG", "commitInfo: -----login_token" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.HUIFU_WITHDRAW, map, "999", new StringCallback() {
@@ -217,7 +216,7 @@ public class WithdrawHuiFuActivity extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if (code.equals("200")) {
+                    if ("200".equals(code)) {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
 
@@ -245,7 +244,7 @@ public class WithdrawHuiFuActivity extends BaseActivity {
 
                         wvActHuiFuRegister.postUrl(url, params.getBytes());//提交post请求
 
-                    } else if (code.equals("100")) {
+                    } else if ("100".equals(code)) {
                         try {
                             if (jsonobject != null) {
                                 ToastUtils.showToast(WithdrawHuiFuActivity.this, jsonobject.getString("description"));
@@ -254,7 +253,7 @@ public class WithdrawHuiFuActivity extends BaseActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } else if (code.equals("")) {
+                    } else if ("".equals(code)) {
                         ToastUtils.showToast(WithdrawHuiFuActivity.this, R.string.denglushibai);
                     }
                     // 做对应返回错误码的处理

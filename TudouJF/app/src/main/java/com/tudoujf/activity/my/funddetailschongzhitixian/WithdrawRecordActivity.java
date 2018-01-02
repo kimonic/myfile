@@ -1,11 +1,9 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
@@ -21,7 +19,6 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.RechargeRecordActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.WithDrawBean;
 import com.tudoujf.bean.databean.WithdrawRecordBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -37,7 +34,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -80,21 +76,7 @@ public class WithdrawRecordActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-//临时数据源
         list = new ArrayList<>();
-//        for (int i = 0; i < 30; i++) {
-//            RechargeRecordActBean bean=new RechargeRecordActBean();
-//            bean.setJinE("000,000,000.00");
-//            bean.setDate("20XX-XX-XX");
-//            if (i%2==0){
-//                bean.setState("提现成功");
-//            }else {
-//                bean.setState("待审核");
-//            }
-//            bean.setContent("提现金额");
-//
-//            list.add(bean);
-//        }
     }
 
     @Override
@@ -164,7 +146,8 @@ public class WithdrawRecordActivity extends BaseActivity {
                 dismissPDialog();
 
 
-                if (page > 1) {                    srl.finishLoadmore();
+                if (page > 1) {
+                    srl.finishLoadmore();
                 } else {
                     srl.finishRefresh();
                 }

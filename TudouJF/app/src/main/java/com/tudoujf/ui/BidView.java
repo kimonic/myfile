@@ -95,12 +95,12 @@ public class BidView extends View {
      */
     private String isNewer;
 
-    /**
-     * 贷后管理显示
-     */
-    private boolean showDaiHouGuanLi = false;
-    private Bitmap bitmapDaiHouGuanLi;
-    private RectF rectFDaiHouGuanLi;
+//    /**
+//     * 贷后管理显示
+//     */
+//    private boolean showDaiHouGuanLi = false;
+//    private Bitmap bitmapDaiHouGuanLi;
+//    private RectF rectFDaiHouGuanLi;
 
 
     public BidView(Context context) {
@@ -123,17 +123,17 @@ public class BidView extends View {
     }
 
 
-    public boolean isShowDaiHouGuanLi() {
-        return showDaiHouGuanLi;
-    }
-
-    public void setShowDaiHouGuanLi(boolean showDaiHouGuanLi) {
-        this.showDaiHouGuanLi = showDaiHouGuanLi;
-    }
+//    public boolean isShowDaiHouGuanLi() {
+//        return showDaiHouGuanLi;
+//    }
+//
+//    public void setShowDaiHouGuanLi(boolean showDaiHouGuanLi) {
+//        this.showDaiHouGuanLi = showDaiHouGuanLi;
+//    }
 
     private void initView() {
-        rectFDaiHouGuanLi = new RectF();
-        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
+//        rectFDaiHouGuanLi = new RectF();
+//        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
 
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
@@ -238,19 +238,19 @@ public class BidView extends View {
 
 
         //-----------------------------显示贷后管理-------------------------------------------------
-        if (showDaiHouGuanLi){
-            if (lock){
-                rectFDaiHouGuanLi.left=rectFLock.right+width * 0.02f;
-            }else {
-                rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
-            }
-            rectFDaiHouGuanLi.top = width * 0.03077f;
-            rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
-            rectFDaiHouGuanLi.bottom = width * 0.075f;
-
-            canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
-
-        }
+//        if (showDaiHouGuanLi){
+//            if (lock){
+//                rectFDaiHouGuanLi.left=rectFLock.right+width * 0.02f;
+//            }else {
+//                rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
+//            }
+//            rectFDaiHouGuanLi.top = width * 0.03077f;
+//            rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
+//            rectFDaiHouGuanLi.bottom = width * 0.075f;
+//
+//            canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
+//
+//        }
 
 
         //-----------------------------显示贷后管理-------------------------------------------------
@@ -475,17 +475,19 @@ public class BidView extends View {
 //                }
 //            }
 //        }
+//----------------------------------贷后管理点击事件------------------------------------------------
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            float currentX = event.getX();
+//            float currentY = event.getY();
+//            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
+//                if (listener != null) {
+//                    listener.clickEvent();
+//                }
+//                return true;
+//            }
+//        }
+//----------------------------------贷后管理点击事件------------------------------------------------
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            float currentX = event.getX();
-            float currentY = event.getY();
-            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
-                if (listener != null) {
-                    listener.clickEvent();
-                }
-                return true;
-            }
-        }
         return super.onTouchEvent(event);
     }
 

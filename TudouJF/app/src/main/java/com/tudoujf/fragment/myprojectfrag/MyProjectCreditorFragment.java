@@ -238,7 +238,6 @@ public class MyProjectCreditorFragment extends BaseFragment {
         map.put("status_nid", status_nid);
 
 
-        Log.e("TAG", "initDataFromInternet: status_nid-----" + status_nid);
 
         HttpMethods.getInstance().POST(getActivity(), Constants.MY_CREDITOR, map, "",
                 new StringCallback() {
@@ -325,7 +324,6 @@ public class MyProjectCreditorFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 111) {
-//            Log.e("TAG", "onActivityResult: ----我的债权项目刷新-");
             page = 1;
             start_time = "";
             end_time = "";

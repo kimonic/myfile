@@ -2,8 +2,6 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,7 +14,6 @@ import android.view.View;
 
 import com.tudoujf.R;
 import com.tudoujf.utils.ScreenSizeUtils;
-import com.tudoujf.utils.StringUtils;
 
 import java.text.DecimalFormat;
 
@@ -93,8 +90,8 @@ public class ClaimsBidView extends View {
      */
     private String transfer = "";
 
-    private Bitmap bitmapDaiHouGuanLi;
-    private RectF rectFDaiHouGuanLi;
+//    private Bitmap bitmapDaiHouGuanLi;
+//    private RectF rectFDaiHouGuanLi;
 
     /**
      * 奖励的数值
@@ -163,8 +160,8 @@ public class ClaimsBidView extends View {
 
     private void initView() {
 
-        rectFDaiHouGuanLi = new RectF();
-        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
+//        rectFDaiHouGuanLi = new RectF();
+//        bitmapDaiHouGuanLi = BitmapFactory.decodeResource(getResources(), R.drawable.daihouguanli);
 
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
@@ -269,12 +266,12 @@ public class ClaimsBidView extends View {
 
 
         //-----------------------------显示贷后管理-------------------------------------------------
-        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
-        rectFDaiHouGuanLi.top = width * 0.03077f;
-        rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
-        rectFDaiHouGuanLi.bottom = width * 0.075f;
-
-        canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
+//        rectFDaiHouGuanLi.left = text1X + blackPaint.measureText(title) + width * 0.02f;
+//        rectFDaiHouGuanLi.top = width * 0.03077f;
+//        rectFDaiHouGuanLi.right = rectFDaiHouGuanLi.left + width * 0.128f;
+//        rectFDaiHouGuanLi.bottom = width * 0.075f;
+//
+//        canvas.drawBitmap(bitmapDaiHouGuanLi, null, rectFDaiHouGuanLi, null);
 
 
         //-----------------------------显示贷后管理-------------------------------------------------
@@ -469,18 +466,20 @@ public class ClaimsBidView extends View {
 //                }
 //            }
 //        }
+//----------------------------------贷后管理点击事件------------------------------------------------
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            float currentX = event.getX();
-            float currentY = event.getY();
-            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
-                if (listener != null) {
-                    listener.clickEvent();
-                }
-                return true;
-
-            }
-        }
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            float currentX = event.getX();
+//            float currentY = event.getY();
+//            if (rectFDaiHouGuanLi.contains(currentX, currentY)) {
+//                if (listener != null) {
+//                    listener.clickEvent();
+//                }
+//                return true;
+//
+//            }
+//        }
+//----------------------------------贷后管理点击事件------------------------------------------------
         return super.onTouchEvent(event);
     }
 

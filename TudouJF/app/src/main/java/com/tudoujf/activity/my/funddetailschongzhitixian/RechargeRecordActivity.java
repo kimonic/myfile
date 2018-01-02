@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
@@ -71,51 +70,16 @@ public class RechargeRecordActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.tv_act_rechargerecord_loadmore:
-//                if (bean != null && page < bean.getTotal_pages()) {
-//                    page = page + 1;
-//                    initDataFromInternet();
-//                } else if (bean != null) {
-//                    ToastUtils.showToast(RechargeRecordActivity.this, R.string.meiyougengduola);
-//                } else {
-//                    page = 1;
-//                    initDataFromInternet();
-//                }
-//
-//                break;
-////                 case R.id.:break;
-////                 case R.id.:break;
-////                 case R.id.:break;
-////                 case R.id.:break;
-////                 case R.id.:break;
-//        }
 
     }
 
     @Override
     public void initDataFromIntent() {
 
-        Log.e("TAG", "initDataFromIntent: -----启动充值记录!");
-
-
-//        //临时数据源
-//        list=new ArrayList<>();
-//        for (int i = 0; i < 30; i++) {
-//            RechargeRecordActBean bean=new RechargeRecordActBean();
-//            bean.setJinE("000,000,000.00");
-//            bean.setDate("20XX-XX-XX");
-//            bean.setState("充值成功");
-//            bean.setContent("充值金额");
-//
-//            list.add(bean);
-//        }
-
     }
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActRechargeRecord.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActRechargeRecord.setLayoutParams(params);
@@ -142,7 +106,6 @@ public class RechargeRecordActivity extends BaseActivity {
                 closeActivity();
             }
         });
-//        tvLoadMore.setOnClickListener(this);
 
 
         srl.setOnLoadmoreListener(new OnLoadmoreListener() {//加载更多
@@ -176,7 +139,6 @@ public class RechargeRecordActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
-        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + page);
 
         HttpMethods.getInstance().POST(this, Constants.RECHARG_ERECORD, map, getLocalClassName(),
                 new StringCallback() {
@@ -192,7 +154,6 @@ public class RechargeRecordActivity extends BaseActivity {
 
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----充值记录接口返回数据--------" + result);
-
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RechargeRecodeBean>() {
                         }.getType(), RechargeRecodeBean.class, RechargeRecordActivity.this);
                         if (bean1 != null) {
@@ -211,17 +172,9 @@ public class RechargeRecordActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            Log.e("TAG", "onSuccess: -----" + bean.getItems().size());
-
-//            if (page == 1) {
-//                list = bean.getItems();
-//            } else {
             list.addAll(bean.getItems());
-            Log.e("TAG", "onSuccess: --数据源添加数据---" + list.size());
-//            }
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
-                Log.e("TAG", "onSuccess: --刷新数据源---" + list.size());
             } else {
                 adapter = new RechargeRecordActLvAdapterN(list, this);
                 lvActRechargeRecord.setAdapter(adapter);

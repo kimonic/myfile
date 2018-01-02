@@ -3,7 +3,6 @@ package com.tudoujf.activity.my.funddetailschongzhitixian;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.util.Log;
@@ -21,7 +20,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -40,7 +38,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ====================================================================
@@ -76,7 +73,7 @@ public class WithdrawActivity extends BaseActivity {
     private WithDrawBean bean;
 
     private String amount = "1000";
-    private boolean  jump=false;
+    private boolean jump = false;
     private String loginToken;
     private boolean isLogin;
     private IdentityCheckBean identityCheckBean;
@@ -99,17 +96,17 @@ public class WithdrawActivity extends BaseActivity {
                 openActivity(WithdrawRecordActivity.class);
                 break;
             case R.id.tv_act_withdraw_lijitixian://立即提现
-                if ("1".equals(bean.getIs_bind())){
+                if ("1".equals(bean.getIs_bind())) {
                     if (etJinE.getText().toString().equals("")) {
                         if (dialog == null) {
                             dialog = showCustomDialog(LayoutInflater.from(this).inflate(R.layout.dialog_input, null));
                         } else {
                             dialog.show();
                         }
-                    }else if (jump){
+                    } else if (jump) {
                         checkLogin();//检测实名与登陆状态
                     }
-                }else {
+                } else {
                     ToastUtils.showToast(WithdrawActivity.this, R.string.ninshangweibangding);
 
                 }
@@ -138,7 +135,6 @@ public class WithdrawActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActWithdraw.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActWithdraw.setLayoutParams(params);
@@ -159,18 +155,18 @@ public class WithdrawActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 // 当前提现金额大于余额时
 //                tvActWithdrawHint.setText("账号余额不足");
-                float input = StringUtils.string2Float(editable.toString().replace(",",""));
+                float input = StringUtils.string2Float(editable.toString().replace(",", ""));
                 float fAmount = StringUtils.string2Float(amount);
                 if (input < 100 || input > 500000) {
-                    jump=false;
+                    jump = false;
                     tvActWithdrawHint.setText(R.string.tixianjineyingdayu);
                     tvLiJiTiXian.setBackgroundResource(R.drawable.xshape_roundrect_mgray1);
                 } else if (input > fAmount) {
-                    jump=false;
+                    jump = false;
                     tvLiJiTiXian.setBackgroundResource(R.drawable.xshape_roundrect_mgray1);
                     ToastUtils.showToast(WithdrawActivity.this, R.string.yuebuzu);
                 } else {
-                    jump=true;
+                    jump = true;
                     tvActWithdrawHint.setText("");
                     tvLiJiTiXian.setBackgroundResource(R.drawable.xshape_roundrect_themecolor);
                 }
@@ -300,10 +296,12 @@ public class WithdrawActivity extends BaseActivity {
 
     }
 
-    /**打开汇付提现页面*/
-    private void openHuiFu(){
-        Intent intent=new Intent(this,WithdrawHuiFuActivity.class);
-        intent.putExtra("amount",etJinE.getText().toString().replace(",",""));
+    /**
+     * 打开汇付提现页面
+     */
+    private void openHuiFu() {
+        Intent intent = new Intent(this, WithdrawHuiFuActivity.class);
+        intent.putExtra("amount", etJinE.getText().toString().replace(",", ""));
         startActivity(intent);
         finish();
     }

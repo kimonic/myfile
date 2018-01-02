@@ -131,7 +131,6 @@ public class CheckOldPhoneNumberActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActCheckOldPhonenumber.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActCheckOldPhonenumber.setLayoutParams(params);
@@ -195,7 +194,7 @@ public class CheckOldPhoneNumberActivity extends BaseActivity {
                 }.getType());
                 if (phoneCodeBean.getCode().equals("200")) {
                     ToastUtils.showToast(CheckOldPhoneNumberActivity.this, "验证码获取成功!!");
-                }else {
+                } else {
                     ToastUtils.showToast(CheckOldPhoneNumberActivity.this, R.string.yanzhengmahuoqushibai);
                 }
             }

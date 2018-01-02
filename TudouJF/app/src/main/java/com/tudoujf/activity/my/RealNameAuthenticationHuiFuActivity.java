@@ -20,7 +20,6 @@ import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.HuiFuRegisterBean;
-import com.tudoujf.bean.databean.CreditorRightsBuyHuiFuBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
@@ -208,7 +207,7 @@ public class RealNameAuthenticationHuiFuActivity extends BaseActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    if (code.equals("200")) {
+                    if ("200".equals(code)) {
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(temp2, CommonBean.class);
 
@@ -236,7 +235,7 @@ public class RealNameAuthenticationHuiFuActivity extends BaseActivity {
 
                         wvActHuiFuRegister.postUrl(url, params.getBytes());//提交post请求
 
-                    } else if (code.equals("100")) {
+                    } else if ("100".equals(code)) {
                         try {
                             if (jsonobject != null) {
                                 ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, jsonobject.getString("description"));
@@ -244,7 +243,7 @@ public class RealNameAuthenticationHuiFuActivity extends BaseActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    } else if (code.equals("")) {
+                    } else if ("".equals(code)) {
                         ToastUtils.showToast(RealNameAuthenticationHuiFuActivity.this, R.string.denglushibai);
                     }
                     // 做对应返回错误码的处理

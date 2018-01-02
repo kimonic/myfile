@@ -62,13 +62,13 @@ public class RechargeActivity extends BaseActivity {
                 openActivity(RechargeRecordActivity.class);
                 break;
             case R.id.tv_act_recharge_rechargenow://立即充值
-                String  temp=etAmount.getText().toString();
-                if (!temp.equals("")&&StringUtils.string2Float(temp)>0){
-                    Intent intent=new Intent(this, RechargeHuiFuActivity.class);
-                    intent.putExtra("amount",temp);
+                String temp = etAmount.getText().toString();
+                if (!temp.equals("") && StringUtils.string2Float(temp) > 0) {
+                    Intent intent = new Intent(this, RechargeHuiFuActivity.class);
+                    intent.putExtra("amount", temp);
                     startActivity(intent);
                     closeActivity();
-                }else {
+                } else {
                     ToastUtils.showToast(RechargeActivity.this, R.string.qingxinashuruchongzhijine);
                 }
 
@@ -79,8 +79,8 @@ public class RechargeActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         Intent intent = getIntent();
-        Bundle bundle=intent.getExtras();
-        if (bundle!=null){
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
             balance = bundle.getString("balance");
         }
 
@@ -102,10 +102,10 @@ public class RechargeActivity extends BaseActivity {
         tvChognZhiJiLu.setOnClickListener(this);
         tvRechargenow.setOnClickListener(this);
 
-        etAmount.addTextChangedListener(new MTextWatchAdapter(){
+        etAmount.addTextChangedListener(new MTextWatchAdapter() {
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.toString().contains(".")&&editable.toString().substring(editable.toString().indexOf(".")).length()>3){
+                if (editable.toString().contains(".") && editable.toString().substring(editable.toString().indexOf(".")).length() > 3) {
                     etAmount.setText(StringUtils.getTwoDecimalsStr(editable.toString()));
                     etAmount.setSelection(etAmount.getText().length());
                     ToastUtils.showToast(RechargeActivity.this, R.string.zuiduozhinengshuruliangweixiaoshu);

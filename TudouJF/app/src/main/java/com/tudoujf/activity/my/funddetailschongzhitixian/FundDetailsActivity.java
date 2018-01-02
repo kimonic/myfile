@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -82,15 +81,15 @@ public class FundDetailsActivity extends BaseActivity {
                 break;
             case R.id.tv_act_funddetails_withdraw://提现
                 if ("-1".equals(is_trust)) {
-                    if (promptDialog1==null){
-                        promptDialog1=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                    if (promptDialog1 == null) {
+                        promptDialog1 = DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
                             @Override
                             public void onClick() {
                                 promptDialog1.dismiss();
                                 openActivity(RealNameAuthenticationHuiFuActivity.class);
                             }
                         });
-                    }else {
+                    } else {
                         promptDialog1.show();
                     }
 //                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
@@ -102,22 +101,22 @@ public class FundDetailsActivity extends BaseActivity {
 //                            });
 //                    ToastUtils.showToast(this, R.string.qingxianshimingrenzheng);
                 } else {
-                   withdraw();
+                    withdraw();
                 }
 
 //                openActivity(WithdrawActivity.class);
                 break;
             case R.id.tv_act_funddetails_recharge://充值
                 if ("-1".equals(is_trust)) {
-                    if (promptDialog1==null){
-                        promptDialog1=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                    if (promptDialog1 == null) {
+                        promptDialog1 = DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
                             @Override
                             public void onClick() {
                                 promptDialog1.dismiss();
                                 openActivity(RealNameAuthenticationHuiFuActivity.class);
                             }
                         });
-                    }else {
+                    } else {
                         promptDialog1.show();
                     }
 //                    DialogUtils.showDialog(this, R.string.qingxianshimingrenzheng,
@@ -151,7 +150,6 @@ public class FundDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActFundDetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActFundDetails.setLayoutParams(params);
@@ -223,8 +221,10 @@ public class FundDetailsActivity extends BaseActivity {
     }
 
 
-    /**调用提现接口*/
-    private void withdraw(){
+    /**
+     * 调用提现接口
+     */
+    private void withdraw() {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(FundDetailsActivity.this));
@@ -239,7 +239,7 @@ public class FundDetailsActivity extends BaseActivity {
                 if (bean1 != null) {
                     WithDrawBean withDrawBean = (WithDrawBean) bean1;
 
-                    if ("1".equals(withDrawBean.getIs_bind())){
+                    if ("1".equals(withDrawBean.getIs_bind())) {
                         Intent intent = new Intent(FundDetailsActivity.this, WithdrawActivity.class);
                         if (bean != null) {
                             intent.putExtra("amount", bean.getBalance_amount());
@@ -247,33 +247,22 @@ public class FundDetailsActivity extends BaseActivity {
                             intent.putExtra("amount", getResources().getString(R.string.zanwu));
                         }
                         startActivity(intent);
-
-
-                    }else {
-                        if (promptDialog==null){
-                            promptDialog=DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "请绑定银行卡!", new DialogUtils.DialogUtilsClickListener() {
+                    } else {
+                        if (promptDialog == null) {
+                            promptDialog = DialogUtils.showPromptDialog(FundDetailsActivity.this, "提示", "请绑定银行卡!", new DialogUtils.DialogUtilsClickListener() {
                                 @Override
                                 public void onClick() {
                                     promptDialog.dismiss();
                                     openActivity(BankCardManageActivity.class);
                                 }
                             });
-                        }else {
+                        } else {
                             promptDialog.show();
                         }
-//                        DialogUtils.showDialog(FundDetailsActivity.this, R.string.qingxianbangdingyinhangka,
-//                                R.string.queding, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        openActivity(BankCardManageActivity.class);
-//                                    }
-//                                });
                     }
                 } else {
                     ToastUtils.showToast(FundDetailsActivity.this, R.string.shujujiazaichucuo);
                 }
-
-
             }
 
             @Override

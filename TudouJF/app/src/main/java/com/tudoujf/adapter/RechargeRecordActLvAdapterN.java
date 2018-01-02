@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tudoujf.R;
-import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActBean;
 import com.tudoujf.bean.databean.RechargeRecodeBean;
 import com.tudoujf.utils.StringUtils;
 

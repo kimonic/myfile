@@ -115,11 +115,11 @@ public class HttpTestActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-        SensorManager manager= (SensorManager) getSystemService(SENSOR_SERVICE);
-        List<Sensor> sensors=manager.getSensorList(Sensor.TYPE_ALL);
-        StringBuilder builder=new StringBuilder();
+        SensorManager manager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < sensors.size(); i++) {
-            Log.e("TAG", "onStart: ---------------------"+sensors.get(i).getName());
+            Log.e("TAG", "onStart: ---------------------" + sensors.get(i).getName());
             builder.append(sensors.get(i).getName()).append("\n");
         }
 
@@ -185,8 +185,8 @@ public class HttpTestActivity extends BaseActivity {
         map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
         String url;
 
-        for (String  s:map.keySet()){
-            Log.e("TAG", "httpSend:----"+s+"-------- "+map.get(s));
+        for (String s : map.keySet()) {
+            Log.e("TAG", "httpSend:----" + s + "-------- " + map.get(s));
         }
 
 
@@ -197,16 +197,16 @@ public class HttpTestActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 if (!etCanshuInterface.getText().toString().trim().equals("")) {
                     Log.e("TAG", "onSuccess: --------接口测试返回响应------" + response.body());
-                    String result="";
+                    String result = "";
                     try {
                         result = StringUtils.getDecodeString(response.body());
                         tvActHttptest1.setText(result);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         tvActHttptest1.setText(response.body());
                     }
 
-                    if (result.contains("\"code\":200")){
-                        FileUtils.saveJsonToSDCard(HttpTestActivity.this,"数据数据"+ TimeUtils.getCurentTimeTotal()+".txt",result);
+                    if (result.contains("\"code\":200")) {
+                        FileUtils.saveJsonToSDCard(HttpTestActivity.this, "数据数据" + TimeUtils.getCurentTimeTotal() + ".txt", result);
                     }
 
                     //   /phone/loan/loanInfo  loan_id,292
@@ -227,7 +227,6 @@ public class HttpTestActivity extends BaseActivity {
 
 
     }
-
 
 
 }

@@ -132,7 +132,6 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
 
     @Override
     public void initView() {
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActRecommendrecord.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActRecommendrecord.setLayoutParams(params);
@@ -186,8 +185,6 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
         map.put("name", name);
         map.put("start_time", start_time);
         map.put("end_time", end_time);
-        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + page);
-        Log.e("TAG", "initDataFromInternet:我的推广--推广记录--接口返回数据 -----" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.RECOMMEND_LOG, map, this.getLocalClassName(),

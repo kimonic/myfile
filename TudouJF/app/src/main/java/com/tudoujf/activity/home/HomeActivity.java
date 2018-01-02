@@ -97,7 +97,6 @@ public class HomeActivity extends BaseActivity {
         nbvActHome.setViewPager(vpActHome);
         vpActHome.setOffscreenPageLimit(4);
 
-//        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) vpActHome.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         vpActHome.setLayoutParams(params);
