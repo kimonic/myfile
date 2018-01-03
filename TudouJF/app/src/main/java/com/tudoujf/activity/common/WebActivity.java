@@ -1,7 +1,9 @@
 package com.tudoujf.activity.common;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.activity.other.RegisterActivity;
 import com.tudoujf.base.BaseActivity;
@@ -38,8 +41,8 @@ public class WebActivity extends BaseActivity {
     @BindView(R.id.wv_act_web)
     WebView wvActWeb;
 
-    private  String  url;
-    private  String  title;
+    private String url;
+    private String title;
 
     @Override
     public int getLayoutResId() {
@@ -53,8 +56,8 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        url=getIntent().getStringExtra("url");
-        title=getIntent().getStringExtra("title");
+        url = getIntent().getStringExtra("url");
+        title = getIntent().getStringExtra("title");
 //        url="https://www.baidu.com/";
     }
 
@@ -71,7 +74,7 @@ public class WebActivity extends BaseActivity {
         wvActWeb.setWebViewClient(new MyWebClient());
         WebSettings ws = wvActWeb.getSettings();
         ws.setAllowFileAccess(true);
-        ws.setSupportZoom(true);
+//        ws.setSupportZoom(true);
         ws.setJavaScriptEnabled(true);
         ws.setJavaScriptCanOpenWindowsAutomatically(true);
         ws.setUseWideViewPort(true);
@@ -84,6 +87,7 @@ public class WebActivity extends BaseActivity {
         ws.setDomStorageEnabled(true);
 //        wvActWeb.requestFocus();
 //        wvActWeb.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+        wvActWeb.setBackgroundColor(Color.parseColor("#00000000"));
 
         wvActWeb.loadUrl(url);
     }
@@ -130,18 +134,24 @@ public class WebActivity extends BaseActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            if (url.contains(Constants.XIN_SHOU_FU_LI_ZHU_CE)){
+            if (url.contains(Constants.XIN_SHOU_FU_LI_ZHU_CE)) {
                 openActivity(RegisterActivity.class);
                 closeActivity();
-            }else if (url.contains(Constants.LOGIN_CLICK)){
+            } else if (url.contains(Constants.LOGIN_CLICK)) {
                 openActivity(LoginActivity.class);
                 closeActivity();
-            }else {
+            } else if (url.contains("url=")) {
+                ViewGroup viewWeb = (ViewGroup) getWindow().getDecorView();
+                viewWeb.setBackgroundColor(Color.parseColor("#00000000"));
+                viewWeb.removeAllViews();
+                Intent intent = new Intent(WebActivity.this, HomeActivity.class);
+                intent.putExtra("flag", 55);
+                startActivity(intent);
+            } else {
                 showPDialog();
             }
-            Log.e("TAG", "onPageStarted: ---url--"+url);
+            Log.e("TAG", "onPageStarted: ---url--" + url);
         }
-
 
 
         @Override
@@ -154,15 +164,16 @@ public class WebActivity extends BaseActivity {
     @Override
     public void finish() {
         ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.setBackgroundColor(Color.parseColor("#00000000"));
         view.removeAllViews();
         super.finish();
     }
 
     @Override
     public void onBackPressed() {
-        if (wvActWeb.canGoBack()){
+        if (wvActWeb.canGoBack()) {
             wvActWeb.goBack();
-        }else {
+        } else {
             closeActivity();
         }
 
@@ -170,9 +181,10 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        if(wvActWeb!=null){
+        if (wvActWeb != null) {
             wvActWeb.destroy();
         }
         super.onDestroy();
     }
+
 }

@@ -83,8 +83,8 @@
 
                 <FrameLayout
                     android:id="@+id/fl_frag_my_message"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="7dp"
                     android:layout_marginRight="7dp"
@@ -92,10 +92,11 @@
 
                     <TextView
                         android:id="@+id/tv_frag_my_message"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:layout_gravity="end|top"
                         android:gravity="center"
+                        android:paddingBottom="1dp"
                         android:textColor="@color/color_white"
                         android:textSize="8sp" />
                 </FrameLayout>

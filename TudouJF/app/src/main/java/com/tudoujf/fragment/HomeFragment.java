@@ -406,11 +406,11 @@ public class HomeFragment extends BaseFragment {
             int msgCount = data.getIntExtra("msgcount", 0);
             if (msgCount != 0) {
                 Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
-//                if (msgCount < 100) {
-//                    tvMsgCount.setText(("" + msgCount));
-//                } else {
-//                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
-//                }
+                if (msgCount < 100) {
+                    tvMsgCount.setText(("" + msgCount));
+                } else {
+                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
+                }
             }
 
         } else if (requestCode == 666) {//签到界面返回
@@ -754,16 +754,18 @@ public class HomeFragment extends BaseFragment {
             }
 
             if ("0".equals(bean.getMessage_count())) {
-                ivMsgCount.setImageResource(R.drawable.frag_home_noinfo);
-//                tvMsgCount.setText("");
+//                ivMsgCount.setImageResource(R.drawable.frag_home_noinfo);
+                tvMsgCount.setText("");
+                tvMsgCount.setVisibility(View.INVISIBLE);
             } else {
-                ivMsgCount.setImageResource(R.drawable.frag_home_info);
+//                ivMsgCount.setImageResource(R.drawable.frag_home_info);
+                tvMsgCount.setVisibility(View.VISIBLE);
                 int count = StringUtils.string2Integer(bean.getMessage_count());
-//                if (count < 100) {
-//                    tvMsgCount.setText(bean.getMessage_count());
-//                } else {
-//                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
-//                }
+                if (count < 100) {
+                    tvMsgCount.setText(bean.getMessage_count());
+                } else {
+                    tvMsgCount.setText(getResources().getString(R.string.ninenine));
+                }
             }
 
         }

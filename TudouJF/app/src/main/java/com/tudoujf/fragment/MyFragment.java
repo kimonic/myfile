@@ -490,11 +490,11 @@ public class MyFragment extends BaseFragment {
                 flMessage.setBackgroundResource(R.drawable.frag_home_noinfo);
                 tvMessage.setText("");
             } else if (count < 100) {
-                setImageSize(18);
+                setImageSize(20);
                 flMessage.setBackgroundResource(R.drawable.frag_home_info);
                 tvMessage.setText(bean.getCount());
             } else {
-                setImageSize(18);
+                setImageSize(20);
                 flMessage.setBackgroundResource(R.drawable.frag_home_info);
                 tvMessage.setText(getResources().getString(R.string.ninenine));
             }

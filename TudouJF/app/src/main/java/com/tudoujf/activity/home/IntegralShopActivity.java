@@ -92,13 +92,13 @@ public class IntegralShopActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.ll_act_integralshop_classification_of_goods://分类筛选
                 Map<String, String> map = new TreeMap<>();
-                map.put("type","fenlei");
-                openActivityParams(ClassificationOfGoodsActivity.class,map);
+                map.put("type", "fenlei");
+                openActivityParams(ClassificationOfGoodsActivity.class, map);
                 break;
             case R.id.ll_act_integralshop_integral_screen://积分筛选
                 Map<String, String> map1 = new TreeMap<>();
-                map1.put("type","jifen");
-                openActivityParams(ClassificationOfGoodsActivity.class,map1);
+                map1.put("type", "jifen");
+                openActivityParams(ClassificationOfGoodsActivity.class, map1);
                 break;
             case R.id.ll_act_integralshop_hot://热门兑换
                 openActivity(HotExchangeActivity.class);
@@ -239,7 +239,6 @@ public class IntegralShopActivity extends BaseActivity {
                         if (bean1 != null) {
                             beanMore = (IntegralShopMoreBean) bean1;
                             LoadInternetDataToUi();
-
                         } else {
                             ToastUtils.showToast(IntegralShopActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                         }
@@ -294,16 +293,12 @@ public class IntegralShopActivity extends BaseActivity {
 
     private void finishRL() {
 
-        if (srl!=null){
+        if (srl != null) {
             if (srl.isLoading()) {
                 srl.finishLoadmore();
             } else if (srl.isRefreshing()) {
                 srl.finishRefresh();
             }
         }
-
     }
 }
-
-
-

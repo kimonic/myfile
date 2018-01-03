@@ -16,11 +16,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.adapter.DialogLVAdapter;
+import com.tudoujf.bean.SystemMessageFragBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -517,6 +523,64 @@ public class DialogUtils {
             lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
             lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
             lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+
+    public static AlertDialog  showListDialog(Context context){
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_listdialog, null);
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        ListView listView=view.findViewById(R.id.lv_dialoglist);
+
+        List<SystemMessageFragBean> list=new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            SystemMessageFragBean bean=new SystemMessageFragBean();
+            bean.setTime(i+"个item");
+            list.add(bean);
+        }
+
+        DialogLVAdapter   adapter=new DialogLVAdapter(list,context);
+        listView.setAdapter(adapter);
+
+
+
+//        TextView tvContent = view.findViewById(R.id.tv_content);
+//        TextView tvCancle = view.findViewById(R.id.tv_cancle);
+//        TextView tvQueDing = view.findViewById(R.id.tv_queding);
+//
+//        tvContent.setText(content);
+//        tvCancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        tvQueDing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//                if (listener != null) {
+//                    listener.onClick();
+//                }
+//            }
+//        });
+
+
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.BOTTOM;
             window.setAttributes(lp);
         }
         return dialog;

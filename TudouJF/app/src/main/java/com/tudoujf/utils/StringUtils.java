@@ -163,7 +163,7 @@ public class StringUtils {
      */
     public static String getStrTime(String cc_time) {
         if (cc_time==null){
-            return "****/**/**";
+            return "****-**-**";
         }
         String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -208,7 +208,7 @@ public class StringUtils {
      */
     public static String getStrTimeBias(String cc_time) {
         if (cc_time==null){
-            return "****/**/**";
+            return "****-**-**";
         }
         String re_StrTime;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
@@ -217,7 +217,7 @@ public class StringUtils {
             re_StrTime = sdf.format(new Date(lcc_time * 1000L));
 
         } catch (NumberFormatException e) {
-            return "****/**/**";
+            return "****-**-**";
         }
         return re_StrTime;
     }

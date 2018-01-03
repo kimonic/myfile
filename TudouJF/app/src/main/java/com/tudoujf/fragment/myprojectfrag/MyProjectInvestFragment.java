@@ -49,12 +49,12 @@ public class MyProjectInvestFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_frag_myprojectinvest1:
-                setBtnStyle(0);
-                vp.setCurrentItem(0);
-                break;
-            case R.id.tv_frag_myprojectinvest2:
                 setBtnStyle(1);
                 vp.setCurrentItem(1);
+                break;
+            case R.id.tv_frag_myprojectinvest2:
+                setBtnStyle(0);
+                vp.setCurrentItem(0);
                 break;
             case R.id.tv_frag_myprojectinvest3:
                 setBtnStyle(2);
@@ -81,8 +81,8 @@ public class MyProjectInvestFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        list.add(tvBtn1);
         list.add(tvBtn2);
+        list.add(tvBtn1);
         list.add(tvBtn3);
 
         MyProjectInvestChildFragment fragment1 = new MyProjectInvestChildFragment();
@@ -102,8 +102,8 @@ public class MyProjectInvestFragment extends BaseFragment {
         bundle3.putString("type", "2");
         fragment3.setArguments(bundle3);
 
-        listFrag.add(fragment1);
         listFrag.add(fragment2);
+        listFrag.add(fragment1);
         listFrag.add(fragment3);
 
         vp.setAdapter(new HomeFragVPAdapter(getChildFragmentManager(), listFrag));

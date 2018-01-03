@@ -239,7 +239,6 @@ public class HomeActivity extends BaseActivity {
 //                                                        "http://android.myapp.com/myapp/detail.htm?apkName=com.shoujiduoduo.ringtone");
 //                                                intent.putExtra("title","下载新版本");
 //                                                startActivity(intent);
-
                                                 DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
                                             }
                                         });
