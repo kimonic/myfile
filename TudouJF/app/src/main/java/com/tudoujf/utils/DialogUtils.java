@@ -16,6 +16,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -529,24 +531,82 @@ public class DialogUtils {
     }
 
 
-    public static AlertDialog  showListDialog(Context context){
+    /**
+     * 积分商城筛选dialog
+     */
+    public static AlertDialog showListDialog(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_listdialog, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
 
-        ListView listView=view.findViewById(R.id.lv_dialoglist);
+        final ListView listView = view.findViewById(R.id.lv_dialoglist);
+        TextView cancel = view.findViewById(R.id.tv_dialoglist_cancel);
+        TextView queding = view.findViewById(R.id.tv_dialoglist_confirm);
 
-        List<SystemMessageFragBean> list=new ArrayList<>();
+        final List<SystemMessageFragBean> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            SystemMessageFragBean bean=new SystemMessageFragBean();
-            bean.setTime(i+"个item");
+            SystemMessageFragBean bean = new SystemMessageFragBean();
+            bean.setTime(i + "个item");
+            bean.setTitle("11");
             list.add(bean);
         }
 
-        DialogLVAdapter   adapter=new DialogLVAdapter(list,context);
+        final DialogLVAdapter adapter = new DialogLVAdapter(list, context);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                view.setBackgroundColor(Color.parseColor("#E3FBFE"));
+                for (int i = 0; i < list.size(); i++) {
+                    if (i == position) {
+                        list.get(i).setTitle("22");
+                    } else {
+                        list.get(i).setTitle("11");
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        queding.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+//        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                Log.e("TAG", "onScroll: -firstVisibleItem----"+firstVisibleItem);
+//                if (listView.getChildAt(3)!=null){
+//                    Log.e("TAG", "onScroll: -firstVisibleItem----"+listView.getChildAt(firstVisibleItem/2));
+//                    listView.getChildAt(3).setBackgroundColor(Color.RED);
+//                }
+//
+//                for (int i = 0; i < visibleItemCount; i++) {
+//                    if (i!=3&&listView.getChildAt(i)!=null){
+//                        listView.getChildAt(i).setBackgroundColor(Color.WHITE);
+//                    }
+//                }
+//
+//            }
+//        });
 
 
 //        TextView tvContent = view.findViewById(R.id.tv_content);

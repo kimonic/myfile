@@ -1,6 +1,7 @@
 package com.tudoujf.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,15 @@ public class DialogLVAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) view.getTag();
         }
 
-        viewHolder.textView.setText(list.get(position).getTitle());
+
+        viewHolder.textView.setText(list.get(position).getTime());
+        if ("11".equals(list.get(position).getTitle())){
+            view.setBackgroundColor(Color.parseColor("#F4F4F4"));
+            viewHolder.textView.setTextColor(context.getResources().getColor(R.color.color_gray3));
+        }else {
+            view.setBackgroundColor(Color.parseColor("#E3FBFE"));
+            viewHolder.textView.setTextColor(context.getResources().getColor(R.color.global_theme_background_color));
+        }
 
         return view;
     }

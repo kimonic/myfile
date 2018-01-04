@@ -20,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.NewVersionBean;
@@ -52,6 +53,8 @@ import butterknife.BindView;
 public class SetActivity extends BaseActivity {
     @BindView(R.id.tv_act_set_title)
     TextView tvActSetTitle;
+     @BindView(R.id.tv_act_set_versionname)
+    TextView tvVersionName;
     @BindView(R.id.ll_act_set_kefudianhua)
     LinearLayout llActSetPhone;
     @BindView(R.id.ll_act_set_help)
@@ -92,7 +95,10 @@ public class SetActivity extends BaseActivity {
                 openActivity(FeedbackActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
+//                DialogUtils.showListDialog(this);//积分商城类别选择dialog
+
                 checkNew();
+
 //                count++;
 //                if (flag && count == 10) {
 //                    flag = false;
@@ -171,6 +177,8 @@ public class SetActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tvActSetTitle.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         tvActSetTitle.setLayoutParams(params);
+
+        tvVersionName.setText(("土豆金服Ver"+AppInfoUtils.getVersionName(this)));
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_phone, null);
         TextView tvCall1 = view.findViewById(R.id.tv_call1);
