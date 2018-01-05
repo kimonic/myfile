@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.SystemMessageFragBean;
+import com.tudoujf.bean.databean.TypeInfoBean;
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ import java.util.List;
  * * ====================================================================
  */
 public class DialogLVAdapter extends BaseAdapter {
-    private List<SystemMessageFragBean> list;
+    private List<TypeInfoBean.ItemsBean> list;
     private Context context;
 
-    public DialogLVAdapter(List<SystemMessageFragBean> list, Context context) {
+    public DialogLVAdapter(List<TypeInfoBean.ItemsBean> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -52,22 +53,22 @@ public class DialogLVAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder viewHolder;
-        if (convertView==null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_listdialog,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.textView= (TextView) view.findViewById(R.id.tv_listdialog);
+        if (convertView == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_listdialog, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.textView = (TextView) view.findViewById(R.id.tv_listdialog);
             view.setTag(viewHolder);
-        }else {
-            view=convertView;
-            viewHolder= (ViewHolder) view.getTag();
+        } else {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
         }
 
 
-        viewHolder.textView.setText(list.get(position).getTime());
-        if ("11".equals(list.get(position).getTitle())){
+        viewHolder.textView.setText(list.get(position).getName());
+        if (list.get(position).getBacFlag()==1) {
             view.setBackgroundColor(Color.parseColor("#F4F4F4"));
             viewHolder.textView.setTextColor(context.getResources().getColor(R.color.color_gray3));
-        }else {
+        } else {
             view.setBackgroundColor(Color.parseColor("#E3FBFE"));
             viewHolder.textView.setTextColor(context.getResources().getColor(R.color.global_theme_background_color));
         }
@@ -75,7 +76,7 @@ public class DialogLVAdapter extends BaseAdapter {
         return view;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         private TextView textView;
     }
 }

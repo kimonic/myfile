@@ -1,8 +1,12 @@
 package com.tudoujf.activity.discover;
 
 
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +18,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.adapter.ClassificationOfGoodsLvAdapter;
@@ -29,6 +34,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -77,6 +83,10 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     private String type_id = "";
     private TypeInfoBean inBean;
 
+    private AlertDialog dialog;
+    private List<TypeInfoBean.ItemsBean> listType;
+    private boolean show = false;
+
     @Override
     public int getLayoutResId() {
         return R.layout.act_classificationofgoods;
@@ -89,6 +99,29 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                 closeActivity();
                 break;
             case R.id.ll_act_classificationofgoods_screen:
+                if (dialog == null) {
+                    if (listType.size() == 0) {
+                        show = true;
+                        requestType();
+                    } else {
+                        dialog = DialogUtils.showListDialog(this, listType, new DialogUtils.ListDialogClickListener() {
+                            @Override
+                            public void onClick(int position) {
+                                Log.e("TAG", "onClick: -position----"+position);
+                                page=1;
+                                list.clear();
+                                if ("fenlei".equals(type)) {//分类筛选
+                                    type_id=listType.get(position).getId();
+                                } else if ("jifen".equals(type)) {//积分筛选
+                                    point_id=listType.get(position).getId();
+                                }
+                                initDataFromInternet();
+                            }
+                        });
+                    }
+                } else {
+                    dialog.show();
+                }
                 break;
 //                 case R.id.:break;
 //                 case R.id.:break;
@@ -98,10 +131,12 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
 
     }
 
+
+
     @Override
     public void initDataFromIntent() {
         list = new ArrayList<>();
-
+        listType = new ArrayList<>();
         type = getIntent().getStringExtra("type");
         if ("fenlei".equals(type)) {//分类筛选
             requestUrl = Constants.GOODS_TYPES;
@@ -112,7 +147,12 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         }
         requestType();
 
+
+
+
     }
+
+
 
     private void requestType() {
         showPDialog();
@@ -137,6 +177,28 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         String rankingList = "{items:" + bean.getData().toString() + "}";
                         inBean = gson.fromJson(rankingList, TypeInfoBean.class);
                         if (inBean != null) {
+                            if (inBean.getItems() != null && inBean.getItems().size() > 0) {
+                                listType.addAll(inBean.getItems());
+                                if (show) {
+                                    dialog = DialogUtils.showListDialog(ClassificationOfGoodsActivity.this, listType, new DialogUtils.ListDialogClickListener() {
+                                        @Override
+                                        public void onClick(int position) {
+                                            Log.e("TAG", "onClick: -position----"+position);
+                                            page=1;
+                                            list.clear();
+                                            if ("fenlei".equals(type)) {//分类筛选
+                                                type_id=listType.get(position).getId();
+                                            } else if ("jifen".equals(type)) {//积分筛选
+                                                point_id=listType.get(position).getId();
+                                            }
+                                            initDataFromInternet();
+
+                                        }
+                                    });
+                                }
+                            } else {
+                                ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.huoqufenleileixingshiabai);
+                            }
 
                         } else {
                             ToastUtils.showToast(ClassificationOfGoodsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
@@ -164,6 +226,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         frameLayout.setLayoutParams(params);
 
         srl.setRefreshHeader(new TuDouHeader(this));
+        srl.setPrimaryColorsId(R.color.global_theme_background_color);
     }
 
     @Override
@@ -176,8 +239,23 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 point_id = "";
+                type_id = "";
                 page = 1;
+                list.clear();
                 initDataFromInternet();
+            }
+        });
+
+        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                if (bean!=null&&page<bean.getTotal_pages()){
+                    page++;
+                    initDataFromInternet();
+                }else {
+                    ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.meiyougengduola);
+                    srl.finishLoadmore();
+                }
             }
         });
     }
@@ -217,7 +295,6 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         dismissPDialog();
                         finishRL();
                         ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.huoqujifenshangchengxinxishibai);
-
                     }
                 }
         );
@@ -254,7 +331,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     }
 
     private void finishRL() {
-        if (srl!=null){
+        if (srl != null) {
             if (srl.isLoading()) {
                 srl.finishLoadmore();
             } else if (srl.isRefreshing()) {

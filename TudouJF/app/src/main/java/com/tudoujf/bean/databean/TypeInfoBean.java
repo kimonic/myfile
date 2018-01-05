@@ -40,7 +40,17 @@ public class TypeInfoBean implements BaseBean {
         private String id;
         private String name;
         private String pid;
+        private int  bacFlag=1;
         private JsonElement children;
+
+
+        public int getBacFlag() {
+            return bacFlag;
+        }
+
+        public void setBacFlag(int bacFlag) {
+            this.bacFlag = bacFlag;
+        }
 
         public String getId() {
             return id;

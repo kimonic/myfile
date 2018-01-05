@@ -674,6 +674,7 @@
     <string name="huoqubangzhuxinxishiabai">获取帮助信息失败!</string>
     <string name="xiazailianjiechucuo">下载链接出错,请前往应用商店下载最新版本!</string>
     <string name="yuebuzuqing">账户可用余额不足，请先充值!</string>
+    <string name="huoqufenleileixingshiabai">获取分类类型失败!!</string>
 
 
 </resources>

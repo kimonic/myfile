@@ -61,6 +61,7 @@ import com.tudoujf.utils.ToastUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 
@@ -326,7 +327,6 @@ public class MyAccountActivity extends BaseActivity {
     @SuppressLint("InflateParams")
     @Override
     public void initView() {
-
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActMyAccount.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);

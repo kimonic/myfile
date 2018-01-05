@@ -26,6 +26,7 @@ import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.adapter.DialogLVAdapter;
 import com.tudoujf.bean.SystemMessageFragBean;
+import com.tudoujf.bean.databean.TypeInfoBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -534,7 +535,8 @@ public class DialogUtils {
     /**
      * 积分商城筛选dialog
      */
-    public static AlertDialog showListDialog(Context context) {
+    public static AlertDialog showListDialog(Context context, final List<TypeInfoBean.ItemsBean> listType
+    , final ListDialogClickListener listener) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_listdialog, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
@@ -544,26 +546,23 @@ public class DialogUtils {
         TextView cancel = view.findViewById(R.id.tv_dialoglist_cancel);
         TextView queding = view.findViewById(R.id.tv_dialoglist_confirm);
 
-        final List<SystemMessageFragBean> list = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            SystemMessageFragBean bean = new SystemMessageFragBean();
-            bean.setTime(i + "个item");
-            bean.setTitle("11");
-            list.add(bean);
-        }
+        final int[] currentPosition = new int[1];
 
-        final DialogLVAdapter adapter = new DialogLVAdapter(list, context);
+//        -
+
+        final DialogLVAdapter adapter = new DialogLVAdapter(listType, context);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                view.setBackgroundColor(Color.parseColor("#E3FBFE"));
-                for (int i = 0; i < list.size(); i++) {
+                currentPosition[0] =position;
+                for (int i = 0; i < listType.size(); i++) {
                     if (i == position) {
-                        list.get(i).setTitle("22");
+                        listType.get(i).setBacFlag(2);
                     } else {
-                        list.get(i).setTitle("11");
+                        listType.get(i).setBacFlag(1);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -582,55 +581,11 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                if (listener!=null){
+                    listener.onClick(currentPosition[0]);
+                }
             }
         });
-
-//        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(AbsListView view, int scrollState) {
-//
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                Log.e("TAG", "onScroll: -firstVisibleItem----"+firstVisibleItem);
-//                if (listView.getChildAt(3)!=null){
-//                    Log.e("TAG", "onScroll: -firstVisibleItem----"+listView.getChildAt(firstVisibleItem/2));
-//                    listView.getChildAt(3).setBackgroundColor(Color.RED);
-//                }
-//
-//                for (int i = 0; i < visibleItemCount; i++) {
-//                    if (i!=3&&listView.getChildAt(i)!=null){
-//                        listView.getChildAt(i).setBackgroundColor(Color.WHITE);
-//                    }
-//                }
-//
-//            }
-//        });
-
-
-//        TextView tvContent = view.findViewById(R.id.tv_content);
-//        TextView tvCancle = view.findViewById(R.id.tv_cancle);
-//        TextView tvQueDing = view.findViewById(R.id.tv_queding);
-//
-//        tvContent.setText(content);
-//        tvCancle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        tvQueDing.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//                if (listener != null) {
-//                    listener.onClick();
-//                }
-//            }
-//        });
-
 
         //一定得在show完dialog后来set属性
         Window window = dialog.getWindow();
@@ -644,6 +599,10 @@ public class DialogUtils {
             window.setAttributes(lp);
         }
         return dialog;
+    }
+
+    public interface ListDialogClickListener{
+        void onClick(int  position);
     }
 
 

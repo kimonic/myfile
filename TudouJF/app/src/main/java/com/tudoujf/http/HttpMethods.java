@@ -45,7 +45,7 @@ public class HttpMethods {
     @SuppressWarnings("unchecked")
     public void GET(final Context context, String url, final Map<String, String> paramsMap,
                     final String Key, Callback callback) {
-        OkGo.get(url)     // 请求方式和请求url
+        OkGo.get(url)   // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey(Key)                      // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍

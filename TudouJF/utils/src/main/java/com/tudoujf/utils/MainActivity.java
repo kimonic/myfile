@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,11 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
+
+
         setContentView(R.layout.activity_main);
         etTest=findViewById(R.id.et_test);
         root=findViewById(R.id.root);
-        srl=findViewById(R.id.srl_frag_my);
-
+//        srl=findViewById(R.id.srl_frag_my);
+        etTest.setVisibility(View.GONE);
         PackageManager pm = getPackageManager();
         try {
             PackageInfo pi = pm.getPackageInfo(getPackageName(), 0);
@@ -58,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         ScreenUtil screenUtil=new ScreenUtil(this);
 
-        srl.setPrimaryColorsId(R.color.global_theme_background_color);
-        srl.setRefreshHeader(new TuDouHeader(this));
-        srl.setEnableLoadmore(false);
+//        srl.setPrimaryColorsId(R.color.global_theme_background_color);
+//        srl.setRefreshHeader(new TuDouHeader(this));
+//        srl.setEnableLoadmore(false);
         Log.e("TAG", "onOpen: ---输入法已打开--"+screenUtil.getAccurateScreenDpi()[0]);
         Log.e("TAG", "onOpen: ---输入法已打开--"+screenUtil.getAccurateScreenDpi()[1]);
 
