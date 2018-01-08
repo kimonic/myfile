@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.discover.ClassificationOfGoodsActivity;
+import com.tudoujf.activity.discover.GoodsDetailsActivity;
 import com.tudoujf.activity.discover.HotExchangeActivity;
 import com.tudoujf.activity.discover.IntegralRankingListActivity;
 import com.tudoujf.adapter.IntegralShopRvAdapter;
@@ -264,6 +266,13 @@ public class IntegralShopActivity extends BaseActivity {
             if (adapter == null) {
                 adapter = new IntegralShopRvAdapter(this, list);
                 rvActIntegralShop.setAdapter(adapter);
+                adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Log.e("TAG", "onItemClick: --position---"+position);
+                        openGoodsDetailsActivity(list.get(position).getId());
+                    }
+                });
             } else {
                 adapter.notifyDataSetChanged();
             }
@@ -272,6 +281,14 @@ public class IntegralShopActivity extends BaseActivity {
             if (adapter == null) {
                 adapter = new IntegralShopRvAdapter(this, list);
                 rvActIntegralShop.setAdapter(adapter);
+                adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Log.e("TAG", "onItemClick: --position---"+position);
+                        openGoodsDetailsActivity(list.get(position).getId());
+//                        openActivity(GoodsDetailsActivity.class);
+                    }
+                });
             } else {
                 adapter.notifyDataSetChanged();
             }
@@ -279,6 +296,13 @@ public class IntegralShopActivity extends BaseActivity {
             ToastUtils.showToast(IntegralShopActivity.this, R.string.meiyoukexianshishuju);
         }
 
+    }
+
+    private void openGoodsDetailsActivity(String id){
+        Intent intent=new Intent(this,GoodsDetailsActivity.class);
+        intent.putExtra("id",id);
+        intent.putExtra("integral",bean.getMyPoint());
+        startActivity(intent);
     }
 
     @Override

@@ -97,7 +97,7 @@ public class SignInActivity extends BaseActivity {
     public void initView() {
 
         // TODO: 2017/12/22 暂时去掉积分商城
-        llShop.setVisibility(View.GONE);
+//        llShop.setVisibility(View.GONE);
 
 //        dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
 

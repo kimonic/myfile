@@ -299,8 +299,12 @@ public class ProductDetailsActivity extends BaseActivity {
                 tvBuyNow.setClickable(false);//禁止点击
             }
 
+            if (bean.getLoan_info().getName().length()<19){
+                mtbProductdetails.setCenterTitle(bean.getLoan_info().getName());
+            }else {
+                mtbProductdetails.setCenterTitle(bean.getLoan_info().getName().substring(0,19)+"...");
+            }
 
-            mtbProductdetails.setCenterTitle(bean.getLoan_info().getName());
 
             tvRongZiEDu.setText((bean.getLoan_info().getAmount() + "元"));
             tvShengYuKeTou.setText((bean.getLoan_info().getLeft_amount() + "元"));

@@ -71,7 +71,7 @@ public class WhiteLinearLayout extends LinearLayout {
         rect.top=0;
         rect.left=0;
         rect.right=width;
-        rect.top=height-4;
+        rect.bottom=height-4;
         canvas.drawRect(rect,cyanPaint);
         canvas.drawLine(0, height - 3, width, height - 3, whitePaint);
     }

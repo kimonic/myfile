@@ -24,4 +24,8 @@
         <attr name="underlinecolor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="BoderTextView">
+        <attr name="bunderlinecolor" format="color" />
+    </declare-styleable>
+
 </resources>

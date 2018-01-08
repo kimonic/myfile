@@ -258,6 +258,8 @@
         <activity android:name=".activity.discover.HotExchangeActivity" />
         <!--78.贷后管理activity-->
         <activity android:name=".activity.my.myproject.DaiHouGuanLiActivity" />
+        <!--79.商品详情activity-->
+        <activity android:name=".activity.discover.GoodsDetailsActivity" />
 
         <service
             android:name=".service.MyService"

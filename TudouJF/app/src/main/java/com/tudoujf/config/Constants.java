@@ -322,6 +322,10 @@ public class Constants {
      * 积分商城获取积分类别接口
      */
     public static final String POINT_RANK = URL + "/phone/mall/pointRank";
+    /**
+     * 积分商城商品详情接口
+     */
+    public static final String GOODS_DETAILS = URL + "/phone/mall/showGoodDetail";
 
     /**
      * 债权转让撤销

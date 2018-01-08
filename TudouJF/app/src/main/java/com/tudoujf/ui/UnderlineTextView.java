@@ -92,7 +92,6 @@ public class UnderlineTextView extends AppCompatTextView {
         int height = getHeight();
         int  length= (int) getPaint().measureText(getText().toString());
 
-        Log.e("TAG", "onDraw: getPaint().measureText(getText().toString())-----"+getPaint().measureText(getText().toString()));
 
         canvas.drawLine((width/2-length/2)-20, height - 3, (width/2-length/2)+length+20, height - 3, underlinePaint);
         canvas.restore();

@@ -3,6 +3,7 @@ package com.tudoujf.adapter;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,19 +36,23 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
-            mOnItemClickListener.onItemClick(v);
+            mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
+            Log.e("TAG", "adapter: --点击跳转--rv-");
+
         }
     }
 
     //自定义监听事件
     public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view);
+        void onItemClick(View view,int position);
     }
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        mOnItemClickListener = listener;
+        this.mOnItemClickListener = listener;
+        Log.e("TAG", "adapter: --点击跳转--listenerrv-"+listener);
+
     }
 
     //适配器初始化
@@ -73,6 +78,8 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
         ((MyViewHolder) holder).tvResidue.setText(("剩余  " + list.get(position).getStock()));
         ((MyViewHolder) holder).tvIntegral.setText(list.get(position).getCredit());
         ImageGlideUtils.loadImage(((MyViewHolder) holder).imageView, list.get(position).getImages());
+
+        holder.itemView.setTag(position);//设置点击的位置
 
     }
 

@@ -675,6 +675,21 @@
     <string name="xiazailianjiechucuo">下载链接出错,请前往应用商店下载最新版本!</string>
     <string name="yuebuzuqing">账户可用余额不足，请先充值!</string>
     <string name="huoqufenleileixingshiabai">获取分类类型失败!!</string>
+    <string name="duihuan">兑换</string>
+    <string name="lipinhao">礼品号:</string>
+    <string name="duihuanjifen">兑换积分:</string>
+    <string name="wodejifenmao">我的积分:</string>
+    <string name="jianhao">-</string>
+    <string name="jiahao">+</string>
+    <string name="fen">份</string>
+    <string name="kucun">库存:</string>
+    <string name="lijiduihuan">立即兑换</string>
+    <string name="chanpingaishu">产品概述</string>
+    <string name="xiangxijieshao">详细介绍</string>
+    <string name="shiyonghsuoming">使用说明</string>
+    <string name="huoqushangpinxiangqingshibai">获取商品详情信息失败!</string>
+    <string name="yichaochukucunshuliang">已超出库存数量!</string>
+    <string name="jifenbuzu">积分不足!</string>
 
 
 </resources>
