@@ -95,11 +95,17 @@ public class IntegralShopActivity extends BaseActivity {
             case R.id.ll_act_integralshop_classification_of_goods://分类筛选
                 Map<String, String> map = new TreeMap<>();
                 map.put("type", "fenlei");
+                if (bean!=null){
+                    map.put("integral", bean.getMyPoint());
+                }
                 openActivityParams(ClassificationOfGoodsActivity.class, map);
                 break;
             case R.id.ll_act_integralshop_integral_screen://积分筛选
                 Map<String, String> map1 = new TreeMap<>();
                 map1.put("type", "jifen");
+                if (bean!=null){
+                    map1.put("integral", bean.getMyPoint());
+                }
                 openActivityParams(ClassificationOfGoodsActivity.class, map1);
                 break;
             case R.id.ll_act_integralshop_hot://热门兑换
@@ -313,6 +319,12 @@ public class IntegralShopActivity extends BaseActivity {
     @Override
     protected boolean translucentStatusBar() {
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initDataFromInternet();
     }
 
     private void finishRL() {

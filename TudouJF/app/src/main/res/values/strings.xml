@@ -690,6 +690,19 @@
     <string name="huoqushangpinxiangqingshibai">获取商品详情信息失败!</string>
     <string name="yichaochukucunshuliang">已超出库存数量!</string>
     <string name="jifenbuzu">积分不足!</string>
+    <string name="querenduihuan">确认兑换</string>
+    <string name="lianxiren">联系人:</string>
+    <string name="dianhua">电话:</string>
+    <string name="xiangxidizhi">详细地址:</string>
+    <string name="gong">共</string>
+    <string name="jian">件</string>
+    <string name="wodejifen1">我的积分:</string>
+    <string name="shangpinduihuanshibai">商品兑换失败!</string>
+    <string name="lianxirenxingmingbunengweikong">联系人姓名不能为空!</string>
+    <string name="qingtianxiezhengquedeshoujihaoma">请填写正确的手机号码</string>
+    <string name="xiangxidizhibunengweikong">详细地址不能为空!</string>
+    <string name="duihuanchenggong">兑换成功!</string>
+    <string name="duihuanshibai">兑换失败!</string>
 
 
 </resources>

@@ -129,7 +129,9 @@
         <!--16.签到activity-->
         <activity android:name=".activity.home.SignInActivity" />
         <!--17.积分商城activity-->
-        <activity android:name=".activity.home.IntegralShopActivity" />
+        <activity android:name=".activity.home.IntegralShopActivity"
+            android:launchMode="singleTask"
+            />
         <!--18.汇付支付activity-->
         <activity android:name=".activity.other.HuiFuRegisterActivity" />
         <!--19.我的收益activity-->
@@ -260,6 +262,8 @@
         <activity android:name=".activity.my.myproject.DaiHouGuanLiActivity" />
         <!--79.商品详情activity-->
         <activity android:name=".activity.discover.GoodsDetailsActivity" />
+        <!--80.积分商城商品确认兑换activity-->
+        <activity android:name=".activity.discover.GoodsExchangeActivity" />
 
         <service
             android:name=".service.MyService"

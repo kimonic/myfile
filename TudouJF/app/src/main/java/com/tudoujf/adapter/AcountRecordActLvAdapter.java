@@ -75,7 +75,7 @@ public class AcountRecordActLvAdapter extends BaseAdapter {
             viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
         }
 
-        viewHolder.textView1.setText(StringUtils.getStrTime(list.get(position).getVerify_time()));
+        viewHolder.textView1.setText(list.get(position).getAdd_time());
         viewHolder.textView2.setText(list.get(position).getMoney());
         viewHolder.textView3.setText(list.get(position).getStatus());
 

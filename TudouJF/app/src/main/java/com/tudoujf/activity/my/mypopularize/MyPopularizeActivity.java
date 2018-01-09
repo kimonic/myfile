@@ -112,6 +112,7 @@ public class MyPopularizeActivity extends BaseActivity {
 
                         if (result!=null&&result.contains("200")){
                             ToastUtils.showToast(MyPopularizeActivity.this, R.string.jiesuanchenggong);
+                            openActivity(AccountRecordActivity.class);
                         }else {
                             ToastUtils.showToast(MyPopularizeActivity.this, R.string.jiesuanshibai);
                         }
@@ -228,6 +229,11 @@ public class MyPopularizeActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initDataFromInternet();
+    }
 
     @Override
     protected int setStatusBarColor() {

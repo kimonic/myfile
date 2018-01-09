@@ -1,12 +1,11 @@
 package com.tudoujf.activity.discover;
 
 
-import android.graphics.Color;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,7 +25,6 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.IntegralShopBean;
-import com.tudoujf.bean.databean.IntegralRankingListBean;
 import com.tudoujf.bean.databean.IntegralShopMoreBean;
 import com.tudoujf.bean.databean.TypeInfoBean;
 import com.tudoujf.config.Constants;
@@ -86,6 +84,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     private AlertDialog dialog;
     private List<TypeInfoBean.ItemsBean> listType;
     private boolean show = false;
+    private String integral;
 
     @Override
     public int getLayoutResId() {
@@ -138,6 +137,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         list = new ArrayList<>();
         listType = new ArrayList<>();
         type = getIntent().getStringExtra("type");
+        integral = getIntent().getStringExtra("integral");
         if ("fenlei".equals(type)) {//分类筛选
             requestUrl = Constants.GOODS_TYPES;
             tvContent.setText(R.string.fenleishaixuan);
@@ -258,6 +258,17 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                 }
             }
         });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(ClassificationOfGoodsActivity.this,GoodsDetailsActivity.class);
+                intent.putExtra("id",list.get(position).getId());
+                intent.putExtra("integral",integral);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
@@ -271,7 +282,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         Log.e("TAG", "loadMoreGoods: -----" + page);
 
 
-        HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP_MORE, map, getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP_MORE, map, "ClassificationOfGoodsActivity", new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();

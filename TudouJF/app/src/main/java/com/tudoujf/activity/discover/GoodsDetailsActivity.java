@@ -1,5 +1,6 @@
 package com.tudoujf.activity.discover;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -165,6 +166,14 @@ public class GoodsDetailsActivity extends BaseActivity {
                 if (StringUtils.string2Integer(integral)>
                         StringUtils.string2Integer(tvNumber.getText().toString())*StringUtils.string2Integer(bean.getCredit())){
 
+                    Intent intent=new Intent(this,GoodsExchangeActivity.class);
+                    intent.putExtra("number",tvNumber.getText().toString());
+                    intent.putExtra("url",bean.getImages().get(0));
+                    intent.putExtra("needintegral",bean.getCredit());
+                    intent.putExtra("myintegral",integral);
+                    intent.putExtra("lipinhao",bean.getNum());
+                    startActivity(intent);
+
                 }else {
                     ToastUtils.showToast(GoodsDetailsActivity.this, R.string.jifenbuzu);
                 }
@@ -174,20 +183,7 @@ public class GoodsDetailsActivity extends BaseActivity {
 
     }
 
-    private void setBtnStyle(int position) {
-        for (int i = 0; i < list.size(); i++) {
-            if (position == i) {
-                list.get(i).setDrawBoder(true);
-                list.get(i).setUnderlinecolor(getResources().getColor(R.color.global_theme_background_color));
-                list.get(i).setTextColor(getResources().getColor(R.color.global_theme_background_color));
-                list.get(i).setBackgroundColor(getResources().getColor(R.color.color_white));
-            } else {
-                list.get(i).setDrawBoder(false);
-                list.get(i).setTextColor(getResources().getColor(R.color.color_black2));
-                list.get(i).setBackgroundColor(getResources().getColor(R.color.color_line));
-            }
-        }
-    }
+
 
     @Override
     public void initDataFromIntent() {
@@ -212,6 +208,14 @@ public class GoodsDetailsActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+
+        mtb.getLeftTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeActivity();
+            }
+        });
+
         btvBtv1.setOnClickListener(this);
         btvBtv2.setOnClickListener(this);
         btvBtv3.setOnClickListener(this);
@@ -334,5 +338,18 @@ public class GoodsDetailsActivity extends BaseActivity {
         return true;
     }
 
-
+    private void setBtnStyle(int position) {
+        for (int i = 0; i < list.size(); i++) {
+            if (position == i) {
+                list.get(i).setDrawBoder(true);
+                list.get(i).setUnderlinecolor(getResources().getColor(R.color.global_theme_background_color));
+                list.get(i).setTextColor(getResources().getColor(R.color.global_theme_background_color));
+                list.get(i).setBackgroundColor(getResources().getColor(R.color.color_white));
+            } else {
+                list.get(i).setDrawBoder(false);
+                list.get(i).setTextColor(getResources().getColor(R.color.color_black2));
+                list.get(i).setBackgroundColor(getResources().getColor(R.color.color_line));
+            }
+        }
+    }
 }
