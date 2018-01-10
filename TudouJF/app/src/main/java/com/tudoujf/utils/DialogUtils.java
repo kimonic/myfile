@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -536,7 +537,7 @@ public class DialogUtils {
      * 积分商城筛选dialog
      */
     public static AlertDialog showListDialog(Context context, final List<TypeInfoBean.ItemsBean> listType
-    , final ListDialogClickListener listener) {
+            , final ListDialogClickListener listener) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_listdialog, null);
         final AlertDialog dialog = new AlertDialog.Builder(context).create();
         dialog.setCanceledOnTouchOutside(true);
@@ -557,7 +558,7 @@ public class DialogUtils {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                view.setBackgroundColor(Color.parseColor("#E3FBFE"));
-                currentPosition[0] =position;
+                currentPosition[0] = position;
                 for (int i = 0; i < listType.size(); i++) {
                     if (i == position) {
                         listType.get(i).setBacFlag(2);
@@ -581,7 +582,7 @@ public class DialogUtils {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                if (listener!=null){
+                if (listener != null) {
                     listener.onClick(currentPosition[0]);
                 }
             }
@@ -601,8 +602,34 @@ public class DialogUtils {
         return dialog;
     }
 
-    public interface ListDialogClickListener{
-        void onClick(int  position);
+
+    public static AlertDialog showIntegralInsufficient(Context context) {
+        ImageView view = new ImageView(context);
+        view.setScaleType(ImageView.ScaleType.FIT_XY);
+        view.setImageResource(R.drawable.dialog_integralinsufficient);
+
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = window.getAttributes();
+            int  desity=ScreenSizeUtils.getDensity(context);
+
+            lp.width = 155*desity;
+            lp.height = 46*desity;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+    public interface ListDialogClickListener {
+        void onClick(int position);
     }
 
 

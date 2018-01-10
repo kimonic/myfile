@@ -1,6 +1,5 @@
 package com.tudoujf.activity.discover;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -8,18 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.IntegralShopMoreBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
@@ -30,7 +25,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -82,7 +76,6 @@ public class GoodsExchangeActivity extends BaseActivity {
                 if (check()){
                     affirm();
                 }
-
                 break;
 //            case R.id.: break;
 //            case R.id.: break;

@@ -123,7 +123,6 @@ public class MyPopularizeActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         ToastUtils.showToast(MyPopularizeActivity.this, R.string.jisuanshibai);
-
                     }
                 });
 

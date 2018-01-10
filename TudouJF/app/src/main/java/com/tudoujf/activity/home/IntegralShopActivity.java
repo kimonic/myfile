@@ -207,7 +207,6 @@ public class IntegralShopActivity extends BaseActivity {
                         if (bean1 != null) {
                             bean = (IntegralShopBean) bean1;
                             LoadInternetDataToUi();
-
                         } else {
                             ToastUtils.showToast(IntegralShopActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                         }
@@ -219,7 +218,6 @@ public class IntegralShopActivity extends BaseActivity {
                         dismissPDialog();
                         finishRL();
                         ToastUtils.showToast(IntegralShopActivity.this, R.string.huoqujifenshangchengxinxishibai);
-
                     }
                 }
         );
