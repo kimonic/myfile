@@ -53,14 +53,36 @@
         </LinearLayout>
 
 
-
+        <!--<LinearLayout-->
+            <!--android:layout_width="118dp"-->
+            <!--android:layout_height="75dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginTop="24dp"-->
+            <!--android:gravity="center">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_rvitem"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:scaleType="fitCenter"-->
+                <!--/>-->
+            <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/iv_rvitem"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="118dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="75dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginBottom="10dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="24dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:scaleType="fitCenter"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="#a3a3"&ndash;&gt;-->
+                <!--&lt;!&ndash;/>&ndash;&gt;-->
+        <!--</LinearLayout>-->
         <ImageView
             android:id="@+id/iv_rvitem"
             android:layout_width="118dp"
             android:layout_height="75dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="24dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitCenter"
+            />
     </LinearLayout>
 
 </LinearLayout>

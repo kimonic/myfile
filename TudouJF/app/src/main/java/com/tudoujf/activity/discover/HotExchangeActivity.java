@@ -1,9 +1,11 @@
 package com.tudoujf.activity.discover;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -51,6 +53,7 @@ public class HotExchangeActivity extends BaseActivity {
     private HotExchangeBean inBean;
     private List<HotExchangeBean.ItemsBean> list;
     private HotExchangeLvAdapter adapter;
+    private String integral;
 //    @BindView(R.id.srl_act_hotexchange)
 //    SmartRefreshLayout srl;
 
@@ -67,6 +70,7 @@ public class HotExchangeActivity extends BaseActivity {
     @Override
     public void initDataFromIntent() {
         list=new ArrayList<>();
+        integral=getIntent().getStringExtra("integral");
     }
 
     @Override
@@ -82,6 +86,15 @@ public class HotExchangeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 closeActivity();
+            }
+        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(HotExchangeActivity.this,GoodsDetailsActivity.class);
+                intent.putExtra("id",list.get(position).getId());
+                intent.putExtra("integral",integral);
+                startActivity(intent);
             }
         });
 

@@ -187,7 +187,6 @@ public class GoodsDetailsActivity extends BaseActivity {
                 break;
 //                 case R.id.:break;
         }
-
     }
 
 

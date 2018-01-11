@@ -65,6 +65,8 @@ public class IntegralShopActivity extends BaseActivity {
     SmartRefreshLayout srl;
     @BindView(R.id.tv_act_integralshop_myintegral)
     TextView myIntegral;
+    @BindView(R.id.tv_act_myaccount_touzi)
+    TextView tvTouzi;
 
     @BindView(R.id.ll_act_integralshop_classification_of_goods)
     LinearLayout classificationOfGoods;
@@ -83,6 +85,7 @@ public class IntegralShopActivity extends BaseActivity {
 
     private List<IntegralShopBean.GoodsBean.ItemsBean> list;
     private int page = 1;
+    private int flag = 1;
 
     @Override
     public int getLayoutResId() {
@@ -95,7 +98,7 @@ public class IntegralShopActivity extends BaseActivity {
             case R.id.ll_act_integralshop_classification_of_goods://分类筛选
                 Map<String, String> map = new TreeMap<>();
                 map.put("type", "fenlei");
-                if (bean!=null){
+                if (bean != null) {
                     map.put("integral", bean.getMyPoint());
                 }
                 openActivityParams(ClassificationOfGoodsActivity.class, map);
@@ -103,16 +106,25 @@ public class IntegralShopActivity extends BaseActivity {
             case R.id.ll_act_integralshop_integral_screen://积分筛选
                 Map<String, String> map1 = new TreeMap<>();
                 map1.put("type", "jifen");
-                if (bean!=null){
+                if (bean != null) {
                     map1.put("integral", bean.getMyPoint());
                 }
                 openActivityParams(ClassificationOfGoodsActivity.class, map1);
                 break;
             case R.id.ll_act_integralshop_hot://热门兑换
-                openActivity(HotExchangeActivity.class);
+                Intent intent = new Intent(this, HotExchangeActivity.class);
+                intent.putExtra("integral", bean.getMyPoint());
+                startActivity(intent);
+//                openActivity(HotExchangeActivity.class);
                 break;
             case R.id.ll_act_integralshop_ranking_list://排行榜
                 openActivity(IntegralRankingListActivity.class);
+                break;
+            case R.id.tv_act_myaccount_touzi://跳转投资
+                Intent intent1 = new Intent(this, HomeActivity.class);
+                intent1.putExtra("flag", 555);
+                startActivity(intent1);
+//                openActivity(HomeActivity.class);
                 break;
 //                 case R.id.:break;
 //                 case R.id.:break;
@@ -176,7 +188,6 @@ public class IntegralShopActivity extends BaseActivity {
                     ToastUtils.showToast(IntegralShopActivity.this, R.string.meiyougengduola);
                     srl.finishLoadmore();
                 }
-
             }
         });
 
@@ -184,6 +195,7 @@ public class IntegralShopActivity extends BaseActivity {
         integralScreen.setOnClickListener(this);
         hot.setOnClickListener(this);
         rankingList.setOnClickListener(this);
+        tvTouzi.setOnClickListener(this);
 
 
     }
@@ -273,7 +285,7 @@ public class IntegralShopActivity extends BaseActivity {
                 adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.e("TAG", "onItemClick: --position---"+position);
+                        Log.e("TAG", "onItemClick: --position---" + position);
                         openGoodsDetailsActivity(list.get(position).getId());
                     }
                 });
@@ -288,7 +300,7 @@ public class IntegralShopActivity extends BaseActivity {
                 adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.e("TAG", "onItemClick: --position---"+position);
+                        Log.e("TAG", "onItemClick: --position---" + position);
                         openGoodsDetailsActivity(list.get(position).getId());
 //                        openActivity(GoodsDetailsActivity.class);
                     }
@@ -302,10 +314,10 @@ public class IntegralShopActivity extends BaseActivity {
 
     }
 
-    private void openGoodsDetailsActivity(String id){
-        Intent intent=new Intent(this,GoodsDetailsActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("integral",bean.getMyPoint());
+    private void openGoodsDetailsActivity(String id) {
+        Intent intent = new Intent(this, GoodsDetailsActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("integral", bean.getMyPoint());
         startActivity(intent);
     }
 
@@ -322,7 +334,13 @@ public class IntegralShopActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initDataFromInternet();
+        if (flag == 1) {
+            flag++;
+        } else {
+            page = 1;
+            list.clear();
+            initDataFromInternet();
+        }
     }
 
     private void finishRL() {

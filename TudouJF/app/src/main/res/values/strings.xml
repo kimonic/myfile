@@ -703,6 +703,12 @@
     <string name="xiangxidizhibunengweikong">详细地址不能为空!</string>
     <string name="duihuanchenggong">兑换成功!</string>
     <string name="duihuanshibai">兑换失败!</string>
+    <string name="dialog_risk">为了给您提供更好的资产选择\n请完成风险测评</string>
+    <string name="lijipinggu">立即评估</string>
+    <string name="zanbupinggu">暂不评估</string>
+    <string name="touzifengxianpingce">投资风险评测</string>
+    <string name="morenbaoshouxing">默认保守型</string>
+    <string name="qupinggu">去评估</string>
 
 
 </resources>

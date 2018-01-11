@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:background="@color/color_white"
+        >
+        <ImageView
+            android:layout_width="247dp"
+            android:layout_height="143dp"
+            android:background="@drawable/risk"
+            android:scaleType="fitXY"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/dialog_risk"
+            android:layout_marginBottom="10dp"
+            android:lineSpacingExtra="5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:id="@+id/tv_dialog_lijikaitong"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:text="@string/lijipinggu"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/color_white"
+                android:background="@drawable/xshape_roundrect_mblue"
+                />
+            <TextView
+                android:id="@+id/tv_dialog_zanbukaitong"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:text="@string/zanbupinggu"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/color_gray"
+                android:background="@drawable/xshape_roundrect_mblue2"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

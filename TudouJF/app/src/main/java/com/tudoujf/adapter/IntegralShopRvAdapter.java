@@ -77,7 +77,7 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
         ((MyViewHolder) holder).tvTitle.setText(list.get(position).getName());
         ((MyViewHolder) holder).tvResidue.setText(("剩余  " + list.get(position).getStock()));
         ((MyViewHolder) holder).tvIntegral.setText(list.get(position).getCredit());
-        ImageGlideUtils.loadImage(((MyViewHolder) holder).imageView, list.get(position).getImages());
+        ImageGlideUtils.loadImageFitCenter(((MyViewHolder) holder).imageView, list.get(position).getImages());
 
         holder.itemView.setTag(position);//设置点击的位置
 

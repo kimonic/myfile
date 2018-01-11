@@ -96,6 +96,8 @@ public class MyAccountActivity extends BaseActivity {
     LinearLayout llLogin;
     @BindView(R.id.ll_act_myaccount_gesture)
     LinearLayout llGesture;
+    @BindView(R.id.ll_act_myaccount_risk)
+    LinearLayout llRisk;
     @BindView(R.id.tv_act_myaccount_signout)
     TextView tvSignOut;
     @BindView(R.id.tv_act_myaccount_oc)
@@ -269,6 +271,9 @@ public class MyAccountActivity extends BaseActivity {
                     dialogImage.show();
                 }
                 break;
+            case R.id.ll_act_myaccount_risk:
+//                DialogUtils.showRiskDialog(this);
+                break;
         }
 
     }
@@ -376,6 +381,7 @@ public class MyAccountActivity extends BaseActivity {
         tvAlbum.setOnClickListener(this);
 
         ivIcon.setOnClickListener(this);
+        llRisk.setOnClickListener(this);
 
     }
 
