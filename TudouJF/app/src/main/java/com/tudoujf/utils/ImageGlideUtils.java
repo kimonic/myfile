@@ -1,6 +1,5 @@
 package com.tudoujf.utils;
 
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -79,24 +78,22 @@ public class ImageGlideUtils {
 
         Glide.with(view.getContext())
                 .load(url)
-                .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
-                .placeholder(R.drawable.ic_error)
+                .error(R.drawable.shop_error) //加载图片失败的时候显示的默认图
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)//图片缓存策略,这个一般必须有
                 .crossFade()//淡入淡出
-
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        view.setImageDrawable(resource);
-                        view.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                        return false;
-                    }
-                })
+//                .listener(new RequestListener<String, GlideDrawable>() {//此处解决图片拉伸问题,有动画效果
+//                    @Override
+//                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                        view.setImageDrawable(resource);
+//                        view.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                        return false;
+//                    }
+//                })
                 .into(view);
 
     }
@@ -125,7 +122,7 @@ public class ImageGlideUtils {
                 .load(resId)
                 .error(R.drawable.act_lock_icon) //加载图片失败的时候显示的默认图
                 .placeholder(R.drawable.act_lock_icon)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一般必须有
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//图片缓存策略,这个一0般必须有
                 .crossFade()//淡入淡出
                 .centerCrop()
                 .bitmapTransform(new CropCircleTransformation(view.getContext()))

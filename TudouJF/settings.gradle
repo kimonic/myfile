@@ -1,1 +1,1 @@
-include ':app', ':calculator', ':utils', ':mynotebook', ':UdeskSDKUI', ':JPushExample(801460)'
+include ':app', ':calculator', ':utils', ':mynotebook', ':UdeskSDKUI', ':JPushExample(801460)', ':utilcode'

@@ -69,7 +69,9 @@ public class SignInActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_signin_shop:
+
                 openActivity(IntegralShopActivity.class);
+
                 break;
             case R.id.ll_act_signin_jilu:
                 Bundle bundle = new Bundle();

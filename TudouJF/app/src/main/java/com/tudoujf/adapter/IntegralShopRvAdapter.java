@@ -37,8 +37,6 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
             mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
-            Log.e("TAG", "adapter: --点击跳转--rv-");
-
         }
     }
 
@@ -51,7 +49,6 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
-        Log.e("TAG", "adapter: --点击跳转--listenerrv-"+listener);
 
     }
 
@@ -67,7 +64,6 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
         View view = LayoutInflater.from(mContext).inflate(R.layout.rvitem_integralshopact, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         view.setOnClickListener(this);
-
         return viewHolder;
     }
 
@@ -75,8 +71,9 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         ((MyViewHolder) holder).tvTitle.setText(list.get(position).getName());
-        ((MyViewHolder) holder).tvResidue.setText(("剩余  " + list.get(position).getStock()));
+        ((MyViewHolder) holder).tvResidue.setText(("剩余:  " + list.get(position).getStock()));
         ((MyViewHolder) holder).tvIntegral.setText(list.get(position).getCredit());
+        ((MyViewHolder) holder).tvDescription.setText(list.get(position).getBewrite());
         ImageGlideUtils.loadImageFitCenter(((MyViewHolder) holder).imageView, list.get(position).getImages());
 
         holder.itemView.setTag(position);//设置点击的位置
@@ -91,7 +88,7 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
 
 
     private class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTitle, tvResidue, tvIntegral;
+        private TextView tvTitle, tvResidue, tvIntegral,tvDescription;
         private ImageView imageView;
 
         public MyViewHolder(View view) {
@@ -99,6 +96,7 @@ public class IntegralShopRvAdapter extends RecyclerView.Adapter implements View.
             tvTitle = (TextView) view.findViewById(R.id.tv_rvitem_title);
             tvResidue = (TextView) view.findViewById(R.id.tv_rvitem_residue);
             tvIntegral = (TextView) view.findViewById(R.id.tv_rvitem_integral);
+            tvDescription = (TextView) view.findViewById(R.id.tv_rvitem_description);
             imageView = (ImageView) view.findViewById(R.id.iv_rvitem);
         }
 

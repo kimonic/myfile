@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Statistic">
+    <option name="separateTabsFileTypes" value="java;xml;css;" />
+    <option name="excludeDotArtifactDirectory" value="true" />
+    <option name="excludedDirectories">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/tudoujf/activity/common" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/tudoujf/activity/discover" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/tudoujf/activity/home" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/tudoujf/activity/managemoney" />
+      </list>
+    </option>
+  </component>
+</project>

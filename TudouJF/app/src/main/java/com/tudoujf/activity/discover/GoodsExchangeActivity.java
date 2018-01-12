@@ -1,5 +1,6 @@
 package com.tudoujf.activity.discover;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -134,16 +135,13 @@ public class GoodsExchangeActivity extends BaseActivity {
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess: -----------积分商城--商品确认兑换返回的json数据----------------" + result);
                         if (result!=null&&result.contains("200")){
-                            DialogUtils.showPromptDialogAll(GoodsExchangeActivity.this, "提示", "兑换成功", new DialogUtils.DialogUtilsClickListener() {
+                            DialogUtils.showPromptDialogConfirm(GoodsExchangeActivity.this, "提示", "兑换成功", new DialogUtils.DialogUtilsClickListener() {
                                 @Override
                                 public void onClick() {
-                                    openActivity(IntegralShopActivity.class);
-                                    closeActivity();
-                                }
-                            }, new DialogUtils.DialogUtilsClickListener() {
-                                @Override
-                                public void onClick() {
-                                    openActivity(IntegralShopActivity.class);
+                                    Intent intent=new Intent(GoodsExchangeActivity.this,IntegralShopActivity.class);
+                                    intent.putExtra("flag",555);
+                                    startActivity(intent);
+//                                    openActivity(IntegralShopActivity.class);
                                     closeActivity();
                                 }
                             });

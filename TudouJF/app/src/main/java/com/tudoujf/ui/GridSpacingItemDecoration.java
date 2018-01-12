@@ -60,7 +60,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         int count = parent.getChildCount();
-        Log.e("TAG", "getItemOffsets: --执行-count--"+count);
         int bottom;
         if (count % 2 == 0) {
             bottom = count/2;

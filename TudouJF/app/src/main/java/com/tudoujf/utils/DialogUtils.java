@@ -482,6 +482,55 @@ public class DialogUtils {
 
 
     /**
+     * 只含有确定的简单提示dialog
+     *
+     * @param context 上下文
+     * @param content 点击back键的提示信息
+     * @return alertdialog
+     */
+    public static AlertDialog showPromptDialogConfirm(final Context context, String title, String content,
+                                                      final DialogUtilsClickListener agreeListener) {
+
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt_confirm, null);
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        TextView tvTitle = view.findViewById(R.id.tv_title);
+        TextView tvContent = view.findViewById(R.id.tv_content);
+        TextView tvQueDing = view.findViewById(R.id.tv_queding);
+
+        tvTitle.setText(title);
+        tvContent.setText(content);
+
+
+        tvQueDing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (agreeListener != null) {
+                    agreeListener.onClick();
+                }
+            }
+        });
+
+
+        //一定得在show完dialog后来set属性
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setContentView(view);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            lp.gravity = Gravity.CENTER;
+            window.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+
+    /**
      * 债权撤销提示dialog
      *
      * @param context 上下文
@@ -618,16 +667,15 @@ public class DialogUtils {
             window.setContentView(view);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             WindowManager.LayoutParams lp = window.getAttributes();
-            int  desity=ScreenSizeUtils.getDensity(context);
+            int desity = ScreenSizeUtils.getDensity(context);
 
-            lp.width = 155*desity;
-            lp.height = 46*desity;
+            lp.width = 155 * desity;
+            lp.height = 46 * desity;
             lp.gravity = Gravity.CENTER;
             window.setAttributes(lp);
         }
         return dialog;
     }
-
 
 
     /**
@@ -680,24 +728,6 @@ public class DialogUtils {
         SharedPreferencesUtils.getInstance(context, "popshow").put("showrisk", false);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public interface ListDialogClickListener {

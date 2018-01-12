@@ -43,6 +43,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import cn.udesk.activity.MessageAdatper;
 
 /**
  * * ====================================================================
@@ -268,7 +269,6 @@ public class IntegralShopActivity extends BaseActivity {
                         dismissPDialog();
                         finishRL();
                         ToastUtils.showToast(IntegralShopActivity.this, R.string.huoqujifenshangchengxinxishibai);
-
                     }
                 }
         );
@@ -285,7 +285,6 @@ public class IntegralShopActivity extends BaseActivity {
                 adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.e("TAG", "onItemClick: --position---" + position);
                         openGoodsDetailsActivity(list.get(position).getId());
                     }
                 });
@@ -300,7 +299,6 @@ public class IntegralShopActivity extends BaseActivity {
                 adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Log.e("TAG", "onItemClick: --position---" + position);
                         openGoodsDetailsActivity(list.get(position).getId());
 //                        openActivity(GoodsDetailsActivity.class);
                     }
@@ -326,6 +324,8 @@ public class IntegralShopActivity extends BaseActivity {
         return getResources().getColor(R.color.global_theme_background_color);
     }
 
+
+
     @Override
     protected boolean translucentStatusBar() {
         return true;
@@ -334,13 +334,25 @@ public class IntegralShopActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (flag == 1) {
-            flag++;
-        } else {
+//        if (flag == 1) {
+//            flag++;
+//        } else {
+//            page = 1;
+//            list.clear();
+//            initDataFromInternet();
+//        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        flag=intent.getIntExtra("flag",0);
+        if (flag==555){
             page = 1;
             list.clear();
             initDataFromInternet();
         }
+
     }
 
     private void finishRL() {

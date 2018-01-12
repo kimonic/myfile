@@ -98,7 +98,11 @@
                 android:paddingRight="10dp"
                 android:text="磁悬浮HiFi音响"
                 android:textColor="@color/color_black2"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ellipsize="end"
+                />
 
             <TextView
                 android:id="@+id/tv_act_goodsdetails_bewrite"
@@ -109,7 +113,11 @@
                 android:paddingRight="10dp"
                 android:text="磁悬浮HiFi音响"
                 android:textColor="@color/color_gray3"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:ellipsize="end"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
