@@ -162,7 +162,6 @@ public class MyProjectInvestChildFragment extends BaseFragment {
                         dismissPDialog();
                         finishRL();
 
-
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess:----我的项目-投资项目接口返回数据--------" + type + "-------" + result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyProjectInvestChildBean>() {
@@ -181,7 +180,6 @@ public class MyProjectInvestChildFragment extends BaseFragment {
                         dismissPDialog();
                         finishRL();
                         ToastUtils.showToast(getActivity(), R.string.huoqutouzixiangmuxinxishiabai);
-
                     }
                 });
 

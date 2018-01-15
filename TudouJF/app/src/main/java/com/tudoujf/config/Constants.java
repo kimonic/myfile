@@ -426,6 +426,10 @@ public class Constants {
      * 投资协议
      */
     public static final String TOU_ZI_XIE_YI = URL + "/phone/agreement/loanProtocol";
+     /**
+     * 投资协议
+     */
+    public static final String LOAN_AGREEMENT = URL + "/wap/loan/appLoanAgreement#";
     /**
      * 新手福利
      */

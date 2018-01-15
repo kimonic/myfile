@@ -272,6 +272,7 @@ public class MyAccountActivity extends BaseActivity {
                 }
                 break;
             case R.id.ll_act_myaccount_risk:
+                // TODO: 2018/1/15 风险评估
 //                DialogUtils.showRiskDialog(this);
                 break;
         }

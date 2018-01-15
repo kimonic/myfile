@@ -88,7 +88,8 @@ public class MyInvestDetailsActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myinvestdetails_see_protocol:
                 Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
+                intent.putExtra("url", Constants.LOAN_AGREEMENT+"?id="+bean.getLoan_info().getId()
+                +"&tenderId="+id);
                 intent.putExtra("title","土豆金服服务协议");
                 startActivity(intent);
                 break;

@@ -2,7 +2,6 @@ package com.tudoujf.activity.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -23,7 +22,6 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.SignInView;
-import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 
@@ -40,6 +38,7 @@ import butterknife.BindView;
  * date：            2017/8/10
  * description：  签到activity,我的积分界面
  * history：
+ *
  * * ====================================================================
  */
 
@@ -58,7 +57,6 @@ public class SignInActivity extends BaseActivity {
     SignInView sivSignIn;
 
     private SignInBean bean;
-//    private AlertDialog dialog;
 
     @Override
     public int getLayoutResId() {
@@ -101,7 +99,7 @@ public class SignInActivity extends BaseActivity {
         // TODO: 2017/12/22 暂时去掉积分商城
 //        llShop.setVisibility(View.GONE);
 
-//        dialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActSignIn.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
@@ -164,13 +162,12 @@ public class SignInActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(SignInActivity.this));
-//        map.put("login_token", "12267");
 
 
         HttpMethods.getInstance().POST(this, Constants.SIGN_IN, map, "SignInActivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-//                dialog.dismiss();
+
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
 
@@ -186,7 +183,7 @@ public class SignInActivity extends BaseActivity {
 
             @Override
             public void onError(Response<String> response) {
-//                dialog.dismiss();
+
                 dismissPDialog();
                 Log.e(TAG, "onSuccess:------------签到请求json数据失败----------------- " + response.code());
                 super.onError(response);

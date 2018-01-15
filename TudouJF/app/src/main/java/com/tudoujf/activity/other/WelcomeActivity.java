@@ -129,9 +129,9 @@ public class WelcomeActivity extends BaseActivity {
             public void requestResult(int requestCode, List<String> perms) {
                 if (perms.size() > 0) {
 //-----------------------------------------待删除-------------------------------------------------------
-                    for (int i = 0; i < perms.size(); i++) {
-                        ToastUtils.showToast(WelcomeActivity.this, perms.get(i));
-                    }
+//                    for (int i = 0; i < perms.size(); i++) {
+//                        ToastUtils.showToast(WelcomeActivity.this, perms.get(i));
+//                    }
 
 //-----------------------------------------待删除-------------------------------------------------------
 
