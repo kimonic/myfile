@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,7 @@ import android.view.ViewGroup;
 
 import com.lzy.okgo.OkGo;
 import com.tudoujf.R;
-import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.DialogUtils;
-import com.tudoujf.utils.ToastUtils;
 
 import java.lang.ref.WeakReference;
 

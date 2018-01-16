@@ -3,6 +3,7 @@
 
     <item
         android:left="-2dp"
+        android:right="1px"
         >
         <shape>
             <solid android:color="@android:color/transparent"/>

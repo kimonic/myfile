@@ -327,9 +327,14 @@ public class Constants {
      */
     public static final String GOODS_DETAILS = URL + "/phone/mall/showGoodDetail";
  /**
-     * 积分商城商品详情接口
+     * 积分商城提交订单接口
      */
     public static final String SUBMIT_ORDER = URL + "/phone/mall/submitOrder";
+
+  /**
+     * 积分商城兑换记录接口
+     */
+    public static final String EXCHANGE_LOG = URL + "/phone/mall/exchangeLog";
 
     /**
      * 债权转让撤销

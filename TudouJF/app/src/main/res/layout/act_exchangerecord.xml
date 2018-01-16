@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/mtb_act_exchnagerecord"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/global_theme_background_color">
+
+        <TextView
+            android:id="@+id/tv_act_exchnagerecord_bac"
+            android:layout_width="18dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/xvector_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/duihuanjilu"
+            android:textColor="@color/color_white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_act_exchnagerecord_filtrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/act_myearnings_sel"
+                android:textColor="@color/color_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="16dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginStart="7dp"
+                android:background="@drawable/act_myearnings_filter" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+    <!--<com.tudoujf.ui.MTopBarView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:background="@color/act_register_tvbac1"-->
+    <!--app:centerText="@string/act_exchnagerecord_title"-->
+    <!--app:leftImage="@drawable/xvector_back"-->
+    <!--/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="27"
+            android:gravity="center"
+            android:text="@string/shangpjnmingcheng"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_fourboder"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="11"
+            android:gravity="center"
+            android:text="@string/act_integralrecode_integral"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center"
+            android:text="@string/shuliang"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:gravity="center"
+            android:text="@string/chulizhuangtai"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="21"
+            android:gravity="center"
+            android:text="@string/duihuanshijian"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="16"
+            android:gravity="center"
+            android:text="@string/beizhu"
+            android:textColor="@color/color_black"
+            android:background="@drawable/xshape_threeboderql"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_act_exchnagerecord"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        style="@style/SmartRefreshLayout"
+        app:srlEnableLoadmoreWhenContentNotFull="false"
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/lv_act_exchnagerecord"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerHeight="0dp"
+            android:divider="@null"
+            />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+
+</LinearLayout>

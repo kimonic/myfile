@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.discover.ClassificationOfGoodsActivity;
+import com.tudoujf.activity.discover.ExchangeRecordActivity;
 import com.tudoujf.activity.discover.GoodsDetailsActivity;
 import com.tudoujf.activity.discover.HotExchangeActivity;
 import com.tudoujf.activity.discover.IntegralRankingListActivity;
@@ -167,6 +168,13 @@ public class IntegralShopActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 closeActivity();
+            }
+        });
+
+        mtbActIntegralShop.getRightTV().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(ExchangeRecordActivity.class);
             }
         });
 

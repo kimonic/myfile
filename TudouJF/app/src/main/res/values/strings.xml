@@ -709,6 +709,13 @@
     <string name="touzifengxianpingce">投资风险评测</string>
     <string name="morenbaoshouxing">默认保守型</string>
     <string name="qupinggu">去评估</string>
+    <string name="duihuanjilu">兑换记录</string>
+    <string name="shangpjnmingcheng">商品名称</string>
+    <string name="shuliang">数量</string>
+    <string name="chulizhuangtai">处理状态:</string>
+    <string name="duihuanshijian">兑换时间:</string>
+    <string name="beizhu">备注:</string>
+    <string name="huoquduihuanjiluxinxishibai">获取兑换记录信息失败!</string>
 
 
 </resources>

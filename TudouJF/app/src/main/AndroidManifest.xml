@@ -264,6 +264,9 @@
         <activity android:name=".activity.discover.GoodsDetailsActivity" />
         <!--80.积分商城商品确认兑换activity-->
         <activity android:name=".activity.discover.GoodsExchangeActivity" />
+        <!--81.兑换记录activity-->
+        <activity android:name=".activity.discover.ExchangeRecordActivity" />
+
 
         <service
             android:name=".service.MyService"

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -74,7 +73,7 @@ public class GoodsExchangeActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_act_goodsexchange_affirmexchange:
-                if (check()){
+                if (check()) {
                     affirm();
                 }
                 break;
@@ -87,14 +86,14 @@ public class GoodsExchangeActivity extends BaseActivity {
     }
 
     private boolean check() {
-        if ("".equals(etLianxiren.getText().toString())){
+        if ("".equals(etLianxiren.getText().toString())) {
             ToastUtils.showToast(GoodsExchangeActivity.this, R.string.lianxirenxingmingbunengweikong);
 
             return false;
-        }else if (etPhone.getText().toString().trim().length()!=11){
+        } else if (etPhone.getText().toString().trim().length() != 11) {
             ToastUtils.showToast(GoodsExchangeActivity.this, R.string.qingtianxiezhengquedeshoujihaoma);
             return false;
-        }else if ("".equals(etAdress.getText().toString())){
+        } else if ("".equals(etAdress.getText().toString())) {
             ToastUtils.showToast(GoodsExchangeActivity.this, R.string.xiangxidizhibunengweikong);
             return false;
         }
@@ -120,12 +119,11 @@ public class GoodsExchangeActivity extends BaseActivity {
         map.put("consignee", etLianxiren.getText().toString());
         map.put("address", etAdress.getText().toString());
 
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-lipinhao-"+lipinhao);
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etPhone.getText().toString()-"+etPhone.getText().toString());
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-number-"+number);
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etLianxiren.getText().toString()-"+etLianxiren.getText().toString());
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etAdress.getText().toString()-"+etAdress.getText().toString());
-
+        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-lipinhao-" + lipinhao);
+        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etPhone.getText().toString()-" + etPhone.getText().toString());
+        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-number-" + number);
+        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etLianxiren.getText().toString()-" + etLianxiren.getText().toString());
+        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etAdress.getText().toString()-" + etAdress.getText().toString());
 
 
         HttpMethods.getInstance().POST(this, Constants.SUBMIT_ORDER, map, "GoodsExchangeActivity", new StringCallback() {
@@ -134,18 +132,20 @@ public class GoodsExchangeActivity extends BaseActivity {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         Log.e("TAG", "onSuccess: -----------积分商城--商品确认兑换返回的json数据----------------" + result);
-                        if (result!=null&&result.contains("200")){
+                        if (result != null && result.contains("200")) {
                             DialogUtils.showPromptDialogConfirm(GoodsExchangeActivity.this, "提示", "兑换成功", new DialogUtils.DialogUtilsClickListener() {
                                 @Override
                                 public void onClick() {
-                                    Intent intent=new Intent(GoodsExchangeActivity.this,IntegralShopActivity.class);
-                                    intent.putExtra("flag",555);
+
+
+                                    Intent intent = new Intent(GoodsExchangeActivity.this, ExchangeRecordActivity.class);
+                                    intent.putExtra("flag", 555);
                                     startActivity(intent);
-//                                    openActivity(IntegralShopActivity.class);
                                     closeActivity();
+
                                 }
                             });
-                        }else {
+                        } else {
                             ToastUtils.showToast(GoodsExchangeActivity.this, R.string.duihuanshibai);
                         }
 

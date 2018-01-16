@@ -209,12 +209,10 @@ public class RedPackageActivity extends BaseActivity {
         mtbRedpackage.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2017/12/13 取消红包修改
                 redId="";
                 acount="";
                 together_status="";
                 skip();
-//                closeActivity();
             }
         });
     }

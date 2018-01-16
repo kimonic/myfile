@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             >
 
             <TextView
@@ -50,6 +51,7 @@
                 android:layout_weight="1"
                 android:layout_height="30dp"
                 android:textSize="14sp"
+
                 android:textColor="#1F86FB"
                 android:text="@string/queding"
                 android:gravity="center"

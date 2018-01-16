@@ -117,21 +117,24 @@ public class MyProjectCreditorFragLvAdapter extends BaseAdapter {
 
             }
         });
+//-----------------------------------------暂时不显示贷后管理---------------------------------------
 
-        viewHolder.bidView.setShowDaiHouGuanLi(true);
+        viewHolder.bidView.setShowDaiHouGuanLi(false);
+//        final int pos=position;
+//
+//        viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
+//            @Override
+//            public void clickEvent() {
+//
+//                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+//                intent.putExtra("loan_id",list.get(pos).getLoan_id());
+//                context.startActivity(intent);
+////                ToastUtils.showToast(context, "打开贷后管理!");
+//            }
+//        });
+//
+//-----------------------------------------暂时不显示贷后管理---------------------------------------
 
-        final int pos=position;
-
-        viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
-            @Override
-            public void clickEvent() {
-
-                Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
-                intent.putExtra("loan_id",list.get(pos).getLoan_id());
-                context.startActivity(intent);
-//                ToastUtils.showToast(context, "打开贷后管理!");
-            }
-        });
         viewHolder.bidView.invalidate();
 
         return view;

@@ -13,11 +13,8 @@ import com.tudoujf.adapter.HomeFragVPAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.fragment.myprojectfrag.MyProjectCreditorFragment;
 import com.tudoujf.fragment.myprojectfrag.MyProjectInvestFragment;
-import com.tudoujf.fragment.myprojectfrag.MyProjectTotalFragment;
 import com.tudoujf.ui.DateFilterDialog;
-import com.tudoujf.ui.UnderlineTextView;
 import com.tudoujf.utils.ScreenSizeUtils;
-import com.tudoujf.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +41,7 @@ public class MyProjectActivity extends BaseActivity {
     FrameLayout mtbActMyproject;
     @BindView(R.id.vp_act_myproject)
     ViewPager vpActMyproject;
-//    @BindView(R.id.utv_act_myproject_total)
+    //    @BindView(R.id.utv_act_myproject_total)
 //    UnderlineTextView utvTotal;
     @BindView(R.id.utv_act_myproject_touzixiangmu)
     TextView utvTouZiXiangMu;
@@ -56,7 +53,7 @@ public class MyProjectActivity extends BaseActivity {
     private List<Fragment> listFrag;
     private DateFilterDialog dateFilterDialog;
     private int currentItem = 0;
-    private  String  flag;
+    private String flag;
 
     @Override
     public int getLayoutResId() {
@@ -79,22 +76,21 @@ public class MyProjectActivity extends BaseActivity {
                 setButStyle(1);
                 break;
             case R.id.tv_act_myproject_bac:
-                if ("creditor".equals(flag)){
+                if ("creditor".equals(flag)) {
                     openActivity(HomeActivity.class);
-                }else {
+                } else {
                     closeActivity();
                 }
                 break;
             case R.id.ll_act_myproject_filtrate:
                 if (dateFilterDialog == null) {
-                    dateFilterDialog = new DateFilterDialog(this,getResources().getString(R.string.qignxuanzeninyaochaxundehuikuanshijian));
+                    dateFilterDialog = new DateFilterDialog(this, getResources().getString(R.string.qignxuanzeninyaochaxundehuikuanshijian));
                     dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
                         @Override
                         public void dismiss(String startTime, String endTime) {
+
                             refreshFragment(startTime, endTime);
 
-                            // TODO: 2017/9/4  请求网络筛选展示数据
-//                            ToastUtils.showToast(MyProjectActivity.this, startTime + "-----------" + endTime);
                         }
                     });
                 }
@@ -112,7 +108,7 @@ public class MyProjectActivity extends BaseActivity {
 //                ((MyProjectTotalFragment) listFrag.get(0)).initDataFromInternet();
 //                break;
             case 0:
-                ((MyProjectInvestFragment) listFrag.get(0)).getCurrentFragRefresh(startTime,endTime);
+                ((MyProjectInvestFragment) listFrag.get(0)).getCurrentFragRefresh(startTime, endTime);
 //                ((MyProjectInvestFragment) listFrag.get(0)).setEnd_time(endTime);
 //                ((MyProjectInvestFragment) listFrag.get(0)).initDataFromInternet();
                 break;
@@ -129,7 +125,7 @@ public class MyProjectActivity extends BaseActivity {
         listFrag = new ArrayList<>();
 //        MyProjectTotalFragment fragment1 = new MyProjectTotalFragment();
 
-        flag=getIntent().getStringExtra("flag");
+        flag = getIntent().getStringExtra("flag");
 
         MyProjectInvestFragment fragment2 = new MyProjectInvestFragment();
 
@@ -202,9 +198,9 @@ public class MyProjectActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if ("creditor".equals(flag)){
+        if ("creditor".equals(flag)) {
             openActivity(HomeActivity.class);
-        }else {
+        } else {
             closeActivity();
         }
     }

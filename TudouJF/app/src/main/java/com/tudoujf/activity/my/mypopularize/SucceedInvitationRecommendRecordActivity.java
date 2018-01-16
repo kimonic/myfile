@@ -101,8 +101,9 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     });
+                }else {
+                    dateFilterDialog.show();
                 }
-                dateFilterDialog.show();
                 break;
         }
 

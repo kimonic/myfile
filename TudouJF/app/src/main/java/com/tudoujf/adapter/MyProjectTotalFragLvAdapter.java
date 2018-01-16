@@ -95,25 +95,25 @@ public class MyProjectTotalFragLvAdapter extends BaseAdapter {
 
 
         final int pos=position;
-
-        if (!"投标中".equals(list.get(position).getStatus_name())){
-
-            viewHolder.bidView.setShowDaiHouGuanLi(true);
-            viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
-                @Override
-                public void clickEvent() {
-                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
-                    intent.putExtra("loan_id",list.get(pos).getLoanId());
-                    context.startActivity(intent);
-//                    ToastUtils.showToast(context, "打开贷后管理");
-
-                }
-            });
-
-        }else {
+//---------------------------------贷后管理暂时隐藏-------------------------------------------------
+//        if (!"投标中".equals(list.get(position).getStatus_name())){
+//            viewHolder.bidView.setShowDaiHouGuanLi(true);
+//            viewHolder.bidView.setListener(new MyProjectBidView.ClickEventListener() {
+//                @Override
+//                public void clickEvent() {
+//                    Intent intent=new Intent(context, DaiHouGuanLiActivity.class);
+//                    intent.putExtra("loan_id",list.get(pos).getLoanId());
+//                    context.startActivity(intent);
+////                    ToastUtils.showToast(context, "打开贷后管理");
+//
+//                }
+//            });
+//
+//        }else {
             viewHolder.bidView.setShowDaiHouGuanLi(false);
-        }
+//        }
 
+//---------------------------------贷后管理暂时隐藏-------------------------------------------------
 
 
 
