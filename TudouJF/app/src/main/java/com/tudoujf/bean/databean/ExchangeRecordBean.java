@@ -101,6 +101,7 @@ public class ExchangeRecordBean implements BaseBean {
          * credit : 379
          * order_count : 1
          * mobile : 16516514651
+         * "images": "https://www.tudoujf.com/imagesAHFG876/images/mall/goods/20160914/6191e43f0f29eb106d40360b051091ba.png",
          */
 
         private String post;
@@ -119,6 +120,15 @@ public class ExchangeRecordBean implements BaseBean {
         private String credit;
         private String order_count;
         private String mobile;
+        private String images;
+
+        public String getImages() {
+            return images;
+        }
+
+        public void setImages(String images) {
+            this.images = images;
+        }
 
         private  int  bacFlag;
 

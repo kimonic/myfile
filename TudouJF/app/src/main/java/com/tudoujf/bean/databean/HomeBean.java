@@ -29,8 +29,26 @@ public class HomeBean implements BaseBean {
     private String sign_status;
     private String message_count;
     private String experience_amount;
+    private String riskAssessment;
+    private String isTrustOpen;
     private List<LoanBean> loan;
     private List<BannerBean> banner;
+
+    public String getIsTrustOpen() {
+        return isTrustOpen;
+    }
+
+    public void setIsTrustOpen(String isTrustOpen) {
+        this.isTrustOpen = isTrustOpen;
+    }
+
+    public String getRiskAssessment() {
+        return riskAssessment;
+    }
+
+    public void setRiskAssessment(String riskAssessment) {
+        this.riskAssessment = riskAssessment;
+    }
 
     public String getExperience_amount() {
         return experience_amount;

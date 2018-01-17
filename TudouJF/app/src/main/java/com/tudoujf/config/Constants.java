@@ -16,8 +16,9 @@ public class Constants {
     /**
      * 固定URL
      */
-//    public static final String URL = "http://m.test.tudoujf.com";
-    public static final String URL = "http://mob.tudoujf.com";
+    // TODO: 2018/1/17 正式环境与测试环境切换
+    public static final String URL = "http://m.test.tudoujf.com";
+//    public static final String URL = "http://mob.tudoujf.com";
 
     /**
      * 活动专区接口
@@ -350,6 +351,10 @@ public class Constants {
      * 检查版本更新
      */
     public static final String NEW_VERSION = URL + "/phone/member/updateVersion";
+  /**
+     * 风险测评
+     */
+    public static final String RISK_QUESTION = URL + "/wap/member/riskAssessment/questions?type=app&login_token=";
 
 
     //----------------------------------------------------------------------------------------------

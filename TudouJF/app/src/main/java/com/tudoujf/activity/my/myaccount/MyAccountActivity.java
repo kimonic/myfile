@@ -273,7 +273,7 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myaccount_risk:
                 // TODO: 2018/1/15 风险评估
-//                DialogUtils.showRiskDialog(this);
+                DialogUtils.showRiskDialog(this);
                 break;
         }
 
@@ -355,7 +355,7 @@ public class MyAccountActivity extends BaseActivity {
         }
         //---------------------------------------------手势密码相关---------------------------------
         // TODO: 2018/1/12 暂时隐藏风险评估
-        llRisk.setVisibility(View.GONE);
+//        llRisk.setVisibility(View.GONE);
     }
 
     @Override

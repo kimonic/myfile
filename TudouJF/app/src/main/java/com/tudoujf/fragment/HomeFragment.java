@@ -51,6 +51,7 @@ import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
@@ -719,6 +720,19 @@ public class HomeFragment extends BaseFragment {
             } else {
                 retractAnim(2);
             }
+
+
+            // TODO: 2018/1/17 检测是否需要弹出风险提示
+            if ((!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
+                    &&"-1".equals(bean.getRiskAssessment())
+                    &&"1".equals(bean.getIsTrustOpen())
+                    ){
+
+                DialogUtils.showRiskDialog(getActivity());
+
+            }
+
+
         }
     }
 
@@ -793,12 +807,13 @@ public class HomeFragment extends BaseFragment {
             }
         }
         super.onResume();
-        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-            loginFlag = true;
-        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-            loginFlag = false;
-            initDataFromInternet();
-        }
+//        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+//            loginFlag = true;
+//        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+//            loginFlag = false;
+//            Log.e("TAG", "LoadInternetDataToUi: ---风险测评--onResume");
+//            initDataFromInternet();
+//        }
     }
 
     @Override

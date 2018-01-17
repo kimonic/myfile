@@ -65,73 +65,78 @@
     <!--app:leftImage="@drawable/xvector_back"-->
     <!--/>-->
 
-    <LinearLayout
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:background="@color/color_white"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="27"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/shangpjnmingcheng"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_fourboder"-->
+            <!--android:textSize="10sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="11"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/act_integralrecode_integral"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_threeboderql"-->
+            <!--android:textSize="10sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="10"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/shuliang"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_threeboderql"-->
+            <!--android:textSize="10sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="15"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/chulizhuangtai"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_threeboderql"-->
+            <!--android:textSize="10sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="21"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/duihuanshijian"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_threeboderql"-->
+            <!--android:textSize="10sp" />-->
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="16"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/beizhu"-->
+            <!--android:textColor="@color/color_black"-->
+            <!--android:background="@drawable/xshape_threeboderql"-->
+            <!--android:textSize="10sp" />-->
+
+    <!--</LinearLayout>-->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/color_white"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="27"
-            android:gravity="center"
-            android:text="@string/shangpjnmingcheng"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_fourboder"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="11"
-            android:gravity="center"
-            android:text="@string/act_integralrecode_integral"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_threeboderql"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:gravity="center"
-            android:text="@string/shuliang"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_threeboderql"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="15"
-            android:gravity="center"
-            android:text="@string/chulizhuangtai"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_threeboderql"
-            android:textSize="10sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="21"
-            android:gravity="center"
-            android:text="@string/duihuanshijian"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_threeboderql"
-            android:textSize="10sp" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="16"
-            android:gravity="center"
-            android:text="@string/beizhu"
-            android:textColor="@color/color_black"
-            android:background="@drawable/xshape_threeboderql"
-            android:textSize="10sp" />
-
-    </LinearLayout>
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="@color/color_line1" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/srl_act_exchnagerecord"

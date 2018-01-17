@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.bean.databean.ExchangeRecordBean;
+import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.StringUtils;
 
 import java.util.List;
@@ -64,6 +66,7 @@ public class ExchangeRecordActLvAdapter extends BaseAdapter {
             viewHolder.textView4= (TextView) view.findViewById(R.id.tv_lvitem_exchangerecord4);
             viewHolder.textView5= (TextView) view.findViewById(R.id.tv_lvitem_exchangerecord5);
             viewHolder.textView6= (TextView) view.findViewById(R.id.tv_lvitem_exchangerecord6);
+            viewHolder.imageView= (ImageView) view.findViewById(R.id.iv_lvitem_exchangerecord);
 
             view.setTag(viewHolder);
         } else {
@@ -71,11 +74,11 @@ public class ExchangeRecordActLvAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        if (list.get(position).getBacFlag()==2){
-            viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.lvbac));
-        }else {
-            viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
-        }
+//        if (list.get(position).getBacFlag()==2){
+//            viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.lvbac));
+//        }else {
+//            viewHolder.linearLayout.setBackgroundColor(context.getResources().getColor(R.color.color_white));
+//        }
 
         viewHolder.textView1.setText(list.get(position).getGoods_name());
         viewHolder.textView2.setText(list.get(position).getCredit());
@@ -83,11 +86,16 @@ public class ExchangeRecordActLvAdapter extends BaseAdapter {
         viewHolder.textView4.setText(list.get(position).getDelivery_status());
         viewHolder.textView5.setText(StringUtils.getStrTime(list.get(position).getAdd_time()));
         viewHolder.textView6.setText(list.get(position).getRemark());
+
+        if (list.get(position).getImages()!=null){
+            ImageGlideUtils.loadImageFromUrl(viewHolder.imageView,list.get(position).getImages());
+        }
         return view;
     }
 
     private class ViewHolder {
         TextView textView1, textView2, textView3,textView4,textView5,textView6;
         LinearLayout linearLayout;
+        ImageView imageView;
     }
 }

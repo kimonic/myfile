@@ -24,10 +24,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.adapter.DialogLVAdapter;
 import com.tudoujf.bean.SystemMessageFragBean;
 import com.tudoujf.bean.databean.TypeInfoBean;
+import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -717,9 +720,12 @@ public class DialogUtils {
         tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                  2017/8/1 打开评估页面
-//                Intent intent = new Intent(context, RealNameAuthenticationHuiFuActivity.class);
-//                context.startActivity(intent);
+                // TODO: 2018/1/17  打开评估页面
+//
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("url", Constants.RISK_QUESTION+ UserConfig.getInstance().getLoginToken(context));
+                intent.putExtra("title","风险测评");
+                context.startActivity(intent);
                 pop.dismiss();
             }
         });
