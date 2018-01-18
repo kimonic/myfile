@@ -77,6 +77,15 @@ public class MyAccountBean implements BaseBean {
     private String member_name;
     private int isVip;
     private String vipEndTime;
+    private String riskAssessmentType;
+
+    public String getRiskAssessmentType() {
+        return riskAssessmentType;
+    }
+
+    public void setRiskAssessmentType(String riskAssessmentType) {
+        this.riskAssessmentType = riskAssessmentType;
+    }
 
     public int getIsVip() {
         return isVip;

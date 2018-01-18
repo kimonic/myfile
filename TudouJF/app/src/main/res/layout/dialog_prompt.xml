@@ -26,11 +26,14 @@
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/color_black"
             android:text="@string/qingbangdingyinhangka"
             android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             />
         <View
             android:layout_width="match_parent"
@@ -41,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
+
             >
             <TextView
                 android:id="@+id/tv_cancle"
@@ -52,6 +55,8 @@
                 android:text="@string/cancel"
                 android:gravity="center"
                 android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 />
             <View
                 android:layout_width="1dp"
@@ -67,7 +72,8 @@
                 android:textColor="#1F86FB"
                 android:text="@string/queding"
                 android:gravity="center"
-                />
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp" />
         </LinearLayout>
     </LinearLayout>
 

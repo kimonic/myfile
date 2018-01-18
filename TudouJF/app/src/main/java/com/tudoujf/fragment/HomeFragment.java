@@ -722,7 +722,7 @@ public class HomeFragment extends BaseFragment {
             }
 
 
-            // TODO: 2018/1/17 检测是否需要弹出风险提示
+            // TODO: 2018/1/17 检测是否需要弹出风险测评
             if ((!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
                     &&"-1".equals(bean.getRiskAssessment())
                     &&"1".equals(bean.getIsTrustOpen())

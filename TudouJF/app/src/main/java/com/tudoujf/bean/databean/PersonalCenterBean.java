@@ -41,6 +41,15 @@ public class PersonalCenterBean implements BaseBean {
     private String vipEndTime;
     private String weChatID;
     private String experience_loan_id;
+    private String riskAssessmentCount;
+
+    public String getRiskAssessmentCount() {
+        return riskAssessmentCount;
+    }
+
+    public void setRiskAssessmentCount(String riskAssessmentCount) {
+        this.riskAssessmentCount = riskAssessmentCount;
+    }
 
     public String getExperience_loan_id() {
         return experience_loan_id;

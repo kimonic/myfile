@@ -36,6 +36,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.DrawGestureActivity;
@@ -115,6 +116,9 @@ public class MyAccountActivity extends BaseActivity {
     @BindView(R.id.tv_act_myaccount_name_description)
     TextView tvNameDescription;
 
+    @BindView(R.id.tv_act_myaccount_risk_description)
+    TextView tvRiskDescription;
+
 
     @BindView(R.id.iv_act_myaccount_icon)
     ImageView ivIcon;
@@ -142,6 +146,8 @@ public class MyAccountActivity extends BaseActivity {
     private ImageView imageView;
     private boolean change = false;
     private AlertDialog dialogImage;
+    private String riskAssessmentCount;
+
 
     @Override
     public int getLayoutResId() {
@@ -273,7 +279,20 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myaccount_risk:
                 // TODO: 2018/1/15 风险评估
-                DialogUtils.showRiskDialog(this);
+                if (riskAssessmentCount != null && StringUtils.string2Integer(riskAssessmentCount) < 3) {
+                    Intent intent1 = new Intent(this, WebActivity.class);
+                    intent1.putExtra("url", Constants.RISK_QUESTION + UserConfig.getInstance().getLoginToken(this));
+                    intent1.putExtra("title", "风险测评");
+                    startActivity(intent1);
+                } else {
+                    DialogUtils.showPromptDialog(this, getString(R.string.tishi), getString(R.string.riskhint), new DialogUtils.DialogUtilsClickListener() {
+                        @Override
+                        public void onClick() {
+
+                        }
+                    });
+                }
+
                 break;
         }
 
@@ -307,6 +326,7 @@ public class MyAccountActivity extends BaseActivity {
         if (bundle != null) {
             userName = bundle.getString("name");
             iconurl = bundle.getString("iconurl");
+            riskAssessmentCount = bundle.getString("riskAssessmentCount");
         }
 
 
@@ -430,7 +450,7 @@ public class MyAccountActivity extends BaseActivity {
                 ivVip.setImageResource(R.drawable.frag_my_vip);
             }
 
-
+            tvRiskDescription.setText(bean.getRiskAssessmentType());
             UserConfig.getInstance().setBindPhone(bean.getPhone());
 
             tvBankcardDescription.setText(bean.getBankName());
@@ -439,6 +459,14 @@ public class MyAccountActivity extends BaseActivity {
             tvEmailDescription.setText(bean.getIs_email().getStatus_name());
             tvNameDescription.setText(bean.getIs_realname().getStatus_name());
 
+            /**
+             *  sendevent  /dev/input/event5 0003 0  500
+                sendevent /dev/input/event5 0003 1  500
+                sendevent /dev/input/event5 0001 0330 1
+                sendevent  /dev/input/event5 0 0 0
+                sendevent  /dev/input/event5 0001 0330 0
+                sendevent  /dev/input/event5 0 0 0
+             */
 
         }
 

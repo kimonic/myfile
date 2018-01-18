@@ -245,6 +245,7 @@ public class MyFragment extends BaseFragment {
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("name", bean.getMember_name());
                 bundle1.putString("iconurl", bean.getAvatar());
+                bundle1.putString("riskAssessmentCount", bean.getRiskAssessmentCount());
                 openActivity(MyAccountActivity.class, bundle1);
                 break;
             case R.id.tv_frag_my_realname://跳转实名认证页面
