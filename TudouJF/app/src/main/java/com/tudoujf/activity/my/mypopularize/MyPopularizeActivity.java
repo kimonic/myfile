@@ -169,6 +169,8 @@ public class MyPopularizeActivity extends BaseActivity {
         llRecommendRecord.setOnClickListener(this);
         tvBtnJieSuan.setOnClickListener(this);
 
+
+
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.tudoujf.calculator.activity;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -58,15 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int unit = 10000;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        decimalFormat = new DecimalFormat("0.0000");
-        initListener();
 
-    }
 
     private void initListener() {
         tvCalculator.setOnClickListener(this);
@@ -143,4 +138,95 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        decimalFormat = new DecimalFormat("0.0000");
+        initListener();
+        getLifecycle().addObserver(new TestLifeCycle());//在该方法内初始化需要根据生命周期执行操作的类
+        Log.e("TAG", "生命周期:--activity-----onCreate: -----");
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("TAG", "生命周期:--activity-----onStart: -----");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("TAG", "生命周期:--activity-----onResume: -----");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("TAG", "生命周期:--activity-----onPause: -----");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("TAG", "生命周期:--activity-----onStop: -----");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("TAG", "生命周期:--activity-----onDestroy: -----");
+    }
+
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+
+
+    class TestLifeCycle implements LifecycleObserver {//实现LifecycleObserver接口去监听生命周期事件,这是一个空的标识接口
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_START)//使用注解的方式绑定回调
+        public void onStart(){
+            Log.e("TAG", "生命周期测试: TestLifeCycle-----ON_START");
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        public void onCreate(){
+            Log.e("TAG", "生命周期测试: TestLifeCycle-----ON_CREATE");
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        public void onPause(){
+            Log.e("TAG", "生命周期测试: TestLifeCycle-----ON_PAUSE");
+        }
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        public void onResume(){
+            Log.e("TAG", "生命周期测试: TestLifeCycle-----ON_RESUME");
+        }
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void onStop(){
+            Log.e("TAG", "生命周期测试:TestLifeCycle -----ON_STOP");
+        }
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        public void onDestroy(){
+            Log.e("TAG", "生命周期测试: TestLifeCycle-----ON_DESTROY");
+        }
+//        @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+//        public void onAny(){
+//            Log.e("TAG", "生命周期测试: -----ON_ANY");
+//        }
+    }
+
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+//------------------------生命周期测试--------------------------------------------------------------
+
+
 }
