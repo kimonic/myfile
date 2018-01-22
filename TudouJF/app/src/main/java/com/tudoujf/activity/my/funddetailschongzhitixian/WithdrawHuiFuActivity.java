@@ -201,11 +201,13 @@ public class WithdrawHuiFuActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
 
+                String temp = response.body();
+                String temp2 = StringUtils.getDecodeString(temp);
+
                 String result = StringUtils.getDecodeString(response.body());
                 Log.e("TAG", "onSuccess: -----------请求提现页面接口返回的json数据----------------" + result);
 
-                String temp = response.body();
-                String temp2 = StringUtils.getDecodeString(temp);
+
 
                 if (temp2 != null) {
                     String code = "";

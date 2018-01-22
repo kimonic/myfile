@@ -496,7 +496,7 @@ public class HomeFragment extends BaseFragment {
                     intent1.putExtra("title", getResources().getString(R.string.huodongxinagqing));
                     startActivity(intent1);
 //                    ToastUtils.showToast(getActivity(), listUrl.get(vpFragHome.getCurrentItem()).getJumpurl());
-                    // TODO: 2017/8/15 传递跳转页面的URL
+                    //  2017/8/15 传递跳转页面的URL
                 }
             });
             list.add(imageview);
@@ -728,14 +728,14 @@ public class HomeFragment extends BaseFragment {
 
 
             // TODO: 2018/1/17 检测是否需要弹出风险测评
-            if ((!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
-                    &&"-1".equals(bean.getRiskAssessment())
-                    &&"1".equals(bean.getIsTrustOpen())
-                    ){
-
-                DialogUtils.showRiskDialog(getActivity());
-
-            }
+//            if ((!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
+//                    &&"-1".equals(bean.getRiskAssessment())
+//                    &&"1".equals(bean.getIsTrustOpen())
+//                    ){
+//
+//                DialogUtils.showRiskDialog(getActivity());
+//
+//            }
 
 
         }

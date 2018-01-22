@@ -126,6 +126,7 @@ public class DiscoverFragment extends BaseFragment {
         vJianGe.setVisibility(View.GONE);
 
 
+
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
 //        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         srl.setRefreshHeader(new TuDouHeader(getActivity()));

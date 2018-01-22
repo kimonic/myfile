@@ -375,7 +375,7 @@ public class MyAccountActivity extends BaseActivity {
         }
         //---------------------------------------------手势密码相关---------------------------------
         // TODO: 2018/1/12 暂时隐藏风险评估
-//        llRisk.setVisibility(View.GONE);
+        llRisk.setVisibility(View.GONE);
     }
 
     @Override

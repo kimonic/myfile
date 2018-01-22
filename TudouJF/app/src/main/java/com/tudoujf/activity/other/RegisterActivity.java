@@ -458,7 +458,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
-                // TODO: 2017/8/15 保存完数据之后,跳转手势密码页面
+                // 2017/8/15 保存完数据之后,跳转手势密码页面
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
                         }.getType(),
