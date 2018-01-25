@@ -62,7 +62,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
                 OkGo.getInstance().cancelAll();
 //                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
                 dismissPDialog();
-            }else {
+            } else {
                 dismissPDialog();
             }
         }
@@ -81,7 +81,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
             } else {
                 bDialog.show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("TAG", "showPDialog: -----窗体泄露");
         }
 
@@ -89,7 +89,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
     public void dismissPDialog() {
         isProgressing = false;
-        if (bDialog != null&&bDialog.isShowing()) {
+        if (bDialog != null && bDialog.isShowing()) {
             bDialog.dismiss();
         }
     }
@@ -166,7 +166,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
                 Message msg = Message.obtain();
                 msg.what = 1;
-                if (handler!=null){
+                if (handler != null) {
                     handler.sendMessage(msg);
                 }
             }

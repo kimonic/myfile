@@ -411,6 +411,7 @@ public class MyAccountActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "我的账户序列: -----"+ UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.MY_ACCOUNT, map, getLocalClassName(),
                 new StringCallback() {

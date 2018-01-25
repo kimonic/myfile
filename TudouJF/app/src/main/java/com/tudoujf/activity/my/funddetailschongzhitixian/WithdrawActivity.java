@@ -304,6 +304,7 @@ public class WithdrawActivity extends BaseActivity {
         intent.putExtra("amount", etJinE.getText().toString().replace(",", ""));
         startActivity(intent);
         finish();
+
     }
 
     @Override

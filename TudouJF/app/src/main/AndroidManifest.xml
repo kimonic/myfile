@@ -45,6 +45,11 @@
     <!--//////////////////////////////////极光推送////////////////////////////////////////////////-->
 
 
+
+    <!--/////////////////////////////////////华为手机问题临时添加///////////////////////////////////////-->
+    <uses-sdk android:maxSdkVersion="26" android:minSdkVersion="19" android:targetSdkVersion="26" />
+    <!--/////////////////////////////////////华为手机问题临时添加///////////////////////////////////////-->
+
     <uses-feature
         android:name="android.hardware.camera"
         tools:ignore="UnsupportedChromeOsHardware" />
@@ -266,6 +271,8 @@
         <activity android:name=".activity.discover.GoodsExchangeActivity" />
         <!--81.兑换记录activity-->
         <activity android:name=".activity.discover.ExchangeRecordActivity" />
+        <!--82.豪礼兑换activity-->
+        <activity android:name=".activity.discover.GoodGiftExchangeActivity" />
 
 
         <service

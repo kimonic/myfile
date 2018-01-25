@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.common.WebActivity;
+import com.tudoujf.activity.discover.GoodGiftExchangeActivity;
 import com.tudoujf.activity.discover.LuckyLotteryActivity;
 import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.adapter.DiscoverFragLvAdapter;
@@ -88,7 +89,8 @@ public class DiscoverFragment extends BaseFragment {
             case R.id.ll_frag_discover_bt2:
                 openActivity(IntegralShopActivity.class);
                 break;
-            case R.id.ll_frag_discover_bt3:
+            case R.id.ll_frag_discover_bt3://豪礼兑换
+                openActivity(GoodGiftExchangeActivity.class);
                 ToastUtils.showToast(getActivity(), R.string.jijiangkaiqijingqingqidai);
                 break;
 //            case R.id.: break;
@@ -121,9 +123,9 @@ public class DiscoverFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        // TODO: 2017/12/22 暂时去掉按钮
-        llFragDiscoverBtTotal.setVisibility(View.GONE);
-        vJianGe.setVisibility(View.GONE);
+        // TODO: 2017/12/22 暂时去掉发现顶部的幸运抽奖,积分商城,豪礼兑换按钮
+//        llFragDiscoverBtTotal.setVisibility(View.GONE);
+//        vJianGe.setVisibility(View.GONE);
 
 
 
