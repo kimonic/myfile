@@ -5,14 +5,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-
-import java.sql.Ref;
 
 /**
  * * ===============================================================
@@ -21,25 +19,19 @@ import java.sql.Ref;
  * author：          kimonik
  * version：          1.0
  * date：             2018/1/25
- * description：  验证码生成view
+ * description：  验证码生成view,控件宽高比最好为3:1
  * history：
  * *==================================================================
  */
 
 public class VerificationCodeView extends View {
 
-    /**生成的并显示的验证码*/
-    private  String  showCode="";
-    /**验证码画笔*/
+    private String showCode = "";
     private Paint codePaint;
-    /**文本绘制的路径*/
-    private Path path;
-    /**圆角矩形画笔*/
     private Paint bacPaint;
-    /**背景圆角矩形*/
     private RectF rectF;
-
-    private StringBuilder builder;
+    private Rect bounds;
+    private float radious=6;
 
     public String getShowCode() {
         return showCode;
@@ -61,6 +53,7 @@ public class VerificationCodeView extends View {
         super(context, attrs, defStyleAttr);
         initView();
     }
+
     @TargetApi(21)
     public VerificationCodeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -68,78 +61,78 @@ public class VerificationCodeView extends View {
     }
 
     private void initView() {
-        rectF=new RectF();
-        builder=new StringBuilder();
+        rectF = new RectF();
+        bounds = new Rect();
+        showCode = generateCode();
 
-        showCode=generateCode();
-        Log.e("TAG", "initView: VerificationCodeView-----"+showCode);
-
-
-        path=new Path();
-
-        codePaint=new Paint();
+        codePaint = new Paint();
         codePaint.setAntiAlias(true);
         codePaint.setColor(Color.parseColor("#46B5E5"));
         codePaint.setStyle(Paint.Style.FILL);
 
-        bacPaint=new Paint();
+
+        bacPaint = new Paint();
         bacPaint.setAntiAlias(true);
         bacPaint.setColor(Color.WHITE);
         bacPaint.setStyle(Paint.Style.FILL);
-
+        bacPaint.setStrokeWidth(10);
 
 
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int width=getWidth();
-        int height=getHeight();
-        rectF.top=0;
-        rectF.left=0;
-        rectF.right=width;
-        rectF.bottom=height;
-        canvas.drawRoundRect(rectF,6,6,bacPaint);
-        codePaint.setTextSize(50);
+        int width = getWidth();
+        int height = getHeight();
 
-        float  textLength=codePaint.measureText(showCode);
-        float  spacing=(width*0.8f-textLength)/3;
+        rectF.top = 0;
+        rectF.left = 0;
+        rectF.right = width;
+        rectF.bottom = height;
+        canvas.drawRoundRect(rectF, radious, radious, bacPaint);
 
-        float  startX=width*0.2f;
-        float startY=height*0.5f;
+        codePaint.setTextSize(height * 0.6f);
 
-//        float endX=width*0.8f;
-//        float endY=height*0.7f;
-//
-//        path.moveTo(startX,startY);
-//        path.lineTo(endX,endY);
+        float textLength = codePaint.measureText(showCode);
+        float spacing = (width - textLength) / 3;
+
+        float startX = width * 0.15f;
+        float startY = height * 0.7f;
 
 
-
-//        canvas.drawTextOnPath(showCode,path,0,0,codePaint);  240406564351
-//        canvas.save();
-//        canvas.rotate(45);
-        canvas.drawText(showCode,startX,startY,codePaint);
-//        canvas.restore();
-//
-//        canvas.drawText(String.valueOf(showCode.charAt(1)),startX+spacing,startY,codePaint);
-//
-//        canvas.save();
-//        canvas.rotate(45);
-//        canvas.drawText(String.valueOf(showCode.charAt(2)),startX+spacing*2,startY,codePaint);
-////        canvas.rotate(-45);
-//        canvas.restore();
-//
-//        canvas.drawText(String.valueOf(showCode.charAt(3)),startX+spacing*3,startY,codePaint);
-
+        for (int i = 0; i < 4; i++) {
+            codePaint.getTextBounds(String.valueOf(showCode.charAt(i)), 0, 1, bounds);
+            canvas.save();
+            canvas.rotate(getDegress(), startX + spacing * i + Math.abs(bounds.left - bounds.right) / 2, startY - Math.abs(bounds.bottom - bounds.top) / 2);
+            canvas.drawText(String.valueOf(showCode.charAt(i)), startX + spacing * i, startY, codePaint);
+            canvas.restore();
+        }
 
 
     }
 
-    private String generateCode(){
-        return builder.append((int)(Math.random()*10))
-                .append((int)(Math.random()*10))
-                .append((int)(Math.random()*10))
-                .append((int)(Math.random()*10)).toString();
+    private float getDegress() {
+        return (float) (Math.pow(-1, (int) (Math.random() * 10)) * Math.random() * 30);
+    }
+
+    private String generateCode() {
+        return String.valueOf((int) (Math.random() * 10)) +
+                (int) (Math.random() * 10) +
+                (int) (Math.random() * 10) +
+                (int) (Math.random() * 10);
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                return true;
+            case MotionEvent.ACTION_UP:
+                showCode = generateCode();
+                invalidate();
+                return true;
+        }
+        return super.onTouchEvent(event);
     }
 }

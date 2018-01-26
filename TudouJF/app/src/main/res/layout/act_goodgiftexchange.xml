@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_yellow"
     android:orientation="vertical">
     <com.tudoujf.ui.MTopBarView
         android:id="@+id/mtb_act_goodgiftexcahnge"
@@ -13,11 +14,66 @@
         app:centerText="@string/haoliduihuan"
         app:leftImage="@drawable/xvector_back" />
 
-
-    <com.tudoujf.ui.VerificationCodeView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="30dp"
+        android:hint="@string/qingshuruyanzhengma"
+        android:textSize="14sp"
+        android:background="@drawable/xshape_roundrect_goodgiftexchange"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        >
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:hint="@string/qingshuruyanzhengma"
+            android:textSize="14sp"
+            android:background="@drawable/xshape_roundrect_goodgiftexchange"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_marginRight="36dp"
+            android:layout_marginEnd="36dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+
+            />
+
+        <com.tudoujf.ui.VerificationCodeView
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:textSize="16sp"
+        android:background="@drawable/xshape_roundrect_goodgiftexchange1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/color_white"
+        android:text="@string/duihuan"
+
+        />
+
+
 
 
 </LinearLayout>
