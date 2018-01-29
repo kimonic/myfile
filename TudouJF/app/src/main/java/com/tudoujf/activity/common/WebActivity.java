@@ -1,6 +1,7 @@
 package com.tudoujf.activity.common;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -137,10 +138,12 @@ public class WebActivity extends BaseActivity {
             if (url.contains(Constants.XIN_SHOU_FU_LI_ZHU_CE)) {
                 openActivity(RegisterActivity.class);
                 closeActivity();
-            } else if (url.contains(Constants.LOGIN_CLICK)) {
+            }
+            else if (url.contains(Constants.LOGIN_CLICK)) {
                 openActivity(LoginActivity.class);
                 closeActivity();
-            } else if (url.contains("url=")) {
+            }
+            else if (url.contains("url=")) {
                 ViewGroup viewWeb = (ViewGroup) getWindow().getDecorView();
                 viewWeb.setBackgroundColor(Color.parseColor("#00000000"));
                 viewWeb.removeAllViews();
@@ -148,7 +151,11 @@ public class WebActivity extends BaseActivity {
                 intent.putExtra("flag", 55);
                 startActivity(intent);
             } else {
-                showPDialog();
+                try {
+                    showPDialog();
+                }catch (Exception e){
+
+                }
             }
             Log.e("TAG", "onPageStarted: ---url--" + url);
         }
@@ -163,6 +170,7 @@ public class WebActivity extends BaseActivity {
 
     @Override
     public void finish() {
+        dismissPDialog();//2018-01-29添加,窗体泄露
         ViewGroup view = (ViewGroup) getWindow().getDecorView();
         view.setBackgroundColor(Color.parseColor("#00000000"));
         view.removeAllViews();
@@ -186,5 +194,6 @@ public class WebActivity extends BaseActivity {
         }
         super.onDestroy();
     }
+
 
 }

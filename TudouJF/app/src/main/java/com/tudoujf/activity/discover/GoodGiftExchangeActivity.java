@@ -1,14 +1,20 @@
 package com.tudoujf.activity.discover;
 
+import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.ui.VerificationCodeView;
 import com.tudoujf.utils.ScreenSizeUtils;
+import com.tudoujf.utils.ToastUtils;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -25,6 +31,14 @@ import butterknife.BindView;
 public class GoodGiftExchangeActivity extends BaseActivity {
     @BindView(R.id.mtb_act_goodgiftexcahnge)
     MTopBarView mtb;
+    @BindView(R.id.et_act_goodgiftexchange_duihuanma)
+    EditText etDuiHuanMa;
+    @BindView(R.id.et_act_goodgiftexchange_yanzhengma)
+    EditText etYanZhengMa;
+    @BindView(R.id.vcv_act_goodgiftexchange_yanzhengma)
+    VerificationCodeView vcvYanZhengMa;
+    @BindView(R.id.tv_act_goodgiftexchange_duihuan)
+    TextView tvDuiHuan;
 
     @Override
     public int getLayoutResId() {
@@ -33,6 +47,20 @@ public class GoodGiftExchangeActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_act_goodgiftexchange_duihuan:
+                if (etYanZhengMa.getText().toString().equals(vcvYanZhengMa.getShowCode())) {
+                    ToastUtils.showToast(GoodGiftExchangeActivity.this, "验证码输入正确!");
+                } else {
+                    ToastUtils.showToast(GoodGiftExchangeActivity.this, "验证码输入错误!");
+                }
+                break;
+//                 case R.id.:break;
+//                 case R.id.:break;
+//                 case R.id.:break;
+//                 case R.id.:break;
+//                 case R.id.:break;
+        }
 
     }
 
@@ -50,13 +78,13 @@ public class GoodGiftExchangeActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
         mtb.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeActivity();
             }
         });
+        tvDuiHuan.setOnClickListener(this);
     }
 
     @Override
@@ -80,4 +108,10 @@ public class GoodGiftExchangeActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

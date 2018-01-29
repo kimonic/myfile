@@ -27,6 +27,7 @@ import com.tudoujf.base.BaseFragment;
 import com.tudoujf.bean.DiscoverFragBean;
 import com.tudoujf.bean.databean.DiscoverBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
@@ -84,7 +85,12 @@ public class DiscoverFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_frag_discover_bt1:
-                openActivity(LuckyLotteryActivity.class);
+                Intent intent=new Intent(getActivity(),WebActivity.class);
+                intent.putExtra("url",Constants.URL+"/wap/prize/index?type=app&login_token="
+                        + UserConfig.getInstance().getLoginToken(getActivity()));
+                intent.putExtra("title",getString(R.string.xingyunchoujiang));
+                startActivity(intent);
+//                openActivity(LuckyLotteryActivity.class);
                 break;
             case R.id.ll_frag_discover_bt2:
                 openActivity(IntegralShopActivity.class);

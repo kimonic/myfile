@@ -718,6 +718,15 @@
     <string name="huoquduihuanjiluxinxishibai">获取兑换记录信息失败!</string>
     <string name="riskhint">每个月只能进行3次风险测评,\n您本月已经测试了3次!</string>
     <string name="haoliduihuan">好礼兑换</string>
+    <string name="qingshuruduihuanma">请输入兑换码</string>
+    <string name="qingshurutuxingyanzhengma">请输入图形验证码</string>
+    <string name="huodongduixiang">活动对象</string>
+    <string name="jinxianchiduihuanmayonghu">仅限持兑换码用户</string>
+    <string name="huodongshuoming">活动说明</string>
+    <string name="shuoming1">1.每个兑换码仅限兑换1次。</string>
+    <string name="shuoming2">2.兑换成功后,所获奖励将自动发送到您的账户。</string>
+    <string name="ruyouyiwen">如有疑问请联系在线客服或拨打400-066-5811</string>
+    <string name="xingyunchoujiang">幸运抽奖</string>
 
 
 </resources>

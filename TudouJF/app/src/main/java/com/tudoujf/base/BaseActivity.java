@@ -82,7 +82,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             if (handlerMemoryActivity != null&&isProgressing&&msg.what==1) {
                 OkGo.getInstance().cancelAll();
 //                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
-                dismissPDialog();
+                try {
+                    dismissPDialog();
+                }catch (Exception e){
+
+                }
             }else {
                 dismissPDialog();
             }
