@@ -364,6 +364,8 @@ public class HomeActivity extends BaseActivity {
             } catch (NullPointerException e) {
 
             }
+        }else if (flag==66){
+            vpActHome.setCurrentItem(3);
         }
 
     }

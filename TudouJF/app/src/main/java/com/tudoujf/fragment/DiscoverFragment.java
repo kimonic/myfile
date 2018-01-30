@@ -1,5 +1,6 @@
 package com.tudoujf.fragment;
 
+import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -89,6 +90,7 @@ public class DiscoverFragment extends BaseFragment {
                 intent.putExtra("url",Constants.URL+"/wap/prize/index?type=app&login_token="
                         + UserConfig.getInstance().getLoginToken(getActivity()));
                 intent.putExtra("title",getString(R.string.xingyunchoujiang));
+                intent.putExtra("flag","my");
                 startActivity(intent);
 //                openActivity(LuckyLotteryActivity.class);
                 break;

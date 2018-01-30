@@ -44,6 +44,7 @@ public class WebActivity extends BaseActivity {
 
     private String url;
     private String title;
+    private  String  flag;
 
     @Override
     public int getLayoutResId() {
@@ -59,6 +60,8 @@ public class WebActivity extends BaseActivity {
     public void initDataFromIntent() {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
+        flag = getIntent().getStringExtra("flag");
+
 //        url="https://www.baidu.com/";
     }
 
@@ -140,7 +143,14 @@ public class WebActivity extends BaseActivity {
                 closeActivity();
             }
             else if (url.contains(Constants.LOGIN_CLICK)) {
-                openActivity(LoginActivity.class);
+
+                if (flag==null){
+                    openActivity(LoginActivity.class);
+                }else if ("my".equals(flag)){
+                    Intent intent = new Intent(WebActivity.this, HomeActivity.class);
+                    intent.putExtra("flag", 66);
+                    startActivity(intent);
+                }
                 closeActivity();
             }
             else if (url.contains("url=")) {
