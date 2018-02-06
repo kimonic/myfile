@@ -156,6 +156,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     public void onDestroyView() {
         OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
         unbinder.unbind();
+        // TODO: 2018/2/2   dialog异常尝试处理,未确认
+        dismissPDialog();
+        bDialog=null;
         super.onDestroyView();
     }
 

@@ -297,6 +297,10 @@ public class Constants {
     public static final String EXPERIENCE_TENDERLIST = URL + "/phone/experience/tenderList";
 
     /**
+     * 好礼兑换接口
+     */
+    public static final String REDEEM_CODE = URL + "/phone/activity/redeemCode";
+    /**
      * 积分商城首页接口
      */
     public static final String INTEGRAL_SHOP = URL + "/phone/mall/index";
@@ -327,12 +331,12 @@ public class Constants {
      * 积分商城商品详情接口
      */
     public static final String GOODS_DETAILS = URL + "/phone/mall/showGoodDetail";
- /**
+    /**
      * 积分商城提交订单接口
      */
     public static final String SUBMIT_ORDER = URL + "/phone/mall/submitOrder";
 
-  /**
+    /**
      * 积分商城兑换记录接口
      */
     public static final String EXCHANGE_LOG = URL + "/phone/mall/exchangeLog";
@@ -351,7 +355,7 @@ public class Constants {
      * 检查版本更新
      */
     public static final String NEW_VERSION = URL + "/phone/member/updateVersion";
-  /**
+    /**
      * 风险测评
      */
     public static final String RISK_QUESTION = URL + "/wap/member/riskAssessment/questions?type=app&login_token=";
@@ -436,7 +440,7 @@ public class Constants {
      * 投资协议
      */
     public static final String TOU_ZI_XIE_YI = URL + "/phone/agreement/loanProtocol";
-     /**
+    /**
      * 投资协议
      */
     public static final String LOAN_AGREEMENT = URL + "/wap/loan/appLoanAgreement#";

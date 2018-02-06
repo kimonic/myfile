@@ -38,8 +38,13 @@ public class StringUtils {
      * 返回未解密的json对象
      */
     private static GlobalBean firstParseJson(String json) {
-        return gson.fromJson(json, new TypeToken<GlobalBean>() {
-        }.getType());
+        try {
+            return gson.fromJson(json, new TypeToken<GlobalBean>() {
+            }.getType());
+        }catch (Exception e){
+            return null;
+        }
+
     }
 
     /**
@@ -50,7 +55,7 @@ public class StringUtils {
         String temp;
         GlobalBean bean = firstParseJson(json);
         //MD5验证
-        if (MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
+        if (bean!=null&&MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
             return temp;
         } else {
@@ -194,8 +199,7 @@ public class StringUtils {
         } catch (NumberFormatException e) {
             return "****-**-**";
         }
-        Log.e("TAG", "getStrTimeFull: -----"+re_StrTime);
-        
+
         return re_StrTime;
     }
 

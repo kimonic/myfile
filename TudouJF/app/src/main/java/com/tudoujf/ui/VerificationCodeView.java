@@ -37,8 +37,8 @@ public class VerificationCodeView extends View {
         return showCode;
     }
 
-    public void setShowCode(String showCode) {
-        this.showCode = showCode;
+    public void setShowCode() {
+        this.showCode = generateCode();
     }
 
     public VerificationCodeView(Context context) {

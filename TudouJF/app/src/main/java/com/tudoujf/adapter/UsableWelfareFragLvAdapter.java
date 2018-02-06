@@ -122,9 +122,15 @@ public class UsableWelfareFragLvAdapter extends BaseAdapter {
                         break;
                 }
                 viewHolder.textView4.setText(statusQ);
-                viewHolder.redView.setOneText(list.get(position).getInterest());
                 viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
-                viewHolder.redView.setTwoText("%");
+                if ("1".equals(list.get(position).getCoupon_type())){
+                    viewHolder.redView.setOneText(list.get(position).getInterest());
+                    viewHolder.redView.setTwoText("%");
+                }else {
+                    viewHolder.redView.setOneText("10");
+                    viewHolder.redView.setTwoText("倍");
+                }
+
                 viewHolder.redView.setValid(isValidQ);
                 viewHolder.redView.setRedPackageOrQuan(false);
 

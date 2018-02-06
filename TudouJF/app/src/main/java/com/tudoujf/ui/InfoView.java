@@ -139,7 +139,7 @@ public class InfoView extends View {
 //        float initScale=13.5f;//位图1左上角位置与控件宽度的比例
 //        float initScaleh=6.6f;//位图1左上角位置与控件宽度的比例
 
-        rectImag1.left= (int) (width*0.13333f);//位图1左上角x坐标
+        rectImag1.left= (int) (width*0.08f);//位图1左上角x坐标
         rectImag1.top= (int) (width*0.19066f);//位图1左上角y坐标
         rectImag1.right=rectImag1.left+bitWidth1;
         rectImag1.bottom=rectImag1.top+bitWidth1;
@@ -147,7 +147,7 @@ public class InfoView extends View {
         canvas.drawBitmap(bitmapLeft,null,rectImag1,null);
         paintGray.setTextSize(width*0.044f);//设置文字大小
 
-        canvas.drawText("预期年化收益",rectImag1.left+bitWidth1+10,rectImag1.bottom-5,paintGray);
+        canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi),rectImag1.left+bitWidth1+10,rectImag1.bottom-5,paintGray);
 
 
         canvas.drawText("借款期限",width*0.63733f,rectImag1.bottom-5,paintGray);
@@ -155,7 +155,7 @@ public class InfoView extends View {
 
         //-------------------------------年化收益---------------------------------------------------
 
-        float textWidth1=paintGray.measureText("预期年化收益");
+        float textWidth1=paintGray.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi));
         int textX1= (int) (rectImag1.left+(textWidth1+bitWidth1+10)/2-paintOrange.measureText(nianHuaShouYi)/2);
         canvas.drawText(nianHuaShouYi,textX1,width*0.13733f,paintOrange);
 

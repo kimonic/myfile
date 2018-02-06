@@ -113,9 +113,7 @@ public class RedPackageActivity extends BaseActivity {
      */
     private String url;
     //--------------------------------------已选中的红包加息券返现券id------------------------------
-    private String  selId;
-
-
+    private String selId;
 
 
     //--------------------------------------已选中的红包加息券返现券id------------------------------
@@ -165,21 +163,18 @@ public class RedPackageActivity extends BaseActivity {
             time_limit = bundle.getString("time_limit");
             amount = bundle.getString("amount");
             together_status = bundle.getString("together_status");
-            selId= bundle.getString("selId");//已选中的红包id
+            selId = bundle.getString("selId");//已选中的红包id
             //----------------------------------------------------------------
 
             //--------------------------传递的参数--------------------------------------------------
-            Log.e("TAG", "initDataFromIntent: -----actType"+actType);
-            Log.e("TAG", "initDataFromIntent: -----is_beginner"+is_beginner);
-            Log.e("TAG", "initDataFromIntent: -----time_limit"+time_limit);
-            Log.e("TAG", "initDataFromIntent: -----amount"+amount);
-            Log.e("TAG", "initDataFromIntent: -----together_status"+together_status);
-
+            Log.e("TAG", "initDataFromIntent: -----actType" + actType);
+            Log.e("TAG", "initDataFromIntent: -----is_beginner" + is_beginner);
+            Log.e("TAG", "initDataFromIntent: -----time_limit" + time_limit);
+            Log.e("TAG", "initDataFromIntent: -----amount" + amount);
+            Log.e("TAG", "initDataFromIntent: -----together_status" + together_status);
 
 
             //--------------------------传递的参数--------------------------------------------------
-
-
 
 
             if (actType == 1) {
@@ -209,9 +204,9 @@ public class RedPackageActivity extends BaseActivity {
         mtbRedpackage.getLeftTV().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                redId="";
-                acount="";
-                together_status="";
+                redId = "";
+                acount = "";
+                together_status = "";
                 skip();
             }
         });
@@ -219,9 +214,9 @@ public class RedPackageActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        redId="";
-        acount="";
-        together_status="";
+        redId = "";
+        acount = "";
+        together_status = "";
         skip();
     }
 
@@ -384,11 +379,11 @@ public class RedPackageActivity extends BaseActivity {
 
             if (listRed.size() > 0) {
                 //--------------------------------之前已选中的红包----------------------------------
-                if (selId!=null&&!"".equals(selId)){
+                if (selId != null && !"".equals(selId)) {
                     for (int i = 0; i < listRed.size(); i++) {
-                        if (selId.equals(listRed.get(i).getId())){
+                        if (selId.equals(listRed.get(i).getId())) {
                             listRed.get(i).setBackground(2);
-                            beforePosition=i;
+                            beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
 //                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
@@ -397,9 +392,6 @@ public class RedPackageActivity extends BaseActivity {
                     }
                 }
                 //--------------------------------之前已选中的红包----------------------------------
-
-
-
 
 
                 tvRedpackageCount.setText(("您有" + listRed.size() + "个红包可使用"));
@@ -413,19 +405,17 @@ public class RedPackageActivity extends BaseActivity {
                 tvDescription.setText("暂无红包");
             }
 
-        }
-
-        if (jiaXiQuanBean != null && actType == 2) {
+        } else if (jiaXiQuanBean != null && actType == 2) {
             listJiaXiQuan = jiaXiQuanBean.getList();
             if (listJiaXiQuan.size() > 0) {
 
 
                 //--------------------------------之前已选中的加息券----------------------------------
-                if (selId!=null&&!"".equals(selId)){
+                if (selId != null && !"".equals(selId)) {
                     for (int i = 0; i < listRed.size(); i++) {
-                        if (selId.equals(listRed.get(i).getId())){
+                        if (selId.equals(listRed.get(i).getId())) {
                             listRed.get(i).setBackground(2);
-                            beforePosition=i;
+                            beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
 //                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
@@ -447,29 +437,24 @@ public class RedPackageActivity extends BaseActivity {
                 tvDescription.setText("暂无加息券");
             }
 
-        }
-
-
-        if (fanXianQuanBean != null && actType == 3) {
+        } else if (fanXianQuanBean != null && actType == 3) {
             listFanXianQuan = fanXianQuanBean.getList();
 
             if (listFanXianQuan.size() > 0) {
 
                 //--------------------------------之前已选中的返现券----------------------------------
-                if (selId!=null&&!"".equals(selId)){
+                if (selId != null && !"".equals(selId)) {
                     for (int i = 0; i < listRed.size(); i++) {
-                        if (selId.equals(listRed.get(i).getId())){
+                        if (selId.equals(listRed.get(i).getId())) {
                             listRed.get(i).setBackground(2);
-                            beforePosition=i;
+                            beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
-//                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
                             count++;
                         }
                     }
                 }
                 //--------------------------------之前已选中的返现券----------------------------------
-
 
 
                 tvRedpackageCount.setText(("您有" + listFanXianQuan.size() + "个返现券可使用"));

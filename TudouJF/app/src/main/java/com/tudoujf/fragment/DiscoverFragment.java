@@ -99,7 +99,7 @@ public class DiscoverFragment extends BaseFragment {
                 break;
             case R.id.ll_frag_discover_bt3://豪礼兑换
                 openActivity(GoodGiftExchangeActivity.class);
-                ToastUtils.showToast(getActivity(), R.string.jijiangkaiqijingqingqidai);
+//                ToastUtils.showToast(getActivity(), R.string.jijiangkaiqijingqingqidai);
                 break;
 //            case R.id.: break;
 //            case R.id.: break;
@@ -182,9 +182,9 @@ public class DiscoverFragment extends BaseFragment {
                 intent.putExtra("title", list.get(position).getName());
                 startActivity(intent);
 //                openActivity(WebActivity.class);
+
             }
         });
-
     }
 
     private void finishRL() {

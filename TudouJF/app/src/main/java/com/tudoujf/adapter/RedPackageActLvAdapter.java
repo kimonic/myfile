@@ -78,7 +78,10 @@ public class RedPackageActLvAdapter extends BaseAdapter {
         viewHolder.textView2.setText(("投资" + list.get(position).getTime_limit() + "个月可使用"));
         viewHolder.textView3.setText((list.get(position).getAmount() + "元   "));
         viewHolder.textView4.setText(context.getResources().getString(R.string.keshiyong));
+
+
         viewHolder.redView.setOneText(list.get(position).getAmount());
+
         viewHolder.redView.setFourText(StringUtils.getStrTimeFull(list.get(position).getEnd_time()));
 
 
