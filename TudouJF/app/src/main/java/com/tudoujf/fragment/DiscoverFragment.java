@@ -132,8 +132,8 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void initView() {
         // TODO: 2017/12/22 暂时去掉发现顶部的幸运抽奖,积分商城,豪礼兑换按钮
-//        llFragDiscoverBtTotal.setVisibility(View.GONE);
-//        vJianGe.setVisibility(View.GONE);
+        llFragDiscoverBtTotal.setVisibility(View.GONE);
+        vJianGe.setVisibility(View.GONE);
 
 
 

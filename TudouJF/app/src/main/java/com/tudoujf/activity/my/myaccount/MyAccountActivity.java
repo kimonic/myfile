@@ -374,8 +374,8 @@ public class MyAccountActivity extends BaseActivity {
             tvOC.setBackgroundResource(R.drawable.act_myaccount_close);
         }
         //---------------------------------------------手势密码相关---------------------------------
-        // TODO: 2018/1/12 暂时隐藏风险评估
-        llRisk.setVisibility(View.GONE);
+//         TODO: 2018/1/12 暂时隐藏风险评估
+//        llRisk.setVisibility(View.GONE);
     }
 
     @Override

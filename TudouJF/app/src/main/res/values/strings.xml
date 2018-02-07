@@ -183,7 +183,7 @@
     <string name="frag_systemmessage_previous">上一页</string>
     <string name="frag_systemmessage_next">下一页</string>
     <string name="frag_home_zhaiquanjiazhiyuan">债权价值(元)</string>
-    <string name="yuanbiaonianhuashouyi">原标年化收益</string>
+    <string name="yuanbiaonianhuashouyi">原标约定借款年化收益</string>
     <string name="zhuanrangjiageyuan">转让价格(元)</string>
     <string name="shouqing">售罄</string>
     <string name="frag_discover_discover">发现</string>
@@ -728,6 +728,7 @@
     <string name="ruyouyiwen">如有疑问请联系在线客服或拨打400-066-5811</string>
     <string name="xingyunchoujiang">幸运抽奖</string>
     <string name="qingshuruzhengquedetuxingyanzhengma">请输入正确的图形验证码!</string>
+    <string name="woyaochujie">我要出借</string>
 
 
 </resources>

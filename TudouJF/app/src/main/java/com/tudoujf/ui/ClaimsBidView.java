@@ -320,7 +320,7 @@ public class ClaimsBidView extends View {
 
 
         //---------------原标年化收益---------------------------------------------------------------
-        float text6X = width * 0.3466f;
+        float text6X = width * 0.3066f;
 //                text5X + blackPaint.measureText(yuanBiaoNianHuaShouYi) / 2 - grayPaint.measureText(getResources().getString(R.string.yuanbiaonianhuashouyi)) / 2;
         canvas.drawText(getResources().getString(R.string.yuanbiaonianhuashouyi), text6X, text4Y, grayPaint);
         //------------------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ public class ClaimsBidView extends View {
         //------------------------------------------------------------------------------------------
 
         //------------------------------------------------------------------------------------------
-        float text8X = width * 0.6466f;
+        float text8X = width * 0.6866f;
 //                text7X + blackPaint.measureText(transferPrice) / 2 - grayPaint.measureText(getResources().getString(R.string.zhuanrangjiageyuan)) / 2;
         canvas.drawText(getResources().getString(R.string.zhuanrangjiageyuan), text8X, text4Y, grayPaint);
         //------------------------------------------------------------------------------------------

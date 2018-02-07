@@ -43,7 +43,7 @@ public class QuestionClassificationActivity extends BaseActivity {
             R.string.xinshouzhiyin,
             R.string.chongzhitixian,
 
-            R.string.woyaolicai,
+            R.string.woyaochujie,
             R.string.woyaorongzi,
 
             R.string.zhaiquanzhuanrang,
