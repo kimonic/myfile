@@ -24,8 +24,12 @@ public class HomeBean implements BaseBean {
      * message_count : 0
      * loan : [{"id":153,"amount":970000,"max_add_time":1499758608,"award_amount":null,"apr":15,"name":"123456","period_unit":"月","award_proportion":null,"additional_status":-1,"category_type":"1","period":12,"experience_status":-1,"award_status":null},{"id":66,"amount":300000,"max_add_time":1496634353,"award_amount":null,"apr":13,"name":"房产抵押借款20160713001","period_unit":"月","award_proportion":null,"additional_status":-1,"category_type":"1","period":6,"experience_status":-1,"award_status":null},{"id":12,"amount":550000,"max_add_time":1496816212,"award_amount":null,"apr":24,"name":"个人房产抵押","period_unit":"月","award_proportion":null,"additional_status":-1,"category_type":"1","period":3,"experience_status":-1,"award_status":null},{"id":1,"amount":1000,"max_add_time":1499304599,"award_amount":null,"apr":9,"name":"房产抵押借款20160427001","period_unit":"月","award_proportion":null,"additional_status":-1,"category_type":"1","period":1,"experience_status":-1,"award_status":null},{"id":160,"amount":0,"max_add_time":1483498603,"award_amount":null,"apr":5,"name":"新手体验标","period_unit":"天","award_proportion":null,"additional_status":-1,"category_type":"4","period":5,"experience_status":1,"award_status":null},{"id":2,"amount":50000,"max_add_time":1490948033,"award_amount":null,"apr":9,"name":"房产抵押借款20160427002","period_unit":"月","award_proportion":null,"additional_status":1,"category_type":"1","period":1,"experience_status":-1,"award_status":null}]
      * banner : [{"image":"http://imgview.test.tudoujf.com/system/banner/20161101/d0096ec6c83575373e3a21d129ff8fef.jpg","jumpurl":"https://www.tudoujf.com/content/articles/getDetail?id=450&router=/lanmuer"},{"image":"http://imgview.test.tudoujf.com/system/banner/20160826/ce93dc8dcf820c53530f50f8a0e127c2.jpg","jumpurl":"https://www.tudoujf.com/content/articles/getDetail?id=232&router=/lanmuer"},{"image":"http://imgview.test.tudoujf.com/system/banner/20161101/f3ccdd27d2000e3f9255a7e3e2c48800.jpg","jumpurl":"https://www.tudoujf.com/content/articles/getDetail?id=450&router=/lanmuer"},{"image":"http://imgview.test.tudoujf.com/system/banner/20161101/799bad5a3b514f096e69bbc4a7896cd9.jpg","jumpurl":"https://www.tudoujf.com/content/articles/getDetail?id=329&router=/lanmuer"}]
+     "realName": " ",
+     "birthdayWelfare": -1,
      */
 
+    private String realName;
+    private String birthdayWelfare;
     private String sign_status;
     private String message_count;
     private String experience_amount;
@@ -33,6 +37,22 @@ public class HomeBean implements BaseBean {
     private String isTrustOpen;
     private List<LoanBean> loan;
     private List<BannerBean> banner;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getBirthdayWelfare() {
+        return birthdayWelfare;
+    }
+
+    public void setBirthdayWelfare(String birthdayWelfare) {
+        this.birthdayWelfare = birthdayWelfare;
+    }
 
     public String getIsTrustOpen() {
         return isTrustOpen;

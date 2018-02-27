@@ -17,8 +17,8 @@ public class Constants {
      * 固定URL
      */
     // TODO: 2018/1/17 正式环境与测试环境切换
-//    public static final String URL = "http://m.test.tudoujf.com";
-    public static final String URL = "http://mob.tudoujf.com";
+    public static final String URL = "http://m.test.tudoujf.com";
+//    public static final String URL = "http://mob.tudoujf.com";
 
     /**
      * 活动专区接口
@@ -492,11 +492,16 @@ public class Constants {
      */
     public static final String LOGIN = URL + "/phone/member/login";
 
+   /**
+     * 领取生日红包
+     */
+    public static final String BIRTHDAY_WELFARE = URL + "/phone/member/birthdayWelfare";
+
+
     /**
      * 首页信息
      */
     public static final String HOME = URL + "/phone/index/index";
-
 
     /**
      * 检测手机号码、邮箱、用户名是否存在

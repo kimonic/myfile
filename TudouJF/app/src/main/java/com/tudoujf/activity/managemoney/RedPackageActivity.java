@@ -137,7 +137,6 @@ public class RedPackageActivity extends BaseActivity {
         intent.putExtra("redId", redId);
         intent.putExtra("acount", acount);
         Log.e("TAG", "skip: -----" + together_status);
-
         intent.putExtra("together_status", together_status);
         switch (actType) {
             case 1://红包
@@ -275,15 +274,25 @@ public class RedPackageActivity extends BaseActivity {
                     itemSel = true;
                 }
                 if (itemSel) {//改变确认按钮
-                    if (actType == 1) {
+                    if (actType == 1) {//红包选中
                         redId = listRed.get(position).getId();
                         acount = listRed.get(position).getAmount();
                         together_status = listRed.get(position).getTogether_status();
-                    } else if (actType == 2) {
-                        redId = listJiaXiQuan.get(position).getId();
-                        acount = listJiaXiQuan.get(position).getInterest();
-                        together_status = listJiaXiQuan.get(position).getTogether_status();
-                    } else if (actType == 3) {
+                    } else if (actType == 2) {//加息券选中
+                        // TODO: 2018/2/27 修复十倍加息券bug
+
+                        if ("1".equals(listJiaXiQuan.get(position).getCoupon_type())){
+                            redId = listJiaXiQuan.get(position).getId();
+                            acount = listJiaXiQuan.get(position).getInterest()+"%";
+                            together_status = listJiaXiQuan.get(position).getTogether_status();
+                        }else {
+                            redId = listJiaXiQuan.get(position).getId();
+                            acount = getString(R.string.shibeijiaxi);
+                            together_status = listJiaXiQuan.get(position).getTogether_status();
+                        }
+
+
+                    } else if (actType == 3) {//返现券选中
                         redId = listFanXianQuan.get(position).getId();
                         acount = listFanXianQuan.get(position).getProportion();
                         together_status = listFanXianQuan.get(position).getTogether_status();
@@ -386,6 +395,9 @@ public class RedPackageActivity extends BaseActivity {
                             beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
+                            redId = listRed.get(i).getId();
+                            acount = listRed.get(i).getAmount();
+                            together_status = listRed.get(i).getTogether_status();
 //                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             count++;
                         }
@@ -412,13 +424,24 @@ public class RedPackageActivity extends BaseActivity {
 
                 //--------------------------------之前已选中的加息券----------------------------------
                 if (selId != null && !"".equals(selId)) {
-                    for (int i = 0; i < listRed.size(); i++) {
-                        if (selId.equals(listRed.get(i).getId())) {
-                            listRed.get(i).setBackground(2);
+                    for (int i = 0; i < listJiaXiQuan.size(); i++) {
+                        if (selId.equals(listJiaXiQuan.get(i).getId())) {
+                            listJiaXiQuan.get(i).setBackground(2);
                             beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
 //                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
+
+                            if ("1".equals(listJiaXiQuan.get(i).getCoupon_type())){
+                                redId = listJiaXiQuan.get(i).getId();
+                                acount = listJiaXiQuan.get(i).getInterest()+"%";
+                                together_status = listJiaXiQuan.get(i).getTogether_status();
+                            }else {
+                                redId = listJiaXiQuan.get(i).getId();
+                                acount = getString(R.string.shibeijiaxi);
+                                together_status = listJiaXiQuan.get(i).getTogether_status();
+                            }
+
                             count++;
                         }
                     }
@@ -444,12 +467,15 @@ public class RedPackageActivity extends BaseActivity {
 
                 //--------------------------------之前已选中的返现券----------------------------------
                 if (selId != null && !"".equals(selId)) {
-                    for (int i = 0; i < listRed.size(); i++) {
-                        if (selId.equals(listRed.get(i).getId())) {
-                            listRed.get(i).setBackground(2);
+                    for (int i = 0; i < listFanXianQuan.size(); i++) {
+                        if (selId.equals(listFanXianQuan.get(i).getId())) {
+                            listFanXianQuan.get(i).setBackground(2);
                             beforePosition = i;
                             tvAffirmUse.setText(getResources().getString(R.string.act_redpacksge_querenshiyong));
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
+                            redId = listFanXianQuan.get(i).getId();
+                            acount = listFanXianQuan.get(i).getProportion();
+                            together_status = listFanXianQuan.get(i).getTogether_status();
                             count++;
                         }
                     }

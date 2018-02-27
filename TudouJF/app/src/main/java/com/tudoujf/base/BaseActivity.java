@@ -62,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     private boolean isActive = true;
     //-----------------------------------------联网请求计时---------------------------------------------------------
 
-    private boolean  isProgressing=false;
+    private boolean isProgressing = false;
 
     private MyHandler handler = new MyHandler(this);
 
@@ -79,20 +79,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
             super.handleMessage(msg);
 
             AppCompatActivity handlerMemoryActivity = weakReference.get();
-            if (handlerMemoryActivity != null&&isProgressing&&msg.what==1) {
+            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
                 OkGo.getInstance().cancelAll();
 //                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
                 try {
                     dismissPDialog();
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
-            }else {
+            } else {
                 dismissPDialog();
             }
         }
     }
-
 
 
     //------------------------------------------联网请求计时--------------------------------------------------------
@@ -101,18 +100,21 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
 
     public void showPDialog() {
         timeThread();
-        isProgressing=true;
-        if (bDialog == null&&!isFinishing()) {
+        isProgressing = true;
+        if (bDialog == null && !isFinishing()) {
             bDialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
-        } else if (!isFinishing()){
+        } else if (!isFinishing()) {
             bDialog.show();
         }
     }
 
     public void dismissPDialog() {
-        isProgressing=false;
-        if (bDialog != null&&bDialog.isShowing()) {
-            bDialog.dismiss();
+        isProgressing = false;
+        // TODO: 2018/2/26 窗体泄露异常修正
+        if (!(isFinishing() || isDestroyed())) {
+            if (bDialog != null && bDialog.isShowing()) {
+                bDialog.dismiss();
+            }
         }
     }
 
@@ -192,12 +194,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     protected void openActivity(Class<? extends BaseActivity> toActivity) {
         openActivity(toActivity, null);
     }
- /**
+
+    /**
      * 启动下一个activity
      */
-    protected void openActivityParams(Class<? extends BaseActivity> toActivity, Map<String,String> map) {
+    protected void openActivityParams(Class<? extends BaseActivity> toActivity, Map<String, String> map) {
         Intent intent = new Intent(this, toActivity);
-        if (map.size()>0){
+        if (map.size() > 0) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 intent.putExtra(entry.getKey(), entry.getValue());
             }
@@ -238,7 +241,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     protected void onDestroy() {
 
 //        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient()); //此处开启会造成不定时的数据无法加载
-
+        // TODO: 2018/2/26   dialog异常尝试处理,未确认
+        dismissPDialog();
+        bDialog = null;
         OkGo.cancelTag(OkGo.getInstance().getOkHttpClient(), getLocalClassName());
         super.onDestroy();
 
@@ -324,9 +329,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     }
 
 
-
-    private void timeThread(){
-        new Thread(){
+    private void timeThread() {
+        new Thread() {
             @Override
             public void run() {
                 try {
@@ -334,9 +338,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Message msg=Message.obtain();
-                msg.what=1;
-                if (handler!=null){
+                Message msg = Message.obtain();
+                msg.what = 1;
+                if (handler != null) {
                     handler.sendMessage(msg);
                 }
             }

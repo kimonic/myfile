@@ -519,9 +519,9 @@ public class AffirmBuyActivity extends BaseActivity {
             }
             if (jiaXiQuanId == null || "".equals(jiaXiQuanId)) {
                 ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
-                tvJiaxiquan.setText(getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
+                tvJiaxiquan.setText(getResources().getString(R.string.meiyoukeyongjiaxiquan));
             } else {
-                tvJiaxiquan.setText(("已选" + acount + "%加息券"));
+                tvJiaxiquan.setText(("已选" + acount + "加息券"));
             }
         }
 
@@ -539,7 +539,7 @@ public class AffirmBuyActivity extends BaseActivity {
             }
             if (fanXianQuanId == null || "".equals(fanXianQuanId)) {
                 ToastUtils.showToast(AffirmBuyActivity.this, getResources().getString(R.string.meiyouxuanzhongkeyongfanxianquan));
-                tvFanXianQuan.setText(getResources().getString(R.string.meiyouxuanzhongkeyongjiaxiquan));
+                tvFanXianQuan.setText(getResources().getString(R.string.meiyoukeyongfanxianquan));
             } else {
                 tvFanXianQuan.setText(("已选" + acount + "%返现券"));
             }

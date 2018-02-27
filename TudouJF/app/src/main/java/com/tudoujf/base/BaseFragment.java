@@ -90,8 +90,11 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     public void dismissPDialog() {
         isProgressing = false;
         try {
-            if (bDialog != null && bDialog.isShowing()) {
-                bDialog.dismiss();
+            // TODO: 2018/2/26 窗体泄露异常修正
+            if (getActivity() != null && !(getActivity().isFinishing() || getActivity().isDestroyed())) {
+                if (bDialog != null && bDialog.isShowing()) {
+                    bDialog.dismiss();
+                }
             }
         } catch (Exception e) {
             Log.e("TAG", "showPDialog: -----窗体泄露");
@@ -158,7 +161,7 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         unbinder.unbind();
         // TODO: 2018/2/2   dialog异常尝试处理,未确认
         dismissPDialog();
-        bDialog=null;
+        bDialog = null;
         super.onDestroyView();
     }
 

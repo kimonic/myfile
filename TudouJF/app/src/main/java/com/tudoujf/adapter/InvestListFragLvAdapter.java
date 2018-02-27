@@ -71,10 +71,9 @@ public class InvestListFragLvAdapter extends BaseAdapter {
         if (!"-1".equals(list.get(position).getAward_status())) {//是否额外奖励 -1否 1按金额，2按比例
             viewHolder.bidView.setAward(true);//奖0.02%是否显示
             viewHolder.bidView.setAwardValue(StringUtils.string2Float(list.get(position).getAward_proportion()));//奖励的数值
-        }else {
+        } else {
             viewHolder.bidView.setAward(false);//奖0.02%是否显示
         }
-
 
 
 //        if (!"借款中".equals(list.get(position).getStatus_name())){
@@ -83,41 +82,43 @@ public class InvestListFragLvAdapter extends BaseAdapter {
 //            viewHolder.bidView.setInvestNow(true);
 //        }
         //判断按钮是蓝色还是灰色,条件status<=3并且进度<100
-        if (!(StringUtils.string2Integer(list.get(position).getStatus())<=3&&StringUtils.string2Integer(list.get(position).getProgress())<100)){//是否时立即还款按钮
+        if (!(StringUtils.string2Integer(list.get(position).getStatus()) <= 3 && StringUtils.string2Integer(list.get(position).getProgress()) < 100)) {//是否时立即还款按钮
             viewHolder.bidView.setInvestNow(false);
-        }else {
+        } else {
             viewHolder.bidView.setInvestNow(true);
         }
 
-        if (list.get(position).getStatus_name()!=null){
+        if (list.get(position).getStatus_name() != null) {
             viewHolder.bidView.setButtonText(list.get(position).getStatus_name());//按钮文本
         }
 
 
-
-
-        viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress())/100);//投资进度
-        if (list.get(position).getName()!=null){
+        viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress()) / 100);//投资进度
+        if (list.get(position).getName() != null) {
 //            viewHolder.bidView.setTitle((list.get(position).getCategory_name()+list.get(position).getSerialno()));//标的标题
-            viewHolder.bidView.setTitle(list.get(position).getName());//标的标题
+//            if (list.get(position).getName().length() > 20) {
+//                viewHolder.bidView.setTitle((list.get(position).getName().substring(0, 17) + "..."));//标的标题过长时显示部分内容
+//            } else {
+                viewHolder.bidView.setTitle(list.get(position).getName());//标的标题
+//            }
         }
 
-        if ("-1".equals(list.get(position).getAdditional_status())){//是否显示新手专享
+        if ("-1".equals(list.get(position).getAdditional_status())) {//是否显示新手专享
             viewHolder.bidView.setIsNewer("");
-        }else {
+        } else {
             viewHolder.bidView.setIsNewer(context.getResources().getString(R.string.xinshouzhuanxiang));
         }
 
-        if ("1".equals(list.get(position).getIs_locked())){
+        if ("1".equals(list.get(position).getIs_locked())) {
             viewHolder.bidView.setLock(true);
-        }else {
+        } else {
             viewHolder.bidView.setLock(false);
         }
 
 
         viewHolder.bidView.setNianHuaShouYi(StringUtils.getTwoDecimalsStr(list.get(position).getApr()));//预期年化收益率
 
-        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus()+"元");//剩余可投资金额
+        viewHolder.bidView.setShengYuKeTou(list.get(position).getAmount_surplus() + "元");//剩余可投资金额
 
 
 //---------------------------显示贷后管理-------------------------------------------------------------
@@ -140,7 +141,6 @@ public class InvestListFragLvAdapter extends BaseAdapter {
         viewHolder.bidView.setInvestSum(list.get(position).getAmount());//总投资金额
         viewHolder.bidView.setInvestTime(list.get(position).getPeriod());//投资期限
         viewHolder.bidView.invalidate();
-
 
 
         return view;

@@ -227,6 +227,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
 
         srl.setRefreshHeader(new TuDouHeader(this));
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
+
     }
 
     @Override

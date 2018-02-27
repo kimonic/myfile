@@ -2,6 +2,7 @@
     <string name="app_name">土豆金服</string>
     <string name="homepage">首页</string>
     <string name="licai">理财</string>
+    <string name="licai1">投资</string>
     <string name="faxian">发现</string>
     <string name="my">我的</string>
     <string name="act_login_username">请输入用户名/手机号</string>
@@ -249,7 +250,7 @@
     <string name="act_myearnings_huodongshouyi">活动收益</string>
     <string name="frag_home_xinshoutiyanbiao">新手体验标</string>
     <string name="act_adress_title">公司地址</string>
-    <string name="licaiyoufengxian">理财有风险,投资需谨慎</string>
+    <string name="licaiyoufengxian">投资有风险,出借需谨慎</string>
     <string name="act_integralrecode_title">积分记录</string>
     <string name="act_integralrecode_zongjifen" >总积分</string>
     <string name="act_integralrecode_default">--,---</string>
@@ -497,7 +498,7 @@
     <string name="meiyoukeyonghongbao">没有可用红包</string>
     <string name="biaodigoumai">标的购买</string>
     <string name="qingxianshurutouzijine">请先输入投资金额!</string>
-    <string name="meiyouxuanzhongkeyongjiaxiquan">没有可用加息券</string>
+    <string name="meiyouxuanzhongkeyongjiaxiquan">没有选中可用加息券</string>
     <string name="zuiduozhinengshuruliangweixiaoshu">最多只能输入两位小数!</string>
     <string name="qingxinashuruchongzhijine">请先输入充值金额,并且充值金额不能为0!</string>
     <string name="yuebuzu">账户余额不足!</string>
@@ -729,6 +730,12 @@
     <string name="xingyunchoujiang">幸运抽奖</string>
     <string name="qingshuruzhengquedetuxingyanzhengma">请输入正确的图形验证码!</string>
     <string name="woyaochujie">我要出借</string>
+    <string name="shengritishi">,生日快乐!送给您一个生日大礼包,请领取后前往我的福利查看详情!!</string>
+    <string name="lingquchenggong">领取成功!</string>
+    <string name="lignqushibai">领取失败!</string>
+    <string name="shibeijiaxi">10倍</string>
+    <string name="meiyoukeyongjiaxiquan">没有可用加息券</string>
+    <string name="meiyoukeyongfanxianquan">没有可用返现券</string>
 
 
 </resources>

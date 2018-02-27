@@ -5,6 +5,8 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -208,6 +210,11 @@ public class HomeFragment extends BaseFragment {
 
     private boolean theEnd = true;
 
+    /**
+     * 风险提示弹窗flag
+     */
+    private boolean fengXianFlag = true;
+
     @Override
     public int layoutRes() {
         return R.layout.frag_home;
@@ -253,6 +260,7 @@ public class HomeFragment extends BaseFragment {
                 startActivity(intent1);
 //                openActivity(NewbieWelfareActivity.class);
                 break;
+
             case R.id.ll_frag_home_tuijianyouli://推荐有礼
                 if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                     openActivity(LoginActivity.class);
@@ -695,6 +703,7 @@ public class HomeFragment extends BaseFragment {
                 super.onError(response);
                 dismissPDialog();
                 finishRL();
+
                 ToastUtils.showToast(getActivity(), R.string.huoqushouyeshujushibai);
             }
         });
@@ -717,7 +726,6 @@ public class HomeFragment extends BaseFragment {
             initBallViews();
             initImagesViews();
             initOtherView(0);
-
             params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
             if ("-1".equals(bean.getSign_status())) {
                 params.setMarginEnd(0);
@@ -728,12 +736,24 @@ public class HomeFragment extends BaseFragment {
 
 
 //             TODO: 2018/1/17 检测是否需要弹出风险测评
-            if ((!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
-                    &&"-1".equals(bean.getRiskAssessment())
-                    &&"1".equals(bean.getIsTrustOpen())
-                    ){
+            if (fengXianFlag && (!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
+                    && "-1".equals(bean.getRiskAssessment())
+                    && "1".equals(bean.getIsTrustOpen())
+                    ) {
 
                 DialogUtils.showRiskDialog(getActivity());
+                fengXianFlag = false;
+            }
+            // TODO: 2018/2/9 检测是否弹出生日红包弹窗
+            if ("1".equals(bean.getBirthdayWelfare())) {
+                String relName = bean.getRealName();
+                ToastUtils.showToast(getActivity(), relName + ",生日快乐!");
+                DialogUtils.showPromptDialog(getActivity(), getString(R.string.tishi), relName + getString(R.string.shengritishi), new DialogUtils.DialogUtilsClickListener() {
+                    @Override
+                    public void onClick() {
+                        receiveRedPackage();
+                    }
+                });
 
             }
 
@@ -742,8 +762,42 @@ public class HomeFragment extends BaseFragment {
     }
 
     /**
+     * 领取生日红包
+     */
+    private void receiveRedPackage() {
+        showPDialog();
+        TreeMap<String, String> map = new TreeMap<>();
+
+        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+
+        HttpMethods.getInstance().POST(getActivity(), Constants.BIRTHDAY_WELFARE, map, "", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                dismissPDialog();
+
+                String result = StringUtils.getDecodeString(response.body());
+                Log.e(TAG, "onSuccess: ------------领取生日红包返回的json数据----------------" + result);
+                if (result != null && result.contains("\"code\":200")) {
+                    ToastUtils.showToast(getActivity(), R.string.lingquchenggong);
+                } else {
+                    ToastUtils.showToast(getActivity(), R.string.lignqushibai);
+                }
+
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                dismissPDialog();
+                ToastUtils.showToast(getActivity(), R.string.lignqushibai);
+            }
+        });
+    }
+
+    /**
      * 对其他view加载网络数据
      */
+
     private void initOtherView(int position) {
         if (loanBeanList != null) {
             tvBidTitle.setText(loanBeanList.get(position).getName());
@@ -813,12 +867,16 @@ public class HomeFragment extends BaseFragment {
         }
         super.onResume();
 //        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-//            loginFlag = true;
+//            loginFlag = true;  1  2  3
+
+
+
 //        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
 //            loginFlag = false;
 //            Log.e("TAG", "LoadInternetDataToUi: ---风险测评--onResume");
 //            initDataFromInternet();
-//        }
+
+        //        }
     }
 
     @Override

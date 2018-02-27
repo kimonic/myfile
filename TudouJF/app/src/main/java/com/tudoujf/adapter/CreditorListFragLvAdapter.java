@@ -69,7 +69,11 @@ public class CreditorListFragLvAdapter extends BaseAdapter {
 
         viewHolder.bidView.setInvestProgress(StringUtils.string2Float(list.get(position).getProgress()) / 100);//投资进度
         if (list.get(position).getLoan_name() != null) {
-            viewHolder.bidView.setTitle((list.get(position).getLoan_name()));//标的标题
+            if (list.get(position).getLoan_name().length()>20){
+                viewHolder.bidView.setTitle((list.get(position).getLoan_name().substring(0,17)+"..."));//标的标题过长时显示部分内容
+            }else {
+                viewHolder.bidView.setTitle(list.get(position).getLoan_name());//标的标题
+            }
         }
 
         if (list.get(position).getAmount_surplus() == null) {
