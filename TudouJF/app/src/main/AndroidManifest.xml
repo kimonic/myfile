@@ -273,6 +273,9 @@
         <activity android:name=".activity.discover.ExchangeRecordActivity" />
         <!--82.豪礼兑换activity-->
         <activity android:name=".activity.discover.GoodGiftExchangeActivity" />
+        <!--83.电子签章activity-->
+        <activity android:name=".activity.my.myaccount.ElectronicSignatureActivity" />
+
 
 
         <service

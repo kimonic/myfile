@@ -99,8 +99,12 @@ public class MyAccountActivity extends BaseActivity {
     LinearLayout llGesture;
     @BindView(R.id.ll_act_myaccount_risk)
     LinearLayout llRisk;
+    @BindView(R.id.ll_act_myaccount_signature)
+    LinearLayout llSignature;
     @BindView(R.id.tv_act_myaccount_signout)
     TextView tvSignOut;
+    @BindView(R.id.tv_act_myaccount_signature)
+    TextView tvSignature;
     @BindView(R.id.tv_act_myaccount_oc)
     TextView tvOC;
     @BindView(R.id.tv_act_myaccount_username)
@@ -294,6 +298,10 @@ public class MyAccountActivity extends BaseActivity {
                 }
 
                 break;
+            case R.id.ll_act_myaccount_signature://电子签章
+                // TODO: 2018/3/5 打开开通电子签章界面
+                openActivity(ElectronicSignatureActivity.class);
+                break;
         }
 
     }
@@ -403,6 +411,7 @@ public class MyAccountActivity extends BaseActivity {
 
         ivIcon.setOnClickListener(this);
         llRisk.setOnClickListener(this);
+        llSignature.setOnClickListener(this);
 
     }
 
@@ -411,7 +420,7 @@ public class MyAccountActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "我的账户序列: -----"+ UserConfig.getInstance().getLoginToken(this));
+        Log.e("TAG", "我的账户序列: -----" + UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.MY_ACCOUNT, map, getLocalClassName(),
                 new StringCallback() {
@@ -462,11 +471,11 @@ public class MyAccountActivity extends BaseActivity {
 
             /**
              *  sendevent  /dev/input/event5 0003 0  500
-                sendevent /dev/input/event5 0003 1  500
-                sendevent /dev/input/event5 0001 0330 1
-                sendevent  /dev/input/event5 0 0 0
-                sendevent  /dev/input/event5 0001 0330 0
-                sendevent  /dev/input/event5 0 0 0
+             sendevent /dev/input/event5 0003 1  500
+             sendevent /dev/input/event5 0001 0330 1
+             sendevent  /dev/input/event5 0 0 0
+             sendevent  /dev/input/event5 0001 0330 0
+             sendevent  /dev/input/event5 0 0 0
              */
 
         }
