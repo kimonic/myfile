@@ -752,6 +752,9 @@
     <string name="shuzizhengshufuwuxieyi">《<u>数字证书服务协议</u>》</string>
     <string name="querenkaitong">确认开通</string>
     <string name="qingxiantongyishuzizhengshufuwuxieyi">请先同意数字证书服务协议!</string>
+    <string name="yikaitong">已开通</string>
+    <string name="huoquyonghuxinxishibai">获取用户信息失败!</string>
+    <string name="shuzizhengshufuwuxieyi1">数字证书服务协议</string>
 
 
 </resources>

@@ -151,6 +151,7 @@ public class MyAccountActivity extends BaseActivity {
     private boolean change = false;
     private AlertDialog dialogImage;
     private String riskAssessmentCount;
+    private boolean signatureFlag = true;
 
 
     @Override
@@ -300,7 +301,9 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myaccount_signature://电子签章
                 // TODO: 2018/3/5 打开开通电子签章界面
-                openActivity(ElectronicSignatureActivity.class);
+                if (signatureFlag){
+                    openActivity(ElectronicSignatureActivity.class);
+                }
                 break;
         }
 
@@ -469,14 +472,15 @@ public class MyAccountActivity extends BaseActivity {
             tvEmailDescription.setText(bean.getIs_email().getStatus_name());
             tvNameDescription.setText(bean.getIs_realname().getStatus_name());
 
-            /**
-             *  sendevent  /dev/input/event5 0003 0  500
-             sendevent /dev/input/event5 0003 1  500
-             sendevent /dev/input/event5 0001 0330 1
-             sendevent  /dev/input/event5 0 0 0
-             sendevent  /dev/input/event5 0001 0330 0
-             sendevent  /dev/input/event5 0 0 0
-             */
+            // TODO: 2018/3/7 电子签章相关
+            if ("1".equals(bean.getIsSealExisted())) {
+                tvSignature.setText(R.string.yikaitong);
+                signatureFlag = false;
+            } else {
+                tvSignature.setText(R.string.qukaitong);
+                signatureFlag = true;
+            }
+
 
         }
 

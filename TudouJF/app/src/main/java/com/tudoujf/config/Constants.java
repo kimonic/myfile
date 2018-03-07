@@ -17,8 +17,8 @@ public class Constants {
      * 固定URL
      */
     // TODO: 2018/1/17 正式环境与测试环境切换
-//    public static final String URL = "http://m.test.tudoujf.com";
-    public static final String URL = "http://mob.tudoujf.com";
+    public static final String URL = "http://m.test.tudoujf.com";
+//    public static final String URL = "http://mob.tudoujf.com";
 
     /**
      * 活动专区接口
@@ -360,6 +360,19 @@ public class Constants {
      */
     public static final String RISK_QUESTION = URL + "/wap/member/riskAssessment/questions?type=app&login_token=";
 
+    /**
+     * 创建电子签章信息
+     */
+    public static final String SINATURE_INIT = URL + "/phone/seal/memberInfo";
+    /**
+     * 确认创建电子签章
+     */
+    public static final String SINATURE_AFFIRM = URL + "/phone/seal/createSeal";
+    /**
+     * 电子签章创建协议
+     */
+//    public static final String SINATURE_AGREEMENT = URL + "/phone/seal/agreement";
+    public static final String SINATURE_AGREEMENT = URL + "/phone/seal/agreement?login_token=";
 
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -492,7 +505,7 @@ public class Constants {
      */
     public static final String LOGIN = URL + "/phone/member/login";
 
-   /**
+    /**
      * 领取生日红包
      */
     public static final String BIRTHDAY_WELFARE = URL + "/phone/member/birthdayWelfare";

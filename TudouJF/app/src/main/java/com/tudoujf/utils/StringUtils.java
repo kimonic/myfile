@@ -59,7 +59,7 @@ public class StringUtils {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
             return temp;
         } else {
-            return null;
+            return "";
         }
     }
 

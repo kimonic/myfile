@@ -21,13 +21,13 @@ public class MyAccountBean implements BaseBean {
      * phone : 18011111111
      * bank_name : 建设银行
      * account2Wap : 6210*********3456
-     * business_license : 
+     * business_license :
      * card_id : 510************340
      * password : 4fbba2941f32bf7eb05d5910f06bc95a
-     * group_status : 
+     * group_status :
      * is_trust : 1
      * realname_status : 1
-     * pay_pwd : 
+     * pay_pwd :
      * is_email : {"status_code":"-1","status_name":"未认证"}
      * is_phone : {"status_code":"-1","status_name":"已绑定"}
      * is_realname : {"status_code":"1","status_name":"已认证"}
@@ -38,9 +38,9 @@ public class MyAccountBean implements BaseBean {
      * pwd : 1
      * trust_account : {"status_code":"","status_name":"6000060005589777"}
      * realname_remark : Trust register notify
-     * email : 
+     * email :
      * lastlogin_time : 1509715904
-     * paypassword : 
+     * paypassword :
      * is_corp : -1
      * account : 621081123456123456
      * realname : *小白
@@ -78,6 +78,15 @@ public class MyAccountBean implements BaseBean {
     private int isVip;
     private String vipEndTime;
     private String riskAssessmentType;
+    private String isSealExisted;
+
+    public String getIsSealExisted() {
+        return isSealExisted;
+    }
+
+    public void setIsSealExisted(String isSealExisted) {
+        this.isSealExisted = isSealExisted;
+    }
 
     public String getRiskAssessmentType() {
         return riskAssessmentType;
@@ -407,7 +416,7 @@ public class MyAccountBean implements BaseBean {
 
     public static class TrustAccountBean {
         /**
-         * status_code : 
+         * status_code :
          * status_name : 6000060005589777
          */
 
