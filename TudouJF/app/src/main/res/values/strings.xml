@@ -92,7 +92,8 @@
     <string name="act_affirmbuy_keyongjiaxiquan">可用加息券</string>
     <string name="act_affirmbuy_keyongfanxianquan">返现券</string>
     <string name="act_affirmbuy_tongyi">同意</string>
-    <string name="act_affirmbuy_pingtaijujianfuwuxieyi">《平台居间服务协议》</string>
+    <string name="act_affirmbuy_pingtaijujianfuwuxieyi">《平台居间服务协议》,具体内容请通过电脑端进行查看</string>
+    <!--<string name="act_affirmbuy_pingtaijujianfuwuxieyi">《平台居间服务协议》</string>-->
     <string name="act_affirmbuy_querengoumai">确认购买</string>
     <string name="act_fanxianquansel_title">选择返现券</string>
     <string name="act_fanxianquansel_zanwu">暂无返现券</string>

@@ -709,29 +709,38 @@ public class DialogUtils {
                 ((Activity) context).getWindow().setAttributes(params);
             }
         });
-        TextView tvLiJiKaiTong = (TextView) view.findViewById(R.id.tv_dialog_lijikaitong);
-        TextView tvZanBuKaiTong = (TextView) view.findViewById(R.id.tv_dialog_zanbukaitong);
-        tvZanBuKaiTong.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_dialog_risk_close);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pop.dismiss();
             }
         });
-        tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2018/1/17  打开评估页面
+
+//        TextView tvLiJiKaiTong = (TextView) view.findViewById(R.id.tv_dialog_lijikaitong);
+//        TextView tvZanBuKaiTong = (TextView) view.findViewById(R.id.tv_dialog_zanbukaitong);
+//        tvZanBuKaiTong.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pop.dismiss();
+//            }
+//        });
+//        tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                 TO DO: 2018/1/17  打开评估页面
 //
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("url", Constants.RISK_QUESTION+ UserConfig.getInstance().getLoginToken(context));
-                intent.putExtra("title","风险测评");
-                context.startActivity(intent);
-                pop.dismiss();
-            }
-        });
+//                Intent intent = new Intent(context, WebActivity.class);
+//                intent.putExtra("url", Constants.RISK_QUESTION+ UserConfig.getInstance().getLoginToken(context));
+//                intent.putExtra("title","风险测评");
+//                context.startActivity(intent);
+//                pop.dismiss();
+//            }
+//        });
 
 
-        SharedPreferencesUtils.getInstance(context, "popshow").put("showrisk", false);
+//        SharedPreferencesUtils.getInstance(context, "popshow").put("showrisk", false);
 
     }
 

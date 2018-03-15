@@ -150,6 +150,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
         Intent intent=new Intent(this, WebActivity.class);
         intent.putExtra("url", Constants.SINATURE_AGREEMENT+UserConfig.getInstance().getLoginToken(this));
         intent.putExtra("title",getString(R.string.shuzizhengshufuwuxieyi1));
+        Log.e("TAG", "requestAgreement: -----"+Constants.SINATURE_AGREEMENT+UserConfig.getInstance().getLoginToken(this));
+
         startActivity(intent);
 //        showPDialog();
 //        TreeMap<String, String> map = new TreeMap<>();
@@ -204,6 +206,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
 
                                         }
                                     });
+                            tvAffirmOpen.setClickable(false);
+                            tvAffirmOpen.setBackgroundColor(getResources().getColor(R.color.color_gray));
                         } else {
                             DialogUtils.showPromptDialog(ElectronicSignatureActivity.this,
                                     "提示", "电子签章开通失败", new DialogUtils.DialogUtilsClickListener() {
@@ -220,7 +224,6 @@ public class ElectronicSignatureActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         Log.e("TAG", "onError: 创建电子签章是否成功的返回信息-----" + response.body());
-
                         ToastUtils.showToast(ElectronicSignatureActivity.this, R.string.shujujiazaichaoshi);
                     }
                 });

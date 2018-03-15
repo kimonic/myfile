@@ -293,7 +293,6 @@ public class HomeFragment extends BaseFragment {
                     Intent intent = new Intent(getActivity(), MyMessageActivity.class);
                     startActivityForResult(intent, 1);
                 }
-//                openActivity(MyMessageActivity.class);
                 break;
         }
 
@@ -305,7 +304,7 @@ public class HomeFragment extends BaseFragment {
     private void retractAnim(int flag) {
         params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
         // TODO: 2018/2/28  修复params为null的问题,待验证 1.0.3
-        if(params==null){
+        if (params == null) {
             return;
         }
         int marginEnd = params.getMarginEnd();
@@ -360,7 +359,6 @@ public class HomeFragment extends BaseFragment {
                             checkIdentity();
                         }
 
-//
                     } else {
                         Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
                         intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
@@ -507,9 +505,6 @@ public class HomeFragment extends BaseFragment {
                     intent1.putExtra("url", listUrl.get(vpFragHome.getCurrentItem()).getJumpurl());
                     intent1.putExtra("title", getResources().getString(R.string.huodongxinagqing));
                     startActivity(intent1);
-//                    ToastUtils.showToast(getActivity(), listUrl.get(vpFragHome
-// .getCurrentItem()).getJumpurl());
-                    //  2017/8/15 传递跳转页面的URL
                 }
             });
             list.add(imageview);
@@ -873,7 +868,6 @@ public class HomeFragment extends BaseFragment {
         super.onResume();
 //        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
 //            loginFlag = true;  1  2  3
-
 
 
 //        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {

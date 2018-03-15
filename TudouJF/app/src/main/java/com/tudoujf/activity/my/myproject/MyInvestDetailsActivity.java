@@ -87,11 +87,11 @@ public class MyInvestDetailsActivity extends BaseActivity {
                 openActivity(AffirmBuyCreditorsRightsActivity.class);
                 break;
             case R.id.ll_act_myinvestdetails_see_protocol:
-                Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", Constants.LOAN_AGREEMENT+"?id="+bean.getLoan_info().getId()
-                +"&tenderId="+id);
-                intent.putExtra("title","土豆金服服务协议");
-                startActivity(intent);
+//                Intent intent = new Intent(this, WebActivity.class);
+//                intent.putExtra("url", Constants.LOAN_AGREEMENT+"?id="+bean.getLoan_info().getId()
+//                +"&tenderId="+id);
+//                intent.putExtra("title","土豆金服服务协议");
+//                startActivity(intent);
                 break;
         }
 
@@ -120,7 +120,7 @@ public class MyInvestDetailsActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        llSeeProtocol.setOnClickListener(this);
+//        llSeeProtocol.setOnClickListener(this);
     }
 
     @Override
@@ -151,7 +151,7 @@ public class MyInvestDetailsActivity extends BaseActivity {
                         }
                     }
 
-                    @Override
+                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
@@ -199,6 +199,10 @@ public class MyInvestDetailsActivity extends BaseActivity {
 
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     protected int setStatusBarColor() {
         return getResources().getColor(R.color.global_theme_background_color);

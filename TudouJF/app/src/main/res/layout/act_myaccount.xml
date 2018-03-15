@@ -240,72 +240,7 @@
                     />
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_line"
-                />
-            <LinearLayout
-                android:id="@+id/ll_act_myaccount_risk"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:background="@color/color_white"
-                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:contentDescription="@null"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/act_account_fengxinpinggu"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textColor="@color/color_black"
-                    android:gravity="center"
-                    android:text="@string/touzifengxianpingce"
-
-                    />
-
-
-
-                <TextView
-                    android:id="@+id/tv_act_myaccount_risk_description"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="@color/color_black2"
-                    android:textSize="12sp"
-                    android:text="@string/morenbaoshouxing"
-                    android:gravity="center"
-                    />
-                <TextView
-                    android:id="@+id/tv_act_myaccount_risk_now"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/color_orange"
-                    android:textSize="12sp"
-                    android:text="@string/qupinggu"
-                    android:gravity="center_vertical|end"
-                    />
-
-                <TextView
-                    android:layout_width="11dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/xvector_rightarrowlarge"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    />
-
-            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -474,6 +409,72 @@
                     android:textColor="@color/color_orange"
                     android:textSize="12sp"
                     android:text="@string/weirenzheng"
+                    android:gravity="center_vertical|end"
+                    />
+
+                <TextView
+                    android:layout_width="11dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/xvector_rightarrowlarge"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line"
+                />
+            <LinearLayout
+                android:id="@+id/ll_act_myaccount_risk"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@color/color_white"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@null"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/act_account_fengxinpinggu"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center"
+                    android:text="@string/touzifengxianpingce"
+
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_act_myaccount_risk_description"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/color_black2"
+                    android:textSize="12sp"
+                    android:text="@string/morenbaoshouxing"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_act_myaccount_risk_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/color_orange"
+                    android:textSize="12sp"
+                    android:text="@string/qupinggu"
                     android:gravity="center_vertical|end"
                     />
 

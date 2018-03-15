@@ -189,7 +189,9 @@ public class HomeActivity extends BaseActivity {
         checkNew();
     }
 
-
+    /**
+     * app版本更新
+     */
     private void checkNew() {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("phone_type", "1");
@@ -203,7 +205,6 @@ public class HomeActivity extends BaseActivity {
                         }.getType(), NewVersionBean.class, HomeActivity.this);
                         if (bean1 != null) {
                             NewVersionBean bean = (NewVersionBean) bean1;
-
                             String versionName = AppInfoUtils.getVersionName(HomeActivity.this);
                             final String url;
                             if (bean.getUrl()!=null){
@@ -211,7 +212,6 @@ public class HomeActivity extends BaseActivity {
                             }else {
                                 url="";
                             }
-
 
                             //强制更新
                             if (versionName.equals(bean.getForce_version())) {

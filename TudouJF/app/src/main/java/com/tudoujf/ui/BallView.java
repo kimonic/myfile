@@ -5,11 +5,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.tudoujf.R;
@@ -36,8 +34,7 @@ public class BallView extends View {
 
     private int circleBorderWidth = 4;
     private int lineBorderWidth = 20;
-    private String text="11.00%";
-    private float duandianbuchang=10;
+    private String text = "0.00%";
 
     public String getText() {
         return text;
@@ -102,47 +99,43 @@ public class BallView extends View {
 
         int width = getWidth();
         int height = getHeight();
-
         int length = Math.min(width, height);
 
 
 
-
-        float lineStartX = (float) (width / 2 - Math.sqrt(length * length / 4 - length * length * 0.01));
-        float lineEndX = (float) (width / 2 + Math.sqrt(length * length / 4 - length * length * 0.01));
-        float lineHeight = height / 2 + 0.1f * length / 2;
-        canvas.drawLine(lineStartX+duandianbuchang, lineHeight, lineEndX-duandianbuchang, lineHeight, linePaint);
+        //----------------------------圆中阴影及阴影上方横线----------------------------------------
 
         float angle = (float) (360 * Math.asin((0.1 * length - lineBorderWidth) / (0.5 * length)) / (2 * Math.PI));
-
-
         rectF.left = width / 2 - length / 2 + 5;
         rectF.top = height / 2 - length / 2 + 5;
         rectF.right = width / 2 + length / 2 - 5;
         rectF.bottom = height / 2 + length / 2 - 5;
+        canvas.drawArc(rectF, angle / 2, 180 - angle, false, linePaint);
         canvas.drawArc(rectF, angle, 180 - 2 * angle, false, shadowpaint);
+        //----------------------------圆中阴影及阴影上方横线----------------------------------------
 
 
-        float textY=height/2-length*0.11f;
-//        shadowpaint.setTextSize(length*0.2f);
-//        shadowpaint.setTextSize(length*0.1658f);
-        shadowpaint.setTextSize(68);
-        float  textLength=shadowpaint.measureText(text);
-        float textX=width/2-textLength/2;
-
-        canvas.drawText(text,textX,textY,shadowpaint);
-
-//        textPaint.setTextSize(length*0.12f);
-//        textPaint.setTextSize(length*0.09024f);
-        textPaint.setTextSize(37);
-        float bottomTextLength=textPaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi));
-        float textX1=width/2-bottomTextLength/2;
-        float textY1=height/2+length*0.24f;
-        canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi),textX1,textY1,textPaint);
+        //----------------------------5.00%-借款利率绘制--------------------------------------------
+        float textY = height / 2 - length * 0.11f;
+        shadowpaint.setTextSize(length * 0.1743f);
+        float textLength = shadowpaint.measureText(text);
+        float textX = width / 2 - textLength / 2;
+        canvas.drawText(text, textX, textY, shadowpaint);
+        //----------------------------5.00%-借款利率绘制--------------------------------------------
 
 
+        //----------------------------约定借款年华利率绘制------------------------------------------
+        textPaint.setTextSize(length * 0.09487f);
+        float bottomTextLength = textPaint.measureText(getResources().getString(R.string.frag_home_yuqinianhuashouyi));
+        float textX1 = width / 2 - bottomTextLength / 2;
+        float textY1 = height / 2 + length * 0.24f;
+        canvas.drawText(getResources().getString(R.string.frag_home_yuqinianhuashouyi), textX1, textY1, textPaint);
+        //----------------------------约定借款年华利率绘制------------------------------------------
+
+
+        //----------------------------外圈大圆绘制--------------------------------------------------
         canvas.drawCircle(width / 2, height / 2, length / 2 - circleBorderWidth, circlePaint);
-
+        //----------------------------外圈大圆绘制--------------------------------------------------
 
 
     }

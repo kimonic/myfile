@@ -307,13 +307,13 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="@string/act_mypopularize_chakan"
-                    android:textColor="@color/color_black"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="@string/act_mypopularize_chakan"-->
+                    <!--android:textColor="@color/color_black"-->
+                    <!--android:textSize="12sp" />-->
 
                 <TextView
                     android:layout_width="wrap_content"
