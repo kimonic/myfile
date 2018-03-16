@@ -1,36 +1,29 @@
 package com.tudoujf.activity.discover;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.databean.DiscoverBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.VerificationCodeView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
-import java.nio.channels.Channels;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -141,7 +134,8 @@ public class GoodGiftExchangeActivity extends BaseActivity {
                         dismissPDialog();
 //                        finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:---好礼兑换接口返回数据--------" + result);
+                        LUtils.e(GoodGiftExchangeActivity.class,"logflag-好礼兑换接口返回数据--"+result);
+
                         Gson gson=new Gson();
                         CommonBean bean=gson.fromJson(result,CommonBean.class);
                         if (bean!=null&&"200".equals(bean.getCode())){

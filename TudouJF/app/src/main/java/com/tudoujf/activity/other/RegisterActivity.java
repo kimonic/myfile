@@ -6,7 +6,6 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.example.encryptionpackages.AESencrypt;
 import com.example.encryptionpackages.CreateCode;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -35,6 +33,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -101,7 +100,6 @@ public class RegisterActivity extends BaseActivity {
      * 手机验证码
      */
     private String randomCode;
-    private String TAG = "RegisterActivity";
     /**
      * 检测手机号是否存在的bean
      */
@@ -122,10 +120,7 @@ public class RegisterActivity extends BaseActivity {
      * 登陆注册时展示的dialog
      */
     private AlertDialog dialog;
-    /**
-     * 记录第一次点击back键的时间
-     */
-    private long beforeTime;
+
 
     /**
      * 倒计时handler
@@ -133,7 +128,7 @@ public class RegisterActivity extends BaseActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            tvGetcode.setText(msg.what + "s后重新发送");
+            tvGetcode.setText((msg.what + "s后重新发送"));
             if (msg.what == 0) {
                 countTime = 60;
                 tvGetcode.setClickable(true);
@@ -150,7 +145,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private boolean agreeRule = false;
 
-    private boolean fosousOne, fosousTwo;
+//    private boolean fosousOne, fosousTwo;
 
     @Override
     public int getLayoutResId() {
@@ -213,14 +208,12 @@ public class RegisterActivity extends BaseActivity {
             case R.id.tv_zhucexieyi:
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("url", Constants.ZHU_CE_XIE_YI);
-                intent.putExtra("title","土豆金服服务协议");
+                intent.putExtra("title", "土豆金服服务协议");
                 startActivity(intent);
                 break;
 
         }
     }
-
-
 
 
     @Override
@@ -246,7 +239,7 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     ivClear.setVisibility(View.GONE);
                 }
-                checkPhoneBean=null;
+                checkPhoneBean = null;
                 tvGetcode.setBackgroundResource(R.drawable.xshape_roundrect_mgray);
 
             }
@@ -301,7 +294,8 @@ public class RegisterActivity extends BaseActivity {
                         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.CHECK, map, "registeractivity", new StringCallback() {
                             @Override
                             public void onSuccess(Response<String> response) {
-                                Log.e(TAG, "onSuccess:---------校验手机号是否存在返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                                LUtils.e(RegisterActivity.class, "logflag-校验手机号是否存在返回的json数据--" + StringUtils.getDecodeString(response.body()));
+
                                 BaseBean bean = ParseJson.getJsonResult(response.body(), new TypeToken<CheckPhoneIsExistRegisterActBean>() {
                                         }.getType(),
                                         CheckPhoneIsExistRegisterActBean.class, RegisterActivity.this);
@@ -309,7 +303,7 @@ public class RegisterActivity extends BaseActivity {
                                     checkPhoneBean = (CheckPhoneIsExistRegisterActBean) bean;
                                     if (checkPhoneBean.getStatus().equals("0")) {
                                         tvGetcode.setBackgroundResource(R.drawable.xshape_roundrect_myellow);
-                                    }else {
+                                    } else {
                                         ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
                                     }
                                 }
@@ -343,13 +337,13 @@ public class RegisterActivity extends BaseActivity {
         tvZhuCeXieYi.setOnClickListener(this);
     }
 
-    private void visibilityplaceHolder() {
-        if (fosousOne || fosousTwo) {
-            view.setVisibility(View.VISIBLE);
-        } else {
-            view.setVisibility(View.GONE);
-        }
-    }
+//    private void visibilityplaceHolder() {
+//        if (fosousOne || fosousTwo) {
+//            view.setVisibility(View.VISIBLE);
+//        } else {
+//            view.setVisibility(View.GONE);
+//        }
+//    }
 
     @Override
     public void initDataFromInternet() {
@@ -380,7 +374,7 @@ public class RegisterActivity extends BaseActivity {
      */
     private void startCountDown() {
         tvGetcode.setClickable(false);
-        tvGetcode.setText("60s后重新发送");
+        tvGetcode.setText(("60s后重新发送"));
         new Thread() {
             @Override
             public void run() {
@@ -400,15 +394,15 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    /**
-     * 将object对象转化为json字符串
-     */
-    public static String object2JsonNoEscaping(Object obj) {
-        GsonBuilder gson = new GsonBuilder();
-        gson.disableHtmlEscaping();
-        gson.serializeNulls();
-        return gson.create().toJson(obj);
-    }
+//    /**
+//     * 将object对象转化为json字符串
+//     */
+//    public static String object2JsonNoEscaping(Object obj) {
+//        GsonBuilder gson = new GsonBuilder();
+//        gson.disableHtmlEscaping();
+//        gson.serializeNulls();
+//        return gson.create().toJson(obj);
+//    }
 
     /**
      * 提交注册信息
@@ -424,7 +418,8 @@ public class RegisterActivity extends BaseActivity {
             HttpMethods.getInstance().POST(this, Constants.REGISTER, map, "registeractivity", new StringCallback() {
                 @Override
                 public void onSuccess(Response<String> response) {
-                    Log.e(TAG, "onSuccess:---------注册账号返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                    LUtils.e(RegisterActivity.class, "logflag-注册账号返回的json数据--" + StringUtils.getDecodeString(response.body()));
+
                     // 调用登陆接口进行登陆,注册成功保存login_token,跳转设置手势密码页面
                     try {
                         JSONObject json = new JSONObject(StringUtils.getDecodeString(response.body()));
@@ -457,7 +452,8 @@ public class RegisterActivity extends BaseActivity {
         HttpMethods.getInstance().POST(this, Constants.LOGIN, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                Log.e(TAG, "onSuccess:---------注册账号成功后登陆返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                LUtils.e(RegisterActivity.class, "logflag---注册账号成功后登陆返回的json数据" + StringUtils.getDecodeString(response.body()));
+
                 // 2017/8/15 保存完数据之后,跳转手势密码页面
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
@@ -494,12 +490,6 @@ public class RegisterActivity extends BaseActivity {
      */
     public void getSms() {
         randomCode = StringUtils.getRandomCode();
-        Log.e(TAG, "getSms: --------------------" + randomCode);
-        //-----------------------------------------待删除-------------------------------------------------------
-        //-----------------------------------------待删除-------------------------------------------------------
-//        ToastUtils.showToast(RegisterActivity.this, randomCode);
-        //-----------------------------------------待删除-------------------------------------------------------
-        //-----------------------------------------待删除-------------------------------------------------------
         TreeMap<String, String> map = new TreeMap<>();
         map.put("type", "reg");//类型注册
         map.put("phone", userName);//手机号码
@@ -508,7 +498,8 @@ public class RegisterActivity extends BaseActivity {
         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.REG_SMS, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                Log.e(TAG, "onSuccess:---------获取验证码返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                LUtils.e(RegisterActivity.class, "logflag-获取验证码返回的json数据--" + StringUtils.getDecodeString(response.body()));
+
                 Gson gson = new Gson();
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());

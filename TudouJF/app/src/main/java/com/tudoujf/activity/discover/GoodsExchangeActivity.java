@@ -1,7 +1,6 @@
 package com.tudoujf.activity.discover;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,6 +17,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -119,11 +119,6 @@ public class GoodsExchangeActivity extends BaseActivity {
         map.put("consignee", etLianxiren.getText().toString());
         map.put("address", etAdress.getText().toString());
 
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-lipinhao-" + lipinhao);
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etPhone.getText().toString()-" + etPhone.getText().toString());
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-number-" + number);
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etLianxiren.getText().toString()-" + etLianxiren.getText().toString());
-        Log.e("TAG", "affirm: ---商品确认兑换返回的json数据-etAdress.getText().toString()-" + etAdress.getText().toString());
 
 
         HttpMethods.getInstance().POST(this, Constants.SUBMIT_ORDER, map, "GoodsExchangeActivity", new StringCallback() {
@@ -131,7 +126,8 @@ public class GoodsExchangeActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------积分商城--商品确认兑换返回的json数据----------------" + result);
+                        LUtils.e(GoodsExchangeActivity.class,"logflag-积分商城--商品确认兑换返回的json数据--"+result);
+
                         if (result != null && result.contains("200")) {
                             DialogUtils.showPromptDialogConfirm(GoodsExchangeActivity.this, "提示", "兑换成功", new DialogUtils.DialogUtilsClickListener() {
                                 @Override

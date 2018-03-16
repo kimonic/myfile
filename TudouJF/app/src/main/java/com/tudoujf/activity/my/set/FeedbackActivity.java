@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.set;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,6 +14,7 @@ import com.tudoujf.bean.CommonBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -113,7 +113,8 @@ public class FeedbackActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----反馈意见接口返回数据--------------" + result);
+                        LUtils.e(FeedbackActivity.class,"logflag-反馈意见接口返回数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
                         if (bean != null) {

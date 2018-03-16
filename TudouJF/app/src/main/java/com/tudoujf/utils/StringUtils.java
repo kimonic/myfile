@@ -71,8 +71,6 @@ public class StringUtils {
         params.put("diyou", CreateCode.p2sDiyou(CreateCode.GetJson(map)));
         params.put("xmdy", CreateCode.p2sXmdy(CreateCode.p2sDiyou(CreateCode.GetJson(map))));
 
-//        Log.e("TAG", "getRequestParams: -diyou----"+params.get("diyou"));
-//        Log.e("TAG", "getRequestParams: -xmdy----"+params.get("xmdy"));
 
         return params;
     }
@@ -326,13 +324,11 @@ public class StringUtils {
                     builder.insert(fStr.length() + tem - 3 - (i - 1) * 4, ",");
                 }
                 tem++;
-//                Log.e("TAG", "getCommaDecimalsStrAssist: -----" + builder.toString() + "------------" + s.length());
                 i++;
             }
 //            while (s.length()+tem - 3 * i >= 3) {
 //                builder.insert(s.length() - 3 * i - 3+tem, ",");
 //                tem++;
-//                Log.e("TAG", "getCommaDecimalsStrAssist: -----"+builder.toString()+"------------"+s.length());
 //                i++;
 //            }
             return builder.toString();

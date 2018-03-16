@@ -29,6 +29,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -247,7 +248,8 @@ public class MyProjectCreditorFragment extends BaseFragment {
                         finishSRL();
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的债权项目接口返回数据--------" + status_nid + "----" + result);
+                        LUtils.e(MyProjectCreditorFragment.class,"logflag--我的债权项目接口返回数据--"+status_nid + "----" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyCreditorProjectBean>() {
                         }.getType(), MyCreditorProjectBean.class, getActivity());
                         if (bean1 != null) {

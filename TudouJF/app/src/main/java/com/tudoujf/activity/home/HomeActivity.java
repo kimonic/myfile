@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -12,8 +11,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.common.WebActivity;
-import com.tudoujf.activity.my.set.SetActivity;
 import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.HomeFragVPAdapter;
@@ -33,6 +30,7 @@ import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.AppInfoUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.DownloadAppUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
@@ -67,12 +65,7 @@ public class HomeActivity extends BaseActivity {
 
     private int beforePosition = 0;
 
-    private String signup = "";
 
-    /**
-     * 是否已开启手势密码
-     */
-    private boolean isLock = false;
 
     @Override
     public int getLayoutResId() {
@@ -200,21 +193,29 @@ public class HomeActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----检查版本更新接口返回数据--------------" + result);
+                        LUtils.e(HomeActivity.class,"logflag-检查版本更新接口返回数据--"+result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
                         }.getType(), NewVersionBean.class, HomeActivity.this);
                         if (bean1 != null) {
                             NewVersionBean bean = (NewVersionBean) bean1;
                             String versionName = AppInfoUtils.getVersionName(HomeActivity.this);
                             final String url;
-                            if (bean.getUrl()!=null){
-                                url= bean.getUrl();
-                            }else {
-                                url="";
+                            if (bean.getUrl() != null) {
+                                url = bean.getUrl();
+                            } else {
+                                url = "";
                             }
 
-                            //强制更新
-                            if (versionName.equals(bean.getForce_version())) {
+////                            捕获apk的下载地址
+//                            Intent intent = new Intent(HomeActivity.this, WebActivity.class);
+//                            intent.putExtra("url",
+//                                    "http://sj.qq.com/myapp/detail.htm?apkName=com.tudoujf");
+//                            intent.putExtra("title", "下载新版本");
+//                            startActivity(intent);
+
+                            //所有低版本都必须强制更新
+                            if (bean.getForce_version() != null && (Integer.parseInt(versionName.replace(".", "").substring(0, 3)) <
+                                    Integer.parseInt(bean.getForce_version().replace(".", "")))) {
                                 DialogUtils.showPromptDialogAll(HomeActivity.this, "提示", "APP须更新到最新版本,是否前往更新?",
                                         new DialogUtils.DialogUtilsClickListener() {
                                             @Override
@@ -233,12 +234,6 @@ public class HomeActivity extends BaseActivity {
                                         new DialogUtils.DialogUtilsClickListener() {
                                             @Override
                                             public void onClick() {
-                                                //捕获apk的下载地址
-//                                                Intent intent=new Intent(HomeActivity.this, WebActivity.class);
-//                                                intent.putExtra("url",
-//                                                        "http://android.myapp.com/myapp/detail.htm?apkName=com.shoujiduoduo.ringtone");
-//                                                intent.putExtra("title","下载新版本");
-//                                                startActivity(intent);
                                                 DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
                                             }
                                         });
@@ -314,9 +309,11 @@ public class HomeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 888) {
             //----------------------------可能会对页面跳转产生影响-------------------------------------
+
             checkLogin();
             if (isLogin) {
                 vpActHome.setCurrentItem(3);
+                ((HomeFragment) (list.get(0))).setFengXianFlag(true);
                 ((HomeFragment) (list.get(0))).initDataFromInternet();
             }
 
@@ -339,9 +336,10 @@ public class HomeActivity extends BaseActivity {
             } else {
                 vpActHome.setCurrentItem(0);
                 try {
+                    //重置风险提示显示
                     ((HomeFragment) (list.get(0))).initDataFromInternet();
                 } catch (NullPointerException e) {
-
+                    e.printStackTrace();
                 }
             }
         }
@@ -352,8 +350,6 @@ public class HomeActivity extends BaseActivity {
         super.onNewIntent(intent);
 
         int flag = intent.getIntExtra("flag", 0);
-        Log.e("TAG", "onNewIntent: flag-----" + flag);
-
         if (flag == 555) {
             vpActHome.setCurrentItem(1);
         } else if (flag == 55) {
@@ -362,9 +358,9 @@ public class HomeActivity extends BaseActivity {
             try {
                 ((HomeFragment) (list.get(0))).initDataFromInternet();
             } catch (NullPointerException e) {
-
+                e.printStackTrace();
             }
-        }else if (flag==66){
+        } else if (flag == 66) {
             vpActHome.setCurrentItem(3);
         }
 
@@ -399,8 +395,6 @@ public class HomeActivity extends BaseActivity {
 //
 //
 //    public void registerMessageReceiver() {
-//        Log.e("TAG", "onReceive: --推送接收-注册通知--");
-//        Log.e("TAG", "onReceive: --推送接收-注册通知--"+getPackageName());
 //        mMessageReceiver = new MessageReceiver();
 //        IntentFilter filter = new IntentFilter();
 //        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
@@ -414,7 +408,6 @@ public class HomeActivity extends BaseActivity {
 //        @Override
 //        public void onReceive(Context context, Intent intent) {
 //
-//            Log.e("TAG", "onReceive: --推送接收---"+intent.getAction());
 //
 //            try {
 //                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {

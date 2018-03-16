@@ -1,11 +1,9 @@
 package com.tudoujf.activity.common;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -20,6 +18,7 @@ import com.tudoujf.activity.other.RegisterActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
@@ -164,10 +163,11 @@ public class WebActivity extends BaseActivity {
                 try {
                     showPDialog();
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }
             }
-            Log.e("TAG", "onPageStarted: ---url--" + url);
+            LUtils.e(MyWebClient.class,"logflag-webview加载的URL--"+url);
+
         }
 
 

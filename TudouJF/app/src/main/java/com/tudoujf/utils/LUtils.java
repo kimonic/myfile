@@ -15,7 +15,7 @@ public class LUtils {
      *
      * @param clz 打印log所在的类
      * @param str 自定义打印的字符串
-     * mark:Thread.currentThread().getStackTrace()可以获得方法符调用顺序
+     * mark:Thread.currentThread().getStackTrace()可以获得方法调用顺序
      */
     public static void e(Class clz, String str) {
         if (DEBUG){

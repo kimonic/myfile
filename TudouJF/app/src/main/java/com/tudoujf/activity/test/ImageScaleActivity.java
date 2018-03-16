@@ -51,7 +51,6 @@ public class ImageScaleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_imagescale);
 
-        Log.e("TAG", "onClick: ---hello--111");
         iv = (ImageView) findViewById(R.id.iv);
         iv.setOnTouchListener(new TouchListener());
 
@@ -92,9 +91,6 @@ public class ImageScaleActivity extends Activity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("TAG", "onClick: ---hello--222");
-
-
 
                 if (count1 == 0) {
                     //xml中默认设置为center,为实现缩放拖动,故应设置为ImageView.ScaleType.MATRIX

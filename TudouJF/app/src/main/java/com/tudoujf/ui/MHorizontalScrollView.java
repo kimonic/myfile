@@ -47,13 +47,7 @@ public class MHorizontalScrollView extends HorizontalScrollView {
 
     @Override
     public void setScrollX(@Px int value) {
-        Log.e("TAG", "currentScrollX: -------d-----"+value );
-
-
         super.setScrollX(value);
-
-
-
     }
 
     @Override

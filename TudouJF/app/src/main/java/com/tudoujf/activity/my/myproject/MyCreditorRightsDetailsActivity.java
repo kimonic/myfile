@@ -28,6 +28,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -149,7 +150,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----请求债权转让撤销接口返回数据------------" + result);
+                        LUtils.e(MyCreditorRightsDetailsActivity.class,"logflag-请求债权转让撤销接口返回数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean1 = gson.fromJson(result, CommonBean.class);
                         if (bean1 != null && "200".equals(bean1.getCode())) {
@@ -243,7 +245,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
 
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的债权项目详情接口返回数据--------" + type + "----" + result);
+                        LUtils.e(MyCreditorRightsDetailsActivity.class,"logflag-我的债权项目详情接口返回数据--"+ type + "----" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
                         }.getType(), TransferableDetailsBean.class, MyCreditorRightsDetailsActivity.this);
                         if (bean1 != null) {
@@ -370,7 +373,8 @@ public class MyCreditorRightsDetailsActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----请求债权转让接口返回数据------------" + result);
+                        LUtils.e(MyCreditorRightsDetailsActivity.class,"logflag-请求债权转让接口返回数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean1 = gson.fromJson(result, CommonBean.class);
                         if (bean1 != null && "200".equals(bean1.getCode())) {

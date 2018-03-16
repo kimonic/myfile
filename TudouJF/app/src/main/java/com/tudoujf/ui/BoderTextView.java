@@ -63,8 +63,6 @@ public class BoderTextView extends AppCompatTextView {
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BoderTextView);
             underlineColor = a.getColor(R.styleable.BoderTextView_bunderlinecolor, 0);
-            Log.e("TAG", "initView: ---underlineColor--"+underlineColor);
-
             a.recycle();
         }
 

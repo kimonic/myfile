@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.IBinder;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -30,6 +29,7 @@ import com.tudoujf.activity.test.GuessHappyActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.service.MyService;
+import com.tudoujf.utils.LUtils;
 
 import java.util.List;
 
@@ -170,7 +170,6 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(RedPackageActivity.class);
                 //解绑服务,只能执行一次,多次报错
 //                unbindService(connection);
-//                Log.e("TAG", "onDestroy:1212 "+ Thread.currentThread().getName());
 ////                停止服务
 //                Intent intent2 = new Intent(this, MyIntentService.class);
 //                stopService(intent2);
@@ -232,13 +231,11 @@ public class PreviewActivity extends BaseActivity {
 
     private void checkPersition() {
         // Check for mandatory permissions.
-        for (String permission : MANDATORY_PERMISSIONS) {
-            if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                Log.e("TAG", "checkPersition: -----" + permission);
-            } else {
-                Log.e("TAG", "checkPersition: --PERMISSION_GRANTED---" + permission);
-            }
-        }
+//        for (String permission : MANDATORY_PERMISSIONS) {
+//            if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+//            } else {
+//            }
+//        }
     }
 
     @Override
@@ -248,7 +245,7 @@ public class PreviewActivity extends BaseActivity {
         List<Sensor> sensors = manager != null ? manager.getSensorList(Sensor.TYPE_ALL) : null;
         if (sensors != null) {
             for (int i = 0; i < sensors.size(); i++) {
-                Log.e("TAG", "onStart: ---------------------" + sensors.get(i).getName());
+                LUtils.e(PreviewActivity.class,"logflag---"+sensors.get(i).getName());
             }
         }
 
@@ -293,8 +290,6 @@ public class PreviewActivity extends BaseActivity {
 //        pop.showAtLocation(btActPreview7, Gravity.TOP, 0, 0);//显示位置
 //        int out[] = new int[2];
 //        btActPreview.getLocationInWindow(out);//获取view在Android坐标系中左上角的坐标点
-//        Log.e("TAG", "showPop: ----" + out[0]);
-//        Log.e("TAG", "showPop: -----" + out[1]);
 //        //pop的监听依靠承载的view来 实现
 //        view.setOnTouchListener(new View.OnTouchListener() {
 //

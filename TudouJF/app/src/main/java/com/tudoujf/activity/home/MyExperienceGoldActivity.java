@@ -1,7 +1,6 @@
 package com.tudoujf.activity.home;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -11,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.my.myearnings.MyEarningsActivity;
 import com.tudoujf.adapter.MyExperienceGoldLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
@@ -21,6 +19,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 
@@ -52,7 +51,6 @@ public class MyExperienceGoldActivity extends BaseActivity {
     TextView tvAmountBalance;
     @BindView(R.id.lv_act_myexperience)
     ListView listview;
-    private List<MyExperienceGoldBean.PageObjBean.ItemsBean> list;
 
 
     private MyExperienceGoldBean bean;
@@ -110,7 +108,8 @@ public class MyExperienceGoldActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的体验金接口返回数据------------------- " + result);
+                        LUtils.e(MyExperienceGoldActivity.class,"logflag--我的体验金接口返回数据-"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyExperienceGoldBean>() {
                         }.getType(), MyExperienceGoldBean.class, MyExperienceGoldActivity.this);
                         if (bean1 != null) {
@@ -140,7 +139,7 @@ public class MyExperienceGoldActivity extends BaseActivity {
 
             tvAmountBalance.setText(StringUtils.getCommaDecimalsStr(bean.getMy_account_balance()));
             if (bean.getPageObj().getItems() != null && bean.getPageObj().getItems().size() > 0) {
-                list = bean.getPageObj().getItems();
+                List<MyExperienceGoldBean.PageObjBean.ItemsBean> list = bean.getPageObj().getItems();
                 MyExperienceGoldLvAdapter adapter = new MyExperienceGoldLvAdapter(this, list);
                 listview.setAdapter(adapter);
             }

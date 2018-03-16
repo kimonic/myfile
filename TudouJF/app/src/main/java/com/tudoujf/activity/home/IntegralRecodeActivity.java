@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -82,7 +83,7 @@ public class IntegralRecodeActivity extends BaseActivity {
     /**
      * 加载进度dialog,选择筛选时间dialog
      */
-    private AlertDialog dialog, timeSelDialog;
+    private AlertDialog  timeSelDialog;
     /**
      * 加载显示积分页数
      */
@@ -180,6 +181,7 @@ public class IntegralRecodeActivity extends BaseActivity {
         }
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public void initView() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbIntegralRecode.getLayoutParams();
@@ -270,8 +272,6 @@ public class IntegralRecodeActivity extends BaseActivity {
         map.put("end_time", paramsEndTime);
         map.put("page_count", "");//待删除字段
         map.put("page", "" + page);
-        Log.e("TAG", "initDataFromInternet: ---------------------??" + paramsStartTime);
-        Log.e("TAG", "initDataFromInternet: ---------------------??" + paramsEndTime);
         showPDialog();
 
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_LIST, map, "IntegralRecodeActivity", new StringCallback() {
@@ -296,7 +296,6 @@ public class IntegralRecodeActivity extends BaseActivity {
 
             @Override
             public void onError(Response<String> response) {
-                Log.e("TAG", "onSuccess: ----------消息接口请求返回错误信息-----------------" + response.message());
 //                dialog.dismiss();
                 dismissPDialog();
                 super.onError(response);

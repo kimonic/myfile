@@ -55,7 +55,6 @@ public class PermissionUtils {
         if (needCheckPermission()) {
             for (String permission : permissionName) {
                 if (context.checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                    Log.e("TAG", "checkAPPNeedPermission: -----"+permission);
                     permissionList.add(permission);
                 }
             }

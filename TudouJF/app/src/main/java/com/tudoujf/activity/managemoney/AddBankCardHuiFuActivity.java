@@ -1,9 +1,7 @@
 package com.tudoujf.activity.managemoney;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,7 +13,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeRecordActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
@@ -24,6 +21,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -57,7 +55,7 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
     private String url = "";
     private String params = "";
 
-    private  String  amount;
+//    private  String  amount;
 
     private long beforeTime = 0;
     private boolean flag = false;
@@ -75,10 +73,10 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            amount = intent.getStringExtra("amount");
-        }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            amount = intent.getStringExtra("amount");
+//        }
 
     }
 
@@ -167,8 +165,9 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
 //                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, "注册失败1");
 //                finish();
 //            } else
-            Log.e("TAG", "onPageStarted: -----"+url);
-            
+            LUtils.e(myWebClient.class,"logflag---"+url);
+
+
             if (url.contains(Constants.STATUS_CLOSE)) {
 //                UserConfig.getInstance().setCreditorFlush(true);
 //                openActivity(RechargeRecordActivity.class);
@@ -193,7 +192,6 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
 
-        Log.e("TAG", "commitInfo: -----login_token"+UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.YIBAO_BIND_CARD, map, "999", new StringCallback() {
@@ -203,7 +201,8 @@ public class AddBankCardHuiFuActivity extends BaseActivity {
                 dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求绑定银行卡页面接口返回的json数据----------------" + result);
+                LUtils.e(AddBankCardHuiFuActivity.class,"logflag-请求绑定银行卡页面接口返回的json数据--"+result);
+
 
                 String temp = response.body();
                 String temp2 = StringUtils.getDecodeString(temp);

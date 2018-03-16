@@ -237,7 +237,6 @@ public class InfoView extends View {
 
 
 
-            Log.e("TAG", "onDraw: ---getStrokeWidth--"+paintGray.getStrokeWidth());
             paintGray1.setStrokeWidth(6);
             canvas.drawLine(rectF.right,width*0.2893f,width,width*0.2893f,paintGray1);
 

@@ -3,7 +3,6 @@ package com.tudoujf.activity.my.myaccount;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,6 +23,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -205,7 +205,7 @@ public class VIPHuiFuBuyActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------VIP申请接口返回数据----------------" + result);
+                LUtils.e(VIPHuiFuBuyActivity.class,"logflag-VIP申请接口返回数据--"+result);
 
                 String temp = response.body();
                 String temp2 = StringUtils.getDecodeString(temp);

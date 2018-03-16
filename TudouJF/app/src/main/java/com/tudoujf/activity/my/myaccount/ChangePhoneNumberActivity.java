@@ -1,7 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,10 +68,6 @@ public class ChangePhoneNumberActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActChangePhonenumber.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActChangePhonenumber.setLayoutParams(params);
-        Log.e("TAG", "initView:phone -----" + phone);
-        Log.e("TAG", "initView: ----phone.length()-" + phone.length());
-
-
         if (phone != null && phone.length() == 11) {
             hidePhone = phone.substring(0, 3) + "****" + phone.substring(7);
             tvOld.setText(("已绑定的手机号:" + hidePhone));

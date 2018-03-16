@@ -87,7 +87,6 @@ public class BitmapUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         inBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
 
-        Log.e("TAG", "getFixation: ----------baos.toByteArray()-11----------" + baos.toByteArray().length);
 
 
         int options = 100*100 * 1024 / (baos.toByteArray().length);//将图片压缩到100kb的压缩比

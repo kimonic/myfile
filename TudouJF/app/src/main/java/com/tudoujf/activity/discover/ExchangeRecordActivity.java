@@ -1,7 +1,6 @@
 package com.tudoujf.activity.discover;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -27,6 +26,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.DateFilterDialog;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -185,7 +185,8 @@ public class ExchangeRecordActivity extends BaseActivity {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----积分商城--兑换记录--接口返回数据--------" + result);
+                        LUtils.e(ExchangeRecordActivity.class,"logflag-积分商城--兑换记录--接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ExchangeRecordBean>() {
                         }.getType(), ExchangeRecordBean.class, ExchangeRecordActivity.this);
                         if (bean1 != null) {

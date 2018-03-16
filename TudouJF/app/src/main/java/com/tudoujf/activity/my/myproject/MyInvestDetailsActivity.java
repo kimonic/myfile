@@ -24,6 +24,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.InfoView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -129,7 +130,6 @@ public class MyInvestDetailsActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("id", id);
-        Log.e("TAG", "initDataFromInternet: 我的投资详情id-----"+id);
 
 
         HttpMethods.getInstance().POST(this, Constants.MY_INVESTMENT_DETAIL, map, getLocalClassName(),
@@ -140,7 +140,8 @@ public class MyInvestDetailsActivity extends BaseActivity {
                         dismissPDialog();
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的投资项目详情接口返回数据--------" + result);
+                        LUtils.e(MyInvestDetailsActivity.class,"logflag-我的投资项目详情接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyInvestDetailsBean>() {
                         }.getType(), MyInvestDetailsBean.class, MyInvestDetailsActivity.this);
                         if (bean1 != null) {

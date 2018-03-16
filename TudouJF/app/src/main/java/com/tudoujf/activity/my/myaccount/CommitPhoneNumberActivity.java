@@ -2,7 +2,6 @@ package com.tudoujf.activity.my.myaccount;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,6 +18,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -137,7 +137,8 @@ public class CommitPhoneNumberActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
-                Log.e("TAG", "onSuccess:-getSms--------修改手机号码,新手机号完成绑定返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                LUtils.e(CommitPhoneNumberActivity.class,"logflag-修改手机号码,新手机号完成绑定返回的json数据--"+StringUtils.getDecodeString(response.body()));
+
                 Gson gson = new Gson();
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());
@@ -199,7 +200,6 @@ public class CommitPhoneNumberActivity extends BaseActivity {
     public void getSms() {
         showPDialog();
         randomCode = StringUtils.getRandomCode();
-        Log.e("TAG", "getSms: --------------------" + randomCode);
         TreeMap<String, String> map = new TreeMap<>();
         map.put("type", "reset");//类型注册
         map.put("phone", newPhone);//手机号码
@@ -209,7 +209,10 @@ public class CommitPhoneNumberActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
-                Log.e("TAG", "onSuccess:---------修改手机号码,新手机号验证,获取验证码返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+
+                LUtils.e(CommitPhoneNumberActivity.class,"logflag-修改手机号码,新手机号验证,获取验证码返回的json数据--"+StringUtils.getDecodeString(response.body()));
+
+
                 Gson gson = new Gson();
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());

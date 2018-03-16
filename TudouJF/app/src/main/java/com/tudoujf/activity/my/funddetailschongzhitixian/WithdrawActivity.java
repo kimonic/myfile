@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +30,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -75,9 +75,9 @@ public class WithdrawActivity extends BaseActivity {
     private String amount = "1000";
     private boolean jump = false;
     private String loginToken;
-    private boolean isLogin;
+//    private boolean isLogin;
     private IdentityCheckBean identityCheckBean;
-    private boolean isLogin1;
+//    private boolean isLogin1;
 
     @Override
     public int getLayoutResId() {
@@ -179,16 +179,14 @@ public class WithdrawActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "initDataFromInternet: ------获取的logintoken--??---------" + UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "initDataFromInternet: ------获取的logintoken----??-------" + Constants.WITHDRAW);
-//        map.put("login_token", "12267");
 
         HttpMethods.getInstance().POST(this, Constants.WITHDRAW, map, getLocalClassName(), new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------提现接口请求返回数据-----------------" + result);
+                LUtils.e(WithdrawActivity.class,"logflag--提现接口请求返回数据-"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithDrawBean>() {
                 }.getType(), WithDrawBean.class, WithdrawActivity.this);
                 if (bean1 != null) {
@@ -258,12 +256,12 @@ public class WithdrawActivity extends BaseActivity {
     private void checkLogin() {
         loginToken = UserConfig.getInstance().getLoginToken(this);
         if ("".equals(loginToken)) {
-            isLogin = false;
+//            isLogin = false;
             Intent intent = new Intent(this, LoginActivity.class);
             intent.putExtra("type", 888);
             startActivityForResult(intent, 888);
         } else {
-            isLogin = true;
+//            isLogin = true;
             checkIdentity();
         }
 
@@ -278,7 +276,8 @@ public class WithdrawActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                LUtils.e(WithdrawActivity.class,"logflag--请求身份是否实名返回的json数据-"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, WithdrawActivity.this);
                 if (bean1 != null) {
@@ -311,7 +310,7 @@ public class WithdrawActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 888) {
-            isLogin1 = true;
+//            isLogin1 = true;
             checkLogin();
         }
     }

@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.mypopularize;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -27,6 +25,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.DateFilterDialog;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -195,7 +194,8 @@ public class SucceedInvitationRecommendRecordActivity extends BaseActivity {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的推广--推广记录--接口返回数据--------" + result);
+                        LUtils.e(SucceedInvitationRecommendRecordActivity.class,"logflag-我的推广--推广记录--接口返回数据---"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RecommendRecordBean>() {
                         }.getType(), RecommendRecordBean.class, SucceedInvitationRecommendRecordActivity.this);
                         if (bean1 != null) {

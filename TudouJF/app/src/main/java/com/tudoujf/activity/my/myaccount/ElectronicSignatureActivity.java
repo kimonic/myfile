@@ -1,10 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,8 +12,6 @@ import com.tudoujf.R;
 import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.MyAccountBean;
-import com.tudoujf.bean.databean.SignatureAgreementBean;
 import com.tudoujf.bean.databean.SignatureBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -25,16 +19,14 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -62,16 +54,6 @@ public class ElectronicSignatureActivity extends BaseActivity {
     TextView tvName;
     @BindView(R.id.tv_act_electronicsgnature_shenfenzhenghao)
     TextView tvShenfenzhenghao;
-    //    @BindView(R.id.tv_act_electronicsgnature_dalu)
-//    TextView tvDaLu;
-//    @BindView(R.id.tv_act_electronicsgnature_xianggang)
-//    TextView tvXiangGang;
-//    @BindView(R.id.tv_act_electronicsgnature_aomen)
-//    TextView tvAoMen;
-//    @BindView(R.id.tv_act_electronicsgnature_taiwan)
-//    TextView tvTaiWan;
-//    @BindView(R.id.tv_act_electronicsgnature_waiji)
-//    TextView tvWaiJi;
     @BindView(R.id.tv_act_electronicsgnature_xieyisel)
     TextView tvXieYiSel;
     @BindView(R.id.tv_act_electronicsgnature_xieyi)
@@ -81,12 +63,9 @@ public class ElectronicSignatureActivity extends BaseActivity {
     @BindView(R.id.tv_temp)
     TextView tvTemp;
 
-    //    private List<TextView> list;
-//    private int position = 0;
     private int count = 0;
     private boolean xieYiFlag = false;
     private SignatureBean bean;
-    private SignatureAgreementBean beanA;
 
     @Override
     public int getLayoutResId() {
@@ -150,37 +129,7 @@ public class ElectronicSignatureActivity extends BaseActivity {
         Intent intent=new Intent(this, WebActivity.class);
         intent.putExtra("url", Constants.SINATURE_AGREEMENT+UserConfig.getInstance().getLoginToken(this));
         intent.putExtra("title",getString(R.string.shuzizhengshufuwuxieyi1));
-        Log.e("TAG", "requestAgreement: -----"+Constants.SINATURE_AGREEMENT+UserConfig.getInstance().getLoginToken(this));
-
         startActivity(intent);
-//        showPDialog();
-//        TreeMap<String, String> map = new TreeMap<>();
-//        map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-//
-//        HttpMethods.getInstance().POST(this, Constants.SINATURE_AGREEMENT, map, "ElectronicSignatureActivity",
-//                new StringCallback() {
-//                    @Override
-//                    public void onSuccess(Response<String> response) {
-//                        dismissPDialog();
-//                        String result = StringUtils.getDecodeString(response.body());
-//                        Log.e("TAG", "onSuccess:----创建电子签章协议返回信息--------" + result);
-//                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SignatureAgreementBean>() {
-//                        }.getType(), SignatureAgreementBean.class, ElectronicSignatureActivity.this);
-//                        if (bean1 != null) {
-//                            beanA = (SignatureAgreementBean) bean1;
-//                            tvTemp.setText(Html.fromHtml(beanA.getContents()));
-//                        } else {
-//                            ToastUtils.showToast(ElectronicSignatureActivity.this, R.string.shujujiazaichucuo);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Response<String> response) {
-//                        super.onError(response);
-//                        dismissPDialog();
-//                        ToastUtils.showToast(ElectronicSignatureActivity.this, R.string.shujujiazaichaoshi);
-//                    }
-//                });
     }
 
     /**
@@ -197,7 +146,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----创建电子签章是否成功的返回信息--------" + result);
+                        LUtils.e(ElectronicSignatureActivity.class,"logflag-创建电子签章是否成功的返回信息--"+result);
+
                         if (result.contains("\"code\":200")) {
                             DialogUtils.showPromptDialog(ElectronicSignatureActivity.this,
                                     "提示", "电子签章开通成功", new DialogUtils.DialogUtilsClickListener() {
@@ -223,7 +173,6 @@ public class ElectronicSignatureActivity extends BaseActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        Log.e("TAG", "onError: 创建电子签章是否成功的返回信息-----" + response.body());
                         ToastUtils.showToast(ElectronicSignatureActivity.this, R.string.shujujiazaichaoshi);
                     }
                 });
@@ -287,7 +236,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----创建电子签章的初始化信息--------" + result);
+                        LUtils.e(ElectronicSignatureActivity.class,"logflag-创建电子签章的初始化信息--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SignatureBean>() {
                         }.getType(), SignatureBean.class, ElectronicSignatureActivity.this);
                         if (bean1 != null) {

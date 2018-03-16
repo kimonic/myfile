@@ -172,7 +172,6 @@ public class GuessHappyActivity extends BaseActivity {
                             gvActTest.setSleepTime(sleepTime);
                         }
 
-                        Log.e("TAG", "onClick: name-----" + name);
                     }
 
 
@@ -375,8 +374,6 @@ public class GuessHappyActivity extends BaseActivity {
                         break;
                 }
 
-                Log.e("TAG", "onResult: -----回调已执行");
-
                 ToastUtils.showToast(GuessHappyActivity.this, getResources().getString(R.string.bencizhongjiangjinewei) + earings);
                 ToastUtils.showToast(GuessHappyActivity.this, R.string.youxikaishi);
                 tvtotal.setText((getResources().getString(R.string.shengyuzonge) + StringUtils.getCommaDecimalsStrZeroDot("" + total)));
@@ -404,10 +401,6 @@ public class GuessHappyActivity extends BaseActivity {
                 bean.setYellow(yellowCount);
                 bean.setGreen(greenCount);
                 bean.save();
-                Log.e("TAG", "oneFinish: ----shdsjdchsjkdhsjd-" + redCount);
-                Log.e("TAG", "oneFinish: ----shdsjdchsjkdhsjd-" + blueCount);
-                Log.e("TAG", "oneFinish: ----shdsjdchsjkdhsjd-" + yellowCount);
-                Log.e("TAG", "oneFinish: ----shdsjdchsjkdhsjd-" + greenCount);
 
             }
 
@@ -530,9 +523,7 @@ public class GuessHappyActivity extends BaseActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
             window.setContentView(view);
             WindowManager.LayoutParams lp = window.getAttributes();
-//            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
             int wh = 90 * ScreenSizeUtils.getDensity(context);
-            Log.e("TAG", "showUserDialog: ----wh-"+wh);
             lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
             lp.height =  WindowManager.LayoutParams.WRAP_CONTENT;
             lp.gravity = Gravity.CENTER;

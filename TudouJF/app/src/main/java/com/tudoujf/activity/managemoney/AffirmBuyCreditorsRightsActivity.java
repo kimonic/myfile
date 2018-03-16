@@ -4,10 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.service.notification.NotificationListenerService;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,15 +23,14 @@ import com.tudoujf.activity.my.funddetailschongzhitixian.RechargeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.AffirmBuyCreditorRightrsBean;
-import com.tudoujf.bean.databean.CreditorRightsDetailsBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.ui.InfoView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -42,7 +38,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -98,7 +93,6 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                         if ((StringUtils.string2Float(bean.getBalance_amount()) >= StringUtils.string2Float(bean.getAmount()))) {
 //                        showPasswordDialog();
                             Intent intent = new Intent(this, CreditorRightsHuiFuBuyActivity.class);
-                            Log.e("TAG", "onClick: -----------transfer_id-------" + transfer_id);
                             intent.putExtra("transferId", transfer_id);
                             startActivity(intent);
                         } else {
@@ -225,7 +219,8 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求债权购买接口返回的json数据----------------" + result);
+                LUtils.e(AffirmBuyCreditorsRightsActivity.class,"logflag-请求债权购买接口返回的json数据--"+result);
+
                 Gson gson = new Gson();
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AffirmBuyCreditorRightrsBean>() {
                 }.getType(), AffirmBuyCreditorRightrsBean.class, AffirmBuyCreditorsRightsActivity.this);

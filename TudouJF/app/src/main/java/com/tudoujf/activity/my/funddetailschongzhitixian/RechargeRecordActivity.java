@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -153,7 +153,8 @@ public class RechargeRecordActivity extends BaseActivity {
                         }
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----充值记录接口返回数据--------" + result);
+                        LUtils.e(RechargeRecordActivity.class,"logflag--充值记录接口返回数据-"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RechargeRecodeBean>() {
                         }.getType(), RechargeRecodeBean.class, RechargeRecordActivity.this);
                         if (bean1 != null) {

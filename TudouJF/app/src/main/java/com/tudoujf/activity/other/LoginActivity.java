@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -31,6 +30,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -222,7 +222,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 dialog.dismiss();
-                Log.e("TAG", "onSuccess:---------登陆成功后返回的json数据-------------" + StringUtils.getDecodeString(response.body()));
+                LUtils.e(LoginActivity.class,"logflag-登陆成功后返回的json数据--"+StringUtils.getDecodeString(response.body()));
+
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<LoginBean>() {
                         }.getType(),

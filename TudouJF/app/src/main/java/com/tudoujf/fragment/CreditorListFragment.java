@@ -29,6 +29,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -314,7 +315,8 @@ public class CreditorListFragment extends BaseFragment {
 
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----理财债权列表接口返回数据-- " + type + "------" + result);
+                        LUtils.e(CreditorListFragment.class,"logflag-理财债权列表接口返回数据--"+ type + "------" + result);
+
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorListBean>() {
                         }.getType(), CreditorListBean.class, getActivity());
@@ -393,12 +395,8 @@ public class CreditorListFragment extends BaseFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-//        Log.e("TAG", "setUserVisibleHint: -----执行");
         if (isVisibleToUser) {
-//            Log.e("TAG", "setUserVisibleHint: -----可见");
             if (UserConfig.getInstance().isCreditorFlush()) {
-//                Log.e("TAG", "setUserVisibleHint: -----可见刷新");
-
                 UserConfig.getInstance().setCreditorFlush(false);
                 page = 1;
                 initDataFromInternet();
@@ -408,7 +406,6 @@ public class CreditorListFragment extends BaseFragment {
         }
 //        else {
 //            //相当于Fragment的onPause
-////            Log.e("TAG", "setUserVisibleHint: -----不可见");
 //        }
     }
 

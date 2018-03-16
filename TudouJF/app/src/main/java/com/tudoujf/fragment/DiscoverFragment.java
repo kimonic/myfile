@@ -34,6 +34,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -212,7 +213,9 @@ public class DiscoverFragment extends BaseFragment {
                         dismissPDialog();
                         finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:---首页发现接口返回数据--------" + result);
+
+                        LUtils.e(DiscoverFragment.class,"logflag--首页发现接口返回数据-"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<DiscoverBean>() {
                         }.getType(), DiscoverBean.class, getActivity());
                         if (bean1 != null) {

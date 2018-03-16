@@ -1,8 +1,8 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +25,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -104,6 +105,7 @@ public class BankCardManageActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public void initView() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActBankCardManage.getLayoutParams();
@@ -149,7 +151,8 @@ public class BankCardManageActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----绑定的银行卡列表接口返回数据--------" + result);
+                        LUtils.e(BankCardManageActivity.class,"logflag-绑定的银行卡列表接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<BankCardManageBean>() {
                         }.getType(), BankCardManageBean.class, BankCardManageActivity.this);
                         if (bean1 != null) {
@@ -210,7 +213,8 @@ public class BankCardManageActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                LUtils.e(BankCardManageActivity.class,"logflag-请求身份是否实名返回的json数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, BankCardManageActivity.this);
                 if (bean1 != null) {

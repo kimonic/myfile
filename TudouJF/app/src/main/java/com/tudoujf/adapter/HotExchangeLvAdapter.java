@@ -73,7 +73,6 @@ public class HotExchangeLvAdapter extends BaseAdapter {
         viewHolder.title.setText(list.get(position).getName());
         viewHolder.description.setText(list.get(position).getBewrite());
         viewHolder.integral.setText(list.get(position).getCredit());
-        Log.e("TAG", "getView: -----"+list.get(position).getGoods_count());
 
         viewHolder.count.setText((list.get(position).getGoods_count()+"份"));
 

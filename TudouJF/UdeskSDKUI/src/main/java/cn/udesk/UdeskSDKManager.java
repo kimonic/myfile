@@ -282,13 +282,11 @@ public class UdeskSDKManager {
 
     //进入会话入口,支持配置,根据配置进入会话
     public void entryChat(Context context) {
-        Log.e("TAG", "udesk自定义: -----entryChat111");
 
         if (TextUtils.isEmpty(getAppId(context))) {
             showConversationByImGroup(context);
             return;
         }
-        Log.e("TAG", "udesk自定义: -----entryChat222");
 
         initCrashReport(context);
         getSDKImSetting(context);
@@ -305,7 +303,6 @@ public class UdeskSDKManager {
             intent.putExtra(UdeskConst.UDESKGROUPID, groupId);
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Log.e("TAG", "udesk自定义: -----toLanuchChatAcitvity");
 
 
         context.startActivity(intent);
@@ -615,10 +612,6 @@ public class UdeskSDKManager {
      */
     private void getSDKImSetting(final Context context) {
 
-        Log.e("TAG", "udesk自定义: -----getSDKImSetting");
-        Log.e("TAG", "udesk自定义: -----getDomain(context)----"+getDomain(context));
-        Log.e("TAG", "udesk自定义: -----getAppkey(context)----"+getAppkey(context));
-        Log.e("TAG", "udesk自定义: -----getAppId(context)-----"+getAppId(context));
 
         try {
 
@@ -629,12 +622,10 @@ public class UdeskSDKManager {
                             imSetting = JsonUtils.parserIMSettingJson(message);
                             switchBySetting(context, imSetting);
                             countSettingReq = 0;
-                            Log.e("TAG", "udesk自定义: -----getSDKImSetting---onSuccess");
                         }
 
                         @Override
                         public void onFail(String message) {
-                            Log.e("TAG", "udesk自定义: -----getSDKImSetting---onFail");
                             if (countSettingReq >= 2) {
                                 countSettingReq = 0;
                                 if (imSetting != null) {
@@ -661,8 +652,6 @@ public class UdeskSDKManager {
      * @param imSetting
      */
     private void switchBySetting(Context context, SDKIMSetting imSetting) {
-        Log.e("TAG", "udesk自定义: -----switchBySetting");
-
         if (imSetting != null) {
             if (imSetting.getIn_session()) {
                 toLanuchChatAcitvity(context);

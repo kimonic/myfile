@@ -3,7 +3,6 @@ package com.tudoujf.activity.my.funddetailschongzhitixian;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -25,6 +24,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.FundDetailsView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -170,7 +170,6 @@ public class FundDetailsActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + UserConfig.getInstance().getLoginToken(this));
 
         HttpMethods.getInstance().POST(this, Constants.FUND_DETAILS, map, getLocalClassName(),
                 new StringCallback() {
@@ -179,7 +178,8 @@ public class FundDetailsActivity extends BaseActivity {
                         dismissPDialog();
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----资金详情接口返回数据--------" + result);
+                        LUtils.e(FundDetailsActivity.class,"logflag-资金详情接口返回数据--"+result);
+
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<FundDetailsBean>() {
                         }.getType(), FundDetailsBean.class, FundDetailsActivity.this);
@@ -233,7 +233,8 @@ public class FundDetailsActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------提现接口请求返回数据-----------------" + result);
+                LUtils.e(FundDetailsActivity.class,"logflag-提现接口请求返回数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithDrawBean>() {
                 }.getType(), WithDrawBean.class, FundDetailsActivity.this);
                 if (bean1 != null) {

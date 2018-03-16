@@ -28,6 +28,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -196,7 +197,8 @@ public class UsableWelfareFragment extends BaseFragment {
                         dismissPDialog();
                         finishRl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------请求我的福利返回的json数据-------" + actType + "---------" + result);
+                        LUtils.e(UsableWelfareFragment.class,"logflag-请求我的福利返回的json数据--"+ actType + "---------" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WelfareListBean>() {
                         }.getType(), WelfareListBean.class, getActivity());
                         if (bean1 != null) {

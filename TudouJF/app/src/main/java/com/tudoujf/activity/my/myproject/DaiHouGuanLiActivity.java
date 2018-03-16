@@ -20,6 +20,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -107,7 +108,8 @@ public class DaiHouGuanLiActivity extends BaseActivity {
                 dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------贷后管理接口请求返回数据-----------------" + result);
+                LUtils.e(DaiHouGuanLiActivity.class,"logflag-贷后管理接口请求返回数据--"+result);
+
                 Gson gson = new Gson();
                 bean = gson.fromJson(result, DaiHouGuanLiBean.class);
                 if (bean != null && bean.getCode() == 200) {

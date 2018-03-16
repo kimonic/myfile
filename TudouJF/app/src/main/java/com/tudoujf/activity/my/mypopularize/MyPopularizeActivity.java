@@ -1,7 +1,6 @@
 package com.tudoujf.activity.my.mypopularize;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -108,7 +108,8 @@ public class MyPopularizeActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的推广首页--立即结算--接口返回数据--------" + result);
+                        LUtils.e(MyPopularizeActivity.class,"logflag--我的推广首页--立即结算--接口返回数据--"+result);
+
 
                         if (result!=null&&result.contains("200")){
                             ToastUtils.showToast(MyPopularizeActivity.this, R.string.jiesuanchenggong);
@@ -185,7 +186,8 @@ public class MyPopularizeActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的推广首页接口返回数据--------" + result);
+                        LUtils.e(MyPopularizeActivity.class,"logflag--我的推广首页接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyPopularizeBean>() {
                         }.getType(), MyPopularizeBean.class, MyPopularizeActivity.this);
                         if (bean1 != null) {

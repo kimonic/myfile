@@ -2,8 +2,6 @@ package com.tudoujf.activity.discover;
 
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -12,16 +10,15 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HotExchangeLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.bean.CommonBean;
 import com.tudoujf.bean.databean.HotExchangeBean;
-import com.tudoujf.bean.databean.IntegralRankingListBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -31,7 +28,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================
@@ -109,7 +105,9 @@ public class HotExchangeActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------热门商品接口返回的json数据----------------" + result);
+
+                        LUtils.e(HotExchangeActivity.class,"logflag-热门商品接口返回的json数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
                         String rankingList = "{items:" + bean.getData().toString() + "}";

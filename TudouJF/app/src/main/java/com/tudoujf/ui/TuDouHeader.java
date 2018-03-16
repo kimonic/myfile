@@ -86,26 +86,16 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
 
     @Override
     public void onPullingDown(float percent, int offset, int headerHeight, int extendHeight) {
-//        Log.e("TAG", "onPullingDown: TuDouHeader-----percent"+percent);
-//        Log.e("TAG", "onPullingDown: TuDouHeader-----offset"+offset);
-//        Log.e("TAG", "onPullingDown: TuDouHeader-----headerHeight"+headerHeight);
-//        Log.e("TAG", "onPullingDown: TuDouHeader-----extendHeight"+extendHeight);
 
 
     }
 
     @Override
     public void onReleasing(float percent, int offset, int headerHeight, int extendHeight) {
-//        Log.e("TAG", "onReleasing: TuDouHeader-----percent"+percent);
-//        Log.e("TAG", "onReleasing: TuDouHeader-----offset"+offset);
-//        Log.e("TAG", "onReleasing: TuDouHeader-----headerHeight"+headerHeight);
-//        Log.e("TAG", "onReleasing: TuDouHeader-----extendHeight"+extendHeight);
     }
 
     @Override
     public void onRefreshReleased(RefreshLayout layout, int headerHeight, int extendHeight) {
-//        Log.e("TAG", "onRefreshReleased:TuDouHeader -----headerHeight"+headerHeight);
-//        Log.e("TAG", "onRefreshReleased: TuDouHeader-----extendHeight"+extendHeight);
     }
 
     @NonNull
@@ -126,16 +116,10 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
 
     @Override
     public void onInitialized(RefreshKernel kernel, int height, int extendHeight) {
-//        Log.e("TAG", "onInitialized: TuDouHeader-----height"+height);
-//        Log.e("TAG", "onInitialized: TuDouHeader-----extendHeight"+extendHeight);
     }
 
     @Override
     public void onHorizontalDrag(float percentX, int offsetX, int offsetMax) {
-//        Log.e("TAG", "onHorizontalDrag: TuDouHeader-----percentX"+percentX);
-//        Log.e("TAG", "onHorizontalDrag: TuDouHeader-----offsetX"+offsetX);
-//        Log.e("TAG", "onHorizontalDrag: TuDouHeader-----offsetMax"+offsetMax);
-
 
     }
 
@@ -147,8 +131,6 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
      */
     @Override
     public void onStartAnimator(RefreshLayout layout, int height, int extendHeight) {
-//        Log.e("TAG", "onStartAnimator: TuDouHeader-----height"+height);
-//        Log.e("TAG", "onStartAnimator: TuDouHeader-----extendHeight"+extendHeight);
         RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         rotate.setInterpolator(lin);
@@ -180,8 +162,6 @@ public class TuDouHeader extends LinearLayout implements RefreshHeader {
 
     @Override
     public void onStateChanged(RefreshLayout refreshLayout, RefreshState oldState, RefreshState newState) {
-//        Log.e("TAG", "onStateChanged: TuDouHeader-----newState"+newState);
-
         switch (newState) {
             case None:
             case PullDownToRefresh:

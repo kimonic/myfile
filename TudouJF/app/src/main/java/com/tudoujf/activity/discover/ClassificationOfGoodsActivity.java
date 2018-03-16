@@ -3,7 +3,6 @@ package com.tudoujf.activity.discover;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -33,6 +32,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -106,13 +106,12 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         dialog = DialogUtils.showListDialog(this, listType, new DialogUtils.ListDialogClickListener() {
                             @Override
                             public void onClick(int position) {
-                                Log.e("TAG", "onClick: -position----"+position);
-                                page=1;
+                                page = 1;
                                 list.clear();
                                 if ("fenlei".equals(type)) {//分类筛选
-                                    type_id=listType.get(position).getId();
+                                    type_id = listType.get(position).getId();
                                 } else if ("jifen".equals(type)) {//积分筛选
-                                    point_id=listType.get(position).getId();
+                                    point_id = listType.get(position).getId();
                                 }
                                 initDataFromInternet();
                             }
@@ -131,7 +130,6 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void initDataFromIntent() {
         list = new ArrayList<>();
@@ -148,10 +146,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         requestType();
 
 
-
-
     }
-
 
 
     private void requestType() {
@@ -161,7 +156,6 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
 //        map.put("type_id", type_id);
 //        map.put("point_id", point_id);
 //        map.put("page", "" + page);
-//        Log.e("TAG", "loadMoreGoods: -----" + page);
 
 
         HttpMethods.getInstance().POST(this, requestUrl, map, getLocalClassName(), new StringCallback() {
@@ -170,7 +164,7 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         dismissPDialog();
 //                        finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------积分商城--商品分类--分类类型返回的json数据----------------" + result);
+                        LUtils.e(ClassificationOfGoodsActivity.class, "logflag---积分商城--商品分类--分类类型返回的json数据--" + result);
 
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
@@ -183,13 +177,12 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                                     dialog = DialogUtils.showListDialog(ClassificationOfGoodsActivity.this, listType, new DialogUtils.ListDialogClickListener() {
                                         @Override
                                         public void onClick(int position) {
-                                            Log.e("TAG", "onClick: -position----"+position);
-                                            page=1;
+                                            page = 1;
                                             list.clear();
                                             if ("fenlei".equals(type)) {//分类筛选
-                                                type_id=listType.get(position).getId();
+                                                type_id = listType.get(position).getId();
                                             } else if ("jifen".equals(type)) {//积分筛选
-                                                point_id=listType.get(position).getId();
+                                                point_id = listType.get(position).getId();
                                             }
                                             initDataFromInternet();
 
@@ -250,10 +243,10 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         srl.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
-                if (bean!=null&&page<bean.getTotal_pages()){
+                if (bean != null && page < bean.getTotal_pages()) {
                     page++;
                     initDataFromInternet();
-                }else {
+                } else {
                     ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.meiyougengduola);
                     srl.finishLoadmore();
                 }
@@ -263,9 +256,9 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(ClassificationOfGoodsActivity.this,GoodsDetailsActivity.class);
-                intent.putExtra("id",list.get(position).getId());
-                intent.putExtra("integral",integral);
+                Intent intent = new Intent(ClassificationOfGoodsActivity.this, GoodsDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("integral", integral);
                 startActivity(intent);
 
             }
@@ -280,7 +273,6 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
         map.put("type_id", type_id);
         map.put("point_id", point_id);
         map.put("page", "" + page);
-        Log.e("TAG", "loadMoreGoods: -----" + page);
 
 
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP_MORE, map, "ClassificationOfGoodsActivity", new StringCallback() {
@@ -289,7 +281,8 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         dismissPDialog();
                         finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------积分商城--商品分类返回的json数据----------------" + result);
+                        LUtils.e(ClassificationOfGoodsActivity.class, "logflag--积分商城--商品分类返回的json数据--" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralShopMoreBean>() {
                         }.getType(), IntegralShopMoreBean.class, ClassificationOfGoodsActivity.this);
                         if (bean1 != null) {

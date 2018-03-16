@@ -22,6 +22,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.SignInView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 
@@ -137,7 +138,8 @@ public class SignInActivity extends BaseActivity {
 
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e(TAG, "onSuccess: -----------请求签到返回的json数据----------------" + result);
+                        LUtils.e(SignInActivity.class,"logflag-请求签到返回的json数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
                         if (bean.getCode().equals("200")) {
@@ -178,7 +180,8 @@ public class SignInActivity extends BaseActivity {
                     bean = (SignInBean) bean1;
                     LoadInternetDataToUi();
                 }
-                Log.e(TAG, "onSuccess:------------签到请求json数据----------------- " + result);
+                LUtils.e(SignInActivity.class,"logflag-签到请求json数据--"+result);
+
             }
 
             @Override

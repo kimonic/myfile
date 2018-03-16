@@ -82,7 +82,6 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
                 bDialog.show();
             }
         } catch (Exception e) {
-            Log.e("TAG", "showPDialog: -----窗体泄露");
         }
 
     }
@@ -97,7 +96,6 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
                 }
             }
         } catch (Exception e) {
-            Log.e("TAG", "showPDialog: -----窗体泄露");
         }
 
     }

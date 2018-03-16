@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/global_theme_background_color</item>
     </style>
 
-    <style name="NativateButton" >
+    <style name="NativateButton">
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
         <item name="android:clickable">true</item>
@@ -25,5 +25,8 @@
         <item name="srlEnableHeaderTranslationContent">true</item>
     </style>
 
+    <style name="showPopupAnimation" parent="android:Animation">
+        <item name="android:windowExitAnimation">@anim/pop_out</item>
+    </style>
 
 </resources>

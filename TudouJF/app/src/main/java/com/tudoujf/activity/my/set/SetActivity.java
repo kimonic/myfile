@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.NewVersionBean;
@@ -30,6 +28,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.utils.AppInfoUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.DownloadAppUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -63,15 +62,12 @@ public class SetActivity extends BaseActivity {
     LinearLayout llActSetFeedback;
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
-    //-------------------------待删除-----------------------------------------------
-    private boolean flag = false;
-    //-------------------------待删除-----------------------------------------------
+
 
 
     private View view;
     private AlertDialog dialog;
 
-    private int count = 0;
 
     @Override
     public int getLayoutResId() {
@@ -104,13 +100,6 @@ public class SetActivity extends BaseActivity {
 //                    flag = false;
 //                    openActivity(PreviewActivity.class);
 //                }
-
-
-                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getVersionCode(this));
-                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getAppName(this));
-                Log.e("TAG", "onClick: getVersionCode-----" + AppInfoUtils.getVersionName(this));
-
-//                ToastUtils.showToast(SetActivity.this, R.string.jijiangkaiqijingqingqidai);
                 break;
         }
 
@@ -126,7 +115,8 @@ public class SetActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----检查版本更新接口返回数据--------------" + result);
+                        LUtils.e(SetActivity.class,"logflag-检查版本更新接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
                         }.getType(), NewVersionBean.class, SetActivity.this);
                         if (bean1 != null) {
@@ -218,7 +208,6 @@ public class SetActivity extends BaseActivity {
         llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                flag = true;
                 return false;
             }
         });

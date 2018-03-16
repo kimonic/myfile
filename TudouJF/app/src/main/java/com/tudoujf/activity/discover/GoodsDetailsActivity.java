@@ -2,7 +2,6 @@ package com.tudoujf.activity.discover;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -14,7 +13,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.IntegralShopActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.GoodsDetailsBean;
@@ -25,6 +23,7 @@ import com.tudoujf.ui.BoderTextView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -245,7 +244,8 @@ public class GoodsDetailsActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------积分商城商品详情接口请求返回数据-----------------" + result);
+                LUtils.e(GoodsDetailsActivity.class,"logflag-积分商城商品详情接口请求返回数据--"+result);
+
                 BaseBean baseBean = ParseJson.getJsonResult(response.body(), new TypeToken<GoodsDetailsBean>() {
                         }.getType()
                         , GoodsDetailsBean.class, GoodsDetailsActivity.this);

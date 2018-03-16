@@ -1,7 +1,6 @@
 package com.tudoujf.activity.discover;
 
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,6 +16,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MListView;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -92,7 +92,8 @@ public class IntegralRankingListActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------积分排行榜返回的json数据----------------" + result);
+                        LUtils.e(IntegralRankingListActivity.class,"logflag-积分排行榜返回的json数据--"+result);
+
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
                         String rankingList = "{items:" + bean.getData().toString() + "}";

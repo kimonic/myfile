@@ -25,6 +25,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -190,7 +191,8 @@ public class DueInInterestFragment extends BaseFragment {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的收益--利息收益接口返回数据--------" + result);
+                        LUtils.e(DueInInterestFragment.class,"logflag-我的收益--利息收益接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<DueInInterestBean>() {
                         }.getType(), DueInInterestBean.class, getActivity());
                         if (bean1 != null) {

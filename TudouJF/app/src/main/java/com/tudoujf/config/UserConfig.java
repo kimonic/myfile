@@ -2,6 +2,7 @@ package com.tudoujf.config;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.example.encryptionpackages.AESencrypt;
@@ -10,6 +11,9 @@ import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * * ==================================================
@@ -266,6 +270,19 @@ public class UserConfig {
      */
     public void setBindPhone(String bindPhone) {
         this.bindPhone = bindPhone;
+    }
+
+    /**启动我的账户所需要的参数*/
+    private Bundle accountsParams;
+
+    /**启动我的账户所需要的参数*/
+    public Bundle getAccountsParams() {
+        return accountsParams;
+    }
+
+    /**启动我的账户所需要的参数*/
+    public void setAccountsParams(Bundle accountsParams) {
+        this.accountsParams = accountsParams;
     }
 
     /**

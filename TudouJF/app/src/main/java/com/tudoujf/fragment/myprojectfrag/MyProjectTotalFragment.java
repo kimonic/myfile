@@ -26,6 +26,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -158,7 +159,6 @@ public class MyProjectTotalFragment extends BaseFragment {
 //                if (bean != null && page < bean.getTotal_pages()) {
 //                    page = page + 1;
 //                    initDataFromInternet();
-//                    Log.e("TAG", "onLoadmore:我的投资项目接口返回数据 -----"+page);
 //
 //                } else {
 //                    srlTotal.finishLoadmore();
@@ -203,8 +203,6 @@ public class MyProjectTotalFragment extends BaseFragment {
         map.put("start_time", start_time);
         map.put("end_time", end_time);
 
-        Log.e("TAG", "onSuccess:----我的投资项目接口返回数据-login_token------" + UserConfig.getInstance().getLoginToken(getActivity()));
-
 
         HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, "",
                 new StringCallback() {
@@ -216,7 +214,8 @@ public class MyProjectTotalFragment extends BaseFragment {
 
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的投资项目接口返回数据--------" + result);
+                        LUtils.e(MyProjectTotalFragment.class,"logflag-我的投资项目接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyInvestProjectBean>() {
                         }.getType(), MyInvestProjectBean.class, getActivity());
                         if (bean1 != null) {

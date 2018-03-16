@@ -3,7 +3,6 @@ package com.tudoujf.activity.managemoney;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,7 +14,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
-import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.assist.AndroidBug5497Workaround;
 import com.tudoujf.base.BaseActivity;
@@ -25,6 +23,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -87,7 +86,6 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
             coupon = intent.getStringExtra("coupon");
             redBag = intent.getStringExtra("redBag");
             paypassword = intent.getStringExtra("paypassword");
-            Log.e("TAG", "initDataFromIntent: -----"+paypassword);
 
         }
 
@@ -208,13 +206,6 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
         map.put("redBag", redBag);
         map.put("password", paypassword);
 
-        Log.e("TAG", "commitInfo: -----amount"+amount);
-        Log.e("TAG", "commitInfo: -----id"+id);
-        Log.e("TAG", "commitInfo: -----coupon"+coupon);
-        Log.e("TAG", "commitInfo: -----paypassword"+paypassword);
-        Log.e("TAG", "commitInfo: -----redBag"+redBag);
-        Log.e("TAG", "commitInfo: -----login_token"+UserConfig.getInstance().getLoginToken(this));
-
 
         HttpMethods.getInstance().POST(this, Constants.AFFIRM_BUY_INVEST, map, "999", new StringCallback() {
             @SuppressLint("SetJavaScriptEnabled")
@@ -222,7 +213,8 @@ public class InvestHuiFuBuyActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求标的购买回复页面接口返回的json数据----------------" + result);
+                LUtils.e(InvestHuiFuBuyActivity.class,"logflag-请求标的购买回复页面接口返回的json数据--"+result);
+
 
                 String temp = response.body();
                 String temp2 = StringUtils.getDecodeString(temp);

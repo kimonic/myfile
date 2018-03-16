@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -136,7 +135,6 @@ public class LockActivity extends BaseActivity {
         name = MD5Utils.md5(loginToken);
 
         password = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getString(name + "ciphertext", "");
-        Log.e("TAG", "selselsel:--------------手势密码字符串--------------- " + password);
         if ("".equals(password)) {
             UserConfig.getInstance().setDraw(true);
             closeActivity();
@@ -167,9 +165,6 @@ public class LockActivity extends BaseActivity {
             ImageGlideUtils.loadCircularImage(ivIcon, R.drawable.act_lock_icon);
         }
         mlvActLock.setPassword(password);
-//        TreeMap<String,String>  map=new TreeMap<>();
-//        map.put("login_token","12267");
-//        Log.e("TAG", "initView:------------加密字符串---------- " + StringUtils.getRequestParams(map));
         if ("close".equals(type)) {
             llBtn.setVisibility(View.GONE);
             tvHint.setText(R.string.qinghuizhinindangqiandeshoushimima);
@@ -219,10 +214,9 @@ public class LockActivity extends BaseActivity {
 
             @Override
             public void drawFinish(List<Integer> positionSet) {
-                for (int i = 0; i < positionSet.size(); i++) {
-                    Log.e("TAG", "drawFinish:-------positionSet------------ " + positionSet.get(i));
-
-                }
+//                for (int i = 0; i < positionSet.size(); i++) {
+//
+//                }
 
             }
 

@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -147,8 +147,6 @@ public class TransactionRecordActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
-        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + UserConfig.getInstance().getLoginToken(this));
-
         HttpMethods.getInstance().POST(this, Constants.TRADERECORD, map, getLocalClassName(),
                 new StringCallback() {
                     @Override
@@ -160,7 +158,8 @@ public class TransactionRecordActivity extends BaseActivity {
                             srl.finishRefresh();
                         }
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----交易记录接口返回数据--------" + result);
+                        LUtils.e(TransactionRecordActivity.class,"logflag-交易记录接口返回数据--"+result);
+
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransactionRecordBean>() {
                         }.getType(), TransactionRecordBean.class, TransactionRecordActivity.this);
@@ -180,8 +179,6 @@ public class TransactionRecordActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
         if (bean != null) {
             list.addAll(bean.getItems());
-            Log.e("TAG", "LoadInternetDataToUi: ---交易记录--" + list.size());
-
             if (adapter == null) {
                 adapter = new TransactionRecordActLvAdapter(list, this);
                 lvActTransactionDetails.setAdapter(adapter);

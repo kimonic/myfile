@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +21,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -65,7 +65,6 @@ public class AffirmPasswordActivity extends BaseActivity {
 
     private String password1, password2;
     private String userName;
-    private String TAG = "AffirmPasswordActivity";
     private AlertDialog dialog;
 
     @Override
@@ -113,7 +112,8 @@ public class AffirmPasswordActivity extends BaseActivity {
                 public void onSuccess(Response<String> response) {
                     dialog.dismiss();
                     String result = StringUtils.getDecodeString(response.body());
-                    Log.e(TAG, "onSuccess: --------确认密码返回json字符串--------" + result);
+                    LUtils.e(AffirmPasswordActivity.class,"logflag-确认密码返回json字符串--"+result);
+
                     Gson gson = new Gson();
                     AffirmPasswordBean bean = gson.fromJson(result, AffirmPasswordBean.class);
                     if (bean != null) {

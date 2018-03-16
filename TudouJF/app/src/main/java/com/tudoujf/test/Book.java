@@ -34,7 +34,6 @@ public class Book extends DataSupport{
     }
 
     public int getId() {
-        Log.e("TAG", "initDataFromIntent: --888---"+id);
         return id;
     }
 

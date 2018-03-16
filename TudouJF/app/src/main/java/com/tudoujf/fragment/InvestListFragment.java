@@ -39,6 +39,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.BidView;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -316,7 +317,8 @@ public class InvestListFragment extends BaseFragment {
                         dismissPDialog();
 //                        dialog.dismiss();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----理财投资列表接口返回数据-- " + type + "------" + result);
+                        LUtils.e(InvestListFragment.class,"logflag--理财投资列表接口返回数据-"+ type + "------" +result);
+
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<InvestListBean>() {
                         }.getType(), InvestListBean.class, getActivity());

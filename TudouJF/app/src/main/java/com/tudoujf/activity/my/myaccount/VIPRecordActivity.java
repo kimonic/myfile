@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.myaccount;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,6 +23,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -136,7 +136,8 @@ public class VIPRecordActivity extends BaseActivity {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----VIP申请记录--------" + result);
+                        LUtils.e(VIPRecordActivity.class,"logflag-VIP申请记录--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<VIPRecordBean>() {
                         }.getType(), VIPRecordBean.class, VIPRecordActivity.this);
                         if (bean1 != null) {

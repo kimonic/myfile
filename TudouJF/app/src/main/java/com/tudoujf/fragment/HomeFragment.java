@@ -60,6 +60,7 @@ import com.tudoujf.ui.DotView;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -215,6 +216,10 @@ public class HomeFragment extends BaseFragment {
      */
     private boolean fengXianFlag = true;
 
+    public void setFengXianFlag(boolean fengXianFlag) {
+        this.fengXianFlag = fengXianFlag;
+    }
+
     @Override
     public int layoutRes() {
         return R.layout.frag_home;
@@ -278,7 +283,9 @@ public class HomeFragment extends BaseFragment {
 
 
                 if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-                    openActivity(LoginActivity.class);
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.putExtra("type", 888);
+                    startActivityForResult(intent, 888);
                 } else if (params.getMarginEnd() < 0) {
                     params.setMarginEnd(0);
                     ivSignIn.setLayoutParams(params);
@@ -384,7 +391,6 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, getActivity());
                 if (bean1 != null) {
@@ -418,10 +424,8 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {//我的消息返回数据
-            Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
             int msgCount = data.getIntExtra("msgcount", 0);
             if (msgCount != 0) {
-                Log.e(TAG, "onActivityResult: ----未读消息数--------" + data.getStringExtra("msgcount"));
                 if (msgCount < 100) {
                     tvMsgCount.setText(("" + msgCount));
                 } else {
@@ -430,6 +434,9 @@ public class HomeFragment extends BaseFragment {
             }
 
         } else if (requestCode == 666) {//签到界面返回
+            initDataFromInternet();
+        }else if (requestCode==888){
+            fengXianFlag=true;
             initDataFromInternet();
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -578,8 +585,6 @@ public class HomeFragment extends BaseFragment {
 //                        float distanceX = event.getRawX()-downX;//负值左移,正值右移
 //                        float distanceY = event.getRawY()-downY;
 //
-//                        Log.e("TAG", "onTouch: ---distanceX--"+distanceX);
-//                        Log.e("TAG", "onTouch: ---distanceY--"+distanceY);
 //
 //
 //                        params.rightMargin= (int) (right-distanceX);
@@ -735,6 +740,8 @@ public class HomeFragment extends BaseFragment {
             }
 
 
+
+
 //             TODO: 2018/1/17 检测是否需要弹出风险测评
             if (fengXianFlag && (!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
                     && "-1".equals(bean.getRiskAssessment())
@@ -872,7 +879,6 @@ public class HomeFragment extends BaseFragment {
 
 //        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
 //            loginFlag = false;
-//            Log.e("TAG", "LoadInternetDataToUi: ---风险测评--onResume");
 //            initDataFromInternet();
 
         //        }

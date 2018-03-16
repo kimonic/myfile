@@ -35,6 +35,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.PasswordView;
 import com.tudoujf.utils.KeyboardChangeListener;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -214,7 +215,7 @@ public class AffirmBuyActivity extends BaseActivity {
             case R.id.tv_touzixieyi:
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
-                intent.putExtra("title","土豆金服服务协议");
+                intent.putExtra("title", "土豆金服服务协议");
                 startActivity(intent);
                 break;
         }
@@ -302,8 +303,6 @@ public class AffirmBuyActivity extends BaseActivity {
         });
 
 
-        Log.e("TAG1212", "isShow = -----------------------");
-
         new KeyboardChangeListener(this).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
             @Override
             public void onKeyboardChange(boolean isShow, int keyboardHeight) {
@@ -315,7 +314,6 @@ public class AffirmBuyActivity extends BaseActivity {
             public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
 // 可捕捉右下角的Return按钮,监听回车按钮
 //添加抛出收起事件代码
-                Log.e("TAG1212", "???????????????????????????????????????");
                 return false;
             }
         });
@@ -325,11 +323,11 @@ public class AffirmBuyActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 if (bean != null && StringUtils.string2Float(editable.toString()) >= 10) {
                     //计算预期收益
-                    float liXiShouYi=(StringUtils.string2Float(bean.getApr()) /
+                    float liXiShouYi = (StringUtils.string2Float(bean.getApr()) /
                             100 * StringUtils.string2Float(editable.toString()) / 12) * StringUtils.string2Float(bean.getPeriod());
-                    float  jiangLiShouYi=StringUtils.string2Float(editable.toString())
+                    float jiangLiShouYi = StringUtils.string2Float(editable.toString())
                             * StringUtils.string2Float(bean.getAward_proportion().toString()) / 100;
-                    float zongShouYi=liXiShouYi+jiangLiShouYi;
+                    float zongShouYi = liXiShouYi + jiangLiShouYi;
                     String temp = decimalFormat.format(liXiShouYi);
                     //尚未测试无奖励金额的
                     tvReward.setText(decimalFormat.format(jiangLiShouYi));
@@ -393,7 +391,8 @@ public class AffirmBuyActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----产品购买接口返回数据--------" + result);
+                        LUtils.e(AffirmBuyActivity.class, "logflag--产品购买接口返回数据-" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AffirmBuyBean>() {
                         }.getType(), AffirmBuyBean.class, AffirmBuyActivity.this);
                         if (bean1 != null) {
@@ -493,7 +492,6 @@ public class AffirmBuyActivity extends BaseActivity {
             redId = data.getStringExtra("redId");
             acount = data.getStringExtra("acount");
             String status = data.getStringExtra("together_status");
-            Log.e("TAG", "onActivityResult: -----" + status);
             if (!status.equals("")) {
                 together_status_redbag = StringUtils.string2Integer(status);
             }

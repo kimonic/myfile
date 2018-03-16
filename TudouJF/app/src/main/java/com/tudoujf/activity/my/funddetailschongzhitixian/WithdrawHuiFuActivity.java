@@ -3,7 +3,6 @@ package com.tudoujf.activity.my.funddetailschongzhitixian;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -23,6 +22,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -165,7 +165,8 @@ public class WithdrawHuiFuActivity extends BaseActivity {
 //                ToastUtils.showToast(CreditorRightsHuiFuBuyActivity.this, "注册失败1");
 //                finish();
 //            } else
-            Log.e("TAG", "onPageStarted: -----" + url);
+            LUtils.e(myWebClient.class,"logflag--url-"+url);
+
 
             if (url.contains(Constants.STATUS_CLOSE)) {
 //                UserConfig.getInstance().setCreditorFlush(true);
@@ -192,8 +193,6 @@ public class WithdrawHuiFuActivity extends BaseActivity {
         map.put("amount", amount);
         map.put("paymentType", "chinapnrTrust");//paymentType:"chinapnrTrust"
 
-        Log.e("TAG", "commitInfo: -----amount" + amount);
-        Log.e("TAG", "commitInfo: -----login_token" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.HUIFU_WITHDRAW, map, "999", new StringCallback() {
@@ -205,7 +204,7 @@ public class WithdrawHuiFuActivity extends BaseActivity {
                 String temp2 = StringUtils.getDecodeString(temp);
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求提现页面接口返回的json数据----------------" + result);
+                LUtils.e(WithdrawHuiFuActivity.class,"logflag-请求提现页面接口返回的json数据--"+result);
 
 
 

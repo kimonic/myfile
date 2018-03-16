@@ -60,6 +60,7 @@ import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -431,7 +432,8 @@ public class MyFragment extends BaseFragment {
                         public void onSuccess(Response<String> response) {
                             dismissPDialog();
                             String result = StringUtils.getDecodeString(response.body());
-                            Log.e("TAG", "onSuccess:----个人中心接口返回数据--------" + result);
+                            LUtils.e(MyFragment.class,"logflag--个人中心接口返回数据-"+result);
+
                             if (srl!=null&&srl.isRefreshing()) {
                                 srl.finishRefresh();
                             }
@@ -470,6 +472,11 @@ public class MyFragment extends BaseFragment {
             tvCanuse.setText(StringUtils.getCommaDecimalsStr(bean.getAmount_balance()));
             tvExperience.setText(StringUtils.getCommaDecimalsStr(bean.getExperience_balance()));
 
+            Bundle bundle= new Bundle();
+            bundle.putString("name", bean.getMember_name());
+            bundle.putString("iconurl", bean.getAvatar());
+            bundle.putString("riskAssessmentCount", bean.getRiskAssessmentCount());
+            UserConfig.getInstance().setAccountsParams(bundle);
 
             if ("1".equals(bean.getIsVip())) {
                 ivVip.setImageResource(R.drawable.frag_my_vipt);
@@ -537,7 +544,8 @@ public class MyFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------提现接口请求返回数据-----------------" + result);
+                LUtils.e(MyFragment.class,"logflag-提现接口请求返回数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithDrawBean>() {
                 }.getType(), WithDrawBean.class, getActivity());
                 if (bean1 != null) {

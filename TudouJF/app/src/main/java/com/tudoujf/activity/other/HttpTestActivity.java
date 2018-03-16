@@ -2,7 +2,6 @@ package com.tudoujf.activity.other;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.utils.FileUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.TimeUtils;
 
@@ -119,7 +119,6 @@ public class HttpTestActivity extends BaseActivity {
         List<Sensor> sensors = manager.getSensorList(Sensor.TYPE_ALL);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < sensors.size(); i++) {
-            Log.e("TAG", "onStart: ---------------------" + sensors.get(i).getName());
             builder.append(sensors.get(i).getName()).append("\n");
         }
 
@@ -186,7 +185,7 @@ public class HttpTestActivity extends BaseActivity {
         String url;
 
         for (String s : map.keySet()) {
-            Log.e("TAG", "httpSend:----" + s + "-------- " + map.get(s));
+            LUtils.e(HttpTestActivity.class, "logflag---httpSend:----" + s + "-------- " + map.get(s));
         }
 
 
@@ -196,7 +195,6 @@ public class HttpTestActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 if (!etCanshuInterface.getText().toString().trim().equals("")) {
-                    Log.e("TAG", "onSuccess: --------接口测试返回响应------" + response.body());
                     String result = "";
                     try {
                         result = StringUtils.getDecodeString(response.body());
@@ -208,9 +206,7 @@ public class HttpTestActivity extends BaseActivity {
                     if (result.contains("\"code\":200")) {
                         FileUtils.saveJsonToSDCard(HttpTestActivity.this, "数据数据" + TimeUtils.getCurentTimeTotal() + ".txt", result);
                     }
-
-                    //   /phone/loan/loanInfo  loan_id,292
-                    Log.e("TAG", "onSuccess:-----------接口测试返回结果---------- " + result);
+                    LUtils.e(HttpTestActivity.class, "logflag-接口测试返回结果--" +result);
                 } else {
                     tvActHttptest1.setText(response.body());
                 }

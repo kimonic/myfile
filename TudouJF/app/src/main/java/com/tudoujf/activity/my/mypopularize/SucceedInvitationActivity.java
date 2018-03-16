@@ -1,7 +1,6 @@
 package com.tudoujf.activity.my.mypopularize;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -10,7 +9,6 @@ import android.widget.ListView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -20,7 +18,6 @@ import com.tudoujf.R;
 import com.tudoujf.adapter.SucceedInvitationActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.databean.MyPopularizeBean;
 import com.tudoujf.bean.databean.SucceedInvitationBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -28,6 +25,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -156,8 +154,6 @@ public class SucceedInvitationActivity extends BaseActivity {
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
 
-        Log.e("TAG", "initDataFromInternet:我的推广成功邀请好友接口返回数据 -----" + page);
-        Log.e("TAG", "initDataFromInternet:我的推广成功邀请好友接口返回数据 -----" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.SUCCEED_INVITATION, map, this.getLocalClassName(),
@@ -167,7 +163,8 @@ public class SucceedInvitationActivity extends BaseActivity {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的推广成功邀请好友接口返回数据--------" + result);
+                        LUtils.e(SucceedInvitationActivity.class,"logflag--我的推广成功邀请好友接口返回数据-"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SucceedInvitationBean>() {
                         }.getType(), SucceedInvitationBean.class, SucceedInvitationActivity.this);
                         if (bean1 != null) {

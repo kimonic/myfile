@@ -1,9 +1,7 @@
 package com.tudoujf.activity.managemoney;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +23,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.InfoView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -145,7 +144,6 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         }
 
 
-
     }
 
     @Override
@@ -179,23 +177,24 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
         map.put("transfer_id", transfer_id);
         map.put("loan_id", loan_id);
         HttpMethods.getInstance().POST(this, Constants.CREDITOR_DETAILS, map, getLocalClassName(), new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                dismissPDialog();
-                String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求债权详情返回的json数据----------------" + result);
-                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorRightsDetailsBean>() {
-                }.getType(), CreditorRightsDetailsBean.class, CreditorRightsDetailsActivity.this);
-                if (bean1 != null) {
-                    bean = (CreditorRightsDetailsBean) bean1;
-                    LoadInternetDataToUi();
-                    if (isLogin) {
-                        enterBuy();
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        LUtils.e(CreditorRightsDetailsActivity.class, "logflag-请求债权详情返回的json数据--" + result);
+
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorRightsDetailsBean>() {
+                        }.getType(), CreditorRightsDetailsBean.class, CreditorRightsDetailsActivity.this);
+                        if (bean1 != null) {
+                            bean = (CreditorRightsDetailsBean) bean1;
+                            LoadInternetDataToUi();
+                            if (isLogin) {
+                                enterBuy();
+                            }
+                        } else {
+                            ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                        }
                     }
-                } else {
-                    ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
-                }
-            }
 
                     @Override
                     public void onError(Response<String> response) {
@@ -222,20 +221,21 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             tvFinancingAmount.setText(bean.getLoanMap().getLoan_info().getAmount());//融资金额
 
             tvRepaymentWay.setText(bean.getLoanMap().getRepay_type().getName());//还款方式
-            tvRepaymentSchedule.setText("已还" + bean.getTransferMap().getPeriod_yes() + "期/共" + bean.getTransferMap().getTotal_period() + "期");//??还款进度
+            tvRepaymentSchedule.setText(("已还" + bean.getTransferMap().getPeriod_yes() + "期/共"
+                    + bean.getTransferMap().getTotal_period() + "期"));//??还款进度
             tvRepaymentDeadline.setText(bean.getTransferMap().getLast_repay_time());//??还款期限
             tvInvestCount.setText(bean.getLoanMap().getLoan_info().getTender_count());//投资人数
 
-            status=bean.getTransferMap().getStatus();
+            status = bean.getTransferMap().getStatus();
 
             ivInfo.setNianHuaShouYi(bean.getLoanMap().getLoan_info().getApr());
             ivInfo.setJieKuanQiXian(bean.getLoanMap().getLoan_info().getPeriod_name());
             ivInfo.invalidate();
 
-            if (!"1".equals(status)){
+            if (!"1".equals(status)) {
                 tvBuyNow.setClickable(false);
                 tvBuyNow.setBackgroundColor(getResources().getColor(R.color.color_gray));
-                if ("2".equals(status)){
+                if ("2".equals(status)) {
                     tvBuyNow.setText(getResources().getString(R.string.shouqing));
                 }
 
@@ -279,7 +279,8 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                LUtils.e(CreditorRightsDetailsActivity.class, "logflag-请求身份是否实名返回的json数据--" +result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, CreditorRightsDetailsActivity.this);
                 if (bean1 != null) {
@@ -292,15 +293,15 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                             initDataFromInternet();
                         }
                     } else {
-                        if (promptDialog==null){
-                            promptDialog=DialogUtils.showPromptDialog(CreditorRightsDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
+                        if (promptDialog == null) {
+                            promptDialog = DialogUtils.showPromptDialog(CreditorRightsDetailsActivity.this, "提示", "您还没有实名，请先实名!", new DialogUtils.DialogUtilsClickListener() {
                                 @Override
                                 public void onClick() {
                                     promptDialog.dismiss();
                                     openActivity(RealNameAuthenticationHuiFuActivity.class);
                                 }
                             });
-                        }else {
+                        } else {
                             promptDialog.show();
                         }
 //                        //  弹出汇付托管开通页面
@@ -332,7 +333,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 888&&resultCode==888) {
+        if (requestCode == 888 && resultCode == 888) {
             isLogin1 = true;
             checkLogin();
         }

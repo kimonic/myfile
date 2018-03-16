@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.tudoujf.R;
 import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
+import com.tudoujf.activity.my.myaccount.MyAccountActivity;
 import com.tudoujf.adapter.DialogLVAdapter;
 import com.tudoujf.bean.SystemMessageFragBean;
 import com.tudoujf.bean.databean.TypeInfoBean;
@@ -362,7 +363,6 @@ public class DialogUtils {
             WindowManager.LayoutParams lp = window.getAttributes();
 //            Log.e(TAG, "showProgreessDialog: --ScreenSizeUtils.getDensity(this)-"+ ScreenSizeUtils.getDensity(this));
             int wh = 90 * ScreenSizeUtils.getDensity(context);
-            Log.e("TAG", "showUserDialog: ----wh-" + wh);
             lp.width = wh;
             lp.height = wh;
             lp.gravity = Gravity.CENTER;
@@ -698,7 +698,7 @@ public class DialogUtils {
         pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
         pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
         pop.setFocusable(true);//获取焦点
-
+        pop.setAnimationStyle(R.style.showPopupAnimation);
         pop.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
 
         pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -710,11 +710,26 @@ public class DialogUtils {
             }
         });
         ImageView imageView = (ImageView) view.findViewById(R.id.iv_dialog_risk_close);
+        TextView textView = (TextView) view.findViewById(R.id.tv_dialog_risk_jump);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pop.dismiss();
+            }
+        });
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserConfig.getInstance().getAccountsParams()!=null){
+                    Intent intent=new Intent(context, MyAccountActivity.class);
+                    intent.putExtras(UserConfig.getInstance().getAccountsParams());
+                    context.startActivity(intent);
+                    pop.dismiss();
+                }else {
+                    ToastUtils.showToast(context, "请手动前往我的--我的账户设置!");
+                }
+
             }
         });
 

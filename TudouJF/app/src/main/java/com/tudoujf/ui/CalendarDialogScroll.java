@@ -223,10 +223,8 @@ public class CalendarDialogScroll implements View.OnClickListener {
         //-------------------------------标识开始时间还是结束时间----2017.12.08----------------------------------------------------------------
         if (buttonFlag!=1){
             tvCurrentTime.setBackgroundResource(R.drawable.dialog_canlendarsel_tableheader_right);
-            Log.e("TAG", "initView: -----右边");
         }else {
             tvCurrentTime.setBackgroundResource(R.drawable.dialog_canlendarsel_tableheader_left);
-            Log.e("TAG", "initView: -----左边");
         }
 //-------------------------------标识开始时间还是结束时间-----2017.12.08---------------------------------------------------------------
 

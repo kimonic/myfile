@@ -1,9 +1,7 @@
 package com.tudoujf.activity.home;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +32,7 @@ import com.tudoujf.ui.FullyGridLayoutManager;
 import com.tudoujf.ui.GridSpacingItemDecoration;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -44,7 +43,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import butterknife.BindView;
-import cn.udesk.activity.MessageAdatper;
 
 /**
  * * ====================================================================
@@ -87,7 +85,6 @@ public class IntegralShopActivity extends BaseActivity {
 
     private List<IntegralShopBean.GoodsBean.ItemsBean> list;
     private int page = 1;
-    private int flag = 1;
 
     @Override
     public int getLayoutResId() {
@@ -151,7 +148,7 @@ public class IntegralShopActivity extends BaseActivity {
 
 
         FullyGridLayoutManager layoutManager = new FullyGridLayoutManager(this, 2);
-        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 //        GridLayoutManager layoutManager=new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
 //        rvActIntegralShop.setLayoutManager(layoutManager1);
         rvActIntegralShop.setLayoutManager(layoutManager);
@@ -222,7 +219,7 @@ public class IntegralShopActivity extends BaseActivity {
                         dismissPDialog();
                         finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------请求积分商城返回的json数据----------------" + result);
+                        LUtils.e(IntegralShopActivity.class,"logflag-请求积分商城返回的json数据--"+result);
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralShopBean>() {
                         }.getType(), IntegralShopBean.class, IntegralShopActivity.this);
                         if (bean1 != null) {
@@ -251,16 +248,14 @@ public class IntegralShopActivity extends BaseActivity {
         map.put("type_id", "");
         map.put("point_id", "");
         map.put("page", "" + page);
-        Log.e("TAG", "loadMoreGoods: -----" + page);
-
-
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP_MORE, map, getLocalClassName(), new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         finishRL();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess: -----------请求积分商城加载更多商品返回的json数据----------------" + result);
+                        LUtils.e(IntegralShopActivity.class,"logflag-请求积分商城加载更多商品返回的json数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralShopMoreBean>() {
                         }.getType(), IntegralShopMoreBean.class, IntegralShopActivity.this);
                         if (bean1 != null) {
@@ -354,8 +349,8 @@ public class IntegralShopActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        flag=intent.getIntExtra("flag",0);
-        if (flag==555){
+        int flag = intent.getIntExtra("flag", 0);
+        if (flag ==555){
             page = 1;
             list.clear();
             initDataFromInternet();

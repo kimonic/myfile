@@ -36,6 +36,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -208,7 +209,8 @@ public class SystemMessageFragment extends BaseFragment {
                             } else {
                                 ToastUtils.showToast(getActivity(), "网络不太给力哟!");
                             }
-                            Log.e("TAG", "onSuccess: ----------标记消息是否已读接口请求返回数据" + type + "-----------------" + result);
+                            LUtils.e(SystemMessageFragment.class,"logflag-标记消息是否已读接口请求返回数据--"+ type + "-----------------" + result);
+
                         }
                     });
                 } else {
@@ -267,7 +269,8 @@ public class SystemMessageFragment extends BaseFragment {
                 }
 //                dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------消息接口请求返回数据" + type + "-----------------" + result);
+                LUtils.e(SystemMessageFragment.class,"logflag-消息接口请求返回数据--"+type + "-----------------" + result);
+
 //                FileUtils.saveJsonToSDCard(getActivity(), "infomessage", result);
                 BaseBean baseBean = ParseJson.getJsonResult(response.body(), new TypeToken<MyMessageBean>() {
                         }.getType()
@@ -285,7 +288,6 @@ public class SystemMessageFragment extends BaseFragment {
                 dismissPDialog();
 //                dialog.dismiss();
                 ToastUtils.showToast(getActivity(), R.string.wuwangluotishi);
-                Log.e("TAG", "onSuccess: ----------消息接口请求返回错误信息" + type + "-----------------" + response.message());
                 super.onError(response);
             }
         });

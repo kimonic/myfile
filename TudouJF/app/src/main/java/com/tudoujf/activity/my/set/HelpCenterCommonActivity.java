@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.set;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -8,21 +7,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.adapter.HelpCenterCommonExpanableAdapter;
 import com.tudoujf.base.BaseActivity;
-import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.CommonBean;
-import com.tudoujf.bean.SafetyControlActBean;
 import com.tudoujf.bean.databean.HelpCenterCommonBean;
-import com.tudoujf.bean.databean.PersonalCenterBean;
 import com.tudoujf.config.Constants;
-import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
-import com.tudoujf.http.ParseJson;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -141,7 +134,8 @@ public class HelpCenterCommonActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----帮助中心通用接口返回数据--------" + category_id + "------" + result);
+                        LUtils.e(HelpCenterCommonActivity.class,"logflag--帮助中心通用接口返回数据---" + category_id + "------" + result);
+
                         Gson gson = new Gson();
                         bean = gson.fromJson(result, HelpCenterCommonBean.class);
                         if (bean != null && "200".equals(bean.getCode())) {

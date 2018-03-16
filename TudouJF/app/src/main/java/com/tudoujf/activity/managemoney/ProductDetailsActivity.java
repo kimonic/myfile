@@ -1,11 +1,9 @@
 package com.tudoujf.activity.managemoney;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +15,6 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
-import com.tudoujf.activity.my.myaccount.BankCardManageActivity;
 import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.ProductDetailsActLvAdapter;
 import com.tudoujf.base.BaseActivity;
@@ -36,6 +33,7 @@ import com.tudoujf.ui.UnderlineTextView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.HeightUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -131,7 +129,6 @@ public class ProductDetailsActivity extends BaseActivity {
 
 
     private String loginToken;
-    private String status;
     private String hint;
     /**
      * 是否已经登陆,已经登陆了则只检查是否实名,未登陆登陆后需要再次刷新本页面
@@ -248,16 +245,15 @@ public class ProductDetailsActivity extends BaseActivity {
 //        map.put("loan_id", loan_id);
         //----------------------------临时固定id----------------------------------------------------------------------------------------------------------------
         map.put("loan_id", loan_id);
-        Log.e("TAG", "initDataFromInternet: ---------loan_id------------" + loan_id);
 
         HttpMethods.getInstance().POST(this, Constants.INVESTMENT_DETAILS, map, getLocalClassName(),
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-//                        dialog.dismiss();
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----理财投资详情接口返回数据--------" + result);
+                        LUtils.e(ProductDetailsActivity.class,"logflag-理财投资详情接口返回数据--"+result);
+
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<InvestDetailsBean>() {
                         }.getType(), InvestDetailsBean.class, ProductDetailsActivity.this);
@@ -446,8 +442,6 @@ public class ProductDetailsActivity extends BaseActivity {
                 bundle.putString("is_beginner", bean.getLoan_info().getAdditional_status());
                 bundle.putString("time_limit", bean.getLoan_info().getPeriod());
                 bundle.putString("has_password", bean.getLoan_info().isPassword_status());
-                Log.e("TAG", "enterBuy: --bean.get???Loan_info().getAdditional_status()---" + bean.getLoan_info().getAdditional_status());
-
 
                 openActivity(AffirmBuyActivity.class, bundle);
             } else if (hint != null) {
@@ -484,7 +478,8 @@ public class ProductDetailsActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                LUtils.e(ProductDetailsActivity.class,"logflag-请求身份是否实名返回的json数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, ProductDetailsActivity.this);
                 if (bean1 != null) {

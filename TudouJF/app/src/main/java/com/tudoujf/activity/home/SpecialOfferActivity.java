@@ -1,7 +1,6 @@
 package com.tudoujf.activity.home;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -17,12 +16,9 @@ import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
 import com.tudoujf.activity.common.WebActivity;
-import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.adapter.SpecialOfferActLvAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
-import com.tudoujf.bean.SpecialOfferActBean;
-import com.tudoujf.bean.databean.MyExperienceGoldBean;
 import com.tudoujf.bean.databean.SpecialOfferBean;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
@@ -30,6 +26,7 @@ import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -53,7 +50,6 @@ import butterknife.BindView;
  */
 
 public class SpecialOfferActivity extends BaseActivity {
-    private static final String TAG = "SpecialOfferActivity";
     @BindView(R.id.mtb_act_specialoffer)
     MTopBarView mtbSpecialOffer;
     @BindView(R.id.lv_act_specialoffer)
@@ -161,7 +157,6 @@ public class SpecialOfferActivity extends BaseActivity {
 
     @Override
     public void initDataFromInternet() {
-        Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- ");
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
@@ -173,8 +168,7 @@ public class SpecialOfferActivity extends BaseActivity {
                 dismissPDialog();
                 finishRl();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess:------------活动专区请求json数据----------------- " + result);
-
+                LUtils.e(SpecialOfferActivity.class,"logflag-活动专区请求json数据--"+result);
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<SpecialOfferBean>() {
                 }.getType(), SpecialOfferBean.class, SpecialOfferActivity.this);
@@ -190,7 +184,6 @@ public class SpecialOfferActivity extends BaseActivity {
             public void onError(Response<String> response) {
                 dismissPDialog();
                 finishRl();
-                Log.e(TAG, "onSuccess:------------活动专区请求json数据失败----------------- " + response.code());
                 super.onError(response);
             }
         });

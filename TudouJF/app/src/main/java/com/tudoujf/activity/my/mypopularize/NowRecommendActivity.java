@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.imageutils.BitmapUtil;
 import com.tudoujf.R;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.UserConfig;
@@ -98,8 +96,6 @@ public class NowRecommendActivity extends BaseActivity {
      * 友盟分享代码-------------------------------------------------------------------------------
      */
     private void share() {
-        Log.e("TAG", "share: 微信是否安装-----" + UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN));
-
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         bitmap = drawableBitmapOnWhiteBg(bitmap);
 

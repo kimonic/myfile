@@ -192,7 +192,6 @@ public class VIPActivity extends BaseActivity {
 //                        dismissPDialog();
 //
 //                        String result = StringUtils.getDecodeString(response.body());
-//                        Log.e("TAG", "onSuccess:----VIP申请接口返回数据------------" + result);
 ////                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<TransferableDetailsBean>() {
 ////                        }.getType(), TransferableDetailsBean.class, VIPActivity.this);
 ////                        if (bean1 != null) {

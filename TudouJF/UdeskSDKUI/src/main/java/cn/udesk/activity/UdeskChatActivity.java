@@ -535,7 +535,6 @@ public class UdeskChatActivity extends Activity implements IChatActivityView,
 //                @Override
 //                public void onGlobalLayout() {
 //                    int heightDiff = udeskRoot.getRootView().getHeight() - udeskRoot.getHeight();
-//                    Log.e("TAG", "onGlobalLayout: --heightDiff---"+heightDiff);
 //                    if (heightDiff > 100) { //高度变小100像素则认为键盘弹出
 //                        //这里执行需要的处理
 //                    }

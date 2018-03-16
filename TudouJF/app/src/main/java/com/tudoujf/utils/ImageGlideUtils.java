@@ -61,7 +61,6 @@ public class ImageGlideUtils {
 //
 //                    @Override
 //                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-//                        Log.e("TAG", "onResourceReady: ---resource--"+resource);
 //                       view.setImageDrawable(resource);
 //                        view.setScaleType(ImageView.ScaleType.FIT_CENTER);
 //                        return false;

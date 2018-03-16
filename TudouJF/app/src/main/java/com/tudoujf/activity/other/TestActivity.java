@@ -126,8 +126,6 @@ public class TestActivity extends BaseActivity {
                 ScanTools.scanCode(imageView, new ScanTools.ScanCall() {
                     @Override
                     public void getCode(String s) {
-                        Log.e("TAG", "v: -----" + s);
-
                         ToastUtils.showToast(TestActivity.this, s);
                     }
                 });

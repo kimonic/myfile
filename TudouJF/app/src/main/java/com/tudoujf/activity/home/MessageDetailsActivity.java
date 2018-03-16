@@ -12,9 +12,6 @@ import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static android.text.Html.FROM_HTML_MODE_COMPACT;
 
 /**
  * * ====================================================================
@@ -66,7 +63,6 @@ public class MessageDetailsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbMessageDetails.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbMessageDetails.setLayoutParams(params);

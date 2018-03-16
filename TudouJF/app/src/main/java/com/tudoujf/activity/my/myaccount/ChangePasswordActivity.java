@@ -2,7 +2,6 @@ package com.tudoujf.activity.my.myaccount;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +19,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
 import com.tudoujf.utils.StringUtils;
@@ -139,7 +139,8 @@ public class ChangePasswordActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----修改密码接口返回数据--------" + result);
+                        LUtils.e(ChangePasswordActivity.class,"logflag-修改密码接口返回数据--"+result);
+
 
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);

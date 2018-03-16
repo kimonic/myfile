@@ -30,6 +30,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MRedView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.HeightUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -136,7 +137,6 @@ public class RedPackageActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.putExtra("redId", redId);
         intent.putExtra("acount", acount);
-        Log.e("TAG", "skip: -----" + together_status);
         intent.putExtra("together_status", together_status);
         switch (actType) {
             case 1://红包
@@ -164,16 +164,6 @@ public class RedPackageActivity extends BaseActivity {
             together_status = bundle.getString("together_status");
             selId = bundle.getString("selId");//已选中的红包id
             //----------------------------------------------------------------
-
-            //--------------------------传递的参数--------------------------------------------------
-            Log.e("TAG", "initDataFromIntent: -----actType" + actType);
-            Log.e("TAG", "initDataFromIntent: -----is_beginner" + is_beginner);
-            Log.e("TAG", "initDataFromIntent: -----time_limit" + time_limit);
-            Log.e("TAG", "initDataFromIntent: -----amount" + amount);
-            Log.e("TAG", "initDataFromIntent: -----together_status" + together_status);
-
-
-            //--------------------------传递的参数--------------------------------------------------
 
 
             if (actType == 1) {
@@ -281,11 +271,11 @@ public class RedPackageActivity extends BaseActivity {
                     } else if (actType == 2) {//加息券选中
                         // TODO: 2018/2/27 修复十倍加息券bug
 
-                        if ("1".equals(listJiaXiQuan.get(position).getCoupon_type())){
+                        if ("1".equals(listJiaXiQuan.get(position).getCoupon_type())) {
                             redId = listJiaXiQuan.get(position).getId();
-                            acount = listJiaXiQuan.get(position).getInterest()+"%";
+                            acount = listJiaXiQuan.get(position).getInterest() + "%";
                             together_status = listJiaXiQuan.get(position).getTogether_status();
-                        }else {
+                        } else {
                             redId = listJiaXiQuan.get(position).getId();
                             acount = getString(R.string.shibeijiaxi);
                             together_status = listJiaXiQuan.get(position).getTogether_status();
@@ -336,11 +326,11 @@ public class RedPackageActivity extends BaseActivity {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         if (actType == 1) {
-                            Log.e("TAG", "onSuccess:----获取可用红包接口返回数据--------" + result);
+                            LUtils.e(RedPackageActivity.class, "logflag-获取可用红包接口返回数据--" + result);
                         } else if (actType == 2) {
-                            Log.e("TAG", "onSuccess:----获取可用加息券接口返回数据--------" + result);
+                            LUtils.e(RedPackageActivity.class, "logflag-获取可用加息券接口返回数据--" + result);
                         } else if (actType == 3) {
-                            Log.e("TAG", "onSuccess:----获取可用返现券接口返回数据--------" + result);
+                            LUtils.e(RedPackageActivity.class, "logflag-获取可用返现券接口返回数据--" + result);
                         }
                         if (actType == 1) {
                             BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<RedBagBean>() {
@@ -432,11 +422,11 @@ public class RedPackageActivity extends BaseActivity {
 //                            tvAffirmUse.setBackgroundResource(R.drawable.xshape_roundrect_mblue);
                             tvAffirmUse.setBackgroundColor(getResources().getColor(R.color.calendar_selbac));
 
-                            if ("1".equals(listJiaXiQuan.get(i).getCoupon_type())){
+                            if ("1".equals(listJiaXiQuan.get(i).getCoupon_type())) {
                                 redId = listJiaXiQuan.get(i).getId();
-                                acount = listJiaXiQuan.get(i).getInterest()+"%";
+                                acount = listJiaXiQuan.get(i).getInterest() + "%";
                                 together_status = listJiaXiQuan.get(i).getTogether_status();
-                            }else {
+                            } else {
                                 redId = listJiaXiQuan.get(i).getId();
                                 acount = getString(R.string.shibeijiaxi);
                                 together_status = listJiaXiQuan.get(i).getTogether_status();

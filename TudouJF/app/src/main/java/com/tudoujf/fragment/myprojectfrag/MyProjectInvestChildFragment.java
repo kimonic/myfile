@@ -27,6 +27,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
 
@@ -65,11 +66,6 @@ public class MyProjectInvestChildFragment extends BaseFragment {
 
 
     public void setStartEndTime(String startTime, String endTime){
-
-        Log.e("TAG", "setStartEndTime: --startTime---"+startTime);
-        Log.e("TAG", "setStartEndTime: --endTime---"+endTime);
-
-
         start_time = startTime;
         end_time = endTime;
         page=1;
@@ -151,8 +147,6 @@ public class MyProjectInvestChildFragment extends BaseFragment {
         map.put("end_time", end_time);
         map.put("type", type);// 0投标中； 1回款中； 2已回款
 
-        Log.e("TAG", "onSuccess:----我的投资项目接口返回数据-login_token------" + UserConfig.getInstance().getLoginToken(getActivity()));
-
 
         HttpMethods.getInstance().POST(getActivity(), Constants.MY_INVESTMENT, map, "",
                 new StringCallback() {
@@ -163,7 +157,8 @@ public class MyProjectInvestChildFragment extends BaseFragment {
                         finishRL();
 
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的项目-投资项目接口返回数据--------" + type + "-------" + result);
+                        LUtils.e(MyProjectInvestChildFragment.class,"logflag-我的项目-投资项目接口返回数据--"+type + "-------" + result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyProjectInvestChildBean>() {
                         }.getType(), MyProjectInvestChildBean.class, getActivity());
                         if (bean1 != null) {

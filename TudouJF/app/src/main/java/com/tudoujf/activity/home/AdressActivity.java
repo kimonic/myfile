@@ -1,6 +1,5 @@
 package com.tudoujf.activity.home;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -10,7 +9,6 @@ import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.ScreenSizeUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 /**
@@ -46,7 +44,6 @@ public class AdressActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        /**设置沉浸式状态栏*/
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActAdress.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActAdress.setLayoutParams(params);

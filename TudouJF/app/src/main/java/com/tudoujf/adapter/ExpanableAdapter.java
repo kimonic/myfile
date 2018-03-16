@@ -134,7 +134,6 @@ public class ExpanableAdapter extends BaseExpandableListAdapter {
             itemHolder = (ItemHolder) convertView.getTag();
         }
         itemHolder.txt.setText(groupList.get(groupPosition).getContent());
-        Log.e("TAG", "getChildView:------------- " +groupList.get(groupPosition).getContent());
         return convertView;
     }
 

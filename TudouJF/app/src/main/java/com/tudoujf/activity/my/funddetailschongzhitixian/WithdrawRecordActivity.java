@@ -1,6 +1,5 @@
 package com.tudoujf.activity.my.funddetailschongzhitixian;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -52,8 +52,6 @@ public class WithdrawRecordActivity extends BaseActivity {
     MTopBarView mtbActWithdrawRecord;
     @BindView(R.id.lv_act_withdrawrecord)
     ListView lvActWithdrawRecord;
-    //    @BindView(R.id.tv_act_withdrawrecord_loadmore)
-//    TextView tvLoadMore;
     @BindView(R.id.srl_act_withdrawrecord)
     SmartRefreshLayout srl;
 
@@ -134,10 +132,7 @@ public class WithdrawRecordActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-//        map.put("login_token", "12267");
         map.put("page", "" + page);
-        Log.e("TAG", "initDataFromInternet: -----" + page);
-        Log.e("TAG", "initDataFromInternet: ---login_token--" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.WITHDRAW_RECORD, map, getLocalClassName(), new StringCallback() {
@@ -154,7 +149,8 @@ public class WithdrawRecordActivity extends BaseActivity {
 
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: ----------提现记录接口请求返回数据-----------------" + result);
+                LUtils.e(WithdrawRecordActivity.class,"logflag-提现记录接口请求返回数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<WithdrawRecordBean>() {
                 }.getType(), WithdrawRecordBean.class, WithdrawRecordActivity.this);
                 if (bean1 != null) {
@@ -180,7 +176,6 @@ public class WithdrawRecordActivity extends BaseActivity {
 
             if (adapter != null) {
                 adapter.notifyDataSetChanged();
-                Log.e("TAG", "onSuccess: --刷新数据源---" + list.size());
             } else {
                 adapter = new RechargeRecordActLvAdapter(list, this);
                 lvActWithdrawRecord.setAdapter(adapter);

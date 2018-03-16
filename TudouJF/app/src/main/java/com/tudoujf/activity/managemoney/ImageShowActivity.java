@@ -4,10 +4,6 @@ import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,7 +13,6 @@ import com.tudoujf.base.BaseActivity;
 import com.tudoujf.utils.ImageGlideUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * * ===============================================================

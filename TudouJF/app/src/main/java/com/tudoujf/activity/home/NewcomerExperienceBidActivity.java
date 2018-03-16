@@ -1,9 +1,7 @@
 package com.tudoujf.activity.home;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +29,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.InfoView;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -66,8 +65,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     TextView tvTouZiRenShu;
     @BindView(R.id.tv_act_newcomerexperiencebid_huankuanfangshi)
     TextView tvHuanKuanFangShi;
-    //    @BindView(R.id.tv_act_newcomerexperiencebid_loadmore)
-//    TextView tvLoadMore;
     @BindView(R.id.tv_act_newcomerexperiencebid_bidnow)
     TextView tvBidNow;
     @BindView(R.id.srl_act_newcomerexperiencebid)
@@ -79,9 +76,9 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     private String loan_id;
     private NewcomerExperienceBidActLvAdapter adapter;
     private String loginToken;
-    private boolean isLogin;
+//    private boolean isLogin;
     private IdentityCheckBean identityCheckBean;
-    private boolean isLogin1;
+//    private boolean isLogin1;
 
     private int page = 1;
     private ExperienceListBean beanE;
@@ -137,9 +134,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             map.put("loan_id", loan_id);
             map.put("page", "" + page);
 
-            Log.e("TAG", "initDataFromInternet: -体验标的loan_id----" + loan_id);
-
-
             HttpMethods.getInstance().POST(this, Constants.EXPERIENCE_TENDERLIST, map, getLocalClassName(),
                     new StringCallback() {
                         @Override
@@ -156,7 +150,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                             dismissPDialog();
                             srl.finishLoadmore();
                             String result = StringUtils.getDecodeString(response.body());
-                            Log.e("TAG", "onSuccess:----体验标投资详情列表接口返回数据------------------- " + result);
+                            LUtils.e(NewcomerExperienceBidActivity.class,"logflag-体验标投资详情列表接口返回数据--"+result);
+
                             BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ExperienceListBean>() {
                             }.getType(), ExperienceListBean.class, NewcomerExperienceBidActivity.this);
                             if (bean1 != null) {
@@ -249,8 +244,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("page", "" + page);
 
-        Log.e("TAG", "initDataFromInternet: -----" + loan_id);
-        Log.e("TAG", "initDataFromInternet: --page---" + page);
 
         map.put("loan_id", loan_id);
 
@@ -268,7 +261,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----体验标详情接口返回数据------------------- " + result);
+                        LUtils.e(NewcomerExperienceBidActivity.class,"logflag-体验标详情接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewcomerExperienceBidBean>() {
                         }.getType(), NewcomerExperienceBidBean.class, NewcomerExperienceBidActivity.this);
                         if (bean1 != null) {
@@ -286,8 +280,6 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            Log.e("TAG", "LoadInternetDataToUi: -----" + bean.getAttaList());
-
             tvHuanKuanFangShi.setText(bean.getRepay_type().getContents());
             tvTouZiRenShu.setText(bean.getLoan_info().getTender_count());
             tvYiTouJinE.setText(bean.getLoan_info().getCredited_amount());
@@ -329,12 +321,12 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     private void checkLogin() {
         loginToken = UserConfig.getInstance().getLoginToken(this);
         if ("".equals(loginToken)) {
-            isLogin = false;
+//            isLogin = false;
             Intent intent = new Intent(this, LoginActivity.class);
             intent.putExtra("type", 888);
             startActivityForResult(intent, 888);
         } else {
-            isLogin = true;
+//            isLogin = true;
             checkIdentity();
         }
 
@@ -350,7 +342,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求身份是否实名返回的json数据----------------" + result);
+                LUtils.e(NewcomerExperienceBidActivity.class,"logflag--请求身份是否实名返回的json数据-"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, NewcomerExperienceBidActivity.this);
                 if (bean1 != null) {
@@ -407,7 +400,8 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------确认投资返回的json数据----------------" + result);
+                LUtils.e(NewcomerExperienceBidActivity.class,"logflag--确认投资返回的json数据-"+result);
+
                 if (result != null && result.contains("200")) {
                     openActivity(MyExperienceGoldActivity.class);//打开我体验金页面
                 } else {
@@ -428,7 +422,7 @@ public class NewcomerExperienceBidActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 888 && resultCode == 888) {
-            isLogin1 = true;
+//            isLogin1 = true;
             checkLogin();
         }
     }

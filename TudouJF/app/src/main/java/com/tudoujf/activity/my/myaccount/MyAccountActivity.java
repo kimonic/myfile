@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +52,7 @@ import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.FileUtils;
 import com.tudoujf.utils.GlideImageLoaderUtils;
 import com.tudoujf.utils.ImageGlideUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.SharedPreferencesUtils;
@@ -62,7 +62,6 @@ import com.tudoujf.utils.ToastUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 
@@ -351,7 +350,6 @@ public class MyAccountActivity extends BaseActivity {
             OkGo.<File>get(iconurl).execute(new FileCallback(iconDir, fileName) {
                 @Override
                 public void onSuccess(Response<File> response) {
-                    Log.e("TAG", "onSuccess: ---头像图片保存成功--");
                 }
             });
         }
@@ -423,15 +421,14 @@ public class MyAccountActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        Log.e("TAG", "我的账户序列: -----" + UserConfig.getInstance().getLoginToken(this));
-
         HttpMethods.getInstance().POST(this, Constants.MY_ACCOUNT, map, getLocalClassName(),
                 new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        Log.e("TAG", "onSuccess:----我的账户接口返回数据--------" + result);
+                        LUtils.e(MyAccountActivity.class,"logflag-我的账户接口返回数据--"+result);
+
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<MyAccountBean>() {
                         }.getType(), MyAccountBean.class, MyAccountActivity.this);
                         if (bean1 != null) {
@@ -561,7 +558,6 @@ public class MyAccountActivity extends BaseActivity {
                                 @Override
                                 public void run() {
                                     String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, path);
-                                    Log.e("TAG", "run: -图片存储路径--imPath--" + imPath);
 
                                 }
                             }.start();
@@ -575,13 +571,11 @@ public class MyAccountActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         ToastUtils.showToast(MyAccountActivity.this, R.string.tupianshangchuanshibai);
-                        Log.e("TAG", "onSuccess: ---图片存储路径--" + response.body());
                     }
 
                     @Override
                     public void uploadProgress(Progress progress) {
                         super.uploadProgress(progress);
-                        Log.e("TAG", "uploadProgress: --图片存储路径-progress--" + progress);
 
                     }
                 });

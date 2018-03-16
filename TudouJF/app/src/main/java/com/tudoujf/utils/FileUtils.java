@@ -78,7 +78,6 @@ public class FileUtils {
 
 
         File file = new File(getFilepath(context) + fileName);
-        Log.e("TAG", "saveJsonToSDCard: " + (getFilepath(context) + fileName));
 
         FileOutputStream os = null;
         try {
@@ -173,11 +172,9 @@ public class FileUtils {
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
             if (!appDir.mkdir()) {
-                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
         String fileName = name + "icon.jpg";
-        Log.e("TAG", "iconPath: file.getAbsolutePath()-----" + appDir.getAbsolutePath() + "/" + fileName);
         return appDir.getAbsolutePath() + "/" + fileName;
     }
 
@@ -193,7 +190,6 @@ public class FileUtils {
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
             if (!appDir.mkdir()) {
-                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
         String fileName = name + "icon.jpg";
@@ -252,7 +248,6 @@ public class FileUtils {
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
             if (!appDir.mkdir()) {
-                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
         String fileName = "icon.jpg";
@@ -277,8 +272,6 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("TAG", "saveBitmap: --f.getAbsolutePath()---"+f.getAbsolutePath());
-
         return f.getAbsolutePath();
 
     }
@@ -288,7 +281,6 @@ public class FileUtils {
         File appDir = new File(Environment.getExternalStorageDirectory(), "icon");
         if (!appDir.exists()) {
             if (!appDir.mkdir()) {
-                Log.e("TAG", "saveImageToGallery: -----图片保存目录创建失败!!");
             }
         }
         return appDir.getAbsolutePath();
@@ -296,12 +288,12 @@ public class FileUtils {
 
 
     public static void fileDir(Context context) {
-        Log.e("TAG", "fileDir:1---------------" + context.getExternalCacheDir());//应用内缓存目录
-        Log.e("TAG", "fileDir:5---------------" + context.getExternalCacheDir().getPath());
-        Log.e("TAG", "fileDir: 2---------------" + context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));//SD卡内应用缓存目录
-        Log.e("TAG", "fileDir: -3--------------" + context.getFilesDir());//SD卡内应用缓存目录
-        Log.e("TAG", "fileDir: ---4------------" + context.getCacheDir());//应用内缓存目录
-        Log.e("TAG", "fileDir: ---6------------" + context.getCacheDir().getPath());
+       LUtils.e(FileUtils.class, "logflag---------------" + context.getExternalCacheDir());//应用内缓存目录
+       LUtils.e(FileUtils.class, "logflag---------------" + context.getExternalCacheDir().getPath());
+       LUtils.e(FileUtils.class, "logflag---------------" + context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS));//SD卡内应用缓存目录
+       LUtils.e(FileUtils.class, "logflag--------------" + context.getFilesDir());//SD卡内应用缓存目录
+       LUtils.e(FileUtils.class, "logflag -------------" + context.getCacheDir());//应用内缓存目录
+       LUtils.e(FileUtils.class, "logflag -------------" + context.getCacheDir().getPath());
         //以上目录都会在卸载时清空数据
     }
 

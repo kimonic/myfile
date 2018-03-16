@@ -3,7 +3,6 @@ package com.tudoujf.activity.managemoney;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -24,6 +23,7 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.ui.MTopBarView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.ToastUtils;
@@ -188,8 +188,6 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
         map.put("transferId", transferId);
-        Log.e("TAG", "commitInfo: -transferId----" + transferId);
-        Log.e("TAG", "commitInfo: --UserConfig.getInstance().getLoginToken(this)---" + UserConfig.getInstance().getLoginToken(this));
 
 
         HttpMethods.getInstance().POST(this, Constants.AFFIRM_BUY_CREDITOR_RIGHTS, map, "999", new StringCallback() {
@@ -197,7 +195,8 @@ public class CreditorRightsHuiFuBuyActivity extends BaseActivity {
             @Override
             public void onSuccess(Response<String> response) {
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e("TAG", "onSuccess: -----------请求债权购买回复页面接口返回的json数据----------------" + result);
+                LUtils.e(CreditorRightsHuiFuBuyActivity.class,"logflag-请求债权购买回复页面接口返回的json数据--"+result);
+
 
                 String temp = response.body();
                 String temp2 = StringUtils.getDecodeString(temp);

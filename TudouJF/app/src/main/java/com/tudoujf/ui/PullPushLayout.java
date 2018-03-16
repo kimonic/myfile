@@ -117,12 +117,10 @@ public class PullPushLayout extends LinearLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.e(TAG, "dispatchTouchEvent: ----------ACTION_DOWN-");
                 downX = ev.getX();
                 downY = ev.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.e(TAG, "dispatchTouchEvent: ----------ACTION_MOVE-");
                 moveX = Math.abs(ev.getX() - downX);
                 moveY = ev.getY() - downY;
                 if (moveX < 30 && moveY > 50 && listView.getFirstVisiblePosition() == 0
@@ -179,7 +177,6 @@ public class PullPushLayout extends LinearLayout {
                         }
                     }.start();
                 }
-                Log.e(TAG, "dispatchTouchEvent: ----------ACTION_UP-");
 
                 break;
         }
@@ -195,18 +192,10 @@ public class PullPushLayout extends LinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.e("TAG", "onTouchEvent: ---------3333-ACTION_DOWN--------------");
-
                 break;
             case MotionEvent.ACTION_MOVE:
-                Log.e("TAG", "onTouchEvent: ---------3333-ACTION_MOVE--------------");
-
-
                 break;
             case MotionEvent.ACTION_UP:
-
-                Log.e("TAG", "onTouchEvent: ---------3333-ACTION_UP--------------");
-
                 break;
         }
 
@@ -219,7 +208,6 @@ public class PullPushLayout extends LinearLayout {
 
 //        在被判定为滚动之前用户手指可以移动的最大值--即超过该值后即判定为滚动状态
         int maxMove = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-        Log.e("TAG", "initView22: " + maxMove);
         ViewCompat.setNestedScrollingEnabled(this, true);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -250,7 +238,6 @@ public class PullPushLayout extends LinearLayout {
 
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            list.add("这个item的序号是---------" + i);
         }
         listView.setAdapter(new SimpleLVAdapter(list, getContext()));
 
