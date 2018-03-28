@@ -301,6 +301,8 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                         finishRL();
                         ToastUtils.showToast(ClassificationOfGoodsActivity.this, R.string.huoqujifenshangchengxinxishibai);
                     }
+
+
                 }
         );
 

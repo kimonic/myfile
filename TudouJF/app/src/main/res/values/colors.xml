@@ -68,6 +68,7 @@
     <color name="color_line1">#DDDDDD</color>
     <color name="color_black2">#666666</color>
     <color name="color_black3">#383838</color>
+    <color name="colortouming">#00000000</color>
 
 
 </resources>

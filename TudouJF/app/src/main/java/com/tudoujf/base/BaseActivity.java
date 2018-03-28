@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ import com.tudoujf.activity.my.myproject.MyProjectActivity;
 import com.tudoujf.activity.other.LockActivity;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ToastUtils;
 
 import java.lang.ref.WeakReference;
@@ -126,6 +128,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏显示
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);//禁止截屏
 //        getSupportActionBar().hide();//代码隐藏actionbar
+        //设置背景透明20180328修正启东白屏
+        getWindow().getDecorView().setBackground(new ColorDrawable(Color.WHITE));
+
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
         initDataFromIntent();

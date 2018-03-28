@@ -15,6 +15,7 @@ import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.PermissionUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -74,13 +75,15 @@ public class WelcomeActivity extends BaseActivity {
     public void initDataFromIntent() {
         isgudie = SharedPreferencesUtils.getInstance(this, Constants.USER_CONFIG).getBoolean("isguide", false);
         isLock = UserConfig.getInstance().getLockPass(this);
+
+
     }
 
     @Override
     public void initView() {
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivActWelcome.getLayoutParams();
-        params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
-        ivActWelcome.setLayoutParams(params);
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivActWelcome.getLayoutParams();
+//        params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
+//        ivActWelcome.setLayoutParams(params);
 
 
         //-------------------------------检查权限授予情况-------------------------------------------
@@ -116,7 +119,7 @@ public class WelcomeActivity extends BaseActivity {
                 }
 
             }
-        }, 2000);
+        }, 1000);
     }
 
     @Override
