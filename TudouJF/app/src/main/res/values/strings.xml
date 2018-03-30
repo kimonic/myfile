@@ -132,7 +132,7 @@
     <string name="zhuangtai">状态</string>
 
     <string name="frag_home_touziqixian">投资期限</string>
-    <string name="frag_home_yuqinianhuashouyi">约定借款年化利率</string>
+    <string name="frag_home_yuqinianhuashouyi">预期年化收益</string>
     <string name="dialog_zanbukaitong">暂不开通</string>
     <string name="dialog_lijikaitong">立即开通</string>
     <string name="dialog_tishi">为了您的资金安全\n请开通资金托管账户</string>

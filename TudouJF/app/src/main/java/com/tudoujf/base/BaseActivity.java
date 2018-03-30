@@ -128,9 +128,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏显示
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);//禁止截屏
 //        getSupportActionBar().hide();//代码隐藏actionbar
-        //设置背景透明20180328修正启东白屏
-        getWindow().getDecorView().setBackground(new ColorDrawable(Color.WHITE));
-
+        //设置背景透明20180328修正启动白屏
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.windowback));
         setContentView(getLayoutResId());
         ButterKnife.bind(this);
         initDataFromIntent();

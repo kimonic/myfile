@@ -98,7 +98,7 @@ public class SignInActivity extends BaseActivity {
     public void initView() {
 
         // TODO: 2017/12/22 暂时去掉积分商城
-        llShop.setVisibility(View.GONE);
+//        llShop.setVisibility(View.GONE);
 
 
 
@@ -128,8 +128,6 @@ public class SignInActivity extends BaseActivity {
                 showPDialog();
                 TreeMap<String, String> map = new TreeMap<>();
                 map.put("login_token", UserConfig.getInstance().getLoginToken(SignInActivity.this));
-                Log.e(TAG, "clickEvent: ------logintoken--------" + UserConfig.getInstance().getLoginToken(SignInActivity.this));
-
 
                 HttpMethods.getInstance().POST(SignInActivity.this, Constants.SIGN_IN_SAVE, map, getLocalClassName(), new StringCallback() {
                     @Override
@@ -188,7 +186,6 @@ public class SignInActivity extends BaseActivity {
             public void onError(Response<String> response) {
 
                 dismissPDialog();
-                Log.e(TAG, "onSuccess:------------签到请求json数据失败----------------- " + response.code());
                 super.onError(response);
             }
         });

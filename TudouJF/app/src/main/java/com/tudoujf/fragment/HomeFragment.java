@@ -348,7 +348,8 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess: ------------首页fragment返回的标的详情id数据----------------" + result);
+                LUtils.e(HomeFragment.class,"logflag-首页fragment返回的标的详情id数据--"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBidIdBean>() {
                         }.getType(),
                         HomeBidIdBean.class, getActivity());
@@ -686,7 +687,8 @@ public class HomeFragment extends BaseFragment {
                 finishRL();
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess: ------------首页fragment返回的json数据----------------" + result);
+                LUtils.e(HomeFragment.class,"logflag--首页fragment返回的json数据-"+result);
+
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
                         }.getType(),
                         HomeBean.class, getActivity());
@@ -742,7 +744,7 @@ public class HomeFragment extends BaseFragment {
 
 
 
-//             TODO: 2018/1/17 检测是否需要弹出风险测评
+//             TODO: 2018/1/17 检测是否需要弹出风险测评,电子印章
             if (fengXianFlag && (!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
                     && "-1".equals(bean.getRiskAssessment())
                     && "1".equals(bean.getIsTrustOpen())
@@ -783,7 +785,8 @@ public class HomeFragment extends BaseFragment {
                 dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess: ------------领取生日红包返回的json数据----------------" + result);
+                LUtils.e(HomeFragment.class,"logflag--领取生日红包返回的json数据-"+result);
+
                 if (result != null && result.contains("\"code\":200")) {
                     ToastUtils.showToast(getActivity(), R.string.lingquchenggong);
                 } else {

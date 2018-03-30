@@ -38,17 +38,20 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
 
         int position = parent.getChildAdapterPosition(view);
-        if (position % 2 == 0) {
-            outRect.left = 0;
-            outRect.right = 3;
-            outRect.bottom = 3;
-            outRect.top = 0;
-        } else {
-            outRect.left = 0;
-            outRect.right = 0;
-            outRect.bottom = 3;
-            outRect.top = 0;
+        if (position>0){
+            if (position % 2 == 1) {
+                outRect.left = 0;
+                outRect.right = 3;
+                outRect.bottom = 3;
+                outRect.top = 0;
+            } else {
+                outRect.left = 0;
+                outRect.right = 0;
+                outRect.bottom = 3;
+                outRect.top = 0;
+            }
         }
+
     }
 
     /**

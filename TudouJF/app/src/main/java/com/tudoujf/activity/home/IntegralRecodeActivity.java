@@ -31,6 +31,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.CalendarDialogScroll;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.ScreenSizeUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.TimeUtils;
@@ -266,7 +267,6 @@ public class IntegralRecodeActivity extends BaseActivity {
         TreeMap<String, String> map = new TreeMap<>();
 
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-        Log.e(TAG, "initDataFromInternet: ------获取的logintoken-----------" + UserConfig.getInstance().getLoginToken(this));
 //        map.put("login_token", "12267");
         map.put("start_time", paramsStartTime);
         map.put("end_time", paramsEndTime);
@@ -279,7 +279,7 @@ public class IntegralRecodeActivity extends BaseActivity {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                Log.e(TAG, "onSuccess: ----------消息接口请求返回数据-----------------" + result);
+                LUtils.e(IntegralRecodeActivity.class,"logflag--消息接口请求返回数据-"+result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IntegralRecodeBean>() {
                 }.getType(), IntegralRecodeBean.class, IntegralRecodeActivity.this);
 
