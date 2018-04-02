@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     android:orientation="vertical">
 
     <ImageView
@@ -64,9 +65,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:paddingTop="5dp"
         android:background="@color/color_white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:id="@+id/ll_act_integralshop_classification_of_goods"
@@ -80,8 +81,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="@null"
-                android:src="@drawable/act_integralshop_shangpinfenlei"
-                />
+                android:src="@drawable/act_integralshop_shangpinfenlei" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,8 +105,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:contentDescription="@null"
-                android:src="@drawable/act_integralshop_jifenshaixuan"
-                />
+                android:src="@drawable/act_integralshop_jifenshaixuan" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,8 +128,8 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/act_integralshop_remenduihuan"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/act_integralshop_remenduihuan" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,8 +152,8 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/act_integralshop_jifenpaihangbang"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:src="@drawable/act_integralshop_jifenpaihangbang" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -166,8 +165,9 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="3dp" />
 
 </LinearLayout>

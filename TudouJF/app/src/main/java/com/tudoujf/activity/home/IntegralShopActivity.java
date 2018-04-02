@@ -1,5 +1,6 @@
 package com.tudoujf.activity.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +31,6 @@ import com.tudoujf.config.Constants;
 import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
-import com.tudoujf.ui.FullyGridLayoutManager;
 import com.tudoujf.ui.GridSpacingItemDecoration;
 import com.tudoujf.ui.MTopBarView;
 import com.tudoujf.ui.TuDouHeader;
@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.zip.Inflater;
 
 import butterknife.BindView;
 
@@ -67,20 +66,16 @@ public class IntegralShopActivity extends BaseActivity {
     @BindView(R.id.srl_act_integralshop)
     SmartRefreshLayout srl;
 
-//    @BindView(R.id.tv_act_myaccount_touzi)
-    TextView tvTouzi;
-//    @BindView(R.id.tv_act_integralshop_myintegral)
-    TextView myIntegral;
-//    @BindView(R.id.ll_act_integralshop_classification_of_goods)
-    LinearLayout classificationOfGoods;
-//    @BindView(R.id.ll_act_integralshop_integral_screen)
-    LinearLayout integralScreen;
-//    @BindView(R.id.ll_act_integralshop_hot)
-    LinearLayout hot;
-//    @BindView(R.id.ll_act_integralshop_ranking_list)
-    LinearLayout rankingList;
+    private TextView tvTouzi;
+    private TextView myIntegral;
+    private LinearLayout classificationOfGoods;
+    private LinearLayout integralScreen;
+    private LinearLayout hot;
+    private LinearLayout rankingList;
 
-    /**头部视图*/
+    /**
+     * 头部视图
+     */
     private View headerView;
 
     private IntegralShopBean bean;
@@ -130,7 +125,6 @@ public class IntegralShopActivity extends BaseActivity {
                 Intent intent1 = new Intent(this, HomeActivity.class);
                 intent1.putExtra("flag", 555);
                 startActivity(intent1);
-//                openActivity(HomeActivity.class);
                 break;
 //                 case R.id.:break;
 //                 case R.id.:break;
@@ -144,6 +138,7 @@ public class IntegralShopActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public void initView() {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActIntegralShop.getLayoutParams();
@@ -152,15 +147,6 @@ public class IntegralShopActivity extends BaseActivity {
 //
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
         srl.setRefreshHeader(new TuDouHeader(this));
-//
-//
-//        FullyGridLayoutManager layoutManager = new FullyGridLayoutManager(this, 2);
-////        LinearLayoutManager layoutManager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-////        GridLayoutManager layoutManager=new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
-////        rvActIntegralShop.setLayoutManager(layoutManager1);
-//        rvActIntegralShop.setLayoutManager(layoutManager);
-//        rvActIntegralShop.setNestedScrollingEnabled(false);
-//        rvActIntegralShop.addItemDecoration(new GridSpacingItemDecoration());
 
         manager = new GridLayoutManager(this, 2);
         rvActIntegralShop.setLayoutManager(manager);
@@ -173,19 +159,13 @@ public class IntegralShopActivity extends BaseActivity {
         rvActIntegralShop.addItemDecoration(new GridSpacingItemDecoration());
 
 
-        headerView= LayoutInflater.from(this).inflate(R.layout.rv_header_integralshop,null,false);
-        tvTouzi=headerView.findViewById(R.id.tv_act_myaccount_touzi);
-        myIntegral=headerView.findViewById(R.id.tv_act_integralshop_myintegral);
-        classificationOfGoods=headerView.findViewById(R.id.ll_act_integralshop_classification_of_goods);
-        integralScreen=headerView.findViewById(R.id.ll_act_integralshop_integral_screen);
-        hot=headerView.findViewById(R.id.ll_act_integralshop_hot);
-        rankingList=headerView.findViewById(R.id.ll_act_integralshop_ranking_list);
-
-//        rvActIntegralShop.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.VERTICAL));
-        //        rvActIntegralShop.setAdapter();
-
-
-
+        headerView = LayoutInflater.from(this).inflate(R.layout.rv_header_integralshop, null, false);
+        tvTouzi = headerView.findViewById(R.id.tv_act_myaccount_touzi);
+        myIntegral = headerView.findViewById(R.id.tv_act_integralshop_myintegral);
+        classificationOfGoods = headerView.findViewById(R.id.ll_act_integralshop_classification_of_goods);
+        integralScreen = headerView.findViewById(R.id.ll_act_integralshop_integral_screen);
+        hot = headerView.findViewById(R.id.ll_act_integralshop_hot);
+        rankingList = headerView.findViewById(R.id.ll_act_integralshop_ranking_list);
 
 
     }
@@ -242,8 +222,6 @@ public class IntegralShopActivity extends BaseActivity {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(this));
-//        map.put("transfer_id", transfer_id);
-//        map.put("loan_id", loan_id);
         HttpMethods.getInstance().POST(this, Constants.INTEGRAL_SHOP, map, getLocalClassName(), new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -328,10 +306,10 @@ public class IntegralShopActivity extends BaseActivity {
                 adapter.notifyDataSetChanged();
             }
         } else if (beanMore != null && page > 1 && beanMore.getItems() != null) {
-            LUtils.e(IntegralShopActivity.class,"logflag--shop-"+list.size());
+            LUtils.e(IntegralShopActivity.class, "logflag--shop-" + list.size());
             list.addAll(beanMore.getItems());
             if (adapter == null) {
-                adapter = new IntegralShopRvAdapter(this, list,R.layout.rv_header_integralshop);
+                adapter = new IntegralShopRvAdapter(this, list, R.layout.rv_header_integralshop);
                 adapter.setHeaderView(headerView);
                 rvActIntegralShop.setAdapter(adapter);
                 adapter.setOnItemClickListener(new IntegralShopRvAdapter.OnRecyclerViewItemClickListener() {
@@ -342,7 +320,7 @@ public class IntegralShopActivity extends BaseActivity {
                     }
                 });
             } else {
-                LUtils.e(IntegralShopActivity.class,"logflag--shop-刷新");
+                LUtils.e(IntegralShopActivity.class, "logflag--shop-刷新");
                 adapter.notifyDataSetChanged();
             }
         } else {
@@ -369,17 +347,6 @@ public class IntegralShopActivity extends BaseActivity {
         return true;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        if (flag == 1) {
-//            flag++;
-//        } else {
-//            page = 1;
-//            list.clear();
-//            initDataFromInternet();
-//        }
-    }
 
     @Override
     protected void onNewIntent(Intent intent) {
