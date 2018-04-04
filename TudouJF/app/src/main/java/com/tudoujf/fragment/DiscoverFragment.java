@@ -3,6 +3,7 @@ package com.tudoujf.fragment;
 import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -59,24 +60,22 @@ import butterknife.BindView;
 public class DiscoverFragment extends BaseFragment {
     @BindView(R.id.mtb_frag_discover)
     MTopBarView mtbFragDiscover;
-    @BindView(R.id.ll_frag_discover_bt1)
-    LinearLayout llFragDiscoverBt1;
-    @BindView(R.id.ll_frag_discover_bt2)
-    LinearLayout llFragDiscoverBt2;
-    @BindView(R.id.ll_frag_discover_bt3)
-    LinearLayout llFragDiscoverBt3;
-    @BindView(R.id.ll_frag_discover_bttotal)
-    LinearLayout llFragDiscoverBtTotal;
+
+
+    private LinearLayout llFragDiscoverBt1;
+    private LinearLayout llFragDiscoverBt2;
+    private LinearLayout llFragDiscoverBt3;
+
+
     @BindView(R.id.lv_frag_discover)
     ListView lvFragDiscover;
     @BindView(R.id.srl_frag_discover)
     SmartRefreshLayout srl;
-    @BindView(R.id.view_jiange)
-    View vJianGe;
 
     private List<DiscoverBean.ItemsBean> list;
     private int page = 1;
     private DiscoverBean bean;
+    private DiscoverFragLvAdapter adapter;
 
     @Override
     public int layoutRes() {
@@ -87,11 +86,11 @@ public class DiscoverFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_frag_discover_bt1:
-                Intent intent=new Intent(getActivity(),WebActivity.class);
-                intent.putExtra("url",Constants.URL+"/wap/prize/index?type=app&login_token="
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", Constants.URL + "/wap/prize/index?type=app&login_token="
                         + UserConfig.getInstance().getLoginToken(getActivity()));
-                intent.putExtra("title",getString(R.string.xingyunchoujiang));
-                intent.putExtra("flag","my");
+                intent.putExtra("title", getString(R.string.xingyunchoujiang));
+                intent.putExtra("flag", "my");
                 startActivity(intent);
 //                openActivity(LuckyLotteryActivity.class);
                 break;
@@ -133,16 +132,23 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void initView() {
         // TODO: 2017/12/22 暂时去掉发现顶部的幸运抽奖,积分商城,豪礼兑换按钮
-        llFragDiscoverBtTotal.setVisibility(View.GONE);
-        vJianGe.setVisibility(View.GONE);
+//        //listview的固定headerview控件
+//        View view = LayoutInflater.from(getActivity()).inflate(R.layout.lv_header, null, false);
+//        llFragDiscoverBt1 = view.findViewById(R.id.ll_frag_discover_bt1);
+//        llFragDiscoverBt2 = view.findViewById(R.id.ll_frag_discover_bt2);
+//        llFragDiscoverBt3 = view.findViewById(R.id.ll_frag_discover_bt3);
+//        lvFragDiscover.addHeaderView(view);
 
+
+        adapter = new DiscoverFragLvAdapter(list, getActivity());
+        lvFragDiscover.setAdapter(adapter);
 
 
         srl.setPrimaryColorsId(R.color.global_theme_background_color);
 //        srl.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
         srl.setRefreshHeader(new TuDouHeader(getActivity()));
-        srl.setRefreshFooter(new BallPulseFooter(getActivity()));
-        srl.setEnableLoadmore(true);
+//        srl.setRefreshFooter(new BallPulseFooter(getActivity()));
+        srl.setEnableLoadmore(false);
 
         initDataFromInternet();
     }
@@ -155,14 +161,15 @@ public class DiscoverFragment extends BaseFragment {
                 closeActivity();
             }
         });
-        llFragDiscoverBt1.setOnClickListener(this);
-        llFragDiscoverBt2.setOnClickListener(this);
-        llFragDiscoverBt3.setOnClickListener(this);
+        // TODO: 2018/4/4 暂时去掉积分商城
+//        llFragDiscoverBt1.setOnClickListener(this);
+//        llFragDiscoverBt2.setOnClickListener(this);
+//        llFragDiscoverBt3.setOnClickListener(this);
 
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                page=1;
+                page = 1;
                 list.clear();
                 initDataFromInternet();
 //                finishRL();
@@ -178,10 +185,13 @@ public class DiscoverFragment extends BaseFragment {
         lvFragDiscover.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", list.get(position).getJumpurl());
-                intent.putExtra("title", list.get(position).getName());
-                startActivity(intent);
+                if (id != -1) {
+                    int realPosition = (int) id;
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
+                    intent.putExtra("url", list.get(realPosition).getJumpurl());
+                    intent.putExtra("title", list.get(realPosition).getName());
+                    startActivity(intent);
+                }
 //                openActivity(WebActivity.class);
 
             }
@@ -189,7 +199,7 @@ public class DiscoverFragment extends BaseFragment {
     }
 
     private void finishRL() {
-        if (srl!=null){
+        if (srl != null) {
             if (srl.isRefreshing()) {
                 srl.finishRefresh();
             } else if (srl.isLoading()) {
@@ -214,7 +224,7 @@ public class DiscoverFragment extends BaseFragment {
                         finishRL();
                         String result = StringUtils.getDecodeString(response.body());
 
-                        LUtils.e(DiscoverFragment.class,"logflag--首页发现接口返回数据-"+result);
+                        LUtils.e(DiscoverFragment.class, "logflag--首页发现接口返回数据-" + result);
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<DiscoverBean>() {
                         }.getType(), DiscoverBean.class, getActivity());
@@ -244,9 +254,9 @@ public class DiscoverFragment extends BaseFragment {
             list.addAll(bean.getItems());
 //            list.addAll(bean.getItems());
 
-            DiscoverFragLvAdapter adapter = new DiscoverFragLvAdapter(list, getActivity());
-            lvFragDiscover.setAdapter(adapter);
-            HeightUtils.setListviewHeight(lvFragDiscover);
+
+            adapter.notifyDataSetChanged();
+//            HeightUtils.setListviewHeight(lvFragDiscover);
 
         }
 
