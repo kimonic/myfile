@@ -253,7 +253,7 @@ public class DiscoverFragment extends BaseFragment {
 
             list.addAll(bean.getItems());
 //            list.addAll(bean.getItems());
-
+//---
 
             adapter.notifyDataSetChanged();
 //            HeightUtils.setListviewHeight(lvFragDiscover);
