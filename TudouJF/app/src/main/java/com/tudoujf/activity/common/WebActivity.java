@@ -34,7 +34,6 @@ import butterknife.BindView;
  * history：
  * ===================================================
  */
-
 public class WebActivity extends BaseActivity {
     @BindView(R.id.mtb_act_web)
     MTopBarView mtbActWeb;

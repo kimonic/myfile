@@ -25,7 +25,6 @@ import butterknife.BindView;
  * history：
  * * ====================================================================
  */
-
 public class ManageMoneyMattersFragment extends BaseFragment {
 //    @BindView(R.id.lv_frag_managemoneymatters)
 //    ListView lvFragManageMoneyMatters;

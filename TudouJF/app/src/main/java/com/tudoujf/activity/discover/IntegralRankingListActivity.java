@@ -38,7 +38,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class IntegralRankingListActivity extends BaseActivity {
     @BindView(R.id.mtb_act_integralrankinglist)
     MTopBarView mtb;

@@ -53,7 +53,6 @@ import butterknife.BindView;
  * history：
  * ===================================================
  */
-
 public class HomeActivity extends BaseActivity {
     @BindView(R.id.vp_act_home)
     ViewPager vpActHome;
@@ -62,7 +61,6 @@ public class HomeActivity extends BaseActivity {
 
     private List<Fragment> list;
     private boolean isLogin = false;
-
     private int beforePosition = 0;
 
 
@@ -127,8 +125,6 @@ public class HomeActivity extends BaseActivity {
                 if (position == 3) {
                     ((MyFragment) list.get(3)).showService();
                 }
-
-
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
@@ -278,6 +274,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        //是否需要显示开通汇付的对话框
         if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
             if (!"".equals(UserConfig.getInstance().getLoginToken(this)) && "-1".equals(UserConfig.getInstance().getIsRealName(this))) {
                 SharedPreferencesUtils.getInstance(this, "popshow").put("show", false);
@@ -288,6 +285,9 @@ public class HomeActivity extends BaseActivity {
 
     //----------------------------可能会对页面跳转产生影响-------------------------------------
 
+    /**
+     * 检测是否已登陆
+     */
     private void checkLogin() {
         if (!"".equals(UserConfig.getInstance().getLoginToken(this))) {
             MApp.getInstance().setLogin(true);
@@ -297,6 +297,9 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 打开登陆界面
+     */
     private void openLoginAct() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.putExtra("type", 888);
@@ -350,17 +353,17 @@ public class HomeActivity extends BaseActivity {
         super.onNewIntent(intent);
 
         int flag = intent.getIntExtra("flag", 0);
-        if (flag == 555) {
+        if (flag == 555) {//理财界面
             vpActHome.setCurrentItem(1);
-        } else if (flag == 55) {
+        } else if (flag == 55) {//首页界面
             vpActHome.setCurrentItem(0);
-        } else if (flag == 666) {
+        } else if (flag == 666) {//刷新首页界面
             try {
                 ((HomeFragment) (list.get(0))).initDataFromInternet();
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
-        } else if (flag == 66) {
+        } else if (flag == 66) {//我的界面
             vpActHome.setCurrentItem(3);
         }
 

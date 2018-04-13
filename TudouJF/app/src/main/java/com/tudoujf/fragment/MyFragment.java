@@ -308,6 +308,7 @@ public class MyFragment extends BaseFragment {
         });
     }
 
+    /**显示客服按钮*/
     public void showService() {
         if (flFragMy != null) {
             flFragMy.setVisibility(View.VISIBLE);

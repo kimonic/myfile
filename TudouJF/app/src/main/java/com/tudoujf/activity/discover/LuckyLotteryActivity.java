@@ -20,7 +20,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class LuckyLotteryActivity extends BaseActivity {
     @BindView(R.id.lll_act_luckylottery)
     LuckyLotteryLayout lllActLuckylottery;

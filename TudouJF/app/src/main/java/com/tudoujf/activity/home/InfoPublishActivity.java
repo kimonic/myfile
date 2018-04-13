@@ -22,10 +22,9 @@ import butterknife.BindView;
  * version：          1.0
  * date：            2017/8/2
  * description：   信息披露activity
- * history：
+ * history：  本页包含的所有按钮点击打开
  * ===================================================
  */
-
 public class InfoPublishActivity extends BaseActivity {
     @BindView(R.id.mtb_act_infopublish)
     MTopBarView mtbInfopublish;

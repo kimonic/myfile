@@ -109,6 +109,7 @@ public class InvestListFragLvAdapter extends BaseAdapter {
             viewHolder.bidView.setIsNewer(context.getResources().getString(R.string.xinshouzhuanxiang));
         }
 
+        //标的是否有锁
         if ("1".equals(list.get(position).getIs_locked())) {
             viewHolder.bidView.setLock(true);
         } else {

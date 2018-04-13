@@ -22,8 +22,6 @@ import com.tudoujf.utils.TimeUtils;
  * history：
  * * ==================================================
  */
-
-
 public class DateFilterDialog implements View.OnClickListener {
     private Context context;
     private ClickEvent lisenter;

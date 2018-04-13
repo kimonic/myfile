@@ -54,7 +54,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class ClassificationOfGoodsActivity extends BaseActivity {
     @BindView(R.id.tv_act_classificationofgoods_back)
     TextView tvBack;
@@ -149,6 +148,9 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
     }
 
 
+    /**
+     * 获取商品分类
+     */
     private void requestType() {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
@@ -345,7 +347,5 @@ public class ClassificationOfGoodsActivity extends BaseActivity {
                 srl.finishRefresh();
             }
         }
-
-
     }
 }

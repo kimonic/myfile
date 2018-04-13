@@ -311,25 +311,25 @@ public class HomeFragment extends BaseFragment {
     private void retractAnim(int flag) {
         params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
         // TODO: 2018/2/28  修复params为null的问题,待验证 1.0.3
-        if (params == null) {
-            return;
-        }
-        int marginEnd = params.getMarginEnd();
-        ValueAnimator animator;
-        if (flag == 1) {
-            animator = ValueAnimator.ofInt(marginEnd, 0);
-        } else {
-            animator = ValueAnimator.ofInt(0, -50 * density);
-        }
-        animator.setDuration(1000);
-        animator.start();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                params.setMarginEnd((Integer) animation.getAnimatedValue());
-                ivSignIn.setLayoutParams(params);
+        if (params != null) {
+            int marginEnd = params.getMarginEnd();
+            ValueAnimator animator;
+            if (flag == 1) {
+                animator = ValueAnimator.ofInt(marginEnd, 0);
+            } else {
+                animator = ValueAnimator.ofInt(0, -50 * density);
             }
-        });
+            animator.setDuration(1000);
+            animator.start();
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    params.setMarginEnd((Integer) animation.getAnimatedValue());
+                    ivSignIn.setLayoutParams(params);
+                }
+            });
+        }
+
     }
 
     /**

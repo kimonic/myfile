@@ -64,45 +64,50 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     private boolean isActive = true;
     //-----------------------------------------联网请求计时---------------------------------------------------------
 
-    private boolean isProgressing = false;
 
-    private MyHandler handler = new MyHandler(this);
+    // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+    //    private boolean isProgressing = false;
 
-    class MyHandler extends Handler {
-        // 弱引用 ，防止内存泄露
-        private WeakReference<AppCompatActivity> weakReference;
+//    private MyHandler handler = new MyHandler(this);
+//
+//    class MyHandler extends Handler {
+//        // 弱引用 ，防止内存泄露
+//        private WeakReference<AppCompatActivity> weakReference;
+//
+//        private MyHandler(AppCompatActivity handlerMemoryActivity) {
+//            weakReference = new WeakReference<AppCompatActivity>(handlerMemoryActivity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//
+//            AppCompatActivity handlerMemoryActivity = weakReference.get();
+//            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
+//                OkGo.getInstance().cancelAll();
+////                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
+//                try {
+//                    dismissPDialog();
+//                } catch (Exception e) {
+//
+//                }
+//            } else {
+//                dismissPDialog();
+//            }
+//        }
+//    }
 
-        private MyHandler(AppCompatActivity handlerMemoryActivity) {
-            weakReference = new WeakReference<AppCompatActivity>(handlerMemoryActivity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            AppCompatActivity handlerMemoryActivity = weakReference.get();
-            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
-                OkGo.getInstance().cancelAll();
-//                ToastUtils.showToast(BaseActivity.this, R.string.shujujiazaichaoshi);
-                try {
-                    dismissPDialog();
-                } catch (Exception e) {
-
-                }
-            } else {
-                dismissPDialog();
-            }
-        }
-    }
-
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
 
     //------------------------------------------联网请求计时--------------------------------------------------------
 
     private AlertDialog bDialog;
 
     public void showPDialog() {
-        timeThread();
-        isProgressing = true;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//        timeThread();
+//        isProgressing = true;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
         if (bDialog == null && !isFinishing()) {
             bDialog = DialogUtils.showProgreessDialog(this, getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
         } else if (!isFinishing()) {
@@ -111,7 +116,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
     }
 
     public void dismissPDialog() {
-        isProgressing = false;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//        isProgressing = false;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
         // TODO: 2018/2/26 窗体泄露异常修正
         if (!(isFinishing() || isDestroyed())) {
             if (bDialog != null && bDialog.isShowing()) {
@@ -332,22 +339,25 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseMeth
 
     }
 
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
 
-    private void timeThread() {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(15000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Message msg = Message.obtain();
-                msg.what = 1;
-                if (handler != null) {
-                    handler.sendMessage(msg);
-                }
-            }
-        }.start();
-    }
+//    private void timeThread() {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(15000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Message msg = Message.obtain();
+//                msg.what = 1;
+//                if (handler != null) {
+//                    handler.sendMessage(msg);
+//                }
+//            }
+//        }.start();
+//    }
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+
 }

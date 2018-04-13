@@ -38,7 +38,6 @@ import butterknife.BindView;
  * history：
  * ===================================================
  */
-
 public class WelcomeActivity extends BaseActivity {
     @BindView(R.id.iv_act_welcome)
     ImageView ivActWelcome;
@@ -174,6 +173,9 @@ public class WelcomeActivity extends BaseActivity {
         startActivity(localIntent);
     }
 
+    /**
+     * 启动引导页,手势密码页或者主页的逻辑判断
+     */
     private void start() {
         if (!isgudie) {//第一次打开
             Intent intent = new Intent(WelcomeActivity.this, GuideActivity.class);

@@ -45,7 +45,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class GoodsDetailsActivity extends BaseActivity {
     @BindView(R.id.mtb_act_godsdetails)
     MTopBarView mtb;
@@ -344,6 +343,10 @@ public class GoodsDetailsActivity extends BaseActivity {
         return true;
     }
 
+    /**
+     * 设置按钮样式
+     * @param position 位置
+     */
     private void setBtnStyle(int position) {
         for (int i = 0; i < list.size(); i++) {
             if (position == i) {

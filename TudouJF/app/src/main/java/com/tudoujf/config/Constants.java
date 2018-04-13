@@ -11,14 +11,13 @@ package com.tudoujf.config;
  * history：
  * * ====================================================================
  */
-
 public class Constants {
     /**
      * 固定URL
      */
     // TODO: 2018/1/17 正式环境与测试环境切换
-//    public static final String URL = "http://m.test.tudoujf.com";
-    public static final String URL = "http://mob.tudoujf.com";
+    public static final String URL = "http://m.test.tudoujf.com";
+//    public static final String URL = "http://mob.tudoujf.com";
 
     /**
      * 活动专区接口

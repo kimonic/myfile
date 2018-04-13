@@ -42,39 +42,43 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
 
     //-----------------------------------------联网请求计时---------------------------------------------------------
 
-    private boolean isProgressing = false;
+    // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//    private boolean isProgressing = false;
+//
+//    private MyHandler handler;
+//
+//    private class MyHandler extends Handler {
+//        // 弱引用 ，防止内存泄露
+//        private WeakReference<FragmentActivity> weakReference;
+//
+//        public MyHandler(FragmentActivity handlerMemoryActivity) {
+//            weakReference = new WeakReference<FragmentActivity>(handlerMemoryActivity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            FragmentActivity handlerMemoryActivity = weakReference.get();
+//            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
+//                OkGo.getInstance().cancelAll();
+////                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
+//                dismissPDialog();
+//            } else {
+//                dismissPDialog();
+//            }
+//        }
+//    }
 
-    private MyHandler handler;
-
-    private class MyHandler extends Handler {
-        // 弱引用 ，防止内存泄露
-        private WeakReference<FragmentActivity> weakReference;
-
-        public MyHandler(FragmentActivity handlerMemoryActivity) {
-            weakReference = new WeakReference<FragmentActivity>(handlerMemoryActivity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            FragmentActivity handlerMemoryActivity = weakReference.get();
-            if (handlerMemoryActivity != null && isProgressing && msg.what == 1) {
-                OkGo.getInstance().cancelAll();
-//                ToastUtils.showToast(getActivity(), R.string.shujujiazaichaoshi);
-                dismissPDialog();
-            } else {
-                dismissPDialog();
-            }
-        }
-    }
-
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
 
     //------------------------------------------联网请求计时--------------------------------------------------------
 
 
     public void showPDialog() {
-        isProgressing = true;
-        timeThread();
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//        isProgressing = true;
+//        timeThread();
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
         try {
             if (bDialog == null) {
                 bDialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
@@ -87,7 +91,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     }
 
     public void dismissPDialog() {
-        isProgressing = false;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//        isProgressing = false;
+        // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
         try {
             // TODO: 2018/2/26 窗体泄露异常修正
             if (getActivity() != null && !(getActivity().isFinishing() || getActivity().isDestroyed())) {
@@ -109,7 +115,9 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         initDataFromIntent();
         initView();
         initListener();
-        handler = new MyHandler(getActivity());
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//        handler = new MyHandler(getActivity());
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
         return view;
     }
 
@@ -163,22 +171,24 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
         super.onDestroyView();
     }
 
-    private void timeThread() {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(15000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                Message msg = Message.obtain();
-                msg.what = 1;
-                if (handler != null) {
-                    handler.sendMessage(msg);
-                }
-            }
-        }.start();
-    }
+    // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
+//    private void timeThread() {
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(15000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                Message msg = Message.obtain();
+//                msg.what = 1;
+//                if (handler != null) {
+//                    handler.sendMessage(msg);
+//                }
+//            }
+//        }.start();
+//    }
+// ---------------------------20180411--去掉线程控制取消dialog--------------------------------------
 }

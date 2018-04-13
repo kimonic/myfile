@@ -48,7 +48,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class ExchangeRecordActivity extends BaseActivity {
     @BindView(R.id.tv_act_exchnagerecord_bac)
     TextView tvBac;

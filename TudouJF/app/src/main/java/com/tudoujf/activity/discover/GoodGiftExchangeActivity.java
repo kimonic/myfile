@@ -36,7 +36,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class GoodGiftExchangeActivity extends BaseActivity {
     @BindView(R.id.mtb_act_goodgiftexcahnge)
     MTopBarView mtb;
@@ -120,7 +119,9 @@ public class GoodGiftExchangeActivity extends BaseActivity {
 
     }
 
-
+    /**
+     * 兑换
+     */
     private void exchange(){
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();

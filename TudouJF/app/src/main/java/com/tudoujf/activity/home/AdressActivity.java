@@ -19,7 +19,7 @@ import butterknife.BindView;
  * version：          1.0
  * date：            2017/8/10
  * description：  公司地址activity
- * history：
+ * history：  未使用
  * * ====================================================================
  */
 

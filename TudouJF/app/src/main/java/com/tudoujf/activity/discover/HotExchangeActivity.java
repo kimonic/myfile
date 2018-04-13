@@ -40,7 +40,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class HotExchangeActivity extends BaseActivity {
     @BindView(R.id.mtb_act_hotexchange)
     MTopBarView mtb;

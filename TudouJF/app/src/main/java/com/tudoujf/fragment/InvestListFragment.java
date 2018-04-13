@@ -60,7 +60,6 @@ import butterknife.BindView;
  * history：
  * * ====================================================================
  */
-
 public class InvestListFragment extends BaseFragment {
     @BindView(R.id.lv_frag_managemoneymatterstouchild)
     ListView lvFragManageMoneyMatters;

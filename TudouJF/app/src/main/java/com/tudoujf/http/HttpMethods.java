@@ -48,7 +48,7 @@ public class HttpMethods {
         OkGo.get(url)   // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey(Key)                      // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
-                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
+                .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .params(paramsMap)
                 .execute(callback);
     }
@@ -60,7 +60,7 @@ public class HttpMethods {
     public void GET(final Context context, String url, Callback callback) {
         OkGo.get(url)     // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求
-                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
+                .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .execute(callback);
     }
 
@@ -76,7 +76,7 @@ public class HttpMethods {
         OkGo.post(url)     // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求
                 .cacheKey(Key)                      // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
-                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
+                .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .params(StringUtils.getRequestParams(paramsMap))
                 .execute(callback);
     }
@@ -89,7 +89,7 @@ public class HttpMethods {
         OkGo.get(url)//
                 .tag(context)//
                 .cacheKey("sds")
-                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
+                .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .params(paramsMap)
                 .execute(callback);
 
@@ -103,7 +103,7 @@ public class HttpMethods {
                 .params("login_token",loginToken)
                 .params("headImage",new File(filePath))
                 .cacheKey("sds")
-                .cacheMode(CacheMode.DEFAULT)       // 缓存模式，详细请看缓存介绍
+                .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .execute(callback);
 
     }

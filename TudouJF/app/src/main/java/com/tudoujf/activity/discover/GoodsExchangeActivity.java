@@ -37,7 +37,6 @@ import butterknife.BindView;
  * history：
  * *==================================================================
  */
-
 public class GoodsExchangeActivity extends BaseActivity {
     @BindView(R.id.mtb_act_goodsexchange)
     MTopBarView mtb;
@@ -85,6 +84,7 @@ public class GoodsExchangeActivity extends BaseActivity {
         }
     }
 
+    /**检测输入内容是否符合规则*/
     private boolean check() {
         if ("".equals(etLianxiren.getText().toString())) {
             ToastUtils.showToast(GoodsExchangeActivity.this, R.string.lianxirenxingmingbunengweikong);
