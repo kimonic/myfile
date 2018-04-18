@@ -622,6 +622,7 @@ public class HomeFragment extends BaseFragment {
     }
 
 
+    /**显示隐藏的提示信息*/
     private void showInfo(final TextView tv) {
         tv.setText(R.string.licaiyoufengxian);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -807,10 +808,10 @@ public class HomeFragment extends BaseFragment {
     /**
      * 对其他view加载网络数据
      */
-
     private void initOtherView(int position) {
         if (loanBeanList != null) {
             tvBidTitle.setText(loanBeanList.get(position).getName());
+            //判断标的种类,新手体验标,新手专享标,正常标
             if ("1".equals(loanBeanList.get(position).getAdditional_status())) {
                 tvXinShouZhuanXinag.setVisibility(View.VISIBLE);
                 tvXinShouZhuanXinag.setText(getResources().getString(R.string.frag_home_xinshouzhuanxiangbiao));
@@ -821,14 +822,15 @@ public class HomeFragment extends BaseFragment {
                 tvXinShouZhuanXinag.setVisibility(View.INVISIBLE);
             }
 
+            //判断是否显示奖励加息
             if ("2".equals(loanBeanList.get(position).getAward_status())) {
                 aivFragHome.setVisibility(View.VISIBLE);
-
                 aivFragHome.setText("奖" + loanBeanList.get(position).getAward_proportion().toString() + "%");
                 aivFragHome.invalidate();
             } else {
                 aivFragHome.setVisibility(View.INVISIBLE);
             }
+
             tvTouZiJinE.setText((loanBeanList.get(position).getAmount() + "元"));
             if ("月".equals(loanBeanList.get(position).getPeriod_unit())) {
                 tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + "个" + loanBeanList.get(position).getPeriod_unit()));
@@ -836,14 +838,14 @@ public class HomeFragment extends BaseFragment {
                 tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + loanBeanList.get(position).getPeriod_unit()));
             }
 
+            //判断未读消息数目
             if ("0".equals(bean.getMessage_count())) {
-//                ivMsgCount.setImageResource(R.drawable.frag_home_noinfo);
                 tvMsgCount.setText("");
                 tvMsgCount.setVisibility(View.INVISIBLE);
             } else {
-//                ivMsgCount.setImageResource(R.drawable.frag_home_info);
                 tvMsgCount.setVisibility(View.VISIBLE);
                 int count = StringUtils.string2Integer(bean.getMessage_count());
+                //未读消息数目超过100时,显示99,低于100,显示正常数目
                 if (count < 100) {
                     tvMsgCount.setText(bean.getMessage_count());
                 } else {
@@ -876,15 +878,6 @@ public class HomeFragment extends BaseFragment {
             }
         }
         super.onResume();
-//        if (!loginFlag && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-//            loginFlag = true;  1  2  3
-
-
-//        } else if (loginFlag && !"".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-//            loginFlag = false;
-//            initDataFromInternet();
-
-        //        }
     }
 
     @Override
@@ -896,6 +889,7 @@ public class HomeFragment extends BaseFragment {
         super.onDestroy();
     }
 
+    /**viewpager轮播*/
     private void initAutoCarousel() {
         thread = new Thread() {
             @Override

@@ -1,7 +1,6 @@
 package com.tudoujf.fragment;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -105,7 +103,6 @@ public class CreditorListFragment extends BaseFragment {
      * 投资列表适配器
      */
     private CreditorListFragLvAdapter actLVAdapter;
-    private String TAG = "ManageMoneyChild";
     /**
      * 互斥的button按钮背景色设置的list
      */

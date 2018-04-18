@@ -499,7 +499,7 @@ public class MyAccountActivity extends BaseActivity {
                 String imPath = FileUtils.saveBitmap(photo);
                 postImage(imPath);
 //                }
-            } else {
+            } else   {
                 ToastUtils.showToast(this, "没有获取到拍照图片!");
             }
         } else if (requestCode == 2 && data != null) {
@@ -558,7 +558,6 @@ public class MyAccountActivity extends BaseActivity {
                                 @Override
                                 public void run() {
                                     String imPath = FileUtils.saveImageToGallery(MyAccountActivity.this, path);
-
                                 }
                             }.start();
                         } else {
