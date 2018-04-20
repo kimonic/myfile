@@ -64,13 +64,14 @@ public class HttpMethods {
                 .execute(callback);
     }
 
+
+
     /**
      * post请求
      */
     @SuppressWarnings("unchecked")
-    public  void POST( Context context, String url, TreeMap<String, String> paramsMap,
-                          String Key, Callback callback) {
-
+    public void POST(Context context, String url, TreeMap<String, String> paramsMap,
+                      String Key, Callback callback) {
 
 
         OkGo.post(url)     // 请求方式和请求url
@@ -81,10 +82,9 @@ public class HttpMethods {
                 .execute(callback);
     }
 
-
     //下载http://imtt.dd.qq.com/16891/8C3E058EAFBFD4F1EFE0AAA815250716.apk?fsname=com.tencent.mobileqq_7.1.0_692.apk&csr=1bbd
     @SuppressWarnings("unchecked")
-    public void Download( Context context, String url,  Map<String, String> paramsMap,
+    public void Download(Context context, String url, Map<String, String> paramsMap,
                          Callback callback) {
         OkGo.get(url)//
                 .tag(context)//
@@ -95,13 +95,13 @@ public class HttpMethods {
 
     }
 
-    public void postFile( Context context, String url,   String loginToken,String filePath,
-                          Callback callback) {
+    public void postFile(Context context, String url, String loginToken, String filePath,
+                         Callback callback) {
         OkGo.post(url)//
                 .tag(context)
 //                .isMultipart(true)//
-                .params("login_token",loginToken)
-                .params("headImage",new File(filePath))
+                .params("login_token", loginToken)
+                .params("headImage", new File(filePath))
                 .cacheKey("sds")
                 .cacheMode(CacheMode.NO_CACHE)       // 缓存模式，详细请看缓存介绍
                 .execute(callback);

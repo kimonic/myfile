@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -76,6 +77,8 @@ public class DiscoverFragment extends BaseFragment {
     private int page = 1;
     private DiscoverBean bean;
     private DiscoverFragLvAdapter adapter;
+
+    private boolean refeshFlag=false;
 
     @Override
     public int layoutRes() {
@@ -169,18 +172,18 @@ public class DiscoverFragment extends BaseFragment {
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                refeshFlag=true;
                 page = 1;
-                list.clear();
                 initDataFromInternet();
 //                finishRL();
             }
         });
-        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                finishRL();
-            }
-        });
+//        srl.setOnLoadmoreListener(new OnLoadmoreListener() {
+//            @Override
+//            public void onLoadmore(RefreshLayout refreshlayout) {
+//                finishRL();
+//            }
+//        });
 
         lvFragDiscover.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -196,6 +199,8 @@ public class DiscoverFragment extends BaseFragment {
 
             }
         });
+
+
     }
 
     private void finishRL() {
@@ -250,14 +255,12 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null && bean.getItems() != null && bean.getItems().size() > 0) {
-
+            if (refeshFlag){
+                list.clear();
+                refeshFlag=false;
+            }
             list.addAll(bean.getItems());
-//            list.addAll(bean.getItems());
-
-
             adapter.notifyDataSetChanged();
-//            HeightUtils.setListviewHeight(lvFragDiscover);
-
         }
 
     }

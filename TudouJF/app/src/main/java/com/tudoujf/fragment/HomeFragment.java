@@ -197,6 +197,8 @@ public class HomeFragment extends BaseFragment {
     private HomeBidIdBean homeBidIdBean;
     /**
      * banner 的页面个数
+     *
+     *
      */
     private int bannerCount;
     private FrameLayout.LayoutParams params;
@@ -278,10 +280,7 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.iv_frag_home_signin:
 
-
                 retractAnim(1);
-
-
                 if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.putExtra("type", 888);
@@ -711,7 +710,6 @@ public class HomeFragment extends BaseFragment {
                 super.onError(response);
                 dismissPDialog();
                 finishRL();
-
                 ToastUtils.showToast(getActivity(), R.string.huoqushouyeshujushibai);
             }
         });
