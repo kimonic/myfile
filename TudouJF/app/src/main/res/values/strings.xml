@@ -756,6 +756,7 @@
     <string name="yikaitong">已开通</string>
     <string name="huoquyonghuxinxishibai">获取用户信息失败!</string>
     <string name="shuzizhengshufuwuxieyi1">数字证书服务协议</string>
+    <string name="pingtaijujianfuwuxieyi">《平台居间服务协议》</string>
 
 
 </resources>

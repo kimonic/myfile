@@ -534,7 +534,7 @@
             android:id="@+id/tv_touzixieyi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/act_affirmbuy_pingtaijujianfuwuxieyi"
+            android:text="@string/pingtaijujianfuwuxieyi"
             android:textColor="@color/global_theme_background_color"
             android:textSize="12sp" />
 

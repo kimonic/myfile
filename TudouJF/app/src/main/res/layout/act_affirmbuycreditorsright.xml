@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/global_theme_background_color"
-            android:text="@string/act_affirmbuy_pingtaijujianfuwuxieyi"
+            android:text="@string/pingtaijujianfuwuxieyi"
             />
 
     </LinearLayout>

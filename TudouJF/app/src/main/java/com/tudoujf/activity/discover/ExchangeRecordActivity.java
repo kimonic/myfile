@@ -61,16 +61,15 @@ public class ExchangeRecordActivity extends BaseActivity {
     SmartRefreshLayout srl;
 
 
-
     private DateFilterDialog dateFilterDialog;
     private String start_time = "";
     private String end_time = "";
     private int page = 1;
 
-    private List<ExchangeRecordBean.ItemsBean>  list;
+    private List<ExchangeRecordBean.ItemsBean> list;
 
 
-    private  int  flag;
+    private int flag;
     private ExchangeRecordBean bean;
     private boolean selFlag;
     private ExchangeRecordActLvAdapter adapter;
@@ -85,7 +84,7 @@ public class ExchangeRecordActivity extends BaseActivity {
 
         switch (v.getId()) {
             case R.id.tv_act_exchnagerecord_bac:
-                if (flag==555){
+                if (flag == 555) {
                     Intent intent = new Intent(this, IntegralShopActivity.class);
                     intent.putExtra("flag", 555);
                     startActivity(intent);
@@ -93,23 +92,23 @@ public class ExchangeRecordActivity extends BaseActivity {
 
                 closeActivity();
                 break;
-                 case R.id.ll_act_exchnagerecord_filtrate:
-                     if (dateFilterDialog == null) {
-                         dateFilterDialog = new DateFilterDialog(this,"请选择您要查询的兑换时间");
-                         dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
-                             @Override
-                             public void dismiss(String startTime, String endTime) {
-                                 start_time = startTime;
-                                 end_time = endTime;
-                                 page = 1;
-                                 selFlag = true;
-                                 initDataFromInternet();
-                             }
-                         });
-                     }else {
-                         dateFilterDialog.show();
-                     }
-                     break;
+            case R.id.ll_act_exchnagerecord_filtrate:
+                if (dateFilterDialog == null) {
+                    dateFilterDialog = new DateFilterDialog(this, "请选择您要查询的兑换时间");
+                    dateFilterDialog.setLisenter(new DateFilterDialog.ClickEvent() {
+                        @Override
+                        public void dismiss(String startTime, String endTime) {
+                            start_time = startTime;
+                            end_time = endTime;
+                            page = 1;
+                            selFlag = true;
+                            initDataFromInternet();
+                        }
+                    });
+                } else {
+                    dateFilterDialog.show();
+                }
+                break;
 //                 case R.id.:break;
 //                 case R.id.:break;
 //                 case R.id.:break;
@@ -120,8 +119,8 @@ public class ExchangeRecordActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        flag=getIntent().getIntExtra("flag",0);
-        list=new ArrayList<>();
+        flag = getIntent().getIntExtra("flag", 0);
+        list = new ArrayList<>();
     }
 
     @Override
@@ -184,7 +183,7 @@ public class ExchangeRecordActivity extends BaseActivity {
                         dismissPDialog();
                         finishSrl();
                         String result = StringUtils.getDecodeString(response.body());
-                        LUtils.e(ExchangeRecordActivity.class,"logflag-积分商城--兑换记录--接口返回数据--"+result);
+                        LUtils.e(ExchangeRecordActivity.class, "logflag-积分商城--兑换记录--接口返回数据--" + result);
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<ExchangeRecordBean>() {
                         }.getType(), ExchangeRecordBean.class, ExchangeRecordActivity.this);
@@ -232,11 +231,12 @@ public class ExchangeRecordActivity extends BaseActivity {
             } else {
                 adapter.notifyDataSetChanged();
             }
-        }
-        if (selFlag) {
+        } else if (selFlag) {
             list.clear();
             selFlag = false;
-            adapter.notifyDataSetChanged();
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
             ToastUtils.showToast(ExchangeRecordActivity.this, R.string.meiyousousuoshuju);
         }
     }
@@ -254,14 +254,14 @@ public class ExchangeRecordActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (flag==555){
+        if (flag == 555) {
             Intent intent = new Intent(this, IntegralShopActivity.class);
             intent.putExtra("flag", 555);
             startActivity(intent);
         }
         closeActivity();
     }
-    
+
     private void finishSrl() {
         if (srl != null) {
             if (srl.isRefreshing()) {

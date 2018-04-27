@@ -323,8 +323,11 @@ public class HomeFragment extends BaseFragment {
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    params.setMarginEnd((Integer) animation.getAnimatedValue());
-                    ivSignIn.setLayoutParams(params);
+                    if (params!=null){
+                        params.setMarginEnd((Integer) animation.getAnimatedValue());
+                        ivSignIn.setLayoutParams(params);
+                    }
+
                 }
             });
         }

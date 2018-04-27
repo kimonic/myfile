@@ -418,7 +418,11 @@ public class AffirmBuyActivity extends BaseActivity {
     @Override
     public void LoadInternetDataToUi() {
         if (bean != null) {
-            mtbAffirmbuy.setCenterTitle(bean.getName());
+            if (bean.getName().length()<19){
+                mtbAffirmbuy.setCenterTitle(bean.getName());
+            }else {
+                mtbAffirmbuy.setCenterTitle(bean.getName().substring(0,19)+"...");
+            }
             tvBalance.setText(bean.getMember().getBalance_amount());
             tvWaitAmount.setText(bean.getWait_amount());
             tvQiTou.setText(bean.getTender_amount_min());

@@ -239,7 +239,11 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
     public void LoadInternetDataToUi() {
 
         if (bean != null) {
-            mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name());
+            if (bean.getLoan_name().length()<19){
+                mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name());
+            }else {
+                mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name().substring(0,19)+"...");
+            }
             tvEarnings.setText(bean.getIncome());
             tvBalance.setText(bean.getBalance_amount());
             tvInvestamount.setText(bean.getAmount());
