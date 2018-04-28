@@ -31,10 +31,10 @@ import java.lang.reflect.Type;
 
 public class ParseJson {
 
-    public static final int BEAN_NULL = 0;
-    public static final int BEAN_COMMON = 1;
-    public static final int BEAN_DATA = 2;
-    public static final int BEAN_ERROR = -1;
+    private static final int BEAN_NULL = 0;
+    private static final int BEAN_COMMON = 1;
+    private static final int BEAN_DATA = 2;
+    private static final int BEAN_ERROR = -1;
 
     /**
      * 解析json数据返回databean或commonbean

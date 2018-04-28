@@ -220,8 +220,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                 dialog.dismiss();
                 String result = StringUtils.getDecodeString(response.body());
                 LUtils.e(AffirmBuyCreditorsRightsActivity.class,"logflag-请求债权购买接口返回的json数据--"+result);
-
-                Gson gson = new Gson();
+//                Gson gson = new Gson();
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<AffirmBuyCreditorRightrsBean>() {
                 }.getType(), AffirmBuyCreditorRightrsBean.class, AffirmBuyCreditorsRightsActivity.this);
                 if (bean1 != null) {
@@ -273,6 +272,5 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
         } else {
             dialog.show();
         }
-
     }
 }
