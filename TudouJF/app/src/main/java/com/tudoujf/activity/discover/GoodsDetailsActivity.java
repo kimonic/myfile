@@ -13,10 +13,12 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.GoodsDetailsBean;
 import com.tudoujf.config.Constants;
+import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.ui.BoderTextView;
@@ -165,24 +167,29 @@ public class GoodsDetailsActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_act_godsdetails_nowexchange://
-                if (StringUtils.string2Integer(integral) >
-                        StringUtils.string2Integer(tvNumber.getText().toString()) * StringUtils.string2Integer(bean.getCredit())) {
+                if (UserConfig.getInstance().getLoginToken(this).equals("")){
+                    openActivity(LoginActivity.class);
+                }else {
+                    if (StringUtils.string2Integer(integral) >
+                            StringUtils.string2Integer(tvNumber.getText().toString()) * StringUtils.string2Integer(bean.getCredit())) {
 
-                    Intent intent = new Intent(this, GoodsExchangeActivity.class);
-                    intent.putExtra("number", tvNumber.getText().toString());
-                    intent.putExtra("url", bean.getImages().get(0));
-                    intent.putExtra("needintegral", bean.getCredit());
-                    intent.putExtra("myintegral", integral);
-                    intent.putExtra("lipinhao", bean.getNum());
-                    startActivity(intent);
+                        Intent intent = new Intent(this, GoodsExchangeActivity.class);
+                        intent.putExtra("number", tvNumber.getText().toString());
+                        intent.putExtra("url", bean.getImages().get(0));
+                        intent.putExtra("needintegral", bean.getCredit());
+                        intent.putExtra("myintegral", integral);
+                        intent.putExtra("lipinhao", bean.getNum());
+                        startActivity(intent);
 
-                } else {
-                    if (dialog == null) {
-                        dialog = DialogUtils.showIntegralInsufficient(this);
                     } else {
-                        dialog.show();
+                        if (dialog == null) {
+                            dialog = DialogUtils.showIntegralInsufficient(this);
+                        } else {
+                            dialog.show();
+                        }
                     }
                 }
+
                 break;
 //                 case R.id.:break;
         }

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -126,6 +127,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_zhaiquanxieyi:
+
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
                 intent.putExtra("title","土豆金服服务协议");
@@ -134,44 +136,44 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
         }
     }
 
-    private void showPasswordDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_affirmbuy, null);
-
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.alpha = 0.5f;
-        getWindow().setAttributes(params);
-        final PopupWindow pop = new PopupWindow(view, ScreenSizeUtils.getScreenWidth(this) - 180, 500);
-        pop.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-
-        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
-        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
-        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
-        pop.setFocusable(true);//获取焦点
-        pop.showAtLocation(this.getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
-
-
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                WindowManager.LayoutParams params = getWindow().getAttributes();
-                params.alpha = 1f;
-                getWindow().setAttributes(params);
-            }
-        });
-
-        final PasswordView passwordView = (PasswordView) view.findViewById(R.id.pv_act_affirmbuy_dialog);
-        TextView textView = (TextView) view.findViewById(R.id.tv_act_affirmbuy_dialog);
-        passwordView.setBtnText(textView);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pop.dismiss();
-            }
-        });
-        textView.setClickable(false);
-
-
-    }
+//    private void showPasswordDialog() {
+//        View view = LayoutInflater.from(this).inflate(R.layout.dialog_act_affirmbuy, null);
+//
+//        WindowManager.LayoutParams params = getWindow().getAttributes();
+//        params.alpha = 0.5f;
+//        getWindow().setAttributes(params);
+//        final PopupWindow pop = new PopupWindow(view, ScreenSizeUtils.getScreenWidth(this) - 180, 500);
+//        pop.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+//
+//        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
+//        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
+//        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
+//        pop.setFocusable(true);//获取焦点
+//        pop.showAtLocation(this.getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
+//
+//
+//        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//            @Override
+//            public void onDismiss() {
+//                WindowManager.LayoutParams params = getWindow().getAttributes();
+//                params.alpha = 1f;
+//                getWindow().setAttributes(params);
+//            }
+//        });
+//
+//        final PasswordView passwordView = (PasswordView) view.findViewById(R.id.pv_act_affirmbuy_dialog);
+//        TextView textView = (TextView) view.findViewById(R.id.tv_act_affirmbuy_dialog);
+//        passwordView.setBtnText(textView);
+//        textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pop.dismiss();
+//            }
+//        });
+//        textView.setClickable(false);
+//
+//
+//    }
 
     @Override
     public void initDataFromIntent() {

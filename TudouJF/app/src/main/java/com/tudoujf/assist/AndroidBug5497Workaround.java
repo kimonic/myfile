@@ -87,7 +87,8 @@ public class AndroidBug5497Workaround {
     }
 
     /**
-     * 计算mChildOfContent可见高度     ** @return
+     * 计算mChildOfContent可见高度
+     *  ** @return
      */
     private int computeUsableHeight() {
         Rect r = new Rect();

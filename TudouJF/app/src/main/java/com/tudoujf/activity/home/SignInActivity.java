@@ -97,8 +97,8 @@ public class SignInActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        // TODO: 2017/12/22 暂时去掉积分商城
-        llShop.setVisibility(View.GONE);
+//        // TODO: 2017/12/22 暂时去掉积分商城
+//        llShop.setVisibility(View.GONE);
 
 
 

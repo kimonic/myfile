@@ -24,6 +24,7 @@ import com.tudoujf.activity.common.WebActivity;
 import com.tudoujf.activity.discover.GoodGiftExchangeActivity;
 import com.tudoujf.activity.discover.LuckyLotteryActivity;
 import com.tudoujf.activity.home.IntegralShopActivity;
+import com.tudoujf.activity.other.LoginActivity;
 import com.tudoujf.adapter.DiscoverFragLvAdapter;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.base.BaseFragment;
@@ -89,12 +90,17 @@ public class DiscoverFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_frag_discover_bt1:
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", Constants.URL + "/wap/prize/index?type=app&login_token="
-                        + UserConfig.getInstance().getLoginToken(getActivity()));
-                intent.putExtra("title", getString(R.string.xingyunchoujiang));
-                intent.putExtra("flag", "my");
-                startActivity(intent);
+                if (UserConfig.getInstance().getLoginToken(getActivity()).equals("")){
+                    openActivity(LoginActivity.class);
+                }else {
+                    Intent intent = new Intent(getActivity(), WebActivity.class);
+                    intent.putExtra("url", Constants.URL + "/wap/prize/index?type=app&login_token="
+                            + UserConfig.getInstance().getLoginToken(getActivity()));
+                    intent.putExtra("title", getString(R.string.xingyunchoujiang));
+                    intent.putExtra("flag", "my");
+                    startActivity(intent);
+                }
+
 //                openActivity(LuckyLotteryActivity.class);
                 break;
             case R.id.ll_frag_discover_bt2:
@@ -135,12 +141,12 @@ public class DiscoverFragment extends BaseFragment {
     @Override
     public void initView() {
         // TODO: 2017/12/22 暂时去掉发现顶部的幸运抽奖,积分商城,豪礼兑换按钮
-//        //listview的固定headerview控件
-//        View view = LayoutInflater.from(getActivity()).inflate(R.layout.lv_header, null, false);
-//        llFragDiscoverBt1 = view.findViewById(R.id.ll_frag_discover_bt1);
-//        llFragDiscoverBt2 = view.findViewById(R.id.ll_frag_discover_bt2);
-//        llFragDiscoverBt3 = view.findViewById(R.id.ll_frag_discover_bt3);
-//        lvFragDiscover.addHeaderView(view);
+        //listview的固定headerview控件
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.lv_header, null, false);
+        llFragDiscoverBt1 = view.findViewById(R.id.ll_frag_discover_bt1);
+        llFragDiscoverBt2 = view.findViewById(R.id.ll_frag_discover_bt2);
+        llFragDiscoverBt3 = view.findViewById(R.id.ll_frag_discover_bt3);
+        lvFragDiscover.addHeaderView(view);
 
 
         adapter = new DiscoverFragLvAdapter(list, getActivity());
@@ -164,10 +170,10 @@ public class DiscoverFragment extends BaseFragment {
                 closeActivity();
             }
         });
-        // TODO: 2018/4/4 暂时去掉积分商城
-//        llFragDiscoverBt1.setOnClickListener(this);
-//        llFragDiscoverBt2.setOnClickListener(this);
-//        llFragDiscoverBt3.setOnClickListener(this);
+//        // TODO: 2018/4/4 暂时去掉积分商城
+        llFragDiscoverBt1.setOnClickListener(this);
+        llFragDiscoverBt2.setOnClickListener(this);
+        llFragDiscoverBt3.setOnClickListener(this);
 
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override

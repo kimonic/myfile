@@ -110,7 +110,7 @@ public class HuiFuRegisterActivity extends BaseActivity {
     }
 
 
-    private class myWebClient extends WebViewClient {
+    private class MyWebClient extends WebViewClient {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
@@ -172,7 +172,7 @@ public class HuiFuRegisterActivity extends BaseActivity {
                             e.printStackTrace();
                         }
                         String body = Utils.handleJson(jo);
-                        wvActHuiFuRegister.setWebViewClient(new myWebClient());
+                        wvActHuiFuRegister.setWebViewClient(new MyWebClient());
                         WebSettings ws = wvActHuiFuRegister.getSettings();
                         ws.setAllowFileAccess(true);
                         ws.setSupportZoom(true);
