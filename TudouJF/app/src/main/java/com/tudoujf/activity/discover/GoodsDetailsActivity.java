@@ -307,6 +307,7 @@ public class GoodsDetailsActivity extends BaseActivity {
                         public void onClick(View v) {
                             ImageGlideUtils.loadImage(iv, url);
                             position = (int) (v.getTag());
+                            position = (int) (v.getTag());
                             setBorderColor();
                         }
                     });
