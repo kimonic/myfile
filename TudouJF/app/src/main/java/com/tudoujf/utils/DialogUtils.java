@@ -200,7 +200,7 @@ public class DialogUtils {
     public static AlertDialog showProgreessDialog(final Context context, final String msg) {
         @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_act_login, null);
         AlertDialog dialog = new AlertDialog.Builder(context).create();
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
             private long beforeTime;
 

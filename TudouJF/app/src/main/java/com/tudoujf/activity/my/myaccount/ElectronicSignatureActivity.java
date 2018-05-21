@@ -153,7 +153,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
                                     "提示", "电子签章开通成功", new DialogUtils.DialogUtilsClickListener() {
                                         @Override
                                         public void onClick() {
-
+                                            //20180521修改,开通成功后返回我的账户页面
+                                            closeActivity();
                                         }
                                     });
                             tvAffirmOpen.setClickable(false);
@@ -163,7 +164,8 @@ public class ElectronicSignatureActivity extends BaseActivity {
                                     "提示", "电子签章开通失败", new DialogUtils.DialogUtilsClickListener() {
                                         @Override
                                         public void onClick() {
-
+                                            //20180521修改,开通成功后返回我的账户页面
+                                            closeActivity();
                                         }
                                     });
                         }

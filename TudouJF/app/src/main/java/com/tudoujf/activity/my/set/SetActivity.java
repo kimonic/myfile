@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.tudoujf.R;
+import com.tudoujf.activity.other.PreviewActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.NewVersionBean;
@@ -131,7 +132,7 @@ public class SetActivity extends BaseActivity {
                                 url="";
                             }
                             if (versionName.equals(bean.getNew_version())) {
-                                DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
+                                 DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
                             } else {
                                 DialogUtils.showPromptDialog(SetActivity.this, "提示", "发现APP有新版本,是否前往更新?",
                                         new DialogUtils.DialogUtilsClickListener() {

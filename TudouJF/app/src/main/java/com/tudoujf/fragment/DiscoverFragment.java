@@ -110,6 +110,7 @@ public class DiscoverFragment extends BaseFragment {
                 openActivity(GoodGiftExchangeActivity.class);
 //                ToastUtils.showToast(getActivity(), R.string.jijiangkaiqijingqingqidai);
                 break;
+
 //            case R.id.: break;
 //            case R.id.: break;
 //            case R.id.: break;
@@ -180,7 +181,7 @@ public class DiscoverFragment extends BaseFragment {
             public void onRefresh(RefreshLayout refreshlayout) {
                 refeshFlag=true;
                 page = 1;
-                initDataFromInternet();
+                  initDataFromInternet();
 //                finishRL();
             }
         });

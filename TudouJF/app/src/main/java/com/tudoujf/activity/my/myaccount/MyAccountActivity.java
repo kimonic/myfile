@@ -129,6 +129,8 @@ public class MyAccountActivity extends BaseActivity {
     ImageView ivVip;
     TextView tvPhotograph;
     TextView tvAlbum;
+    /**是否需要刷新页面*/
+    private boolean isRefresh=false;
 
     private AlertDialog dialog;
     private View view;
@@ -162,6 +164,7 @@ public class MyAccountActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_act_myaccount_icon://更改头像
+                isRefresh=false;
                 if (dialog == null) {
                     dialog = showCustomDialog(view);
                 } else {
@@ -169,6 +172,7 @@ public class MyAccountActivity extends BaseActivity {
                 }
                 break;
             case R.id.ll_act_myaccount_bankcard://银行卡管理
+                isRefresh=false;
                 openActivity(BankCardManageActivity.class);
                 break;
             case R.id.ll_act_myaccount_huifu://我的汇付账号
@@ -177,7 +181,7 @@ public class MyAccountActivity extends BaseActivity {
 //                Intent intent1 = new Intent(this, ChangePhoneNumberActivity.class);
 //                intent1.putExtra("phone",bean.getPhone());
 //                startActivity(intent1);
-
+                isRefresh=true;
                 openActivity(ChangePhoneNumberActivity.class);
                 break;
             case R.id.ll_act_myaccount_email://邮箱认证
@@ -185,6 +189,7 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myaccount_name://实名认证
                 if (!"1".equals(bean.getIs_trust())) {
+                    isRefresh=true;
                     openActivity(RealNameAuthenticationHuiFuActivity.class);
                 }
                 break;
@@ -192,6 +197,7 @@ public class MyAccountActivity extends BaseActivity {
                 openActivity(ChangePasswordActivity.class);
                 break;
             case R.id.ll_act_myaccount_gesture://手势密码
+                isRefresh=false;
                 if (isOpen) {
                     showCloseDialog();
                 } else {
@@ -282,6 +288,7 @@ public class MyAccountActivity extends BaseActivity {
                 }
                 break;
             case R.id.ll_act_myaccount_risk:
+                isRefresh=true;
                 // TODO: 2018/1/15 风险评估
                 if (riskAssessmentCount != null && StringUtils.string2Integer(riskAssessmentCount) < 3) {
                     Intent intent1 = new Intent(this, WebActivity.class);
@@ -300,6 +307,7 @@ public class MyAccountActivity extends BaseActivity {
                 break;
             case R.id.ll_act_myaccount_signature://电子签章
                 // TODO: 2018/3/5 打开开通电子签章界面
+                isRefresh=true;
                 if (signatureFlag){
                     openActivity(ElectronicSignatureActivity.class);
                 }
@@ -643,6 +651,15 @@ public class MyAccountActivity extends BaseActivity {
             });
         } else {
             dialogClose.show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //20180521修改,再次返回该页面后刷新数据,针对开通电子签章等该界面有变化的情况
+        if (isRefresh){
+            initDataFromInternet();
         }
     }
 
