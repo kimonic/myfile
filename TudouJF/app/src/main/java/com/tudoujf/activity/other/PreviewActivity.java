@@ -1,13 +1,21 @@
 package com.tudoujf.activity.other;
 
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 
 import com.lzy.okgo.callback.StringCallback;
@@ -25,6 +33,7 @@ import com.tudoujf.activity.managemoney.AffirmBuyActivity;
 import com.tudoujf.activity.managemoney.FanXianQuanSelActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.managemoney.RedPackageActivity;
+import com.tudoujf.activity.test.AllSignActivity;
 import com.tudoujf.activity.test.GuessHappyActivity;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.http.HttpMethods;
@@ -32,6 +41,8 @@ import com.tudoujf.service.MyService;
 import com.tudoujf.utils.LUtils;
 
 import java.util.List;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 import butterknife.BindView;
 
@@ -132,7 +143,8 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(LoginActivity.class);
                 break;
             case R.id.bt_act_preview1:
-                openActivity(AffirmPasswordActivity.class);
+                test();
+//                openActivity(AffirmPasswordActivity.class);
                 break;
             case R.id.bt_act_preview2:
                 openActivity(FindPasswordActivity.class);
@@ -150,7 +162,7 @@ public class PreviewActivity extends BaseActivity {
                 openActivity(ProductDetailsActivity.class);
                 break;
             case R.id.bt_act_preview7:
-                openActivity(AffirmBuyActivity.class);
+                openActivity(AllSignActivity.class);
 
 //                PendingIntent pendingIntent=PendingIntent.getActivity(this,0,null,FLAG_ONE_SHOT,null);
 //                AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -350,7 +362,56 @@ public class PreviewActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
+//        1 1 2 3 5 8 13
+//20
 
+    }
+
+
+
+    public  void  test(){
+        ValueAnimator animator=ValueAnimator.ofFloat(1,10);
+        animator.setDuration(2000);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.start();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                LUtils.e(PreviewActivity.class,"logflag-动画测试--"+animation.getAnimatedValue());
+                btActPreview1.setScaleX((Float) animation.getAnimatedValue());
+                btActPreview1.setScaleY((Float) animation.getAnimatedValue());
+
+
+            }
+        });
+        long startTime1=System.currentTimeMillis();
+        int first=1;
+        int second=1;
+        int result=0;
+        for (int i = 0; i < 33; i++) {
+            result=first+second;
+            if (i%2==0){
+                first=result;
+            }else {
+                second=result;
+            }
+        }
+        LUtils.e(PreviewActivity.class,"logflag--斐波那契数列-"+result);
+        long endTime1=System.currentTimeMillis();
+        LUtils.e(PreviewActivity.class,"logflag--时间间隔-"+(endTime1-startTime1));
+        long startTime2=System.currentTimeMillis();
+        LUtils.e(PreviewActivity.class,"logflag-斐波那契数列2??--"+fibo(35));
+        long endTime2=System.currentTimeMillis();
+        LUtils.e(PreviewActivity.class,"logflag--时间间隔222-"+(endTime2-startTime2));
+    }
+    public int fibo(int m){
+        if (m==1){
+            return 1;
+        }else if (m==2){
+            return 1;
+        }else {
+            return fibo(m-1)+fibo(m-2);
+        }
     }
 
 

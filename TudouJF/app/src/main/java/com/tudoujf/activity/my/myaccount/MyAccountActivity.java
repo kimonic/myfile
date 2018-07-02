@@ -532,7 +532,7 @@ public class MyAccountActivity extends BaseActivity {
 
         } else if (requestCode == 111) {//开启手势密码是否成功
             if (data != null && data.getBooleanExtra("result", false)) {
-                tvOC.setBackgroundResource(R.drawable.act_myaccount_open);
+                tvOC.setBackgroundResource( R.drawable.act_myaccount_open);
                 isOpen = true;
             }
 
@@ -542,8 +542,6 @@ public class MyAccountActivity extends BaseActivity {
         } else if (requestCode == 222) {
             openActivity(HomeActivity.class);
         }
-
-
     }
 
 
@@ -583,7 +581,6 @@ public class MyAccountActivity extends BaseActivity {
                     @Override
                     public void uploadProgress(Progress progress) {
                         super.uploadProgress(progress);
-
                     }
                 });
     }

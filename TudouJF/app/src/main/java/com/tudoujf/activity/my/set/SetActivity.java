@@ -53,7 +53,7 @@ import butterknife.BindView;
 public class SetActivity extends BaseActivity {
     @BindView(R.id.tv_act_set_title)
     TextView tvActSetTitle;
-     @BindView(R.id.tv_act_set_versionname)
+    @BindView(R.id.tv_act_set_versionname)
     TextView tvVersionName;
     @BindView(R.id.ll_act_set_kefudianhua)
     LinearLayout llActSetPhone;
@@ -63,11 +63,13 @@ public class SetActivity extends BaseActivity {
     LinearLayout llActSetFeedback;
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
-
+    @BindView(R.id.test)
+    TextView openPreview;
 
 
     private View view;
     private AlertDialog dialog;
+    private int count=0;
 
 
     @Override
@@ -96,10 +98,12 @@ public class SetActivity extends BaseActivity {
 
                 checkNew();
 
-//                count++;
-//                if (flag && count == 10) {
-//                    flag = false;
-//                    openActivity(PreviewActivity.class);
+
+                break;
+            case R.id.test:
+                count++;
+//                if ( count == 10) {
+                    openActivity(PreviewActivity.class);
 //                }
                 break;
         }
@@ -116,7 +120,7 @@ public class SetActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-                        LUtils.e(SetActivity.class,"logflag-检查版本更新接口返回数据--"+result);
+                        LUtils.e(SetActivity.class, "logflag-检查版本更新接口返回数据--" + result);
 
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
                         }.getType(), NewVersionBean.class, SetActivity.this);
@@ -126,13 +130,13 @@ public class SetActivity extends BaseActivity {
                             String versionName = AppInfoUtils.getVersionName(SetActivity.this);
 
                             final String url;
-                            if (bean.getUrl()!=null){
-                                url= bean.getUrl();
-                            }else {
-                                url="";
+                            if (bean.getUrl() != null) {
+                                url = bean.getUrl();
+                            } else {
+                                url = "";
                             }
                             if (versionName.equals(bean.getNew_version())) {
-                                 DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
+                                DialogUtils.showPromptDialog(SetActivity.this, "提示", "当前已是最新版本!", null);
                             } else {
                                 DialogUtils.showPromptDialog(SetActivity.this, "提示", "发现APP有新版本,是否前往更新?",
                                         new DialogUtils.DialogUtilsClickListener() {
@@ -169,7 +173,7 @@ public class SetActivity extends BaseActivity {
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         tvActSetTitle.setLayoutParams(params);
 
-        tvVersionName.setText(("土豆金服Ver"+AppInfoUtils.getVersionName(this)));
+        tvVersionName.setText(("土豆金服Ver" + AppInfoUtils.getVersionName(this)));
 
         view = LayoutInflater.from(this).inflate(R.layout.dialog_phone, null);
         TextView tvCall1 = view.findViewById(R.id.tv_call1);
@@ -204,6 +208,8 @@ public class SetActivity extends BaseActivity {
         llActSetCheckUpdate.setOnClickListener(this);
         llActSetHelp.setOnClickListener(this);
         llActSetFeedback.setOnClickListener(this);
+        //20180528打开测试界面
+        openPreview.setOnClickListener(this);
 
         //-------------------------待删除-----------------------------------------------
         llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {

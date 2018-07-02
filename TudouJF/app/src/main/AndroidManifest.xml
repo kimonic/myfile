@@ -364,6 +364,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".wxapi.WXEntryActivity" />
+        <activity android:name=".activity.test.AllSignActivity" />
 
         <!--//////////////////QQ完整版要的activity///////////////////////////////////////////////////-->
 

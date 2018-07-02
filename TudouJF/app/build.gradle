@@ -120,7 +120,8 @@ dependencies {
     //glide扩展
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-    //json数据解析库
+    //json数据解析库2018-06-01-13-42修改
+//    compile 'com.google.code.gson:gson:2.8.2'
     compile 'com.google.code.gson:gson:2.8.1'
     //okgo依赖--网络连接库
     compile 'com.lzy.net:okgo:3.0.4'

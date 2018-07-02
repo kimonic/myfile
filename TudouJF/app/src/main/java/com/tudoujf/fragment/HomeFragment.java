@@ -501,6 +501,7 @@ public class HomeFragment extends BaseFragment {
     /**
      * 初始化导航图片数据
      */
+
     private void initImagesViews() {
         listUrl = bean.getBanner();
 
@@ -529,6 +530,7 @@ public class HomeFragment extends BaseFragment {
         dvFragHome.invalidate();
 
     }
+
 
     @Override
     public void initListener() {
