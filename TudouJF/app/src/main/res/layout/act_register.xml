@@ -79,50 +79,61 @@
         </LinearLayout>
 
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:background="@drawable/xshape_roundrect_edittextbac"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<ImageView-->
-        <!--android:layout_width="20dp"-->
-        <!--android:layout_height="35dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:contentDescription="@null"-->
-        <!--android:src="@drawable/xvector_imagecode"-->
-
-        <!--/>-->
-
-        <!--<EditText-->
-        <!--android:id="@+id/et_act_register_code"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@null"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:hint="@string/act_register_imagecode"-->
-        <!--android:textSize="12sp" />-->
-
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_act_register_codeimage"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginEnd="10dp"-->
-        <!--android:layout_marginRight="10dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:contentDescription="@string/act_register_imagecode"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/xshape_roundrect_edittextbac"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
 
-        <!--/>-->
-        <!--</LinearLayout>-->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/xvector_imagecode"
+
+                />
+
+            <EditText
+                android:id="@+id/et_act_register_code_graphical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/act_register_imagecode"
+                android:textSize="12sp" />
+
+
+            <com.tudoujf.ui.VerificationCodeView
+                android:id="@+id/vcv_act_register"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/color_gray1"
+                />
+
+
+            <!--<ImageView-->
+            <!--android:id="@+id/iv_act_register_codeimage"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:contentDescription="@string/act_register_imagecode" />-->
+        </LinearLayout>
 
 
         <LinearLayout

@@ -2,15 +2,20 @@ package com.tudoujf.ui;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.tudoujf.utils.LUtils;
 
 /**
  * * ===============================================================
@@ -31,7 +36,7 @@ public class VerificationCodeView extends View {
     private Paint bacPaint;
     private RectF rectF;
     private Rect bounds;
-    private float radious=6;
+    private float radious = 6;
 
     public String getShowCode() {
         return showCode;
@@ -51,6 +56,7 @@ public class VerificationCodeView extends View {
 
     public VerificationCodeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         initView();
     }
 
@@ -61,6 +67,8 @@ public class VerificationCodeView extends View {
     }
 
     private void initView() {
+        ColorDrawable dra = (ColorDrawable) getBackground();
+
         rectF = new RectF();
         bounds = new Rect();
         showCode = generateCode();
@@ -73,7 +81,11 @@ public class VerificationCodeView extends View {
 
         bacPaint = new Paint();
         bacPaint.setAntiAlias(true);
-        bacPaint.setColor(Color.WHITE);
+        if (dra != null) {
+            bacPaint.setColor(dra.getColor());
+        } else {
+            bacPaint.setColor(Color.WHITE);
+        }
         bacPaint.setStyle(Paint.Style.FILL);
         bacPaint.setStrokeWidth(10);
 

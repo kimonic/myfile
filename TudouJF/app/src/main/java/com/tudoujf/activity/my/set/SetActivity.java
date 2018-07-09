@@ -63,8 +63,10 @@ public class SetActivity extends BaseActivity {
     LinearLayout llActSetFeedback;
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
-    @BindView(R.id.test)
-    TextView openPreview;
+
+    //打开测试界面按钮
+//    @BindView(R.id.test)
+//    TextView openPreview;
 
 
     private View view;
@@ -100,12 +102,13 @@ public class SetActivity extends BaseActivity {
 
 
                 break;
-            case R.id.test:
-                count++;
+                //打开测试界面
+//            case R.id.test:
+//                count++;
 //                if ( count == 10) {
-                    openActivity(PreviewActivity.class);
+//                    openActivity(PreviewActivity.class);
 //                }
-                break;
+//                break;
         }
 
     }
@@ -209,7 +212,7 @@ public class SetActivity extends BaseActivity {
         llActSetHelp.setOnClickListener(this);
         llActSetFeedback.setOnClickListener(this);
         //20180528打开测试界面
-        openPreview.setOnClickListener(this);
+//        openPreview.setOnClickListener(this);
 
         //-------------------------待删除-----------------------------------------------
         llActSetCheckUpdate.setOnLongClickListener(new View.OnLongClickListener() {

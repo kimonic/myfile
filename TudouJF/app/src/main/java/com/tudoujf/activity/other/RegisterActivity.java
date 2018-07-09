@@ -1,6 +1,7 @@
 package com.tudoujf.activity.other;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +33,7 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
+import com.tudoujf.ui.VerificationCodeView;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
@@ -46,6 +48,7 @@ import org.json.JSONObject;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.udesk.ScreenUtil;
 
 /**
@@ -95,6 +98,11 @@ public class RegisterActivity extends BaseActivity {
     View view;
     @BindView(R.id.scrollview_act_register)
     ScrollView scrollView;
+
+    @BindView(R.id.vcv_act_register)
+    VerificationCodeView vcvActRegister;
+    @BindView(R.id.et_act_register_code_graphical)
+    EditText etActRegisterPhonecode;
     private int count = 0, countAgree = 0;
     /**
      * 手机验证码
@@ -163,18 +171,24 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.tv_act_register_getcode://发送网路请求,获取手机验证码
 
-                if (etUsername.hasFocus()) {//有焦点时清除焦点
-                    etUsername.clearFocus();
-                }
-                if (checkPhoneBean != null && !userName.equals("")) {
-                    if (checkPhoneBean.getStatus().equals("0")) {
-                        startCountDown();
-                        getSms();
-                    } else {
-                        ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
+                //清除焦点会导致焦点监听事件发生变化执行焦点监听,重复验证手机号码是否正确
+//                if (etUsername.hasFocus()) {//有焦点时清除焦点
+//                    etUsername.clearFocus();
+//                }
+                //在获取验证码前先验证图形验证码
+                if (!vcvActRegister.getShowCode().equals(etActRegisterPhonecode.getText().toString())) {
+                    ToastUtils.showToast(this, "请输入正确的图形验证码!!");
+                } else {
+                    if (checkPhoneBean != null && !userName.equals("")) {
+                        if (checkPhoneBean.getStatus().equals("0")) {
+                            startCountDown();
+                            getSms();
+                        } else {
+                            ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
+                        }
+                    } else if (!etUsername.hasFocus()) {
+                        ToastUtils.showToast(RegisterActivity.this, "请输入正确的手机号码!!!");
                     }
-                } else if (!etUsername.hasFocus()) {
-                    ToastUtils.showToast(RegisterActivity.this, "请输入正确的手机号码!!!");
                 }
 
                 break;
@@ -524,6 +538,7 @@ public class RegisterActivity extends BaseActivity {
      * 检测注册数据
      */
     private boolean checkSubmit() {
+
         if (!(phoneCodeBean != null && phoneCodeBean.getCode().equals("200")
                 && phoneCodeBean.getData().equals(phoneCodeBean.getDescription())
                 && etPhonecode.getText().toString().trim().equals(randomCode))) {
@@ -534,6 +549,7 @@ public class RegisterActivity extends BaseActivity {
             ToastUtils.showToast(this, "未同意土豆金服服务协议!!");
             return false;
         }
+
         return checkPassword();
     }
 
@@ -561,4 +577,10 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

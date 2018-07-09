@@ -8,8 +8,9 @@ android {
         applicationId "com.tudoujf"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.3"
+        //20180709修改,该版本未发布
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 //---------------------------------------------极光推送---------------------------------------------
 //---------------------------------------------分包---------------------------------------------
@@ -93,7 +94,12 @@ android {
     }
     //-------------------------------------正式打包添加-------------------------------------------------
 
+    //https://www.jianshu.com/p/5ab471ee46bd
 
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+    }
 }
 
 
