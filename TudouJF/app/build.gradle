@@ -8,7 +8,7 @@ android {
         applicationId "com.tudoujf"
         minSdkVersion 19
         targetSdkVersion 26
-        //20180709修改,该版本未发布
+        //20180710更新版本,此版本已在应用宝发布
         versionCode 5
         versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
