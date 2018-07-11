@@ -70,7 +70,12 @@ public class ClassificationOfGoodsLvAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.title.setText(list.get(position).getName());
-        viewHolder.description.setText(list.get(position).getBewrite());
+        //商品描述内容过长时,只显示30个字符
+        if (list.get(position).getBewrite().length()<30){
+            viewHolder.description.setText(list.get(position).getBewrite());
+        }else {
+            viewHolder.description.setText((list.get(position).getBewrite().substring(0,27)+"..."));
+        }
         viewHolder.integral.setText(list.get(position).getCredit());
         viewHolder.count.setText((list.get(position).getStock()+"份"));
 

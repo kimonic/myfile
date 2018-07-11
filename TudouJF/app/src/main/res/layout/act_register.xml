@@ -113,26 +113,28 @@
                 android:textSize="12sp" />
 
 
-            <com.tudoujf.ui.VerificationCodeView
+            <!--<com.tudoujf.ui.VerificationCodeView-->
+            <!--android:id="@+id/vcv_act_register"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:background="@color/color_gray1"-->
+            <!--/>-->
+
+
+            <ImageView
                 android:id="@+id/vcv_act_register"
-                android:layout_width="100dp"
+                android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@color/color_gray1"
-                />
+                android:contentDescription="@string/act_register_imagecode" />
 
-
-            <!--<ImageView-->
-            <!--android:id="@+id/iv_act_register_codeimage"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginEnd="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--android:contentDescription="@string/act_register_imagecode" />-->
         </LinearLayout>
 
 

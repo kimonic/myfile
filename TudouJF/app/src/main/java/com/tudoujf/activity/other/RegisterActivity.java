@@ -33,8 +33,8 @@ import com.tudoujf.config.UserConfig;
 import com.tudoujf.http.HttpMethods;
 import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
-import com.tudoujf.ui.VerificationCodeView;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.GlideImageLoaderUtils;
 import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.MD5Utils;
 import com.tudoujf.utils.ScreenSizeUtils;
@@ -100,7 +100,7 @@ public class RegisterActivity extends BaseActivity {
     ScrollView scrollView;
 
     @BindView(R.id.vcv_act_register)
-    VerificationCodeView vcvActRegister;
+    ImageView vcvActRegister;
     @BindView(R.id.et_act_register_code_graphical)
     EditText etActRegisterPhonecode;
     private int count = 0, countAgree = 0;
@@ -152,6 +152,9 @@ public class RegisterActivity extends BaseActivity {
      * 是否同意协议
      */
     private boolean agreeRule = false;
+    /**加载图片*/
+    private GlideImageLoaderUtils glideImageLoaderUtils;
+
 
 //    private boolean fosousOne, fosousTwo;
 
@@ -176,12 +179,11 @@ public class RegisterActivity extends BaseActivity {
 //                    etUsername.clearFocus();
 //                }
                 //在获取验证码前先验证图形验证码
-                if (!vcvActRegister.getShowCode().equals(etActRegisterPhonecode.getText().toString())) {
+                if ("".equals(etActRegisterPhonecode.getText().toString())) {
                     ToastUtils.showToast(this, "请输入正确的图形验证码!!");
                 } else {
                     if (checkPhoneBean != null && !userName.equals("")) {
                         if (checkPhoneBean.getStatus().equals("0")) {
-                            startCountDown();
                             getSms();
                         } else {
                             ToastUtils.showToast(RegisterActivity.this, "该号码已注册!!!");
@@ -225,6 +227,9 @@ public class RegisterActivity extends BaseActivity {
                 intent.putExtra("title", "土豆金服服务协议");
                 startActivity(intent);
                 break;
+            case R.id.vcv_act_register://点击更换验证码
+                glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
+                break;
 
         }
     }
@@ -232,7 +237,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-
+        glideImageLoaderUtils=new GlideImageLoaderUtils();
     }
 
     @Override
@@ -240,6 +245,8 @@ public class RegisterActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
         params.height = ScreenSizeUtils.getScreenHeight(this);
         view.setLayoutParams(params);
+        //http://m.test.tudoujf.com/common/public/verifycode1/1
+        glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
 
     }
 
@@ -349,6 +356,7 @@ public class RegisterActivity extends BaseActivity {
         tvRegister.setOnClickListener(this);
         llAgree.setOnClickListener(this);
         tvZhuCeXieYi.setOnClickListener(this);
+        vcvActRegister.setOnClickListener(this);
     }
 
 //    private void visibilityplaceHolder() {
@@ -509,6 +517,8 @@ public class RegisterActivity extends BaseActivity {
         map.put("phone", userName);//手机号码
         map.put("is_check", "1");//手机认证时默认为1
         map.put("phone_code", "" + randomCode);
+        LUtils.e(RegisterActivity.class,"logflag--图形验证码-"+etActRegisterPhonecode.getText().toString());
+        map.put("image_code", etActRegisterPhonecode.getText().toString());
         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.REG_SMS, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -518,7 +528,10 @@ public class RegisterActivity extends BaseActivity {
                 phoneCodeBean = gson.fromJson(StringUtils.getDecodeString(response.body()), new TypeToken<PhoneCodeBean>() {
                 }.getType());
                 if (phoneCodeBean.getCode().equals("200")) {
+                    startCountDown();
                     ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
+                }else {
+                    ToastUtils.showToast(RegisterActivity.this, phoneCodeBean.getDescription());
                 }
 
 
