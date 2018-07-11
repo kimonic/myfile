@@ -202,6 +202,7 @@ public class SetActivity extends BaseActivity {
             startActivity(intent);
         } catch (ActivityNotFoundException exception) {
             ToastUtils.showToast(SetActivity.this, R.string.chucuola);
+
         }
     }
 
