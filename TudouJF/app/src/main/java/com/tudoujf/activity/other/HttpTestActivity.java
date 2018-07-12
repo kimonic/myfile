@@ -190,6 +190,7 @@ public class HttpTestActivity extends BaseActivity {
 
 
         url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
+        LUtils.e(HttpTestActivity.class,"logflag---httpSend:----"+url);
 
         HttpMethods.getInstance().POST(this, url, map, "test", new StringCallback() {
             @Override

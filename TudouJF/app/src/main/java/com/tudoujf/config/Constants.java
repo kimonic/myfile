@@ -373,6 +373,10 @@ public class Constants {
 //    public static final String SINATURE_AGREEMENT = URL + "/phone/seal/agreement";
     public static final String SINATURE_AGREEMENT = URL + "/phone/seal/agreement?login_token=";
 
+    /**获取图形验证码*/
+    public static final String IMAGE_CODE = URL + "/phone/common/public/verifyType/";
+
+
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------

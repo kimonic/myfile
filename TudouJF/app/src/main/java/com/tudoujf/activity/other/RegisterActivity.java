@@ -1,12 +1,15 @@
 package com.tudoujf.activity.other;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputType;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +29,7 @@ import com.tudoujf.adapter.MTextWatchAdapter;
 import com.tudoujf.base.BaseActivity;
 import com.tudoujf.base.BaseBean;
 import com.tudoujf.bean.databean.CheckPhoneIsExistRegisterActBean;
+import com.tudoujf.bean.databean.ImageCodeBean;
 import com.tudoujf.bean.databean.LoginBean;
 import com.tudoujf.bean.databean.PhoneCodeBean;
 import com.tudoujf.config.Constants;
@@ -152,11 +156,12 @@ public class RegisterActivity extends BaseActivity {
      * 是否同意协议
      */
     private boolean agreeRule = false;
-    /**加载图片*/
-    private GlideImageLoaderUtils glideImageLoaderUtils;
+//    /**加载图片*/
+//    private GlideImageLoaderUtils glideImageLoaderUtils;
 
 
 //    private boolean fosousOne, fosousTwo;
+    private String code_answer;
 
     @Override
     public int getLayoutResId() {
@@ -228,7 +233,8 @@ public class RegisterActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.vcv_act_register://点击更换验证码
-                glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
+                initImageCode();
+//                glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
                 break;
 
         }
@@ -237,7 +243,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        glideImageLoaderUtils=new GlideImageLoaderUtils();
+//        glideImageLoaderUtils=new GlideImageLoaderUtils();
     }
 
     @Override
@@ -246,8 +252,28 @@ public class RegisterActivity extends BaseActivity {
         params.height = ScreenSizeUtils.getScreenHeight(this);
         view.setLayoutParams(params);
         //http://m.test.tudoujf.com/common/public/verifycode1/1
-        glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
-
+//        glideImageLoaderUtils.onDisplayImage(this,vcvActRegister,Constants.URL+"/common/public/verifycode1/"+System.currentTimeMillis());
+        initImageCode();
+    }
+    /**获取图形验证码*/
+    private void initImageCode() {
+        String url=Constants.IMAGE_CODE+System.currentTimeMillis();
+        HttpMethods.getInstance().POST(this, url, new TreeMap<String, String>(), "", new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+//                String result = StringUtils.getDecodeString(response.body());
+                BaseBean bean = ParseJson.getJsonResult(response.body(), new TypeToken<ImageCodeBean>() {
+                        }.getType(),
+                        ImageCodeBean.class, RegisterActivity.this);
+                if (bean!=null){
+                    ImageCodeBean bean1= (ImageCodeBean) bean;
+                    byte[] image=Base64.decode(bean1.getImage_code(),Base64.DEFAULT);
+                    Bitmap bitmap= BitmapFactory.decodeByteArray(image,0,image.length);
+                    vcvActRegister.setImageBitmap(bitmap);
+                    code_answer=bean1.getCode_answer();
+                }
+            }
+        });
     }
 
     @Override
@@ -519,6 +545,7 @@ public class RegisterActivity extends BaseActivity {
         map.put("phone_code", "" + randomCode);
         LUtils.e(RegisterActivity.class,"logflag--图形验证码-"+etActRegisterPhonecode.getText().toString());
         map.put("image_code", etActRegisterPhonecode.getText().toString());
+        map.put("code_answer", code_answer);
         HttpMethods.getInstance().POST(RegisterActivity.this, Constants.REG_SMS, map, "registeractivity", new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
@@ -529,12 +556,12 @@ public class RegisterActivity extends BaseActivity {
                 }.getType());
                 if (phoneCodeBean.getCode().equals("200")) {
                     startCountDown();
+                    initImageCode();
+                    etActRegisterPhonecode.setText("");
                     ToastUtils.showToast(RegisterActivity.this, "验证码获取成功!!");
                 }else {
                     ToastUtils.showToast(RegisterActivity.this, phoneCodeBean.getDescription());
                 }
-
-
             }
         });
     }
@@ -551,7 +578,6 @@ public class RegisterActivity extends BaseActivity {
      * 检测注册数据
      */
     private boolean checkSubmit() {
-
         if (!(phoneCodeBean != null && phoneCodeBean.getCode().equals("200")
                 && phoneCodeBean.getData().equals(phoneCodeBean.getDescription())
                 && etPhonecode.getText().toString().trim().equals(randomCode))) {
@@ -562,7 +588,6 @@ public class RegisterActivity extends BaseActivity {
             ToastUtils.showToast(this, "未同意土豆金服服务协议!!");
             return false;
         }
-
         return checkPassword();
     }
 
@@ -590,10 +615,4 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
