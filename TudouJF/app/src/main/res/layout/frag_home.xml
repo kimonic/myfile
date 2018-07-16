@@ -73,8 +73,6 @@
                             android:textSize="8sp" />
                     </FrameLayout>
                 </FrameLayout>
-
-
             </FrameLayout>
 
             <LinearLayout
@@ -249,6 +247,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_frag_home_ballviewheight"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:background="@color/color_white"
@@ -257,10 +256,16 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp">
 
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_frag_home_leftarrow"-->
+                    <!--android:layout_width="50dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="@drawable/xvector_leftarrow" />-->
+
                 <TextView
                     android:id="@+id/tv_frag_home_leftarrow"
                     android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="130dp"
                     android:background="@drawable/xvector_leftarrow" />
 
                 <android.support.v4.view.ViewPager
@@ -272,13 +277,14 @@
                 <TextView
                     android:id="@+id/tv_frag_home_rightarrow"
                     android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="130dp"
                     android:background="@drawable/xvector_rightarrow" />
 
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_frag_home_ballviewheight1"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:background="@color/color_white"

@@ -63,15 +63,14 @@ public class SetActivity extends BaseActivity {
     LinearLayout llActSetFeedback;
     @BindView(R.id.ll_act_set_checkupdate)
     LinearLayout llActSetCheckUpdate;
-
-    //打开测试界面按钮
+    //
+//    //打开测试界面按钮
     @BindView(R.id.test)
     TextView openPreview;
 
-
     private View view;
     private AlertDialog dialog;
-    private int count=0;
+    private int count = 0;
 
 
     @Override
@@ -96,16 +95,12 @@ public class SetActivity extends BaseActivity {
                 openActivity(FeedbackActivity.class);
                 break;
             case R.id.ll_act_set_checkupdate://检查更新
-//                DialogUtils.showListDialog(this);//积分商城类别选择dialog
-
                 checkNew();
-
-
                 break;
-                //打开测试界面
+            //打开测试界面
             case R.id.test:
                 count++;
-                if ( count == 10) {
+                if (count == 10) {
                     openActivity(PreviewActivity.class);
                 }
                 break;
@@ -149,7 +144,6 @@ public class SetActivity extends BaseActivity {
                                             }
                                         });
                             }
-
                         } else {
                             ToastUtils.showToast(SetActivity.this, R.string.shujujiazaichucuo);
                         }
@@ -202,7 +196,6 @@ public class SetActivity extends BaseActivity {
             startActivity(intent);
         } catch (ActivityNotFoundException exception) {
             ToastUtils.showToast(SetActivity.this, R.string.chucuola);
-
         }
     }
 

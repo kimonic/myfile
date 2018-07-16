@@ -9,8 +9,8 @@ import android.util.Log;
 
 public class LUtils {
 
-//    private static final boolean  DEBUG=false;
-    private static final boolean  DEBUG=true;
+    private static final boolean  DEBUG=false;
+//    private static final boolean  DEBUG=true;
     /**
      * 显示--类名,方法名,自定义信息
      *

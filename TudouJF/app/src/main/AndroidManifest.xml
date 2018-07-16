@@ -376,7 +376,8 @@
             android:name="UMENG_CHANNEL"
             android:value="xiaomiyingyongshichang" />
 
-
+        <!--适配宽屏手机201807160941-->
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
         <!--//////////////////友盟分享activity///////////////////////////////////////////////////-->
 
 

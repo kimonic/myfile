@@ -1,19 +1,10 @@
 package com.tudoujf.fragment;
 
 import android.animation.ValueAnimator;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleObserver;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
-import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -104,6 +95,7 @@ public class HomeFragment extends BaseFragment {
     TextView tvFengXianTiShi2;
     @BindView(R.id.ll_frag_home_xinshoufuli)
     LinearLayout llXinShouFuLi;
+
     @BindView(R.id.ll_frag_home_huodongzhuanqu)
     LinearLayout llHuoDongZhuanQu;
     @BindView(R.id.ll_frag_home_tuijianyouli)
@@ -128,13 +120,16 @@ public class HomeFragment extends BaseFragment {
     ImageView ivMsgCount;
     @BindView(R.id.tv_frag_msgcount)
     TextView tvMsgCount;
+
+    //动态设置ballview的宽高
+    @BindView(R.id.ll_frag_home_ballviewheight)
+    LinearLayout llBallViewHeight;
+    @BindView(R.id.ll_frag_home_ballviewheight1)
+    LinearLayout llBallViewHeight1;
     //    @BindView(R.id.drag_frame)
 //    FrameLayout dragFrame;
     private List<ImageView> list;
     private List<BallView> listBall;
-    private float currentY;
-    private boolean flag = false;
-    private String TAG = "HomeFragment";
     /**
      * 请求返回的json数据
      */
@@ -172,10 +167,6 @@ public class HomeFragment extends BaseFragment {
      */
     private int autoCount = 0;
     /**
-     * 递增递减控制
-     */
-    private boolean plummet = false;
-    /**
      * 轮播线程
      */
     private Thread thread;
@@ -184,21 +175,12 @@ public class HomeFragment extends BaseFragment {
      * 当前ballview的位置
      */
     private int ballviewPosition = 0;
-    private boolean loginFlag = false;
-
-
-    /**
-     * 加载dialog
-     */
-    private AlertDialog dialog;
     /**
      * 将要打开的标的详情idbean
      */
     private HomeBidIdBean homeBidIdBean;
     /**
      * banner 的页面个数
-     *
-     *
      */
     private int bannerCount;
     private FrameLayout.LayoutParams params;
@@ -206,9 +188,6 @@ public class HomeFragment extends BaseFragment {
      * 屏幕像素密度
      */
     private int density;
-//    private int screenWidth, screenHeight;
-//    private int right, bottom;
-//    private float downX, downY;
 
 
     private boolean theEnd = true;
@@ -323,7 +302,7 @@ public class HomeFragment extends BaseFragment {
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    if (params!=null){
+                    if (params != null) {
                         params.setMarginEnd((Integer) animation.getAnimatedValue());
                         ivSignIn.setLayoutParams(params);
                     }
@@ -350,7 +329,7 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class,"logflag-首页fragment返回的标的详情id数据--"+result);
+                LUtils.e(HomeFragment.class, "logflag-首页fragment返回的标的详情id数据--" + result);
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBidIdBean>() {
                         }.getType(),
@@ -394,6 +373,7 @@ public class HomeFragment extends BaseFragment {
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
                 String result = StringUtils.getDecodeString(response.body());
+                LUtils.e(HomeFragment.class, "logflag--是否实名-" + result);
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
                 }.getType(), IdentityCheckBean.class, getActivity());
                 if (bean1 != null) {
@@ -438,8 +418,8 @@ public class HomeFragment extends BaseFragment {
 
         } else if (requestCode == 666) {//签到界面返回
             initDataFromInternet();
-        }else if (requestCode==888){
-            fengXianFlag=true;
+        } else if (requestCode == 888) {
+            fengXianFlag = true;
             initDataFromInternet();
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -449,9 +429,9 @@ public class HomeFragment extends BaseFragment {
     public void initDataFromIntent() {
         listBall = new ArrayList<>();
         list = new ArrayList<>();
-        if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-            loginFlag = true;
-        }
+//        if ("".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+//            boolean loginFlag = true;
+//        }
     }
 
     @Override
@@ -460,11 +440,20 @@ public class HomeFragment extends BaseFragment {
         initAutoCarousel();
         initDataFromInternet();
 
-//         开启悬浮窗-----------------------------------------------------------------------------------------------------------------------------------
-//        Intent intent = new Intent(getActivity(), SignInService.class);
-//        getActivity().startService(intent);
 
-//        dialog = DialogUtils.showProgreessDialog(getActivity(), getResources().getString(R.string.zaicidianjijinagtuichugaiyemian));
+        //动态设置ballview的宽高201807161039--------------------------------------------------------
+        int realHeight = ScreenSizeUtils.getScreenHeight(getActivity());
+        if (realHeight > 1920) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llBallViewHeight.getLayoutParams();
+            if (realHeight - 1920 > 120) {
+                params.height = 170 * density;
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) llBallViewHeight1.getLayoutParams();
+                params1.height = 46 * density + realHeight - 2040;
+            } else {
+                params.height = 130 * density + realHeight - 1920;
+            }
+        }
+        //动态设置ballview的宽高201807161039--------------------------------------------------------
 
 
         //设置全区背景色
@@ -626,7 +615,9 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    /**显示隐藏的提示信息*/
+    /**
+     * 显示隐藏的提示信息
+     */
     private void showInfo(final TextView tv) {
         tv.setText(R.string.licaiyoufengxian);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -692,7 +683,7 @@ public class HomeFragment extends BaseFragment {
                 finishRL();
 
                 String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class,"logflag--首页fragment返回的json数据-"+result);
+                LUtils.e(HomeFragment.class, "logflag--首页fragment返回的json数据-" + result);
 
                 BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
                         }.getType(),
@@ -746,8 +737,6 @@ public class HomeFragment extends BaseFragment {
             }
 
 
-
-
 //             TODO: 2018/1/17 检测是否需要弹出风险测评,电子印章
             if (fengXianFlag && (!"".equals(UserConfig.getInstance().getLoginToken(getActivity())))
                     && "-1".equals(bean.getRiskAssessment())
@@ -789,7 +778,7 @@ public class HomeFragment extends BaseFragment {
                 dismissPDialog();
 
                 String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class,"logflag--领取生日红包返回的json数据-"+result);
+                LUtils.e(HomeFragment.class, "logflag--领取生日红包返回的json数据-" + result);
 
                 if (result != null && result.contains("\"code\":200")) {
                     ToastUtils.showToast(getActivity(), R.string.lingquchenggong);
@@ -892,7 +881,9 @@ public class HomeFragment extends BaseFragment {
         super.onDestroy();
     }
 
-    /**viewpager轮播*/
+    /**
+     * viewpager轮播
+     */
     private void initAutoCarousel() {
         thread = new Thread() {
             @Override
