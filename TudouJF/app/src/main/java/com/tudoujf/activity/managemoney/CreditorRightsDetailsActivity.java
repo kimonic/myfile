@@ -192,6 +192,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                                 enterBuy();
                             }
                         } else {
+
                             ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                         }
                     }
