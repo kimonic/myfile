@@ -2,6 +2,10 @@ package com.tudoujf.activity.other;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.text.Html;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,10 +21,12 @@ import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 import com.tudoujf.utils.TimeUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.TreeMap;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * * ================================================
@@ -81,6 +87,11 @@ public class HttpTestActivity extends BaseActivity {
     @BindView(R.id.clear7)
     TextView clear7;
 
+    @BindView(R.id.et_canshu_all)
+    EditText etCanshuAll;
+    @BindView(R.id.clear0)
+    TextView clear0;
+
     @Override
     public void initDataFromIntent() {
 
@@ -103,6 +114,7 @@ public class HttpTestActivity extends BaseActivity {
     @Override
     public void initListener() {
         tvActHttptest4.setOnClickListener(this);
+        clear0.setOnClickListener(this);
         clear1.setOnClickListener(this);
         clear2.setOnClickListener(this);
         clear3.setOnClickListener(this);
@@ -147,6 +159,9 @@ public class HttpTestActivity extends BaseActivity {
             case R.id.clear1:
                 etCanshuInterface.setText("");
                 break;
+            case R.id.clear0:
+                etCanshuAll.setText("");
+                break;
             case R.id.clear2:
                 etCanshuKey1.setText("");
                 etCanshuValue1.setText("");
@@ -176,51 +191,66 @@ public class HttpTestActivity extends BaseActivity {
 
     private void httpSend() {
         TreeMap<String, String> map = new TreeMap<>();
-        map.put(etCanshuKey1.getText().toString().trim(), etCanshuValue1.getText().toString().trim());
-        map.put(etCanshuKey2.getText().toString().trim(), etCanshuValue2.getText().toString().trim());
-        map.put(etCanshuKey3.getText().toString().trim(), etCanshuValue3.getText().toString().trim());
-        map.put(etCanshuKey4.getText().toString().trim(), etCanshuValue4.getText().toString().trim());
-        map.put(etCanshuKey5.getText().toString().trim(), etCanshuValue5.getText().toString().trim());
-        map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
         String url;
+        if (!"".equals(etCanshuAll.getText().toString())) {
+            url = etCanshuAll.getText().toString();
+            HttpMethods.getInstance().POST1(this, url, map, "test", new StringCallback() {
+                @Override
+                public void onSuccess(Response<String> response) {
+                    String m = response.body();
+                    tvActHttptest1.setText(m);
+                    //http://m.juzimi.com/ju/1144961
+                    Log.e("TAG", "logflag-123456--" + m);
+                }
+            });
 
-        for (String s : map.keySet()) {
-            LUtils.e(HttpTestActivity.class, "logflag---httpSend:----" + s + "-------- " + map.get(s));
-        }
+        } else {
+            map.put(etCanshuKey1.getText().toString().trim(), etCanshuValue1.getText().toString().trim());
+            map.put(etCanshuKey2.getText().toString().trim(), etCanshuValue2.getText().toString().trim());
+            map.put(etCanshuKey3.getText().toString().trim(), etCanshuValue3.getText().toString().trim());
+            map.put(etCanshuKey4.getText().toString().trim(), etCanshuValue4.getText().toString().trim());
+            map.put(etCanshuKey5.getText().toString().trim(), etCanshuValue5.getText().toString().trim());
+            map.put(etCanshuKey6.getText().toString().trim(), etCanshuValue6.getText().toString().trim());
 
 
-        url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
-        LUtils.e(HttpTestActivity.class,"logflag---httpSend:----"+url);
+            for (String s : map.keySet()) {
+                LUtils.e(HttpTestActivity.class, "logflag---httpSend:----" + s + "-------- " + map.get(s));
+            }
 
-        HttpMethods.getInstance().POST(this, url, map, "test", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                if (!etCanshuInterface.getText().toString().trim().equals("")) {
-                    String result = "";
-                    try {
-                        result = StringUtils.getDecodeString(response.body());
-                        tvActHttptest1.setText(result);
-                    } catch (Exception e) {
+
+            url = Constants.URL + etCanshuInterface.getText().toString().trim().replace(" ", "");
+            LUtils.e(HttpTestActivity.class, "logflag---httpSend:----" + url);
+
+            HttpMethods.getInstance().POST(this, url, map, "test", new StringCallback() {
+                @Override
+                public void onSuccess(Response<String> response) {
+                    if (!etCanshuInterface.getText().toString().trim().equals("")) {
+                        String result = "";
+                        try {
+                            result = StringUtils.getDecodeString(response.body());
+                            tvActHttptest1.setText(result);
+                        } catch (Exception e) {
+                            tvActHttptest1.setText(response.body());
+                        }
+
+                        if (result.contains("\"code\":200")) {
+                            FileUtils.saveJsonToSDCard(HttpTestActivity.this, "数据数据" + TimeUtils.getCurentTimeTotal() + ".txt", result);
+                        }
+                        LUtils.e(HttpTestActivity.class, "logflag-接口测试返回结果--" + result);
+                    } else {
                         tvActHttptest1.setText(response.body());
                     }
 
-                    if (result.contains("\"code\":200")) {
-                        FileUtils.saveJsonToSDCard(HttpTestActivity.this, "数据数据" + TimeUtils.getCurentTimeTotal() + ".txt", result);
-                    }
-                    LUtils.e(HttpTestActivity.class, "logflag-接口测试返回结果--" +result);
-                } else {
-                    tvActHttptest1.setText(response.body());
+
                 }
 
-
-            }
-
-            @Override
-            public void onError(Response<String> response) {
-                tvActHttptest1.setText(response.message());
-                super.onError(response);
-            }
-        });
+                @Override
+                public void onError(Response<String> response) {
+                    tvActHttptest1.setText(response.message());
+                    super.onError(response);
+                }
+            });
+        }
 
 
     }

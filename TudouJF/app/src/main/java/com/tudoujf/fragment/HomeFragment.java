@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.header.waveswipe.WaveView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
@@ -258,7 +259,6 @@ public class HomeFragment extends BaseFragment {
                 openActivity(InfoPublishActivity.class);
                 break;
             case R.id.iv_frag_home_signin:
-
                 retractAnim(1);
                 if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);

@@ -223,7 +223,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
             tvRepaymentWay.setText(bean.getLoanMap().getRepay_type().getName());//还款方式
             tvRepaymentSchedule.setText(("已还" + bean.getTransferMap().getPeriod_yes() + "期/共"
                     + bean.getTransferMap().getTotal_period() + "期"));//??还款进度
-            tvRepaymentDeadline.setText(bean.getTransferMap().getLast_repay_time());//??还款期限
+            tvRepaymentDeadline.setText(StringUtils.getStrTime(bean.getTransferMap().getLast_repay_time()));//??还款期限
             tvInvestCount.setText(bean.getLoanMap().getLoan_info().getTender_count());//投资人数
 
             status = bean.getTransferMap().getStatus();

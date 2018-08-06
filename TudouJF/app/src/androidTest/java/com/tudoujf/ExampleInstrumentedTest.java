@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.tudoujf.utils.StringUtils;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,5 +24,9 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.tudoujf", appContext.getPackageName());
+    }
+    @Test
+    public void check(){
+        assertEquals(StringUtils.getRandomCode().length(),6);
     }
 }

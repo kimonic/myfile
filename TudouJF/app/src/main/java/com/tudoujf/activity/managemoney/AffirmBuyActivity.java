@@ -423,7 +423,7 @@ public class AffirmBuyActivity extends BaseActivity {
             }else {
                 mtbAffirmbuy.setCenterTitle(bean.getName().substring(0,19)+"...");
             }
-            tvBalance.setText(bean.getMember().getBalance_amount());
+            tvBalance.setText(StringUtils.getCommaDecimalsStr(bean.getMember().getBalance_amount()));
             tvWaitAmount.setText(bean.getWait_amount());
             tvQiTou.setText(bean.getTender_amount_min());
             if ("0".equals(bean.getTender_amount_max())) {

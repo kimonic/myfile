@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.tudoujf.R;
 import com.tudoujf.activity.my.RealNameAuthenticationHuiFuActivity;
 import com.tudoujf.activity.other.LoginActivity;
@@ -465,6 +466,7 @@ public class ProductDetailsActivity extends BaseActivity {
             isLogin = true;
             checkIdentity();
         }
+
 
     }
 

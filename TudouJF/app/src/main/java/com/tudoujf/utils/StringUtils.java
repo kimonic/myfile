@@ -41,7 +41,7 @@ public class StringUtils {
         try {
             return gson.fromJson(json, new TypeToken<GlobalBean>() {
             }.getType());
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 
@@ -55,7 +55,7 @@ public class StringUtils {
         String temp;
         GlobalBean bean = firstParseJson(json);
         //MD5验证
-        if (bean!=null&&MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
+        if (bean != null && MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
             return temp;
         } else {
@@ -165,7 +165,7 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTime(String cc_time) {
-        if (cc_time==null){
+        if (cc_time == null) {
             return "****-**-**";
         }
         String re_StrTime;
@@ -182,9 +182,9 @@ public class StringUtils {
 
 
     /**
-            * 将时间戳转为字符串
+     * 将时间戳转为字符串
      *
-             * @param cc_time 时间戳字符串,到秒
+     * @param cc_time 时间戳字符串,到秒
      * @return yyyy-MM-dd
      */
     public static String getStrTimeFull(String cc_time) {
@@ -209,7 +209,7 @@ public class StringUtils {
      * @return yyyy-MM-dd
      */
     public static String getStrTimeBias(String cc_time) {
-        if (cc_time==null){
+        if (cc_time == null) {
             return "****-**-**";
         }
         String re_StrTime;
@@ -239,7 +239,7 @@ public class StringUtils {
      * 补齐两位小数
      */
     public static String getTwoDecimalsStr(String fStr) {
-        if (fStr==null){
+        if (fStr == null) {
             return "";
         }
         float f = string2Float(fStr);
@@ -252,7 +252,7 @@ public class StringUtils {
      * 补齐两位小数
      */
     public static String getTwoDecimalsStrUD(String fStr) {
-        if (fStr==null){
+        if (fStr == null) {
             return "";
         }
         double f = string2Float(fStr);
@@ -266,13 +266,11 @@ public class StringUtils {
     }
 
 
-
-
     /**
      * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
-        if (fStr == null) {
+        if (fStr == null||"".equals(fStr)) {
             return "0.00";
         }
         if (fStr.contains(".")) {
@@ -401,19 +399,19 @@ public class StringUtils {
         return sb.toString();
     }
 
-    /**科学计数法转换为诶数字scientific notation*/
+    /**
+     * 科学计数法转换为诶数字scientific notation
+     */
     public static String changeScientificNotation(String num1) {
-        if (num1!=null){
+        if (num1 != null) {
             BigDecimal bd1 = new BigDecimal(num1);
             return bd1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString();
-        }else {
+        } else {
             return "0";
         }
 
 
     }
-
-
 
 
 }

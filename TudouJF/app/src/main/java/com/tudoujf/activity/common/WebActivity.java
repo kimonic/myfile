@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -69,10 +70,7 @@ public class WebActivity extends BaseActivity {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mtbActWeb.getLayoutParams();
         params.setMargins(0, ScreenSizeUtils.getStatusHeight(this), 0, 0);
         mtbActWeb.setLayoutParams(params);
-
         mtbActWeb.setCenterTitle(title);
-
-
         wvActWeb.setWebViewClient(new MyWebClient());
         WebSettings ws = wvActWeb.getSettings();
         ws.setAllowFileAccess(true);
@@ -174,6 +172,7 @@ public class WebActivity extends BaseActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             return super.shouldOverrideUrlLoading(view, url);
         }
+
 
     }
 

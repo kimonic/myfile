@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
@@ -100,7 +101,16 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                             DialogUtils.showDialog(this, getResources().getString(R.string.zhanghuyuebuzu), R.string.queren, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    openActivity(RechargeActivity.class);
+                                    //201808061504修复余额不足进入充值页面时显示余额异常
+                                    jumpRechargeActivity();
+//                                    Bundle bundle=new Bundle();
+//                                    if (bean!=null){
+//                                        bundle.putString("balance",bean.getBalance_amount());
+//                                    }
+//                                    Intent intent=new Intent(AffirmBuyCreditorsRightsActivity.this,RechargeActivity.class);
+//                                    intent.putExtras(bundle);
+//                                    startActivity(intent);
+//                                    openActivity(RechargeActivity.class);
                                 }
                             });
                         }
@@ -114,7 +124,8 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
 
                 break;
             case R.id.tv_act_affirmbuycreditors_recharge:
-                openActivity(RechargeActivity.class);
+                jumpRechargeActivity();
+//                openActivity(RechargeActivity.class);
                 break;
             case R.id.tv_act_affirm_agree://同意协议
                 count++;
@@ -127,13 +138,20 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_zhaiquanxieyi:
-
                 Intent intent = new Intent(this, WebActivity.class);
                 intent.putExtra("url", Constants.TOU_ZI_XIE_YI);
                 intent.putExtra("title","土豆金服服务协议");
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void jumpRechargeActivity(){
+        Bundle bundle=new Bundle();
+        if (bean!=null){
+            bundle.putString("balance",bean.getBalance_amount());
+        }
+        openActivity(RechargeActivity.class,bundle);
     }
 
 //    private void showPasswordDialog() {
@@ -246,7 +264,7 @@ public class AffirmBuyCreditorsRightsActivity extends BaseActivity {
                 mtbAffirmBuyCreditorsRight.setCenterTitle(bean.getLoan_name().substring(0,19)+"...");
             }
             tvEarnings.setText(bean.getIncome());
-            tvBalance.setText(bean.getBalance_amount());
+            tvBalance.setText(StringUtils.getCommaDecimalsStr(bean.getBalance_amount()));
             tvInvestamount.setText(bean.getAmount());
         }
     }

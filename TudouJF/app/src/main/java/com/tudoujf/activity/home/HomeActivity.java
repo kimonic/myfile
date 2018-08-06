@@ -65,7 +65,6 @@ public class HomeActivity extends BaseActivity {
     private int beforePosition = 0;
 
 
-
     @Override
     public int getLayoutResId() {
         return R.layout.act_home;
@@ -129,7 +128,8 @@ public class HomeActivity extends BaseActivity {
                 if (position == 3 && !isLogin) {
                     openLoginAct();
                     return false;
-                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity.this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
+                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity
+                        .this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
 //                    openActivity(LockActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "jiesuo");
@@ -152,7 +152,8 @@ public class HomeActivity extends BaseActivity {
 
                 if (position == 3 && !isLogin) {
                     openLoginAct();
-                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity.this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
+                } else if (position == 3 && UserConfig.getInstance().getLockPass(HomeActivity
+                        .this) && !UserConfig.getInstance().isDraw()) {//已登录已设置手势密码本次未验证手势密码
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "jiesuo");
                     openActivity(LockActivity.class, bundle);//打开手势密码界面
@@ -190,9 +191,10 @@ public class HomeActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         String result = StringUtils.getDecodeString(response.body());
-                        LUtils.e(HomeActivity.class,"logflag-检查版本更新接口返回数据--"+result);
-                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<NewVersionBean>() {
-                        }.getType(), NewVersionBean.class, HomeActivity.this);
+                        LUtils.e(HomeActivity.class, "logflag-检查版本更新接口返回数据--" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new
+                                TypeToken<NewVersionBean>() {
+                                }.getType(), NewVersionBean.class, HomeActivity.this);
                         if (bean1 != null) {
                             NewVersionBean bean = (NewVersionBean) bean1;
                             String versionName = AppInfoUtils.getVersionName(HomeActivity.this);
@@ -211,13 +213,16 @@ public class HomeActivity extends BaseActivity {
 //                            startActivity(intent);
 
                             //所有低版本都必须强制更新
-                            if (bean.getForce_version() != null && (Integer.parseInt(versionName.replace(".", "").substring(0, 3)) <
+                            if (bean.getForce_version() != null && (Integer.parseInt(versionName
+                                    .replace(".", "").substring(0, 3)) <
                                     Integer.parseInt(bean.getForce_version().replace(".", "")))) {
-                                DialogUtils.showPromptDialogAll(HomeActivity.this, "提示", "APP须更新到最新版本,是否前往更新?",
+                                DialogUtils.showPromptDialogAll(HomeActivity.this, "提示",
+                                        "APP必须更新到最新版本,是否前往更新?",
                                         new DialogUtils.DialogUtilsClickListener() {
                                             @Override
                                             public void onClick() {
-                                                DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
+                                                DownloadAppUtils.downloadForWebView(HomeActivity
+                                                        .this, url);
                                                 closeActivity();
                                             }
                                         }, new DialogUtils.DialogUtilsClickListener() {
@@ -227,11 +232,13 @@ public class HomeActivity extends BaseActivity {
                                             }
                                         });
                             } else if (!versionName.equals(bean.getNew_version())) {//普通更新
-                                DialogUtils.showPromptDialog(HomeActivity.this, "提示", "发现APP有新版本,是否前往更新?",
+                                DialogUtils.showPromptDialog(HomeActivity.this, "提示", "发现APP有新版本," +
+                                                "是否前往更新?",
                                         new DialogUtils.DialogUtilsClickListener() {
                                             @Override
                                             public void onClick() {
-                                                DownloadAppUtils.downloadForWebView(HomeActivity.this, url);
+                                                DownloadAppUtils.downloadForWebView(HomeActivity
+                                                        .this, url);
                                             }
                                         });
                             }
@@ -277,8 +284,10 @@ public class HomeActivity extends BaseActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         //是否需要显示开通汇付的对话框
-        if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show", true)) {
-            if (!"".equals(UserConfig.getInstance().getLoginToken(this)) && "-1".equals(UserConfig.getInstance().getIsRealName(this))) {
+        if (hasFocus && SharedPreferencesUtils.getInstance(this, "popshow").getBoolean("show",
+                true)) {
+            if (!"".equals(UserConfig.getInstance().getLoginToken(this)) && "-1".equals
+                    (UserConfig.getInstance().getIsRealName(this))) {
                 SharedPreferencesUtils.getInstance(this, "popshow").put("show", false);
                 DialogUtils.showHuiFuDialog(this);
             }
@@ -383,10 +392,14 @@ public class HomeActivity extends BaseActivity {
 //        super.onPause();
 //    }
 
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
 //    private MessageReceiver mMessageReceiver;
 //    public static boolean isForeground = false;
 //    public static final String MESSAGE_RECEIVED_ACTION = "com.tudoujf.MESSAGE_RECEIVED_ACTION";
@@ -430,9 +443,13 @@ public class HomeActivity extends BaseActivity {
 //        }
 //    }
 //
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
-//    //-----------------------------------------jpush添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
+//    //-----------------------------------------jpush
+// 添加---------------------------------------------
 
 }
