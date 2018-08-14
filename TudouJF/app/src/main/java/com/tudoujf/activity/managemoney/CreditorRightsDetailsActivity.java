@@ -182,7 +182,6 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
                         LUtils.e(CreditorRightsDetailsActivity.class, "logflag-请求债权详情返回的json数据--" + result);
-
                         BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<CreditorRightsDetailsBean>() {
                         }.getType(), CreditorRightsDetailsBean.class, CreditorRightsDetailsActivity.this);
                         if (bean1 != null) {
@@ -192,7 +191,6 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
                                 enterBuy();
                             }
                         } else {
-
                             ToastUtils.showToast(CreditorRightsDetailsActivity.this, getResources().getString(R.string.shujujiazaichucuo));
                         }
                     }

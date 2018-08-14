@@ -410,7 +410,7 @@
     <string name="qingliuxianindelianxifangshi">请留下您的联系方式(电话、QQ或邮箱)</string>
     <string name="tijiao">提交</string>
     <string name="fuwushijian">服务时间</string>
-    <string name="zaowan">早8:30至晚21:00</string>
+    <string name="zaowan">早8:30至晚17:30</string>
     <string name="bodakefurexian">拨打客服热线</string>
     <string name="act_questionclassification_title">问题分类</string>
     <string name="xinshouzhiyin">新手指引</string>
@@ -758,6 +758,8 @@
     <string name="huoquyonghuxinxishibai">获取用户信息失败!</string>
     <string name="shuzizhengshufuwuxieyi1">数字证书服务协议</string>
     <string name="pingtaijujianfuwuxieyi">《平台居间服务协议》</string>
+    <string name="kucunshuliangbuzu">库存数量不足!</string>
+    <string name="huodongshangpin">活动商品,请通过参加活动进行兑换!</string>
 
 
 </resources>

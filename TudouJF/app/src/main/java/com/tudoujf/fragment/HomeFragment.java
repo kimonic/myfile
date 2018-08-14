@@ -303,8 +303,12 @@ public class HomeFragment extends BaseFragment {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     if (params != null) {
-                        params.setMarginEnd((Integer) animation.getAnimatedValue());
-                        ivSignIn.setLayoutParams(params);
+                        try {
+                            params.setMarginEnd((Integer) animation.getAnimatedValue());
+                            ivSignIn.setLayoutParams(params);
+                        }catch (Exception e){
+
+                        }
                     }
 
                 }
