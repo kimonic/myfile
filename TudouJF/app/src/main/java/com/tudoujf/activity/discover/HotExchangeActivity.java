@@ -64,8 +64,8 @@ public class HotExchangeActivity extends BaseActivity {
 
     @Override
     public void initDataFromIntent() {
-        list=new ArrayList<>();
-        integral=getIntent().getStringExtra("integral");
+        list = new ArrayList<>();
+        integral = getIntent().getStringExtra("integral");
     }
 
     @Override
@@ -86,9 +86,9 @@ public class HotExchangeActivity extends BaseActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(HotExchangeActivity.this,GoodsDetailsActivity.class);
-                intent.putExtra("id",list.get(position).getId());
-                intent.putExtra("integral",integral);
+                Intent intent = new Intent(HotExchangeActivity.this, GoodsDetailsActivity.class);
+                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("integral", integral);
                 startActivity(intent);
             }
         });
@@ -99,14 +99,13 @@ public class HotExchangeActivity extends BaseActivity {
     public void initDataFromInternet() {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
-        HttpMethods.getInstance().POST(this, Constants.HOT_GOODS, map, getLocalClassName(), new StringCallback() {
+        HttpMethods.getInstance().POST(this, Constants.HOT_GOODS, map, getLocalClassName(), new
+                StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         dismissPDialog();
                         String result = StringUtils.getDecodeString(response.body());
-
-                        LUtils.e(HotExchangeActivity.class,"logflag-热门商品接口返回的json数据--"+result);
-
+                        LUtils.e(HotExchangeActivity.class, "logflag-热门商品接口返回的json数据--" + result);
                         Gson gson = new Gson();
                         CommonBean bean = gson.fromJson(result, CommonBean.class);
                         String rankingList = "{items:" + bean.getData().toString() + "}";
@@ -114,16 +113,17 @@ public class HotExchangeActivity extends BaseActivity {
                         if (inBean != null) {
                             LoadInternetDataToUi();
                         } else {
-                            ToastUtils.showToast(HotExchangeActivity.this, getResources().getString(R.string.shujujiazaichucuo));
+                            ToastUtils.showToast(HotExchangeActivity.this, getResources()
+                                    .getString(R.string.shujujiazaichucuo));
                         }
-
                     }
 
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dismissPDialog();
-                        ToastUtils.showToast(HotExchangeActivity.this, R.string.huoquremenshangpinxinxishibai);
+                        ToastUtils.showToast(HotExchangeActivity.this, R.string
+                                .huoquremenshangpinxinxishibai);
                     }
                 }
         );
@@ -131,16 +131,17 @@ public class HotExchangeActivity extends BaseActivity {
 
     @Override
     public void LoadInternetDataToUi() {
-        if (inBean!=null&&inBean.getItems()!=null&&inBean.getItems().size()>0){
+        if (inBean != null && inBean.getItems() != null && inBean.getItems().size() > 0) {
             list.addAll(inBean.getItems());
 
-            if (adapter==null){
-                adapter=new HotExchangeLvAdapter(list,this);
+            if (adapter == null) {
+                adapter = new HotExchangeLvAdapter(list, this);
                 lv.setAdapter(adapter);
             }
         }
 
     }
+
     @Override
     protected int setStatusBarColor() {
         return getResources().getColor(R.color.global_theme_background_color);

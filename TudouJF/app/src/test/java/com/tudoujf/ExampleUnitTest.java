@@ -1,10 +1,14 @@
 package com.tudoujf;
 
 import android.graphics.Matrix;
+import android.test.mock.MockContentProvider;
+import android.test.mock.MockContext;
 
 import com.tudoujf.utils.StringUtils;
 
 import org.junit.Test;
+
+import java.text.DecimalFormat;
 
 import static org.junit.Assert.*;
 
@@ -34,9 +38,17 @@ public class ExampleUnitTest {
         assertEquals("111,111,111.00", StringUtils.getCommaDecimalsStr("111111111"));
         assertEquals("1,111,111,111.00", StringUtils.getCommaDecimalsStr("1111111111"));
         assertEquals("11,111,111,111.00", StringUtils.getCommaDecimalsStr("11111111111"));
-        Matrix matrix=new Matrix();
-        float[] temp=new float[9];
-        matrix.getValues(temp);
-        System.out.println("hahahhahahh"+temp);
+
+    }
+
+    @Test
+    public void testStringFormat(){
+        assertEquals("0.0",StringUtils.formatString(null));
+        assertEquals("0.0",StringUtils.formatString("0"));
+        assertEquals("0.0",StringUtils.formatString("0."));
+        assertEquals("0.1",StringUtils.formatString("0.123"));
+        assertEquals("0.1",StringUtils.formatString("0.1"));
+        assertEquals("0.1",StringUtils.formatString("0.12"));
+        assertEquals("1230.1",StringUtils.formatString("1230.11112"));
     }
 }

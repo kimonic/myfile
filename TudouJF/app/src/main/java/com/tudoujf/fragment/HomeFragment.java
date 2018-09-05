@@ -50,6 +50,7 @@ import com.tudoujf.ui.AwardInfoView;
 import com.tudoujf.ui.BallView;
 import com.tudoujf.ui.DotView;
 import com.tudoujf.ui.TuDouHeader;
+import com.tudoujf.utils.DialogShowOrderUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.ImageGlideUtils;
 import com.tudoujf.utils.LUtils;
@@ -227,7 +228,8 @@ public class HomeFragment extends BaseFragment {
                 }
                 break;
             case R.id.tv_frag_home_rightarrow:
-                if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter().getCount() - 1) {
+                if (vpBall.getAdapter() != null && vpBall.getCurrentItem() < vpBall.getAdapter()
+                        .getCount() - 1) {
                     vpBall.setCurrentItem(vpBall.getCurrentItem() + 1);
                     theEnd = true;
                 } else {
@@ -260,7 +262,8 @@ public class HomeFragment extends BaseFragment {
                 break;
             case R.id.iv_frag_home_signin:
                 retractAnim(1);
-                if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
+                if (params.getMarginEnd() == 0 && "".equals(UserConfig.getInstance()
+                        .getLoginToken(getActivity()))) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.putExtra("type", 888);
                     startActivityForResult(intent, 888);
@@ -288,7 +291,6 @@ public class HomeFragment extends BaseFragment {
      */
     private void retractAnim(int flag) {
         params = (FrameLayout.LayoutParams) ivSignIn.getLayoutParams();
-        // TODO: 2018/2/28  修复params为null的问题,待验证 1.0.3
         if (params != null) {
             int marginEnd = params.getMarginEnd();
             ValueAnimator animator;
@@ -306,11 +308,10 @@ public class HomeFragment extends BaseFragment {
                         try {
                             params.setMarginEnd((Integer) animation.getAnimatedValue());
                             ivSignIn.setLayoutParams(params);
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
-
                 }
             });
         }
@@ -328,41 +329,47 @@ public class HomeFragment extends BaseFragment {
         map.put("is_experience", loanBeanList.get(ballviewPosition).getExperience_status());
         map.put("is_new", loanBeanList.get(ballviewPosition).getAdditional_status());
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, "", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                dismissPDialog();
-                String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class, "logflag-首页fragment返回的标的详情id数据--" + result);
-
-                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBidIdBean>() {
-                        }.getType(),
-                        HomeBidIdBean.class, getActivity());
-                if (bean1 != null) {
-                    homeBidIdBean = (HomeBidIdBean) bean1;
-                    if ("1".equals(loanBeanList.get(ballviewPosition).getExperience_status())) {
-
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME_DETAILS_ID, map, "", new
+                StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        LUtils.e(HomeFragment.class, "logflag-首页fragment返回的标的详情id数据--" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new
+                                        TypeToken<HomeBidIdBean>() {
+                                        }.getType(),
+                                HomeBidIdBean.class, getActivity());
+                        if (bean1 != null) {
+                            homeBidIdBean = (HomeBidIdBean) bean1;
+                            if ("1".equals(loanBeanList.get(ballviewPosition)
+                                    .getExperience_status())) {
 //                        //体验金大于0,未登录,已登录未实名,跳转体验金详情
-                        if (StringUtils.string2Integer(bean.getExperience_amount()) > 0 || "".equals(UserConfig.getInstance().getLoginToken(getActivity()))) {
-                            Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
-                            intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                            intent1.putExtra("status", 0);
-                            startActivity(intent1);
+                                if (StringUtils.string2Integer(bean.getExperience_amount()) > 0
+                                        || ""
+                                        .equals(UserConfig.getInstance().getLoginToken
+                                                (getActivity()))) {
+                                    Intent intent1 = new Intent(getActivity(),
+                                            NewcomerExperienceBidActivity.class);
+                                    intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                                    intent1.putExtra("status", 0);
+                                    startActivity(intent1);
+                                } else {
+                                    checkIdentity();
+                                }
+
+                            } else {
+                                Intent intent = new Intent(getActivity(), ProductDetailsActivity
+                                        .class);
+                                intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                                startActivity(intent);
+                            }
+
                         } else {
-                            checkIdentity();
+                            ToastUtils.showToast(getActivity(), R.string.qingqiushujuchucuo);
                         }
-
-                    } else {
-                        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
-                        intent.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                        startActivity(intent);
                     }
-
-                } else {
-                    ToastUtils.showToast(getActivity(), R.string.qingqiushujuchucuo);
-                }
-            }
-        });
+                });
     }
 
     /**
@@ -372,39 +379,45 @@ public class HomeFragment extends BaseFragment {
         showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-        HttpMethods.getInstance().POST(getActivity(), Constants.IDENTITY_CHECK, map, "", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                dismissPDialog();
-                String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class, "logflag--是否实名-" + result);
-                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<IdentityCheckBean>() {
-                }.getType(), IdentityCheckBean.class, getActivity());
-                if (bean1 != null) {
-                    IdentityCheckBean identityCheckBean = (IdentityCheckBean) bean1;
-                    if (identityCheckBean.getIs_trust().equals("1")) {//已实名
-                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
-                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                        intent1.putExtra("status", 1);
-                        startActivity(intent1);
-                    } else {//未实名
-                        Intent intent1 = new Intent(getActivity(), NewcomerExperienceBidActivity.class);
-                        intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
-                        intent1.putExtra("status", 0);
-                        startActivity(intent1);
+        HttpMethods.getInstance().POST(getActivity(), Constants.IDENTITY_CHECK, map, "", new
+                StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        dismissPDialog();
+                        String result = StringUtils.getDecodeString(response.body());
+                        LUtils.e(HomeFragment.class, "logflag--是否实名-" + result);
+                        BaseBean bean1 = ParseJson.getJsonResult(response.body(), new
+                                TypeToken<IdentityCheckBean>() {
+                                }.getType(), IdentityCheckBean.class, getActivity());
+                        if (bean1 != null) {
+                            IdentityCheckBean identityCheckBean = (IdentityCheckBean) bean1;
+                            if (identityCheckBean.getIs_trust().equals("1")) {//已实名
+                                Intent intent1 = new Intent(getActivity(),
+                                        NewcomerExperienceBidActivity
+                                                .class);
+                                intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                                intent1.putExtra("status", 1);
+                                startActivity(intent1);
+                            } else {//未实名
+                                Intent intent1 = new Intent(getActivity(),
+                                        NewcomerExperienceBidActivity
+                                                .class);
+                                intent1.putExtra("loan_id", homeBidIdBean.getLoan_id());
+                                intent1.putExtra("status", 0);
+                                startActivity(intent1);
+                            }
+                        } else {
+                            ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
+                        }
                     }
-                } else {
-                    ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
-                }
-            }
 
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                dismissPDialog();
-                ToastUtils.showToast(getActivity(), R.string.yanzhengshimingxinxishibai);
-            }
-        });
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        dismissPDialog();
+                        ToastUtils.showToast(getActivity(), R.string.yanzhengshimingxinxishibai);
+                    }
+                });
 
     }
 
@@ -419,7 +432,6 @@ public class HomeFragment extends BaseFragment {
                     tvMsgCount.setText(getResources().getString(R.string.ninenine));
                 }
             }
-
         } else if (requestCode == 666) {//签到界面返回
             initDataFromInternet();
         } else if (requestCode == 888) {
@@ -448,16 +460,18 @@ public class HomeFragment extends BaseFragment {
         //动态设置ballview的宽高201807161039--------------------------------------------------------
         int realHeight = ScreenSizeUtils.getScreenHeight(getActivity());
         if (realHeight > 1920) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llBallViewHeight.getLayoutParams();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llBallViewHeight
+                    .getLayoutParams();
             if (realHeight - 1920 > 120) {
                 params.height = 170 * density;
-                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) llBallViewHeight1.getLayoutParams();
+                LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)
+                        llBallViewHeight1.getLayoutParams();
                 params1.height = 46 * density + realHeight - 2040;
             } else {
                 params.height = 130 * density + realHeight - 1920;
             }
         }
-        //动态设置ballview的宽高201807161039--------------------------------------------------------
+        //动态设置ballview的宽高201807161039.--------------------------------------------------------
 
 
         //设置全区背景色
@@ -494,7 +508,6 @@ public class HomeFragment extends BaseFragment {
     /**
      * 初始化导航图片数据
      */
-
     private void initImagesViews() {
         listUrl = bean.getBanner();
 
@@ -549,14 +562,16 @@ public class HomeFragment extends BaseFragment {
         //显示隐藏控件
         srl.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
             @Override
-            public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
+            public void onHeaderPulling(RefreshHeader header, float percent, int offset, int
+                    headerHeight, int extendHeight) {
 //                if (offset > 36) {
 //                    showInfo(tvFengXianTiShi1);
 //                }
             }
 
             @Override
-            public void onFooterPulling(RefreshFooter footer, float percent, int offset, int footerHeight, int extendHeight) {
+            public void onFooterPulling(RefreshFooter footer, float percent, int offset, int
+                    footerHeight, int extendHeight) {
                 if (offset > 36) {
                     showInfo(tvFengXianTiShi2);
                 }
@@ -625,14 +640,14 @@ public class HomeFragment extends BaseFragment {
     private void showInfo(final TextView tv) {
         tv.setText(R.string.licaiyoufengxian);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, 20 * ScreenSizeUtils.getDensity(getActivity()));
+                ViewGroup.LayoutParams.MATCH_PARENT, 20 * ScreenSizeUtils.getDensity(getActivity
+                ()));
         tv.setLayoutParams(params);
         Animation animation = new AlphaAnimation(0.5f, 1);
         animation.setDuration(2000);
         final Animation animation1 = new AlphaAnimation(1, 0);
         animation1.setDuration(2000);
         tv.setAnimation(animation);
-
 
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -680,7 +695,8 @@ public class HomeFragment extends BaseFragment {
         //首页的logintoken为null时,会出现系统错误
         map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
 
-        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "", new StringCallback() {
+        HttpMethods.getInstance().POST(getActivity(), Constants.HOME, map, "", new StringCallback
+                () {
             @Override
             public void onSuccess(Response<String> response) {
                 dismissPDialog();
@@ -689,10 +705,10 @@ public class HomeFragment extends BaseFragment {
                 String result = StringUtils.getDecodeString(response.body());
                 LUtils.e(HomeFragment.class, "logflag--首页fragment返回的json数据-" + result);
 
-                BaseBean bean1 = ParseJson.getJsonResult(response.body(), new TypeToken<HomeBean>() {
-                        }.getType(),
-                        HomeBean.class, getActivity());
-                if (bean1 != null) {
+                BaseBean bean1 = ParseJson.getJsonResult(response.body(),
+                        new TypeToken<HomeBean>() {
+                        }.getType(), HomeBean.class, getActivity());
+                if (bean1 != null && list != null && listBall != null) {
                     bean = (HomeBean) bean1;
                     if (list.size() > 0) {
                         list.clear();
@@ -746,60 +762,75 @@ public class HomeFragment extends BaseFragment {
                     && "-1".equals(bean.getRiskAssessment())
                     && "1".equals(bean.getIsTrustOpen())
                     ) {
-
-                DialogUtils.showRiskDialog(getActivity());
+                // TODO: 2018/9/5 集中提示dialog
+                //201809051134
+                DialogShowOrderUtils.getInstance().setRiskFlag(true);
+//                DialogUtils.showRiskDialog(getActivity());
                 fengXianFlag = false;
             }
+            //20180905    计数要显示的dialog,当所有dialog都确定是否显示后触发显示
+            DialogShowOrderUtils.getInstance().setCount();
+            DialogShowOrderUtils.getInstance().setCount();
+
             // TODO: 2018/2/9 检测是否弹出生日红包弹窗
             if ("1".equals(bean.getBirthdayWelfare())) {
+                // TODO: 2018/9/5 集中提示dialog
+                //201809051134
                 String relName = bean.getRealName();
-                ToastUtils.showToast(getActivity(), relName + ",生日快乐!");
-                DialogUtils.showPromptDialog(getActivity(), getString(R.string.tishi), relName + getString(R.string.shengritishi), new DialogUtils.DialogUtilsClickListener() {
-                    @Override
-                    public void onClick() {
-                        receiveRedPackage();
-                    }
-                });
+                DialogShowOrderUtils.getInstance().setBirthdayFlag(true,relName);
+
+//                ToastUtils.showToast(getActivity(), relName + ",生日快乐!");
+//                DialogUtils.showPromptDialog(getActivity(), getString(R.string.tishi), relName +
+//                        getString(R.string.shengritishi), new DialogUtils
+//                        .DialogUtilsClickListener() {
+//                    @Override
+//                    public void onClick() {
+//                        receiveRedPackage();
+//                    }
+//                });
 
             }
+            //20180905    计数要显示的dialog,当所有dialog都确定是否显示后触发显示
+            DialogShowOrderUtils.getInstance().setCount();
 
 
         }
     }
 
-    /**
-     * 领取生日红包
-     */
-    private void receiveRedPackage() {
-        showPDialog();
-        TreeMap<String, String> map = new TreeMap<>();
-
-        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
-
-        HttpMethods.getInstance().POST(getActivity(), Constants.BIRTHDAY_WELFARE, map, "", new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                dismissPDialog();
-
-                String result = StringUtils.getDecodeString(response.body());
-                LUtils.e(HomeFragment.class, "logflag--领取生日红包返回的json数据-" + result);
-
-                if (result != null && result.contains("\"code\":200")) {
-                    ToastUtils.showToast(getActivity(), R.string.lingquchenggong);
-                } else {
-                    ToastUtils.showToast(getActivity(), R.string.lignqushibai);
-                }
-
-            }
-
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                dismissPDialog();
-                ToastUtils.showToast(getActivity(), R.string.lignqushibai);
-            }
-        });
-    }
+//    /**
+//     * 领取生日红包,转移至DialogShowOrderUtils中
+//     */
+//    private void receiveRedPackage() {
+//        showPDialog();
+//        TreeMap<String, String> map = new TreeMap<>();
+//
+//        map.put("login_token", UserConfig.getInstance().getLoginToken(getActivity()));
+//
+//        HttpMethods.getInstance().POST(getActivity(), Constants.BIRTHDAY_WELFARE, map, "", new
+//                StringCallback() {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//                        dismissPDialog();
+//
+//                        String result = StringUtils.getDecodeString(response.body());
+//                        LUtils.e(HomeFragment.class, "logflag--领取生日红包返回的json数据-" + result);
+//
+//                        if (result != null && result.contains("\"code\":200")) {
+//                            ToastUtils.showToast(getActivity(), R.string.lingquchenggong);
+//                        } else {
+//                            ToastUtils.showToast(getActivity(), R.string.lignqushibai);
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<String> response) {
+//                        super.onError(response);
+//                        dismissPDialog();
+//                        ToastUtils.showToast(getActivity(), R.string.lignqushibai);
+//                    }
+//                });
+//    }
 
     /**
      * 对其他view加载网络数据
@@ -810,10 +841,12 @@ public class HomeFragment extends BaseFragment {
             //判断标的种类,新手体验标,新手专享标,正常标
             if ("1".equals(loanBeanList.get(position).getAdditional_status())) {
                 tvXinShouZhuanXinag.setVisibility(View.VISIBLE);
-                tvXinShouZhuanXinag.setText(getResources().getString(R.string.frag_home_xinshouzhuanxiangbiao));
+                tvXinShouZhuanXinag.setText(getResources().getString(R.string
+                        .frag_home_xinshouzhuanxiangbiao));
             } else if ("1".equals(loanBeanList.get(position).getExperience_status())) {
                 tvXinShouZhuanXinag.setVisibility(View.VISIBLE);
-                tvXinShouZhuanXinag.setText(getResources().getString(R.string.frag_home_xinshoutiyanbiao));
+                tvXinShouZhuanXinag.setText(getResources().getString(R.string
+                        .frag_home_xinshoutiyanbiao));
             } else {
                 tvXinShouZhuanXinag.setVisibility(View.INVISIBLE);
             }
@@ -821,7 +854,9 @@ public class HomeFragment extends BaseFragment {
             //判断是否显示奖励加息
             if ("2".equals(loanBeanList.get(position).getAward_status())) {
                 aivFragHome.setVisibility(View.VISIBLE);
-                aivFragHome.setText("奖" + loanBeanList.get(position).getAward_proportion().toString() + "%");
+                //201809041533添加字符串处理
+                aivFragHome.setText("奖" + StringUtils.formatString(loanBeanList.get(position).getAward_proportion()
+                        .toString()) + "%");
                 aivFragHome.invalidate();
             } else {
                 aivFragHome.setVisibility(View.INVISIBLE);
@@ -829,9 +864,11 @@ public class HomeFragment extends BaseFragment {
 
             tvTouZiJinE.setText((loanBeanList.get(position).getAmount() + "元"));
             if ("月".equals(loanBeanList.get(position).getPeriod_unit())) {
-                tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + "个" + loanBeanList.get(position).getPeriod_unit()));
+                tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + "个" +
+                        loanBeanList.get(position).getPeriod_unit()));
             } else {
-                tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + loanBeanList.get(position).getPeriod_unit()));
+                tvTouZiQiXian.setText((loanBeanList.get(position).getPeriod() + loanBeanList.get
+                        (position).getPeriod_unit()));
             }
 
             //判断未读消息数目
@@ -848,9 +885,7 @@ public class HomeFragment extends BaseFragment {
                     tvMsgCount.setText(getResources().getString(R.string.ninenine));
                 }
             }
-
         }
-
     }
 
 

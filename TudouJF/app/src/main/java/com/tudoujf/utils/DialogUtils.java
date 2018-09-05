@@ -759,6 +759,89 @@ public class DialogUtils {
 
     }
 
+    /**
+     * 风险测评dialog
+     */
+    public static void showRiskDialog(final Context context, final DialogUtilsClickListener listener) {
+
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_risk, null);
+        WindowManager.LayoutParams params = ((Activity) context).getWindow().getAttributes();
+        params.alpha = 0.5f;
+        ((Activity) context).getWindow().setAttributes(params);
+        final PopupWindow pop = new PopupWindow(view);
+        pop.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        pop.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+
+        ColorDrawable drawable = new ColorDrawable(Color.TRANSPARENT);//透明背景图片
+        pop.setBackgroundDrawable(drawable);//pop必须设置背景,否则可能有各种意外
+        pop.setOutsideTouchable(true);//触摸pop外面的部分取消pop
+        pop.setFocusable(true);//获取焦点
+        pop.setAnimationStyle(R.style.showPopupAnimation);
+        pop.showAtLocation(((Activity) context).getWindow().getDecorView(), Gravity.CENTER, 0, 0);//显示位置
+
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams params = ((Activity) context).getWindow().getAttributes();
+                params.alpha = 1f;
+                ((Activity) context).getWindow().setAttributes(params);
+            }
+        });
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_dialog_risk_close);
+        TextView textView = (TextView) view.findViewById(R.id.tv_dialog_risk_jump);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pop.dismiss();
+                if (listener!=null){
+                    listener.onClick();
+                }
+            }
+        });
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserConfig.getInstance().getAccountsParams()!=null){
+                    Intent intent=new Intent(context, MyAccountActivity.class);
+                    intent.putExtras(UserConfig.getInstance().getAccountsParams());
+                    context.startActivity(intent);
+                    pop.dismiss();
+                    if (listener!=null){
+                        listener.onClick();
+                    }
+                }else {
+                    ToastUtils.showToast(context, "请手动前往我的--我的账户设置!");
+                }
+
+            }
+        });
+
+//        TextView tvLiJiKaiTong = (TextView) view.findViewById(R.id.tv_dialog_lijikaitong);
+//        TextView tvZanBuKaiTong = (TextView) view.findViewById(R.id.tv_dialog_zanbukaitong);
+//        tvZanBuKaiTong.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pop.dismiss();
+//            }
+//        });
+//        tvLiJiKaiTong.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                 TO DO: 2018/1/17  打开评估页面
+//
+//                Intent intent = new Intent(context, WebActivity.class);
+//                intent.putExtra("url", Constants.RISK_QUESTION+ UserConfig.getInstance().getLoginToken(context));
+//                intent.putExtra("title","风险测评");
+//                context.startActivity(intent);
+//                pop.dismiss();
+//            }
+//        });
+
+
+//        SharedPreferencesUtils.getInstance(context, "popshow").put("showrisk", false);
+
+    }
 
     public interface ListDialogClickListener {
         void onClick(int position);

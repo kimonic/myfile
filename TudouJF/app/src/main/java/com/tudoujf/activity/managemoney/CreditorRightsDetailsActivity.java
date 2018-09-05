@@ -227,7 +227,7 @@ public class CreditorRightsDetailsActivity extends BaseActivity {
 
             status = bean.getTransferMap().getStatus();
 
-            ivInfo.setNianHuaShouYi(bean.getLoanMap().getLoan_info().getApr());
+            ivInfo.setNianHuaShouYi(StringUtils.addPercent(bean.getLoanMap().getLoan_info().getApr()));
             ivInfo.setJieKuanQiXian(bean.getLoanMap().getLoan_info().getPeriod_name());
             ivInfo.invalidate();
 

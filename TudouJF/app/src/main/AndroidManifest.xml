@@ -78,7 +78,8 @@
         <meta-data
             android:name="rsk"
             android:value="DYklj45T78ET@asd23" />
-
+        <!--超高屏幕设置-->
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
         <!-- 1.欢迎页activity -->
         <activity android:name=".activity.other.WelcomeActivity">
 

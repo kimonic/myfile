@@ -55,7 +55,8 @@ public class StringUtils {
         String temp;
         GlobalBean bean = firstParseJson(json);
         //MD5验证
-        if (bean != null && MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() + CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
+        if (bean != null && MD5Utils.md5(CreateCode.getRECEIVE_SiGN_KEY() + bean.getDiyou() +
+                CreateCode.getRECEIVE_SiGN_KEY()).equals(bean.getXmdy())) {
             temp = CreateCode.s2pDiyou(bean.getDiyou());
             return temp;
         } else {
@@ -270,7 +271,7 @@ public class StringUtils {
      * 每三位用逗号分隔,最终保留两位小数,不足的用0补齐
      */
     public static String getCommaDecimalsStr(String fStr) {
-        if (fStr == null||"".equals(fStr)) {
+        if (fStr == null || "".equals(fStr)) {
             return "0.00";
         }
         if (fStr.contains(".")) {
@@ -393,7 +394,8 @@ public class StringUtils {
         Matcher m = p.matcher(temp);
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
-            m.appendReplacement(sb, "\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020");//将匹配到的字符串用指定字符串替代
+            m.appendReplacement(sb, "\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020");
+            //将匹配到的字符串用指定字符串替代
         }
         m.appendTail(sb);//将未匹配到的地方添加到sb中
         return sb.toString();
@@ -409,8 +411,38 @@ public class StringUtils {
         } else {
             return "0";
         }
+    }
 
+    /**
+     * 将数字格式化为小数点后加一位
+     */
+    public static String formatString(String s) {
+        if (s == null) {
+            return "0.0";
+        }
 
+        if (!s.contains(".")) {
+            return s + ".0";
+        }
+
+        if (s.substring(s.indexOf(".")).length() > 1) {
+            return s.substring(0, s.indexOf(".") + 2);
+        }
+        return "0.0";
+    }
+
+    /**
+     * 字符串末尾不包含%则添加%
+     */
+    public static String addPercent(String s) {
+        if (s == null) {
+            return "";
+        }
+        if (s.contains("%")) {
+            return s;
+        }else {
+            return s+"%";
+        }
     }
 
 

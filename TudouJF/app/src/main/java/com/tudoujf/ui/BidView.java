@@ -400,7 +400,7 @@ public class BidView extends View {
         if (investProgress * 100 != 0) {
             canvas.drawText(decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         } else {
-            canvas.drawText(0 + decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
+            canvas.drawText( decimalFormat.format(investProgress * 100) + "%", text1X, text9Y, blackPaint);
         }
         //--------------------------------------进度文本:100.00%-------------------------------------------
 

@@ -2,6 +2,7 @@ package com.tudoujf.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.activity.my.myproject.DaiHouGuanLiActivity;
 import com.tudoujf.bean.databean.InvestListBean;
 import com.tudoujf.ui.BidView;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 
 import java.util.List;

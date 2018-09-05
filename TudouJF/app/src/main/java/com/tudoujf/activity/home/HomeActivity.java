@@ -29,6 +29,7 @@ import com.tudoujf.http.ParseJson;
 import com.tudoujf.mapi.MApp;
 import com.tudoujf.ui.NaviButtonView;
 import com.tudoujf.utils.AppInfoUtils;
+import com.tudoujf.utils.DialogShowOrderUtils;
 import com.tudoujf.utils.DialogUtils;
 import com.tudoujf.utils.DownloadAppUtils;
 import com.tudoujf.utils.LUtils;
@@ -78,6 +79,8 @@ public class HomeActivity extends BaseActivity {
     public void initDataFromIntent() {
 //        registerMessageReceiver();  //jpush相关
 //        init();//jpush相关
+        //20180905用于控制dialog的显示顺序
+        DialogShowOrderUtils.getInstance().setHomeActivity(this);
     }
 
     @Override
@@ -216,36 +219,47 @@ public class HomeActivity extends BaseActivity {
                             if (bean.getForce_version() != null && (Integer.parseInt(versionName
                                     .replace(".", "").substring(0, 3)) <
                                     Integer.parseInt(bean.getForce_version().replace(".", "")))) {
-                                DialogUtils.showPromptDialogAll(HomeActivity.this, "提示",
-                                        "APP必须更新到最新版本,是否前往更新?",
-                                        new DialogUtils.DialogUtilsClickListener() {
-                                            @Override
-                                            public void onClick() {
-                                                DownloadAppUtils.downloadForWebView(HomeActivity
-                                                        .this, url);
-                                                closeActivity();
-                                            }
-                                        }, new DialogUtils.DialogUtilsClickListener() {
-                                            @Override
-                                            public void onClick() {
-                                                closeActivity();
-                                            }
-                                        });
+                                // TODO: 2018/9/5 集中提示dialog
+                                //201809051134
+                                DialogShowOrderUtils.getInstance().setUpdateForceFlag(true,url);
+//                                DialogUtils.showPromptDialogAll(HomeActivity.this, "提示",
+//                                        "APP必须更新到最新版本,是否前往更新?",
+//                                        new DialogUtils.DialogUtilsClickListener() {
+//                                            @Override
+//                                            public void onClick() {
+//                                                DownloadAppUtils.downloadForWebView(HomeActivity
+//                                                        .this, url);
+//                                                closeActivity();
+//                                            }
+//                                        }, new DialogUtils.DialogUtilsClickListener() {
+//                                            @Override
+//                                            public void onClick() {
+//                                                closeActivity();
+//                                            }
+//                                        });
                             } else if (!versionName.equals(bean.getNew_version())) {//普通更新
-                                DialogUtils.showPromptDialog(HomeActivity.this, "提示", "发现APP有新版本," +
-                                                "是否前往更新?",
-                                        new DialogUtils.DialogUtilsClickListener() {
-                                            @Override
-                                            public void onClick() {
-                                                DownloadAppUtils.downloadForWebView(HomeActivity
-                                                        .this, url);
-                                            }
-                                        });
+                                // TODO: 2018/9/5 集中提示dialog
+                                //201809051134
+                                DialogShowOrderUtils.getInstance().setUpdateFlag(true,url);
+
+//                                DialogUtils.showPromptDialog(HomeActivity.this, "提示", "发现APP有新版本," +
+//                                                "是否前往更新?",
+//                                        new DialogUtils.DialogUtilsClickListener() {
+//                                            @Override
+//                                            public void onClick() {
+//                                                DownloadAppUtils.downloadForWebView(HomeActivity
+//                                                        .this, url);
+//                                            }
+//                                        });
                             }
 
                         } else {
                             ToastUtils.showToast(HomeActivity.this, R.string.shujujiazaichucuo);
                         }
+
+                        //20180905   计数要显示的dialog,当所有dialog都确定是否显示后触发显示
+                        DialogShowOrderUtils.getInstance().setCount();
+
                     }
 
                     @Override
@@ -253,6 +267,8 @@ public class HomeActivity extends BaseActivity {
                         super.onError(response);
                         dismissPDialog();
                         ToastUtils.showToast(HomeActivity.this, R.string.jianchagengxinshiabai);
+                        //20180905   计数要显示的dialog,当所有dialog都确定是否显示后触发显示
+                        DialogShowOrderUtils.getInstance().setCount();
                     }
                 });
     }

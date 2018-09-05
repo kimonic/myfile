@@ -164,7 +164,6 @@ public class WebActivity extends BaseActivity {
                 }
             }
             LUtils.e(MyWebClient.class,"logflag-webview加载的URL--"+url);
-
         }
 
 
