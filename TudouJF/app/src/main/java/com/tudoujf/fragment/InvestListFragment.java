@@ -27,6 +27,7 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.managemoney.ProductDetailsActivity;
 import com.tudoujf.adapter.InvestListFragLvAdapter;
 import com.tudoujf.base.BaseBean;

@@ -34,6 +34,14 @@ public class DialogShowOrderUtils {
     private boolean birthdayFlag = false;
     private boolean updateFlag = false;
     //活动提示,重要通知,是否禁用app
+    //是否显示dialog
+    //是否强制关闭app
+    //通知标题
+    //通知内容
+    //活动图片
+    //跳转页面url
+    //按钮背景色
+    //按钮字体颜色
     private boolean noticeFlag = false;
     private boolean updateForceFlag = false;
 
@@ -134,15 +142,20 @@ public class DialogShowOrderUtils {
     private void showBirthdayDialog() {
         if (birthdayFlag) {
             ToastUtils.showToast(homeActivity, name + ",生日快乐!");
-            DialogUtils.showPromptDialog(homeActivity, homeActivity.getString(R.string.tishi),
+            DialogUtils.showBirthdayDialog(homeActivity, homeActivity.getString(R.string.tishi),
                     name +
-                    homeActivity.getString(R.string.shengritishi), new DialogUtils
-                    .DialogUtilsClickListener() {
-                @Override
-                public void onClick() {
-                    receiveRedPackage();
-                }
-            });
+                            homeActivity.getString(R.string.shengritishi), new DialogUtils
+                            .DialogUtilsClickListener() {
+                        @Override
+                        public void onClick() {
+                            receiveRedPackage();
+                        }
+                    }, new DialogUtils.DialogUtilsClickListener() {
+                        @Override
+                        public void onClick() {
+                            showNoticeDialog();
+                        }
+                    });
         } else {
             showNoticeDialog();
         }
@@ -174,9 +187,7 @@ public class DialogShowOrderUtils {
     private void receiveRedPackage() {
         homeActivity.showPDialog();
         TreeMap<String, String> map = new TreeMap<>();
-
         map.put("login_token", UserConfig.getInstance().getLoginToken(homeActivity));
-
         HttpMethods.getInstance().POST(homeActivity, Constants.BIRTHDAY_WELFARE, map, "", new
                 StringCallback() {
                     @Override

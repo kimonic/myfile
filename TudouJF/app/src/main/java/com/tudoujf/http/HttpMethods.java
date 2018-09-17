@@ -7,6 +7,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.callback.FileCallback;
+import com.tudoujf.activity.home.HomeActivity;
+import com.tudoujf.utils.LUtils;
 import com.tudoujf.utils.StringUtils;
 
 import java.io.File;
@@ -72,7 +74,6 @@ public class HttpMethods {
     @SuppressWarnings("unchecked")
     public void POST(Context context, String url, TreeMap<String, String> paramsMap,
                       String Key, Callback callback) {
-
 
         OkGo.post(url)     // 请求方式和请求url
                 .tag(context)                       // 请求的 tag, 主要用于取消对应的请求

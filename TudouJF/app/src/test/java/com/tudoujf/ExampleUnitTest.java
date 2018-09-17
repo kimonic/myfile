@@ -51,4 +51,12 @@ public class ExampleUnitTest {
         assertEquals("0.1",StringUtils.formatString("0.12"));
         assertEquals("1230.1",StringUtils.formatString("1230.11112"));
     }
+
+    @Test
+    public void testStringToFloat(){
+        assertEquals(7106.79,StringUtils.string2Float("7,106.79".replace(",","")),0.01);
+        assertEquals(17106.79,StringUtils.string2Float("17,106.79".replace(",","")),0.01);
+        assertEquals(117106.79,StringUtils.string2Float("117,106.79".replace(",","")),0.01);
+        assertEquals(1117106.79,StringUtils.string2Float("1,117,106.79".replace(",","")),0.01);
+    }
 }

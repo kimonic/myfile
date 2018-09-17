@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 
 import com.lzy.okgo.OkGo;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.utils.DialogUtils;
+import com.tudoujf.utils.LUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -161,14 +163,19 @@ public abstract class BaseFragment extends Fragment implements BaseMethod, View.
     }
 
 
+    /**
+     * 销毁方法可能在返回上一页执行一段时间之后才会被调用
+     * 影响全局的方法不宜在其内调用
+     */
     @Override
     public void onDestroyView() {
-        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
         unbinder.unbind();
         // TODO: 2018/2/2   dialog异常尝试处理,未确认
         dismissPDialog();
         bDialog = null;
         super.onDestroyView();
+
+//        OkGo.cancelAll(OkGo.getInstance().getOkHttpClient());
     }
 
     // ---------------------------20180411--去掉线程控制取消dialog--------------------------------------

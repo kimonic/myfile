@@ -1,5 +1,6 @@
 package com.tudoujf.activity.my.myaccount;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -87,10 +88,10 @@ public class VIPActivity extends BaseActivity {
                 break;
             case R.id.tv_act_vip_apply_now:
 //                applyVip();
-                if (StringUtils.string2Float(money) > StringUtils.string2Float(balance)) {
+                //201809111017 修复balance中","造成的返回值为0的问题
+                if (StringUtils.string2Float(money) > StringUtils.string2Float(balance.replace(",",""))) {
 
                     ToastUtils.showToast(VIPActivity.this, R.string.yuebuzuqing);
-
                 } else {
                     Intent intent = new Intent(this, VIPHuiFuBuyActivity.class);
                     intent.putExtra("money", money);
@@ -119,7 +120,6 @@ public class VIPActivity extends BaseActivity {
     public void initDataFromIntent() {
         balance = getIntent().getStringExtra("balance");
         tvActVipAmount.setText(balance);
-
         String isvip = getIntent().getStringExtra("isvip");
         if ("1".equals(isvip)) {
             tvDescription.setText(R.string.qingxuanzeninxuyaoxufeidetaocan);

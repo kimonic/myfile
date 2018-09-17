@@ -29,6 +29,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.tudoujf.R;
+import com.tudoujf.activity.home.HomeActivity;
 import com.tudoujf.activity.home.MyExperienceGoldActivity;
 import com.tudoujf.activity.home.MyMessageActivity;
 import com.tudoujf.activity.home.NewcomerExperienceBidActivity;
@@ -422,7 +423,7 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initDataFromInternet() {
-        String loginToken = UserConfig.getInstance().getLoginToken(getActivity());
+                String loginToken = UserConfig.getInstance().getLoginToken(getActivity());
         if (!"".equals(loginToken)) {
             showPDialog();
             TreeMap<String, String> map = new TreeMap<>();
@@ -447,7 +448,6 @@ public class MyFragment extends BaseFragment {
                             } else {
                                 ToastUtils.showToast(getActivity(), R.string.shujujiazaichucuo);
                             }
-
                         }
 
                         @Override
@@ -514,7 +514,6 @@ public class MyFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-
         initDataFromInternet();
     }
 
